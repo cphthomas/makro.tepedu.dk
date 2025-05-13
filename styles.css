@@ -1,0 +1,398 @@
+/* styles.css */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 56px;
+    /* Adjust for fixed navbar height */
+}
+
+.transparent-navbar {
+    background-color: rgba(248, 249, 250, 0.8);
+    /* Light grey with transparency */
+}
+
+#page-menu ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    text-align: left;
+}
+
+#page-menu ul li a:hover {
+    color: grey;
+}
+
+#page-menu {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 200px;
+    height: calc(100% - 56px);
+    background-color: rgba(248, 249, 250, 0.8);
+    overflow-y: auto;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: block;
+}
+
+#page-menu .menu-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#menu-icon {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    padding: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+body.menu-hidden #menu-icon {
+    display: block;
+}
+
+body.menu-hidden #page-menu {
+    display: none;
+}
+
+body.menu-hidden .content {
+    margin-left: 0;
+}
+
+.content {
+    margin-left: 200px;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.pl-3 {
+    padding-left: 1rem !important;
+}
+
+.pl-5 {
+    padding-left: 1.5rem !important;
+}
+
+.pl-7 {
+    padding-left: 2rem !important;
+}
+
+/* Override Bootstrap primary color */
+.btn-primary {
+    background-color: grey;
+    border-color: grey;
+}
+
+.btn-primary:hover {
+    background-color: darkgrey;
+    border-color: darkgrey;
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: grey;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: grey;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: darkgrey;
+}
+
+.dropdown-menu {
+    background-color: rgba(223, 223, 223, 0.95);
+    border-radius: 0;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: grey;
+    color: white;
+}
+
+.content {
+    margin-left: 200px;
+    /* Same as #page-menu width */
+    padding-top: 40px;
+    /* Increased padding-top for more space */
+}
+
+.navbar-nav .nav-item {
+    margin-left: 40px;
+}
+
+/* Ensure the navbar doesn't overflow */
+.navbar-nav {
+    flex-wrap: nowrap;
+}
+
+/* Adjust scroll position for headings to account for fixed navbar */
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    font-family: 'Open Sans', sans-serif; /* Ensure consistent font family */
+    font-weight: 100 !important; /* Match body font weight */
+    font-style: italic; /* Restore italic */
+    scroll-margin-top: 70px;
+    /* Adjust this value as needed */
+}
+
+/* styles.css */
+
+/* ... existing styles ... */
+
+/* Increase right padding of the content container */
+.content-container {
+    padding-right: 50px;
+    /* Increase this value as needed */
+}
+
+/* Increase right padding on larger screens */
+@media (min-width: 1200px) {
+    .content-container {
+        padding-right: 150px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .content-container {
+        padding-right: 200px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .content-container {
+        padding-right: 250px;
+    }
+}
+
+.navbar-nav .nav-link .bi {
+    font-size: 1.6em;
+    /* Increase font size by 60% */
+    vertical-align: middle;
+    /* Adjust vertical alignment if necessary */
+}
+
+/* Increase the size of the page TOC icon (#menu-icon) */
+#menu-icon .bi {
+    font-size: 1.6em;
+    /* Increase font size by 60% */
+    vertical-align: middle;
+    /* Adjust vertical alignment if necessary */
+}
+
+/* Increase the width of #page-menu on larger screens */
+@media (min-width: 992px) {
+    #page-menu {
+        width: 380px;
+        /* New width (200px + 60%) */
+    }
+
+    /* Adjust the left margin of .content to match the new #page-menu width */
+    .content {
+        margin-left: 380px;
+        /* Same as #page-menu width */
+    }
+}
+
+table {
+    font-size: 0.8em;
+    /* Adjust the value as needed */
+}
+
+.effectLinks {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    /* Set the default text color to white */
+    background: rgba(150, 150, 151, 0.5);
+    padding: 10px;
+    width: 100%;
+}
+
+.effectLinks::after {
+    content: attr(data-replace);
+    position: absolute;
+    left: 0;
+    padding-left: 10px;
+    transform-origin: 100% 50%;
+    transform: translate3d(200%, 0, 0);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease;
+    color: white;
+    background: rgba(21, 23, 26, 1);
+    opacity: 0;
+}
+
+.effectLinks:hover::after {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+}
+
+.effectLinks:hover {
+    background: rgba(21, 23, 26, 1);
+    color: rgb(215, 215, 215);
+}
+
+.effectLinks span {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.effectLinks:hover span {
+    transform: translate3d(-200%, 0, 0);
+}
+
+.effectLinksTable {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(57, 56, 56);
+    /* Changed from white to black */
+    background: none;
+    /* Removed background color */
+    padding: 0px;
+    width: 100%;
+}
+
+.effectLinksTable::after {
+    content: attr(data-replace);
+    position: absolute;
+    left: 0;
+    padding-left: 10px;
+    transform-origin: 100% 50%;
+    transform: translate3d(200%, 0, 0);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease;
+    /* added opacity transition */
+    color: black;
+    background: none;
+    opacity: 0;
+    /* added this line */
+}
+
+.effectLinksTable:hover::after {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    /* added this line */
+}
+
+.effectLinksTable:hover {
+    background: none;
+    /* Removed background color */
+    /* color: rgb(43, 150, 226) */
+    color: white;
+}
+
+.effectLinksTable::after {
+    content: attr(data-replace);
+    transform-origin: 100% 50%;
+    transform: translate3d(200%, 0, 0);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.effectLinksTable:hover::after {
+    transform: translate3d(0, 0, 0);
+    /* color: rgb(43, 150, 226) */
+    color: white;
+}
+
+.effectLinksTable span {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.effectLinksTable:hover span {
+    transform: translate3d(-200%, 0, 0);
+}
+
+kbd23 {
+    font-style: italic;
+    font-family: inherit;
+    /* This makes the <kbd> tag inherit the body's font */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #333;
+}
+
+kbd {
+    background-color: #f0f0f0;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-family: "Courier New", monospace;
+    color: #333;
+}
+
+.no-rounded-corners {
+    border-radius: 0 !important;
+}
+
+.no-rounded-corners .card-body {
+    border-radius: 0 !important;
+}
+
+.no-rounded-corners img {
+    border-radius: 0 !important;
+}
+
+.info-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #f7aa0e;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.example-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #b3b3b3;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+/* Style for negative examples in tables */
+.bad-example td {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.table th,
+.table td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Custom styles for square corners on cards */
+.card,
+.card-body {
+    border-radius: 0 !important; /* Override default Bootstrap/MDB styles */
+}
