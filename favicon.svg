@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&amp;display=swap');
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(4deg); }
+      75% { transform: rotate(-4deg); }
+    }
+
+    .circle {
+      fill: #888;
+    }
+
+    .text {
+      fill: white;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: central;
+      animation: wiggle 1s infinite;
+      transform-origin: center;
+    }
+  </style>
+
+  <circle cx="32" cy="32" r="30" class="circle"></circle>
+  <text x="32" y="32" class="text">t</text>
+</svg>
