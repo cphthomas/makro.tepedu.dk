@@ -397,42 +397,18 @@ kbd {
     border-radius: 0 !important; /* Override default Bootstrap/MDB styles */
 }
 
-.book-cover-wrapper {
+.video-header-wrapper {
     position: relative;
+    width: 100%;
+    max-height: 400px;
     overflow: hidden;
+    margin-bottom: 1rem; /* To give some space below */
 }
 
-.cover-text-overlay {
-    font-family: 'Space Grotesk', sans-serif;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-    z-index: 2;
-    opacity: 0;
-    transition: all 0.6s ease;
-    letter-spacing: -0.02em;
+.video-header-wrapper .video-header {
+    width: 100%;
+    object-fit: cover;
+    max-height: 400px;
 }
 
-.animate-cover-text.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.typing-cursor {
-    display: inline-block;
-    width: 3px;
-    height: 1em;
-    background-color: currentColor;
-    margin-left: 2px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
+.
