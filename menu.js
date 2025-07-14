@@ -1,14 +1,13 @@
 // Menu configuration
 const menuItems = [
-    { href: 'index.html', text: 'Introduktion til Finansielt Salg' },
-    { href: 'klassisk.html', text: 'Klassisk Salg' },
-    { href: 'losning.html', text: 'Løsningssalg' },
-    { href: 'kommunikation.html', text: 'Kommunikation i Finansiel Rådgivning' },
-    { href: 'challenger.html', text: 'Challenger Salg' },
-    { href: 'pitching.html', text: 'Pitching' },
-    { href: 'pipeline.html', text: 'Pipeline' },
-    { href: 'portefolje.html', text: 'Porteføljesalg' },
-    { href: 'salgsteknikker.html', text: 'Sammenligning af Salgsteknikker' }
+    { href: 'index.html', text: 'Introduktion til Branchekendskab' },
+    { href: 'bank.html', text: 'Bank' },
+    { href: 'finanstilsyn.html', text: 'Finanstilsyn' },
+    { href: 'ejendomsmaegler.html', text: 'Ejendomsmægler' },
+    { href: 'forsikring.html', text: 'Forsikring' },
+    { href: 'realkredit.html', text: 'Realkredit' },
+    { href: 'revision.html', text: 'Revision' },
+    { href: 'pension.html', text: 'Pension' }
 ];
 
 // Function to generate dropdown menu HTML
