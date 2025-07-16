@@ -14,9 +14,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.svg">
+    <style>
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #343a40; /* Dark grey line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: #ffffff;
+            border: 4px solid #007bff; /* Blue dot */
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -16px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: #f8f9fa; /* Light grey background */
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            padding: 10px 0;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 600px) {
+            .timeline-container::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 0 10px 10px;
+                border-color: transparent transparent transparent white;
+            }
+
+            .timeline-item::after {
+                left: 15px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+        }
+
+        .timeline-item.active .timeline-content {
+            background-color: #e2e6ea; /* Slightly darker grey on active */
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -91,12 +188,13 @@
                 <div class="info-box">
                     <p>Finanstilsynet er en specialiseret tilsynsmyndighed, der blev etableret i sin nuværende form i 1988, selvom rødder går tilbage til 1919.</p>
                     
-                    <h4>Organisatoriske facts:</h4>
+                    <h4>Organisatoriske facts :</h4>
+                    <p><b>Bemærk:</b> Nedenstående tal for ansatte og budget er illustrative og afrundede estimater baseret på offentligt tilgængelige kilder. Disse skal ikke betragtes som præcise, officielle data, men giver et overblik over Finanstilsynets omtrentlige størrelse og ressourcer.</p>
                     <ul>
                         <li><b>Status:</b> Selvstændig myndighed under Erhvervsministeriet</li>
                         <li><b>Adresse:</b> Århusgade 110, 2100 København Ø</li>
-                        <li><b>Ansatte:</b> Ca. 450-500 medarbejdere (2024)</li>
-                        <li><b>Budget:</b> Ca. 600-700 mio. kr. årligt</li>
+                        <li><b>Ansatte:</b> Ca. 450-500 medarbejdere (2024) - illustrativt estimat</li>
+                        <li><b>Budget:</b> Ca. 600-700 mio. kr. årligt - illustrativt estimat</li>
                         <li><b>Finansiering:</b> Primært gennem afgifter fra de tilsynsførte virksomheder</li>
                         <li><b>Direktør:</b> Jesper Berg (siden 2019)</li>
                     </ul>
@@ -156,6 +254,7 @@
                 </div>
 
                 <h2>Tilsynsførte virksomheder og sektorer</h2>
+                <p>Finanstilsynet fører tilsyn med en bred vifte af finansielle virksomheder og sektorer i Danmark. Nedenstående tabel giver et overblik over de primære sektorer, antallet af virksomheder under tilsyn, og hvad Finanstilsynet især fokuserer på i sit tilsyn med hver enkelt sektor.</p>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
@@ -204,12 +303,15 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="chart-container" style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
+                    <canvas id="finanstilsynSectorCountBarChart"></canvas>
+                </div>
+                <br><br>
                 <h2>Arbejde i Finanstilsynet</h2>
                 <div class="example-box">
                     <h4>Hvad laver man som ansat i Finanstilsynet?</h4>
                     <p>Finanstilsynet tilbyder spændende karrieremuligheder for dem, der ønsker at arbejde med finansiel regulering og tilsyn:</p>
-
+ 
                     <h5>Tilsynsmedarbejdere:</h5>
                     <ul>
                         <li><b>Tilsynsspecialist:</b> Gennemfører inspektioner og vurderer risici i finansielle virksomheder</li>
@@ -258,58 +360,63 @@
                 </div>
 
                 <h2>Historisk udvikling</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>År</th>
-                                <th>Milepæl</th>
-                                <th>Betydning</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><b>1919</b></td>
-                                <td>Oprettelse af Banktilsynet</td>
-                                <td>Første systematiske tilsyn med banker efter 1. Verdenskrig</td>
-                            </tr>
-                            <tr>
-                                <td><b>1964</b></td>
-                                <td>Forsikringstilsynet etableres</td>
-                                <td>Specialiseret tilsyn med forsikringsvirksomhed</td>
-                            </tr>
-                            <tr>
-                                <td><b>1988</b></td>
-                                <td>Sammenslutning til Finanstilsynet</td>
-                                <td>Samlet tilsyn med hele den finansielle sektor</td>
-                            </tr>
-                            <tr>
-                                <td><b>1996</b></td>
-                                <td>Værdipapirtilsynet indlemmes</td>
-                                <td>Komplet tilsyn med kapitalmarkeder</td>
-                            </tr>
-                            <tr>
-                                <td><b>2007</b></td>
-                                <td>Implementering af Solvens II forberedelser</td>
-                                <td>Europæisk harmonisering af forsikringstilsyn</td>
-                            </tr>
-                            <tr>
-                                <td><b>2008-2012</b></td>
-                                <td>Finanskrise og skærpet tilsyn</td>
-                                <td>Øgede beføjelser og mere intensivt tilsyn</td>
-                            </tr>
-                            <tr>
-                                <td><b>2018</b></td>
-                                <td>Danske Bank hvidvasksag</td>
-                                <td>Øget fokus på hvidvaskbekæmpelse</td>
-                            </tr>
-                            <tr>
-                                <td><b>2020</b></td>
-                                <td>COVID-19 og krisehåndtering</td>
-                                <td>Fleksibilitet i tilsynspraksis under pandemien</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">1919</div>
+                        <div class="timeline-content">
+                            <p>Oprettelse af Banktilsynet: Første systematiske tilsyn med banker efter 1. Verdenskrig</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">1964</div>
+                        <div class="timeline-content">
+                            <p>Forsikringstilsynet etableres: Specialiseret tilsyn med forsikringsvirksomhed</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">1988</div>
+                        <div class="timeline-content">
+                            <p>Sammenslutning til Finanstilsynet: Samlet tilsyn med hele den finansielle sektor</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">1996</div>
+                        <div class="timeline-content">
+                            <p>Værdipapirtilsynet indlemmes: Komplet tilsyn med kapitalmarkeder</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2007</div>
+                        <div class="timeline-content">
+                            <p>Implementering af Solvens II forberedelser: Europæisk harmonisering af forsikringstilsyn</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2008-2012</div>
+                        <div class="timeline-content">
+                            <p>Finanskrise og skærpet tilsyn: Øgede beføjelser og mere intensivt tilsyn</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2018</div>
+                        <div class="timeline-content">
+                            <p>Danske Bank hvidvasksag: Øget fokus på hvidvaskbekæmpelse</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-content">
+                            <p>COVID-19 og krisehåndtering: Fleksibilitet i tilsynspraksis under pandemien</p>
+                        </div>
+                    </div>
                 </div>
 
                 <h3>Skelsættende begivenheder og sager</h3>
@@ -474,6 +581,110 @@
     <!-- MDB JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to initialize a chart
+            function initializeChart(chartId, chartConfig) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                new Chart(ctx, {
+                    ...chartConfig,
+                    options: {
+                        ...chartConfig.options,
+                        animation: {
+                            duration: 2000 // Set animation duration to 2000ms (2 seconds)
+                        }
+                    }
+                });
+            }
+
+            // Intersection Observer for charts
+            const chartObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chartId = entry.target.id;
+                        // Initialize chart based on ID
+                        if (chartId === 'finanstilsynSectorCountBarChart') {
+                            initializeChart('finanstilsynSectorCountBarChart', {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Banker og sparekasser', 'Realkreditinstitutter', 'Forsikringsselskaber', 'Pensionskasser', 'Investeringsforvaltningsselskaber', 'Fondsmæglerselskaber', 'Betalingsinstitutter'],
+                                    datasets: [{
+                                        label: 'Antal virksomheder (ca.)',
+                                        data: [65, 7.5, 190, 55, 175, 45, 25],
+                                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: 'Antal tilsynsførte virksomheder pr. sektor ',
+                                            font: {
+                                                size: 18
+                                            }
+                                        },
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(context) {
+                                                    let label = context.dataset.label || '';
+                                                    if (label) {
+                                                        label += ': ';
+                                                    }
+                                                    if (context.parsed.y !== null) {
+                                                        label += context.parsed.y;
+                                                    }
+                                                    return label;
+                                                }
+                                            }
+                                        },
+                                        datalabels: {
+                                            anchor: 'end',
+                                            align: 'top',
+                                            formatter: (value, context) => {
+                                                return value;
+                                            },
+                                            color: '#000',
+                                            font: {
+                                                weight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            title: {
+                                                display: true,
+                                                text: 'Antal virksomheder'
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: [ChartDataLabels]
+                            });
+                        }
+                        observer.unobserve(entry.target); // Stop observing once chart is loaded
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% of the chart is visible
+
+            // Observe chart canvas elements
+            document.querySelectorAll('canvas').forEach(canvas => {
+                chartObserver.observe(canvas);
+            });
+
+            // Timeline interactivity
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
