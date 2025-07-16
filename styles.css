@@ -14,61 +14,9 @@ body {
     /* Light grey with transparency */
 }
 
-#page-menu ul li a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    text-align: left;
-}
-
-#page-menu ul li a:hover {
-    color: grey;
-}
-
-#page-menu {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    width: 200px;
-    height: calc(100% - 56px);
-    background-color: rgba(248, 249, 250, 0.8);
-    overflow-y: auto;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    display: block;
-}
-
-#page-menu .menu-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-#menu-icon {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    padding: 10px;
-    cursor: pointer;
-    display: none;
-}
-
-body.menu-hidden #menu-icon {
-    display: block;
-}
-
-body.menu-hidden #page-menu {
-    display: none;
-}
-
-body.menu-hidden .content {
-    margin-left: 0;
-}
-
 .content {
-    margin-left: 200px;
+    transition: margin-left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    margin-left: 0; /* Default to no margin */
 }
 
 .pl-0 {
@@ -359,6 +307,14 @@ kbd {
     border-left: 4px solid #f7aa0e;
     padding: 15px;
     margin: 20px 0;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+.info-box:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
 .example-box {
@@ -366,6 +322,14 @@ kbd {
     border-left: 4px solid #b3b3b3;
     padding: 15px;
     margin: 20px 0;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+.example-box:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
 /* Style for negative examples in tables */
@@ -397,18 +361,170 @@ kbd {
     border-radius: 0 !important; /* Override default Bootstrap/MDB styles */
 }
 
-.video-header-wrapper {
+.book-cover-wrapper {
     position: relative;
     width: 100%;
     max-height: 400px;
     overflow: hidden;
     margin-bottom: 1rem; /* To give some space below */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.video-header-wrapper .video-header {
+.book-cover-wrapper video,
+.book-cover-wrapper img {
     width: 100%;
     object-fit: cover;
     max-height: 400px;
 }
 
-.
+.cover-text-overlay {
+    font-family: 'IBM Plex Mono', monospace; /* IBM Plex Mono font */
+    position: absolute;
+    font-size: 2.5rem;
+    font-weight: 400; /* Regular font weight for better readability */
+    color: black; /* Black color */
+    text-shadow: none; /* Remove text shadow */
+    font-style: normal; /* No italics */
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(0); /* Keep it vertically centered */
+    transition: all 0.6s ease;
+    letter-spacing: -0.02em;
+    text-align: center;
+    width: 100%;
+}
+
+.animate-cover-text.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background-color: currentColor;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+/* Left-aligned TOC sidebar */
+#left-aligned-sidebar {
+    position: fixed;
+    top: 56px; /* Adjust for navbar height */
+    left: -300px; /* Start off-screen */
+    width: 300px;
+    height: calc(100% - 56px);
+    background-color: rgba(248, 249, 250, 0.95);
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    overflow-y: auto;
+    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1029; /* Below navbar (1030) */
+}
+
+#left-aligned-sidebar.open {
+    left: 0;
+}
+
+.content.sidebar-open {
+    margin-left: 300px;
+}
+
+
+#left-aligned-sidebar h4 {
+    margin-top: 0;
+    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+#left-aligned-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#left-aligned-sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 5px 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300; /* Lighter font weight */
+    transition: font-weight 0.2s ease;
+}
+
+#left-aligned-sidebar ul li a:hover,
+#left-aligned-sidebar ul li a:focus {
+    font-weight: 700; /* Bolder on hover/focus */
+}
+
+/* Sidebar Toggle Button */
+#sidebar-toggle-button {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 1032;
+    background: transparent; /* Default to transparent */
+    color: white;
+    border: 2px solid transparent; /* Default to transparent border */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    line-height: 0; /* Reset line-height for centering */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+#sidebar-toggle-button:hover,
+#sidebar-toggle-button:focus { /* Add focus for keyboard navigation */
+    background: #fd7e14; /* Orange on hover/focus */
+    border: 2px solid #fd7e14; /* Orange border on hover/focus */
+    transform: translateY(-50%) scale(1.1);
+    outline: none; /* Remove blue outline on focus */
+}
+
+/* Default state for the button when not hovered or focused */
+#sidebar-toggle-button:not(:hover):not(:focus) {
+    background: #868e96; /* Modern grey */
+    border: 2px solid #868e96; /* Modern grey border */
+}
+
+#sidebar-toggle-button.open {
+    left: 320px; /* Move button with sidebar */
+}
+
+
+#sidebar-toggle-button .icon-open,
+#sidebar-toggle-button .icon-close {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#sidebar-toggle-button .icon-close {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}
+
+#sidebar-toggle-button.open .icon-open {
+    transform: scale(0);
+    opacity: 0;
+}
+
+#sidebar-toggle-button.open .icon-close {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}

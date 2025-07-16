@@ -34,26 +34,33 @@
             font-family: var(--font-primary);
         }
         
-        h1, h2 {
+        h1 {
+            font-family: 'IBM Plex Mono', monospace; /* IBM Plex Mono font */
+            font-weight: 400; /* Regular weight */
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
             font-family: var(--font-secondary);
             font-weight: 500;
             letter-spacing: -0.02em;
         }
         
         .cover-text-overlay {
-            font-family: var(--font-secondary); /* Changed from var(--font-cover-overlay) to use Space Grotesk */
+            font-family: 'IBM Plex Mono', monospace; /* IBM Plex Mono font */
             position: absolute;
             bottom: 20px;
             left: 20px;
             font-size: 2.5rem;
-            font-weight: 700; /* Increased weight for Space Grotesk */
-            color: white;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-weight: 400; /* Regular weight for readability */
+            color: black; /* Black color */
+            text-shadow: none; /* Remove text shadow */
+            font-style: normal; /* No italics */
             z-index: 2;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s ease;
-            letter-spacing: -0.02em; /* Added for Space Grotesk styling */
+            letter-spacing: -0.02em;
         }
         
         .animate-cover-text.is-visible {
@@ -167,7 +174,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front1.mp4"
                                 aria-label="Bank kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Bank" data-type-speed="150">Bank</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="2. Bank" data-type-speed="150">Bank</div>
                         </div>
                         <div class="book-info">
                             <p>
@@ -183,7 +190,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front2.mp4"
                                 aria-label="Finanstilsyn kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Finanstilsyn" data-type-speed="150">Finanstilsyn</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="3. Finanstilsyn" data-type-speed="150">Finanstilsyn</div>
                         </div>
                         <div class="book-info">
                             <p>
@@ -202,7 +209,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front3.mp4"
                                 aria-label="Ejendomsmægler kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Ejendomsmægler" data-type-speed="150">Ejendomsmægler</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="4. Ejendomsmægler" data-type-speed="150">Ejendomsmægler</div>
                         </div>
                         <div class="book-info">
                             <p>
@@ -218,7 +225,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front4.mp4"
                                 aria-label="Forsikring kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Forsikring" data-type-speed="150">Forsikring</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="5. Forsikring" data-type-speed="150">Forsikring</div>
                         </div>
                         <div class="book-info">
                             <p>
@@ -237,7 +244,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front5.mp4"
                                 aria-label="Realkredit kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Realkredit" data-type-speed="150">Realkredit</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="6. Realkredit" data-type-speed="150">Realkredit</div>
                         </div>
                         <div class="book-info">
                             <p>
@@ -253,7 +260,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front6.mp4"
                                 aria-label="Revision kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Revision" data-type-speed="150">Revision</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="7. Revision" data-type-speed="150">Revision</div>
                         </div>
                         <div class="book-info">
                             <p>
@@ -272,7 +279,7 @@
                         <div class="book-cover-wrapper">
                             <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front7.mp4"
                                 aria-label="Pension kapitel"></video>
-                            <div class="cover-text-overlay animate-cover-text" data-type-text="Pension" data-type-speed="150">Pension</div>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="8. Pension" data-type-speed="150">Pension</div>
                         </div>
                         <div class="book-info">
                             <p>

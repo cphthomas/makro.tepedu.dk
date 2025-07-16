@@ -63,16 +63,15 @@
     </nav>
 
 
-
     <!-- Page Content -->
     <div class="content">
         <div class="container mt-4">
             <article>
-                <h1>Bank</h1>
+                <h1 style="display: none;">Bank</h1>
 
                 <div class="book-cover-wrapper">
                     <video autoplay loop muted playsinline src="FRONT/Video/front1.mp4" alt="Dansk banksektor" class="img-fluid" width="100%" style="max-height: 400px; object-fit: cover;"></video>
-                    <div class="cover-text-overlay animate-cover-text" data-type-text="Bank" data-type-speed="150">Bank</div>
+                    <div class="cover-text-overlay animate-cover-text" data-type-text="2. Bank" data-type-speed="150">Bank</div>
                 </div>
                 <div class="info-box">
                     <p>Banksektoren udgør rygraden i det danske finansielle system og spiller en central rolle i både private borgeres og virksomheders økonomi. Med en historie, der strækker sig over flere århundreder, har danske banker udviklet sig til at være blandt de mest stabile og innovative i verden.</p>
@@ -88,7 +87,7 @@
                 </div>
                 <br>
 
-                <h2>Den danske banksektor i tal</h2>
+                <h2>2.1 Den danske banksektor i tal</h2>
                 <div class="info-box">
                     <p>Den danske banksektor er karakteriseret ved at være koncentreret omkring få store spillere, men med plads til mange mindre specialistbanker:</p>
                     
@@ -109,7 +108,7 @@
                     </ul>
                 </div>
 
-                <h2>De dominerende banker i Danmark</h2>
+                <h2>2.2 De dominerende banker i Danmark</h2>
                 <div class="table-responsive mb-4">
                     <table class="table table-striped table-bordered">
                         <thead class="table-dark">
@@ -161,7 +160,7 @@
                     </table>
                 </div>
 
-                <h3>Øvrige betydningsfulde banker</h3>
+                <h3>2.2.1 Øvrige betydningsfulde banker</h3>
                 <div class="info-box">
                     <h4>Specialistbanker og mindre aktører:</h4>
                     <ul>
@@ -172,7 +171,7 @@
                     </ul>
                 </div>
 
-                <h2>Bankernes kerneydelser</h2>
+                <h2>2.3 Bankernes kerneydelser</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
@@ -217,7 +216,7 @@
                     </table>
                 </div>
 
-                <h2>Arbejde i banksektoren</h2>
+                <h2>2.4 Arbejde i banksektoren</h2>
                 <div class="example-box">
                     <h4>Hvad laver man som ansat i en bank?</h4>
                     <p>Banksektoren tilbyder en bred vifte af karrieremuligheder på tværs af mange forskellige områder:</p>
@@ -255,7 +254,7 @@
                     </ul>
                 </div>
 
-                <h3>Typisk karriereforløb</h3>
+                <h3>2.4.1 Typisk karriereforløb</h3>
                 <div class="info-box">
                     <h4>Fra nyuddannet til leder - en typisk vej:</h4>
                     <ol>
@@ -269,7 +268,7 @@
                     <p><b>Uddannelseskrav:</b> De fleste banker foretrækker kandidater med Finansøkonom, HA, Cand.merc., eller lignende økonomisk uddannelse. Enkelte roller kræver specialiseret uddannelse (f.eks. IT, jura).</p>
                 </div>
 
-                <h2>Historisk udvikling og skelsættende begivenheder</h2>
+                <h2>2.5 Historisk udvikling og skelsættende begivenheder</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
@@ -329,7 +328,7 @@
                     </table>
                 </div>
 
-                <h3>Betydningsfulde sager og kriser</h3>
+                <h3>2.5.1 Betydningsfulde sager og kriser</h3>
                 <div class="example-box">
                     <h4>Finanskrisen 2008-2012:</h4>
                     <p>Den globale finanskrise ramte Danmark hårdt og førte til omfattende forandringer i banksektoren:</p>
@@ -349,7 +348,7 @@
                     </ul>
                 </div>
 
-                <h3>Nyere udviklingstendenser</h3>
+                <h3>2.5.2 Nyere udviklingstendenser</h3>
                 <div class="info-box">
                     <h4>Aktuelle udfordringer og muligheder:</h4>
                     <ul>
@@ -362,7 +361,7 @@
                     </ul>
                 </div>
 
-                <h2>Fremtidsperspektiver</h2>
+                <h2>2.6 Fremtidsperspektiver</h2>
                 <div class="example-box">
                     <h4>Hvordan ser banksektoren ud om 10 år?</h4>
                     <p>Banksektoren står overfor omfattende forandringer, der vil præge arbejdet i årene fremover:</p>
@@ -393,7 +392,7 @@
                 </div>
 
                 <br>
-                <h2>Quiz</h2>
+                <h2>2.7 Quiz</h2>
                 <a href="#" class="effectLinks" data-replace="Åben quiz" target="_blank">
                     <span>Quiz om banksektoren</span>
                 </a>
@@ -403,6 +402,16 @@
         </div>
     </div>
 
+    <!-- Left-aligned TOC Sidebar -->
+    <div id="left-aligned-sidebar">
+        <h4>Indholdsfortegnelse</h4>
+        <ul id="sidebar-toc"></ul>
+    </div>
+    <button id="sidebar-toggle-button">
+        <span class="icon-open">☰</span>
+        <span class="icon-close">×</span>
+    </button>
+
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -410,64 +419,10 @@
     <script src="menu.js"></script>
     <script src="script.js"></script>
     <script src="info.js"></script>
-    <script src="script.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- MDB JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
-    <script>
-        // Add typing animation for video overlays
-        document.addEventListener('DOMContentLoaded', function() {
-            function typeWriter(element, text, speed = 100, callback) {
-                let i = 0;
-                element.innerHTML = '';
-                let cursor = element.querySelector('.typing-cursor');
-                if (!cursor) {
-                    cursor = document.createElement('span');
-                    cursor.className = 'typing-cursor';
-                    element.appendChild(cursor);
-                }
-                function type() {
-                    if (i < text.length) {
-                        cursor.insertAdjacentText('beforebegin', text.charAt(i));
-                        i++;
-                        setTimeout(type, speed);
-                    } else {
-                        // Keep cursor visible for video overlays
-                        if (callback) callback();
-                    }
-                }
-                type();
-            }
-
-            // Intersection Observer for video text animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const overlay = entry.target;
-                        overlay.classList.add('is-visible');
-                        
-                        // Start typing animation after overlay becomes visible
-                        setTimeout(() => {
-                            const text = overlay.dataset.typeText;
-                            const speed = parseInt(overlay.dataset.typeSpeed) || 150;
-                            if (text && !overlay.hasAttribute('data-typed')) {
-                                overlay.setAttribute('data-typed', 'true');
-                                typeWriter(overlay, text, speed);
-                            }
-                        }, 300);
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-
-            // Observe all video text overlays
-            document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
-                observer.observe(overlay);
-            });
-        });
-    </script>
 </body>
 
 </html> 

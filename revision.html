@@ -9,7 +9,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@100;400;500&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- MDB CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
     <!-- Font Awesome -->
@@ -63,14 +63,15 @@
     </nav>
 
 
-
     <!-- Page Content -->
     <div class="content">
         <div class="container mt-4">
             <article>
-                <h1>Revision</h1>
-
-                <video autoplay loop muted playsinline src="FRONT/Video/front6.mp4" alt="Revisionsbranchen i Danmark" class="img-fluid" width="100%" style="max-height: 400px; object-fit: cover;"></video>
+                <h1 style="display: none;">Revision</h1>
+                <div class="book-cover-wrapper">
+                    <video autoplay loop muted playsinline src="FRONT/Video/front6.mp4" alt="Revisionsbranchen i Danmark" class="img-fluid" width="100%" style="max-height: 400px; object-fit: cover;"></video>
+                    <div class="cover-text-overlay animate-cover-text" data-type-text="7. Revision" data-type-speed="150">Revision</div>
+                </div>
                 <div class="info-box">
                     <p>Revisionsbranchen spiller en afgørende rolle i det danske erhvervsliv ved at sikre troværdighed og gennemsigtighed i virksomhedernes regnskaber. Fra de internationale "Big Four" til mindre lokale revisionshuse tilbyder branchen både lovpligtig revision og omfattende rådgivning, der hjælper virksomheder med at navigere i et stadig mere komplekst reguleringslandskab.</p>
                     
@@ -540,6 +541,16 @@
         </div>
     </div>
 
+    <!-- Left-aligned TOC Sidebar -->
+    <div id="left-aligned-sidebar">
+        <h4>Indholdsfortegnelse</h4>
+        <ul id="sidebar-toc"></ul>
+    </div>
+    <button id="sidebar-toggle-button">
+        <span class="icon-open">☰</span>
+        <span class="icon-close">×</span>
+    </button>
+
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -547,64 +558,10 @@
     <script src="menu.js"></script>
     <script src="script.js"></script>
     <script src="info.js"></script>
-    <script src="script.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- MDB JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
-    <script>
-        // Add typing animation for video overlays
-        document.addEventListener('DOMContentLoaded', function() {
-            function typeWriter(element, text, speed = 100, callback) {
-                let i = 0;
-                element.innerHTML = '';
-                let cursor = element.querySelector('.typing-cursor');
-                if (!cursor) {
-                    cursor = document.createElement('span');
-                    cursor.className = 'typing-cursor';
-                    element.appendChild(cursor);
-                }
-                function type() {
-                    if (i < text.length) {
-                        cursor.insertAdjacentText('beforebegin', text.charAt(i));
-                        i++;
-                        setTimeout(type, speed);
-                    } else {
-                        // Keep cursor visible for video overlays
-                        if (callback) callback();
-                    }
-                }
-                type();
-            }
-
-            // Intersection Observer for video text animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const overlay = entry.target;
-                        overlay.classList.add('is-visible');
-                        
-                        // Start typing animation after overlay becomes visible
-                        setTimeout(() => {
-                            const text = overlay.dataset.typeText;
-                            const speed = parseInt(overlay.dataset.typeSpeed) || 150;
-                            if (text && !overlay.hasAttribute('data-typed')) {
-                                overlay.setAttribute('data-typed', 'true');
-                                typeWriter(overlay, text, speed);
-                            }
-                        }, 300);
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-
-            // Observe all video text overlays
-            document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
-                observer.observe(overlay);
-            });
-        });
-    </script>
 </body>
 
 </html> 

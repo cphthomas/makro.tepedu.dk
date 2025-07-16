@@ -63,16 +63,15 @@
     </nav>
 
 
-
     <!-- Page Content -->
     <div class="content">
         <div class="container mt-4">
             <article>
-                <h1>Forsikring</h1>
+                <h1 style="display: none;">Forsikring</h1>
 
                 <div class="book-cover-wrapper">
                     <video autoplay loop muted playsinline src="FRONT/Video/front4.mp4" alt="Forsikringsbranchen i Danmark" class="img-fluid" width="100%" style="max-height: 400px; object-fit: cover;"></video>
-                    <div class="cover-text-overlay animate-cover-text" data-type-text="Forsikring" data-type-speed="150">Forsikring</div>
+                    <div class="cover-text-overlay animate-cover-text" data-type-text="5. Forsikring" data-type-speed="150">Forsikring</div>
                 </div>
                 <div class="info-box">
                     <p>Forsikringsbranchen er en hjørnesten i det danske samfund og økonomi. Med dybe rødder tilbage til 1600-tallet hjælper forsikringsselskaberne danskere og virksomheder med at håndtere risici og sikre økonomisk tryghed. Branchen spænder fra traditionelle skades- og personforsikringer til moderne løsninger for cyber-sikkerhed og klimarisici.</p>
@@ -495,6 +494,16 @@
             </article>
         </div>
     </div>
+
+    <!-- Left-aligned TOC Sidebar -->
+    <div id="left-aligned-sidebar">
+        <h4>Indholdsfortegnelse</h4>
+        <ul id="sidebar-toc"></ul>
+    </div>
+    <button id="sidebar-toggle-button">
+        <span class="icon-open">☰</span>
+        <span class="icon-close">×</span>
+    </button>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
