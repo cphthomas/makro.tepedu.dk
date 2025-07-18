@@ -93,6 +93,27 @@
             font-family: var(--font-thin-body);
             font-weight: 300;
         }
+
+        /* Video background styling for white overlay after play */
+        .book-cover-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .book-cover-wrapper video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            background-color: white;
+        }
+
+        .cover-text-overlay {
+            z-index: 2; /* Ensures text is above overlay */
+        }
     </style>
 </head>
 
@@ -172,7 +193,7 @@
                 <div class="book-card animate-on-scroll" data-animation-delay="100">
                     <a href="bank.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front1.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=3"
                                 aria-label="Bank kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="2. Bank" data-type-speed="150">Bank</div>
                         </div>
@@ -188,7 +209,7 @@
                 <div class="book-card animate-on-scroll" data-animation-delay="200">
                     <a href="finanstilsyn.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front2.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=2"
                                 aria-label="Finanstilsyn kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="3. Finanstilsyn" data-type-speed="150">Finanstilsyn</div>
                         </div>
@@ -207,7 +228,7 @@
                 <div class="book-card animate-on-scroll" data-animation-delay="100">
                     <a href="ejendomsmaegler.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front3.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=1"
                                 aria-label="Ejendomsmægler kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="4. Ejendomsmægler" data-type-speed="150">Ejendomsmægler</div>
                         </div>
@@ -223,7 +244,7 @@
                 <div class="book-card animate-on-scroll" data-animation-delay="200">
                     <a href="forsikring.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front4.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=0"
                                 aria-label="Forsikring kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="5. Forsikring" data-type-speed="150">Forsikring</div>
                         </div>
@@ -242,7 +263,7 @@
                 <div class="book-card animate-on-scroll" data-animation-delay="100">
                     <a href="realkredit.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front5.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=0"
                                 aria-label="Realkredit kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="6. Realkredit" data-type-speed="150">Realkredit</div>
                         </div>
@@ -258,7 +279,7 @@
                 <div class="book-card animate-on-scroll" data-animation-delay="200">
                     <a href="revision.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front6.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=1"
                                 aria-label="Revision kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="7. Revision" data-type-speed="150">Revision</div>
                         </div>
@@ -273,11 +294,11 @@
             </div>
 
             <!-- Fourth row with pension -->
-            <div class="book-grid" style="justify-content: center;">
+            <div class="book-grid">
                 <div class="book-card animate-on-scroll" data-animation-delay="100">
                     <a href="pension.html">
                         <div class="book-cover-wrapper">
-                            <video autoplay loop muted playsinline class="book-cover-image" src="FRONT/Video/front7.mp4"
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=2"
                                 aria-label="Pension kapitel"></video>
                             <div class="cover-text-overlay animate-cover-text" data-type-text="8. Pension" data-type-speed="150">Pension</div>
                         </div>
@@ -285,6 +306,22 @@
                             <p>
                                 Udforsk pensionsbranchen og dens centrale rolle i danskernes økonomi. 
                                 Lær om pensionskasser, forsikringsselskaber og arbejdsmuligheder.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="book-card animate-on-scroll" data-animation-delay="200">
+                    <a href="ejendomsadministration.html">
+                        <div class="book-cover-wrapper">
+                            <video autoplay muted playsinline class="book-cover-image" src="FRONT/Video/branche2160.mp4#t=0"
+                                aria-label="Ejendomsadministration kapitel"></video>
+                            <div class="cover-text-overlay animate-cover-text" data-type-text="9. Ejendomsadministration" data-type-speed="150">Ejendomsadministration</div>
+                        </div>
+                        <div class="book-info">
+                            <p>
+                                Få indsigt i ejendomsadministrationsbranchen og dens rolle i forvaltning af ejendomme. 
+                                Lær om administrationsselskaber, ejerforeninger og karrieremuligheder.
                             </p>
                         </div>
                     </a>
@@ -355,6 +392,25 @@
             // Observe all video text overlays
             document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
                 observer.observe(overlay);
+            });
+
+            // Handle video end events for white background
+            const videos = document.querySelectorAll('.book-cover-wrapper video');
+            videos.forEach(video => {
+                video.addEventListener('ended', function() {
+                    // Create white overlay when video ends
+                    const whiteOverlay = document.createElement('div');
+                    whiteOverlay.style.cssText = `
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: white;
+                        z-index: 1;
+                    `;
+                    this.parentElement.appendChild(whiteOverlay);
+                });
             });
         });
     </script>

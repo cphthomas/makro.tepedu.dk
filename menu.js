@@ -7,7 +7,8 @@ const menuItems = [
     { href: 'forsikring.html', text: 'Forsikring' },
     { href: 'realkredit.html', text: 'Realkredit' },
     { href: 'revision.html', text: 'Revision' },
-    { href: 'pension.html', text: 'Pension' }
+    { href: 'pension.html', text: 'Pension' },
+    { href: 'ejendomsadministration.html', text: 'Ejendomsadministration' }
 ];
 
 // Function to generate dropdown menu HTML

@@ -24,18 +24,20 @@
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 40px 0;
         }
 
         .timeline-container::after {
             content: '';
             position: absolute;
-            width: 6px;
-            background-color: #343a40; /* Dark grey line */
+            width: 4px;
+            background: linear-gradient(to bottom, #007bff, #28a745, #ffc107, #dc3545);
             top: 0;
             bottom: 0;
             left: 50%;
-            margin-left: -3px;
+            margin-left: -2px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0,123,255,0.3);
         }
 
         .timeline-item {
@@ -43,19 +45,45 @@
             position: relative;
             background-color: inherit;
             width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInTimeline 0.6s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+        .timeline-item:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes slideInTimeline {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .timeline-item::after {
             content: '';
             position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -17px;
-            background-color: #ffffff;
-            border: 4px solid #007bff; /* Blue dot */
-            top: 15px;
+            width: 20px;
+            height: 20px;
+            right: -14px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border: 3px solid #ffffff;
+            top: 20px;
             border-radius: 50%;
             z-index: 1;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover::after {
+            transform: scale(1.2);
+            box-shadow: 0 6px 12px rgba(0,123,255,0.4);
         }
 
         .timeline-item:nth-child(even) {
@@ -63,25 +91,53 @@
         }
 
         .timeline-item:nth-child(even)::after {
-            left: -16px;
+            left: -14px;
         }
 
         .timeline-content {
-            padding: 20px 30px;
-            background-color: #f8f9fa; /* Light grey background */
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             position: relative;
-            border-radius: 6px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,123,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            box-shadow: 0 12px 35px rgba(0,123,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #28a745);
+            border-radius: 15px 15px 0 0;
         }
 
         .timeline-date {
-            padding: 10px 0;
-            font-weight: bold;
+            padding: 0 0 15px 0;
+            font-weight: 600;
             color: #007bff;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(0,123,255,0.1);
+        }
+
+        .timeline-content p {
+            margin: 0;
+            color: #495057;
+            line-height: 1.6;
         }
 
         /* Media queries for responsiveness */
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
             .timeline-container::after {
                 left: 31px;
             }
@@ -92,26 +148,45 @@
                 padding-right: 25px;
             }
 
-            .timeline-item::before {
-                left: 60px;
-                border: medium solid white;
-                border-width: 10px 0 10px 10px;
-                border-color: transparent transparent transparent white;
-            }
-
             .timeline-item::after {
-                left: 15px;
+                left: 22px;
             }
 
             .timeline-item:nth-child(even) {
                 left: 0%;
             }
+
+            .timeline-item:nth-child(even)::after {
+                left: 22px;
+            }
         }
 
         .timeline-item.active .timeline-content {
-            background-color: #e2e6ea; /* Slightly darker grey on active */
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,123,255,0.2);
+        }
+        
+        /* Ensure video respects container width and white background */
+        .book-cover-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            background-color: white;
+        }
+        
+        .book-cover-wrapper video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            background-color: white;
+        }
+        
+        /* Ensure text overlay stays above white background */
+        .cover-text-overlay {
+            z-index: 2;
         }
     </style>
 </head>
@@ -167,7 +242,7 @@
                 <h1 style="display: none;">Finanstilsyn</h1>
 
                 <div class="book-cover-wrapper">
-                    <video autoplay loop muted playsinline src="FRONT/Video/front2.mp4" alt="Finanstilsynet Danmark" class="img-fluid" width="100%" style="max-height: 400px; object-fit: cover;"></video>
+                    <video autoplay muted playsinline src="FRONT/Video/branche2160.mp4" alt="Finanstilsynet Danmark" class="img-fluid" width="100%" style="max-height: 400px; object-fit: cover;"></video>
                     <div class="cover-text-overlay animate-cover-text" data-type-text="3. Finanstilsyn" data-type-speed="150">Finanstilsyn</div>
                 </div>
                 <div class="info-box">
@@ -683,6 +758,25 @@
                     item.classList.toggle('active');
                 });
             });
+
+            // Handle video end event for white background
+            const video = document.querySelector('.book-cover-wrapper video');
+            if (video) {
+                video.addEventListener('ended', function() {
+                    // Create white overlay when video ends
+                    const whiteOverlay = document.createElement('div');
+                    whiteOverlay.style.cssText = `
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: white;
+                        z-index: 1;
+                    `;
+                    this.parentElement.appendChild(whiteOverlay);
+                });
+            }
         });
     </script>
 </body>

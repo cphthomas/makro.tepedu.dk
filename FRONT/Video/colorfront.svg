@@ -1,0 +1,19 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes soft-fade {
+        0%   { background-color: #f3dcd0; } /* Soft Peach */
+        50%  { background-color: #7b84b3; } /* Muted Blue/Purple */
+        100% { background-color: #f3dcd0; } /* Back to Soft Peach */
+      }
+      .background-rect {
+        width: 100%;
+        height: 100%;
+        animation: soft-fade 15s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+  <foreignObject width="100%" height="100%">
+    <div class="background-rect" xmlns="http://www.w3.org/1999/xhtml" />
+  </foreignObject>
+</svg>
