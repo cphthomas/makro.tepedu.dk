@@ -264,7 +264,6 @@
                     <h4>Branchestørrelse (2024):</h4>
                     <ul>
                         <li><b>Ca. 3.000 statsautoriserede revisorer</b> i Danmark</li>
-                        <li><b>Ca. 6.000 registrerede revisorer</b> (lavere autorisation)</li>
                         <li><b>Ca. 800-1.000 revisionsvirksomheder</b> fra store internationale til enkeltmandshuse</li>
                         <li><b>Ca. 25.000-30.000 ansatte</b> i hele revisionssektoren</li>
                         <li><b>Ca. 15-20 mia. kr.</b> i samlet omsætning årligt</li>
@@ -332,8 +331,14 @@
                                 <td>Fokus på mellemstore virksomheder</td>
                             </tr>
                             <tr>
+                                <td><b>Redmark</b></td>
+                                <td>1-2%</td>
+                                <td>100-200</td>
+                                <td>Fokus på mellemstore virksomheder, særlig styrke i teknologi og digitalisering</td>
+                            </tr>
+                            <tr>
                                 <td><b>Øvrige</b></td>
-                                <td>15-20%</td>
+                                <td>14-18%</td>
                                 <td>15.000+</td>
                                 <td>Lokale og regionale revisionshuse, specialister</td>
                             </tr>
@@ -521,6 +526,22 @@
                 </div>
 
                 <h2>Uddannelse og certificering</h2>
+                <div class="info-box">
+                    <h3>Ændringer i revisorautorisationer</h3>
+                    <p>Pr. 1. januar 2013 blev titlen "Registreret revisor" afskaffet. Fra denne dato er der kun én beskyttet titel for lovpligtige revisioner: <b>Statsautoriseret revisor</b>.</p>
+                    
+                    <h4>Rettigheder for statsautoriseret revisor</h4>
+                    <p>Kun statsautoriserede revisorer har ret til at:</p>
+                    <ul>
+                        <li>Udføre lovpligtig revision af regnskaber for aktie- og anpartsselskaber</li>
+                        <li>Udarbejde erklæringsopgaver med høj grad af sikkerhed</li>
+                        <li>Være ansvarlig revisor for børsnoterede selskaber</li>
+                        <li>Godkendes til revision af finansielle institutioner</li>
+                    </ul>
+                    
+                    <p>Andre revisorer (f.eks. med HD(R) eller finansøkonom) må kun udføre frivillig revision og rådgivning, men ikke lovpligtige revisioner.</p>
+                </div>
+                
                 <div class="table-responsive mb-4">
                     <table class="table table-striped table-bordered">
                         <thead class="table-dark">
@@ -534,27 +555,21 @@
                         <tbody>
                             <tr>
                                 <td><b>Statsautoriseret revisor</b></td>
-                                <td>HD/kandidat + 3 års praktik + eksamen</td>
-                                <td>5-7 år total</td>
-                                <td>Fuld revisorautorisation, alle virksomhedstyper</td>
-                            </tr>
-                            <tr>
-                                <td><b>Registreret revisor</b></td>
-                                <td>Finansøkonom/merkonom + 3 års praktik + eksamen</td>
-                                <td>4-6 år total</td>
-                                <td>Revision af mindre selskaber</td>
+                                <td>HD(R) eller Cand.merc.aud. + 3 års praktik + statsautoriseret revisoreksamen</td>
+                                <td>Typisk 8-10 år total (inkl. uddannelse og praktik)</td>
+                                <td>Fuld revisorautorisation, ret til at udføre lovpligtig revision for alle virksomhedstyper</td>
                             </tr>
                             <tr>
                                 <td><b>HD(R) - Regnskab</b></td>
-                                <td>Finansøkonom + 2 år deltid</td>
+                                <td>Finansøkonom eller lign. + 2 år deltid</td>
                                 <td>2 år</td>
-                                <td>Grundlag for revisoruddannelse</td>
+                                <td>Del af uddannelsesforløbet mod statsautoriseret revisor. Giver grundlag for revisoruddannelse.</td>
                             </tr>
                             <tr>
                                 <td><b>Cand.merc.aud</b></td>
-                                <td>HA/scient.adm. + 2 år kandidat</td>
+                                <td>HA/scient.adm. eller lign. + 2 år kandidat</td>
                                 <td>2 år</td>
-                                <td>Direkte vej til statsautoriseret revisor</td>
+                                <td>Direkte vej til den teoretiske del af statsautoriseret revisoruddannelse.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -619,9 +634,16 @@
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
+                        <div class="timeline-date">2013</div>
+                        <div class="timeline-content">
+                            <p>Afskaffelse af Registreret revisor: Kun Statsautoriseret revisor må udføre lovpligtig revision</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
                         <div class="timeline-date">2016</div>
                         <div class="timeline-content">
-                            <p>EU's revisorforordning implementeres: Rotation af revisorer, forbud mod visse ikke-revisionsydelser</p>
+                            <p>EU's revisorforordning implementeres: Indførelse af obligatorisk revisorrotation for virksomheder af offentlig interesse (PIE - Public Interest Entities) og forbud mod visse ikke-revisionsydelser for at styrke revisorers uafhængighed og revisionskvalitet.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -988,8 +1010,10 @@
                                                 if (label) {
                                                     label += ': ';
                                                 }
-                                                if (label.includes('Omsætning') || label.includes('Resultat')) {
+                                                if (label.includes('Omsætning')) {
                                                     label += tooltipItem.yLabel + ' mia. kr.';
+                                                } else if (label.includes('Resultat')) {
+                                                    label += tooltipItem.yLabel + ' mio. kr.';
                                                 } else {
                                                     label += tooltipItem.yLabel;
                                                 }

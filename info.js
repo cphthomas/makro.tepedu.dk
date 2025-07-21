@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         .info-popup {
             visibility: hidden;
-            width: 300px;
+            width: 180px; /* Set to 60% of 300px */
             background-color: #fff;
             color: #333;
             text-align: left;
@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
             padding: 15px;
             position: absolute;
             z-index: 1000;
-            top: 30px;
-            left: 0;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             opacity: 0;
             transition: opacity 0.3s, visibility 0.3s;
@@ -29,8 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         .info-popup img {
-            width: 100%;
-            height: auto;
+            max-width: 100%; /* Ensure image fits within the popup */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+            margin: 10px auto; /* Center image and add some vertical spacing */
         }
         
         .info-icon-container:hover .info-popup,
@@ -74,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <h5>Om denne bog</h5>
             <p>Denne bog er udviklet af: </p>
             <img src="images/mig.jpg" alt="Thomas Petersen">
-            <br><small>Thomas Petersen</small>
+            <br><small>Thomas Petersen
             <br><br>
             <p>I udviklingen er der benyttet kunstig intelligens både til kodningen af selve strukturen i form af navigation, js-, html- og css-filer, samt indhold og eksempler. <br>Der er benyttet følgende LLM-modeller:</p>
             <ul>
@@ -82,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <li>Anthropic Claude</li>
                 <li>OpenAI ChatGPT</li>
             </ul>
+            </small>
         `;
         
         // Sæt elementerne sammen
