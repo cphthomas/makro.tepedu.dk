@@ -253,7 +253,7 @@
                 <div class="info-box">
                     <p>Banksektoren udgør rygraden i det danske finansielle system og spiller en central rolle i både private borgeres og virksomheders økonomi. Med en historie, der strækker sig over flere århundreder, har danske banker udviklet sig til at være blandt de mest stabile og innovative i verden.</p>
                     
-                    <p>I dette kapitel ser we på:</p>
+                    <p>I dette kapitel ser vi på:</p>
                     <ul>
                         <li>Overblik over den danske banksektor og dens størrelse</li>
                         <li>De dominerende banker og deres markedsandele</li>
@@ -288,7 +288,7 @@
                 </div>
 
                 <h2>2.2 De dominerende banker i Danmark</h2>
-                <p>Den danske banksektor er præget af en række store banker, der tilsammen sidder på en betydelig del af markedet. <strong>Markedsandelen måles på balancesum og udlån for danske aktiviteter</strong> - dvs. hvor stor en procentdel af sektorens samlede aktiver (balancesum) eller udlånsvolumen hver bank kontrollerer i Danmark. Balancesummen reflekterer bankens samlede aktiver og passiver og er et godt mål for bankens samlede størrelse, mens udlån viser, hvor stor en del af den samlede udlånsaktivitet banken står for. Nordea er en nordisk bank med betydelige aktiviteter i Danmark, men deres samlede balancesum er større, da den inkluderer hele deres nordiske forretning.</p>
+                <p>Den danske banksektor er præget af en række store banker. <strong>Målt på balancesum er Danske Bank den største danske bank.</strong> Markedsandelen måles typisk på balancesum og udlån for danske aktiviteter. Det er dog vigtigt at bemærke, at selvom Nordea er en stor aktør på det danske marked, kategoriseres den juridisk som en finsk bank af Finanstilsynet og optræder derfor ikke på Finanstilsynets officielle liste over de største danske banker. I nedenstående oversigt er Nordea medtaget grundet deres markedsomfang i Danmark, men deres tal og markedsandel afspejler ofte hele den nordiske forretning.</p>
                 <div class="table-responsive mb-4">
                     <table class="table table-striped table-bordered">
                         <thead class="table-dark">
@@ -301,22 +301,21 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><b>Nordea</b></td>
-                                <td>33%</td>
-                                <td>Nordisk fokus, stærk digital platform</td>
-                                <td>Alle segmenter, særlig stærk i corporate banking</td>
-                            </tr>
-                            <tr>
                                 <td><b>Danske Bank</b></td>
                                 <td>28%</td>
-                                <td>Danmarks største bank, stærk i corporate banking og private banking</td>
+                                <td>Danmarks største bank (målt på balancesum for danske banker). Stærk i corporate banking og private banking.</td>
                                 <td>Store virksomheder, private banking kunder, almindelige bankkunder</td>
+                            </tr>
+                            <tr>
+                                <td><b>Nordea</b></td>
+                                <td>33%</td>
+                                <td>Juridisk en finsk bank, men en af de største aktører på det danske marked. Nordisk fokus og stærk digital platform.</td>
+                                <td>Alle segmenter, særlig stærk i corporate banking</td>
                             </tr>
                             <tr>
                                 <td><b>Jyske Bank</b></td>
                                 <td>10%</td>
                                 <td>Stærk i private banking og erhverv, kendt for personlig service. Har cementeret sin position som en af de største banker i Danmark efter opkøbet af Handelsbankens danske aktiviteter.</td>
-                                <tr>
                                 <td><b>Sydbank</b></td>
                                 <td>7%</td>
                                 <td>Regional stærk i Sønderjylland og Fyn, fokus på erhverv</td>
@@ -331,7 +330,7 @@
                             <tr>
                                 <td><b>Arbejdernes Landsbank</b></td>
                                 <td>4%</td>
-                                <td>Kooperativ struktur, fokus på almindelige lønmodtagere</td>
+                                <td>Kooperativ struktur (ejet af kunderne), fokus på almindelige lønmodtagere</td>
                                 <td>Lønmodtagere, fagforeningsmedlemmer, mindre virksomheder</td>
                             </tr>
                             <tr>
@@ -465,7 +464,7 @@
                                 <td>Alle kundesegmenter</td>
                             </tr>
                             <tr>
-                                <td><b>Investering og formuepleie</b></td>
+                                <td><b>Investering og formuepleje</b></td>
                                 <td>Investeringsrådgivning, porteføljeforvaltning, private banking, værdipapirhandel</td>
                                 <td>Velhavende privatkunder</td>
                             </tr>
@@ -518,7 +517,7 @@
                             <tr>
                                 <td><b>Investeringsforeningskonti</b></td>
                                 <td>Konti tilknyttet investeringsforeninger, hvor midlerne investeres i værdipapirer. Renten afhænger af investeringens afkast.</td>
-                                <td>Kunden med interesse i investering og højere risikovillighed</td>
+                                <td>Kunder med interesse i investering og højere risikovillighed</td>
                             </tr>
                             <tr>
                                 <td><b>Virksomhedskonti</b></td>
@@ -812,13 +811,13 @@
                         initializeChart('marketShareBankPieChart', {
                             type: 'pie',
                             data: {
-                                labels: ['Nordea', 'Danske Bank', 'Jyske Bank', 'Sydbank', 'Nykredit Bank', 'Arbejdernes Landsbank', 'Øvrige banker'],
+                                labels: ['Danske Bank', 'Nordea', 'Jyske Bank', 'Sydbank', 'Nykredit Bank', 'Arbejdernes Landsbank', 'Øvrige banker'],
                                 datasets: [{
                                     label: 'Markedsandel målt på balancesum/udlån (ca.)',
-                                    data: [33, 28, 10, 7, 5, 4, 13], // Adjusted to sum to 100%
+                                    data: [28, 33, 10, 7, 5, 4, 13], // Adjusted to sum to 100%
                                     backgroundColor: [
-                                        'rgba(54, 162, 235, 0.8)', // Nordea
                                         'rgba(255, 99, 132, 0.8)', // Danske Bank
+                                        'rgba(54, 162, 235, 0.8)', // Nordea
                                         'rgba(255, 206, 86, 0.8)',
                                         'rgba(75, 192, 192, 0.8)',
                                         'rgba(153, 102, 255, 0.8)',
@@ -826,8 +825,8 @@
                                         'rgba(201, 203, 207, 0.8)'
                                     ],
                                     borderColor: [
-                                        'rgba(54, 162, 235, 1)',
                                         'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
                                         'rgba(255, 206, 86, 1)',
                                         'rgba(75, 192, 192, 1)',
                                         'rgba(153, 102, 255, 1)',
