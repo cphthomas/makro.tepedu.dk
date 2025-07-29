@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+<script src="https://unpkg.com/wavesurfer.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.svg">
@@ -193,6 +194,98 @@
         .cover-text-overlay {
             z-index: 2;
         }
+
+        /* New Podcast Player Styles */
+        .podcast-container {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            margin: 30px 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .podcast-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.4em;
+        }
+
+        .podcast-title .bi-broadcast {
+            margin-right: 12px;
+            color: #007bff;
+            font-size: 1.6em;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        #waveform {
+            width: 100%;
+            height: 90px;
+            margin-bottom: 15px;
+        }
+
+        .podcast-controls-new {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .play-btn-new {
+            background: #007bff;
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn-new:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .time-display-new {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 16px;
+            color: #495057;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .speed-selector-new {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            padding: 8px 12px;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right .75rem center;
+            background-size: 16px 12px;
+        }
     </style>
 </head>
 
@@ -262,7 +355,27 @@
                         <li>Historisk udvikling og skelsættende begivenheder</li>
                     </ul>
                 </div>
-                <br>
+                
+                <!-- New Podcast Player -->
+                <div class="podcast-container">
+                    <h3 class="podcast-title"><i class="bi bi-broadcast"></i> Lyt til kapitlet</h3>
+                    <audio id="podcast-audio" src="podcast/bank.wav" preload="metadata"></audio>
+                    <div id="waveform"></div>
+                    <div class="podcast-controls-new">
+                        <button class="play-btn-new" id="playBtn">
+                            <i class="bi bi-play-fill"></i>
+                        </button>
+                        <div class="time-display-new">
+                            <span id="currentTime">0:00</span> / <span id="totalDuration">0:00</span>
+                        </div>
+                        <select class="speed-selector-new" id="speedSelector">
+                            <option value="0.5">0.5x</option>
+                            <option value="1" selected>1.0x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2.0x</option>
+                        </select>
+                    </div>
+                </div>
 
                 <h2>2.1 Den danske banksektor i tal</h2>
                 <div class="info-box">
@@ -763,7 +876,7 @@
 
                 <br>
                 <h2>2.7 Quiz</h2>
-                <a href="#" class="effectLinks" data-replace="Åben quiz" target="_blank">
+                <a href="https://quiz.tepedu.dk/bank" class="effectLinks" data-replace="Åben quiz" target="_blank">
                     <span>Quiz om banksektoren</span>
                 </a>
                 <br>
@@ -1015,6 +1128,50 @@
                 `;
                 this.parentElement.appendChild(whiteOverlay);
             });
+        }
+
+        // New Podcast Player Logic
+        const wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: '#adb5bd',
+            progressColor: '#007bff',
+            cursorColor: '#343a40',
+            barWidth: 4,
+            barRadius: 2,
+            responsive: true,
+            height: 90,
+            normalize: true,
+        });
+
+        wavesurfer.load('podcast/bank.wav');
+
+        const playBtn = document.getElementById('playBtn');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalDurationEl = document.getElementById('totalDuration');
+        const speedSelector = document.getElementById('speedSelector');
+
+        wavesurfer.on('ready', function () {
+            totalDurationEl.textContent = formatTime(wavesurfer.getDuration());
+        });
+
+        wavesurfer.on('audioprocess', function () {
+            currentTimeEl.textContent = formatTime(wavesurfer.getCurrentTime());
+        });
+
+        playBtn.addEventListener('click', function () {
+            wavesurfer.playPause();
+            const isPlaying = wavesurfer.isPlaying();
+            playBtn.innerHTML = isPlaying ? '<i class="bi bi-pause-fill"></i>' : '<i class="bi bi-play-fill"></i>';
+        });
+
+        speedSelector.addEventListener('change', function (e) {
+            wavesurfer.setPlaybackRate(e.target.value);
+        });
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+            return `${minutes}:${seconds}`;
         }
     });
 </script>
