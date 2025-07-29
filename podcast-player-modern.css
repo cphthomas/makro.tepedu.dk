@@ -1,0 +1,118 @@
+:root {
+    --player-bg: #ffffff;
+    --player-shadow: rgba(0, 0, 0, 0.08);
+    --accent-color: #007bff;
+    --accent-color-light: #4dabf7;
+    --text-primary: #212529;
+    --text-secondary: #868e96;
+    --wave-bg: rgba(0, 123, 255, 0.1);
+    --cursor-color: #343a40;
+}
+
+.podcast-player-modern {
+    background: var(--player-bg);
+    padding: 25px;
+    margin: 40px 0;
+    box-shadow: 0 10px 40px var(--player-shadow);
+    animation: fadeInPlayer 0.7s ease-in-out;
+}
+
+@keyframes fadeInPlayer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.podcast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.podcast-title-modern {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.3em;
+    margin: 0;
+}
+
+.podcast-icon {
+    font-size: 1.5em;
+    color: var(--accent-color);
+}
+
+.podcast-artwork {
+    width: 100px;
+    height: 100px;
+    background-color: #f1f3f5;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.podcast-track-title {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.waveform-container {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.podcast-footer {
+    padding: 0 10px;
+}
+
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+.podcast-controls-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-button:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.play-pause-button {
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    font-size: 32px;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.play-pause-button:hover {
+    background-color: var(--accent-color-light);
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+}

@@ -19,7 +19,7 @@
     <script src="https://unpkg.com/wavesurfer.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="podcast-player.css">
+    <link rel="stylesheet" href="podcast-player-modern.css">
     <link rel="icon" type="image/x-icon" href="favicon.svg">
     <style>
         .timeline-container {
@@ -265,24 +265,27 @@
                     </ul>
                 </div>
                 
-                <!-- New Podcast Player -->
-                <div class="podcast-player-container">
-                    <h3 class="podcast-player-title"><i class="bi bi-broadcast-pin"></i> Lyt til kapitlet</h3>
+                <div class="podcast-player-modern">
+                    <div class="podcast-header">
+                        <h3 class="podcast-title-modern">Lyt til kapitlet</h3>
+                        <i class="bi bi-broadcast-pin podcast-icon"></i>
+                    </div>
+                    <div class="podcast-artwork">
+                        <!-- Artwork can go here -->
+                    </div>
+                    <div class="podcast-track-title">Bank</div>
                     <audio src="podcast/bank.wav" preload="metadata"></audio>
-                    <div class="podcast-waveform"></div>
-                    <div class="podcast-controls">
-                        <button class="podcast-play-button">
-                            <i class="bi bi-play-fill"></i>
-                        </button>
-                        <div class="podcast-time-display">
-                            <span class="current-time">0:00</span> / <span class="total-duration">0:00</span>
+                    <div class="waveform-container"></div>
+                    <div class="podcast-footer">
+                        <div class="time-display">
+                            <span class="current-time">0:00</span>
+                            <span class="total-duration">0:00</span>
                         </div>
-                        <select class="podcast-speed-selector">
-                            <option value="0.5">0.5x</option>
-                            <option value="1" selected>1.0x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2">2.0x</option>
-                        </select>
+                        <div class="podcast-controls-modern">
+                            <button class="control-button backward-button"><i class="bi bi-skip-backward-fill"></i></button>
+                            <button class="control-button play-pause-button"><i class="bi bi-play-fill"></i></button>
+                            <button class="control-button forward-button"><i class="bi bi-skip-forward-fill"></i></button>
+                        </div>
                     </div>
                 </div>
 
@@ -338,6 +341,9 @@
                                 <td><b>Jyske Bank</b></td>
                                 <td>10%</td>
                                 <td>Stærk i private banking og erhverv, kendt for personlig service. Har cementeret sin position som en af de største banker i Danmark efter opkøbet af Handelsbankens danske aktiviteter.</td>
+                                <td>Private banking, erhvervskunder</td>
+                            </tr>
+                            <tr>
                                 <td><b>Sydbank</b></td>
                                 <td>7%</td>
                                 <td>Regional stærk i Sønderjylland og Fyn, fokus på erhverv</td>
@@ -811,7 +817,7 @@
     <script src="menu.js"></script>
     <script src="script.js"></script>
     <script src="info.js"></script>
-    <script src="podcast-player.js"></script>
+    <script src="podcast-player-modern.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- MDB JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
