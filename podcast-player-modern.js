@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const waveformEl = container.querySelector('.waveform-container');
         const playBtn = container.querySelector('.play-pause-button');
         const currentTimeEl = container.querySelector('.current-time');
-        const totalDurationEl = container.querySelector('.total-duration');
+        // const totalDurationEl = container.querySelector('.total-duration'); // Removed as per user request
         const speedControl = container.querySelector('.speed-control-modern');
         const podcastIcon = container.querySelector('.podcast-icon');
         const progressBarContainer = container.querySelector('.progress-bar-container');
         const progressBar = container.querySelector('.progress-bar');
 
-        if (!audioEl || !waveformEl || !playBtn || !currentTimeEl || !totalDurationEl || !speedControl || !podcastIcon || !progressBarContainer || !progressBar) {
+        if (!audioEl || !waveformEl || !playBtn || !currentTimeEl || !speedControl || !podcastIcon || !progressBarContainer || !progressBar) {
             console.error('One or more podcast player elements are missing.');
             return;
         }
@@ -20,12 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const wavesurfer = WaveSurfer.create({
             container: waveformEl,
             waveColor: 'rgba(108, 117, 125, 0.2)', // Lighter grey for the background wave
-            progressColor: {
-                // Gradient for the progress wave, inspired by the image
-                '0%': 'rgba(255, 105, 180, 0.8)', // Pinkish
-                '50%': 'rgba(0, 191, 255, 0.8)',   // Blueish
-                '100%': 'rgba(255, 105, 180, 0.8)' // Pinkish
-            },
+            progressColor: '#FF8C00', // Orange like the progress bar
             cursorColor: 'transparent',
             barWidth: 3,
             barRadius: 5, // More rounded bars
@@ -36,8 +31,23 @@ document.addEventListener('DOMContentLoaded', function() {
             barGap: 2 // Add a small gap between bars
         });
 
+        // Explicitly load the audio to ensure duration is available
+        wavesurfer.load(audioEl.src);
+
         wavesurfer.on('ready', function () {
-            totalDurationEl.textContent = formatTime(wavesurfer.getDuration());
+            // Removed total duration update as per user request
+            // const duration = wavesurfer.getDuration();
+            // console.log('Wavesurfer ready. Duration:', duration);
+            // if (duration > 0) {
+            //     totalDurationEl.textContent = formatTime(duration);
+            // } else {
+            //     console.warn('Wavesurfer duration not available on ready, retrying...');
+            //     setTimeout(() => {
+            //         const delayedDuration = wavesurfer.getDuration();
+            //         console.log('Wavesurfer delayed duration:', delayedDuration);
+            //         totalDurationEl.textContent = formatTime(delayedDuration);
+            //     }, 500);
+            // }
         });
 
         wavesurfer.on('audioprocess', function () {
@@ -63,7 +73,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         let currentSpeed = 1.0;
-        const speeds = [1.0, 1.25, 1.5, 2.0, 0.75];
+        const speeds = [1.0, 1.25, 1.5, 2.0, 0.75]; // Added 0.75 for slower speed
+
+        // Function to update the speed button's color based on speed
+        function updateSpeedButtonColor(speed) {
+            let color;
+            switch (speed) {
+                case 0.75:
+                    color = '#6c757d'; // Grey for slower
+                    break;
+                case 1.0:
+                    color = '#adb5bd'; // Lighter grey for normal (instead of blue)
+                    break;
+                case 1.25:
+                    color = '#ffc107'; // Yellow/Orange for faster
+                    break;
+                case 1.5:
+                    color = '#fd7e14'; // Orange-red for even faster
+                    break;
+                case 2.0:
+                    color = '#dc3545'; // Red for fastest
+                    break;
+                default:
+                    color = '#6c757d'; // Default to grey
+            }
+            speedControl.style.backgroundColor = color;
+        }
+
+        // Initialize button color
+        updateSpeedButtonColor(currentSpeed);
 
         speedControl.addEventListener('click', () => {
             const currentIndex = speeds.indexOf(currentSpeed);
@@ -71,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             currentSpeed = speeds[nextIndex];
             
             wavesurfer.setPlaybackRate(currentSpeed);
+            updateSpeedButtonColor(currentSpeed); // Update color after speed change
 
             speedControl.classList.add('speed-changing');
             setTimeout(() => {

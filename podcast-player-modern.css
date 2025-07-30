@@ -136,9 +136,10 @@
 }
 
 .speed-control-modern {
-    background: none;
-    border: 1px solid var(--player-border);
-    color: var(--text-secondary);
+    background: var(--text-secondary); /* Default grey background */
+    color: white;
+    border: none; /* No border */
+    border-radius: 0; /* Make it perfectly square */
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 0.9em;
@@ -147,11 +148,17 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    outline: none; /* Remove outline on focus */
+}
+
+.speed-control-modern:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .speed-control-modern:hover {
-    border-color: var(--accent-play);
-    color: var(--accent-play);
+    background-color: var(--accent-play); /* Orange on hover */
+    color: white;
 }
 
 .speed-control-modern .speed-text {
