@@ -7,24 +7,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const playBtn = container.querySelector('.play-pause-button');
         const currentTimeEl = container.querySelector('.current-time');
         const totalDurationEl = container.querySelector('.total-duration');
-        const speedSelector = container.querySelector('.podcast-speed-selector'); // This is not in the new HTML, but I'll leave it for now
-        const forwardBtn = container.querySelector('.forward-button');
-        const backwardBtn = container.querySelector('.backward-button');
+        const speedControl = container.querySelector('.speed-control-modern');
+        const podcastIcon = container.querySelector('.podcast-icon');
+        const progressBar = container.querySelector('.progress-bar');
 
-        if (!audioEl || !waveformEl || !playBtn || !currentTimeEl || !totalDurationEl || !forwardBtn || !backwardBtn) {
+        if (!audioEl || !waveformEl || !playBtn || !currentTimeEl || !totalDurationEl || !speedControl || !podcastIcon || !progressBar) {
             console.error('One or more podcast player elements are missing.');
             return;
         }
 
         const wavesurfer = WaveSurfer.create({
             container: waveformEl,
-            waveColor: 'rgba(0, 123, 255, 0.2)',
+            waveColor: 'rgba(0, 123, 255, 0.1)',
             progressColor: 'rgba(0, 123, 255, 0.7)',
-            cursorColor: '#343a40',
-            barWidth: 3,
+            cursorColor: 'transparent',
+            barWidth: 2,
             barRadius: 3,
             responsive: true,
-            height: 100,
+            height: 60,
             normalize: true,
             media: audioEl,
         });
@@ -35,27 +35,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
         wavesurfer.on('audioprocess', function () {
             currentTimeEl.textContent = formatTime(wavesurfer.getCurrentTime());
+            const progress = wavesurfer.getCurrentTime() / wavesurfer.getDuration();
+            progressBar.style.width = `${progress * 100}%`;
         });
 
         playBtn.addEventListener('click', function () {
             wavesurfer.playPause();
             const isPlaying = wavesurfer.isPlaying();
             playBtn.innerHTML = isPlaying ? '<i class="bi bi-pause-fill"></i>' : '<i class="bi bi-play-fill"></i>';
+            playBtn.classList.toggle('is-playing', isPlaying);
+            podcastIcon.classList.toggle('is-playing', isPlaying);
         });
 
-        forwardBtn.addEventListener('click', () => {
-            wavesurfer.skipForward(10);
-        });
+        let currentSpeed = 1.0;
+        const speeds = [1.0, 1.25, 1.5, 2.0, 0.75];
 
-        backwardBtn.addEventListener('click', () => {
-            wavesurfer.skipBackward(10);
-        });
+        speedControl.addEventListener('click', () => {
+            const currentIndex = speeds.indexOf(currentSpeed);
+            const nextIndex = (currentIndex + 1) % speeds.length;
+            currentSpeed = speeds[nextIndex];
+            
+            wavesurfer.setPlaybackRate(currentSpeed);
 
-        if (speedSelector) {
-            speedSelector.addEventListener('change', function (e) {
-                wavesurfer.setPlaybackRate(e.target.value);
-            });
-        }
+            speedControl.classList.add('speed-changing');
+            setTimeout(() => {
+                speedControl.querySelector('.speed-text').textContent = `${currentSpeed}x`;
+                speedControl.classList.remove('speed-changing');
+            }, 150);
+        });
 
         function formatTime(time) {
             const minutes = Math.floor(time / 60);
