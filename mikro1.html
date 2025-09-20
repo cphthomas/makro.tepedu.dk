@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="Content-Language" content="da">
+     <title>Quiz Mikroøkonomi</title>
+     
+     <!-- Google Fonts - updated with Space Grotesk and italic Roboto -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;300;400;500&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+     
+     <link rel="stylesheet"
+           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet"
+           href="styles.css">
+     <link rel="icon"
+           href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script"
+             async
+             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af grundlæggende økonomiske principper, herunder ressourceknaphed, cost-benefit og alternativomkostninger." data-forudsætning="Ingen. Kurset introducerer fundamentale begreber.">
+     <header> <a href="index.html"
+             target="_blank"><img src="tepedulogo.svg"
+                    alt="Logo"
+                    width="8%"></a>
+          <h2>Quiz Mikroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent"
+                                   class="mt-4"
+                                   style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Mikroøkonomi: Ressourceanvendelse
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <h1 id="question"
+                                  class="card-title"></h1>
+                              <div id="options"
+                                   class="mt-4"></div>
+                              <div id="progress-bar"
+                                   class="progress-bar-container"></div>
+
+                            <div id="quiz-data" style="display: none;">
+                                <div class="question"
+                                        data-question="Hvad er det grundlæggende vilkår for alle økonomiske beslutninger?"
+                                        data-answer="2"
+                                        data-explanation="Alle økonomiske beslutninger tages inden for en budgetramme og er underlagt princippet om knappe ressourcer. Dette er et fundamentalt vilkår i økonomien.">
+                                        <div class="option"
+                                             data-option="At maksimere omsætning">
+                                        </div>
+                                        <div class="option"
+                                             data-option="At minimere omkostninger">
+                                        </div>
+                                        <div class="option"
+                                             data-option="At valgene er underlagt princippet om knappe ressourcer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="At opnå høj gennemsnitsnytte">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilket princip beskriver at en transaktion kun skal gennemføres hvis udbyttet overstiger omkostningerne?"
+                                        data-answer="0"
+                                        data-explanation="Cost-benefit princippet fastslår at en transaktion kun skal gennemføres hvis det ekstra udbytte overstiger de ekstra omkostninger ved at gennemføre transaktionen.">
+                                        <div class="option"
+                                             data-option="Cost-benefit princippet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="De lavthængende frugters princip">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Alternativomkostningsprincippet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Marginalprincippet">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad er en sunk cost?"
+                                        data-answer="1"
+                                        data-explanation="En 'sunk cost' er omkostninger som allerede er afholdt og ikke kan tilbagebetales. Disse omkostninger bør ikke påvirke fremtidige økonomiske beslutninger.">
+                                        <div class="option"
+                                             data-option="Fremtidige omkostninger der ikke kan undgås">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Omkostninger der allerede er afholdt og ikke kan tilbagebetales">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Variable omkostninger i produktionen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Omkostninger der stiger over tid">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En kunde opdager at der er 20 kr at spare på en pakke kaffe i et supermarked der ligger 10 km væk. <br><br>Hvorfor kan det være en dårlig økonomisk beslutning at køre efter tilbuddet?"
+                                        data-answer="1"
+                                        data-explanation="Ved økonomiske beslutninger skal man medregne både direkte omkostninger (transport) og alternativomkostninger - altså værdien af den tid man bruger. Hvis tidsforbruget kunne være brugt på andet værdifuldt arbejde, kan den reelle omkostning overstige besparelsen.">
+                                        <div class="option"
+                                             data-option="Fordi benzinprisen er for høj til at det kan betale sig">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi både transportomkostninger og værdien af den brugte tid skal medregnes i beslutningen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi der er risiko for at tilbuddet er udsolgt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi andre butikker kan have bedre tilbud">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En frugtplukker starter dagen med at kunne plukke 25 kg frugt på en halv time, men bruger gradvist længere tid på at plukke samme mængde. <br><br>Hvad illustrerer dette eksempel?"
+                                        data-answer="0"
+                                        data-explanation="Dette illustrerer princippet om stigende alternativomkostninger, hvor det første output er lettest at producere, hvorefter det bliver gradvist sværere og mere tidskrævende at opnå samme resultat.">
+                                        <div class="option"
+                                             data-option="At der er stigende alternativomkostninger når man starter med de mest tilgængelige ressourcer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="At arbejdseffektiviteten falder pga træthed">
+                                        </div>
+                                        <div class="option"
+                                             data-option="At kvaliteten bliver dårligere over tid">
+                                        </div>
+                                        <div class="option"
+                                             data-option="At arbejdstempoet varierer gennem dagen">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Et firma overvejer at udvide med flere produktionsanlæg. De har beregnet at gennemsnitsomkostningen pr. anlæg er 1,5 mio. kr., mens indtægten pr. anlæg er 2 mio. kr. <br><br>Hvorfor er det forkert kun at se på disse tal?"
+                                        data-answer="3"
+                                        data-explanation="Ved udvidelse af produktion skal man se på de marginale omkostninger - altså hvad det ekstra anlæg koster, ikke gennemsnitsomkostningen. Hvis de marginale omkostninger stiger kan det sidste anlæg give underskud selvom gennemsnittet ser positivt ud.">
+                                        <div class="option"
+                                             data-option="Fordi gennemsnitsberegningen er upræcis">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi driftsomkostninger ikke er medregnet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi indtægterne er usikre">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi de marginale omkostninger ved hvert nyt anlæg kan overstige gennemsnitsomkostningen">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="I en økonomisk beslutningsproces skal man altid medregne alternativomkostninger. En studerende overvejer at tage et bijob lørdag aften i en bar, hvor lønnen er 150 kr i timen. <br><br>Hvorfor kan det være en dårlig økonomisk beslutning at tage jobbet?"
+                                        data-answer="2"
+                                        data-explanation="Alternativomkostningen er værdien af det bedste alternativ man går glip af. Hvis den studerende kunne tjene mere på at undervise eller mister SU ved for høj indkomst, er den reelle omkostning højere end den umiddelbare gevinst.">
+                                        <div class="option"
+                                             data-option="Fordi transporttiden til jobbet er for lang">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi arbejdsmiljøet i barer ofte er dårligt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi tiden kunne bruges på lektiehjælp til højere timeløn">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordi den studerende risikerer at blive for træt til studiet">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En virksomhed har købt en maskine til 500.000 kr. Efter et år viser det sig at en nyere model er mere effektiv. Den gamle maskine kan ikke sælges eller bruges til andet. <br><br>Hvilken betydning bør de 500.000 kr have for beslutningen om at købe ny maskine?"
+                                        data-answer="0"
+                                        data-explanation="De 500.000 kr er en 'sunk cost' - en omkostning der allerede er afholdt og ikke kan genvindes. Denne type omkostninger bør ikke påvirke fremtidige beslutninger, da pengene er tabt uanset hvad.">
+                                        <div class="option"
+                                             data-option="Ingen betydning">
+                                        </div>
+                                        <div class="option"
+                                             data-option="De skal trækkes fra den nye maskines pris">
+                                        </div>
+                                        <div class="option"
+                                             data-option="De skal afskrives over 5 år først">
+                                        </div>
+                                        <div class="option"
+                                             data-option="De skal lægges til omkostningen ved ny maskine">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="På en fabrik produceres der smartphones. De første 1000 telefoner kan produceres for 1000 kr pr stk, men herefter stiger omkostningerne pr telefon. <br><br>Hvad er den sandsynlige årsag til de stigende omkostninger?"
+                                        data-answer="1"
+                                        data-explanation="Ved øget produktion må virksomheden ofte tage mindre effektive ressourcer i brug, fx overtidsarbejde eller ældre maskiner, hvilket giver stigende marginale omkostninger.">
+                                        <div class="option"
+                                             data-option="Materialerne bliver dyrere ved større indkøb">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Der må bruges overtid og mindre effektive maskiner">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Kvaliteten bliver dårligere ved stor produktion">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Arbejderne bliver mere effektive">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Et supermarked køber 1000 kg appelsiner til 10 kr/kg. Efter en uge er 100 kg blevet dårlige og må smides ud. Butikken overvejer at sælge resten til 8 kr/kg. <br><br>Er dette en god beslutning?"
+                                        data-answer="3"
+                                        data-explanation="Den oprindelige indkøbspris er en 'sunk cost'. Ved den aktuelle beslutning skal man kun se på alternativerne fremadrettet - enten få 8 kr/kg eller ingenting hvis appelsinerne bliver dårlige.">
+                                        <div class="option"
+                                             data-option="Nej, det giver et tab på 2 kr/kg">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Nej, det sender et dårligt signal til kunderne">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Nej, man bør vente på bedre priser">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Ja, det er bedre end at miste hele værdien">
+                                        </div>
+                                   </div>
+
+
+
+
+
+                                   <div class="question"
+                                        data-question="En biograf har solgt årskort til 1000 kr. Det viser sig at mange årskortholdere kommer så ofte at hver filmvisning koster biografen 20 kr i slitage og rengøring. <br><br>Bør biografen stoppe salget af årskort?"
+                                        data-answer="2"
+                                        data-explanation="De 1000 kr pr. årskort er allerede modtaget. Beslutningen skal baseres på de fremadrettede marginale omkostninger ved at vise film, sammenholdt med alternative indtjeningsmuligheder for sæderne.">
+                                        <div class="option"
+                                             data-option="Ja, det giver underskud per visning">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Ja, det slider for meget på faciliteterne">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Nej, de 1000 kr pr. årskort er allerede tjent">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Nej, det giver god markedsføring">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En studerende har købt en brugt bil til 50.000 kr til transport mellem bopæl og universitet. Efter en måned tilbydes gratis samkørsel. <br><br>Hvilken betydning bør bilens købspris have?"
+                                        data-answer="1"
+                                        data-explanation="Bilens købspris er en 'sunk cost'. Den fremadrettede beslutning bør udelukkende baseres på løbende omkostninger (benzin, vedligeholdelse) sammenlignet med alternativerne.">
+                                        <div class="option"
+                                             data-option="Den skal afskrives over studietiden">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Ingen - det er en sunk cost">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Den skal medregnes som transportudgift">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Den skal deles ud på måneder">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En håndværker kan enten påtage sig ét stort projekt til fast pris eller flere mindre opgaver med høj timebetaling. Det store projekt giver sikker indtjening. <br><br>Hvad er den centrale økonomiske overvejelse?"
+                                        data-answer="3"
+                                        data-explanation="Alternativomkostningen ved at vælge det store projekt er de potentielle indtægter fra mindre opgaver. Usikkerheden om mængden af små opgaver er afgørende for vurdering af den reelle alternativomkostning.">
+                                        <div class="option"
+                                             data-option="Hvilket projekt der har højest timeløn">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Hvor lang tid projekterne varer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Hvilket projekt der er mest krævende">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Risikoen for manglende små opgaver">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En bager har sidst på dagen 20 kager tilbage som skal smides ud hvis de ikke sælges. Normalprisen er 40 kr pr stk. <br><br>Hvilket udsagn om prissætning er korrekt?"
+                                        data-answer="0"
+                                        data-explanation="Da kagerne ikke kan gemmes, er enhver pris over 0 kr bedre end at smide dem ud. De oprindelige produktionsomkostninger er irrelevante for denne beslutning, da de er 'sunk costs'.">
+                                        <div class="option"
+                                             data-option="Ethvert beløb over 0 kr er bedre end ingen salg">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Prisen bør ikke være under produktionsomkostningen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Prisen må ikke være under halv pris">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Normalprisen bør fastholdes">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En restaurant har en populær buffet til 200 kr pr person. Køkkenchefen har beregnet at råvarerne i gennemsnit koster 80 kr pr gæst. Nogle gæster spiser for 220 kr råvarer. <br><br>Hvilken konklusion er økonomisk korrekt?"
+                                        data-answer="2"
+                                        data-explanation="Ved buffet-koncepter skal man se på den gennemsnitlige omkostning, ikke de marginale omkostninger for enkelte gæster. Så længe den samlede gennemsnitlige omkostning er under prisen, er konceptet rentabelt.">
+                                        <div class="option"
+                                             data-option="De sultne gæster bør betale ekstra">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Der bør indføres begrænsninger på buffeten">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Det er ok så længe gennemsnittet holder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Prisen bør hæves til 240 kr">
+                                        </div>
+                                   </div>
+
+
+
+                                   <div class="question"
+                                        data-question="En virksomhed har brugt 5 millioner på udvikling af et nyt produkt. Testresultaterne viser at produktet bliver dyrere at producere end konkurrenternes. <br><br>Hvad er det korrekte beslutningsgrundlag?"
+                                        data-answer="3"
+                                        data-explanation="Udviklingsomkostningerne er en 'sunk cost' og bør ikke påvirke beslutningen. Kun de fremtidige produktionsomkostninger sammenholdt med den mulige salgspris er relevante for beslutningen.">
+                                        <div class="option"
+                                             data-option="De 5 millioner skal tjenes hjem først">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Projektet skal færdiggøres">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Der skal findes besparelser i produktionen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Kun fremtidige indtægter og omkostninger">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En tøjbutik har købt 100 jakker til 400 kr pr stk. Efter tre måneder er 40 jakker solgt til 1000 kr pr stk. De resterende er ikke længere moderne. <br><br>Hvilket princip bør bruges ved prissætning af de resterende?"
+                                        data-answer="0"
+                                        data-explanation="Indkøbsprisen er en 'sunk cost'. Prisen bør sættes ud fra hvad markedet vil betale nu, da alternativet er ingen salg. Enhver pris over 0 kr er bedre end ingen salg.">
+                                        <div class="option"
+                                             data-option="Prisen sættes efter nuværende efterspørgsel">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Prisen må ikke være under indkøbspris">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Der skal minimum dækkes 50% af indkøb">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Jakkerne gemmes til næste sæson">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En IT-virksomhed kan vælge mellem to nye servere. Server A koster 100.000 kr og bruger strøm for 5000 kr/md. Server B koster 150.000 kr og bruger strøm for 2000 kr/md. <br><br>Hvad er den relevante økonomiske analyse?"
+                                        data-answer="1"
+                                        data-explanation="Den korrekte analyse sammenligner de totale omkostninger over serverens levetid. Forskellen i anskaffelse (50.000 kr) skal sammenholdes med de løbende besparelser (3000 kr/md) for at finde break-even tidspunkt.">
+                                        <div class="option"
+                                             data-option="Server A er billigst at købe">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Beregn hvornår besparelsen på drift overstiger merprisen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Server B har laveste driftsomkostninger">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Vælg den billigste købspris">
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

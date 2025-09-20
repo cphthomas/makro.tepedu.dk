@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="Content-Language" content="da">
+     <title>Quiz Velfærd 2</title>
+     
+     <!-- Google Fonts - updated with Space Grotesk and italic Roboto -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;300;400;500&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+     
+     <link rel="stylesheet"
+           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet"
+           href="styles.css">
+     <link rel="icon"
+           href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script"
+             async
+             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af velfærdssamfundets udvikling, finansiering og fremtidige udfordringer." data-forudsætning="Grundlæggende kendskab til velfærdssystemet.">
+     <header> <a href="index.html"
+             target="_blank"><img src="tepedulogo.svg"
+                    alt="Logo"
+                    width="8%"></a>
+          <h2>Quiz Velfærd 2</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent"
+                                   class="mt-4"
+                                   style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Velfærd 2: Udvikling og Udfordringer
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <h1 id="question"
+                                  class="card-title"></h1>
+                              <div id="options"
+                                   class="mt-4"></div>
+                              <div id="progress-bar"
+                                   class="progress-bar-container"></div>
+
+                            <div id="quiz-data" style="display: none;">
+                                   <!-- 21 -->
+                                   <div class="question"
+                                        data-question="Hvilken effekt har progressiv beskatning på indkomstfordelingen?"
+                                        data-answer="2"
+                                        data-explanation="Progressiv beskatning påvirker fordelingen gennem:
+                                                                                            <br>- Højere marginalskatter for høje indkomster
+                                                                                            <br>- Bundfradrag for lave indkomster
+                                                                                            <br>- Omfordeling via offentlige ydelser
+                                                                                            <br>Konkrete effekter:
+                                                                                            <br>- Reducerer disponibel indkomstulighed
+                                                                                            <br>- Påvirker arbejdsincitamenter
+                                                                                            <br>- Bidrager til velfærdsfinansiering">
+                                        <div class="option"
+                                             data-option="Har ingen reel effekt da højtlønnede finder veje uden om beskatningen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Øger uligheden ved at reducere arbejdsudbuddet betydeligt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Reducerer indkomstforskelle efter skat, men kan påvirke arbejdsincitamenter">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun mellemindkomster mens top og bund er upåvirkede">
+                                        </div>
+                                   </div>
+
+                                   <!-- 22 -->
+                                   <div class="question"
+                                        data-question="Hvordan har velfærdssamfundets hovedopgaver udviklet sig siden 1960'erne?"
+                                        data-answer="1"
+                                        data-explanation="Velfærdssamfundets opgaver har ændret sig markant:
+                                                                                            <br>- Fra fattighjælp til universel velfærd
+                                                                                            <br>- Udvidelse af serviceområder
+                                                                                            <br>- Fokus på forebyggelse
+                                                                                            <br>Konkrete ændringer:
+                                                                                            <br>- Udbygning af daginstitutioner
+                                                                                            <br>- Udvidet sundhedsvæsen
+                                                                                            <br>- Nye sociale ydelser">
+                                        <div class="option"
+                                             data-option="Er blevet indskrænket til kun at omfatte de mest basale sundhedsydelser">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er udvidet fra fattighjælp til omfattende universel velfærd med forebyggende indsats">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har været uændret med fokus på samme kerneydelser gennem hele perioden">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er blevet helt privatiseret med staten som ren tilsynsmyndighed">
+                                        </div>
+                                   </div>
+
+                                   <!-- 23 -->
+                                   <div class="question"
+                                        data-question="Hvordan adskiller den danske velfærdsmodel sig fra den tyske model?"
+                                        data-answer="3"
+                                        data-explanation="De to modeller har grundlæggende forskelle:
+                                                                                            <br>- DK: Skattefinansieret og universel
+                                                                                            <br>- DE: Forsikringsbaseret og arbejdsmarkedstilknyttet
+                                                                                            <br>- Forskellige ydelsesniveauer
+                                                                                            <br>Konkrete forskelle:
+                                                                                            <br>- Finansiering (skat vs. sociale bidrag)
+                                                                                            <br>- Adgangskriterier
+                                                                                            <br>- Familiepolitik">
+                                        <div class="option"
+                                             data-option="Der er ingen væsentlige forskelle mellem de to landes velfærdssystemer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Den danske model er udelukkende privatfinansieret mens den tyske er statslig">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Den tyske model giver højere ydelser til alle borgere end den danske">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Den danske model er universel og skattefinansieret mens den tyske er forsikringsbaseret">
+                                        </div>
+                                   </div>
+
+                                   <!-- 24 -->
+                                   <div class="question"
+                                        data-question="Hvilken betydning har asymmetriske drivkræfter for velfærdssystemet?"
+                                        data-answer="2"
+                                        data-explanation="Asymmetriske drivkræfter påvirker gennem:
+                                                                                            <br>- Større pres for udgiftsforøgelser end besparelser
+                                                                                            <br>- Særinteressers indflydelse
+                                                                                            <br>- Politiske incitamenter
+                                                                                            <br>Konkrete effekter:
+                                                                                            <br>- Udgiftspres i kommuner
+                                                                                            <br>- Svært at gennemføre besparelser
+                                                                                            <br>- Tendens til udgiftsvækst">
+                                        <div class="option"
+                                             data-option="Har ingen betydning da politiske beslutninger altid er balancerede">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fører automatisk til reduktion af velfærdsudgifter over tid">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Skaber tendens til udgiftsvækst gennem større pres for udvidelser end besparelser">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun kommunale beslutninger mens statslige udgifter er upåvirkede">
+                                        </div>
+                                   </div>
+
+                                   <!-- 25 -->
+                                   <div class="question"
+                                        data-question="Hvordan har Velfærdskommissionens anbefalinger fra 2006 påvirket reformerne?"
+                                        data-answer="1"
+                                        data-explanation="Velfærdskommissionens påvirkning omfatter:
+                                                                                            <br>- Senere tilbagetrækning
+                                                                                            <br>- Hurtigere uddannelsesgennemførelse
+                                                                                            <br>- Øget arbejdsudbud
+                                                                                            <br>Konkrete resultater:
+                                                                                            <br>- Højere pensionsalder
+                                                                                            <br>- Fremdriftsreform
+                                                                                            <br>- Dagpengereform">
+                                        <div class="option"
+                                             data-option="Anbefalingerne blev alle afvist og har ikke påvirket senere reformer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har dannet grundlag for væsentlige reformer særligt omkring tilbagetrækning og uddannelse">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirkede kun pensionssystemet mens andre områder forblev uændrede">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Medførte kun kosmetiske ændringer uden reel effekt på velfærdssystemet">
+                                        </div>
+                                   </div>
+
+                                   <!-- 26 -->
+                                   <div class="question"
+                                        data-question="Hvilken effekt har globaliseringen på skattebasen?"
+                                        data-answer="3"
+                                        data-explanation="Globaliseringen påvirker skattebasen gennem:
+                                                                                            <br>- International skattekonkurrence
+                                                                                            <br>- Mobile skattekilder
+                                                                                            <br>- Pres på selskabsskat
+                                                                                            <br>Konkrete eksempler:
+                                                                                            <br>- Lavere selskabsskattesats
+                                                                                            <br>- Særordninger for udenlandske eksperter
+                                                                                            <br>- Øget fokus på immobile skattekilder fx. bolig og jord">
+                                        <div class="option"
+                                             data-option="Har ingen effekt da skattesystemet er rent nationalt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Øger automatisk skatteindtægterne gennem højere økonomisk vækst">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun multinationale selskaber mens andre skattekilder er upåvirkede">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Skaber pres på mobile skattekilder og øger betydningen af immobile skattekilder">
+                                        </div>
+                                   </div>
+
+                                   <!-- 27 -->
+                                   <div class="question"
+                                        data-question="Hvordan har sammensætningen af sociale udgifter ændret sig siden 1970?"
+                                        data-answer="0"
+                                        data-explanation="Sociale udgifter har ændret sammensætning:
+                                                                                            <br>- Kontantydelser fylder relativt mindre
+                                                                                            <br>- Serviceydelser udgør større andel
+                                                                                            <br>- Nye områder er kommet til
+                                                                                            <br>Konkrete ændringer:
+                                                                                            <br>- Udbygning af børnepasning
+                                                                                            <br>- Mere ældrepleje
+                                                                                            <br>- Øget fokus på forebyggelse">
+                                        <div class="option"
+                                             data-option="Serviceydelser fylder relativt mere mens kontantydelsers andel er faldet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Kontantydelser udgør en konstant stigende andel af de samlede udgifter">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fordelingen mellem service og kontantydelser har været helt stabil">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Alle sociale udgifter er blevet reduceret i forhold til BNP">
+                                        </div>
+                                   </div>
+
+                                   <!-- 29 -->
+                                   <div class="question"
+                                        data-question="Hvilken effekt har gratisydelser på indkomstfordelingen?"
+                                        data-answer="1"
+                                        data-explanation="Gratisydelser påvirker fordelingen gennem:
+                                                                                            <br>- Lige adgang uanset indkomst
+                                                                                            <br>- Større relativ værdi for lavindkomstgrupper
+                                                                                            <br>- Bred dækning af basale behov
+                                                                                            <br>Eksempler:
+                                                                                            <br>- Sundhedsydelser
+                                                                                            <br>- Uddannelse
+                                                                                            <br>- Biblioteker og kultur">
+                                        <div class="option"
+                                             data-option="Har ingen fordelingseffekt da alle får samme ydelser">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Reducerer reelt ulighed da værdien betyder mest for lavindkomstgrupper">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Øger uligheden da højtlønnede bruger ydelserne mest">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun middelklassen mens top og bund er upåvirkede">
+                                        </div>
+                                   </div>
+
+                                   <!-- 30 -->
+                                   <div class="question"
+                                        data-question="Hvordan har arbejdsmarkedspolitikken ændret sig siden 1990'erne?"
+                                        data-answer="3"
+                                        data-explanation="Arbejdsmarkedspolitikken har gennemgået store ændringer:
+                                                                                            <br>- Fra passiv til aktiv politik
+                                                                                            <br>- Kortere ydelsesperioder
+                                                                                            <br>- Øget fokus på opkvalificering
+                                                                                            <br>Konkrete tiltag:
+                                                                                            <br>- Dagpengereform
+                                                                                            <br>- Aktivering og uddannelse
+                                                                                            <br>- Fokus på jobsøgning">
+                                        <div class="option"
+                                             data-option="Er blevet mere passiv med fokus på længere understøttelsesperioder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har været uændret siden 1990'erne uden væsentlige reformer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fokuserer nu udelukkende på kontrol og sanktioner">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er blevet mere aktiv med fokus på hurtig tilbagevenden til arbejde og opkvalificering">
+                                        </div>
+                                   </div>
+
+                                   <!-- 31 -->
+                                   <div class="question"
+                                        data-question="Hvordan påvirker EU's indre marked det danske velfærdssystem?"
+                                        data-answer="2"
+                                        data-explanation="EU's indre marked påvirker velfærdssystemet gennem:
+                                                                                            <br>- Fri bevægelighed af arbejdskraft
+                                                                                            <br>- Koordinering af sociale ydelser
+                                                                                            <br>- Konkurrence på serviceområdet
+                                                                                            <br>Konkrete områder:
+                                                                                            <br>- SU til EU-borgere
+                                                                                            <br>- Sundhedsydelser på tværs af grænser
+                                                                                            <br>- Pension og sociale rettigheder">
+                                        <div class="option"
+                                             data-option="Har ingen effekt da velfærd er et rent nationalt anliggende">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Overtager gradvist al regulering af velfærdsydelser fra nationalstaterne">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker gennem arbejdskraftens fri bevægelighed og koordinering af sociale rettigheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Forbyder alle særlige nationale velfærdsordninger til fordel for privatisering">
+                                        </div>
+                                   </div>
+
+                                   <!-- 33 -->
+                                   <div class="question"
+                                        data-question="Hvordan har forholdet mellem private og offentlige velfærdsløsninger udviklet sig?"
+                                        data-answer="3"
+                                        data-explanation="Udviklingen viser nye tendenser:
+                                                                                            <br>- Øget brug af private leverandører
+                                                                                            <br>- Flere valgmuligheder for borgerne
+                                                                                            <br>- Nye samarbejdsformer
+                                                                                            <br>Eksempler:
+                                                                                            <br>- Frit valg i ældreplejen
+                                                                                            <br>- Private daginstitutioner
+                                                                                            <br>- Sundhedsforsikringer">
+                                        <div class="option"
+                                             data-option="Det offentlige har overtaget alle private velfærdsopgaver">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Private løsninger er helt forsvundet til fordel for offentlige">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Forholdet har været helt uændret de sidste 30 år">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Øget samspil mellem offentlige og private løsninger med flere valgmuligheder">
+                                        </div>
+                                   </div>
+
+                                   <!-- 34 -->
+                                   <div class="question"
+                                        data-question="Hvordan påvirker sociale investeringer velfærdssamfundets udvikling?"
+                                        data-answer="2"
+                                        data-explanation="Sociale investeringer har flere effekter:
+                                                                                            <br>- Forebygger sociale problemer
+                                                                                            <br>- Reducerer fremtidige udgifter
+                                                                                            <br>- Øger arbejdsmarkedsdeltagelse
+                                                                                            <br>Konkrete eksempler:
+                                                                                            <br>- Tidlig indsats for udsatte børn
+                                                                                            <br>- Opkvalificering af ledige
+                                                                                            <br>- Forebyggende sundhedsindsats">
+                                        <div class="option"
+                                             data-option="Har ingen effekt da problemer ikke kan forebygges gennem investeringer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Øger kun de offentlige udgifter uden målbare resultater">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Kan reducere fremtidige udgifter gennem forebyggelse og øget arbejdsmarkedsdeltagelse">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fungerer kun i private virksomheder og ikke i offentligt regi">
+                                        </div>
+                                   </div>
+
+                                   <!-- 35 -->
+                                   <div class="question"
+                                        data-question="Hvordan har familiestrukturer påvirket velfærdssamfundets udvikling?"
+                                        data-answer="1"
+                                        data-explanation="Familiestrukturers påvirkning omfatter:
+                                                                                            <br>- Øget behov for børnepasning
+                                                                                            <br>- Flere eneforsørgere
+                                                                                            <br>- Ændrede omsorgsmønstre
+                                                                                            <br>Konkrete ændringer:
+                                                                                            <br>- Udbygning af daginstitutioner
+                                                                                            <br>- Særlige ydelser til enlige
+                                                                                            <br>- Barselsorlov til begge forældre">
+                                        <div class="option"
+                                             data-option="Har ingen betydning da velfærdssystemet er uafhængigt af familieformer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har medført tilpasning af ydelser til nye familiemønstre og arbejdsmarkedsdeltagelse">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun gennem faldende børnetal mens andre forhold er uændrede">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har ført til afvikling af familierelaterede ydelser til fordel for individuelle ydelser">
+                                        </div>
+                                   </div>
+
+                                   <!-- 36 -->
+                                   <div class="question"
+                                        data-question="Hvilken rolle spiller uddannelsesniveau for velfærdssamfundets fremtid?"
+                                        data-answer="3"
+                                        data-explanation="Uddannelsesniveauet påvirker gennem:
+                                                                                            <br>- Produktivitet og konkurrenceevne
+                                                                                            <br>- Beskæftigelsesmuligheder
+                                                                                            <br>- Skatteindtægter og finansiering
+                                                                                            <br>Centrale forhold:
+                                                                                            <br>- Globaliseringens krav
+                                                                                            <br>- Teknologisk udvikling
+                                                                                            <br>- Social mobilitet">
+                                        <div class="option"
+                                             data-option="Har ingen betydning da praktisk erfaring er vigtigere end formel uddannelse">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun den enkeltes indkomst men ikke velfærdssamfundet generelt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er kun relevant for den private sektor mens offentlig velfærd er upåvirket">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er afgørende for produktivitet, beskæftigelse og dermed velfærdssamfundets finansiering">
+                                        </div>
+                                   </div>
+
+                                   <!-- 38 -->
+                                   <div class="question"
+                                        data-question="Hvordan har den regionale fordeling af velfærdsydelser udviklet sig?"
+                                        data-answer="1"
+                                        data-explanation="Regional fordeling viser særlige mønstre:
+                                                                                            <br>- Forskelle i serviceniveau
+                                                                                            <br>- Demografiske udfordringer
+                                                                                            <br>- Økonomisk udligning
+                                                                                            <br>Konkrete forhold:
+                                                                                            <br>- Flere ældre i udkantsområder
+                                                                                            <br>- Rekrutteringsudfordringer
+                                                                                            <br>- Kommunal udligning">
+                                        <div class="option"
+                                             data-option="Er blevet helt ensartet på tværs af landet gennem central styring">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Viser øgede forskelle særligt pga. demografi og rekrutteringsudfordringer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Følger udelukkende kommunernes velstand uden udligning">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er uafhængig af geografi da alle får præcis samme service">
+                                        </div>
+                                   </div>
+
+                                   <!-- 39 -->
+                                   <div class="question"
+                                        data-question="Hvilken betydning har mental sundhed fået i velfærdspolitikken?"
+                                        data-answer="3"
+                                        data-explanation="Mental sundhed har fået øget fokus gennem:
+                                                                                            <br>- Stigende antal med psykiske udfordringer
+                                                                                            <br>- Nye behandlingstilbud
+                                                                                            <br>- Forebyggende indsatser
+                                                                                            <br>Konkrete tiltag:
+                                                                                            <br>- Psykiatriplan
+                                                                                            <br>- Tidlig indsats for unge
+                                                                                            <br>- Arbejdsmiljøindsats">
+                                        <div class="option"
+                                             data-option="Er blevet nedprioriteret til fordel for fysisk sundhed">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har ingen særlig plads i velfærdspolitikken">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Er kun relevant i forhold til arbejdsmarkedet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har fået øget prioritet med fokus på både behandling og forebyggelse">
+                                        </div>
+                                   </div>
+
+                                   <!-- 40 -->
+                                   <div class="question"
+                                        data-question="Hvordan påvirker digitaliseringen leveringen af velfærdsydelser?"
+                                        data-answer="2"
+                                        data-explanation="Digitaliseringen påvirker velfærden gennem:
+                                                                                            <br>- Nye serviceformer
+                                                                                            <br>- Ændrede kompetencekrav
+                                                                                            <br>- Effektivisering af administration
+                                                                                            <br>Konkrete eksempler:
+                                                                                            <br>- Digital borgerservice
+                                                                                            <br>- Telemedicin
+                                                                                            <br>- Digital undervisning">
+                                        <div class="option"
+                                             data-option="Reducerer kvaliteten af velfærdsydelser da personlig kontakt forsvinder fuldstændigt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Har ingen effekt da velfærdsydelser ikke kan digitaliseres">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Skaber nye muligheder for service og effektivisering men kræver også nye kompetencer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun administrative opgaver mens kerneydelser forbliver uændrede">
+                                        </div>
+                                   </div>
+
+                                   <!-- 42 -->
+                                   <div class="question"
+                                        data-question="Hvordan påvirker indvandring velfærdssamfundets finansiering?"
+                                        data-answer="3"
+                                        data-explanation="Indvandringens påvirkning omfatter:
+                                                                                            <br>- Betydning for arbejdsstyrke
+                                                                                            <br>- Erhvervsfrekvens og skatteindtægter
+                                                                                            <br>- Udgifter til integration
+                                                                                            <br>Konkrete forhold:
+                                                                                            <br>- Forskelle i beskæftigelsesgrad
+                                                                                            <br>- Uddannelsesbaggrund
+                                                                                            <br>- Alderssammensætning">
+                                        <div class="option"
+                                             data-option="Har ingen økonomisk betydning for velfærdssystemet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Forbedrer automatisk finansieringen gennem øget arbejdsstyrke">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Påvirker kun kommunale udgifter men ikke statslige velfærdsydelser">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Effekten afhænger af indvandrergruppers arbejdsmarkedstilknytning og uddannelsesniveau">
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

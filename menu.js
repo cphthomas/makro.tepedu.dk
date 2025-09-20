@@ -1,6 +1,7 @@
 // Menu configuration
 const menuItems = [
     { href: 'index.html', text: 'Introduktion til Branchekendskab' },
+    { href: 'ressourcer.html', text: 'Ressourcer' },
     { href: 'bank.html', text: 'Bank' },
     { href: 'finanstilsyn.html', text: 'Finanstilsyn' },
     { href: 'ejendomsmaegler.html', text: 'Ejendomsmægler' },

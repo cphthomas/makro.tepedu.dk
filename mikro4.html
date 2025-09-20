@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="Content-Language" content="da">
+     <title>Quiz Mikroøkonomi</title>
+     
+     <!-- Google Fonts - updated with Space Grotesk and italic Roboto -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;300;400;500&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+     
+     <link rel="stylesheet"
+           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet"
+           href="styles.css">
+     <link rel="icon"
+           href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script"
+             async
+             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af de centrale begreber inden for efterspørgselsteori, herunder nytte, substitutionseffekt og indkomstelasticitet." data-forudsætning="Kendskab til markedsmekanismen fra Mikroøkonomi 3.">
+     <header> <a href="index.html"
+             target="_blank"><img src="tepedulogo.svg"
+                    alt="Logo"
+                    width="8%"></a>
+          <h2>Quiz Mikroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent"
+                                   class="mt-4"
+                                   style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Mikroøkonomi: Efterspørgsel
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <h1 id="question"
+                                  class="card-title"></h1>
+                              <div id="options"
+                                   class="mt-4"></div>
+                              <div id="progress-bar"
+                                   class="progress-bar-container"></div>
+
+                            <div id="quiz-data" style="display: none;">
+                                
+                                   <div class="question"
+                                        data-question="Hvad er forskellen på brugsværdi/nytteværdi og markedsværdi?"
+                                        data-answer="2"
+                                        data-explanation="Brugsværdi/nytteværdi er den værdi eller nytte som varen giver forbrugeren i form af behovsopfyldelse, mens markedsværdi er den pris varen handles til på markedet. Brugsværdien er individuel, mens markedsværdien ofte er ens for alle købere.">
+                                        <div class="option"
+                                             data-option="Der er ingen forskel, det er det samme begreb"></div>
+                                        <div class="option"
+                                             data-option="Brugsværdi er altid højere end markedsværdi"></div>
+                                        <div class="option"
+                                             data-option="Brugsværdi er den individuelle nytte for forbrugeren, markedsværdi er prisen på markedet">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Brugsværdi er produktionsomkostninger, markedsværdi er salgsprisen">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad siger 'loven om faldende grænsenytte'?"
+                                        data-answer="1"
+                                        data-explanation="Loven om faldende grænsenytte betyder at den ekstra nytte (grænsenytte) en forbruger får ved at udvide sit forbrug med én enhed af en given vare, vil normalt falde med mængden af den pågældende vare.">
+                                        <div class="option"
+                                             data-option="Jo mere man køber af en vare, jo billigere bliver den"></div>
+                                        <div class="option"
+                                             data-option="Jo mere man forbruger af en vare, jo mindre bliver den ekstra nytte af én enhed mere">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Jo flere varer man køber, jo mere sparer man i transport">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Jo større forbrug, jo højere bliver den marginale nytte">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad viser forbrugerens efterspørgselskurve?"
+                                        data-answer="0"
+                                        data-explanation="Efterspørgselskurven viser sammenhængen mellem pris og den mængde en forbruger vil købe ved forskellige prisniveauer. Den viser også forbrugerens maksimale betalingsvillighed for forskellige mængder af varen.">
+                                        <div class="option"
+                                             data-option="Sammenhængen mellem pris og den mængde forbrugeren vil købe">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Sammenhængen mellem indkomst og forbrug"></div>
+                                        <div class="option"
+                                             data-option="Sammenhængen mellem to forskellige varers priser"></div>
+                                        <div class="option"
+                                             data-option="Sammenhængen mellem udbud og efterspørgsel"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad er substitutionseffekten når prisen på en vare stiger?"
+                                        data-answer="3"
+                                        data-explanation="Substitutionseffekten betyder at når prisen på en vare stiger, vil forbrugeren erstatte (substituere) den dyre vare med andre lignende, men billigere varer. <br>
+                                        Substitutionseffekten er altid negativ for efterspørgslen efter den vare, der bliver dyrere.">
+                                        <div class="option"
+                                             data-option="Forbrugeren køber mere af varen"></div>
+                                        <div class="option"
+                                             data-option="Forbrugeren sparer flere penge op"></div>
+                                        <div class="option"
+                                             data-option="Forbrugeren får højere realindkomst"></div>
+                                        <div class="option"
+                                             data-option="Forbrugeren erstatter varen med andre lignende varer"></div>
+                                   </div>
+
+
+                                   <div class="question"
+                                        data-question="Hvad er definitionen på en normal vare?"
+                                        data-answer="2"
+                                        data-explanation="En normal vare er en vare hvor:<br><br>1. Efterspørgslen stiger når indkomsten stiger<br>2. Efterspørgslen falder når indkomsten falder<br><br>Det betyder at normal varer har en positiv indkomstelasticitet.<br><br>De fleste varer i økonomien er normale varer.">
+                                        <div class="option"
+                                             data-option="En vare der kun købes af personer med normal indkomst"></div>
+                                        <div class="option"
+                                             data-option="En vare der koster det samme som lignende varer"></div>
+                                        <div class="option"
+                                             data-option="En vare hvor efterspørgslen stiger når indkomsten stiger">
+                                        </div>
+                                        <div class="option"
+                                             data-option="En vare der handles til normal markedspris"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilken af følgende er IKKE en normal vare?"
+                                        data-answer="1"
+                                        data-explanation="Discount fødevarer er ofte inferiøre varer, ikke normale varer, fordi:<br><br>- Når indkomsten stiger, vil mange forbrugere skifte til dyrere mærker<br>- Efterspørgslen falder når indkomsten stiger<br>- De har negativ indkomstelasticitet<br><br>De andre varer i listen er normale varer, hvor efterspørgslen stiger med indkomsten.">
+                                        <div class="option"
+                                             data-option="Økologiske fødevarer"></div>
+                                        <div class="option"
+                                             data-option="Discount fødevarer"></div>
+                                        <div class="option"
+                                             data-option="Restaurantbesøg"></div>
+                                        <div class="option"
+                                             data-option="Rejser"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad er forskellen på en normal vare og en inferiør vare?"
+                                        data-answer="1"
+                                        data-explanation="For normale varer vil efterspørgslen stige når indkomsten stiger. <br>For inferiøre varer vil efterspørgslen derimod falde når indkomsten stiger, fordi forbrugeren i stedet vælger varer af højere kvalitet.">
+                                        <div class="option"
+                                             data-option="Normale varer er dyre, inferiøre varer er billige"></div>
+                                        <div class="option"
+                                             data-option="Ved normale varer stiger efterspørgslen med indkomsten, ved inferiøre varer falder den">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Normale varer er nødvendige, inferiøre varer er luksusvarer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Der er ingen forskel, det er bare forskellige betegnelser">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad måler indkomstelasticiteten?"
+                                        data-answer="2"
+                                        data-explanation="Indkomstelasticiteten måler den procentvise ændring i efterspørgslen i forhold til den procentvise ændring i den disponible indkomst. Den viser hvor følsom efterspørgslen er overfor indkomstændringer.">
+                                        <div class="option"
+                                             data-option="Hvor meget prisen ændrer sig når indkomsten stiger"></div>
+                                        <div class="option"
+                                             data-option="Hvor meget udbuddet ændrer sig når indkomsten stiger"></div>
+                                        <div class="option"
+                                             data-option="Hvor meget efterspørgslen ændrer sig procentvis når indkomsten ændrer sig procentvis">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Hvor meget skatten stiger når indkomsten stiger"></div>
+                                   </div>
+
+
+                                   <div class="question"
+                                        data-question="Hvad sker der med omsætningen når prisen stiger og efterspørgslen er elastisk?"
+                                        data-answer="0"
+                                        data-explanation="Når efterspørgslen er elastisk (numerisk større end 1) og prisen stiger, vil omsætningen falde.<br><br>Dette sker fordi den procentvise nedgang i efterspurgt mængde er større end den procentvise stigning i pris.<br><br>Ved elastisk efterspørgsel betyder det at mængdeeffekten dominerer priseffekten.">
+                                        <div class="option"
+                                             data-option="Omsætningen falder"></div>
+                                        <div class="option"
+                                             data-option="Omsætningen stiger"></div>
+                                        <div class="option"
+                                             data-option="Omsætningen forbliver uændret"></div>
+                                        <div class="option"
+                                             data-option="Man kan ikke sige noget generelt om omsætningen"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad er krydspriselasticiteten et mål for?"
+                                        data-answer="2"
+                                        data-explanation="Krydspriselasticiteten måler den procentvise ændring i efterspørgslen efter vare X i forhold til den procentvise ændring i prisen på vare Y.<br><br>Hvis krydspriselasticiteten er positiv, er varerne substitutter (kan erstatte hinanden).<br><br>Hvis krydspriselasticiteten er negativ, er varerne komplementære (bruges sammen).">
+                                        <div class="option"
+                                             data-option="Hvordan prisen på én vare påvirker prisen på en anden vare">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Hvordan indkomsten påvirker efterspørgslen efter to forskellige varer">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Hvordan prisen på én vare påvirker efterspørgslen efter en anden vare">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Hvordan to varers priser påvirker hinanden over tid"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad menes der med at en efterspørgsel er neutralelastisk?"
+                                        data-answer="1"
+                                        data-explanation="En efterspørgsel er neutralelastisk når priselasticiteten er præcis -1.<br><br>Det betyder at den procentvise ændring i efterspurgt mængde er præcis lige så stor som den procentvise ændring i prisen.<br><br>Ved neutralelastisk efterspørgsel vil omsætningen derfor forblive uændret ved en prisændring.">
+                                        <div class="option"
+                                             data-option="Efterspørgslen påvirkes ikke af prisændringer"></div>
+                                        <div class="option"
+                                             data-option="Den procentvise ændring i mængde er lige så stor som prisændringen">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Efterspørgslen påvirkes kun af indkomst, ikke af pris"></div>
+                                        <div class="option"
+                                             data-option="Prisen forbliver neutral uanset efterspørgslen"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilke faktorer påvirker størrelsen af priselasticiteten?"
+                                        data-answer="3"
+                                        data-explanation="Priselasticitetens størrelse påvirkes af flere faktorer:<br><br>1. Om varen er en nødvendighedsvare eller luksusvare<br>2. Substitutionsmuligheder (alternative varer)<br>3. Varens andel af forbrugerens budget<br>4. Tidsperspektivet (kort eller lang sigt)<br><br>Jo flere substitutionsmuligheder og jo større budgetandel, desto mere elastisk er efterspørgslen.">
+                                        <div class="option"
+                                             data-option="Kun varens pris"></div>
+                                        <div class="option"
+                                             data-option="Kun forbrugerens indkomst"></div>
+                                        <div class="option"
+                                             data-option="Kun antallet af substitute varer"></div>
+                                        <div class="option"
+                                             data-option="Nødvendighed, substitutionsmuligheder, budgetandel og tid">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad er indkomsteffekten når prisen på en normal vare stiger?"
+                                        data-answer="2"
+                                        data-explanation="Indkomsteffekten ved en prisstigning betyder at forbrugerens realindkomst (købekraft) falder.<br><br>For en normal vare betyder det at efterspørgslen falder, fordi forbrugeren har råd til mindre.<br><br>Indkomsteffekten forstærker derfor substitutionseffekten for normale varer når prisen stiger.">
+                                        <div class="option"
+                                             data-option="Forbrugeren får højere realindkomst"></div>
+                                        <div class="option"
+                                             data-option="Forbrugeren køber mere af varen"></div>
+                                        <div class="option"
+                                             data-option="Forbrugeren får lavere realindkomst og køber mindre"></div>
+                                        <div class="option"
+                                             data-option="Indkomsten forbliver uændret"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad kendetegner komplementære varer?"
+                                        data-answer="1"
+                                        data-explanation="Komplementære varer er varer der bruges sammen eller kompletterer hinanden.<br><br>De har en negativ krydspriselasticitet, hvilket betyder at når prisen stiger på den ene vare, falder efterspørgslen på den anden vare.<br><br>Eksempler er: Printer og printerpatroner, kaffe og kaffefløde, biler og benzin.">
+                                        <div class="option"
+                                             data-option="De kan erstatte hinanden"></div>
+                                        <div class="option"
+                                             data-option="De bruges sammen og kompletterer hinanden"></div>
+                                        <div class="option"
+                                             data-option="De har samme pris"></div>
+                                        <div class="option"
+                                             data-option="De produceres af samme virksomhed"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilke af følgende varer er typisk substitutter (kan erstatte hinanden)?"
+                                        data-answer="2"
+                                        data-explanation="Letmælk og minimælk er substitutter, da de kan erstatte hinanden i forbruget.<br><br>Når prisen på letmælk stiger, vil mange forbrugere skifte til minimælk.<br><br>Dette giver en positiv krydspriselasticitet, som er kendetegnende for substitutter.">
+                                        <div class="option"
+                                             data-option="Kaffe og kaffefløde"></div>
+                                        <div class="option"
+                                             data-option="Printer og printerpatron"></div>
+                                        <div class="option"
+                                             data-option="Letmælk og minimælk"></div>
+                                        <div class="option"
+                                             data-option="Tennisketcher og tennisbolde"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilke af følgende varer er komplementære (bruges sammen)?"
+                                        data-answer="3"
+                                        data-explanation="Printer og printerpatron er komplementære varer da de bruges sammen.<br><br>Hvis prisen på printere stiger, falder efterspørgslen efter printerpatroner.<br><br>Andre eksempler på komplementære varer er:<br>- Biler og benzin<br>- Kamera og SD-kort<br>- Kaffe og kaffefløde">
+                                        <div class="option"
+                                             data-option="Cola og Pepsi"></div>
+                                        <div class="option"
+                                             data-option="Smør og margarine"></div>
+                                        <div class="option"
+                                             data-option="Økologisk mælk og almindelig mælk"></div>
+                                        <div class="option"
+                                             data-option="Printer og printerpatron"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilken af følgende varer har typisk den mest uelastiske efterspørgsel?"
+                                        data-answer="1"
+                                        data-explanation="Livsvigtig medicin har typisk meget uelastisk efterspørgsel, da:<br><br>1. Det er en nødvendighedsvare<br>2. Der er ofte få eller ingen substitutionsmuligheder<br>3. Forbrugeren er nødt til at købe medicinen uanset prisen<br><br>Dette betyder at efterspørgslen ændrer sig meget lidt selv ved store prisstigninger.">
+                                        <div class="option"
+                                             data-option="Biografbilletter"></div>
+                                        <div class="option"
+                                             data-option="Livsvigtig medicin"></div>
+                                        <div class="option"
+                                             data-option="Mærkevare-tøj"></div>
+                                        <div class="option"
+                                             data-option="Restaurant-besøg"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilken vare har typisk den mest elastiske efterspørgsel?"
+                                        data-answer="2"
+                                        data-explanation="Luksusbiler har typisk meget elastisk efterspørgsel fordi:<br><br>1. Det er en luksusvare, ikke en nødvendighed<br>2. Der er mange substitutionsmuligheder (både andre bilmærker og andre transportformer)<br>3. Det udgør en stor del af forbrugerens budget<br>4. Købet kan ofte udskydes<br><br>Derfor reagerer efterspørgslen kraftigt på prisændringer.">
+                                        <div class="option"
+                                             data-option="Salt"></div>
+                                        <div class="option"
+                                             data-option="Rugbrød"></div>
+                                        <div class="option"
+                                             data-option="Luksusbiler"></div>
+                                        <div class="option"
+                                             data-option="Drikkevand"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvis prisen på kaffe stiger med 10%, hvilke af følgende varer vil typisk opleve en stigning i efterspørgslen?"
+                                        data-answer="0"
+                                        data-explanation="Te er et substitut for kaffe - mange vil skifte til te hvis kaffen bliver dyrere.<br><br>Derimod vil efterspørgslen efter komplementære varer til kaffe falde, fx:<br>- Kaffefløde<br>- Kaffefiltre<br>- Kaffemaskiner<br><br>Dette er et eksempel på positiv krydspriselasticitet mellem substitutter.">
+                                        <div class="option"
+                                             data-option="Te"></div>
+                                        <div class="option"
+                                             data-option="Kaffefløde"></div>
+                                        <div class="option"
+                                             data-option="Kaffefiltre"></div>
+                                        <div class="option"
+                                             data-option="Kaffemaskiner"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvis prisen på PlayStation 5 stiger, hvilke varer vil typisk opleve faldende efterspørgsel?"
+                                        data-answer="3"
+                                        data-explanation="PlayStation-spil er komplementære varer til PlayStation 5.<br><br>Når prisen på PlayStation 5 stiger vil færre købe konsollen, hvilket fører til:<br>- Lavere efterspørgsel efter spil<br>- Lavere efterspørgsel efter ekstra controllere<br>- Lavere efterspørgsel efter PlayStation Plus-abonnement<br><br>Dette er et eksempel på negativ krydspriselasticitet mellem komplementære varer.">
+                                        <div class="option"
+                                             data-option="Xbox Series X"></div>
+                                        <div class="option"
+                                             data-option="Nintendo Switch"></div>
+                                        <div class="option"
+                                             data-option="Gaming PC"></div>
+                                        <div class="option"
+                                             data-option="PlayStation 5-spil"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvilket par af varer har den stærkeste substitutionseffekt (er tættest substitutter)?"
+                                        data-answer="1"
+                                        data-explanation="Coca Cola og Pepsi er meget tætte substitutter fordi:<br><br>1. De opfylder nøjagtigt samme behov<br>2. De har meget ens karakteristika<br>3. De bruges i samme situationer<br>4. Forbrugerne opfatter dem som meget lignende produkter<br><br>Derfor vil selv små prisforskelle få mange forbrugere til at skifte mellem mærkerne.">
+                                        <div class="option"
+                                             data-option="Kaffe og te"></div>
+                                        <div class="option"
+                                             data-option="Coca Cola og Pepsi"></div>
+                                        <div class="option"
+                                             data-option="Bus og fly"></div>
+                                        <div class="option"
+                                             data-option="Netflix og biografbilletter"></div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad betyder det hvis man har en efterspørgselselasticitet på -2?"
+                                        data-answer="3"
+                                        data-explanation="en efterspørgselselasticitet på -2 betyder at når prisen stiger 1% falder efterspørgslen 2% <br>Minus - indikerer at pris og afsætning bevæger sig modsat hinanden (de er negativt korrelerede)">
+                                        <div class="option"
+                                             data-option="Når prisen stiger 2 kr. falder efterspørgslen 1 kr. "></div>
+                                        <div class="option"
+                                             data-option="Når prisen stiger 1 kr. falder efterspørgslen 2 kr. "></div>
+                                        <div class="option"
+                                             data-option="Når prisen stiger 2% falder efterspørgslen 1%"></div>
+                                        <div class="option"
+                                             data-option="Når prisen stiger 1% falder efterspørgslen 2%"></div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

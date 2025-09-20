@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="Content-Language" content="da">
+     <title>Quiz Mikroøkonomi</title>
+     
+     <!-- Google Fonts - updated with Space Grotesk and italic Roboto -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;300;400;500&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+     
+     <link rel="stylesheet"
+           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet"
+           href="styles.css">
+     <link rel="icon"
+           href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script"
+             async
+             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Anvendelse af omkostningsteori til at træffe produktionsbeslutninger på kort sigt, herunder profitmaksimering og break-even-analyse." data-forudsætning="Forståelse af de grundlæggende produktions- og omkostningsbegreber fra Mikroøkonomi 6.">
+     <header> <a href="index.html"
+             target="_blank"><img src="tepedulogo.svg"
+                    alt="Logo"
+                    width="8%"></a>
+          <h2>Quiz Mikroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent"
+                                   class="mt-4"
+                                   style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Mikroøkonomi: Produktion og Udbud
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <h1 id="question"
+                                  class="card-title"></h1>
+                              <div id="options"
+                                   class="mt-4"></div>
+                              <div id="progress-bar"
+                                   class="progress-bar-container"></div>
+
+                              <div id="quiz-data" style="display: none;">
+                                   
+                                   <div class="question"
+                                        data-question="En producent har faste omkostninger på 100.000 kr og variable omkostninger på 50 kr per enhed. <br>
+                                                                           Markedsprisen er 40 kr per enhed.<br><br>
+                                                                           Hvad er den korrekte produktionsbeslutning på kort sigt?"
+                                        data-answer="3"
+                                        data-explanation="På kort sigt er de faste omkostninger 'sunk cost', de faste omkostninger kan ikke reduceres på kort sigt. <br>
+                                                                           Kun de variable omkostninger er relevante for produktionsbeslutningen. <br>
+                                                                           Da variable omkostninger (50 kr) overstiger salgsprisen (40 kr), bør produktionen stoppes for at minimere tab.">
+                                        <div class="option"
+                                             data-option="Producere til de faste omkostninger er dækket">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Øge prisen til 60 kr">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Fortsætte uændret produktion">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Stoppe produktionen">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En virksomhed overvejer forskellige produktionsniveauer af deres vare.<br><br>
+                                                                                <table class='table table-bordered'>
+                                                                                <thead>
+                                                                                  <tr><th>Antal enheder</th><th>Total omkostning</th><th>Markedspris</th></tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                  <tr><td>100</td><td>2000</td><td>25</td></tr>
+                                                                                  <tr><td>200</td><td>3600</td><td>23</td></tr>
+                                                                                  <tr><td>300</td><td>5400</td><td>21</td></tr>
+                                                                                  <tr><td>400</td><td>7600</td><td>19</td></tr>
+                                                                                </tbody>
+                                                                                </table><br>
+                                                                                Hvilket produktionsniveau giver størst overskud?"
+                                        data-answer="1"
+                                        data-explanation="For hvert niveau beregnes total indtægt (pris × mængde) minus total omkostning: <br>
+                                                                           100: 2500-2000=500 <br>
+                                                                           200: 4600-3600=1000 <br>
+                                                                           300: 6300-5400=900 <br>
+                                                                           400: 7600-7600=0 <br>
+                                                                           Størst overskud er ved 200 enheder med 1000 kr.">
+                                        <div class="option"
+                                             data-option="100 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="200 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="300 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="400 enheder">
+                                        </div>
+                                   </div>
+
+
+                                   <div class="question"
+                                        data-question="En producent overvejer at øge sin produktion.<br>
+                                                                           De marginale omkostninger stiger med produktionsmængden.<br>
+                                                                           Markedsprisen er fast på 80 kr per enhed.<br><br>
+                                                                           Hvilken regel bør anvendes for at bestemme den optimale produktionsmængde?"
+                                        data-answer="1"
+                                        data-explanation="Ved profit-maksimering skal man producere indtil marginalomkostning = pris. Så længe marginalomkostningen er under prisen, vil en ekstra enhed øge profitten. Når marginalomkostningen overstiger prisen, reduceres profitten ved yderligere produktion.">
+                                        <div class="option"
+                                             data-option="Producere indtil gennemsnitsomkostningen er lavest">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Producere indtil marginalomkostning er lig pris">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Producere indtil total omkostning er lig total indtægt">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Producere maksimal kapacitet">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="To konkurrerende butikker sælger samme produkt.<br>
+                                                                           Butik A har følgende omkostninger: Fast 5000 kr/md, Variable 40 kr/enhed<br>
+                                                                           Butik B har følgende omkostninger: Fast 3000 kr/md, Variable 50 kr/enhed<br><br>
+                                                                           Ved hvilket månedligt salg har butikkerne samme totale omkostninger?"
+                                        data-answer="0"
+                                        data-explanation="Vi finder break-even ved at sætte totale omkostninger lig hinanden: <br>
+                                                                           A: 5000+40Q = B: 3000+50Q<br>
+                                                                           Løser vi denne ligning får vi: <br>
+                                                                           5000+40Q = 3000+50Q <br>
+                                                                           hvilket giver: <br>
+                                                                           2000 = 10Q <br>
+                                                                           2000/10 = 10Q/10 <br>
+                                                                           200 = Q <br><br>
+                                                                           
+                                                                           <br>så Q = 200 enheder.">
+                                        <div class="option"
+                                             data-option="200 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="300 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="400 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="500 enheder">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="En virksomhed kan producere sin vare på to forskellige måder:<br>
+                                                                                <table class='table table-bordered'>
+                                                                                <thead>
+                                                                                  <tr><th>Metode</th><th>Fast omk./md</th><th>Variabel omk./enhed</th></tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                  <tr><td>Manuel</td><td>10000</td><td>100</td></tr>
+                                                                                  <tr><td>Automatiseret</td><td>50000</td><td>40</td></tr>
+                                                                                </tbody>
+                                                                                </table><br>
+                                                                                Hvad er det månedlige break-even produktionsvolumen mellem de to metoder?"
+                                        data-answer="2"
+                                        data-explanation="Ved break-even er totale omkostninger ens: <br> Manuel: 10000+100Q = Automatiseret: 50000+40Q. <br>Vi løser ligningen: <br>10000+100Q = 50000+40Q <br>100Q - 40Q = 50000 - 10000 <br>60Q = 40000 <br>60Q/60 = 40000/60 <br>  får vi 40000 = 60Q, så Q = 667 enheder. <br>Større produktion betyder at automatisering er billigst.">
+                                        <div class="option"
+                                             data-option="400 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="500 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="667 enheder">
+                                        </div>
+                                        <div class="option"
+                                             data-option="800 enheder">
+                                        </div>
+                                   </div>
+
+
+                                   <div class="question"
+                                        data-question="Hvornår vil en virksomhed på kort sigt vælge at lukke?"
+                                        data-answer="2"
+                                        data-explanation="En virksomhed vil lukke på kort sigt når:<br><br>P < VE (pris mindre end variable enhedsomkostninger)<br><br>Dette skyldes at:<br>1. Negative dækningsbidrag betyder større tab ved produktion<br>2. Faste omkostninger skal betales uanset hvad<br>3. Bedre at tage tabet fra faste omkostninger alene">
+                                        <div class="option"
+                                             data-option="Når der er underskud"></div>
+                                        <div class="option"
+                                             data-option="Når prisen er under de totale enhedsomkostninger"></div>
+                                        <div class="option"
+                                             data-option="Når prisen er under de variable enhedsomkostninger"></div>
+                                        <div class="option"
+                                             data-option="Når de faste omkostninger stiger"></div>
+                                   </div>
+
+
+
+
+
+
+                                   <div class="question"
+                                        data-question="Hvad forstås ved det korte sigt i mikroøkonomisk produktionsteori?"
+                                        data-answer="2"
+                                        data-explanation="På kort sigt er mindst én produktionsfaktor fast (kan ikke ændres). Typisk er det kapitalapparatet (bygninger, maskiner mv.) der er fast, mens arbejdskraft og råvarer kan varieres. Det korte sigt er ikke defineret ved en bestemt tidsperiode, men ved at mindst én produktionsfaktor ikke kan ændres.">
+                                        <div class="option"
+                                             data-option="En periode på under 1 år"></div>
+                                        <div class="option"
+                                             data-option="En periode hvor alle omkostninger er variable"></div>
+                                        <div class="option"
+                                             data-option="En periode hvor mindst én produktionsfaktor er fast"></div>
+                                        <div class="option"
+                                             data-option="En periode hvor virksomheden ikke kan ændre sine priser">
+                                        </div>
+                                   </div>
+
+                                   <div class="question"
+                                        data-question="Hvad siger 'loven om faldende grænseprodukt'?"
+                                        data-answer="1"
+                                        data-explanation="Loven om faldende grænseprodukt fastslår, at når man tilføjer mere af en variabel produktionsfaktor (fx arbejdskraft) til en fast produktionsfaktor (fx maskiner), vil det ekstra output fra hver ny enhed på et tidspunkt begynde at falde. Dette er en empirisk observation som skyldes, at der bliver mindre og mindre plads og ressourcer til hver ny medarbejder.">
+                                        <div class="option"
+                                             data-option="Produktionen vil altid falde når man ansætter flere medarbejdere">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Den ekstra produktion fra hver ny enhed af en variabel produktionsfaktor vil på et tidspunkt begynde at falde">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Jo flere enheder man producerer, jo lavere bliver enhedsomkostningerne">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Grænseproduktet er altid faldende fra første enhed"></div>
+                                   </div>
+
+
+
+
+
+
+
+                                   <div class="question"
+                                        data-question="Hvad er betingelsen for profitmaksimering under fuldkommen konkurrence?"
+                                        data-answer="0"
+                                        data-explanation="Under fuldkommen konkurrence maksimeres profitten hvor:<br><br>Grænseomsætning (GROMS) = Grænseomkostning (GROMK)<br><br>Da prisen er fast under fuldkommen konkurrence, er GROMS = Pris<br><br>Derfor kan betingelsen også skrives som: P = GROMK">
+                                        <div class="option"
+                                             data-option="Grænseomsætning = Grænseomkostning"></div>
+                                        <div class="option"
+                                             data-option="Gennemsnitsomsætning = Gennemsnitsomkostning"></div>
+                                        <div class="option"
+                                             data-option="Total omsætning = Totale omkostninger"></div>
+                                        <div class="option"
+                                             data-option="Pris > Grænseomkostning"></div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

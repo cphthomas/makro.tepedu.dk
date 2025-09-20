@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="Content-Language" content="da">
+     <title>Quiz Mikroøkonomi</title>
+
+     <!-- Google Fonts - updated with Space Grotesk and italic Roboto -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;300;400;500&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&family=Space+Grotesk:wght@400;500;700&display=swap"
+          rel="stylesheet">
+
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af centrale mikropolitiske begreber, herunder X-ineffektivitet, eksternaliteter og asymmetrisk information."
+     data-forudsætning="Kendskab til markedsformer og grundlæggende mikroøkonomisk teori.">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogo.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Mikroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Mikroøkonomi: Mikropolitik
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <div id="quiz-data" style="display: none;">
+                                   
+                                   <div class="question" data-question="Hvad betyder X-ineffektivitet?" data-answer="2"
+                                        data-explanation="X-ineffektivitet opstår når:
+                                                         <br>- Virksomheder ikke minimerer deres omkostninger
+                                                         <br>- Særligt relevant ved virksomheder med markedsdominans
+                                                         <br>- Kan skyldes manglende konkurrencepres
+                                                         <br>- Kan være større tab en ved monopoler
+                                                         <br>- Kan reduceres gennem LEAN-principper
+                                                         <br>Praktiske eksempler:
+                                                         <br>- DSB før konkurrence fra private operatører
+                                                         <br>- PostNord før liberalisering af postmarkedet
+                                                         <br>- TDC før telemarkeds liberalisering
+                                                         <br>- Kommunale forsyningsselskaber uden konkurrence">
+                                        <div class="option" data-option="Når markedet har perfekt konkurrence"></div>
+                                        <div class="option" data-option="Når virksomheder maksimerer profit"></div>
+                                        <div class="option" data-option="Når virksomheder ikke minimerer omkostninger">
+                                        </div>
+                                        <div class="option" data-option="Når der er mange udbydere på markedet"></div>
+                                   </div>
+
+                                   <!-- 2 -->
+                                   <div class="question" data-question="Hvad er eksterne virkninger?" data-answer="1"
+                                        data-explanation="Eksterne virkninger (eksternaliteter) er:
+                                                         <br>- Omkostninger eller fordele for andre end dem der forårsager aktiviteten
+                                                         <br>- Kan være positive eller negative
+                                                         <br>- Påvirker samfundets ressourcefordeling
+                                                         <br>Positive eksempler:
+                                                         <br>- Vaccination mod smitsomme sygdomme
+                                                         <br>- Biers bestøvning fra biavl
+                                                         <br>Negative eksempler:
+                                                         <br>- Støj fra motorveje
+                                                         <br>- Luftforurening fra industri
+                                                         <br>- Overfiskning i internationale farvande">
+                                        <div class="option" data-option="Kun negative påvirkninger af miljøet"></div>
+                                        <div class="option"
+                                             data-option="Påvirkninger af andre end dem der forårsager aktiviteten">
+                                        </div>
+                                        <div class="option" data-option="Interne omkostninger i virksomheder"></div>
+                                        <div class="option" data-option="Markedets usynlige hånd"></div>
+                                   </div>
+
+                                   <!-- 3 -->
+                                   <div class="question" data-question="Hvad fortæller Coase-teoremet?" data-answer="0"
+                                        data-explanation="Coase-teoremet fastslår at:
+                                                         <br>- Parter kan nå optimal løsning gennem forhandling
+                                                         <br>- Kræver omkostningsfri forhandling mellem parterne
+                                                         <br>- Uafhængigt af initielt ansvar
+                                                         <br>Praktiske eksempler:
+                                                         <br>- Naboaftaler om støj/træer/skygge
+                                                         <br>- Virksomheders køb af forureningsrettigheder
+                                                         <br>- Kompensationsaftaler mellem lufthavne og naboer
+                                                         <br>- Private aftaler om vandrettigheder">
+                                        <div class="option"
+                                             data-option="Parter kan løse eksterne virkninger gennem fri forhandling">
+                                        </div>
+                                        <div class="option"
+                                             data-option="Staten skal altid regulere eksterne virkninger"></div>
+                                        <div class="option" data-option="Forurener skal altid betale"></div>
+                                        <div class="option" data-option="Markedet løser automatisk alle problemer">
+                                        </div>
+                                   </div>
+
+                                   <!-- 4 -->
+                                   <div class="question" data-question="Hvad er forskellen mellem risiko og usikkerhed?"
+                                        data-answer="1" data-explanation="Forskellen mellem risiko og usikkerhed er:
+                                                         <br>- Risiko: Kan beregne sandsynligheder for udfald
+                                                         <br>- Usikkerhed: Kan ikke beregne sandsynligheder
+                                                         <br>Eksempler på risiko:
+                                                         <br>- Forsikringsselskabers beregning af ulykkesrisiko
+                                                         <br>- Roulette i casino
+                                                         <br>- Terningspil med kendte sandsynligheder
+                                                         <br>Eksempler på usikkerhed:
+                                                         <br>- Fremtidig teknologisk udvikling
+                                                         <br>- Klimaforandringers præcise effekt
+                                                         <br>- Krig og geopolitiske konflikter">
+                                        <div class="option" data-option="Der er ingen forskel"></div>
+                                        <div class="option"
+                                             data-option="Ved risiko kan man beregne sandsynligheder, ved usikkerhed kan man ikke">
+                                        </div>
+                                        <div class="option" data-option="Risiko er altid større end usikkerhed"></div>
+                                        <div class="option" data-option="Usikkerhed kan altid beregnes"></div>
+                                   </div>
+
+                                   <!-- 5 -->
+                                   <div class="question" data-question="Hvad betyder adverse selection og moral hazard?"
+                                        data-answer="3" data-explanation="Asymmetrisk information manifesterer sig som:
+                                                         <br>- Adverse selection: Skævt udvalg før kontrakt
+                                                         <br>- Moral hazard: Ændret adfærd efter kontrakt
+                                                         <br>Eksempler på adverse selection:
+                                                         <br>- Brugtbilsmarkedet: Sælger ved mere om bilens stand
+                                                         <br>- Sundhedsforsikring: Syge mennesker køber mere forsikring
+                                                         <br>Eksempler på moral hazard:
+                                                         <br>- Bilister kører mindre forsigtigt med forsikring
+                                                         <br>- Banker tager større risici med statsgaranti
+                                                         <br>- Folk passer mindre på deres cykel med tyveriforsikring">
+                                        <div class="option" data-option="To former for forsikring"></div>
+                                        <div class="option" data-option="Risiko på aktiemarkedet"></div>
+                                        <div class="option" data-option="Former for markedseffektivitet"></div>
+                                        <div class="option" data-option="Problemer ved asymmetrisk information"></div>
+                                   </div>
+
+                                   <!-- 6 -->
+                                   <div class="question" data-question="Hvad er virkningen af en stykafgift?"
+                                        data-answer="2" data-explanation="Stykafgift har følgende virkninger:
+                                                         <br>- Øger prisen og reducerer den handlede mængde
+                                                         <br>- Skaber et effektivitetstab (dødvægtstab)
+                                                         <br>- Fordeles mellem køber og sælger
+                                                         <br>Praktiske eksempler:
+                                                         <br>- Tobaksafgifter (ca. 80% af cigaretprisen)
+                                                         <br>- CO2-afgift på industrien
+                                                         <br>- Sukkerafgift på sodavand
+                                                         <br>- Registreringsafgift på biler
+                                                         <br>- Afgift på plastikposer">
+                                        <div class="option" data-option="Øger altid kun prisen for sælger"></div>
+                                        <div class="option" data-option="Har ingen effekt på mængden"></div>
+                                        <div class="option" data-option="Reducerer mængden og øger prisen"></div>
+                                        <div class="option" data-option="Sænker altid prisen"></div>
+                                   </div>
+
+                                   <!-- 7 -->
+                                   <div class="question" data-question="Hvad karakteriserer kollektive goder?"
+                                        data-answer="1" data-explanation="Kollektive goder karakteriseres ved:
+                                                         <br>- Ikke-rivaliserende forbrug
+                                                         <br>- Ikke-ekskluderbart
+                                                         <br>Eksempler på rene kollektive goder:
+                                                         <br>- Nationalt forsvar
+                                                         <br>- Fyrtårne og GPS-systemet
+                                                         <br>- Offentlig gadebelysning
+                                                         <br>Semi-kollektive goder:
+                                                         <br>- Motorveje (før trængsel)
+                                                         <br>- Offentlige parker
+                                                         <br>- Radio- og TV-signaler">
+                                        <div class="option" data-option="Kan kun bruges af én person ad gangen"></div>
+                                        <div class="option" data-option="Kan bruges af alle samtidig og ingen kan udelukkes"></div>
+                                        <div class="option" data-option="Er altid gratis at producere"></div>
+                                        <div class="option" data-option="Produceres kun af private virksomheder"></div>
+                                   </div>
+
+                                   <!-- 8 -->
+                                   <div class="question"
+                                        data-question="Hvad er EU's hovedlinjer i landbrugspolitikken?"
+                                        data-answer="0"
+                                        data-explanation="EU's landbrugspolitik består af:
+                                                         <br>- Direkte støtte og landdistriktspolitik
+                                                         <br>- Fokus på miljø og klima
+                                                         <br>Konkrete eksempler:
+                                                         <br>- Grundbetaling pr. hektar til landmænd
+                                                         <br>- Særlig støtte til unge landmænd
+                                                         <br>- Økologisk omstillingsstøtte
+                                                         <br>- Landsbypuljen til udvikling
+                                                         <br>- Natura 2000-støtte til naturbevarelse">
+                                        <div class="option"
+                                             data-option="Direkte støtte og landdistriktspolitik med miljøfokus"></div>
+                                        <div class="option"
+                                             data-option="Kun markedsordninger"></div>
+                                        <div class="option"
+                                             data-option="Udelukkende eksportstøtte"></div>
+                                        <div class="option"
+                                             data-option="Kun prisstøtte"></div>
+                                   </div>
+
+                                   <!-- 9 -->
+                                   <div class="question"
+                                        data-question="Hvordan varierer afkast og risiko i aktiemarkedet?"
+                                        data-answer="1"
+                                        data-explanation="Afkast og risiko i aktiemarkedet:
+                                                         <br>- Højere forventet afkast kræver højere risiko
+                                                         <br>- Risiko kan reduceres gennem diversificering
+                                                         <br>Konkrete eksempler:
+                                                         <br>- Novo Nordisk vs. små biotekselskaber
+                                                         <br>- C25 indekset vs. enkeltaktier
+                                                         <br>- Globale vs. emerging markets investeringer
+                                                         <br>Praktiske diversificeringseksempler:
+                                                         <br>- Sparindex Globale Aktier
+                                                         <br>- Danske Invest Mix-produkter
+                                                         <br>- BlackRock World Index Fund">
+                                        <div class="option"
+                                             data-option="Ingen sammenhæng mellem afkast og risiko"></div>
+                                        <div class="option"
+                                             data-option="Højere forventet afkast kræver højere risiko"></div>
+                                        <div class="option"
+                                             data-option="Lavere risiko giver højere forventet afkast"></div>
+                                        <div class="option"
+                                             data-option="Alle aktier har samme risiko"></div>
+                                   </div>
+
+                                   <!-- 10 -->
+                                   <div class="question"
+                                        data-question="Hvad er Danmarks klimapolitiske målsætninger?"
+                                        data-answer="2"
+                                        data-explanation="Danmarks klimapolitiske mål omfatter:
+                                                         <br>- 70% reduktion af drivhusgasser i 2030
+                                                         <br>- Klimaneutralitet i 2050
+                                                         <br>Konkrete initiativer:
+                                                         <br>- Energiø Bornholm (3 GW havvind)
+                                                         <br>- Power-to-X projekter som GreenFuel i Esbjerg
+                                                         <br>- CO2-fangst på Amager Bakke
+                                                         <br>Sektorspecifikke eksempler:
+                                                         <br>- Landbrugets 55-65% reduktionsmål
+                                                         <br>- Mærsks metanoldrevne containerskibe
+                                                         <br>- DONG/Ørsteds transformation til grøn energi">
+                                        <div class="option"
+                                             data-option="Ingen konkrete mål"></div>
+                                        <div class="option"
+                                             data-option="Kun fokus på 2050-mål"></div>
+                                        <div class="option"
+                                             data-option="70% reduktion i 2030 og klimaneutralitet i 2050"></div>
+                                        <div class="option"
+                                             data-option="Kun kortsigtede mål"></div>
+                                   </div>
+
+                                   <!-- 11 -->
+                                   <div class="question"
+                                        data-question="Hvad er effekten af maksimalpriser?"
+                                        data-answer="3"
+                                        data-explanation="Maksimalpriser medfører:
+                                                         <br>- Overskudsefterspørgsel (mangel)
+                                                         <br>- Sort marked og rationering
+                                                         <br>Historiske eksempler:
+                                                         <br>- Husleje regulering i København
+                                                         <br>- Prisloft på el i Californien 2000-2001
+                                                         <br>- Benzinpriskontrol i 70'erne (køer ved tankstationer)
+                                                         <br>Aktuelle eksempler:
+                                                         <br>- Medicinpriser på apoteker
+                                                         <br>- Taxi-maksimalpriser
+                                                         <br>- Prisloft på fjernvarme">
+                                        <div class="option"
+                                             data-option="Øget udbud"></div>
+                                        <div class="option"
+                                             data-option="Højere priser"></div>
+                                        <div class="option"
+                                             data-option="Perfekt markedsligevægt"></div>
+                                        <div class="option"
+                                             data-option="Mangel på varer og sort marked"></div>
+                                   </div>
+
+                                   <!-- 12 -->
+                                   <div class="question"
+                                        data-question="Hvad karakteriserer efficiente finansielle markeder?"
+                                        data-answer="0"
+                                        data-explanation="Efficiente finansielle markeder kendetegnes ved:
+                                                         <br>- Priser afspejler al tilgængelig information
+                                                         <br>- Tre efficiensniveauer: svag, semi-stærk, stærk
+                                                         <br>Praktiske eksempler:
+                                                         <br>- Aktiekursers øjeblikkelige reaktion på regnskaber
+                                                         <br>- Valutakursers reaktion på rentebeslutninger
+                                                         <br>- Obligationskursers tilpasning til inflation
+                                                         <br>Konkrete markedsreaktioner:
+                                                         <br>- Vestas-aktien ved ordreannoncering
+                                                         <br>- Bankaktier ved stress-test resultater
+                                                         <br>- Pharma-aktier ved lægemiddelgodkendelser">
+                                        <div class="option"
+                                             data-option="Priser afspejler al tilgængelig information"></div>
+                                        <div class="option"
+                                             data-option="Kun store investorer tjener penge"></div>
+                                        <div class="option"
+                                             data-option="Altid stigende kurser"></div>
+                                        <div class="option"
+                                             data-option="Ingen handel med aktier"></div>
+                                   </div>
+                                   <!-- 13 -->
+                                   <div class="question"
+                                        data-question="Hvilke adfærdsregulerende afgifter bruges i Danmark?"
+                                        data-answer="2"
+                                        data-explanation="Danske adfærdsregulerende afgifter omfatter:
+                                                         <br>Miljøafgifter:
+                                                         <br>- Plastikpose-afgift (4 kr. pr. pose)
+                                                         <br>- Afgift på engangsservice (fra 2024)
+                                                         <br>Sundhedsafgifter:
+                                                         <br>- Sukkerafgift på sodavand og slik
+                                                         <br>- Tobaksafgift (ca. 80% af cigaretprisen)
+                                                         <br>Energiafgifter:
+                                                         <br>- CO2-afgift på fossile brændsler
+                                                         <br>- Elafgift med lavere sats ved varmepumper
+                                                         <br>Effekt:
+                                                         <br>- Plastikposeforbrug faldet 70% siden 2021
+                                                         <br>- Cigaretforbrug faldet 15% efter afgiftsstigning">
+                                        <div class="option"
+                                             data-option="Kun tobaksafgifter"></div>
+                                        <div class="option"
+                                             data-option="Ingen adfærdsregulerende afgifter"></div>
+                                        <div class="option"
+                                             data-option="Afgifter på miljø, sundhed og energi"></div>
+                                        <div class="option"
+                                             data-option="Kun miljøafgifter"></div>
+                                   </div>
+
+                                   <!-- 14 -->
+                                   <div class="question"
+                                        data-question="Hvordan fremmer Danmark positive eksternaliteter gennem tilskud?"
+                                        data-answer="1"
+                                        data-explanation="Danmark fremmer positive eksternaliteter gennem:
+                                                         <br>Energitilskud:
+                                                         <br>- Tilskud til varmepumper (op til 18.000 kr.)
+                                                         <br>- Støtte til energirenovering
+                                                         <br>Boligtilskud:
+                                                         <br>- Håndværkerfradrag (op til 25.000 kr./person)
+                                                         <br>- Bolig-job-ordningen
+                                                         <br>Grøn omstilling:
+                                                         <br>- Støtte til elbiler
+                                                         <br>- Tilskud til udskiftning af oliefyr
+                                                         <br>Resultater:
+                                                         <br>- 70% flere varmepumper i 2023
+                                                         <br>- 300.000 brugte håndværkerfradrag i 2022">
+                                        <div class="option"
+                                             data-option="Ingen støtteordninger"></div>
+                                        <div class="option"
+                                             data-option="Tilskud til grøn omstilling og energirenovering"></div>
+                                        <div class="option"
+                                             data-option="Kun erhvervsstøtte"></div>
+                                        <div class="option"
+                                             data-option="Udelukkende landbrugsstøtte"></div>
+                                   </div>
+
+                                   <!-- 15 -->
+                                   <div class="question"
+                                        data-question="Hvordan håndterer Danmark negative eksternaliteter fra transport?"
+                                        data-answer="3"
+                                        data-explanation="Danmarks håndtering omfatter:
+                                                         <br>Afgifter:
+                                                         <br>- Registreringsafgift baseret på CO2-udledning
+                                                         <br>- Grøn ejerafgift
+                                                         <br>Støtteordninger:
+                                                         <br>- Tilskud til elbiler
+                                                         <br>- Støtte til ladeinfrastruktur
+                                                         <br>Miljøzoner:
+                                                         <br>- Krav om partikelfilter i større byer
+                                                         <br>- Miljøzoner i København, Aarhus, Aalborg
+                                                         <br>Resultater:
+                                                         <br>- Elbiler udgør 25% af nysalg i 2023
+                                                         <br>- Luftkvalitet forbedret 30% i miljøzoner">
+                                        <div class="option"
+                                             data-option="Ingen regulering af transport"></div>
+                                        <div class="option"
+                                             data-option="Kun forbud mod dieselbiler"></div>
+                                        <div class="option"
+                                             data-option="Udelukkende gennem skatter"></div>
+                                        <div class="option"
+                                             data-option="Kombination af afgifter, støtte og regulering"></div>
+                                   </div>
+
+                                   <!-- 16 -->
+                                   <div class="question"
+                                        data-question="Hvordan understøtter Danmark energieffektivitet?"
+                                        data-answer="0"
+                                        data-explanation="Danmarks energieffektivitetspolitik omfatter:
+                                                         <br>Tilskudsordninger:
+                                                         <br>- Bygningspuljen (400 mio. kr. i 2023)
+                                                         <br>- Skrotningsordning for oliefyr
+                                                         <br>Afgiftsstruktur:
+                                                         <br>- Lavere elafgift til varmepumper
+                                                         <br>- Højere afgift på fossile brændsler
+                                                         <br>Standarder:
+                                                         <br>- Energimærkning af bygninger
+                                                         <br>- Krav til nybyggeri
+                                                         <br>Resultater:
+                                                         <br>- 65% reduktion i oliefyr siden 2013
+                                                         <br>- 40% flere A-mærkede bygninger siden 2018">
+                                        <div class="option"
+                                             data-option="Tilskud, afgifter og standarder i kombination"></div>
+                                        <div class="option"
+                                             data-option="Kun gennem forbud"></div>
+                                        <div class="option"
+                                             data-option="Udelukkende information"></div>
+                                        <div class="option"
+                                             data-option="Ingen aktiv politik"></div>
+                                   </div>
+
+                                   <!-- 17 -->
+                                   <div class="question"
+                                        data-question="Hvordan regulerer Danmark affald og genbrug?"
+                                        data-answer="1"
+                                        data-explanation="Danmarks affaldsregulering omfatter:
+                                                         <br>Afgifter:
+                                                         <br>- Affaldsvarmeafgift
+                                                         <br>- Forbrændingsafgift
+                                                         <br>Udvidet producentansvar:
+                                                         <br>- Emballage (fra 2025)
+                                                         <br>- Elektronik, biler, batterier
+                                                         <br>Resultater:
+                                                         <br>- 68% genanvendelse af husholdningsaffald
+                                                         <br>- 89% genanvendelse af erhvervsaffald">
+                                        <div class="option"
+                                             data-option="Ingen regulering"></div>
+                                        <div class="option"
+                                             data-option="Afgifter og udvidet producentansvar"></div>
+                                        <div class="option"
+                                             data-option="Kun frivillige ordninger"></div>
+                                        <div class="option"
+                                             data-option="Kun forbud mod deponi"></div>
+                                   </div>
+
+                                   <!-- 18 -->
+                                   <div class="question"
+                                        data-question="Hvordan håndterer EU problematikken omkring statsstøtte?"
+                                        data-answer="0"
+                                        data-explanation="EU's håndtering af statsstøtte:
+                                                         <br>- Generelt forbud mod konkurrencevridende statsstøtte
+                                                         <br>- Kommissionen skal godkende undtagelser
+                                                         <br>- Statsstøtte kan tillades til:
+                                                         <br>  - Miljøbeskyttelse
+                                                         <br>  - Regional udvikling
+                                                         <br>  - Forskning og udvikling
+                                                         <br>- Eksempler på ulovlig statsstøtte:
+                                                         <br>  - Apple i Irland (skattefordele)
+                                                         <br>  - Amazon i Luxembourg (skattefordele)">
+                                        <div class="option"
+                                             data-option="Forbud mod statsstøtte med undtagelser"></div>
+                                        <div class="option"
+                                             data-option="Fuld frihed til statsstøtte"></div>
+                                        <div class="option"
+                                             data-option="Kun støtte til landbrug"></div>
+                                        <div class="option"
+                                             data-option="Kun støtte til kriseramte virksomheder"></div>
+                                   </div>
+
+                                   <!-- 19 -->
+                                   <div class="question"
+                                        data-question="Hvad er formålet med udbudsregler?"
+                                        data-answer="1"
+                                        data-explanation="Udbudsreglernes formål:
+                                                         <br>- Sikre konkurrence om offentlige opgaver
+                                                         <br>- Skabe ligebehandling af virksomheder
+                                                         <br>- Modvirke korruption og nepotisme
+                                                         <br>- Gælder for opgaver over en vis værdi
+                                                         <br>Eksempler på udbud:
+                                                         <br>- Byggeri af Femern Bælt-forbindelsen
+                                                         <br>- Drift af færgeruter
+                                                         <br>- Levering af IT-systemer til det offentlige">
+                                        <div class="option"
+                                             data-option="At favorisere danske virksomheder"></div>
+                                        <div class="option"
+                                             data-option="At sikre konkurrence om offentlige opgaver"></div>
+                                        <div class="option"
+                                             data-option="At hæve priserne på offentlige opgaver"></div>
+                                        <div class="option"
+                                             data-option="At minimere antallet af tilbudsgivere"></div>
+                                   </div>
+
+                                   <!-- 20 -->
+                                   <div class="question"
+                                        data-question="Hvad er et eksempel på asymmetrisk information på arbejdsmarkedet?"
+                                        data-answer="2"
+                                        data-explanation="Asymmetrisk information på arbejdsmarkedet:
+                                                         <br>- Ansøger ved mere om egne evner end arbejdsgiver
+                                                         <br>- Kan føre til 'adverse selection'
+                                                         <br>- Løses gennem:
+                                                         <br>  - Prøvetid
+                                                         <br>  - Referencer
+                                                         <br>  - Tests
+                                                         <br>Eksempler:
+                                                         <br>- En ansøger pynter på sit CV
+                                                         <br>- En medarbejder yder mindre efter fastansættelse (moral hazard)">
+                                        <div class="option"
+                                             data-option="Arbejdsgiver kender lønnen"></div>
+                                        <div class="option"
+                                             data-option="Begge parter har fuld information"></div>
+                                        <div class="option"
+                                             data-option="Ansøger ved mere om egne evner end arbejdsgiver"></div>
+                                        <div class="option"
+                                             data-option="Lønnen er altid fair"></div>
+                                   </div>
+
+                                   <!-- 21 -->
+                                   <div class="question"
+                                        data-question="Hvordan kan asymmetrisk information påvirke brugtbilsmarkedet?"
+                                        data-answer="0"
+                                        data-explanation="Asymmetrisk information på brugtbilsmarkedet:
+                                                         <br>- Sælger ved mere om bilens stand end køber
+                                                         <br>- Kan føre til at kun dårlige biler ('lemons') sælges
+                                                         <br>- Løses gennem:
+                                                         <br>  - Brugtbilsattester (FDM)
+                                                         <br>  - Garantier
+                                                         <br>  - Omdømme for forhandlere">
+                                        <div class="option"
+                                             data-option="Fører til at kun dårlige biler sælges ('lemons')"></div>
+                                        <div class="option"
+                                             data-option="Sikrer altid fair priser"></div>
+                                        <div class="option"
+                                             data-option="Fører til at kun gode biler sælges"></div>
+                                        <div class="option"
+                                             data-option="Ingen effekt på markedet"></div>
+                                   </div>
+
+                                   <!-- 22 -->
+                                   <div class="question"
+                                        data-question="Hvordan håndteres moral hazard i forsikringsbranchen?"
+                                        data-answer="3"
+                                        data-explanation="Moral hazard håndteres gennem:
+                                                         <br>- Selvrisiko (kunden dækker en del af skaden)
+                                                         <br>- Bonus-malus ordninger (præmie stiger ved skade)
+                                                         <br>- Overvågning (f.eks. ved mistanke om svindel)
+                                                         <br>Eksempler:
+                                                         <br>- 5.000 kr. selvrisiko på bilforsikring
+                                                         <br>- Trinregulering af præmie efter skadefri kørsel
+                                                         <br>- Krav om tyverialarm i hjemmet">
+                                        <div class="option"
+                                             data-option="Lavere priser for alle"></div>
+                                        <div class="option"
+                                             data-option="Fuld dækning uden betingelser"></div>
+                                        <div class="option"
+                                             data-option="Kun salg til risikofri kunder"></div>
+                                        <div class="option"
+                                             data-option="Selvrisiko og bonusordninger"></div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html> 
