@@ -1,15 +1,11 @@
 // Menu configuration
 const menuItems = [
-    { href: 'index.html', text: 'Introduktion til Branchekendskab' },
+    { href: 'index.html', text: 'Mikroøkonomi' },
     { href: 'ressourcer.html', text: 'Ressourcer' },
-    { href: 'bank.html', text: 'Bank' },
-    { href: 'finanstilsyn.html', text: 'Finanstilsyn' },
-    { href: 'ejendomsmaegler.html', text: 'Ejendomsmægler' },
-    { href: 'forsikring.html', text: 'Forsikring' },
-    { href: 'realkredit.html', text: 'Realkredit' },
-    { href: 'revision.html', text: 'Revision' },
-    { href: 'pension.html', text: 'Pension' },
-    { href: 'ejendomsadministration.html', text: 'Ejendomsadministration' }
+    { href: 'demand.html', text: 'Efterspørgsel' },
+    { href: 'supply.html', text: 'Udbud' },
+    { href: 'markedsbalance.html', text: 'Markedsligevægt' }
+   
 ];
 
 // Function to generate dropdown menu HTML
