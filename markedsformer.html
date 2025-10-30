@@ -350,457 +350,464 @@
                     </ul>
                     <h4>Eksempel på fuldkommen konkurrence:</h4>
 
-                <div class="chart-container"
-                style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
-                <canvas id="plot61"></canvas>
-            </div>
-            <!-- plot61 Perfect Competition -->
+                    <div class="chart-container"
+                        style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
+                        <canvas id="plot61"></canvas>
+                    </div>
+                    <!-- plot61 Perfect Competition -->
 
-            <script>
-                // Setup IntersectionObserver for lazy-loading charts
-                const chartConfigs = {}; // Store configurations for all charts
+                    <script>
+                        // Setup IntersectionObserver for lazy-loading charts
+                        const chartConfigs = {}; // Store configurations for all charts
 
-                // Generic function to create a chart
-                function createChart(canvasId, config) {
-                    const ctx = document.getElementById(canvasId).getContext('2d');
-                    new Chart(ctx, config);
-                }
-
-                // Intersection Observer setup
-                const chartObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const canvasId = entry.target.id;
-                            if (chartConfigs[canvasId]) {
-                                createChart(canvasId, chartConfigs[canvasId]);
-                                observer.unobserve(entry.target); // Stop observing once loaded
-                            }
+                        // Generic function to create a chart
+                        function createChart(canvasId, config) {
+                            const ctx = document.getElementById(canvasId).getContext('2d');
+                            new Chart(ctx, config);
                         }
-                    });
-                }, {
-                    rootMargin: '0px',
-                    threshold: 0.1 // Trigger when 10% of the item is visible
-                });
 
-                // plot61
-                chartConfigs['plot61'] = {
-                        type: 'line',
-                        data: {
-                            datasets: [{
-                                label: 'Efterspørgsel',
-                                data: [
-                                    { x: 0, y: 100 }, { x: 20, y: 90 }, { x: 40, y: 80 }, { x: 60, y: 70 }, { x: 80, y: 60 },
-                                    { x: 100, y: 50 }, { x: 120, y: 40 }, { x: 140, y: 30 }, { x: 160, y: 20 }, { x: 180, y: 10 }, { x: 200, y: 0 }
-                                ],
-                                borderColor: 'green',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2.5,
-                                pointRadius: 3,
-                                pointBackgroundColor: 'green',
-                                lineTension: 0
+                        // Intersection Observer setup
+                        const chartObserver = new IntersectionObserver((entries, observer) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    const canvasId = entry.target.id;
+                                    if (chartConfigs[canvasId]) {
+                                        createChart(canvasId, chartConfigs[canvasId]);
+                                        observer.unobserve(entry.target); // Stop observing once loaded
+                                    }
+                                }
+                            });
+                        }, {
+                            rootMargin: '0px',
+                            threshold: 0.1 // Trigger when 10% of the item is visible
+                        });
+
+                        // plot61
+                        chartConfigs['plot61'] = {
+                            type: 'line',
+                            data: {
+                                datasets: [{
+                                    label: 'Efterspørgsel',
+                                    data: [
+                                        { x: 0, y: 100 }, { x: 20, y: 90 }, { x: 40, y: 80 }, { x: 60, y: 70 }, { x: 80, y: 60 },
+                                        { x: 100, y: 50 }, { x: 120, y: 40 }, { x: 140, y: 30 }, { x: 160, y: 20 }, { x: 180, y: 10 }, { x: 200, y: 0 }
+                                    ],
+                                    borderColor: 'green',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'green',
+                                    lineTension: 0
+                                },
+
+
+                                {
+                                    label: 'Udbud',
+                                    data: [
+                                        { x: 0, y: 20 }, { x: 20, y: 30 }, { x: 40, y: 40 }, { x: 60, y: 50 }, { x: 80, y: 60 },
+                                        { x: 100, y: 70 }, { x: 120, y: 80 }, { x: 140, y: 90 }, { x: 160, y: 100 }, { x: 180, y: 110 }, { x: 200, y: 120 }
+                                    ],
+                                    borderColor: 'red',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'red',
+                                    lineTension: 0
+                                },
+                                {
+                                    label: 'Prislinje',
+                                    data: [
+                                        { x: 0, y: 60 },
+                                        { x: 80, y: 60 }, // Horizontal line at y=80
+                                        null, // Disconnect
+                                        { x: 80, y: 0 },
+                                        { x: 80, y: 60 }, // Vertical line at x=40
+
+                                    ],
+                                    borderColor: 'black',
+                                    borderWidth: 1,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures perfectly straight lines
+                                },
+                                {
+                                    label: 'Tekst',
+                                    data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
+                                    borderColor: 'black',
+                                    borderWidth: 0.0000001,
+                                    fill: false,
+                                    pointRadius: 0,
+                                    pointBackgroundColor: 'black',
+                                    pointBorderColor: 'black',
+                                    lineTension: 0
+                                }
+                                    ,
+                                {
+                                    label: 'Forbrugeroverskud',
+                                    data: [{ x: 0, y: 60 }, { x: 0, y: 100 }, { x: 80, y: 60 }, { x: 0, y: 60 }],
+                                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged triangle
+                                },
+                                {
+                                    label: 'Producentoverskud',
+                                    data: [{ x: 0, y: 20 }, { x: 0, y: 60 }, { x: 80, y: 60 }, { x: 0, y: 20 }],
+                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                }
+
+
+
+
+                                ]
                             },
 
 
-                            {
-                                label: 'Udbud',
-                                data: [
-                                    { x: 0, y: 20 }, { x: 20, y: 30 }, { x: 40, y: 40 }, { x: 60, y: 50 }, { x: 80, y: 60 },
-                                    { x: 100, y: 70 }, { x: 120, y: 80 }, { x: 140, y: 90 }, { x: 160, y: 100 }, { x: 180, y: 110 }, { x: 200, y: 120 }
-                                ],
-                                borderColor: 'red',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2.5,
-                                pointRadius: 3,
-                                pointBackgroundColor: 'red',
-                                lineTension: 0
-                            },
-                            {
-                                label: 'Prislinje',
-                                data: [
-                                    { x: 0, y: 60 },
-                                    { x: 80, y: 60 }, // Horizontal line at y=80
-                                    null, // Disconnect
-                                    { x: 80, y: 0 },
-                                    { x: 80, y: 60 }, // Vertical line at x=40
 
-                                ],
-                                borderColor: 'black',
-                                borderWidth: 1,
-                                borderDash: [5, 5],
-                                fill: false,
-                                pointRadius: 0,
-                                lineTension: 0 // Ensures perfectly straight lines
-                            },
-                            {
-                                label: 'Tekst',
-                                data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
-                                borderColor: 'black',
-                                borderWidth: 0.0000001,
-                                fill: false,
-                                pointRadius: 0,
-                                pointBackgroundColor: 'black',
-                                pointBorderColor: 'black',
-                                lineTension: 0
-                            }
-                                ,
-                            {
-                                label: 'Forbrugeroverskud',
-                                data: [{ x: 0, y: 60 }, { x: 0, y: 100 }, { x: 80, y: 60 }, { x: 0, y: 60 }],
-                                backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                                borderColor: 'transparent',
-                                fill: true,
-                                pointRadius: 0,
-                                lineTension: 0 // Ensures a sharp, straight-edged triangle
-                            },
-                            {
-                                label: 'Producentoverskud',
-                                data: [{ x: 0, y: 20 }, { x: 0, y: 60 }, { x: 80, y: 60 }, { x: 0, y: 20 }],
-                                backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                borderColor: 'transparent',
-                                fill: true,
-                                pointRadius: 0,
-                                lineTension: 0 // Ensures a sharp, straight-edged polygon
-                            }
-
-
-
-
-                            ]
-                        },
-
-
-
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            title: {
-                                display: true,
-                                text: 'Fuldkommen konkurrence - Verdensmarkedet',
-                                fontSize: 18
-                            },
-                            scales: {
-                                xAxes: [{
-                                    type: 'linear',
-                                    position: 'bottom',
-                                    scaleLabel: { display: true, labelString: 'Efterspørgsel i mio stk. Verdensmarkedet' },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 20,
-                                        // This callback function adds ' mio.stk.' to each tick label on the x-axis
-                                        callback: function (value, index, values) {
-                                            return value + ' mio. stk.';
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                title: {
+                                    display: true,
+                                    text: 'Fuldkommen konkurrence - Verdensmarkedet',
+                                    fontSize: 18
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        type: 'linear',
+                                        position: 'bottom',
+                                        scaleLabel: { display: true, labelString: 'Efterspørgsel i mio stk. Verdensmarkedet' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 20,
+                                            // This callback function adds ' mio.stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' mio. stk.';
+                                            }
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: { display: true, labelString: 'Pris (kr.)' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 10,
+                                            // This callback function adds ' mio. stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' kr.';
+                                            }
+                                        }
+                                    }]
+                                },
+                                tooltips: {
+                                    callbacks: {
+                                        title: function () {
+                                            return ''; // Remove the title (which displays the X-axis value)
+                                        },
+                                        label: function (tooltipItem, data) {
+                                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                                            let label = datasetLabel;
+                                            if (datasetLabel === 'Udbud' || datasetLabel === 'Efterspørgsel') {
+                                                const yValue = tooltipItem.yLabel;
+                                                const xValue = tooltipItem.xLabel;
+                                                label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} mio. stk.`;
+                                            } else if (datasetLabel === '') {
+                                                // For the equilibrium dashed line, show both X and Y if needed, or just hide
+                                                return ''; // Hide label for the dashed line itself
+                                            }
+                                            return label;
                                         }
                                     }
-                                }],
-                                yAxes: [{
-                                    scaleLabel: { display: true, labelString: 'Pris (kr.)' },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 10,
-                                        // This callback function adds ' mio. stk.' to each tick label on the x-axis
-                                        callback: function (value, index, values) {
-                                            return value + ' kr.';
-                                        }
-                                    }
-                                }]
-                            },
-                            tooltips: {
-                                callbacks: {
-                                    title: function () {
-                                        return ''; // Remove the title (which displays the X-axis value)
-                                    },
-                                    label: function (tooltipItem, data) {
-                                        const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                                        let label = datasetLabel;
-                                        if (datasetLabel === 'Udbud' || datasetLabel === 'Efterspørgsel') {
-                                            const yValue = tooltipItem.yLabel;
-                                            const xValue = tooltipItem.xLabel;
-                                            label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} mio. stk.`;
-                                        } else if (datasetLabel === '') {
-                                            // For the equilibrium dashed line, show both X and Y if needed, or just hide
-                                            return ''; // Hide label for the dashed line itself
-                                        }
-                                        return label;
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        // This function controls how the label is formatted
+                                        formatter: function (value, context) {
+                                            const datasetLabel = context.dataset.label;
+                                            if (datasetLabel === 'Tekst') {
+                                                return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lila';
+                                            }
+                                            const point = context.dataset.data[context.dataIndex];
+                                            return '(' + point.x + ' mio. stk., ' + point.y + ' kr.)';
+                                        },
+                                        // Simple black frame for Tekst
+                                        backgroundColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'white' : 'transparent';
+                                        },
+                                        borderColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'black' : 'transparent';
+                                        },
+                                        borderWidth: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 1 : 0;
+                                        },
+                                        // This function controls which labels are shown
+                                        display: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            // Show labels for datasets and Tekst
+                                            if (datasetLabel === 'Tekst') {
+                                                return context.dataIndex === 1; // Only show label on the top point
+                                            }
+                                            return datasetLabel === 'Efterspørgsel' || datasetLabel === 'Udbud';
+                                        },
+                                        color: '#333',
+                                        font: {
+                                            weight: 'bold',
+                                            size: 10,
+                                        },
+                                        align: 'end', // Position the label above the point
+                                        offset: 0     // Distance in pixels from the point
                                     }
                                 }
                             },
-                            plugins: {
-                                datalabels: {
-                                    // This function controls how the label is formatted
-                                    formatter: function (value, context) {
-                                        const datasetLabel = context.dataset.label;
-                                        if (datasetLabel === 'Tekst') {
-                                            return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lila';
-                                        }
-                                        const point = context.dataset.data[context.dataIndex];
-                                        return '(' + point.x + ' mio. stk., ' + point.y + ' kr.)';
-                                    },
-                                    // Simple black frame for Tekst
-                                    backgroundColor: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        return datasetLabel === 'Tekst' ? 'white' : 'transparent';
-                                    },
-                                    borderColor: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        return datasetLabel === 'Tekst' ? 'black' : 'transparent';
-                                    },
-                                    borderWidth: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        return datasetLabel === 'Tekst' ? 1 : 0;
-                                    },
-                                    // This function controls which labels are shown
-                                    display: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        // Show labels for datasets and Tekst
-                                        if (datasetLabel === 'Tekst') {
-                                            return context.dataIndex === 1; // Only show label on the top point
-                                        }
-                                        return datasetLabel === 'Efterspørgsel' || datasetLabel === 'Udbud';
-                                    },
-                                    color: '#333',
-                                    font: {
-                                        weight: 'bold',
-                                        size: 10,
-                                    },
-                                    align: 'end', // Position the label above the point
-                                    offset: 0     // Distance in pixels from the point
+                            plugins: [ChartDataLabels]
+                        };
+
+                        chartObserver.observe(document.getElementById('plot61'));
+                    </script>
+
+
+
+
+
+                    <small>
+                        <p>Figur 6.1: Fuldkommen konkurrence - Hele Verdensmarkedet. Efterspørgselskurven (grøn)
+                            illustrerer
+                            efterspørgslen fra hele verden, og udbudskurven (rød) illustrerer udbuddet fra hele verden.
+                            Begge kurver er såldes aggrerede af mange individuelle virksomheder og forbrugere.
+
+                            Kurverne skærer hinanden ved markedsligevægten (80 mio. stk., 60 kr.).
+                            Den individuelle virksomhed er så lille en del af verdensmarkedet, at den enkelte virksomhed
+                            kan
+                            betragtes som en pristager, der ikke kan påvirke prisen og møder en horisontal
+                            efterspørgselskurve i næste figur 6.2
+                            ved verdensmarkedets pris på 60 kr. <br>
+                            På verdensplan bliver det samlede producentoverskud 0,5 * 80 mio. stk. * 60 kr. = 2.400 mio.
+                            kr.
+                            dvs. 2,4 mia. kr. <br>
+                        </p>
+                    </small>
+
+                    <div class="chart-container"
+                        style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
+                        <canvas id="plot62"></canvas>
+                    </div>
+                    <!-- plot62 Perfect Competition -->
+
+                    <script>
+                        // plot62
+                        chartConfigs['plot62'] = {
+                            type: 'line',
+                            data: {
+                                datasets: [{
+                                    label: 'Efterspørgsel',
+                                    data: [
+                                        { x: 0, y: 60 }, { x: 100, y: 60 }
+                                    ],
+                                    borderColor: 'green',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'green',
+                                    lineTension: 0
+                                },
+
+
+                                {
+                                    label: 'Udbud en udbyder',
+                                    data: [
+                                        { x: 0, y: 20 }, { x: 20, y: 40 }, { x: 40, y: 60 }, { x: 60, y: 80 }, { x: 80, y: 100 }
+
+                                    ],
+                                    borderColor: 'red',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'red',
+                                    lineTension: 0
+                                },
+                                {
+                                    label: 'Prislinje',
+                                    data: [
+                                        { x: 0, y: 60 },
+                                        { x: 40, y: 60 }, // Horizontal line at y=80
+                                        null, // Disconnect
+                                        { x: 40, y: 0 },
+                                        { x: 40, y: 60 }, // Vertical line at x=40
+
+                                    ],
+                                    borderColor: 'black',
+                                    borderWidth: 1,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures perfectly straight lines
+                                },
+                                {
+                                    label: 'Tekst',
+                                    data: [{ x: 10, y: 0 }, { x: 10, y: 40 }],
+                                    borderColor: 'black',
+                                    borderWidth: 0.0000001,
+                                    fill: false,
+                                    pointRadius: 0,
+                                    pointBackgroundColor: 'black',
+                                    pointBorderColor: 'black',
+                                    lineTension: 0
                                 }
-                            }
-                        },
-                        plugins: [ChartDataLabels]
-                };
+                                    ,
 
-                chartObserver.observe(document.getElementById('plot61'));
-            </script>
-
-
-
-
-
-            <small>
-                <p>Figur 6.1: Fuldkommen konkurrence - Hele Verdensmarkedet. Efterspørgselskurven (grøn) illustrerer
-                    efterspørgslen fra hele verden, og udbudskurven (rød) illustrerer udbuddet fra hele verden.
-                    Begge kurver er såldes aggrerede af mange individuelle virksomheder og forbrugere.
-
-                    Kurverne skærer hinanden ved markedsligevægten (80 mio. stk., 60 kr.).
-                    Den individuelle virksomhed er så lille en del af verdensmarkedet, at den enkelte virksomhed kan
-                    betragtes som en pristager, der ikke kan påvirke prisen og møder en horisontal
-                    efterspørgselskurve i næste figur 6.2
-                    ved verdensmarkedets pris på 60 kr. <br>
-                    På verdensplan bliver det samlede producentoverskud 0,5 * 80 mio. stk. * 60 kr. = 2.400 mio. kr.
-                    dvs. 2,4 mia. kr. <br>
-                </p>
-            </small>
-
-            <div class="chart-container"
-                style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
-                <canvas id="plot62"></canvas>
-            </div>
-            <!-- plot62 Perfect Competition -->
-
-            <script>
-                // plot62
-                chartConfigs['plot62'] = {
-                        type: 'line',
-                        data: {
-                            datasets: [{
-                                label: 'Efterspørgsel',
-                                data: [
-                                    { x: 0, y: 60 }, { x: 100, y: 60 }
-                                ],
-                                borderColor: 'green',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2.5,
-                                pointRadius: 3,
-                                pointBackgroundColor: 'green',
-                                lineTension: 0
-                            },
+                                {
+                                    label: 'Producentoverskud',
+                                    data: [{ x: 0, y: 20 }, { x: 0, y: 60 }, { x: 40, y: 60 }, { x: 0, y: 20 }],
+                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                },
 
 
-                            {
-                                label: 'Udbud en udbyder',
-                                data: [
-                                    { x: 0, y: 20 }, { x: 20, y: 40 }, { x: 40, y: 60 }, { x: 60, y: 80 }, { x: 80, y: 100 }
 
-                                ],
-                                borderColor: 'red',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2.5,
-                                pointRadius: 3,
-                                pointBackgroundColor: 'red',
-                                lineTension: 0
-                            },
-                            {
-                                label: 'Prislinje',
-                                data: [
-                                    { x: 0, y: 60 },
-                                    { x: 40, y: 60 }, // Horizontal line at y=80
-                                    null, // Disconnect
-                                    { x: 40, y: 0 },
-                                    { x: 40, y: 60 }, // Vertical line at x=40
 
-                                ],
-                                borderColor: 'black',
-                                borderWidth: 1,
-                                borderDash: [5, 5],
-                                fill: false,
-                                pointRadius: 0,
-                                lineTension: 0 // Ensures perfectly straight lines
-                            },
-                            {
-                                label: 'Tekst',
-                                data: [{ x: 10, y: 0 }, { x: 10, y: 40 }],
-                                borderColor: 'black',
-                                borderWidth: 0.0000001,
-                                fill: false,
-                                pointRadius: 0,
-                                pointBackgroundColor: 'black',
-                                pointBorderColor: 'black',
-                                lineTension: 0
-                            }
-                                ,
-
-                            {
-                                label: 'Producentoverskud',
-                                data: [{ x: 0, y: 20 }, { x: 0, y: 60 }, { x: 40, y: 60 }, { x: 0, y: 20 }],
-                                backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                borderColor: 'transparent',
-                                fill: true,
-                                pointRadius: 0,
-                                lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                ]
                             },
 
 
 
-
-                            ]
-                        },
-
-
-
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            title: {
-                                display: true,
-                                text: 'Fuldkommen konkurrence - Individuel virksomhed',
-                                fontSize: 18
-                            },
-                            scales: {
-                                xAxes: [{
-                                    type: 'linear',
-                                    position: 'bottom',
-                                    scaleLabel: { display: true, labelString: 'Efterspørgsel stk.' },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 20,
-                                        // This callback function adds ' stk.' to each tick label on the x-axis
-                                        callback: function (value, index, values) {
-                                            return value + '  stk.';
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                title: {
+                                    display: true,
+                                    text: 'Fuldkommen konkurrence - Individuel virksomhed',
+                                    fontSize: 18
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        type: 'linear',
+                                        position: 'bottom',
+                                        scaleLabel: { display: true, labelString: 'Efterspørgsel stk.' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 20,
+                                            // This callback function adds ' stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + '  stk.';
+                                            }
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: { display: true, labelString: 'Pris (kr.)' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 10,
+                                            // This callback function adds '  stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' kr.';
+                                            }
+                                        }
+                                    }]
+                                },
+                                tooltips: {
+                                    callbacks: {
+                                        title: function () {
+                                            return ''; // Remove the title (which displays the X-axis value)
+                                        },
+                                        label: function (tooltipItem, data) {
+                                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                                            let label = datasetLabel;
+                                            if (datasetLabel === 'Udbud en udbyder' || datasetLabel === 'Efterspørgsel') {
+                                                const yValue = tooltipItem.yLabel;
+                                                const xValue = tooltipItem.xLabel;
+                                                label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue}  stk.`;
+                                            } else if (datasetLabel === '') {
+                                                // For the equilibrium dashed line, show both X and Y if needed, or just hide
+                                                return ''; // Hide label for the dashed line itself
+                                            }
+                                            return label;
                                         }
                                     }
-                                }],
-                                yAxes: [{
-                                    scaleLabel: { display: true, labelString: 'Pris (kr.)' },
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 10,
-                                        // This callback function adds '  stk.' to each tick label on the x-axis
-                                        callback: function (value, index, values) {
-                                            return value + ' kr.';
-                                        }
-                                    }
-                                }]
-                            },
-                            tooltips: {
-                                callbacks: {
-                                    title: function () {
-                                        return ''; // Remove the title (which displays the X-axis value)
-                                    },
-                                    label: function (tooltipItem, data) {
-                                        const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                                        let label = datasetLabel;
-                                        if (datasetLabel === 'Udbud en udbyder' || datasetLabel === 'Efterspørgsel') {
-                                            const yValue = tooltipItem.yLabel;
-                                            const xValue = tooltipItem.xLabel;
-                                            label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue}  stk.`;
-                                        } else if (datasetLabel === '') {
-                                            // For the equilibrium dashed line, show both X and Y if needed, or just hide
-                                            return ''; // Hide label for the dashed line itself
-                                        }
-                                        return label;
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        // This function controls how the label is formatted
+                                        formatter: function (value, context) {
+                                            const datasetLabel = context.dataset.label;
+                                            if (datasetLabel === 'Tekst') {
+                                                return 'Producentoverskud: Lila';
+                                            }
+                                            const point = context.dataset.data[context.dataIndex];
+                                            return '(' + point.x + ' stk., ' + point.y + ' kr.)';
+                                        },
+                                        // Simple black frame for Tekst
+                                        backgroundColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'white' : 'transparent';
+                                        },
+                                        borderColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'black' : 'transparent';
+                                        },
+                                        borderWidth: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 1 : 0;
+                                        },
+                                        // This function controls which labels are shown
+                                        display: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            // Show labels for datasets and Tekst
+                                            if (datasetLabel === 'Tekst') {
+                                                return context.dataIndex === 1; // Only show label on the top point
+                                            }
+                                            return datasetLabel === 'Efterspørgsel' || datasetLabel === 'Udbud en udbyder';
+                                        },
+                                        color: '#333',
+                                        font: {
+                                            weight: 'bold',
+                                            size: 10,
+                                        },
+                                        align: 'end', // Position the label above the point
+                                        offset: 0     // Distance in pixels from the point
                                     }
                                 }
                             },
-                            plugins: {
-                                datalabels: {
-                                    // This function controls how the label is formatted
-                                    formatter: function (value, context) {
-                                        const datasetLabel = context.dataset.label;
-                                        if (datasetLabel === 'Tekst') {
-                                            return 'Producentoverskud: Lila';
-                                        }
-                                        const point = context.dataset.data[context.dataIndex];
-                                        return '(' + point.x + ' stk., ' + point.y + ' kr.)';
-                                    },
-                                    // Simple black frame for Tekst
-                                    backgroundColor: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        return datasetLabel === 'Tekst' ? 'white' : 'transparent';
-                                    },
-                                    borderColor: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        return datasetLabel === 'Tekst' ? 'black' : 'transparent';
-                                    },
-                                    borderWidth: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        return datasetLabel === 'Tekst' ? 1 : 0;
-                                    },
-                                    // This function controls which labels are shown
-                                    display: function (context) {
-                                        const datasetLabel = context.dataset.label;
-                                        // Show labels for datasets and Tekst
-                                        if (datasetLabel === 'Tekst') {
-                                            return context.dataIndex === 1; // Only show label on the top point
-                                        }
-                                        return datasetLabel === 'Efterspørgsel' || datasetLabel === 'Udbud en udbyder';
-                                    },
-                                    color: '#333',
-                                    font: {
-                                        weight: 'bold',
-                                        size: 10,
-                                    },
-                                    align: 'end', // Position the label above the point
-                                    offset: 0     // Distance in pixels from the point
-                                }
-                            }
-                        },
-                        plugins: [ChartDataLabels]
-                };
+                            plugins: [ChartDataLabels]
+                        };
 
-                // Ensure canvas exists before observing
-                const plot62Canvas = document.getElementById('plot62');
-                if (plot62Canvas) {
-                    chartObserver.observe(plot62Canvas);
-                }
-            </script>
+                        // Ensure canvas exists before observing
+                        const plot62Canvas = document.getElementById('plot62');
+                        if (plot62Canvas) {
+                            chartObserver.observe(plot62Canvas);
+                        }
+                    </script>
 
 
 
 
-            <small>
-                <p>Figur 6.2: Fuldkommen konkurrence - Individuel virksomhed. Efterspørgselskurven (grøn) er for den
-                    individuelle virksomhed horisontal
-                    ved verdensmarkedets pris på 60 kr., da den enkelte udbyder ikke kan påvirke prisen.
-                    og udbudskurven (rød) er for den individuelle udbyder, bemærk vi har på på x-aksen stk. IKKE
-                    mio. stk. <br>
-                    Efterspørgsels- og udbudskurverne skærer hinanden 40 stk. til verdensmarkedets pris på 60 kr.
-                    <br>
-                    Producentoverskuddet er det lilla område over udbudskurven og under efterspørgselskurven, for
-                    denne mindre producent bliver producentoverskuddet kun 0,5 * 40 stk. * 60 kr. = 1.200 kr. <br>
-                </p>
-            </small>
-            <br><br>
+                    <small>
+                        <p>Figur 6.2: Fuldkommen konkurrence - Individuel virksomhed. Efterspørgselskurven (grøn) er for
+                            den
+                            individuelle virksomhed horisontal
+                            ved verdensmarkedets pris på 60 kr., da den enkelte udbyder ikke kan påvirke prisen.
+                            og udbudskurven (rød) er for den individuelle udbyder, bemærk vi har på på x-aksen stk. IKKE
+                            mio. stk. <br>
+                            Efterspørgsels- og udbudskurverne skærer hinanden 40 stk. til verdensmarkedets pris på 60
+                            kr.
+                            <br>
+                            Producentoverskuddet er det lilla område over udbudskurven og under efterspørgselskurven,
+                            for
+                            denne mindre producent bliver producentoverskuddet kun 0,5 * 40 stk. * 60 kr. = 1.200 kr.
+                            <br>
+                        </p>
+                    </small>
+                    <br><br>
                 </div>
 
 
@@ -938,462 +945,470 @@
                     <script>
                         // plot63
                         chartConfigs['plot63'] = {
-                                type: 'line',
-                                data: {
-                                    datasets: [{
-                                        label: 'P',
-                                        data: [
-                                            { x: 0, y: 100 }, { x: 20, y: 90 }, { x: 40, y: 80 }, { x: 60, y: 70 }, { x: 80, y: 60 },
-                                            { x: 100, y: 50 }, { x: 120, y: 40 }, { x: 140, y: 30 }, { x: 160, y: 20 }, { x: 180, y: 10 }, { x: 200, y: 0 }
-                                        ],
-                                        borderColor: 'green',
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2.5,
-                                        pointRadius: 3,
-                                        pointBackgroundColor: 'green',
-                                        lineTension: 0
-                                    },
+                            type: 'line',
+                            data: {
+                                datasets: [{
+                                    label: 'P',
+                                    data: [
+                                        { x: 0, y: 100 }, { x: 20, y: 90 }, { x: 40, y: 80 }, { x: 60, y: 70 }, { x: 80, y: 60 },
+                                        { x: 100, y: 50 }, { x: 120, y: 40 }, { x: 140, y: 30 }, { x: 160, y: 20 }, { x: 180, y: 10 }, { x: 200, y: 0 }
+                                    ],
+                                    borderColor: 'green',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'green',
+                                    lineTension: 0
+                                },
 
-                                    {
-                                        label: 'GROMS',
-                                        data: [
-                                            { x: 0, y: 100 }, { x: 20, y: 80 }, { x: 40, y: 60 }, { x: 60, y: 40 }, { x: 80, y: 20 },
-                                            { x: 100, y: 0 }
-                                        ],
-                                        borderColor: 'orange',
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2.5,
-                                        pointRadius: 3,
-                                        pointBackgroundColor: 'orange',
-                                        lineTension: 0
-                                    },
-
-
-                                    {
-                                        label: 'GROMK',
-                                        data: [
-                                            { x: 0, y: 10 }, { x: 20, y: 20 }, { x: 40, y: 30 }, { x: 60, y: 40 }, { x: 80, y: 50 },{ x: 100, y: 60 },{ x: 120, y: 70 },{ x: 140, y: 80 }, { x: 160, y: 90 }, { x: 180, y: 100 }, { x: 200, y: 110 }  
-                                            
-                                        ],
-                                        borderColor: 'red',
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2.5,
-                                        pointRadius: 3,
-                                        pointBackgroundColor: 'red',
-                                        lineTension: 0
-                                    },
-                                    {
-                                        label: 'Prislinje',
-                                        data: [
-                                            { x: 0, y: 70 },
-                                            { x: 60, y: 70 }, // Horizontal line at y=80
-                                            null, // Disconnect
-                                            { x: 60, y: 0 },
-                                            { x: 60, y: 70 }, // Vertical line at x=40
-
-                                        ],
-                                        borderColor: 'black',
-                                        borderWidth: 1,
-                                        borderDash: [5, 5],
-                                        fill: false,
-                                        pointRadius: 0,
-                                        lineTension: 0 // Ensures perfectly straight lines
-                                    },
-                                    {
-                                        label: 'Tekst',
-                                        data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
-                                        borderColor: 'black',
-                                        borderWidth: 0.0000001,
-                                        fill: false,
-                                        pointRadius: 0,
-                                        pointBackgroundColor: 'black',
-                                        pointBorderColor: 'black',
-                                        lineTension: 0
-                                    }
-                                        ,
-                                    {
-                                        label: 'Forbrugeroverskud',
-                                        data: [{ x: 0, y: 70 }, { x: 0, y: 100 }, { x: 60, y: 70 }, { x: 0, y: 70 }],
-                                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                                        borderColor: 'transparent',
-                                        fill: true,
-                                        pointRadius: 0,
-                                        lineTension: 0 // Ensures a sharp, straight-edged triangle
-                                    },
-                                    {
-                                        label: 'Producentoverskud',
-                                        data: [{ x: 0, y: 10 }, { x: 0, y: 70 }, { x: 60, y: 70 }, { x: 60, y: 40 },{ x: 0, y: 10 }],
-                                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                        borderColor: 'transparent',
-                                        fill: true,
-                                        pointRadius: 0,
-                                        lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                    },
-                                    {
-                                        label: 'DWL',
-                                        data: [{ x: 60, y: 40 }, { x: 60, y: 70 }, { x: 90, y: 55 },{ x: 60, y: 40 }],
-                                        backgroundColor: 'rgba(128, 128, 128, 0.5)',
-                                        borderColor: 'transparent',
-                                        fill: true,
-                                        pointRadius: 0,
-                                        lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                    }
-
-
-
-
-                                    ]
+                                {
+                                    label: 'GROMS',
+                                    data: [
+                                        { x: 0, y: 100 }, { x: 20, y: 80 }, { x: 40, y: 60 }, { x: 60, y: 40 }, { x: 80, y: 20 },
+                                        { x: 100, y: 0 }
+                                    ],
+                                    borderColor: 'orange',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'orange',
+                                    lineTension: 0
                                 },
 
 
+                                {
+                                    label: 'GROMK',
+                                    data: [
+                                        { x: 0, y: 10 }, { x: 20, y: 20 }, { x: 40, y: 30 }, { x: 60, y: 40 }, { x: 80, y: 50 }, { x: 100, y: 60 }, { x: 120, y: 70 }, { x: 140, y: 80 }, { x: 160, y: 90 }, { x: 180, y: 100 }, { x: 200, y: 110 }
 
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    title: {
-                                        display: true,
-                                        text: 'Monopolistisk konkurrence - Kort sigt',
-                                        fontSize: 18
-                                    },
-                                    scales: {
-                                        xAxes: [{
-                                            type: 'linear',
-                                            position: 'bottom',
-                                            scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
-                                            ticks: {
-                                                beginAtZero: true,
-                                                stepSize: 20,
-                                                // This callback function adds ' stk.' to each tick label on the x-axis
-                                                callback: function (value, index, values) {
-                                                    return value + ' stk.';
-                                                }
-                                            }
-                                        }],
-                                        yAxes: [{
-                                            scaleLabel: { display: true, labelString: 'Pris (kr.)' },
-                                            ticks: {
-                                                beginAtZero: true,
-                                                stepSize: 10,
-                                                // This callback function adds '  stk.' to each tick label on the x-axis
-                                                callback: function (value, index, values) {
-                                                    return value + ' kr.';
-                                                }
-                                            }
-                                        }]
-                                    },
-                                    tooltips: {
-                                        callbacks: {
-                                            title: function () {
-                                                return ''; // Remove the title (which displays the X-axis value)
-                                            },
-                                            label: function (tooltipItem, data) {
-                                                const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                                                let label = datasetLabel;
-                                                if (datasetLabel === 'GROMK' || datasetLabel === 'P' || datasetLabel === 'GROMS') {
-                                                    const yValue = tooltipItem.yLabel;
-                                                    const xValue = tooltipItem.xLabel;
-                                                    label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
-                                                } else if (datasetLabel === '') {
-                                                    // For the equilibrium dashed line, show both X and Y if needed, or just hide
-                                                    return ''; // Hide label for the dashed line itself
-                                                }
-                                                return label;
+                                    ],
+                                    borderColor: 'red',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'red',
+                                    lineTension: 0
+                                },
+                                {
+                                    label: 'Prislinje',
+                                    data: [
+                                        { x: 0, y: 70 },
+                                        { x: 60, y: 70 }, // Horizontal line at y=80
+                                        null, // Disconnect
+                                        { x: 60, y: 0 },
+                                        { x: 60, y: 70 }, // Vertical line at x=40
+
+                                    ],
+                                    borderColor: 'black',
+                                    borderWidth: 1,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures perfectly straight lines
+                                },
+                                {
+                                    label: 'Tekst',
+                                    data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
+                                    borderColor: 'black',
+                                    borderWidth: 0.0000001,
+                                    fill: false,
+                                    pointRadius: 0,
+                                    pointBackgroundColor: 'black',
+                                    pointBorderColor: 'black',
+                                    lineTension: 0
+                                }
+                                    ,
+                                {
+                                    label: 'Forbrugeroverskud',
+                                    data: [{ x: 0, y: 70 }, { x: 0, y: 100 }, { x: 60, y: 70 }, { x: 0, y: 70 }],
+                                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged triangle
+                                },
+                                {
+                                    label: 'Producentoverskud',
+                                    data: [{ x: 0, y: 10 }, { x: 0, y: 70 }, { x: 60, y: 70 }, { x: 60, y: 40 }, { x: 0, y: 10 }],
+                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                },
+                                {
+                                    label: 'DWL',
+                                    data: [{ x: 60, y: 40 }, { x: 60, y: 70 }, { x: 90, y: 55 }, { x: 60, y: 40 }],
+                                    backgroundColor: 'rgba(128, 128, 128, 0.5)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                }
+
+
+
+
+                                ]
+                            },
+
+
+
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                title: {
+                                    display: true,
+                                    text: 'Monopolistisk konkurrence - Kort sigt',
+                                    fontSize: 18
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        type: 'linear',
+                                        position: 'bottom',
+                                        scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 20,
+                                            // This callback function adds ' stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' stk.';
                                             }
                                         }
-                                    },
-                                    plugins: {
-                                        datalabels: {
-                                            // This function controls how the label is formatted
-                                            formatter: function (value, context) {
-                                                const datasetLabel = context.dataset.label;
-                                                if (datasetLabel === 'Tekst') {
-                                                    return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lilla\nDødvægtstab: Grå';
-                                                }
-                                                const point = context.dataset.data[context.dataIndex];
-                                                return '(' + point.x + ' stk., ' + point.y + ' kr.)';
-                                            },
-                                            // Simple black frame for Tekst
-                                            backgroundColor: function (context) {
-                                                const datasetLabel = context.dataset.label;
-                                                return datasetLabel === 'Tekst' ? 'white' : 'transparent';
-                                            },
-                                            borderColor: function (context) {
-                                                const datasetLabel = context.dataset.label;
-                                                return datasetLabel === 'Tekst' ? 'black' : 'transparent';
-                                            },
-                                            borderWidth: function (context) {
-                                                const datasetLabel = context.dataset.label;
-                                                return datasetLabel === 'Tekst' ? 1 : 0;
-                                            },
-                                            // This function controls which labels are shown
-                                            display: function (context) {
-                                                const datasetLabel = context.dataset.label;
-                                                // Show labels for datasets and Tekst
-                                                if (datasetLabel === 'Tekst') {
-                                                    return context.dataIndex === 1; // Only show label on the top point
-                                                }
-                                                return datasetLabel === 'P' || datasetLabel === 'GROMS' || datasetLabel === 'GROMK';
-                                            },
-                                            color: '#333',
-                                            font: {
-                                                weight: 'bold',
-                                                size: 10,
-                                            },
-                                            align: 'end', // Position the label above the point
-                                            offset: 0     // Distance in pixels from the point
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: { display: true, labelString: 'Pris (kr.)' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 10,
+                                            // This callback function adds '  stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' kr.';
+                                            }
+                                        }
+                                    }]
+                                },
+                                tooltips: {
+                                    callbacks: {
+                                        title: function () {
+                                            return ''; // Remove the title (which displays the X-axis value)
+                                        },
+                                        label: function (tooltipItem, data) {
+                                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                                            let label = datasetLabel;
+                                            if (datasetLabel === 'GROMK' || datasetLabel === 'P' || datasetLabel === 'GROMS') {
+                                                const yValue = tooltipItem.yLabel;
+                                                const xValue = tooltipItem.xLabel;
+                                                label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
+                                            } else if (datasetLabel === '') {
+                                                // For the equilibrium dashed line, show both X and Y if needed, or just hide
+                                                return ''; // Hide label for the dashed line itself
+                                            }
+                                            return label;
                                         }
                                     }
                                 },
-                                plugins: [ChartDataLabels]
+                                plugins: {
+                                    datalabels: {
+                                        // This function controls how the label is formatted
+                                        formatter: function (value, context) {
+                                            const datasetLabel = context.dataset.label;
+                                            if (datasetLabel === 'Tekst') {
+                                                return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lilla\nDødvægtstab: Grå';
+                                            }
+                                            const point = context.dataset.data[context.dataIndex];
+                                            return '(' + point.x + ' stk., ' + point.y + ' kr.)';
+                                        },
+                                        // Simple black frame for Tekst
+                                        backgroundColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'white' : 'transparent';
+                                        },
+                                        borderColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'black' : 'transparent';
+                                        },
+                                        borderWidth: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 1 : 0;
+                                        },
+                                        // This function controls which labels are shown
+                                        display: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            // Show labels for datasets and Tekst
+                                            if (datasetLabel === 'Tekst') {
+                                                return context.dataIndex === 1; // Only show label on the top point
+                                            }
+                                            return datasetLabel === 'P' || datasetLabel === 'GROMS' || datasetLabel === 'GROMK';
+                                        },
+                                        color: '#333',
+                                        font: {
+                                            weight: 'bold',
+                                            size: 10,
+                                        },
+                                        align: 'end', // Position the label above the point
+                                        offset: 0     // Distance in pixels from the point
+                                    }
+                                }
+                            },
+                            plugins: [ChartDataLabels]
                         };
 
                         chartObserver.observe(document.getElementById('plot63'));
                     </script>
                     <h4>Monopolistisk konkurrence - Langt sigt</h4>
-                    <p>På langt sigt vil en overnormal profit blive elimineret, da nye virksomheder indtræder på markedet pga. gode profitmuligheder. 
-                        De nye virksomheder vil reducere profitten og afsætningen, for den eksisterende virksomhed, da den vil skulle konkurrere om kunderne.
-                         De nye indtrædere vil resultere i at virksomhedens pris-afsætningskurve forskydes mod venstre, da der er flere udbydere på markedet, som vil sælge 
-                         et produkt med nogenlunde samme egenskaber.</p>
-                         <div class="chart-container"
-                         style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
-                         <canvas id="plot64"></canvas>
-                     </div>
-                         <small>
-                            <p>Figur 6.4: Monopolistisk konkurrence - Langt sigt. Pris-afsætningskurven P kort sigt (grøn) forskydes ned til P langt sigt (blå) på grund af nye indtrædere, overnormal profit elimineres. <br>
-                                I eksemplet her ses også at P langt sigts kurven (blå) bliver fladere end P kort sigts kurven (grøn), da forbrugerne bliver mere prisfølsomme de har nu mange alternativer. <br>
-                                Vi nærmer os i dette eksempel situationen for et fuldkommen konkurrence marked. Den fladere P kurve på langt sigt kurve (blå) betyder at dødvægtstabet ligeledes reduceres (det grå DWL område bliver forholdsmæssigt mindre på langt sigt frem for på kort sigt), 
-                                så vi nærmer os som nævnt
-                                 situationen uden dødvægtstab for et fuldkommen konkurrence marked.
-                                
-                            </p>
-                        </small>
-                        <br><br>
-                        <script>
-                            // plot64
-                            chartConfigs['plot64'] = {
-                                    type: 'line',
-                                    data: {
-                                        datasets: [{
-                                            label: 'P kort sigt',
-                                            data: [
-                                                { x: 0, y: 100 },  { x: 200, y: 0 }
-                                            ],
-                                            borderColor: 'green',
-                                            backgroundColor: 'transparent',
-                                            borderWidth: 2.5,
-                                            pointRadius: 3,
-                                            pointBackgroundColor: 'green',
-                                            lineTension: 0
-                                        },
-                                        {
-                                        
-                                            label: 'P langt sigt',
-                                            data: [
-                                                { x: 0, y: 30 },{x:20,y:25}, { x: 120, y: 0 }
-                                            ],
-                                            borderColor: 'blue',
-                                            backgroundColor: 'transparent',
-                                            borderWidth: 2.5,
-                                            pointRadius: 3,
-                                            pointBackgroundColor: 'blue',
-                                            lineTension: 0
-                                        },
-    
-                                        {
-                                            label: 'GROMS langt sigt',
-                                            data: [
-                                                { x: 0, y: 30 }, { x: 20, y: 20 }, { x: 40, y: 10 }, { x: 60, y: 0 },
-                                                
-                                            ],
-                                            borderColor: 'orange',
-                                            backgroundColor: 'transparent',
-                                            borderWidth: 2.5,
-                                            pointRadius: 3,
-                                            pointBackgroundColor: 'orange',
-                                            lineTension: 0
-                                        },
-    
-    
-                                        {
-                                            label: 'GROMK',
-                                            data: [
-                                                { x: 0, y: 10 },   { x: 180, y: 100 }, { x: 200, y: 110 }  
-                                                
-                                            ],
-                                            borderColor: 'red',
-                                            backgroundColor: 'transparent',
-                                            borderWidth: 2.5,
-                                            pointRadius: 3,
-                                            pointBackgroundColor: 'red',
-                                            lineTension: 0
-                                        },
-                                        {
-                                            label: 'Prislinje',
-                                            data: [
-                                                { x: 0, y: 25 },
-                                                { x: 20, y: 25 }, // Horizontal line at y=80
-                                                null, // Disconnect
-                                                { x: 20, y: 0 },
-                                                { x: 20, y: 25 }, // Vertical line at x=40
-    
-                                            ],
-                                            borderColor: 'black',
-                                            borderWidth: 1,
-                                            borderDash: [5, 5],
-                                            fill: false,
-                                            pointRadius: 0,
-                                            lineTension: 0 // Ensures perfectly straight lines
-                                        },
-                                        {
-                                            label: 'Tekst',
-                                            data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
-                                            borderColor: 'black',
-                                            borderWidth: 0.0000001,
-                                            fill: false,
-                                            pointRadius: 0,
-                                            pointBackgroundColor: 'black',
-                                            pointBorderColor: 'black',
-                                            lineTension: 0
-                                        }
-                                            ,
-                                        {
-                                            label: 'Forbrugeroverskud',
-                                            data: [{ x: 0, y: 25 }, { x: 0, y: 30 }, { x: 20, y: 25 }, { x: 0, y: 25 }],
-                                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                                            borderColor: 'transparent',
-                                            fill: true,
-                                            pointRadius: 0,
-                                            lineTension: 0 // Ensures a sharp, straight-edged triangle
-                                        },
-                                        {
-                                            label: 'Producentoverskud',
-                                            data: [{ x: 0, y: 10 }, { x: 0, y: 25 }, { x: 20, y: 25 }, { x: 20, y: 20 },{ x: 0, y: 10 }],
-                                            backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                            borderColor: 'transparent',
-                                            fill: true,
-                                            pointRadius: 0,
-                                            lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                        },
-                                        {
-                                            label: 'DWL',
-                                            data: [{ x: 20, y: 20 }, { x: 20, y: 25 }, { x: 27.5, y: 23.33 },{ x: 20, y: 20 }],
-                                            backgroundColor: 'rgba(128, 128, 128, 0.5)',
-                                            borderColor: 'transparent',
-                                            fill: true,
-                                            pointRadius: 0,
-                                            lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                        }
-    
-    
-    
-    
-                                        ]
-                                    },
-    
-    
-    
-                                    options: {
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        title: {
-                                            display: true,
-                                            text: 'Monopolistisk konkurrence - Langt sigt',
-                                            fontSize: 18
-                                        },
-                                        scales: {
-                                            xAxes: [{
-                                                type: 'linear',
-                                                position: 'bottom',
-                                                scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    stepSize: 10,
-                                                    // This callback function adds ' stk.' to each tick label on the x-axis
-                                                    callback: function (value, index, values) {
-                                                        return value + ' stk.';
-                                                    }
-                                                }
-                                            }],
-                                            yAxes: [{
-                                                scaleLabel: { display: true, labelString: 'Pris (kr.)' },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    stepSize: 5,
-                                                    // This callback function adds '  stk.' to each tick label on the x-axis
-                                                    callback: function (value, index, values) {
-                                                        return value + ' kr.';
-                                                    }
-                                                }
-                                            }]
-                                        },
-                                        tooltips: {
-                                            callbacks: {
-                                                title: function () {
-                                                    return ''; // Remove the title (which displays the X-axis value)
-                                                },
-                                                label: function (tooltipItem, data) {
-                                                    const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                                                    let label = datasetLabel;
-                                                    if (datasetLabel === 'GROMK' || datasetLabel === 'P kort sigt' || datasetLabel === 'GROMS langt sigt' || datasetLabel === 'P langt sigt') {
-                                                        const yValue = tooltipItem.yLabel;
-                                                        const xValue = tooltipItem.xLabel;
-                                                        label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
-                                                    } else if (datasetLabel === '') {
-                                                        // For the equilibrium dashed line, show both X and Y if needed, or just hide
-                                                        return ''; // Hide label for the dashed line itself
-                                                    }
-                                                    return label;
-                                                }
-                                            }
-                                        },
-                                        plugins: {
-                                            datalabels: {
-                                                // This function controls how the label is formatted
-                                                formatter: function (value, context) {
-                                                    const datasetLabel = context.dataset.label;
-                                                    if (datasetLabel === 'Tekst') {
-                                                        return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lilla\nDødvægtstab: Grå';
-                                                    }
-                                                    const point = context.dataset.data[context.dataIndex];
-                                                    return '(' + point.x + ' stk., ' + point.y + ' kr.)';
-                                                },
-                                                // Simple black frame for Tekst
-                                                backgroundColor: function (context) {
-                                                    const datasetLabel = context.dataset.label;
-                                                    return datasetLabel === 'Tekst' ? 'white' : 'transparent';
-                                                },
-                                                borderColor: function (context) {
-                                                    const datasetLabel = context.dataset.label;
-                                                    return datasetLabel === 'Tekst' ? 'black' : 'transparent';
-                                                },
-                                                borderWidth: function (context) {
-                                                    const datasetLabel = context.dataset.label;
-                                                    return datasetLabel === 'Tekst' ? 1 : 0;
-                                                },
-                                                // This function controls which labels are shown
-                                                display: function (context) {
-                                                    const datasetLabel = context.dataset.label;
-                                                    // Show labels for datasets and Tekst
-                                                    if (datasetLabel === 'Tekst') {
-                                                        return context.dataIndex === 1; // Only show label on the top point
-                                                    }
-                                                    return datasetLabel === 'P kort sigt' || datasetLabel === 'GROMS langt sigt' || datasetLabel === 'GROMK' || datasetLabel === 'P langt sigt';
-                                                },
-                                                color: '#333',
-                                                font: {
-                                                    weight: 'bold',
-                                                    size: 10,
-                                                },
-                                                align: 'end', // Position the label above the point
-                                                offset: 0     // Distance in pixels from the point
-                                            }
-                                        }
-                                    },
-                                    plugins: [ChartDataLabels]
-                            };
+                    <p>På langt sigt vil en overnormal profit blive elimineret, da nye virksomheder indtræder på
+                        markedet pga. gode profitmuligheder.
+                        De nye virksomheder vil reducere profitten og afsætningen, for den eksisterende virksomhed, da
+                        den vil skulle konkurrere om kunderne.
+                        De nye indtrædere vil resultere i at virksomhedens pris-afsætningskurve forskydes mod venstre,
+                        da der er flere udbydere på markedet, som vil sælge
+                        et produkt med nogenlunde samme egenskaber.</p>
+                    <div class="chart-container"
+                        style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
+                        <canvas id="plot64"></canvas>
+                    </div>
+                    <small>
+                        <p>Figur 6.4: Monopolistisk konkurrence - Langt sigt. Pris-afsætningskurven P kort sigt (grøn)
+                            forskydes ned til P langt sigt (blå) på grund af nye indtrædere, overnormal profit
+                            elimineres. <br>
+                            I eksemplet her ses også at P langt sigts kurven (blå) bliver fladere end P kort sigts
+                            kurven (grøn), da forbrugerne bliver mere prisfølsomme de har nu mange alternativer. <br>
+                            Vi nærmer os i dette eksempel situationen for et fuldkommen konkurrence marked. Den fladere
+                            P kurve på langt sigt kurve (blå) betyder at dødvægtstabet ligeledes reduceres (det grå DWL
+                            område bliver forholdsmæssigt mindre på langt sigt frem for på kort sigt),
+                            så vi nærmer os som nævnt
+                            situationen uden dødvægtstab for et fuldkommen konkurrence marked.
 
-                            chartObserver.observe(document.getElementById('plot64'));
-                        </script>
+                        </p>
+                    </small>
+                    <br><br>
+                    <script>
+                        // plot64
+                        chartConfigs['plot64'] = {
+                            type: 'line',
+                            data: {
+                                datasets: [{
+                                    label: 'P kort sigt',
+                                    data: [
+                                        { x: 0, y: 100 }, { x: 200, y: 0 }
+                                    ],
+                                    borderColor: 'green',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'green',
+                                    lineTension: 0
+                                },
+                                {
+
+                                    label: 'P langt sigt',
+                                    data: [
+                                        { x: 0, y: 30 }, { x: 20, y: 25 }, { x: 120, y: 0 }
+                                    ],
+                                    borderColor: 'blue',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'blue',
+                                    lineTension: 0
+                                },
+
+                                {
+                                    label: 'GROMS langt sigt',
+                                    data: [
+                                        { x: 0, y: 30 }, { x: 20, y: 20 }, { x: 40, y: 10 }, { x: 60, y: 0 },
+
+                                    ],
+                                    borderColor: 'orange',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'orange',
+                                    lineTension: 0
+                                },
+
+
+                                {
+                                    label: 'GROMK',
+                                    data: [
+                                        { x: 0, y: 10 }, { x: 180, y: 100 }, { x: 200, y: 110 }
+
+                                    ],
+                                    borderColor: 'red',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2.5,
+                                    pointRadius: 3,
+                                    pointBackgroundColor: 'red',
+                                    lineTension: 0
+                                },
+                                {
+                                    label: 'Prislinje',
+                                    data: [
+                                        { x: 0, y: 25 },
+                                        { x: 20, y: 25 }, // Horizontal line at y=80
+                                        null, // Disconnect
+                                        { x: 20, y: 0 },
+                                        { x: 20, y: 25 }, // Vertical line at x=40
+
+                                    ],
+                                    borderColor: 'black',
+                                    borderWidth: 1,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures perfectly straight lines
+                                },
+                                {
+                                    label: 'Tekst',
+                                    data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
+                                    borderColor: 'black',
+                                    borderWidth: 0.0000001,
+                                    fill: false,
+                                    pointRadius: 0,
+                                    pointBackgroundColor: 'black',
+                                    pointBorderColor: 'black',
+                                    lineTension: 0
+                                }
+                                    ,
+                                {
+                                    label: 'Forbrugeroverskud',
+                                    data: [{ x: 0, y: 25 }, { x: 0, y: 30 }, { x: 20, y: 25 }, { x: 0, y: 25 }],
+                                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged triangle
+                                },
+                                {
+                                    label: 'Producentoverskud',
+                                    data: [{ x: 0, y: 10 }, { x: 0, y: 25 }, { x: 20, y: 25 }, { x: 20, y: 20 }, { x: 0, y: 10 }],
+                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                },
+                                {
+                                    label: 'DWL',
+                                    data: [{ x: 20, y: 20 }, { x: 20, y: 25 }, { x: 27.5, y: 23.33 }, { x: 20, y: 20 }],
+                                    backgroundColor: 'rgba(128, 128, 128, 0.5)',
+                                    borderColor: 'transparent',
+                                    fill: true,
+                                    pointRadius: 0,
+                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                }
+
+
+
+
+                                ]
+                            },
+
+
+
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                title: {
+                                    display: true,
+                                    text: 'Monopolistisk konkurrence - Langt sigt',
+                                    fontSize: 18
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        type: 'linear',
+                                        position: 'bottom',
+                                        scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 10,
+                                            // This callback function adds ' stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' stk.';
+                                            }
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: { display: true, labelString: 'Pris (kr.)' },
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 5,
+                                            // This callback function adds '  stk.' to each tick label on the x-axis
+                                            callback: function (value, index, values) {
+                                                return value + ' kr.';
+                                            }
+                                        }
+                                    }]
+                                },
+                                tooltips: {
+                                    callbacks: {
+                                        title: function () {
+                                            return ''; // Remove the title (which displays the X-axis value)
+                                        },
+                                        label: function (tooltipItem, data) {
+                                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                                            let label = datasetLabel;
+                                            if (datasetLabel === 'GROMK' || datasetLabel === 'P kort sigt' || datasetLabel === 'GROMS langt sigt' || datasetLabel === 'P langt sigt') {
+                                                const yValue = tooltipItem.yLabel;
+                                                const xValue = tooltipItem.xLabel;
+                                                label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
+                                            } else if (datasetLabel === '') {
+                                                // For the equilibrium dashed line, show both X and Y if needed, or just hide
+                                                return ''; // Hide label for the dashed line itself
+                                            }
+                                            return label;
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        // This function controls how the label is formatted
+                                        formatter: function (value, context) {
+                                            const datasetLabel = context.dataset.label;
+                                            if (datasetLabel === 'Tekst') {
+                                                return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lilla\nDødvægtstab: Grå';
+                                            }
+                                            const point = context.dataset.data[context.dataIndex];
+                                            return '(' + point.x + ' stk., ' + point.y + ' kr.)';
+                                        },
+                                        // Simple black frame for Tekst
+                                        backgroundColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'white' : 'transparent';
+                                        },
+                                        borderColor: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 'black' : 'transparent';
+                                        },
+                                        borderWidth: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            return datasetLabel === 'Tekst' ? 1 : 0;
+                                        },
+                                        // This function controls which labels are shown
+                                        display: function (context) {
+                                            const datasetLabel = context.dataset.label;
+                                            // Show labels for datasets and Tekst
+                                            if (datasetLabel === 'Tekst') {
+                                                return context.dataIndex === 1; // Only show label on the top point
+                                            }
+                                            return datasetLabel === 'P kort sigt' || datasetLabel === 'GROMS langt sigt' || datasetLabel === 'GROMK' || datasetLabel === 'P langt sigt';
+                                        },
+                                        color: '#333',
+                                        font: {
+                                            weight: 'bold',
+                                            size: 10,
+                                        },
+                                        align: 'end', // Position the label above the point
+                                        offset: 0     // Distance in pixels from the point
+                                    }
+                                }
+                            },
+                            plugins: [ChartDataLabels]
+                        };
+
+                        chartObserver.observe(document.getElementById('plot64'));
+                    </script>
                 </div>
 
 
@@ -1485,22 +1500,24 @@
                         </table>
                     </div>
 
-                    
+
                     <div class="chart-container"
                         style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
                         <canvas id="plot65"></canvas>
                     </div>
                     <small>
-                        <p>Figur 6.5: Monopol - Profitmaksimering. Monopol ligner til forveksling monopolistisk konkurrence på kort sigt, 
+                        <p>Figur 6.5: Monopol - Profitmaksimering. Monopol ligner til forveksling monopolistisk
+                            konkurrence på kort sigt,
                             forskellen er at der under monopol ikke er nære substitutter til produktet. <br>
-                             Efterspørgselskurven (grøn) viser markedets
+                            Efterspørgselskurven (grøn) viser markedets
                             efterspørgsel, GROMS-kurven (orange)
                             ligger under efterspørgselskurven og afspejler den marginale omsætning. GROMK-kurven
-                            (rød) viser den marginale omkostning.  <br>
+                            (rød) viser den marginale omkostning. <br>
                             Prislinjen (sort stiplet linje) viser prisen på 120 kr. og afsætningen på 80 stk. <br>
                             Forbrugeroverskuddet (turkis) er området under efterspørgselskurven og over prislinjen.
                             Producentoverskuddet (lilla) er området over GROMK-kurven og under prislinjen.
-                            Dødvægtstabet (grå) er omkostningen for samfundet i forhold til et effektivt marked, under fuldkommen konkurrence.
+                            Dødvægtstabet (grå) er omkostningen for samfundet i forhold til et effektivt marked, under
+                            fuldkommen konkurrence.
                         </p>
                     </small>
 
@@ -1510,213 +1527,213 @@
                 <script>
                     // plot63
                     chartConfigs['plot65'] = {
-                            type: 'line',
-                            data: {
-                                datasets: [{
-                                    label: 'P',
-                                    data: [
-                                        { x: 0, y: 200 }, { x: 20, y: 180 }, { x: 40, y: 160 }, { x: 60, y: 140 }, { x: 80, y: 120 },
-                                        { x: 100, y: 100 }, { x: 120, y: 80 }, { x: 140, y: 60 }, { x: 160, y: 40 }, { x: 180, y: 20 }, { x: 200, y: 0 }
-                                    ],
-                                    borderColor: 'green',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: 'green',
-                                    lineTension: 0
-                                },
+                        type: 'line',
+                        data: {
+                            datasets: [{
+                                label: 'P',
+                                data: [
+                                    { x: 0, y: 200 }, { x: 20, y: 180 }, { x: 40, y: 160 }, { x: 60, y: 140 }, { x: 80, y: 120 },
+                                    { x: 100, y: 100 }, { x: 120, y: 80 }, { x: 140, y: 60 }, { x: 160, y: 40 }, { x: 180, y: 20 }, { x: 200, y: 0 }
+                                ],
+                                borderColor: 'green',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2.5,
+                                pointRadius: 3,
+                                pointBackgroundColor: 'green',
+                                lineTension: 0
+                            },
 
-                                {
-                                    label: 'GROMS',
-                                    data: [
-                                        { x: 0, y:200 }, { x: 20, y: 160 }, { x: 40, y: 120 }, { x: 60, y: 80 }, { x: 80, y: 40 },
-                                        { x: 100, y: 0 }
-                                    ],
-                                    borderColor: 'orange',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: 'orange',
-                                    lineTension: 0
-                                },
-
-
-                                {
-                                    label: 'GROMK',
-                                    data: [
-                                        { x: 0, y: 20 },  { x: 40, y: 30 }, { x: 80, y: 40 }, { x: 120, y: 50 } , { x: 160, y: 60 }, { x: 200, y: 70 }  
-                                        
-                                    ],
-                                    borderColor: 'red',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: 'red',
-                                    lineTension: 0
-                                },
-                                {
-                                    label: 'Prislinje',
-                                    data: [
-                                        { x: 0, y: 120 },
-                                        { x: 80, y: 120 }, // Horizontal line at y=80
-                                        null, // Disconnect
-                                        { x: 80, y: 0 },
-                                        { x: 80, y: 120 }, // Vertical line at x=40
-
-                                    ],
-                                    borderColor: 'black',
-                                    borderWidth: 1,
-                                    borderDash: [5, 5],
-                                    fill: false,
-                                    pointRadius: 0,
-                                    lineTension: 0 // Ensures perfectly straight lines
-                                },
-                                {
-                                    label: 'Tekst',
-                                    data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
-                                    borderColor: 'black',
-                                    borderWidth: 0.0000001,
-                                    fill: false,
-                                    pointRadius: 0,
-                                    pointBackgroundColor: 'black',
-                                    pointBorderColor: 'black',
-                                    lineTension: 0
-                                }
-                                    ,
-                                {
-                                    label: 'Forbrugeroverskud',
-                                    data: [{ x: 0, y: 120 }, { x: 0, y: 200 }, { x: 80, y: 120 }, { x: 0, y: 120 }],
-                                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                                    borderColor: 'transparent',
-                                    fill: true,
-                                    pointRadius: 0,
-                                    lineTension: 0 // Ensures a sharp, straight-edged triangle
-                                },
-                                {
-                                    label: 'Producentoverskud',
-                                    data: [{ x: 0, y: 20 }, { x: 0, y: 120 }, { x: 80, y: 120 }, { x: 80, y: 40 },{ x: 0, y: 20 }],
-                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                    borderColor: 'transparent',
-                                    fill: true,
-                                    pointRadius: 0,
-                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                },
-                                {
-                                    label: 'DWL',
-                                    data: [{ x: 80, y: 40 }, { x: 80, y: 120 }, { x: 145, y: 55 },{ x: 80, y: 40 }],
-                                    backgroundColor: 'rgba(128, 128, 128, 0.5)',
-                                    borderColor: 'transparent',
-                                    fill: true,
-                                    pointRadius: 0,
-                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                }
-
-
-
-
-                                ]
+                            {
+                                label: 'GROMS',
+                                data: [
+                                    { x: 0, y: 200 }, { x: 20, y: 160 }, { x: 40, y: 120 }, { x: 60, y: 80 }, { x: 80, y: 40 },
+                                    { x: 100, y: 0 }
+                                ],
+                                borderColor: 'orange',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2.5,
+                                pointRadius: 3,
+                                pointBackgroundColor: 'orange',
+                                lineTension: 0
                             },
 
 
+                            {
+                                label: 'GROMK',
+                                data: [
+                                    { x: 0, y: 20 }, { x: 40, y: 30 }, { x: 80, y: 40 }, { x: 120, y: 50 }, { x: 160, y: 60 }, { x: 200, y: 70 }
 
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                title: {
-                                    display: true,
-                                    text: 'Monopol',
-                                    fontSize: 18
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        type: 'linear',
-                                        position: 'bottom',
-                                        scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
-                                        ticks: {
-                                            beginAtZero: true,
-                                            stepSize: 20,
-                                            // This callback function adds ' stk.' to each tick label on the x-axis
-                                            callback: function (value, index, values) {
-                                                return value + ' stk.';
-                                            }
-                                        }
-                                    }],
-                                    yAxes: [{
-                                        scaleLabel: { display: true, labelString: 'Pris (kr.)' },
-                                        ticks: {
-                                            beginAtZero: true,
-                                            stepSize: 20,
-                                            // This callback function adds '  stk.' to each tick label on the x-axis
-                                            callback: function (value, index, values) {
-                                                return value + ' kr.';
-                                            }
-                                        }
-                                    }]
-                                },
-                                tooltips: {
-                                    callbacks: {
-                                        title: function () {
-                                            return ''; // Remove the title (which displays the X-axis value)
-                                        },
-                                        label: function (tooltipItem, data) {
-                                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                                            let label = datasetLabel;
-                                            if (datasetLabel === 'GROMK' || datasetLabel === 'P' || datasetLabel === 'GROMS') {
-                                                const yValue = tooltipItem.yLabel;
-                                                const xValue = tooltipItem.xLabel;
-                                                label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
-                                            } else if (datasetLabel === '') {
-                                                // For the equilibrium dashed line, show both X and Y if needed, or just hide
-                                                return ''; // Hide label for the dashed line itself
-                                            }
-                                            return label;
+                                ],
+                                borderColor: 'red',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2.5,
+                                pointRadius: 3,
+                                pointBackgroundColor: 'red',
+                                lineTension: 0
+                            },
+                            {
+                                label: 'Prislinje',
+                                data: [
+                                    { x: 0, y: 120 },
+                                    { x: 80, y: 120 }, // Horizontal line at y=80
+                                    null, // Disconnect
+                                    { x: 80, y: 0 },
+                                    { x: 80, y: 120 }, // Vertical line at x=40
+
+                                ],
+                                borderColor: 'black',
+                                borderWidth: 1,
+                                borderDash: [5, 5],
+                                fill: false,
+                                pointRadius: 0,
+                                lineTension: 0 // Ensures perfectly straight lines
+                            },
+                            {
+                                label: 'Tekst',
+                                data: [{ x: 20, y: 0 }, { x: 20, y: 50 }],
+                                borderColor: 'black',
+                                borderWidth: 0.0000001,
+                                fill: false,
+                                pointRadius: 0,
+                                pointBackgroundColor: 'black',
+                                pointBorderColor: 'black',
+                                lineTension: 0
+                            }
+                                ,
+                            {
+                                label: 'Forbrugeroverskud',
+                                data: [{ x: 0, y: 120 }, { x: 0, y: 200 }, { x: 80, y: 120 }, { x: 0, y: 120 }],
+                                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                borderColor: 'transparent',
+                                fill: true,
+                                pointRadius: 0,
+                                lineTension: 0 // Ensures a sharp, straight-edged triangle
+                            },
+                            {
+                                label: 'Producentoverskud',
+                                data: [{ x: 0, y: 20 }, { x: 0, y: 120 }, { x: 80, y: 120 }, { x: 80, y: 40 }, { x: 0, y: 20 }],
+                                backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                borderColor: 'transparent',
+                                fill: true,
+                                pointRadius: 0,
+                                lineTension: 0 // Ensures a sharp, straight-edged polygon
+                            },
+                            {
+                                label: 'DWL',
+                                data: [{ x: 80, y: 40 }, { x: 80, y: 120 }, { x: 145, y: 55 }, { x: 80, y: 40 }],
+                                backgroundColor: 'rgba(128, 128, 128, 0.5)',
+                                borderColor: 'transparent',
+                                fill: true,
+                                pointRadius: 0,
+                                lineTension: 0 // Ensures a sharp, straight-edged polygon
+                            }
+
+
+
+
+                            ]
+                        },
+
+
+
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            title: {
+                                display: true,
+                                text: 'Monopol',
+                                fontSize: 18
+                            },
+                            scales: {
+                                xAxes: [{
+                                    type: 'linear',
+                                    position: 'bottom',
+                                    scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 20,
+                                        // This callback function adds ' stk.' to each tick label on the x-axis
+                                        callback: function (value, index, values) {
+                                            return value + ' stk.';
                                         }
                                     }
-                                },
-                                plugins: {
-                                    datalabels: {
-                                        // This function controls how the label is formatted
-                                        formatter: function (value, context) {
-                                            const datasetLabel = context.dataset.label;
-                                            if (datasetLabel === 'Tekst') {
-                                                return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lilla\nDødvægtstab: Grå';
-                                            }
-                                            const point = context.dataset.data[context.dataIndex];
-                                            return '(' + point.x + ' stk., ' + point.y + ' kr.)';
-                                        },
-                                        // Simple black frame for Tekst
-                                        backgroundColor: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            return datasetLabel === 'Tekst' ? 'white' : 'transparent';
-                                        },
-                                        borderColor: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            return datasetLabel === 'Tekst' ? 'black' : 'transparent';
-                                        },
-                                        borderWidth: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            return datasetLabel === 'Tekst' ? 1 : 0;
-                                        },
-                                        // This function controls which labels are shown
-                                        display: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            // Show labels for datasets and Tekst
-                                            if (datasetLabel === 'Tekst') {
-                                                return context.dataIndex === 1; // Only show label on the top point
-                                            }
-                                            return datasetLabel === 'P' || datasetLabel === 'GROMS' || datasetLabel === 'GROMK';
-                                        },
-                                        color: '#333',
-                                        font: {
-                                            weight: 'bold',
-                                            size: 10,
-                                        },
-                                        align: 'end', // Position the label above the point
-                                        offset: 0     // Distance in pixels from the point
+                                }],
+                                yAxes: [{
+                                    scaleLabel: { display: true, labelString: 'Pris (kr.)' },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 20,
+                                        // This callback function adds '  stk.' to each tick label on the x-axis
+                                        callback: function (value, index, values) {
+                                            return value + ' kr.';
+                                        }
+                                    }
+                                }]
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    title: function () {
+                                        return ''; // Remove the title (which displays the X-axis value)
+                                    },
+                                    label: function (tooltipItem, data) {
+                                        const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                                        let label = datasetLabel;
+                                        if (datasetLabel === 'GROMK' || datasetLabel === 'P' || datasetLabel === 'GROMS') {
+                                            const yValue = tooltipItem.yLabel;
+                                            const xValue = tooltipItem.xLabel;
+                                            label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
+                                        } else if (datasetLabel === '') {
+                                            // For the equilibrium dashed line, show both X and Y if needed, or just hide
+                                            return ''; // Hide label for the dashed line itself
+                                        }
+                                        return label;
                                     }
                                 }
                             },
-                            plugins: [ChartDataLabels]
+                            plugins: {
+                                datalabels: {
+                                    // This function controls how the label is formatted
+                                    formatter: function (value, context) {
+                                        const datasetLabel = context.dataset.label;
+                                        if (datasetLabel === 'Tekst') {
+                                            return 'Forbrugeroverskud: Turkis\nProducentoverskud: Lilla\nDødvægtstab: Grå';
+                                        }
+                                        const point = context.dataset.data[context.dataIndex];
+                                        return '(' + point.x + ' stk., ' + point.y + ' kr.)';
+                                    },
+                                    // Simple black frame for Tekst
+                                    backgroundColor: function (context) {
+                                        const datasetLabel = context.dataset.label;
+                                        return datasetLabel === 'Tekst' ? 'white' : 'transparent';
+                                    },
+                                    borderColor: function (context) {
+                                        const datasetLabel = context.dataset.label;
+                                        return datasetLabel === 'Tekst' ? 'black' : 'transparent';
+                                    },
+                                    borderWidth: function (context) {
+                                        const datasetLabel = context.dataset.label;
+                                        return datasetLabel === 'Tekst' ? 1 : 0;
+                                    },
+                                    // This function controls which labels are shown
+                                    display: function (context) {
+                                        const datasetLabel = context.dataset.label;
+                                        // Show labels for datasets and Tekst
+                                        if (datasetLabel === 'Tekst') {
+                                            return context.dataIndex === 1; // Only show label on the top point
+                                        }
+                                        return datasetLabel === 'P' || datasetLabel === 'GROMS' || datasetLabel === 'GROMK';
+                                    },
+                                    color: '#333',
+                                    font: {
+                                        weight: 'bold',
+                                        size: 10,
+                                    },
+                                    align: 'end', // Position the label above the point
+                                    offset: 0     // Distance in pixels from the point
+                                }
+                            }
+                        },
+                        plugins: [ChartDataLabels]
                     };
 
                     chartObserver.observe(document.getElementById('plot65'));
@@ -1908,338 +1925,378 @@
                         det, ender de begge med en dårligere situation end hvis de havde samarbejdet og ikke investeret
                         i overdreven konkurrence.</p>
 
-                    <p>Herunder er en tabel, der illustrerer Danske Bank og Nordeas valgmuligheder i en situation, der minder om Fangerens dilemma:</p>
+                    <p>Herunder er en tabel, der illustrerer Danske Bank og Nordeas valgmuligheder i en situation, der
+                        minder om Fangerens dilemma:</p>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead class="thead-light">
-                        
-                            <tr>
-                                <th></th>
-                                <th>Nordea Investerer Ikke</th>
-                                <th>Nordea Investerer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Danske Bank Investerer Ikke</strong></td>
-                                <td>Danske Bank: 10 mia. kr.<br>Nordea: 10 mia. kr.<br>(Samarbejde)</td>
-                                <td>Danske Bank: 2 mia. kr.<br>Nordea: 15 mia. kr.<br>(Nordea vinder)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Danske Bank Investerer</strong></td>
-                                <td>Danske Bank: 15 mia. kr.<br>Nordea: 2 mia. kr.<br>(Danske Bank vinder)</td>
-                                <td>Danske Bank: 5 mia. kr.<br>Nordea: 5 mia. kr.<br>(Konkurrence)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p>Som det ses af tabellen, er det dominerende valg for begge banker at investere, da det sikrer den højeste profit uanset den anden banks strategi. Dette fører dog til et suboptimalt resultat for begge, hvor de ender med 5 mia. kr. hver, i stedet for de 10 mia. kr. hver, de kunne have opnået ved at samarbejde og ikke investere aggressivt.</p>
 
-                    <h4 style="margin-top: 40px;">Knækket pris afsætningsfunktion (Kinked Demand Curve)</h4>
-                    <p>Den knækkede prisafsnætningsfunktion er en model, der forsøger at forklare prisstabilitet på oligopolmarkeder. Modellen bygger på antagelsen om, at konkurrenter reagerer asymmetrisk på prisændringer. Det betyder, at en virksomhed forventer, at:</p>
-                    <ul>
-                        <li>Hvis den sænker prisen, vil konkurrenterne følge trop for ikke at miste markedsandele. Dette gør efterspørgslen relativt uelastisk under det nuværende prisniveau.</li>
-                        <li>Hvis den hæver prisen, vil konkurrenterne <strong>ikke</strong> følge trop, da de kan vinde markedsandele ved at holde deres priser nede. Dette gør efterspørgslen relativt elastisk over det nuværende prisniveau.</li>
-                    </ul>
-                    <p>Dette resulterer i en "knækket" efterspørgselskurve for den enkelte virksomhed, hvor knækket er ved den nuværende markedspris. Kurven er mere elastisk over knækket og mere uelastisk under knækket.</p>
+                                <tr>
+                                    <th></th>
+                                    <th>Nordea Investerer Ikke</th>
+                                    <th>Nordea Investerer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Danske Bank Investerer Ikke</strong></td>
+                                    <td>Danske Bank: 10 mia. kr.<br>Nordea: 10 mia. kr.<br>(Samarbejde)</td>
+                                    <td>Danske Bank: 2 mia. kr.<br>Nordea: 15 mia. kr.<br>(Nordea vinder)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Danske Bank Investerer</strong></td>
+                                    <td>Danske Bank: 15 mia. kr.<br>Nordea: 2 mia. kr.<br>(Danske Bank vinder)</td>
+                                    <td>Danske Bank: 5 mia. kr.<br>Nordea: 5 mia. kr.<br>(Konkurrence)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Som det ses af tabellen, er det dominerende valg for begge banker at investere, da det sikrer
+                            den højeste profit uanset den anden banks strategi. Dette fører dog til et suboptimalt
+                            resultat for begge, hvor de ender med 5 mia. kr. hver, i stedet for de 10 mia. kr. hver, de
+                            kunne have opnået ved at samarbejde og ikke investere aggressivt.</p>
 
-                    <h5>Eksempel: To virksomheder med knækket pris afsætningsfunktion</h5>
-                    <p>Forestil dig et marked med to virksomheder, Virksomhed A og Virksomhed B, der sælger et lignende produkt. Begge virksomheder sætter i øjeblikket deres produkt til 100 kr. pr. enhed og sælger 1.000 enheder. Deres profit er 50.000 kr. hver.</p>
+                        <h4 style="margin-top: 40px;">Knækket pris afsætningsfunktion (Kinked Demand Curve)</h4>
+                        <p>Den knækkede prisafsnætningsfunktion er en model, der forsøger at forklare prisstabilitet på
+                            oligopolmarkeder. Modellen bygger på antagelsen om, at konkurrenter reagerer asymmetrisk på
+                            prisændringer. Det betyder, at en virksomhed forventer, at:</p>
+                        <ul>
+                            <li>Hvis den sænker prisen, vil konkurrenterne følge trop for ikke at miste markedsandele.
+                                Dette gør efterspørgslen relativt uelastisk under det nuværende prisniveau.</li>
+                            <li>Hvis den hæver prisen, vil konkurrenterne <strong>ikke</strong> følge trop, da de kan
+                                vinde markedsandele ved at holde deres priser nede. Dette gør efterspørgslen relativt
+                                elastisk over det nuværende prisniveau.</li>
+                        </ul>
+                        <p>Dette resulterer i en "knækket" efterspørgselskurve for den enkelte virksomhed, hvor knækket
+                            er ved den nuværende markedspris. Kurven er mere elastisk over knækket og mere uelastisk
+                            under knækket.</p>
 
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead class="thead-light">
-                            <tr>
-                                <th>Virksomhed A's Handling</th>
-                                <th>Virksomhed B's Reaktion (forventet)</th>
-                                <th>Resultat for Virksomhed A</th>
-                                <th>Resultat for Virksomhed B</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Hæver pris til 110 kr.</strong></td>
-                                <td>Beholder pris på 100 kr.</td>
-                                <td>Salg falder til 700 enheder.<br>Profit: 35.000 kr.<br>(Taber markedsandele)</td>
-                                <td>Salg stiger til 1.300 enheder.<br>Profit: 65.000 kr.<br>(Vinder markedsandele)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sænker pris til 90 kr.</strong></td>
-                                <td>Sænker også pris til 90 kr.</td>
-                                <td>Salg stiger til 1.100 enheder.<br>Profit: 44.000 kr.<br>(Profitmargen presses)</td>
-                                <td>Salg stiger til 1.100 enheder.<br>Profit: 44.000 kr.<br>(Profitmargen presses)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Beholder pris på 100 kr.</strong></td>
-                                <td>Beholder pris på 100 kr.</td>
-                                <td>Salg: 1.000 enheder.<br>Profit: 50.000 kr.<br>(Stabil)</td>
-                                <td>Salg: 1.000 enheder.<br>Profit: 50.000 kr.<br>(Stabil)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    </div>
-                    <p>I dette scenarie vil Virksomhed A (og B) være tilbageholdende med at ændre prisen. Hvis Virksomhed A hæver prisen, mister den markedsandele og profit, da Virksomhed B ikke følger med. Hvis Virksomhed A sænker prisen, vil Virksomhed B følge med, hvilket resulterer i lavere profitmarginer for begge virksomheder, uden at der opnås en signifikant stigning i markedsandele. Derfor opretholder begge virksomheder den nuværende pris på 100 kr., hvilket fører til prisstabilitet på markedet.</p>
+                        <h5>Eksempel: To virksomheder med knækket pris afsætningsfunktion</h5>
+                        <p>Forestil dig et marked med to virksomheder, Virksomhed A og Virksomhed B, der sælger et
+                            lignende produkt. Begge virksomheder sætter i øjeblikket deres produkt til 100 kr. pr. enhed
+                            og sælger 1.000 enheder. Deres profit er 50.000 kr. hver.</p>
 
-                    <br><br>
-                    <hr>
-                    <br><br>
-                    <h4>Oligopol - Eksempel på knækket pris afsætningsfunktion</h4>
-                    <p>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Virksomhed A's Handling</th>
+                                        <th>Virksomhed B's Reaktion (forventet)</th>
+                                        <th>Resultat for Virksomhed A</th>
+                                        <th>Resultat for Virksomhed B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Hæver pris til 110 kr.</strong></td>
+                                        <td>Beholder pris på 100 kr.</td>
+                                        <td>Salg falder til 700 enheder.<br>Profit: 35.000 kr.<br>(Taber markedsandele)
+                                        </td>
+                                        <td>Salg stiger til 1.300 enheder.<br>Profit: 65.000 kr.<br>(Vinder
+                                            markedsandele)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sænker pris til 90 kr.</strong></td>
+                                        <td>Sænker også pris til 90 kr.</td>
+                                        <td>Salg stiger til 1.100 enheder.<br>Profit: 44.000 kr.<br>(Profitmargen
+                                            presses)</td>
+                                        <td>Salg stiger til 1.100 enheder.<br>Profit: 44.000 kr.<br>(Profitmargen
+                                            presses)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Beholder pris på 100 kr.</strong></td>
+                                        <td>Beholder pris på 100 kr.</td>
+                                        <td>Salg: 1.000 enheder.<br>Profit: 50.000 kr.<br>(Stabil)</td>
+                                        <td>Salg: 1.000 enheder.<br>Profit: 50.000 kr.<br>(Stabil)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <p>I dette scenarie vil Virksomhed A (og B) være tilbageholdende med at ændre prisen. Hvis
+                            Virksomhed A hæver prisen, mister den markedsandele og profit, da Virksomhed B ikke følger
+                            med. Hvis Virksomhed A sænker prisen, vil Virksomhed B følge med, hvilket resulterer i
+                            lavere profitmarginer for begge virksomheder, uden at der opnås en signifikant stigning i
+                            markedsandele. Derfor opretholder begge virksomheder den nuværende pris på 100 kr., hvilket
+                            fører til prisstabilitet på markedet.</p>
+
+                        <br><br>
+                        <hr>
+                        <br><br>
+                        <h4>Oligopol - Eksempel på knækket pris afsætningsfunktion</h4>
+                        <p>
+
+                            Figuren herunder illustrerer den knækkede pris-afsætningsfunktion, som er et centralt
+                            element i oligopolmodeller for at forklare prisstabilitet.
+                            Den grønne P-linje repræsenterer efterspørgselskurven, som har et "knæk" ved den nuværende
+                            markedspris (150 kr.) og afsætning (100 stk.).
+                            Dette knæk afspejler oligopolistens forventning om, at konkurrenterne vil matche en
+                            prisnedsættelse (hvilket gør efterspørgslen under knækket uelastisk), men ikke en
+                            prisstigning (hvilket gør efterspørgslen over knækket elastisk). <br>
+                            Hæver man prisen følger konkurrenterne ikke med, så man mister forholdsmæssigt store
+                            markedsandele og profit, hvis man sænker prisen følger konkurrenterne med, så man mister
+                            profitmarginer og vinder ikke kun en lille markedsandel.
+                            På oligopol markederne er oligopolisterne således ofte låst til en pris og afsætning.<br>
+                            Den orange GROMS-linje (grænseomsætning) har et lodret fald ved den mængde, hvor
+                            efterspørgselskurven knækker (100 stk.). Dette skyldes den pludselige ændring i
+                            efterspørgslens elasticitet. <br>
+                            For at oligopolisten skal opretholde den nuværende pris på 150 kr. ved en afsætning på 100
+                            stk., skal GROMK-kurven (grænseomkostninger) skære gennem det lodrette fald i GROMS-kurven.
+                            Dette betyder, at GROMK skal være mellem 50 kr. og 100 kr. ved en afsætning på 100 stk. Hvis
+                            GROMK falder under 50 kr. (dvs. GROMK < 50 kr. ved 100 stk.), vil oligopolisten have
+                                incitament til at sænke prisen, da marginalomsætningen overstiger
+                                marginalomkostningerne. Hvis GROMK stiger over 100 kr. (dvs. GROMK> 100 kr. ved 100
+                                stk.), vil oligopolisten have incitament til at hæve prisen, da marginalomkostningerne
+                                overstiger marginalomsætningen ved den nuværende produktion.
+                                I dette eksempel er profitten beregnet til 8500 kr.
+                        </p>
+                        <div class="chart-container"
+                            style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
+                            <canvas id="plot66"></canvas>
+                        </div>
+                        <!-- plot66 -->
+                        <script>
+                            // plot63
+                            chartConfigs['plot66'] = {
+                                type: 'line',
+                                data: {
+                                    datasets: [{
+                                        label: 'P',
+                                        data: [
+                                            { x: 0, y: 200 },
+                                            { x: 100, y: 150 },
+                                            null, // Disconnect
+                                            { x: 100, y: 150 },
+                                            { x: 250, y: 0 }
+                                        ],
+                                        borderColor: 'green',
+                                        backgroundColor: 'transparent',
+                                        borderWidth: 2.5,
+                                        pointRadius: 3,
+                                        pointBackgroundColor: 'green',
+                                        lineTension: 0
+                                    },
+
+                                    {
+                                        label: 'GROMS',
+                                        data: [
+                                            { x: 0, y: 200 },
+                                            { x: 100, y: 100 },
+                                            null, // Disconnect
+                                            { x: 100, y: 50 },
+                                            { x: 125, y: 0 }
+                                        ],
+                                        borderColor: 'orange',
+                                        backgroundColor: 'transparent',
+                                        borderWidth: 2.5,
+                                        pointRadius: 3,
+                                        pointBackgroundColor: 'orange',
+                                        lineTension: 0
+                                    },
 
 
-                    </p>
-                    <div class="chart-container"
-                        style="position: relative; height:50vh; width:100%; margin: 20px auto; text-align: center;">
-                        <canvas id="plot66"></canvas>
-                    </div>
-                    <!-- plot66 -->
-                <script>
-                    // plot63
-                    chartConfigs['plot66'] = {
-                            type: 'line',
-                            data: {
-                                datasets: [{
-                                    label: 'P',
-                                    data: [
-                                    { x: 0, y: 200 },
-                                        { x: 100, y: 150 }, 
-                                        null, // Disconnect
-                                        { x: 100, y: 150 },
-                                        { x: 250, y: 0 } 
-                                    ],
-                                    borderColor: 'green',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: 'green',
-                                    lineTension: 0
+                                    {
+                                        label: 'GROMK',
+                                        data: [
+                                            { x: 0, y: 40 },
+                                            { x: 100, y: 90 },
+
+
+                                            { x: 200, y: 140 }
+
+                                        ],
+                                        borderColor: 'red',
+                                        backgroundColor: 'transparent',
+                                        borderWidth: 2.5,
+                                        pointRadius: 3,
+                                        pointBackgroundColor: 'red',
+                                        lineTension: 0
+                                    },
+                                    {
+                                        label: 'Prislinje',
+                                        data: [
+                                            { x: 0, y: 150 },
+                                            { x: 100, y: 150 }, // Horizontal line at y=80
+                                            null, // Disconnect
+                                            { x: 100, y: 150 },
+                                            { x: 100, y: 0 }, // Vertical line at x=40
+
+                                        ],
+                                        borderColor: 'black',
+                                        borderWidth: 1,
+                                        borderDash: [5, 5],
+                                        fill: false,
+                                        pointRadius: 0,
+                                        lineTension: 0 // Ensures perfectly straight lines
+                                    },
+                                    {
+                                        label: 'Tekst',
+                                        data: [{ x: 40, y: 100 }, { x: 40, y: 100 }],
+                                        borderColor: 'black',
+                                        borderWidth: 0.0000001,
+                                        fill: false,
+                                        pointRadius: 0,
+                                        pointBackgroundColor: 'black',
+                                        pointBorderColor: 'black',
+                                        lineTension: 0
+                                    }
+                                        ,
+                                    // {
+                                    //     label: 'Forbrugeroverskud',
+                                    //     data: [{ x: 0, y: 120 }, { x: 0, y: 200 }, { x: 80, y: 120 }, { x: 0, y: 120 }],
+                                    //     backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                    //     borderColor: 'transparent',
+                                    //     fill: true,
+                                    //     pointRadius: 0,
+                                    //     lineTension: 0 // Ensures a sharp, straight-edged triangle
+                                    // },
+                                    {
+                                        label: 'Producentoverskud/Profit',
+                                        data: [{ x: 0, y: 40 }, { x: 0, y: 150 }, { x: 100, y: 150 }, { x: 100, y: 90 }, { x: 0, y: 40 }],
+                                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                        borderColor: 'transparent',
+                                        fill: true,
+                                        pointRadius: 0,
+                                        lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                    },
+                                        // {
+                                        //     label: 'DWL',
+                                        //     data: [{ x: 80, y: 40 }, { x: 80, y: 120 }, { x: 145, y: 55 },{ x: 80, y: 40 }],
+                                        //     backgroundColor: 'rgba(128, 128, 128, 0.5)',
+                                        //     borderColor: 'transparent',
+                                        //     fill: true,
+                                        //     pointRadius: 0,
+                                        //     lineTension: 0 // Ensures a sharp, straight-edged polygon
+                                        // }
+
+
+
+
+                                    ]
                                 },
 
-                                {
-                                    label: 'GROMS',
-                                    data: [
-                                    { x: 0, y: 200 },
-                                        { x: 100, y: 100 }, 
-                                        null, // Disconnect
-                                        { x: 100, y: 50 },
-                                        { x: 125, y: 0 } 
-                                    ],
-                                    borderColor: 'orange',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: 'orange',
-                                    lineTension: 0
-                                },
 
 
-                                {
-                                    label: 'GROMK',
-                                    data: [
-                                    { x: 0, y: 40 },
-                                        { x: 100, y: 90 }, 
-                                    
-                                    
-                                        { x: 200, y: 140 } 
-                                        
-                                    ],
-                                    borderColor: 'red',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: 'red',
-                                    lineTension: 0
-                                },
-                                {
-                                    label: 'Prislinje',
-                                    data: [
-                                        { x: 0, y: 150 },
-                                        { x: 100, y: 150 }, // Horizontal line at y=80
-                                        null, // Disconnect
-                                        { x: 100, y: 150 },
-                                        { x: 100, y: 0 }, // Vertical line at x=40
-
-                                    ],
-                                    borderColor: 'black',
-                                    borderWidth: 1,
-                                    borderDash: [5, 5],
-                                    fill: false,
-                                    pointRadius: 0,
-                                    lineTension: 0 // Ensures perfectly straight lines
-                                },
-                                {
-                                    label: 'Tekst',
-                                    data: [{ x: 40, y: 100 }, { x: 40, y: 100 }],
-                                    borderColor: 'black',
-                                    borderWidth: 0.0000001,
-                                    fill: false,
-                                    pointRadius: 0,
-                                    pointBackgroundColor: 'black',
-                                    pointBorderColor: 'black',
-                                    lineTension: 0
-                                }
-                                    ,
-                                // {
-                                //     label: 'Forbrugeroverskud',
-                                //     data: [{ x: 0, y: 120 }, { x: 0, y: 200 }, { x: 80, y: 120 }, { x: 0, y: 120 }],
-                                //     backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                                //     borderColor: 'transparent',
-                                //     fill: true,
-                                //     pointRadius: 0,
-                                //     lineTension: 0 // Ensures a sharp, straight-edged triangle
-                                // },
-                                {
-                                    label: 'Producentoverskud/Profit',
-                                    data: [{ x: 0, y: 40 }, { x: 0, y: 150 }, { x: 100, y: 150 }, { x: 100, y: 90 },{ x: 0, y: 40 }],
-                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                    borderColor: 'transparent',
-                                    fill: true,
-                                    pointRadius: 0,
-                                    lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                },
-                                // {
-                                //     label: 'DWL',
-                                //     data: [{ x: 80, y: 40 }, { x: 80, y: 120 }, { x: 145, y: 55 },{ x: 80, y: 40 }],
-                                //     backgroundColor: 'rgba(128, 128, 128, 0.5)',
-                                //     borderColor: 'transparent',
-                                //     fill: true,
-                                //     pointRadius: 0,
-                                //     lineTension: 0 // Ensures a sharp, straight-edged polygon
-                                // }
-
-
-
-
-                                ]
-                            },
-
-
-
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                title: {
-                                    display: true,
-                                    text: 'Oligopol',
-                                    fontSize: 18
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        type: 'linear',
-                                        position: 'bottom',
-                                        scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
-                                        ticks: {
-                                            beginAtZero: true,
-                                            stepSize: 20,
-                                            // This callback function adds ' stk.' to each tick label on the x-axis
-                                            callback: function (value, index, values) {
-                                                return value + ' stk.';
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    title: {
+                                        display: true,
+                                        text: 'Oligopol',
+                                        fontSize: 18
+                                    },
+                                    scales: {
+                                        xAxes: [{
+                                            type: 'linear',
+                                            position: 'bottom',
+                                            scaleLabel: { display: true, labelString: 'Afsætning i stk.' },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 20,
+                                                // This callback function adds ' stk.' to each tick label on the x-axis
+                                                callback: function (value, index, values) {
+                                                    return value + ' stk.';
+                                                }
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            scaleLabel: { display: true, labelString: 'Pris (kr.)' },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 20,
+                                                // This callback function adds '  stk.' to each tick label on the x-axis
+                                                callback: function (value, index, values) {
+                                                    return value + ' kr.';
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    tooltips: {
+                                        callbacks: {
+                                            title: function () {
+                                                return ''; // Remove the title (which displays the X-axis value)
+                                            },
+                                            label: function (tooltipItem, data) {
+                                                const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                                                let label = datasetLabel;
+                                                if (datasetLabel === 'GROMK' || datasetLabel === 'P' || datasetLabel === 'GROMS') {
+                                                    const yValue = tooltipItem.yLabel;
+                                                    const xValue = tooltipItem.xLabel;
+                                                    label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
+                                                } else if (datasetLabel === '') {
+                                                    // For the equilibrium dashed line, show both X and Y if needed, or just hide
+                                                    return ''; // Hide label for the dashed line itself
+                                                }
+                                                return label;
                                             }
                                         }
-                                    }],
-                                    yAxes: [{
-                                        scaleLabel: { display: true, labelString: 'Pris (kr.)' },
-                                        ticks: {
-                                            beginAtZero: true,
-                                            stepSize: 20,
-                                            // This callback function adds '  stk.' to each tick label on the x-axis
-                                            callback: function (value, index, values) {
-                                                return value + ' kr.';
-                                            }
-                                        }
-                                    }]
-                                },
-                                tooltips: {
-                                    callbacks: {
-                                        title: function () {
-                                            return ''; // Remove the title (which displays the X-axis value)
-                                        },
-                                        label: function (tooltipItem, data) {
-                                            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                                            let label = datasetLabel;
-                                            if (datasetLabel === 'GROMK' || datasetLabel === 'P' || datasetLabel === 'GROMS') {
-                                                const yValue = tooltipItem.yLabel;
-                                                const xValue = tooltipItem.xLabel;
-                                                label = `${datasetLabel}: Pris: ${yValue} kr., Mængde: ${xValue} stk.`;
-                                            } else if (datasetLabel === '') {
-                                                // For the equilibrium dashed line, show both X and Y if needed, or just hide
-                                                return ''; // Hide label for the dashed line itself
-                                            }
-                                            return label;
+                                    },
+                                    plugins: {
+                                        datalabels: {
+                                            // This function controls how the label is formatted
+                                            formatter: function (value, context) {
+                                                const datasetLabel = context.dataset.label;
+                                                if (datasetLabel === 'Tekst') {
+                                                    return 'Producentoverskud/Profit:\nLilla';
+                                                }
+                                                const point = context.dataset.data[context.dataIndex];
+                                                return '(' + point.x + ' stk., ' + point.y + ' kr.)';
+                                            },
+                                            // Simple black frame for Tekst
+                                            backgroundColor: function (context) {
+                                                const datasetLabel = context.dataset.label;
+                                                return datasetLabel === 'Tekst' ? 'white' : 'transparent';
+                                            },
+                                            borderColor: function (context) {
+                                                const datasetLabel = context.dataset.label;
+                                                return datasetLabel === 'Tekst' ? 'black' : 'transparent';
+                                            },
+                                            borderWidth: function (context) {
+                                                const datasetLabel = context.dataset.label;
+                                                return datasetLabel === 'Tekst' ? 1 : 0;
+                                            },
+                                            // This function controls which labels are shown
+                                            display: function (context) {
+                                                const datasetLabel = context.dataset.label;
+                                                // Show labels for datasets and Tekst
+                                                if (datasetLabel === 'Tekst') {
+                                                    return context.dataIndex === 1; // Only show label on the top point
+                                                }
+                                                return datasetLabel === 'P' || datasetLabel === 'GROMS' || datasetLabel === 'GROMK';
+                                            },
+                                            color: '#333',
+                                            font: {
+                                                weight: 'bold',
+                                                size: 10,
+                                            },
+                                            align: 'end', // Position the label above the point
+                                            offset: 0     // Distance in pixels from the point
                                         }
                                     }
                                 },
-                                plugins: {
-                                    datalabels: {
-                                        // This function controls how the label is formatted
-                                        formatter: function (value, context) {
-                                            const datasetLabel = context.dataset.label;
-                                            if (datasetLabel === 'Tekst') {
-                                                return 'Producentoverskud/Profit:\nLilla';
-                                            }
-                                            const point = context.dataset.data[context.dataIndex];
-                                            return '(' + point.x + ' stk., ' + point.y + ' kr.)';
-                                        },
-                                        // Simple black frame for Tekst
-                                        backgroundColor: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            return datasetLabel === 'Tekst' ? 'white' : 'transparent';
-                                        },
-                                        borderColor: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            return datasetLabel === 'Tekst' ? 'black' : 'transparent';
-                                        },
-                                        borderWidth: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            return datasetLabel === 'Tekst' ? 1 : 0;
-                                        },
-                                        // This function controls which labels are shown
-                                        display: function (context) {
-                                            const datasetLabel = context.dataset.label;
-                                            // Show labels for datasets and Tekst
-                                            if (datasetLabel === 'Tekst') {
-                                                return context.dataIndex === 1; // Only show label on the top point
-                                            }
-                                            return datasetLabel === 'P' || datasetLabel === 'GROMS' || datasetLabel === 'GROMK';
-                                        },
-                                        color: '#333',
-                                        font: {
-                                            weight: 'bold',
-                                            size: 10,
-                                        },
-                                        align: 'end', // Position the label above the point
-                                        offset: 0     // Distance in pixels from the point
-                                    }
-                                }
-                            },
-                            plugins: [ChartDataLabels]
-                    };
+                                plugins: [ChartDataLabels]
+                            };
 
-                    chartObserver.observe(document.getElementById('plot66'));
-                </script>
-                    <small>
-                        <p>Figur 6.6: Oligopol - Strategisk adfærd og gensidig afhængighed. Efterspørgselskurven (blå)
-                            viser
-                            markedets efterspørgsel.
-                            Kartelkurven (grøn) viser resultatet af samarbejde mellem virksomheder, hvor prisen er
-                            højere og
-                            mængden lavere.
-                            Konkurrencekurven (rød) viser resultatet af intens konkurrence, med lavere pris og højere
-                            mængde.
-                            Den kinkede efterspørgselskurve (lilla) illustrerer, hvordan virksomheder i oligopol
-                            forventer,
-                            at konkurrenter vil matche prisnedsættelser,
-                            men ikke prisstigninger. Ligevægtspunktet (sort prik) ved (80 stk., 60 kr.) viser den mængde
-                            og
-                            pris, der opstår,
-                            når virksomhederne agerer strategisk i et oligopol.</p>
-                    </small>
+                            chartObserver.observe(document.getElementById('plot66'));
+                        </script>
+                        <small>
+                            <p>Figur 6.6: Oligopol - Knækket pris-afsætningsfunktion. Den grønne Efterspørgselskurve (P)
+                                har et "knæk" ved ligevægtsprisen på 150 kr. og afsætningen på 100 stk.,
+                                hvilket reflekterer virksomhedens forventning om asymmetriske prisreaktioner fra
+                                konkurrenterne.
+                                Den orange GROMS-kurve (grænseomsætning) udviser et lodret fald ved 100 stk., hvilket er
+                                en direkte konsekvens af knækket i efterspørgselskurven.
+                                Den røde GROMK-kurve (grænseomkostninger) skærer gennem dette lodrette fald. Prislinjen
+                                (sort stiplet linje) indikerer den nuværende pris og afsætning.
+                                Producentoverskuddet/Profitten er det lilla område, som i dette eksempel er 8500 kr.</p>
+                        </small>
 
-                    <br><br>
+                        <br><br>
 
+                    </div>
+                </div>
+                <h2>Karteldannelse og lovgivning (EU-eksempler)</h2>
+                <div class="info-box">
 
-                    <br><br>
-                    <h5>Karteldannelse og lovgivning (EU-eksempler)</h5>
                     <p>Kartelaftaler, hvor konkurrerende virksomheder aftaler priser, mængder eller markedsandele, er
                         <strong>ulovlige</strong> i de fleste lande, herunder i EU og Danmark. Formålet med
                         konkurrencelovgivning er at beskytte forbrugerne mod urimelige priser og begrænset valg, som
@@ -2285,11 +2342,11 @@
                             for private virksomheder.</li>
                     </ul>
 
-                    
+
                     <br><br>
-                    
+
                 </div>
-                </div>
+
                 <h2>Prisdiskriminering</h2>
                 <div class="info-box">
                     <h4>Prisdiskriminering:</h4>
@@ -2338,7 +2395,7 @@
                         <li><strong>Branche:</strong> Forskellige priser for erhvervskunder vs. private (forsikring,
                             bank)</li>
                     </ul>
-                
+
                     <h5>Hvorfor virker prisdiskriminering?</h5>
                     <p>Prisdiskriminering virker fordi:</p>
                     <ul>
@@ -2441,7 +2498,7 @@
                 </a>
                 <br>
                 <br>
-                            
+
 
             </article>
         </div>
@@ -2469,5 +2526,7 @@
     <script src="podcast-player-modern.js"></script>
     <!-- MDB JS -->
     <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script></body>
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+
 </html>
