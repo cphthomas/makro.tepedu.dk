@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aftaleret & Kreditaftaler - Jura</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@100;400;500&family=Roboto:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- MDB CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.svg">
+    <style>
+        /* Custom styles for tables with hover effect */
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .book-cover-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .book-cover-wrapper video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            background-color: white;
+        }
+
+        .cover-text-overlay {
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand navbar-light transparent-navbar fixed-top">
+        <div class="container-fluid">
+            <a href="https://tepedu.dk/" target="_blank" rel="noopener noreferrer">
+                <img src="tepedulogoanim.svg" alt="Te Pedu Logo" style="height: 35px; margin-right: 15px;">
+            </a>
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-house-door"></i>
+            </a>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bi bi-list icon-margin"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="prev-page-link" href="index.html">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="next-page-link" href="kapitel2.html">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <div id="left-aligned-sidebar" class="sidebar">
+        <button id="sidebar-toggle-button" class="sidebar-toggle" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-content">
+            <h5 class="sidebar-title">Indholdsfortegnelse</h5>
+            <ul id="sidebar-toc" class="list-unstyled">
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+        <div class="container mt-4">
+            <article>
+                <h1 style="display: none;">Aftaleret & Kreditaftaler</h1>
+                <div class="book-cover-wrapper">
+                    <video autoplay muted playsinline src="" alt="Aftaleret & Kreditaftaler i Jura" class="img-fluid"
+                        width="100%" style="min-height: 400px; object-fit: cover;"></video>
+                    <div class="cover-text-overlay animate-cover-text" data-type-text="1. Aftaleret & Kreditaftaler"
+                        data-type-speed="150">Aftaleret & Kreditaftaler</div>
+                </div>
+
+                <!-- INTRO SECTION -->
+                <div class="info-box">
+                    <p>Dette kapitel dækker <b>Aftaleret</b> og <b>Kreditaftaleloven (KAL)</b> – to af de mest centrale
+                        retsområder for finansøkonomer. Som rådgiver i bank, forsikring, ejendomsmægling eller revision
+                        skal du kunne:</p>
+                    <ul>
+                        <li>Vurdere om en aftale er bindende</li>
+                        <li>Identificere ugyldighedsgrunde</li>
+                        <li>Forstå fuldmagtsregler (hvem må tegne virksomheden?)</li>
+                        <li>Anvende Kreditaftalelovens forbrugerbeskyttelse korrekt</li>
+                    </ul>
+                    <p>Vi tager udgangspunkt i <b>Aftaleloven</b> (lov nr. 242 af 8. maj 1917) og
+                        <b>Kreditaftaleloven</b> (lov nr. 447 af 23. maj 2012).</p>
+                </div>
+                <br>
+
+                <!-- SECTION 1: AFTALEINDGÅELSE -->
+                <h2>1. Aftaleindgåelse - Hvordan bliver en aftale til?</h2>
+                <div class="info-box">
+                    <p>Et grundlæggende princip i dansk ret er <b>"Pacta sunt servanda"</b> – aftaler skal holdes. En
+                        aftale er bindende, uanset om den er indgået mundtligt eller skriftligt. I finanssektoren er
+                        skriftlighed dog næsten altid et krav pga. bevisbyrden og lovkrav (f.eks. Kreditaftaleloven).
+                    </p>
+
+                    <h3>1.1. Aftalemodellen (Tilbud og Accept)</h3>
+                    <p>Aftalelovens kapitel 1 beskriver den klassiske model for, hvordan en aftale bliver til:</p>
+                    <ol>
+                        <li><b>Tilbud:</b> En part (tilbudsgiver) fremsætter et løfte, der er bindende for ham. F.eks.
+                            "Jeg vil sælge dig denne bil for 100.000 kr."</li>
+                        <li><b>Acceptfrist:</b> Modtageren har en frist til at svare.
+                            <ul>
+                                <li><i>Fastsat frist:</i> "Svar senest fredag kl. 12.00".</li>
+                                <li><i>Legal frist:</i> Hvis ingen frist er nævnt, gælder en "rimelig tid"
+                                    (betænkningstid + forsendelsestid).</li>
+                            </ul>
+                        </li>
+                        <li><b>Accept:</b> Hvis modtageren siger "Ja tak" inden fristens udløb, er aftalen endeligt
+                            indgået (perfekteret).</li>
+                    </ol>
+
+                    <h3>1.2. Kan man fortryde et tilbud? (Tilbagekaldelse - § 7)</h3>
+                    <p>Hovedreglen er, at et tilbud er bindende, når det er kommet til modtagerens <b>kundskab</b> (når
+                        han har læst det). Men man kan nå at tilbagekalde det, hvis tilbagekaldelsen kommer frem
+                        <i>inden</i> eller <i>samtidig</i> med, at modtageren læser tilbuddet.</p>
+
+                    <p><b>Re integra-reglen (§ 39, 2. pkt.):</b> I særlige tilfælde kan man tilbagekalde et tilbud,
+                        selvom det er læst, hvis:</p>
+                    <ol>
+                        <li>Det ikke har virket bestemmende på modtagerens handlinger endnu (han har ikke indrettet
+                            sig).</li>
+                        <li>Det vil være urimeligt at fastholde tilbudsgiveren (f.eks. ved en åbenlys fejl).</li>
+                    </ol>
+
+                    <h3>1.3. Passivitet - Betyder tavshed ja?</h3>
+                    <p><b>Nej.</b> Hovedreglen er, at passivitet (tavshed) ikke er en accept. Man bliver ikke bundet af
+                        at lade være med at svare på en uopfordret mail.</p>
+                    <p><i>Undtagelse:</i> Hvis man har en fast handelsrelation, eller hvis man selv har opfordret til
+                        tilbuddet, kan man have en <b>pligt</b> til at afslå (reklamere), hvis man ikke vil være bundet.
+                    </p>
+
+                    <h3>1.4. Afvigelser (Når det går galt)</h3>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Juridisk konsekvens</th>
+                                    <th>Eksempel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Afslag</b></td>
+                                    <td>Tilbuddet bortfalder straks. Man kan ikke fortryde sit nej og sige ja bagefter.
+                                    </td>
+                                    <td>Kunden siger "Nej tak" til lånetilbuddet. Dagen efter vil han gerne alligevel.
+                                        Banken er ikke længere bundet.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Uoverensstemmende accept</b></td>
+                                    <td>Gælder som <b>afslag</b> + <b>nyt tilbud</b>.</td>
+                                    <td>Kunden svarer: "Ja tak, men kun til 4% i rente" (oprindeligt 5%). Nu er det
+                                        banken, der skal acceptere det nye forslag.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Sen accept</b></td>
+                                    <td>Gælder som <b>nyt tilbud</b>.</td>
+                                    <td>Kunden sender underskrift efter fristens udløb. Banken kan vælge at se det som
+                                        en ny anmodning, de kan sige ja eller nej til.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br><br>
+
+                <!-- SECTION 2: FULDMAGT -->
+                <h2>2. Fuldmagt - Hvem må tegne firmaet?</h2>
+                <div class="info-box">
+                    <p>I den finansielle sektor handler man ofte på vegne af andre (banken, forsikringsselskabet,
+                        ejendomsmæglerkæden). Reglerne om fuldmagt (Aftalelovens kapitel 2) er derfor afgørende for at
+                        vide, om en aftale binder virksomheden.</p>
+
+                    <h3>2.1. Forskellige typer fuldmagt</h3>
+                    <ul>
+                        <li><b>Stillingsfuldmagt (§ 10, stk. 2):</b> Den mest almindelige. Ved at ansætte en person i en
+                            bestemt stilling (fx kasserer, filialdirektør), giver man dem automatisk fuldmagt til at
+                            foretage de handlinger, der er <i>sædvanlige</i> for den stilling.</li>
+                        <li><b>Skriftlig fuldmagt (§ 16):</b> Et dokument, der præcist beskriver, hvad fuldmægtigen må
+                            (f.eks. en bankfuldmagt til at hæve på en konto). Denne skal vises frem (legitimation).</li>
+                        <li><b>Specialfuldmagt (§ 13):</b> En mundtlig besked til tredjemand: "Min advokat må indgå
+                            forliget på mine vegne".</li>
+                        <li><b>Oppørselsfuldmagt:</b> Hvis man igennem længere tid har accepteret, at en person handler
+                            på ens vegne, kan man blive bundet, selvom der ingen formel fuldmagt er.</li>
+                    </ul>
+
+                    <h3>2.2. Beføjelse vs. Fuldmagt (Den svære distinktion)</h3>
+                    <p>Det er vigtigt at skelne mellem, hvad man <i>må</i> over for kunden (Fuldmagt/Legitimation), og
+                        hvad man <i>må</i> over for chefen (Beføjelse/Instruks).</p>
+
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Begreb</th>
+                                    <th>Forklaring</th>
+                                    <th>Eksempel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Fuldmagt</b> (Det ydre skin)</td>
+                                    <td>Hvad omverdenen (kunden) med rette kan tro, at den ansatte må. Bestemmes af
+                                        stillingsbetegnelsen og loven.</td>
+                                    <td>En "Senior Erhvervsrådgiver" ligner en, der må bevilge lån.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Beføjelse</b> (Den interne instruks)</td>
+                                    <td>Hvad den ansatte rent faktisk har fået lov til internt. Kan være begrænset ("Du
+                                        må max bevilge 1 mio. kr.").</td>
+                                    <td>Chefen har sagt: "Ingen lån over 1 mio. uden min godkendelse".</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>2.3. Hvad sker der, hvis rådgiveren går over stregen?</h3>
+                    <p>Hvis en rådgiver bevilger et lån på 2 mio. kr., selvom han kun måtte bevilge 1 mio. kr.
+                        (overskridelse af beføjelse), men stadig inden for sin stillingsfuldmagt (det ser normalt ud for
+                        kunden):</p>
+                    <ul>
+                        <li><b>Kunden i god tro:</b> Aftalen er <b>BINDENDE</b> for banken. Banken hæfter for lånet.
+                        </li>
+                        <li><b>Kunden i ond tro:</b> (Vidste eller burde vide det). Aftalen er <b>IKKE bindende</b>.
+                        </li>
+                        <li><b>Konsekvens for rådgiveren:</b> Rådgiveren bliver erstatningsansvarlig over for banken og
+                            risikerer fyring (brud på ansættelseskontrakten).</li>
+                    </ul>
+                </div>
+                <br><br>
+
+                <!-- This file will be continued in the next message due to length -->
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="menu.js"></script>
+    <script src="script.js"></script>
+    <script src="info.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function typeWriter(element, text, speed = 100, callback) {
+                let i = 0;
+                element.innerHTML = '';
+                let cursor = element.querySelector('.typing-cursor');
+                if (!cursor) {
+                    cursor = document.createElement('span');
+                    cursor.className = 'typing-cursor';
+                    element.appendChild(cursor);
+                }
+                function type() {
+                    if (i < text.length) {
+                        cursor.insertAdjacentText('beforebegin', text.charAt(i));
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        if (callback) callback();
+                    }
+                }
+                type();
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const overlay = entry.target;
+                        overlay.classList.add('is-visible');
+
+                        setTimeout(() => {
+                            const text = overlay.dataset.typeText;
+                            const speed = parseInt(overlay.dataset.typeSpeed) || 150;
+                            if (text && !overlay.hasAttribute('data-typed')) {
+                                overlay.setAttribute('data-typed', 'true');
+                                typeWriter(overlay, text, speed);
+                            }
+                        }, 300);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
+                observer.observe(overlay);
+            });
+
+            const videos = document.querySelectorAll('.book-cover-wrapper video');
+            videos.forEach(video => {
+                video.addEventListener('ended', function () {
+                    const whiteOverlay = document.createElement('div');
+                    whiteOverlay.style.cssText = `
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: white;
+                        z-index: 1;
+                    `;
+                    this.parentElement.appendChild(whiteOverlay);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

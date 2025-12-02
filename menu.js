@@ -1,12 +1,11 @@
 // Menu configuration
 const menuItems = [
-    { href: 'index.html', text: 'Mikroøkonomi' },
-    { href: 'ressourcer.html', text: 'Ressourcer' },
-    { href: 'demand.html', text: 'Efterspørgsel' },
-    { href: 'supply.html', text: 'Udbud' },
-    { href: 'markedsbalance.html', text: 'Markedsligevægt' },
-    { href: 'markedsformer.html', text: 'Markedsformer' },
-    { href: 'mikropolitik.html', text: 'Mikropolitik' }
+    { href: 'index.html', text: 'Forside' },
+    { href: 'kapitel1.html', text: 'Aftaleret & Kreditaftaler' },
+    { href: 'kapitel2.html', text: 'Fordringsret' },
+    { href: 'kapitel3.html', text: 'Sikkerhedsstillelse' },
+    { href: 'kapitel4.html', text: 'Insolvensret' },
+    { href: 'kapitel5.html', text: 'Familie- & Arveret' }
 ];
 
 // Function to generate dropdown menu HTML
