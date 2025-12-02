@@ -75,15 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Tilføj indhold til popup
         infoPopup.innerHTML = `
             <h5>Om denne bog</h5>
-            <p>Denne bog er udviklet af: </p>
-            <img src="images/mig.jpg" alt="Thomas Petersen">
-            <br><small>Thomas Petersen
+            <small>Denne bog er udviklet af:
+            <!-- <img src="images/mig.jpg" alt="Thomas Petersen"> -->
+            <br>Advokat Thomas Hanke <br>&<br> Lektor Thomas Petersen
             <br><br>
             <p>I udviklingen er der benyttet kunstig intelligens både til kodningen af selve strukturen i form af navigation, js-, html- og css-filer, samt indhold og eksempler. <br>Der er benyttet følgende LLM-modeller:</p>
             <ul>
                 <li>Google Gemini</li>
                 <li>Anthropic Claude</li>
-                <li>OpenAI ChatGPT</li>
+                <li>Composer</li>
             </ul>
             </small>
         `;
