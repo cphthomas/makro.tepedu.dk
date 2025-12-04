@@ -1,11 +1,13 @@
 // Menu configuration
 const menuItems = [
     { href: 'index.html', text: 'Forside' },
-    { href: 'kapitel1.html', text: 'Juridisk Metode & Aftaleret' },
-    { href: 'kapitel2.html', text: 'Erstatning' },
-    { href: 'kapitel3.html', text: 'Kreditaftaler Kaution & Gældsbreve' },
-    { href: 'kapitel4.html', text: 'Ejendomshandel Tinglysning & Pant' },
-    { href: 'kapitel5.html', text: 'Insolvensret Selskabsret Hvidvask & Compliance' }
+    { href: 'kapitel1.html', text: 'Juridisk Metode' },
+    { href: 'kapitel2.html', text: 'Aftaleloven' },
+    { href: 'kapitel3.html', text: 'Købeloven' },
+    { href: 'kapitel4.html', text: 'Erstatning' },
+    { href: 'kapitel5.html', text: 'Kreditaftaleloven' },
+    { href: 'kapitel6.html', text: 'Ejendomshandel Tinglysning & Pant' },
+    { href: 'kapitel7.html', text: 'Insolvensret Selskabsret Hvidvask & Compliance' }
 ];
 
 // Function to generate dropdown menu HTML
@@ -62,4 +64,4 @@ function updateNavigationArrows() {
 document.addEventListener('DOMContentLoaded', () => {
     generateDropdownMenu();
     updateNavigationArrows();
-}); 
+});
