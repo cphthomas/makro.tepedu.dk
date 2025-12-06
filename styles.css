@@ -9,6 +9,189 @@ body {
     /* Adjust for fixed navbar height */
 }
 
+/* ============================================
+   ANIMATED EXTERNAL LINKS WITH ICONS
+   Kun for links i kerneteksten (ikke navbar/logo)
+   ============================================ */
+
+/* Base styling for external links (http/https) - kun i content/article området */
+.content a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link),
+.content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link),
+article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link),
+article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link) {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2px 8px;
+    margin: 0 2px;
+    border-radius: 0;
+    background-color: #14b8a6;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+}
+
+/* External link icon - appears after text */
+.content a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link)::after,
+.content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link)::after,
+article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link)::after,
+article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link)::after {
+    content: "";
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: 0.4em;
+    margin-right: 0.3em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+    transform: translateX(-2px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    vertical-align: middle;
+}
+
+/* Hover effects for external links */
+.content a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover,
+.content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover,
+article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover,
+article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover {
+    color: #ffffff;
+    background-color: #0d9488;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+/* Icon animation on hover - superflot animation */
+.content a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after,
+.content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after,
+article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after,
+article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after {
+    opacity: 1;
+    transform: translateX(4px) scale(1.15) rotate(15deg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+}
+
+/* Active/focus state */
+.content a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
+.content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
+article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
+article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus {
+    outline: 2px solid #14b8a6;
+    outline-offset: 2px;
+    border-radius: 0;
+}
+
+/* Links in tables - adjust styling */
+.content table a[href^="http://"]:not(.effectLinksTable),
+.content table a[href^="https://"]:not(.effectLinksTable),
+article table a[href^="http://"]:not(.effectLinksTable),
+article table a[href^="https://"]:not(.effectLinksTable) {
+    color: #ffffff;
+    background-color: #14b8a6;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+}
+
+.content table a[href^="http://"]:not(.effectLinksTable):hover,
+.content table a[href^="https://"]:not(.effectLinksTable):hover,
+article table a[href^="http://"]:not(.effectLinksTable):hover,
+article table a[href^="https://"]:not(.effectLinksTable):hover {
+    color: #ffffff;
+    background-color: #0d9488;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+/* Links in info boxes */
+.content .info-box a[href^="http://"],
+.content .info-box a[href^="https://"],
+.content .example-box a[href^="http://"],
+.content .example-box a[href^="https://"],
+article .info-box a[href^="http://"],
+article .info-box a[href^="https://"],
+article .example-box a[href^="http://"],
+article .example-box a[href^="https://"] {
+    color: #ffffff;
+    background-color: #14b8a6;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+}
+
+.content .info-box a[href^="http://"]:hover,
+.content .info-box a[href^="https://"]:hover,
+.content .example-box a[href^="http://"]:hover,
+.content .example-box a[href^="https://"]:hover,
+article .info-box a[href^="http://"]:hover,
+article .info-box a[href^="https://"]:hover,
+article .example-box a[href^="http://"]:hover,
+article .example-box a[href^="https://"]:hover {
+    color: #ffffff;
+    background-color: #0d9488;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+/* Smooth pulse animation for link icon - superflot animation */
+@keyframes linkPulse {
+    0%, 100% {
+        transform: translateX(4px) scale(1.15) rotate(15deg);
+    }
+    50% {
+        transform: translateX(6px) scale(1.25) rotate(20deg);
+    }
+}
+
+/* Superflot pulse animation on hover for extra attention */
+.content a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after,
+.content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after,
+article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after,
+article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover::after {
+    animation: linkPulse 1.2s ease-in-out infinite;
+}
+
+/* ============================================
+   HOVER EFFECTS FOR ALL LINKS (INTERNAL TOO)
+   ============================================ */
+
+/* General link hover effects (for internal links and other links) */
+a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]) {
+    color: #2563eb;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2px 4px;
+    margin: 0 2px;
+    border-radius: 4px;
+    position: relative;
+}
+
+a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
+    color: #1d4ed8;
+    background-color: rgba(37, 99, 235, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+/* Anchor links (hash links) - subtle hover */
+a[href^="#"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link) {
+    color: #2563eb;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a[href^="#"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .transparent-navbar {
     background-color: rgba(248, 249, 250, 0.8);
     /* Light grey with transparency */
