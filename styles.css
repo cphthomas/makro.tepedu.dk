@@ -161,8 +161,8 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
    HOVER EFFECTS FOR ALL LINKS (INTERNAL TOO)
    ============================================ */
 
-/* General link hover effects (for internal links and other links) */
-a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]) {
+/* General link hover effects (for internal links) - ekskluder book-card links og scroll-indicator */
+a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]) {
     color: #2563eb;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -172,7 +172,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     position: relative;
 }
 
-a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
+a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
     color: #1d4ed8;
     background-color: rgba(37, 99, 235, 0.08);
     transform: translateY(-1px);
