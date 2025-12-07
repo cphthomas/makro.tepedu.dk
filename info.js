@@ -27,13 +27,21 @@ document.addEventListener('DOMContentLoaded', function () {
             transition: opacity 0.3s, visibility 0.3s;
             font-size: 0.9rem;
             border: 1px solid #ddd;
+            max-height: 80vh;
+            overflow-y: auto;
         }
         
         .info-popup img {
-            max-width: 100%; /* Ensure image fits within the popup */
-            height: auto; /* Maintain aspect ratio */
-            display: block; /* Remove extra space below image */
-            margin: 10px auto; /* Center image and add some vertical spacing */
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            margin: 10px auto;
+        }
+        
+        .info-popup img[alt="Thomas Hanke"] {
+            object-position: center top;
         }
         
         .info-icon-container:hover .info-popup,
@@ -72,18 +80,23 @@ document.addEventListener('DOMContentLoaded', function () {
         infoPopup.className = 'info-popup';
         infoPopup.id = 'infoPopup';
 
+        // Hent nuværende år for APA reference
+        const currentYear = new Date().getFullYear();
+        
         // Tilføj indhold til popup
         infoPopup.innerHTML = `
-            <h5>Om denne bog</h5>
-            <small>Denne bog er udviklet af:
+            <h6>Om onlinebogen</h6>
+            <small>Denne onlinebog er udviklet af:
             <img src="images/hanke.avif" alt="Thomas Hanke">
             Advokat Thomas Hanke <br>Redaktør<br>&<br>
             <img src="images/mig.jpg" alt="Thomas Petersen">Lektor Thomas Petersen
-            <br><br>
-            <p>I udviklingen er der benyttet kunstig intelligens både til kodningen af selve strukturen i form af navigation, js-, html- og css-filer, samt indhold og eksempler.</p>
-            <p>Bogen er udviklet til undervisningsbrug og er frit tilgængelig. Bogen bør ikke benyttes som grundlag for juridiske beslutninger, den kan således ikke erstatte juridisk rådgivning fra en advokat.
+              <br><br>
+            <p><strong>APA reference:</strong><br>
+            Hanke, T., & Petersen, T. (${currentYear}). <em>Jura for de finansielle uddannelser</em>. Tepedu. https://jura.tepedu.dk</p><br>
+            <p>Onlinebogen er udviklet med anvendelse af kunstig intelligens til udformning af teknisk struktur (navigation, HTML, CSS, JavaScript) samt fagligt indhold og eksempelmateriale.</p>
+            <p><strong>Disclaimer:</strong> Onlinebogen er udarbejdet til undervisningsformål og stilles frit til rådighed. Indholdet bør ikke anvendes som grundlag for juridiske dispositioner eller beslutninger. For konkret juridisk bistand henvises til en advokat.
             </p>
-           
+          
             </small>
         `;
 
