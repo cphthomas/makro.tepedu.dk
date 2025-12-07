@@ -48,6 +48,26 @@
         .cover-text-overlay {
             z-index: 2;
         }
+
+        /* Custom turquoise link style for internal chapter links to match external links */
+        a.turquoise-link {
+            color: #ffffff !important;
+            background-color: #14b8a6 !important;
+            padding: 0px 6px;
+            margin: 0 2px;
+            text-decoration: none !important;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        a.turquoise-link:hover {
+            color: #ffffff !important;
+            background-color: #0d9488 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+        }
     </style>
 </head>
 
@@ -127,7 +147,7 @@
                         omdømme. Kapitlet giver dig værktøjerne til at navigere i denne "jungle" af regler.</p>
 
                     <p><i>Bemærk: For dybdegående gennemgang af Kreditaftaleloven, Gældsbreve og Kaution henvises til
-                            <b><a href="kapitel5.html">Kapitel 5</a></b>.</i></p>
+                            <b><a href="kapitel5.html" class="turquoise-link">Kapitel 5</a></b>.</i></p>
 
                     <h4>Grundbegreber i Compliance</h4>
                     <div class="table-responsive mb-4">
@@ -218,7 +238,8 @@
                                     <td><b>4. Underretningspligt</b></td>
                                     <td>Ved mistanke om hvidvask skal du underrette Hvidvasksekretariatet (NSK).</td>
                                     <td>Gå til din hvidvaskansvarlige (Money Laundering Reporting Officer). Du må
-                                        <b>IKKE</b> sige det til kunden (Meddelelsesforbud).</td>
+                                        <b>IKKE</b> sige det til kunden (Meddelelsesforbud).
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><b>5. Opbevaringspligt</b></td>
@@ -262,6 +283,31 @@
                                         modtage store kontantbeløb.</td>
                                     <td><b>Afvisning & Underretning:</b> Du skal afvise at modtage pengene kontant. Du
                                         skal undersøge sagen og sandsynligvis underrette Hvidvasksekretariatet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4>Case: "Smurfing" i Pizzeriaet</h4>
+                    <p>En klassisk situation, du kan møde i banken:</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Hvorfor er det mistænkeligt?</th>
+                                    <th>Din handling</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>En kunde (pizzeria-ejer) indsætter 9.500 kr. kontant hver dag i 14 dage.</td>
+                                    <td><b>Structuring / Smurfing:</b> Kunden forsøger bevidst at holde sig under
+                                        grænsen på ca. 15.000 kr. (hvor man skal vise ID/forklare sig). Mønsteret tyder
+                                        på forsøg på at "vaske" sorte penge ind i systemet.</td>
+                                    <td>Du skal stoppe op. Spørg kunden: <i>"Hvor stammer pengene fra? Hvorfor så mange
+                                            små indbetalinger?"</i> Hvis svaret er svævende -> Underret
+                                        Hvidvasksekretariatet.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -365,6 +411,40 @@
                     </div>
                 </div>
 
+                <h4>Case: Databruddet ("Hovsa-mailen")</h4>
+                <div class="info-box">
+                    <p>Selv de bedste laver fejl. Her er et klassisk eksempel på et databrud:</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Problemet (GDPR)</th>
+                                    <th>Løsning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bad-example" style="background-color: #f8d7da;">
+                                    <td>Du skal sende en låneaftale med CPR-nummer til kunden "Jens Hansen". Du vælger
+                                        "Jens Hansen" (en anden kunde) i din Outlook-adressebog og trykker send. Mailen
+                                        er ikke krypteret.</td>
+                                    <td><b>1. Forkert modtager:</b> Uvedkommende har fået adgang til fortrolige
+                                        data.<br><b>2. Ukrypteret:</b> CPR-numre må aldrig sendes som klar tekst på åben
+                                        mail.</td>
+                                    <td>
+                                        <ol>
+                                            <li>Kontakt straks den forkerte modtager: "Slet mailen!"</li>
+                                            <li>Kontakt din DPO (Data Protection Officer) med det samme.</li>
+                                            <li>Sagen skal vurderes: Skal Datatilsynet orienteres? (ofte ja, inden 72
+                                                timer).</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <br>
 
                 <h2>3. God Skik ("Investorbeskyttelse")</h2>
@@ -402,6 +482,34 @@
                     </div>
                 </div>
 
+                <h4>Eksempel: God vs. Dårlig Rådgivning</h4>
+                <div class="info-box">
+                    <p>Hvordan ser "God Skik" ud i hverdagen?</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Dårlig Skik (Det må du IKKE)</th>
+                                    <th>God Skik (Det SKAL du gøre)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Pensionisten Inga (85 år)</b><br>Har 500.000 kr. stående. Skal bruge dem om 2
+                                        år til indskud i beskyttet bolig.</td>
+                                    <td style="background-color: #f8d7da;"><b>Sælg Højrisiko Aktier:</b><br>"Aktier er
+                                        steget 20% i år, Inga! Du skal med på bølgen."<br><i>Risiko: Hun kan miste
+                                            halvdelen inden hun skal bruge dem.</i></td>
+                                    <td style="background-color: #e8f5e9;"><b>Anbefal Sikkerhed:</b><br>"Da du skal
+                                        bruge pengene om kort tid, tør jeg ikke anbefale aktier. Vi sætter dem på en
+                                        højrentekonto."<br><i>Fordel: Pengene er sikret.</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <br>
 
                 <h2>4. Sammenhæng med Kreditaftale og Sikkerhed</h2>
@@ -410,7 +518,8 @@
                         Kreditaftaleloven, er du "non-compliant", og det har juridiske konsekvenser.</p>
 
                     <h4>Overblik: Hvor finder du hvad?</h4>
-                    <p>Detaljeret gennemgang af nedenstående emner findes i <b><a href="kapitel5.html">Kapitel 5:
+                    <p>Detaljeret gennemgang af nedenstående emner findes i <b><a href="kapitel5.html"
+                                class="turquoise-link">Kapitel 5:
                                 Kreditaftaleloven</a></b>.</p>
 
                     <div class="table-responsive mb-4">
@@ -427,19 +536,20 @@
                                     <td><b>Kreditaftaleloven (KAL)</b></td>
                                     <td>Manglende SEF-skema (§ 7a) eller kreditvurdering (§ 7c) er lovbrud. Kan medføre
                                         tab af renter og bødestraf.</td>
-                                    <td><a href="kapitel5.html#KAL">Gå til Kapitel 5</a></td>
+                                    <td><a href="kapitel5.html#KAL" class="turquoise-link">Gå til Kapitel 5</a></td>
                                 </tr>
                                 <tr>
                                     <td><b>Kaution</b></td>
                                     <td>Manglende oplysning til kautionister (§ 48) gør aftalen ugyldig. Det er en
                                         alvorlig compliance-fejl.</td>
-                                    <td><a href="kapitel5.html#Kaution">Gå til Kapitel 5</a></td>
+                                    <td><a href="kapitel5.html#Kaution" class="turquoise-link">Gå til Kapitel 5</a></td>
                                 </tr>
                                 <tr>
                                     <td><b>Gældsbreve</b></td>
                                     <td>Korrekt håndtering af sikreingsakter (denunciation) er afgørende for at sikre
                                         bankens rettigheder.</td>
-                                    <td><a href="kapitel5.html#Gaeldsbreve">Gå til Kapitel 5</a></td>
+                                    <td><a href="kapitel5.html#Gaeldsbreve" class="turquoise-link">Gå til Kapitel 5</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
