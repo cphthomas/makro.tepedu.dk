@@ -110,7 +110,7 @@ article table a[href^="https://"]:not(.effectLinksTable):hover {
     box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
 }
 
-/* Links in info boxes */
+/* Links in info boxes - external links */
 .content .info-box a[href^="http://"],
 .content .info-box a[href^="https://"],
 .content .example-box a[href^="http://"],
@@ -142,6 +142,67 @@ article .example-box a[href^="https://"]:hover {
     box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
 }
 
+/* Links in info boxes - internal links (same styling as external) */
+.content .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]),
+.content .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]),
+article .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]),
+article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]) {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.5px 8px;
+    margin: 0 2px;
+    border-radius: 0;
+    background-color: #14b8a6;
+    font-weight: 500;
+    line-height: 1.2;
+    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+}
+
+/* Internal link icon in info boxes */
+.content .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"])::after,
+.content .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"])::after,
+article .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"])::after,
+article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"])::after {
+    content: "";
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: 0.4em;
+    margin-right: 0.3em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+    transform: translateX(-2px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    vertical-align: middle;
+}
+
+.content .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover,
+.content .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover,
+article .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover,
+article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
+    color: #ffffff;
+    background-color: #0d9488;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+.content .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after,
+.content .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after,
+article .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after,
+article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after {
+    opacity: 1;
+    transform: translateX(4px) scale(1.15) rotate(15deg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+    animation: linkPulse 1.2s ease-in-out infinite;
+}
+
 /* Smooth pulse animation for link icon - superflot animation */
 @keyframes linkPulse {
     0%, 100% {
@@ -161,25 +222,67 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
 }
 
 /* ============================================
-   HOVER EFFECTS FOR ALL LINKS (INTERNAL TOO)
+   INTERNAL LINKS - SAME STYLING AS EXTERNAL LINKS
    ============================================ */
 
-/* General link hover effects (for internal links) - ekskluder book-card links og scroll-indicator */
-a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]) {
-    color: #2563eb;
+/* Base styling for internal links (not http/https, not anchor, not mailto) - kun i content/article området */
+.content a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]),
+article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]) {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 2px 4px;
+    padding: 0.5px 8px;
     margin: 0 2px;
-    border-radius: 4px;
-    position: relative;
+    border-radius: 0;
+    background-color: #14b8a6;
+    font-weight: 500;
+    line-height: 1.2;
+    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
 }
 
-a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
-    color: #1d4ed8;
-    background-color: rgba(37, 99, 235, 0.08);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+/* Internal link icon - appears after text */
+.content a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"])::after,
+article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"])::after {
+    content: "";
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: 0.4em;
+    margin-right: 0.3em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+    transform: translateX(-2px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    vertical-align: middle;
+}
+
+/* Hover effects for internal links */
+.content a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover,
+article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
+    color: #ffffff;
+    background-color: #0d9488;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+/* Icon animation on hover for internal links */
+.content a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after,
+article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after {
+    opacity: 1;
+    transform: translateX(4px) scale(1.15) rotate(15deg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+}
+
+/* Pulse animation on hover for internal links */
+.content a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after,
+article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after {
+    animation: linkPulse 1.2s ease-in-out infinite;
 }
 
 /* Anchor links (hash links) - subtle hover */
@@ -526,10 +629,10 @@ kbd {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
-/* Style for negative examples in tables */
+/* Style for negative examples in tables - svag rød */
 .bad-example td {
-    background-color: #dc3545; /* Bootstrap danger color */
-    color: white;
+    background-color: rgba(248, 215, 218, 0.3); /* Svag rød baggrund */
+    color: inherit; /* Behold normal tekstfarve */
 }
 
 .table {

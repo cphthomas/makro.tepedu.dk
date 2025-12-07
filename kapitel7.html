@@ -49,25 +49,6 @@
             z-index: 2;
         }
 
-        /* Custom turquoise link style for internal chapter links to match external links */
-        a.turquoise-link {
-            color: #ffffff !important;
-            background-color: #14b8a6 !important;
-            padding: 0px 6px;
-            margin: 0 2px;
-            text-decoration: none !important;
-            font-weight: 500;
-            box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        a.turquoise-link:hover {
-            color: #ffffff !important;
-            background-color: #0d9488 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
-        }
     </style>
 </head>
 
@@ -140,14 +121,14 @@
                 </div>
                 <div class="info-box">
                     <p>Dette kapitel omhandler <b>Compliance</b>, <b>Hvidvask</b> og <b>GDPR</b> (Persondata), som er
-                        afgørende rammevilkår for den finansielle sektor. Som finansøkonom er det din "License to
+                        afgørende rammevilkår for den finansielle sektor. Som finansøkonom eller financial controller er det din "License to
                         operate" at kende disse regler.</p>
 
                     <p>Overtrædelse af disse regler kan medføre store bøder, fængselsstraf og tab af virksomhedens
                         omdømme. Kapitlet giver dig værktøjerne til at navigere i denne "jungle" af regler.</p>
 
                     <p><i>Bemærk: For dybdegående gennemgang af Kreditaftaleloven, Gældsbreve og Kaution henvises til
-                            <b><a href="kapitel5.html" class="turquoise-link">Kapitel 5</a></b>.</i></p>
+                            <b><a href="kapitel5.html" target="_blank" rel="noopener noreferrer">Kapitel 5</a></b>.</i></p>
 
                     <h4>Grundbegreber i Compliance</h4>
                     <div class="table-responsive mb-4">
@@ -199,12 +180,12 @@
                 <div class="info-box">
                     <p><b>Hvidvaskloven</b> (Lovbekendtgørelse nr. 316 af 2022, jf. <a
                             href="https://www.retsinformation.dk/eli/lta/2022/316"
-                            target="_blank">retsinformation.dk</a>) skal forebygge hvidvask og finansiering af
+                            target="_blank" rel="noopener noreferrer">retsinformation.dk</a>) skal forebygge hvidvask og finansiering af
                         terrorisme. Loven gælder for finansielle virksomheder, ejendomsmæglere, revisorer, advokater
                         m.fl.</p>
 
-                    <h4>Dine 5 hovedpligter som finansøkonom</h4>
-                    <p>Som ansat i en omfattet virksomhed har du fem centrale pligter:</p>
+                    <h4>Dine 5 hovedpligter som finansøkonom, financial controller eller revisor</h4>
+                    <p>Som ansat i en omfattet virksomhed (bank, revisionsfirma, finansiel virksomhed) har du fem centrale pligter:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -216,25 +197,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>1. Risikovurdering</b></td>
                                     <td>Virksomheden skal kende risikoen for at blive misbrugt til hvidvask.</td>
                                     <td>Du skal vurdere hver enkelt kunde: Er det en høj-risiko eller lav-risiko kunde?
                                         (fx PEP'er er høj risiko).</td>
                                 </tr>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>2. Kundekendskab (KYC)</b></td>
                                     <td>Du <b>SKAL</b> vide hvem kunden er ("Know Your Customer").</td>
                                     <td>Indhent legitimation (Pas/Kørekort + Sundhedskort). Tjek reelle ejere i CVR (for
                                         virksomheder). Spørg til pengenes oprindelse.</td>
                                 </tr>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>3. Undersøgelsespligt</b></td>
                                     <td>Mistænkelige transaktioner skal undersøges.</td>
                                     <td>Hvis en kunde pludselig indsætter 100.000 kr. kontant, skal du spørge: "Hvor
                                         kommer pengene fra?" og kræve dokumentation.</td>
                                 </tr>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>4. Underretningspligt</b></td>
                                     <td>Ved mistanke om hvidvask skal du underrette Hvidvasksekretariatet (NSK).</td>
                                     <td>Gå til din hvidvaskansvarlige (Money Laundering Reporting Officer). Du må
@@ -277,7 +258,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td>En kunde vil købe et hus kontant for 3 mio. kr. uden om banken.</td>
                                     <td>Kontantforbuddet og Hvidvaskloven. Det er højest mistænkeligt. Mæglere må ikke
                                         modtage store kontantbeløb.</td>
@@ -312,6 +293,53 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <h4>Case: Revisor og mistænkelig kunde</h4>
+                    <p>Som revisor eller financial controller kan du møde denne situation:</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Hvorfor er det mistænkeligt?</th>
+                                    <th>Din handling</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
+                                    <td>En kunde beder dig om at lave årsregnskab. Du opdager, at der er mange kontante indbetalinger uden dokumentation. Kunden forklarer: "Det er bare kontantbetalinger fra kunderne."</td>
+                                    <td><b>Manglende dokumentation:</b> Store kontantbeløb uden kvitteringer eller fakturaer er mistænkeligt. Det kan være hvidvask eller skattesvig.</td>
+                                    <td><b>1. Dokumentationskrav:</b> Kræv kvitteringer, fakturaer eller bankudtog.<br><b>2. Risikovurdering:</b> Vurder om kunden er høj-risiko (fx PEP'er, offshore-selskaber).<br><b>3. Underretning:</b> Hvis du har "grundet mistanke", skal du underrette Hvidvasksekretariatet. Du må <b>IKKE</b> advare kunden (meddelelsesforbud).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4>Case: Financial Controller og intern revision</h4>
+                    <p>Som financial controller eller intern revisor skal du også være opmærksom på compliance:</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Compliance-problem</th>
+                                    <th>Din rolle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Du er financial controller i en virksomhed. Du opdager, at salgsafdelingen har modtaget store kontantbetalinger fra en kunde, som ikke er registreret korrekt i regnskabet.</td>
+                                    <td><b>Manglende registrering:</b> Alle transaktioner skal registreres korrekt. Store kontantbeløb skal dokumenteres og kan være hvidvask.</td>
+                                    <td><b>1. Intern kontrol:</b> Sikr korrekt registrering af alle transaktioner.<br><b>2. Dokumentation:</b> Kræv kvitteringer og dokumentation for alle kontantbetalinger.<br><b>3. Risikovurdering:</b> Vurder om transaktionen er mistænkelig. Hvis ja -> kontakt hvidvaskansvarlig.</td>
+                                </tr>
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
+                                    <td>Som intern revisor gennemgår du en leverandør. Du opdager, at virksomheden betaler store beløb til et offshore-selskab uden klar dokumentation for ydelsen.</td>
+                                    <td><b>Mistænkelig transaktion:</b> Betalinger til offshore-selskaber uden dokumentation kan være hvidvask eller skattesvig.</td>
+                                    <td><b>1. Dokumentationskrav:</b> Kræv kontrakter, fakturaer og dokumentation for ydelsen.<br><b>2. Due diligence:</b> Undersøg leverandørens ejerstruktur og formål.<br><b>3. Underretning:</b> Hvis mistanke om hvidvask -> underret hvidvaskansvarlig.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <br>
@@ -319,12 +347,12 @@
                 <h2>2. GDPR (Persondataret)</h2>
                 <div class="info-box">
                     <p><b>GDPR</b> (General Data Protection Regulation / Persondataforordningen) beskytter fysiske
-                        personers rettigheder. Som finansiel rådgiver håndterer du enorme mængder følsomme data.</p>
+                        personers rettigheder. Som finansiel rådgiver, financial controller eller revisor håndterer du enorme mængder følsomme data.</p>
                     <p>Reglerne findes i <b><a
                                 href="https://eur-lex.europa.eu/legal-content/DA/TXT/?uri=celex%3A32016R0679"
-                                target="_blank">Databeskyttelsesforordningen</a></b> og <b><a
+                                target="_blank" rel="noopener noreferrer">Databeskyttelsesforordningen</a></b> og <b><a
                                 href="https://www.retsinformation.dk/eli/lta/2018/502"
-                                target="_blank">Databeskyttelsesloven</a></b>.</p>
+                                target="_blank" rel="noopener noreferrer">Databeskyttelsesloven</a></b>.</p>
 
                     <h4>Hvilke data må du behandle?</h4>
                     <div class="table-responsive mb-4">
@@ -343,7 +371,7 @@
                                     <td>Må behandles, hvis der er et sagligt formål (fx at opfylde en
                                         kontrakt/låneaftale).</td>
                                 </tr>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>Følsomme personoplysninger</b><br>(Artikel 9)</td>
                                     <td>Race, religion, helbredsoplysninger, fagforening, seksuel orientering.</td>
                                     <td><b>FORBUD:</b> Må som udgangspunkt IKKE behandles. Kræver udtrykkeligt samtykke
@@ -390,7 +418,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>Indsigtsret</b></td>
                                     <td>Kunden har ret til at se, hvad I har registreret om ham/hende.</td>
                                     <td>En kunde beder om "at se min sag". Banken skal udlevere kopi af data.</td>
@@ -400,7 +428,7 @@
                                     <td>Kunden kan kræve forkerte data rettet.</td>
                                     <td>Adresse er forkert -> Banken retter det.</td>
                                 </tr>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>Ret til sletning</b><br>("Right to be forgotten")</td>
                                     <td>Kunden kan kræve at blive slettet (hvis I ikke har pligt til at gemme).</td>
                                     <td>En tidligere kunde vil slettes. Hvis hvidvaskloven kræver opbevaring i 5 år, går
@@ -424,7 +452,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bad-example" style="background-color: #f8d7da;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td>Du skal sende en låneaftale med CPR-nummer til kunden "Jens Hansen". Du vælger
                                         "Jens Hansen" (en anden kunde) i din Outlook-adressebog og trykker send. Mailen
                                         er ikke krypteret.</td>
@@ -437,6 +465,46 @@
                                             <li>Kontakt din DPO (Data Protection Officer) med det samme.</li>
                                             <li>Sagen skal vurderes: Skal Datatilsynet orienteres? (ofte ja, inden 72
                                                 timer).</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>Case: Revisor og GDPR - Deling af klientdata</h4>
+                <div class="info-box">
+                    <p>Som revisor eller financial controller skal du være særligt opmærksom på GDPR ved deling af data:</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Problemet (GDPR)</th>
+                                    <th>Løsning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
+                                    <td>Du er revisor og skal dele årsregnskab med en kollega i revisionsfirmaet. Du sender det via usikker e-mail med CPR-numre og lønoplysninger.</td>
+                                    <td><b>1. Usikker kommunikation:</b> Følsomme personoplysninger må kun sendes krypteret.<br><b>2. Formålsbegrænsning:</b> Du må kun dele data, hvis det er nødvendigt for opgaven.</td>
+                                    <td>
+                                        <ol>
+                                            <li><b>Krypteret kommunikation:</b> Brug sikker e-mail eller krypteret fil-delingssystem.</li>
+                                            <li><b>Dataminimering:</b> Del kun de data, der er nødvendige for opgaven.</li>
+                                            <li><b>Dokumentation:</b> Dokumenter, hvorfor data deles (sagligt formål).</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Som financial controller skal du sende løndata til en ekstern konsulent. Du sender en Excel-fil med CPR-numre, løn og helbredsoplysninger via normal e-mail.</td>
+                                    <td><b>1. Ukrypteret:</b> CPR-numre og helbredsoplysninger må aldrig sendes ukrypteret.<br><b>2. Følsomme data:</b> Helbredsoplysninger er særligt følsomme (Artikel 9).</td>
+                                    <td>
+                                        <ol>
+                                            <li><b>Krypteret kommunikation:</b> Brug sikker e-mail eller krypteret fil-delingssystem.</li>
+                                            <li><b>Dataminimering:</b> Send kun nødvendige data (fx ikke helbredsoplysninger, hvis ikke nødvendigt).</li>
+                                            <li><b>Data Processing Agreement:</b> Sikr, at konsulenten har underskrevet en databehandleraftale.</li>
                                         </ol>
                                     </td>
                                 </tr>
@@ -498,10 +566,10 @@
                                 <tr>
                                     <td><b>Pensionisten Inga (85 år)</b><br>Har 500.000 kr. stående. Skal bruge dem om 2
                                         år til indskud i beskyttet bolig.</td>
-                                    <td style="background-color: #f8d7da;"><b>Sælg Højrisiko Aktier:</b><br>"Aktier er
+                                    <td style="background-color: rgba(248, 215, 218, 0.3);"><b>Sælg Højrisiko Aktier:</b><br>"Aktier er
                                         steget 20% i år, Inga! Du skal med på bølgen."<br><i>Risiko: Hun kan miste
                                             halvdelen inden hun skal bruge dem.</i></td>
-                                    <td style="background-color: #e8f5e9;"><b>Anbefal Sikkerhed:</b><br>"Da du skal
+                                    <td style="background-color: rgba(232, 245, 233, 0.3);"><b>Anbefal Sikkerhed:</b><br>"Da du skal
                                         bruge pengene om kort tid, tør jeg ikke anbefale aktier. Vi sætter dem på en
                                         højrentekonto."<br><i>Fordel: Pengene er sikret.</i></td>
                                 </tr>
@@ -518,8 +586,7 @@
                         Kreditaftaleloven, er du "non-compliant", og det har juridiske konsekvenser.</p>
 
                     <h4>Overblik: Hvor finder du hvad?</h4>
-                    <p>Detaljeret gennemgang af nedenstående emner findes i <b><a href="kapitel5.html"
-                                class="turquoise-link">Kapitel 5:
+                    <p>Detaljeret gennemgang af nedenstående emner findes i <b><a href="kapitel5.html" target="_blank" rel="noopener noreferrer">Kapitel 5:
                                 Kreditaftaleloven</a></b>.</p>
 
                     <div class="table-responsive mb-4">
@@ -532,23 +599,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background-color: #e8f5e9;">
+                                <tr style="background-color: rgba(232, 245, 233, 0.3);">
                                     <td><b>Kreditaftaleloven (KAL)</b></td>
                                     <td>Manglende SEF-skema (§ 7a) eller kreditvurdering (§ 7c) er lovbrud. Kan medføre
                                         tab af renter og bødestraf.</td>
-                                    <td><a href="kapitel5.html#KAL" class="turquoise-link">Gå til Kapitel 5</a></td>
+                                    <td><a href="kapitel5.html#KAL" target="_blank" rel="noopener noreferrer">Gå til Kapitel 5</a></td>
                                 </tr>
                                 <tr>
                                     <td><b>Kaution</b></td>
                                     <td>Manglende oplysning til kautionister (§ 48) gør aftalen ugyldig. Det er en
                                         alvorlig compliance-fejl.</td>
-                                    <td><a href="kapitel5.html#Kaution" class="turquoise-link">Gå til Kapitel 5</a></td>
+                                    <td><a href="kapitel5.html#Kaution" target="_blank" rel="noopener noreferrer">Gå til Kapitel 5</a></td>
                                 </tr>
                                 <tr>
                                     <td><b>Gældsbreve</b></td>
                                     <td>Korrekt håndtering af sikreingsakter (denunciation) er afgørende for at sikre
                                         bankens rettigheder.</td>
-                                    <td><a href="kapitel5.html#Gaeldsbreve" class="turquoise-link">Gå til Kapitel 5</a>
+                                    <td><a href="kapitel5.html#Gaeldsbreve" target="_blank" rel="noopener noreferrer">Gå til Kapitel 5</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -560,7 +627,7 @@
 
                 <h2>5. Checkliste for Compliance i hverdagen</h2>
                 <div class="info-box">
-                    <p>Brug denne checkliste før du godkender en sag:</p>
+                    <p>Brug denne checkliste før du godkender en sag (som finansøkonom, financial controller eller revisor):</p>
                     <ul class="list-group">
                         <li class="list-group-item">☐ <b>KYC:</b> Har vi ID på kunden? (Pas/Kørekort)</li>
                         <li class="list-group-item">☐ <b>Hvidvask:</b> Forstår vi, hvor pengene kommer fra? Er
@@ -573,6 +640,8 @@
                             nødvendige data?</li>
                         <li class="list-group-item">☐ <b>Kaution:</b> Er kautionisten informeret om debitors økonomi?
                             (FIL § 48)</li>
+                        <li class="list-group-item">☐ <b>Dokumentation:</b> Er alle transaktioner korrekt dokumenteret? (Revisor/Financial Controller)</li>
+                        <li class="list-group-item">☐ <b>Intern revision:</b> Har jeg gennemgået compliance-risici ved denne sag?</li>
                     </ul>
                 </div>
 
