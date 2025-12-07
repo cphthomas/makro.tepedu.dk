@@ -1,5 +1,5 @@
 // Info popup functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Tilføj styling til head
     const style = document.createElement('style');
     style.textContent = `
@@ -56,28 +56,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
-    
+
     // Find navbar-brandet (home-ikonet)
     const navbarBrand = document.querySelector('.navbar-brand');
-    
+
     if (navbarBrand) {
         // Opret info-ikonet og container
         const infoContainer = document.createElement('div');
         infoContainer.className = 'info-icon-container';
-        
+
         const infoIcon = document.createElement('i');
         infoIcon.className = 'bi bi-info-circle info-icon';
-        
+
         const infoPopup = document.createElement('div');
         infoPopup.className = 'info-popup';
         infoPopup.id = 'infoPopup';
-        
+
         // Tilføj indhold til popup
         infoPopup.innerHTML = `
             <h5>Om denne bog</h5>
             <small>Denne bog er udviklet af:
-            <!-- <img src="images/mig.jpg" alt="Thomas Petersen"> -->
-            <br>Advokat Thomas Hanke <br>&<br> Lektor Thomas Petersen
+            <img src="images/hanke.avif" alt="Thomas Hanke">
+            Advokat Thomas Hanke <br>&<br>
+            <img src="images/mig.jpg" alt="Thomas Petersen">Lektor Thomas Petersen
             <br><br>
             <p>I udviklingen er der benyttet kunstig intelligens både til kodningen af selve strukturen i form af navigation, js-, html- og css-filer, samt indhold og eksempler. <br>Der er benyttet følgende LLM-modeller:</p>
             <ul>
@@ -87,27 +88,27 @@ document.addEventListener('DOMContentLoaded', function() {
             </ul>
             </small>
         `;
-        
+
         // Sæt elementerne sammen
         infoContainer.appendChild(infoIcon);
         infoContainer.appendChild(infoPopup);
-        
+
         // Indsæt efter navbar-brandet
         navbarBrand.parentNode.insertBefore(infoContainer, navbarBrand.nextSibling);
-        
+
         // Tilføj event listeners
-        infoIcon.addEventListener('click', function(e) {
+        infoIcon.addEventListener('click', function (e) {
             e.stopPropagation();
             infoPopup.classList.toggle('show');
         });
-        
-        document.addEventListener('click', function(e) {
+
+        document.addEventListener('click', function (e) {
             if (infoPopup.classList.contains('show')) {
                 infoPopup.classList.remove('show');
             }
         });
-        
-        infoPopup.addEventListener('click', function(e) {
+
+        infoPopup.addEventListener('click', function (e) {
             e.stopPropagation();
         });
     }
