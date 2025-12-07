@@ -77,15 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
             <h5>Om denne bog</h5>
             <small>Denne bog er udviklet af:
             <img src="images/hanke.avif" alt="Thomas Hanke">
-            Advokat Thomas Hanke <br>&<br>
+            Advokat Thomas Hanke <br>Redaktør<br>&<br>
             <img src="images/mig.jpg" alt="Thomas Petersen">Lektor Thomas Petersen
             <br><br>
-            <p>I udviklingen er der benyttet kunstig intelligens både til kodningen af selve strukturen i form af navigation, js-, html- og css-filer, samt indhold og eksempler. <br>Der er benyttet følgende LLM-modeller:</p>
-            <ul>
-                <li>Google Gemini</li>
-                <li>Anthropic Claude</li>
-                <li>Composer</li>
-            </ul>
+            <p>I udviklingen er der benyttet kunstig intelligens både til kodningen af selve strukturen i form af navigation, js-, html- og css-filer, samt indhold og eksempler.</p>
+            <p>Bogen er udviklet til undervisningsbrug og er frit tilgængelig. Bogen bør ikke benyttes som grundlag for juridiske beslutninger, den kan således ikke erstatte juridisk rådgivning fra en advokat.
+            </p>
+           
             </small>
         `;
 
