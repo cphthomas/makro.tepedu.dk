@@ -7,7 +7,8 @@ const menuItems = [
     { href: 'kapitel4.html', text: 'Erstatning' },
     { href: 'kapitel5.html', text: 'Kreditaftaleloven' },
     { href: 'kapitel6.html', text: 'Ejendomshandel Tinglysning & Pant' },
-    { href: 'kapitel7.html', text: 'Insolvensret Selskabsret Hvidvask & Compliance' }
+    { href: 'kapitel7.html', text: 'Insolvensret Selskabsret Hvidvask & Compliance' },
+    { href: 'kapitel8.html', text: 'Ordliste' }
 ];
 
 // Function to generate dropdown menu HTML

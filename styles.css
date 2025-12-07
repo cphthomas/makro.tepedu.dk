@@ -25,12 +25,13 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
     color: #ffffff;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 2px 8px;
+    padding: 0.5px 8px;
     margin: 0 2px;
     border-radius: 0;
     background-color: #14b8a6;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+    line-height: 1.2;
+    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
 }
 
 /* External link icon - appears after text */
@@ -93,9 +94,10 @@ article table a[href^="https://"]:not(.effectLinksTable) {
     color: #ffffff;
     background-color: #14b8a6;
     font-weight: 500;
-    padding: 2px 8px;
+    padding: 0 8px;
+    line-height: 1.2;
     border-radius: 0;
-    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
 }
 
 .content table a[href^="http://"]:not(.effectLinksTable):hover,
@@ -120,9 +122,10 @@ article .example-box a[href^="https://"] {
     color: #ffffff;
     background-color: #14b8a6;
     font-weight: 500;
-    padding: 2px 8px;
+    padding: 0 8px;
+    line-height: 1.2;
     border-radius: 0;
-    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
 }
 
 .content .info-box a[href^="http://"]:hover,
@@ -487,7 +490,7 @@ kbd {
 
 .info-box {
     background-color: #f8f9fa;
-    border-left: 4px solid #f7aa0e;
+    border-left: 4px solid #14b8a6;
     padding: 15px;
     margin: 20px 0;
     border-radius: 0 !important; /* No rounded corners */
