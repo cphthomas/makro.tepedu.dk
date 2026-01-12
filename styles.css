@@ -455,26 +455,32 @@ table {
 .effectLinks {
     overflow: hidden;
     position: relative;
-    display: inline-block;
+    display: block;
     text-decoration: none;
     color: white;
-    /* Set the default text color to white */
-    background: rgba(150, 150, 151, 0.5);
-    padding: 10px;
+    background: #14b8a6;
+    padding: 15px 20px;
     width: 100%;
+    transition: background 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+    margin-bottom: 0;
 }
 
 .effectLinks::after {
     content: attr(data-replace);
     position: absolute;
     left: 0;
-    padding-left: 10px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px 20px;
     transform-origin: 100% 50%;
     transform: translate3d(200%, 0, 0);
     transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease;
     color: white;
     background: rgba(21, 23, 26, 1);
     opacity: 0;
+    display: flex;
+    align-items: center;
 }
 
 .effectLinks:hover::after {
@@ -484,7 +490,7 @@ table {
 
 .effectLinks:hover {
     background: rgba(21, 23, 26, 1);
-    color: rgb(215, 215, 215);
+    color: white;
 }
 
 .effectLinks span {
@@ -494,6 +500,39 @@ table {
 
 .effectLinks:hover span {
     transform: translate3d(-200%, 0, 0);
+}
+
+/* Container for quiz links */
+.quiz-container {
+    padding: 30px 20px;
+    margin: 20px 0;
+    background-color: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Ensure quiz-container doesn't inherit info-box styling even if nested */
+.info-box .quiz-container,
+.quiz-container {
+    background-color: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.info-box .quiz-container:hover,
+.quiz-container:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.quiz-container br {
+    display: block;
+    margin: 10px 0;
+    content: "";
 }
 
 .effectLinksTable {
