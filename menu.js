@@ -6,8 +6,8 @@ const menuItems = [
     { href: 'kapitel3.html', text: 'Købeloven' },
     { href: 'kapitel4.html', text: 'Erstatning' },
     { href: 'kapitel5.html', text: 'Kreditaftale, Kaution & Gældsbreve' },
-    { href: 'kapitel6.html', text: 'Ejendomshandel, Tinglysning & Pant' },
-    { href: 'kapitel7.html', text: 'Compliance, Hvidvask & GDPR' },
+    { href: 'kapitel6.html', text: 'Compliance, Hvidvask & GDPR' },
+    { href: 'kapitel7.html', text: 'Ejendomshandel, Tinglysning & Pant' },
     { href: 'kapitel8.html', text: 'Ordliste' }
 ];
 
