@@ -205,9 +205,12 @@ article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not
 
 /* Smooth pulse animation for link icon - superflot animation */
 @keyframes linkPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(4px) scale(1.15) rotate(15deg);
     }
+
     50% {
         transform: translateX(6px) scale(1.25) rotate(20deg);
     }
@@ -305,7 +308,8 @@ a[href^="#"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLi
 
 .content {
     transition: margin-left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    margin-left: 0; /* Default to no margin */
+    margin-left: 0;
+    /* Default to no margin */
 }
 
 .pl-0 {
@@ -382,9 +386,12 @@ a[href^="#"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLi
 .content h4,
 .content h5,
 .content h6 {
-    font-family: 'Open Sans', sans-serif; /* Ensure consistent font family */
-    font-weight: 100 !important; /* Match body font weight */
-    font-style: italic; /* Restore italic */
+    font-family: 'Open Sans', sans-serif;
+    /* Ensure consistent font family */
+    font-weight: 100 !important;
+    /* Match body font weight */
+    font-style: italic;
+    /* Restore italic */
     scroll-margin-top: 70px;
     /* Adjust this value as needed */
 }
@@ -635,14 +642,19 @@ kbd {
     border-left: 4px solid #14b8a6;
     padding: 15px;
     margin: 20px 0;
-    border-radius: 0 !important; /* No rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+    border-radius: 0 !important;
+    /* No rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transition for hover */
 }
 
 .info-box:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow on hover */
 }
 
 .chart-container {
@@ -658,20 +670,27 @@ kbd {
     border-left: 4px solid #b3b3b3;
     padding: 15px;
     margin: 20px 0;
-    border-radius: 0 !important; /* No rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+    border-radius: 0 !important;
+    /* No rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transition for hover */
 }
 
 .example-box:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow on hover */
 }
 
 /* Style for negative examples in tables - svag rød */
 .bad-example td {
-    background-color: rgba(248, 215, 218, 0.3); /* Svag rød baggrund */
-    color: inherit; /* Behold normal tekstfarve */
+    background-color: rgba(248, 215, 218, 0.3);
+    /* Svag rød baggrund */
+    color: inherit;
+    /* Behold normal tekstfarve */
 }
 
 .table {
@@ -694,7 +713,8 @@ kbd {
 /* Custom styles for square corners on cards */
 .card,
 .card-body {
-    border-radius: 0 !important; /* Override default Bootstrap/MDB styles */
+    border-radius: 0 !important;
+    /* Override default Bootstrap/MDB styles */
 }
 
 .table,
@@ -709,7 +729,8 @@ kbd {
     max-width: 100%;
     max-height: 600px;
     overflow: hidden;
-    margin: 20px 0; /* Match info-box margin */
+    margin: 20px 0;
+    /* Match info-box margin */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -723,16 +744,22 @@ kbd {
 }
 
 .cover-text-overlay {
-    font-family: 'IBM Plex Mono', monospace; /* IBM Plex Mono font */
+    font-family: 'IBM Plex Mono', monospace;
+    /* IBM Plex Mono font */
     position: absolute;
     font-size: 4rem;
-    font-weight: 400; /* Regular font weight for better readability */
-    color: black; /* Black color */
-    text-shadow: none; /* Remove text shadow */
-    font-style: normal; /* No italics */
+    font-weight: 400;
+    /* Regular font weight for better readability */
+    color: black;
+    /* Black color */
+    text-shadow: none;
+    /* Remove text shadow */
+    font-style: normal;
+    /* No italics */
     z-index: 2;
     opacity: 0;
-    transform: translateY(0); /* Keep it vertically centered */
+    transform: translateY(0);
+    /* Keep it vertically centered */
     transition: all 0.6s ease;
     letter-spacing: -0.02em;
     text-align: center;
@@ -754,14 +781,25 @@ kbd {
 }
 
 @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
 }
+
 /* Left-aligned TOC sidebar */
 #left-aligned-sidebar {
     position: fixed;
-    top: 56px; /* Adjust for navbar height */
-    left: -300px; /* Start off-screen */
+    top: 56px;
+    /* Adjust for navbar height */
+    left: -300px;
+    /* Start off-screen */
     width: 300px;
     height: calc(100% - 56px);
     background-color: rgba(248, 249, 250, 0.95);
@@ -769,7 +807,8 @@ kbd {
     padding: 20px;
     overflow-y: auto;
     transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 1029; /* Below navbar (1030) */
+    z-index: 1029;
+    /* Below navbar (1030) */
 }
 
 #left-aligned-sidebar.open {
@@ -798,13 +837,15 @@ kbd {
     display: block;
     padding: 5px 0;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300; /* Lighter font weight */
+    font-weight: 300;
+    /* Lighter font weight */
     transition: font-weight 0.2s ease;
 }
 
 #left-aligned-sidebar ul li a:hover,
 #left-aligned-sidebar ul li a:focus {
-    font-weight: 700; /* Bolder on hover/focus */
+    font-weight: 700;
+    /* Bolder on hover/focus */
 }
 
 /* Sidebar Toggle Button */
@@ -814,38 +855,51 @@ kbd {
     left: 20px;
     transform: translateY(-50%);
     z-index: 1032;
-    background: transparent; /* Default to transparent */
+    background: transparent;
+    /* Default to transparent */
     color: white;
-    border: 2px solid transparent; /* Default to transparent border */
+    border: 2px solid transparent;
+    /* Default to transparent border */
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 24px;
-    line-height: 0; /* Reset line-height for centering */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    line-height: 0;
+    /* Reset line-height for centering */
+    display: flex;
+    /* Use flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 #sidebar-toggle-button:hover,
-#sidebar-toggle-button:focus { /* Add focus for keyboard navigation */
-    background: #fd7e14; /* Orange on hover/focus */
-    border: 2px solid #fd7e14; /* Orange border on hover/focus */
+#sidebar-toggle-button:focus {
+    /* Add focus for keyboard navigation */
+    background: #fd7e14;
+    /* Orange on hover/focus */
+    border: 2px solid #fd7e14;
+    /* Orange border on hover/focus */
     transform: translateY(-50%) scale(1.1);
-    outline: none; /* Remove blue outline on focus */
+    outline: none;
+    /* Remove blue outline on focus */
 }
 
 /* Default state for the button when not hovered or focused */
 #sidebar-toggle-button:not(:hover):not(:focus) {
-    background: #868e96; /* Modern grey */
-    border: 2px solid #868e96; /* Modern grey border */
+    background: #868e96;
+    /* Modern grey */
+    border: 2px solid #868e96;
+    /* Modern grey border */
 }
 
 #sidebar-toggle-button.open {
-    left: 320px; /* Move button with sidebar */
+    left: 320px;
+    /* Move button with sidebar */
 }
 
 
@@ -872,3 +926,28 @@ kbd {
     opacity: 1;
 }
 
+
+/* CRITICAL FIX: Prevent wrapping of legal symbols and numbers in badges */
+.content table td a[href],
+article table td a[href],
+.info-box a[href],
+.example-box a[href],
+.legal-term-link {
+    /* Added a class just in case we need it later */
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center;
+    padding: 1px 6px !important;
+    /* Tighter padding */
+    border-radius: 0 !important;
+    /* SQUARE corners as requested */
+    line-height: 1.2 !important;
+    /* Fixed line height for better fit */
+    font-size: 0.85em !important;
+    /* Smaller font inside the box */
+    vertical-align: middle;
+}
+
+.content table th {
+    white-space: nowrap;
+}

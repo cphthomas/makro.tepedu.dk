@@ -49,6 +49,7 @@
             z-index: 2;
         }
     </style>
+    <link rel="stylesheet" href="glossary.css">
 </head>
 
 <body>
@@ -119,15 +120,17 @@
                     <div class="cover-text-overlay animate-cover-text" data-type-text="1. Juridisk Metode"
                         data-type-speed="150">Juridisk Metode</div>
                 </div>
-                <div class="info-box">
+                <div class="podcast-section">
                     <h2>Podcast</h2>
                     <div class="quiz-container">
-                        <a href="podcast/1.Juridisk_metode.m4a"
-                            class="effectLinks" data-replace="Lyt til Podcast 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?" target="_blank">
-                            <span>Podcast 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?</span>
-                        </a>
+                        <a href="podcast/1.Juridisk_metode.m4a" class="effectLinks"
+                            data-replace="Lyt til Podcast 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?"
+                            target="_blank">
+                            <span>Podcast 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med
+                                jura?</span> </a>
                     </div>
-                    <br><br>
+                </div>
+                <div class="info-box">
                     <p>Dette kapitel introducerer <b>juridisk metode</b> - hvordan man arbejder med jura og finder
                         retskilder.
                         Som finansøkonom skal du kunne identificere relevante retskilder, fortolke juridiske tekster og
@@ -137,12 +140,27 @@
 
                     <h4>Centrale emner</h4>
                     <ul>
-                        <li><b>Retskilder:</b> Love, domme, sædvane og forholdets natur.</li>
+                        <li><b>Retskilder:</b> Love, domme, <span class="legal-term" id="term-saedvane"
+                                data-definition="Uskrevne regler, der er blevet praksis over tid. &quot;Sådan gør man i branchen.&quot;"
+                                data-example="Kutymer for handel med værdipapirer, &quot;God skik&quot; regler inden for forsikring. Lov: KBL § 16"
+                                data-slug="saedvane">sædvane</span> og forholdets natur.</li>
                         <li><b>Juridisk fortolkning:</b> Ordlydsfortolkning, systematisk, historisk og
                             formålsfortolkning.</li>
                         <li><b>Juridisk argumentation:</b> 5-trins model til løsning af juridiske problemstillinger.
                         </li>
-                        <li><b>Vigtige begreber:</b> Bevisbyrde, god/ond tro, forsæt, uagtsomhed.</li>
+                        <li><b>Vigtige begreber:</b> <span class="legal-term" id="term-bevisbyrde"
+                                data-definition="Hvem skal bevise hvad? Hovedregel: Den der påstår noget, skal bevise det."
+                                data-example="I en forsikringssag: Kunden skal bevise, at der er sket en skade, der er dækket af policen. Lov: AFTL § 25"
+                                data-slug="bevisbyrde">Bevisbyrde</span>, god/<span class="legal-term" id="term-ond-tro"
+                                data-definition="Vidste eller burde vide om noget. Modsat god tro."
+                                data-example="Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. Lov: TL § 6"
+                                data-slug="ond-tro">ond tro</span>, <span class="legal-term" id="term-forsaet"
+                                data-definition="Bevidst handling med vilje. Man vidste eller forudså skaden."
+                                data-example="Investeringsrådgiver anbefaler en aktie, han ved er værdiløs, blot for at tjene provision → Forsæt. Lov: Culpa-reglen"
+                                data-slug="forsaet">forsæt</span>, <span class="legal-term" id="term-uagtsomhed"
+                                data-definition="Ikke med vilje, men en fejl man burde have undgået. Kan være simpel eller grov uagtsomhed."
+                                data-example="Bankrådgiver glemmer at tjekke kundens lønsedler før lån → Uagtsomhed. Lov: Culpa-reglen"
+                                data-slug="uagtsomhed">uagtsomhed</span>.</li>
                     </ul>
                 </div>
                 <br>
@@ -155,7 +173,10 @@
 
                     <h4>Hvad består jura af?</h4>
                     <p>Jura er systemet af regler, der styrer vores samfund. For en finansøkonom handler det primært om
-                        formueret (aftaler, køb, lån, erstatning).</p>
+                        formueret (aftaler, køb, lån, <span class="legal-term" id="term-erstatning"
+                            data-definition="Penge, der betales for at dække en skade eller et tab. Kan være formueskade, personskade eller tingskade."
+                            data-example="Bankrådgiver giver fejlagtig rådgivning → Kunde taber 100.000 kr. → Banken skal erstatte 100.000 kr. Lov: Culpa-reglen, EAL"
+                            data-slug="erstatning">erstatning</span>).</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -186,16 +207,30 @@
                                     <td>"§ 5, stk. 1, nr. 3" betyder: Paragraf 5, stykke 1, nummer 3 på listen.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Præceptiv lov</b></td>
+                                    <td><b><span class="legal-term"
+                                                data-definition="En lovregel, der ikke kan fraviges til skade for forbrugeren. Modsat deklaratorisk."
+                                                data-example="Kreditaftaleloven er præceptiv → Banken kan ikke aftale med kunden, at SEF-skemaet ikke skal udleveres eller at kreditvurderingen springes over. Det er ufravigeligt til skade for forbrugeren. Lov: KAL § 1"
+                                                data-slug="praeceptiv">Præceptiv</span> lov</b></td>
                                     <td>En lov, der <b>ikke</b> kan fraviges ved aftale (beskytter typisk den svage
                                         part).</td>
                                     <td>Færdselsloven: Du kan ikke aftale med politiet, at du må køre 150 km/t.
-                                        Kreditaftaleloven: Banken kan ikke aftale, at du ikke har fortrydelsesret.</td>
+                                        Kreditaftaleloven: Banken kan ikke aftale, at du ikke har <span
+                                            class="legal-term" id="term-fortrydelsesret"
+                                            data-definition="Forbrugerens ret til at fortryde en aftale inden for en bestemt frist."
+                                            data-example="Kunde indgår låneaftale på 500.000 kr. den 1. januar. Kunden kan fortryde lånet inden for 14 dage (til 15. januar) uden begrundelse og uden omkostning. Dette gælder kun for forbrugerlån, ikke erhvervslån. Lov: KAL § 19"
+                                            data-slug="fortrydelsesret">fortrydelsesret</span>.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Deklaratorisk lov</b></td>
+                                    <td><b><span class="legal-term" id="term-deklaratorisk"
+                                                data-definition="En lovregel, der kan fraviges ved aftale. Modsat præceptiv (ufravigelig)."
+                                                data-example="Købeloven er deklaratorisk ved handelskøb → Parterne kan aftale anden fremgangsmåde. Lov: KBL § 4"
+                                                data-slug="deklaratorisk">Deklaratorisk</span> lov</b></td>
                                     <td>En lov, der gælder, <b>hvis</b> intet andet er aftalt. Kan fraviges.</td>
-                                    <td>Købeloven (mellem virksomheder): Man kan godt aftale 1 års reklamationsret i
+                                    <td>Købeloven (mellem virksomheder): Man kan godt aftale 1 års <span
+                                            class="legal-term" id="term-reklamationsret"
+                                            data-definition="Købers ret til at reklamere over mangler ved varen. Fristen er 2 år ved handelskøb og forbrugerkøb."
+                                            data-example="Bank opdager mangel ved IT-udstyr efter 18 måneder → Kan stadig reklamere, da fristen er 2 år. Lov: KBL § 21, KBL § 51, KBL § 83"
+                                            data-slug="reklamationsret">reklamationsret</span> i
                                         stedet for 2 år. Loven træder kun til, hvis man har glemt at aftale noget.</td>
                                 </tr>
                             </tbody>
@@ -238,11 +273,18 @@
                                     <td>Afgørelser fra domstolene (især Højesteret). Viser, hvordan loven fortolkes i
                                         praksis.</td>
                                     <td><b>Meget høj</b></td>
-                                    <td>U 2018.553 V (erstatning for mangelfuld rådgivning), U 2007.640 V
+                                    <td>U 2018.553 V (<span class="legal-term"
+                                            data-definition="Penge, der betales for at dække en skade eller et tab. Kan være formueskade, personskade eller tingskade."
+                                            data-example="Bankrådgiver giver fejlagtig rådgivning → Kunde taber 100.000 kr. → Banken skal erstatte 100.000 kr. Lov: Culpa-reglen, EAL"
+                                            data-slug="erstatning">erstatning</span> for mangelfuld rådgivning), U
+                                        2007.640 V
                                         (ejendomsmæglers ansvar)</td>
                                 </tr>
                                 <tr>
-                                    <td><b>3. Sædvane</b></td>
+                                    <td><b>3. <span class="legal-term"
+                                                data-definition="Uskrevne regler, der er blevet praksis over tid. &quot;Sådan gør man i branchen.&quot;"
+                                                data-example="Kutymer for handel med værdipapirer, &quot;God skik&quot; regler inden for forsikring. Lov: KBL § 16"
+                                                data-slug="saedvane">Sædvane</span></b></td>
                                     <td>Uskrevne regler, der er blevet praksis over tid. "Sådan gør man i branchen."
                                     </td>
                                     <td><b>Middel</b></td>
@@ -263,11 +305,20 @@
                     <h4>Hvordan bruges retskilderne?</h4>
                     <ol>
                         <li><b>Start med loven:</b> Find den relevante lov (fx <a
-                                href="https://www.retsinformation.dk/eli/lta/2016/193#P30" target="_blank">AFTL § 30</a>
-                            om svig)</li>
+                                href="https://www.retsinformation.dk/eli/lta/2016/193#P30" target="_blank"><span
+                                    class="legal-term" id="term-aftl" data-definition="Aftaleloven"
+                                    data-example="Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler, fuldmagtsforhold, ugyldighedsgrunde og fortolkning."
+                                    data-slug="aftl">AFTL</span> § 30</a>
+                            om <span class="legal-term" id="term-svig"
+                                data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen var i god tro. Lov: AFTL § 30"
+                                data-slug="svig">svig</span>)</li>
                         <li><b>Læs lovteksten:</b> Hvad står der ordret?</li>
                         <li><b>Find domme:</b> Hvordan har domstolene fortolket paragraffen? (fx U 2018.553 V)</li>
-                        <li><b>Tjek praksis:</b> Hvad er kutyme i branchen?</li>
+                        <li><b>Tjek praksis:</b> Hvad er <span class="legal-term" id="term-kutyme"
+                                data-definition="Sædvane - uskrevne regler, der er blevet praksis over tid i en branche."
+                                data-example="Inden for handel med værdipapirer gælder kutyme om, at handel er bindende mundtligt straks. &quot;God skik&quot; regler inden for forsikring er også kutymer. Lov: KBL § 16"
+                                data-slug="kutyme">kutyme</span> i branchen?</li>
                         <li><b>Anvend på din sag:</b> Passer din situation med loven og dommene?</li>
                     </ol>
 
@@ -280,26 +331,52 @@
                                 <tr>
                                     <th>Metode</th>
                                     <th>Spørgsmål</th>
-                                    <th>Eksempel (Aftaleloven § 30 om svig)</th>
+                                    <th>Eksempel (Aftaleloven § 30 om <span class="legal-term"
+                                            data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                            data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen var i god tro. Lov: AFTL § 30"
+                                            data-slug="svig">svig</span>)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><b>1. Ordlydsfortolkning</b></td>
                                     <td>Hvad står der ordret i loven?</td>
-                                    <td>"En viljeserklæring er ikke bindende... hvis den er fremkaldt ved <b>svig</b>."
-                                        → Hvad betyder "svig"? (Se <a
+                                    <td>"En viljeserklæring er ikke bindende... hvis den er fremkaldt ved <b><span
+                                                class="legal-term"
+                                                data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                                data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen var i god tro. Lov: AFTL § 30"
+                                                data-slug="svig">svig</span></b>."
+                                        → Hvad betyder "<span class="legal-term"
+                                            data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                            data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen var i god tro. Lov: AFTL § 30"
+                                            data-slug="svig">svig</span>"? (Se <a
                                             href="https://www.retsinformation.dk/eli/lta/2016/193#P30"
-                                            target="_blank">AFTL § 30</a>)</td>
+                                            target="_blank"><span class="legal-term" data-definition="Aftaleloven"
+                                                data-example="Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler, fuldmagtsforhold, ugyldighedsgrunde og fortolkning."
+                                                data-slug="aftl">AFTL</span> § 30</a>)</td>
                                 </tr>
                                 <tr>
                                     <td><b>2. Systematisk fortolkning</b></td>
                                     <td>Hvordan hænger paragraffen sammen med andre paragraffer?</td>
                                     <td><a href="https://www.retsinformation.dk/eli/lta/2016/193#P30"
-                                            target="_blank">AFTL § 30</a> (svig) er en <b>svag</b> ugyldighedsgrund,
+                                            target="_blank"><span class="legal-term" data-definition="Aftaleloven"
+                                                data-example="Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler, fuldmagtsforhold, ugyldighedsgrunde og fortolkning."
+                                                data-slug="aftl">AFTL</span> § 30</a> (<span class="legal-term"
+                                            data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                            data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen var i god tro. Lov: AFTL § 30"
+                                            data-slug="svig">svig</span>) er en <b>svag</b> ugyldighedsgrund,
                                         mens <a href="https://www.retsinformation.dk/eli/lta/2016/193#P28"
-                                            target="_blank">AFTL § 28</a> (vold) er
-                                        <b>stærk</b>. Det betyder, at svig kun gælder, når modparten vidste besked (ond
+                                            target="_blank"><span class="legal-term" data-definition="Aftaleloven"
+                                                data-example="Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler, fuldmagtsforhold, ugyldighedsgrunde og fortolkning."
+                                                data-slug="aftl">AFTL</span> § 28</a> (<span class="legal-term"
+                                            id="term-vold"
+                                            data-definition="En stærk ugyldighedsgrund. Aftale indgået under tvang er absolut ugyldig."
+                                            data-example="Kunde tvinges til at underskrive låneaftale under trusler → Aftalen er absolut ugyldig. Lov: AFTL § 28"
+                                            data-slug="vold">vold</span>) er
+                                        <b>stærk</b>. Det betyder, at <span class="legal-term"
+                                            data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                            data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen war i god tro. Lov: AFTL § 30"
+                                            data-slug="svig">svig</span> kun gælder, når modparten vidste besked (ond
                                         tro).
                                     </td>
                                 </tr>
@@ -308,9 +385,17 @@
                                     <td>Hvad var lovgivers hensigt? (forarbejder)</td>
                                     <td>I forarbejderne til <a
                                             href="https://www.retsinformation.dk/eli/lta/2016/193#P30"
-                                            target="_blank">AFTL § 30</a> står: "Svig skal beskytte mod bevidst
+                                            target="_blank"><span class="legal-term" data-definition="Aftaleloven"
+                                                data-example="Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler, fuldmagtsforhold, ugyldighedsgrunde og fortolkning."
+                                                data-slug="aftl">AFTL</span> § 30</a> står: "<span class="legal-term"
+                                            data-definition="Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten vidste besked (ond tro)."
+                                            data-example="Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis køberen var i god tro. Lov: AFTL § 30"
+                                            data-slug="svig">Svig</span> skal beskytte mod bevidst
                                         vildledning." →
-                                        Vildledningen skal være sket med vilje (forsæt).</td>
+                                        Vildledningen skal være sket med vilje (<span class="legal-term"
+                                            data-definition="Bevidst handling med vilje. Man vidste eller forudså skaden."
+                                            data-example="Investeringsrådgiver anbefaler en aktie, han ved er værdiløs, blot for at tjene provision → Forsæt. Lov: Culpa-reglen"
+                                            data-slug="forsaet">forsæt</span>).</td>
                                 </tr>
                                 <tr>
                                     <td><b>4. Formålsfortolkning</b></td>
@@ -328,14 +413,27 @@
 
                     <h4>Trin 1: Identificer problemet</h4>
                     <p><i>Eksempel:</i> En kunde har investeret hele sin opsparing i højrisiko-aktier efter råd fra sin
-                        bank, men tabt alt. Kunden mener, rådgivningen var forkert. Kan kunden få erstatning?</p>
+                        bank, men tabt alt. Kunden mener, rådgivningen var forkert. Kan kunden få <span
+                            class="legal-term"
+                            data-definition="Penge, der betales for at dække en skade eller et tab. Kan være formueskade, personskade eller tingskade."
+                            data-example="Bankrådgiver giver fejlagtig rådgivning → Kunde taber 100.000 kr. → Banken skal erstatte 100.000 kr. Lov: Culpa-reglen, EAL"
+                            data-slug="erstatning">erstatning</span>?</p>
 
                     <h4>Trin 2: Find den relevante regel</h4>
-                    <p><i>Regel:</i> Regler om god skik og erstatningsansvar (culpa). Rådgiveren skal handle i kundens
+                    <p><i>Regel:</i> Regler om god skik og erstatningsansvar (<span class="legal-term" id="term-culpa"
+                            data-definition="Skyld (brøde, uagtsomhed, forseelse). Den ulovbestemte hovedregel om, at man kun hæfter ved forsæt eller uagtsomhed."
+                            data-example="Bankrådgiver glemmer at tjekke RKI før lån → Uagtsomhed (culpa) → Banken hæfter. Lov: Culpa-reglen (ulovbestemt)"
+                            data-slug="culpa">culpa</span>). Rådgiveren skal handle i kundens
                         interesse og oplyse om risici.</p>
 
-                    <h4>Trin 3: Anvend reglen på fakta (subsumption)</h4>
-                    <p><i>Subsumption:</i> Handlede rådgiveren uagtsomt?</p>
+                    <h4>Trin 3: Anvend reglen på fakta (<span class="legal-term" id="term-subsumption"
+                            data-definition="Anvendelse af reglen på fakta. At vurdere, om fakta passer med reglen."
+                            data-example="Reglen siger &quot;uagtsomhed giver ansvar&quot;. Fakta: Bankrådgiver glemte at tjekke RKI → Passer fakta med reglen? Ja → Subsumption opfyldt."
+                            data-slug="subsumption">subsumption</span>)</h4>
+                    <p><i><span class="legal-term"
+                                data-definition="Anvendelse af reglen på fakta. At vurdere, om fakta passer med reglen."
+                                data-example="Reglen siger &quot;uagtsomhed giver ansvar&quot;. Fakta: Bankrådgiver glemte at tjekke RKI → Passer fakta med reglen? Ja → Subsumption opfyldt."
+                                data-slug="subsumption">Subsumption</span>:</i> Handlede rådgiveren uagtsomt?</p>
                     <ul>
                         <li>Ja: Kunden bad om "sikker investering", men fik "høj risiko".</li>
                         <li>Ja: Rådgiveren glemte at lave en risikoprofil (lovkrav).</li>
@@ -347,7 +445,10 @@
                         erstatningsansvarlig.</p>
 
                     <h4>Trin 5: Retsfølge (hvad sker der?)</h4>
-                    <p><i>Retsfølge:</i> Banken skal dække kundens tab (erstatning), så kunden stilles som om
+                    <p><i>Retsfølge:</i> Banken skal dække kundens tab (<span class="legal-term"
+                            data-definition="Penge, der betales for at dække en skade eller et tab. Kan være formueskade, personskade eller tingskade."
+                            data-example="Bankrådgiver giver fejlagtig rådgivning → Kunde taber 100.000 kr. → Banken skal erstatte 100.000 kr. Lov: Culpa-reglen, EAL"
+                            data-slug="erstatning">erstatning</span>), så kunden stilles som om
                         rådgivningen havde været korrekt.</p>
 
                     <h3>4. Eksempel: Juridisk Metode i Praksis</h3>
@@ -364,7 +465,11 @@
                                 <tr>
                                     <td><b>Problem</b></td>
                                     <td>Hvad er det juridiske spørgsmål?</td>
-                                    <td>En 17-årig har købt en dyr scooter på afbetaling uden forældrenes accept.
+                                    <td>En 17-årig har købt en dyr scooter på afbetaling uden forældrenes <span
+                                            class="legal-term" id="term-accept"
+                                            data-definition="En parts svar på et tilbud, der gør aftalen bindende. Accepten skal være overensstemmende med tilbuddet."
+                                            data-example="Banken sender lånetilbud på 500.000 kr. med ÅOP 5,2% til kunden. Når kunden siger &quot;ja tak&quot; eller skriver under, er det en accept, og låneaftalen er bindende. Kunden kan ikke længere fortryde uden omkostning. Lov: AFTL § 1-6"
+                                            data-slug="accept">accept</span>.
                                         Forhandleren kræver betaling. Hvem har ret?</td>
                                 </tr>
                                 <tr>
@@ -382,7 +487,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Subsumption</b></td>
+                                    <td><b><span class="legal-term"
+                                                data-definition="Anvendelse af reglen på fakta. At vurdere, om fakta passer med reglen."
+                                                data-example="Reglen siger &quot;uagtsomhed giver ansvar&quot;. Fakta: Bankrådgiver glemte at tjekke RKI → Passer fakta med reglen? Ja → Subsumption opfyldt."
+                                                data-slug="subsumption">Subsumption</span></b></td>
                                     <td>Passer fakta med reglen?</td>
                                     <td>Ja. Den mindreårige kan ikke stifte gæld. At han "ligner en på 20" ændrer ikke
                                         på juraen.</td>
@@ -415,52 +523,101 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>Bevisbyrde</b></td>
+                                    <td><b><span class="legal-term"
+                                                data-definition="Hvem skal bevise hvad? Hovedregel: Den der påstår noget, skal bevise det."
+                                                data-example="I en forsikringssag: Kunden skal bevise, at der er sket en skade, der er dækket af policen. Lov: AFTL § 25"
+                                                data-slug="bevisbyrde">Bevisbyrde</span></b></td>
                                     <td>Hvem skal bevise hvad? Hovedregel: Den der påstår noget, skal bevise det.</td>
                                     <td>I en forsikringssag: Kunden skal bevise, at der er sket en skade, der er dækket
                                         af policen.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>God tro / Ond tro</b></td>
-                                    <td>God tro = uvidende (uskyldig). Ond tro = vidste eller burde vide.</td>
-                                    <td>En køber af en lejlighed er i <b>god tro</b> om en gæld, hvis intet fremgik af
-                                        tingbogen. Er i <b>ond tro</b>, hvis sælger sagde det.</td>
+                                    <td><b><span class="legal-term" id="term-god-tro"
+                                                data-definition="Uvidende (uskyldig). Man vidste ikke og burde ikke vide om noget."
+                                                data-example="Køber af lejlighed er i god tro om en gæld, hvis intet fremgik af tingbogen. Lov: TL § 6"
+                                                data-slug="god-tro">God tro</span> / <span class="legal-term"
+                                                data-definition="Vidste eller burde vide om noget. Modsat god tro."
+                                                data-example="Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. Lov: TL § 6"
+                                                data-slug="ond-tro">Ond tro</span></b></td>
+                                    <td><span class="legal-term"
+                                            data-definition="Uvidende (uskyldig). Man vidste ikke og burde ikke vide om noget."
+                                            data-example="Køber af lejlighed er i god tro om en gæld, hvis intet fremgik af tingbogen. Lov: TL § 6"
+                                            data-slug="god-tro">God tro</span> = uvidende (uskyldig). <span
+                                            class="legal-term"
+                                            data-definition="Vidste eller burde vide om noget. Modsat god tro."
+                                            data-example="Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. Lov: TL § 6"
+                                            data-slug="ond-tro">Ond tro</span> = vidste eller burde vide.</td>
+                                    <td>En køber af en lejlighed er i <b><span class="legal-term"
+                                                data-definition="Uvidende (uskyldig). Man vidste ikke og burde ikke vide om noget."
+                                                data-example="Køber af lejlighed er i god tro om en gæld, hvis intet fremgik af tingbogen. Lov: TL § 6"
+                                                data-slug="god-tro">god tro</span></b> om en gæld, hvis intet fremgik af
+                                        tingbogen. Er i <b><span class="legal-term"
+                                                data-definition="Vidste eller burde vide om noget. Modsat god tro."
+                                                data-example="Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. Lov: TL § 6"
+                                                data-slug="ond-tro">ond tro</span></b>, hvis sælger sagde det.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Forsæt</b></td>
+                                    <td><b><span class="legal-term"
+                                                data-definition="Bevidst handling med vilje. Man vidste eller forudså skaden."
+                                                data-example="Investeringsrådgiver anbefaler en aktie, han ved er værdiløs, blot for at tjene provision → Forsæt. Lov: Culpa-reglen"
+                                                data-slug="forsaet">Forsæt</span></b></td>
                                     <td>Med vilje. Bevidst handling.</td>
                                     <td>For at straffe for forsikringssvindel (jf. <a
                                             href="https://www.retsinformation.dk/eli/lta/2025/1294#P279"
-                                            target="_blank">Straffeloven § 279</a>) kræves forsæt. Man skal <i>vide</i>,
+                                            target="_blank">Straffeloven § 279</a>) kræves <span class="legal-term"
+                                            data-definition="Bevidst handling med vilje. Man vidste eller forudså skaden."
+                                            data-example="Investeringsrådgiver anbefaler en aktie, han ved er værdiløs, blot for at tjene provision → Forsæt. Lov: Culpa-reglen"
+                                            data-slug="forsaet">forsæt</span>. Man skal <i>vide</i>,
                                         man
                                         snyder.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Uagtsomhed</b></td>
-                                    <td>Ikke med vilje, men en fejl man burde have undgået (culpa).</td>
+                                    <td><b><span class="legal-term"
+                                                data-definition="Ikke med vilje, men en fejl man burde have undgået. Kan være simpel eller grov uagtsomhed."
+                                                data-example="Bankrådgiver glemmer at tjekke kundens lønsedler før lån → Uagtsomhed. Lov: Culpa-reglen"
+                                                data-slug="uagtsomhed">Uagtsomhed</span></b></td>
+                                    <td>Ikke med vilje, men en fejl man burde have undgået (<span class="legal-term"
+                                            data-definition="Skyld (brøde, uagtsomhed, forseelse). Den ulovbestemte hovedregel om, at man kun hæfter ved forsæt eller uagtsomhed."
+                                            data-example="Bankrådgiver glemmer at tjekke RKI før lån → Uagtsomhed (culpa) → Banken hæfter. Lov: Culpa-reglen (ulovbestemt)"
+                                            data-slug="culpa">culpa</span>).</td>
                                     <td>En investeringsrådgiver glemte at spørge om kundens tidshorisont (jf. <a
                                             href="https://www.retsinformation.dk/eli/lta/2024/1163#P43"
                                             target="_blank">Lov om finansiel virksomhed § 43</a>). Det er en
                                         uagtsom fejl (professionelt ansvar).</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Condictio indebiti</b></td>
+                                    <td><b><span class="legal-term" id="term-condictio-indebiti"
+                                                data-definition="Krav om tilbagebetaling af penge, der er betalt ved en fejl."
+                                                data-example="Banken udbetaler 1 mio. kr. for meget ved en fejl. Banken kan kræve dem tilbage (medmindre modtageren var i god tro og har brugt dem rimeligt)."
+                                                data-slug="condictio-indebiti">Condictio indebiti</span></b></td>
                                     <td>Krav om tilbagebetaling af penge, der er betalt ved en fejl.</td>
                                     <td>Banken udbetaler 1 mio. kr. for meget ved en fejl. Banken kan kræve dem tilbage
-                                        (medmindre modtageren var i god tro og har brugt dem rimeligt).</td>
+                                        (medmindre modtageren var i <span class="legal-term"
+                                            data-definition="Uvidende (uskyldig). Man vidste ikke og burde ikke vide om noget."
+                                            data-example="Køber af lejlighed er i god tro om en gæld, hvis intet fremgik af tingbogen. Lov: TL § 6"
+                                            data-slug="god-tro">god tro</span> og har brugt dem rimeligt).</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Analogislutning</b></td>
+                                    <td><b><span class="legal-term" id="term-analogislutning"
+                                                data-definition="Anvende en lovregel på et område, den ikke direkte gælder for, fordi situationen ligner."
+                                                data-example="Regler om &quot;køb&quot; bruges ofte analogisk på &quot;bytte&quot; af varer, da situationerne minder om hinanden."
+                                                data-slug="analogislutning">Analogislutning</span></b></td>
                                     <td>Anvende en lovregel på et område, den ikke direkte gælder for, fordi det ligner.
                                     </td>
                                     <td>Regler om "køb" bruges ofte analogisk på "bytte" af varer, da situationerne
                                         minder om hinanden.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Præjudikat</b></td>
+                                    <td><b><span class="legal-term" id="term-praejudikat"
+                                                data-definition="En tidligere dom, der &quot;skaber ret&quot; og følges i fremtidige sager."
+                                                data-example="En Højesteretsdom om, at banker altid skal rådgive om særlige lånerisici, bliver et præjudikat, alle banker skal følge."
+                                                data-slug="praejudikat">Præjudikat</span></b></td>
                                     <td>En tidligere dom, der "skaber ret" og følges i fremtidige sager.</td>
                                     <td>En Højesteretsdom om, at banker altid skal rådgive om særlige lånerisici, bliver
-                                        et præjudikat, alle banker skal følge.</td>
+                                        et <span class="legal-term"
+                                            data-definition="En tidligere dom, der &quot;skaber ret&quot; og følges i fremtidige sager."
+                                            data-example="En Højesteretsdom om, at banker altid skal rådgive om særlige lånerisici, bliver et præjudikat, alle banker skal følge."
+                                            data-slug="praejudikat">præjudikat</span>, alle banker skal følge.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -483,7 +640,11 @@
                         <li><b>Dokumentér alt:</b> Gem emails, kontrakter, notater. Bevisbyrden kan ligge hos dig.</li>
                         <li><b>Vær præcis:</b> "Måske" er ikke godt nok i jura. Enten er det lovligt eller ulovligt.
                         </li>
-                        <li><b>Tænk på god/ond tro:</b> Mange regler afhænger af, om du vidste eller burde vide noget.
+                        <li><b>Tænk på god/<span class="legal-term"
+                                    data-definition="Vidste eller burde vide om noget. Modsat god tro."
+                                    data-example="Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. Lov: TL § 6"
+                                    data-slug="ond-tro">ond tro</span>:</b> Mange regler afhænger af, om du vidste eller
+                            burde vide noget.
                         </li>
                         <li><b>Spørg ved tvivl:</b> Juridiske fejl kan koste millioner. Kontakt en advokat ved
                             usikkerhed.</li>
@@ -493,11 +654,13 @@
                 <br><br>
                 <h2>Quiz</h2>
                 <div class="quiz-container">
-                    <a href="https://quiz.tepedu.dk/jura1.1"
-                        class="effectLinks" data-replace="Start Quiz 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?" target="_blank">
-                        <span>Quiz 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?</span>
-                    </a>
+                    <a href="https://quiz.tepedu.dk/jura1.1" class="effectLinks"
+                        data-replace="Start Quiz 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?"
+                        target="_blank">
+                        <span>Quiz 1.1 om Juridisk Metode: Juridisk Metode - Hvordan arbejder man med jura?</span> </a>
                 </div>
+                <br><br>
+
 
             </article>
         </div>
@@ -587,6 +750,7 @@
             });
         });
     </script>
+    <script src="glossary.js"></script>
 </body>
 
 </html>
