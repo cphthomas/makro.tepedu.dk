@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search.css">
     <link rel="icon" type="image/x-icon" href="favicon.svg">
     <style>
         /* Custom styles for tables with hover effect */
@@ -67,6 +68,13 @@
 
             <!-- Right-aligned Navbar Items -->
             <ul class="navbar-nav ml-auto align-items-center">
+                <!-- Search Icon -->
+                <li class="nav-item">
+                    <a class="nav-link search-icon-nav" id="search-icon-nav" role="button" aria-label="Søg">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li>
+
                 <!-- Dropdown Menu for Pages -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -354,7 +362,8 @@
                             data-example="Bank, realkreditinstitut, forsikringsselskab, ejendomsmægler er alle erhvervsdrivende. Lov: KBL § 4"
                             data-slug="erhvervsdrivende">erhvervsdrivende</span> - en
                         lastbilsælger
-                        og en vognmand.</p>
+                        og en vognmand.
+                    </p>
 
                     <p>Dvs. et køb, hvor både køber og sælger er <span class="legal-term"
                             data-definition="En person eller virksomhed, der driver erhverv (ikke privatperson)."
@@ -1984,7 +1993,8 @@
                                         efter <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P27"
                                             target="_blank"><span class="legal-term" data-definition="Købeloven"
                                                 data-example="Reglerne om køb af løsøre. Skelner mellem handelskøb, civilkøb og forbrugerkøb."
-                                                data-slug="kbl">KBL</span> § 27</a>.</td>
+                                                data-slug="kbl">KBL</span> § 27</a>.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><b>For sent leveret IT-udstyr:</b> En virksomhed bestiller 20 computere til
@@ -2024,7 +2034,8 @@
                                         kan
                                         virksomheden ophæve købet og købe hos anden leverandør.<br><b>Bemærk:</b> Tabet
                                         skal
-                                        beregnes og dokumenteres præcist.</td>
+                                        beregnes og dokumenteres præcist.
+                                    </td>
                                 </tr>
                                 <tr style="background-color: #e8f5e9;">
                                     <td><b>Manglende vareundersøgelse opdaget ved revision:</b> Ved gennemgang af
@@ -2183,7 +2194,8 @@
                                                 data-example="Ved misligholdelse kan køber ophæve købet og kræve pengene tilbage. Lov: KBL § 24"
                                                 data-slug="ophaevelse">Ophævelse</span>:</b> Ved væsentlig forsinkelse
                                         kan købet
-                                        ophæves, og selskabet kan købe hos anden leverandør.</td>
+                                        ophæves, og selskabet kan købe hos anden leverandør.
+                                    </td>
                                 </tr>
                                 <tr style="background-color: #e8f5e9;">
                                     <td><b>Ejendomsmægler:</b> Et ejendomsmæglerkontor køber nyt CRM-system til at
@@ -2440,6 +2452,26 @@
         });
     </script>
     <script src="glossary.js"></script>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" class="search-input"
+                        placeholder="Søg på tværs af alle kapitler..." autocomplete="off">
+                    <i class="bi bi-search search-icon-input"></i>
+                </div>
+                <button id="search-close" class="search-close" aria-label="Luk søgning">&times;</button>
+            </div>
+            <div class="search-results">
+                <div id="search-info" class="search-info">Skriv mindst 3 tegn for at søge...</div>
+                <div id="search-results"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="search.js"></script>
 </body>
 
 </html>

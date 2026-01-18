@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search.css">
     <link rel="icon" type="image/x-icon" href="favicon.svg">
     <style>
         /* Custom styles for tables with hover effect */
@@ -69,6 +70,14 @@
             </a>
 
             <!-- Right-aligned Navbar Items -->
+                <!-- Search Icon -->
+                <li class="nav-item">
+                    <a class="nav-link search-icon-nav" id="search-icon-nav" role="button" aria-label="Søg">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li>
+                
+
             <ul class="navbar-nav ml-auto align-items-center">
                 <!-- Dropdown Menu for Pages -->
                 <li class="nav-item dropdown">
@@ -2762,6 +2771,26 @@
         });
     </script>
     <script src="glossary.js"></script>
+    
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" class="search-input" placeholder="Søg på tværs af alle kapitler..." autocomplete="off">
+                    <i class="bi bi-search search-icon-input"></i>
+                </div>
+                <button id="search-close" class="search-close" aria-label="Luk søgning">&times;</button>
+            </div>
+            <div class="search-results">
+                <div id="search-info" class="search-info">Skriv mindst 3 tegn for at søge...</div>
+                <div id="search-results"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="search.js"></script>
+
 </body>
 
 </html>

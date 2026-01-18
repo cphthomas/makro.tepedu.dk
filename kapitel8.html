@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="search.css">
   <link rel="icon" type="image/x-icon" href="favicon.svg">
   <style>
     /* Custom styles for tables with hover effect */
@@ -66,6 +67,14 @@
       </a>
 
       <!-- Right-aligned Navbar Items -->
+      <!-- Search Icon -->
+      <li class="nav-item">
+        <a class="nav-link search-icon-nav" id="search-icon-nav" role="button" aria-label="Søg">
+          <i class="bi bi-search"></i>
+        </a>
+      </li>
+
+
       <ul class="navbar-nav ml-auto align-items-center">
         <!-- Dropdown Menu for Pages -->
         <li class="nav-item dropdown">
@@ -168,7 +177,8 @@
                   <b>Inadækvat (Inadækvat):</b> Hvis en fejlbehandling på et hospital forlænger en patients ophold, og
                   patienten derefter bliver forbrændt under en brand på sygehuset, anses brandskaden normalt for
                   inadækvat (uforudsigelig), og hospitalet hæfter ikke for brandskaden som følge af den oprindelige
-                  fejlbehandling.</td>
+                  fejlbehandling.
+                </td>
               </tr>
               <tr id="term-afbetalingskoeb">
                 <td><b>Afbetalingskøb</b><br><small><b>Findes i:</b> <a
@@ -339,7 +349,8 @@
                   modtageren ser beløbet og skynder sig at bruge det (ond tro), er der et klart tilbagebetalingskrav.
                   <b>Pensionsfejl:</b> Et pensionsfirma udbetaler 35.000 kr. i stedet for 32.000 kr. Hvis modtageren er
                   i god tro og har indrettet sit forbrug efter beløbet, kan kravet i særlige tilfælde bortfalde
-                  (retssædvane).</td>
+                  (retssædvane).
+                </td>
               </tr>
               <tr id="term-culpa">
                 <td><b>Culpa</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-culpa">Kapitel 1</a>, <a
@@ -438,7 +449,8 @@
                   ejendomsforbehold. Kunden skal lægge 40.000 kr. (20%) kontant. Finansieringsselskabet ejer bilen,
                   indtil sidste afdrag er betalt. For biler skal forbeholdet tinglyses i <b>Bilbogen</b> for at være
                   gyldigt mod andre kreditorer. Hvis kunden stopper med at betale, kan bilen hentes via Fogedretten.
-                  <b>Lov:</b> KAL § 34.</td>
+                  <b>Lov:</b> KAL § 34.
+                </td>
               </tr>
               <tr id="term-ejendomsret">
                 <td><b>Ejendomsret</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-ejendomsret">Kapitel
@@ -630,7 +642,8 @@
                   CPR-numre skal sendes krypteret. Kunden har ret til at se, hvad banken har registreret om dem.
                   <b>Lov:</b> <a href="https://eur-lex.europa.eu/legal-content/DA/TXT/?uri=celex%3A32016R0679"
                     target="_blank">GDPR</a>, <a href="https://www.retsinformation.dk/eli/lta/2018/502"
-                    target="_blank">Databeskyttelsesloven</a></td>
+                    target="_blank">Databeskyttelsesloven</a>
+                </td>
               </tr>
               <tr id="term-god-tro">
                 <td><b>God tro</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-god-tro">Kapitel 1</a>, <a
@@ -656,7 +669,8 @@
                 <td>Virksomhed skylder banken 1 mio. kr. og udsteder gældsbrev som dokumentation. Gældsbrevet kan være
                   simpelt (kun mellem virksomhed og bank) eller omsætningsgældsbrev (kan sælges til anden bank).
                   <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/333"
-                    target="_blank">Gældsbrevsloven</a></td>
+                    target="_blank">Gældsbrevsloven</a>
+                </td>
               </tr>
               <tr id="term-gaeldsfaktor">
                 <td><b>Gældsfaktor</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gaeldsfaktor">Kapitel
@@ -845,7 +859,8 @@
                 <td>Ejendomsmægler skal have skriftlig formidlingsaftale med sælger, hvor vederlaget (fx 2% af
                   købesummen) og ansvarlig ejendomsmægler fremgår. Uden skriftlig aftale er formidlingsaftalen ugyldig.
                   <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/510#P29" target="_blank">LOFE §
-                    29</a></td>
+                    29</a>
+                </td>
               </tr>
               <tr id="term-lov-om-finansiel-virksomhed-fil">
                 <td><b>Lov om Finansiel Virksomhed (FIL)</b></td>
@@ -920,7 +935,8 @@
                 <td>Banken opdager mistænkelig transaktion (fx kunde indsætter 50.000 kr. kontant uden dokumentation).
                   Banken skal underrette NSK via hvidvaskansvarlig. Banken må IKKE advare kunden (meddelelsesforbud).
                   <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/316"
-                    target="_blank">Hvidvaskloven</a></td>
+                    target="_blank">Hvidvaskloven</a>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -1018,7 +1034,8 @@
                 <td>Kunde er medlem af Folketinget eller minister. Banken skal lave ekstra grundig risikovurdering og
                   KYC, da PEP'er er høj-risiko kunder. Banken skal spørge ekstra grundigt til pengenes oprindelse.
                   <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/316"
-                    target="_blank">Hvidvaskloven</a></td>
+                    target="_blank">Hvidvaskloven</a>
+                </td>
               </tr>
               <tr id="term-personskade">
                 <td><b>Personskade</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-personskade">Kapitel
@@ -1027,7 +1044,8 @@
                   erstatning.</td>
                 <td>Kunde falder i banken og brækker benet → Personskade. Banken skal erstatte tabt arbejdsfortjeneste,
                   helbredelsesudgifter, smerte og lidelse osv. Dette er dyrere end almindelig formueskade. <b>Lov:</b>
-                  <a href="https://www.retsinformation.dk/eli/lta/2018/1070#P1" target="_blank">EAL §§ 1-5</a></td>
+                  <a href="https://www.retsinformation.dk/eli/lta/2018/1070#P1" target="_blank">EAL §§ 1-5</a>
+                </td>
               </tr>
               <tr id="term-principalansvar">
                 <td><b>Principalansvar</b><br><small><b>Findes i:</b> <a
@@ -1217,7 +1235,8 @@
                 <td><b>Eksempler:</b> Fakturaer, navnegældsbreve ("Betales til [Navn]" uden "eller ordre"), låneaftaler
                   i banken. <b>Sikringsakt:</b> Denunciation (GBL § 31) - køberen skal give debitor besked. <b>Debitors
                     indsigelser:</b> Debitor bevarer ALLE indsigelser mod køberen. Ingen ekstinktion mulig. <b>Lov:</b>
-                  <a href="https://www.retsinformation.dk/eli/lta/2014/333#P26" target="_blank">GBL § 26</a></td>
+                  <a href="https://www.retsinformation.dk/eli/lta/2014/333#P26" target="_blank">GBL § 26</a>
+                </td>
               </tr>
               <tr id="term-skadesloesbrev">
                 <td><b>Skadesløsbrev</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-skadesloesbrev">Kapitel
@@ -1549,6 +1568,26 @@
       });
     });
   </script>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="search-modal">
+    <div class="search-container">
+      <div class="search-header">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Søg på tværs af alle kapitler..."
+            autocomplete="off">
+          <i class="bi bi-search search-icon-input"></i>
+        </div>
+        <button id="search-close" class="search-close" aria-label="Luk søgning">&times;</button>
+      </div>
+      <div class="search-results">
+        <div id="search-info" class="search-info">Skriv mindst 3 tegn for at søge...</div>
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="search.js"></script>
 </body>
 
 </html>
