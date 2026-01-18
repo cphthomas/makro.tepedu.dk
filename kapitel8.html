@@ -2,1162 +2,1540 @@
 <html lang="da">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Ordliste - Jura</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@100;400;500&family=Roboto:wght@100;300;400;500;700&display=swap"
-        rel="stylesheet">
-    <!-- MDB CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="favicon.svg">
-    <style>
-        /* Custom styles for tables with hover effect */
-        .table-hover tbody tr:hover {
-            background-color: #f5f5f5;
-            /* Light gray on hover */
-            cursor: pointer;
-        }
+  <meta charset="UTF-8">
+  <title>Ordliste - Jura</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@100;400;500&family=Roboto:wght@100;300;400;500;700&display=swap"
+    rel="stylesheet">
+  <!-- MDB CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="favicon.svg">
+  <style>
+    /* Custom styles for tables with hover effect */
+    .table-hover tbody tr:hover {
+      background-color: #f5f5f5;
+      /* Light gray on hover */
+      cursor: pointer;
+    }
 
-        /* Ensure video respects container width and white background */
-        .book-cover-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            overflow: hidden;
-            background-color: white;
-        }
+    /* Ensure video respects container width and white background */
+    .book-cover-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      background-color: white;
+    }
 
-        .book-cover-wrapper video {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            display: block;
-            background-color: white;
-        }
+    .book-cover-wrapper video {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      display: block;
+      background-color: white;
+    }
 
-        /* Ensure text overlay stays above white background */
-        .cover-text-overlay {
-            z-index: 2;
-        }
-    </style>
-    <link rel="stylesheet" href="glossary.css">
+    /* Ensure text overlay stays above white background */
+    .cover-text-overlay {
+      z-index: 2;
+    }
+  </style>
+  <link rel="stylesheet" href="glossary.css">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand navbar-light transparent-navbar fixed-top">
-        <div class="container-fluid">
-            <!-- Logo and link -->
-            <a href="https://tepedu.dk/" target="_blank" rel="noopener noreferrer">
-                <img src="tepedulogoanim.svg" alt="Te Pedu Logo" style="height: 35px; margin-right: 15px;">
-            </a>
-            <!-- Left-aligned Home Icon -->
-            <a class="navbar-brand" href="index.html">
-                <i class="bi bi-house-door"></i>
-            </a>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand navbar-light transparent-navbar fixed-top">
+    <div class="container-fluid">
+      <!-- Logo and link -->
+      <a href="https://tepedu.dk/" target="_blank" rel="noopener noreferrer">
+        <img src="tepedulogoanim.svg" alt="Te Pedu Logo" style="height: 35px; margin-right: 15px;">
+      </a>
+      <!-- Left-aligned Home Icon -->
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-house-door"></i>
+      </a>
 
-            <!-- Right-aligned Navbar Items -->
-            <ul class="navbar-nav ml-auto align-items-center">
-                <!-- Dropdown Menu for Pages -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bi bi-list icon-margin"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <!-- Menu items will be generated by menu.js -->
-                    </div>
-                </li>
+      <!-- Right-aligned Navbar Items -->
+      <ul class="navbar-nav ml-auto align-items-center">
+        <!-- Dropdown Menu for Pages -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-list icon-margin"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <!-- Menu items will be generated by menu.js -->
+          </div>
+        </li>
 
-                <!-- Left Arrow Icon (Previous Page) -->
-                <li class="nav-item">
-                    <a class="nav-link" id="prev-page-link" href="kapitel7.html">
-                        <i class="bi bi-arrow-left"></i>
-                    </a>
-                </li>
+        <!-- Left Arrow Icon (Previous Page) -->
+        <li class="nav-item">
+          <a class="nav-link" id="prev-page-link" href="kapitel7.html">
+            <i class="bi bi-arrow-left"></i>
+          </a>
+        </li>
 
-                <!-- Right Arrow Icon (Next Page) -->
-                <li class="nav-item">
-                    <a class="nav-link" id="next-page-link" href="index.html">
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </li>
-            </ul>
+        <!-- Right Arrow Icon (Next Page) -->
+        <li class="nav-item">
+          <a class="nav-link" id="next-page-link" href="index.html">
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation -->
+  <div id="left-aligned-sidebar" class="sidebar">
+    <button id="sidebar-toggle-button" class="sidebar-toggle" aria-label="Toggle navigation">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="sidebar-content">
+      <h5 class="sidebar-title">Indholdsfortegnelse</h5>
+      <ul id="sidebar-toc" class="list-unstyled">
+        <!-- TOC items will be generated by script.js -->
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container mt-4">
+      <article>
+        <div class="alphabet-nav mb-4" style="font-size: 1.2rem; text-align: center;">
+          <a href="#letter-A" class="mx-2 font-weight-bold" style="color: #14b8a6;">A</a> <a href="#letter-B"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">B</a> <a href="#letter-C"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">C</a> <a href="#letter-D"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">D</a> <a href="#letter-E"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">E</a> <a href="#letter-F"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">F</a> <a href="#letter-G"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">G</a> <a href="#letter-H"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">H</a> <a href="#letter-K"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">K</a> <a href="#letter-L"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">L</a> <a href="#letter-M"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">M</a> <a href="#letter-N"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">N</a> <a href="#letter-O"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">O</a> <a href="#letter-P"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">P</a> <a href="#letter-R"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">R</a> <a href="#letter-S"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">S</a> <a href="#letter-T"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">T</a> <a href="#letter-U"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">U</a> <a href="#letter-V"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">V</a> <a href="#letter-Å"
+            class="mx-2 font-weight-bold" style="color: #14b8a6;">Å</a>
         </div>
-    </nav>
-
-    <!-- Sidebar Navigation -->
-    <div id="left-aligned-sidebar" class="sidebar">
-        <button id="sidebar-toggle-button" class="sidebar-toggle" aria-label="Toggle navigation">
-            <i class="bi bi-list"></i>
-        </button>
-        <div class="sidebar-content">
-            <h5 class="sidebar-title">Indholdsfortegnelse</h5>
-            <ul id="sidebar-toc" class="list-unstyled">
-                <!-- TOC items will be generated by script.js -->
-            </ul>
+        <h3 id="letter-A">A</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-accept">
+                <td><b>Accept</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-accept">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-accept">Kapitel 2</a>, <a href="kapitel7.html#term-accept">Kapitel
+                      7</a></small></td>
+                <td>En parts svar på et tilbud, der gør aftalen bindende. Accepten skal være
+                  overensstemmende med tilbuddet.</td>
+                <td>Banken sender lånetilbud på 500.000 kr. med ÅOP 5,2% til kunden. Når kunden siger "ja tak" eller
+                  skriver under, er det en accept, og låneaftalen er bindende. Kunden kan ikke længere fortryde uden
+                  omkostning. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P1"
+                    target="_blank">AFTL § 1-6</a></td>
+              </tr>
+              <tr id="term-adaekvans">
+                <td><b>Adækvans</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-adaekvans">Kapitel
+                      4</a></small></td>
+                <td>Påregnelighed - skaden skal være en forudsigelig følge af den uagtsomme handling. Hvis en skade er
+                  helt usandsynlig eller 'fjern', kan der ikke pålægges ansvar, selvom der er årsagssammenhæng
+                  (kausalitet).</td>
+                <td><b>Bankrådgivning (Adækvat):</b> En bankrådgiver glemmer at tjekke RKI på en låneansøger. Det er en
+                  påregnelig (adækvat) følge, at banken lider tab, hvis kunden viser sig at være dårlig betaler.
+                  <b>Inadækvat (Inadækvat):</b> Hvis en fejlbehandling på et hospital forlænger en patients ophold, og
+                  patienten derefter bliver forbrændt under en brand på sygehuset, anses brandskaden normalt for
+                  inadækvat (uforudsigelig), og hospitalet hæfter ikke for brandskaden som følge af den oprindelige
+                  fejlbehandling.</td>
+              </tr>
+              <tr id="term-afbetalingskoeb">
+                <td><b>Afbetalingskøb</b><br><small><b>Findes i:</b> <a
+                      href="kapitel3.html#term-afbetalingskoeb">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-afbetalingskoeb">Kapitel 5</a></small></td>
+                <td>Et køb, hvor købesummen betales i flere rater over tid. Oftest med
+                  ejendomsforbehold.</td>
+                <td>Køber køber bil til 200.000 kr. og betaler i 12 månedlige rater på 20.000 kr. Sælgeren (fx
+                  bilforhandler eller finansieringsselskab) har ejendomsforbehold, indtil sidste afdrag er betalt. Hvis
+                  køberen stopper med at betale, kan sælgeren kræve bilen tilbage. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2021/1853#P6" target="_blank">KBL § 6</a></td>
+              </tr>
+              <tr id="term-afhjaelpning">
+                <td><b>Afhjælpning</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-afhjaelpning">Kapitel
+                      3</a></small></td>
+                <td>Sælgerens ret til at rette en mangel ved varen, før køber kan kræve pengene
+                  tilbage.</td>
+                <td>Banken køber printer til 50.000 kr., men den virker ikke. Leverandøren har ret til at reparere eller
+                  levere ny printer først. Banken kan ikke umiddelbart kræve pengene tilbage eller ophæve købet -
+                  sælgeren får en chance for at rette fejlen først. <b>Lov:</b>
+                  <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P23" target="_blank">KBL § 23</a>
+                </td>
+              </tr>
+              <tr id="term-afslag">
+                <td><b>Afslag</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-afslag">Kapitel 2</a></small>
+                </td>
+                <td>Når en part afviser et tilbud. Tilbuddet er bortfaldet, selvom fristen endnu
+                  ikke er udløbet.</td>
+                <td>Kunden siger "Nej tak" til lånetilbuddet → Tilbuddet er bortfaldet straks.
+                  Kunden kan ikke fortryde sit afslag. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2016/193#P5" target="_blank">AFTL § 5</a></td>
+              </tr>
+              <tr id="term-aftl-aftaleloven">
+                <td><b>AFTL (Aftaleloven)</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-aftl">Kapitel
+                      1</a>, <a href="kapitel2.html#term-aftl">Kapitel 2</a>, <a href="kapitel7.html#term-aftl">Kapitel
+                      7</a></small></td>
+                <td>Aftaleloven</td>
+                <td>Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler,
+                  fuldmagtsforhold, ugyldighedsgrunde og fortolkning.</td>
+              </tr>
+              <tr id="term-afvikling">
+                <td><b>Afvikling</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-afvikling">Kapitel
+                      3</a></small></td>
+                <td>Levering og betaling ved handel med værdipapirer. Sker typisk efter faste
+                  frister (fx T+2 dage).</td>
+                <td>Banken køber aktier mandag → Afvikling sker onsdag (T+2). Pengene og aktierne
+                  overføres på dette tidspunkt.</td>
+              </tr>
+              <tr id="term-analogislutning">
+                <td><b>Analogislutning</b><br><small><b>Findes i:</b> <a
+                      href="kapitel1.html#term-analogislutning">Kapitel 1</a></small></td>
+                <td>Anvende en lovregel på et område, den ikke direkte gælder for, fordi situationen
+                  ligner.</td>
+                <td>Regler om "køb" bruges ofte analogisk på "bytte" af varer, da situationerne
+                  minder om hinanden.</td>
+              </tr>
+              <tr id="term-ansvarsfrihed">
+                <td><b>Ansvarsfrihed</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-ansvarsfrihed">Kapitel
+                      4</a></small></td>
+                <td>Når skadevolder ikke skal betale erstatning, fordi skaden er dækket af
+                  forsikring.</td>
+                <td>Bankassistent taber ved uheld en computer. Skaden er dækket af bankens
+                  tingsforsikring → Assistenten er ansvarsfri. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P19" target="_blank">EAL § 19</a></td>
+              </tr>
+              <tr id="term-ansvarsgrundlag">
+                <td><b>Ansvarsgrundlag</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-ansvarsgrundlag">Kapitel 4</a></small></td>
+                <td>Det juridiske grundlag for erstatningsansvar. Kræver skyld (forsæt eller
+                  uagtsomhed).</td>
+                <td>Bankrådgiver giver bevidst urigtige oplysninger → Forsæt → Ansvarsgrundlag
+                  opfyldt. <b>Lov:</b> Culpa-reglen (ulovbestemt)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-B">B</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-betalingssted">
+                <td><b>Betalingssted</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-betalingssted">Kapitel
+                      5</a></small></td>
+                <td>Normalt fordringshaverens bopæl eller forretningssted. Grundsætningen:
+                  "Pengeskyld er bringeskyld".</td>
+                <td>Kunde skylder banken 100.000 kr. Kunden skal bringe pengene til bankens kontor, ikke omvendt. Banken
+                  er ikke forpligtet til at hente pengene hos kunden. Dette er standardreglen, medmindre andet er
+                  aftalt.</td>
+              </tr>
+              <tr id="term-bevisbyrde">
+                <td><b>Bevisbyrde</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-bevisbyrde">Kapitel 1</a>,
+                    <a href="kapitel2.html#term-bevisbyrde">Kapitel 2</a></small></td>
+                <td>Hvem skal bevise hvad? Hovedregel: Den der påstår noget, skal bevise det.</td>
+                <td>I en forsikringssag: Kunden skal bevise, at der er sket en skade, der er dækket
+                  af policen. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P25"
+                    target="_blank">AFTL § 25</a></td>
+              </tr>
+              <tr id="term-bilbog">
+                <td><b>Bilbog</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-bilbog">Kapitel 7</a></small>
+                </td>
+                <td>Det offentlige register for motorkøretøjer. Pant i biler skal tinglyses i
+                  bilbogen.</td>
+                <td>Banken tager pant i bil. Pantet skal tinglyses i bilbogen for at være gyldigt
+                  mod andre kreditorer. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P42d"
+                    target="_blank">TL § 42 d</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-C">C</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-cisg-den-internationale-koebelov">
+                <td><b>CISG (Den internationale købelov)</b><br><small><b>Findes i:</b> <a
+                      href="kapitel2.html#term-cisg">Kapitel 2</a>, <a href="kapitel3.html#term-cisg">Kapitel
+                      3</a></small></td>
+                <td>Convention on Contracts for the International Sale of Goods - Den internationale
+                  købelov. FN's konvention om internationale køb.</td>
+                <td>Ved internationale køb mellem virksomheder fra forskellige lande kan CISG gælde
+                  i stedet for Købeloven. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P9a"
+                    target="_blank">AFTL § 9a</a></td>
+              </tr>
+              <tr id="term-civilkoeb">
+                <td><b>Civilkøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-civilkoeb">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-civilkoeb">Kapitel 5</a></small></td>
+                <td>Et køb mellem to private personer (ikke erhvervsdrivende). Mindre skærpede
+                  regler end handelskøb.</td>
+                <td>To private personer handler bil i Den Blå Avis til 100.000 kr. → Civilkøb. Mindre strenge
+                  reklamationsfrister end ved handelskøb. Køber har stadig 2 års reklamationsret ved mangler.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P4" target="_blank">KBL § 4</a>
+                </td>
+              </tr>
+              <tr id="term-compliance">
+                <td><b>Compliance</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-compliance">Kapitel 3</a>,
+                    <a href="kapitel5.html#term-compliance">Kapitel 5</a>, <a
+                      href="kapitel6.html#term-compliance">Kapitel 6</a></small></td>
+                <td>Overholdelse af love, regler og interne retningslinjer. I finanssektoren er det en central funktion,
+                  der sikrer, at virksomheden ikke udsættes for bøder eller tab af omdømme. Begrebet dækker også 'Fit &
+                  Proper' regler for ledelsen.</td>
+                <td><b>Finanstilsynet:</b> En bank skal have en uafhængig compliance-funktion, der løbende tjekker, om
+                  reglerne for hvidvask, kreditvurdering og god skik overholdes. Hvis banken ikke har styr på
+                  compliance, kan Finanstilsynet udstede påbud eller inddrage bankens tilladelse til at drive
+                  virksomhed.</td>
+              </tr>
+              <tr id="term-condictio-indebiti">
+                <td><b>Condictio indebiti</b><br><small><b>Findes i:</b> <a
+                      href="kapitel1.html#term-condictio-indebiti">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-condictio-indebiti">Kapitel 2</a></small></td>
+                <td>Krav om tilbagebetaling af penge, der er betalt ved en fejl. Det centrale juridiske spørgsmål er, om
+                  modtageren var i 'god tro' eller 'ond tro'. Hvis man modtager penge, man ved eller burde vide ikke
+                  tilhører en (ond tro), skal de altid betales tilbage.</td>
+                <td><b>Fejludbetaling i banken:</b> Banken overfører ved en fejl 50.000 kr. til en forkert konto. Hvis
+                  modtageren ser beløbet og skynder sig at bruge det (ond tro), er der et klart tilbagebetalingskrav.
+                  <b>Pensionsfejl:</b> Et pensionsfirma udbetaler 35.000 kr. i stedet for 32.000 kr. Hvis modtageren er
+                  i god tro og har indrettet sit forbrug efter beløbet, kan kravet i særlige tilfælde bortfalde
+                  (retssædvane).</td>
+              </tr>
+              <tr id="term-culpa">
+                <td><b>Culpa</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-culpa">Kapitel 1</a>, <a
+                      href="kapitel4.html#term-culpa">Kapitel 4</a></small></td>
+                <td>Skyld - den ulovbestemte hovedregel om erstatningsansvar. Man hæfter, hvis man har udvist forsæt
+                  eller uagtsomhed. Domstolen vurderer handlingen i forhold til 'Bonus Pater' (en fornuftig
+                  referenceperson).</td>
+                <td><b>Finansiel rådgivning:</b> En bankrådgiver glemmer en enkelt post i et komplekst budget (simpel
+                  uagtsomhed). En bankrådgiver bevilger et millionlån uden overhovedet at indhente lønsedler eller
+                  tjekke RKI (grov uagtsomhed). Begge dele medfører ansvar for banken (principalansvar), men graden af
+                  uagtsomhed har betydning for eventuelle forsikringsdækninger og regres.</td>
+              </tr>
+              <tr id="term-culpa-reglen">
+                <td><b>Culpa-reglen</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-culpa-reglen">Kapitel
+                      4</a></small></td>
+                <td>Den ulovbestemte hovedregel i erstatningsretten: Man hæfter kun for skader, man
+                  har forvoldt ved forsæt eller uagtsomhed.</td>
+                <td>Hovedreglen for erstatningsansvar. Kræver skyld (forsæt eller uagtsomhed),
+                  kausalitet, adækvans, tab og værnberettiget interesse.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-D">D</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-deklaratorisk">
+                <td><b>Deklaratorisk</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-deklaratorisk">Kapitel
+                      1</a>, <a href="kapitel2.html#term-deklaratorisk">Kapitel 2</a>, <a
+                      href="kapitel3.html#term-deklaratorisk">Kapitel 3</a></small></td>
+                <td>En lovregel, der kan fraviges ved aftale. Modsat præceptiv (ufravigelig).</td>
+                <td>Købeloven er deklaratorisk ved handelskøb → Parterne kan aftale anden
+                  fremgangsmåde. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P4"
+                    target="_blank">KBL § 4</a></td>
+              </tr>
+              <tr id="term-deponering">
+                <td><b>Deponering</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-deponering">Kapitel
+                      7</a></small></td>
+                <td>Når skyldneren afleverer pengene til en tredjemand (fx retten), hvis
+                  fordringshaveren ikke vil modtage betalingen.</td>
+                <td>Kunden vil betale gælden, men banken nægter at modtage pengene → Kunden kan
+                  deponere pengene hos retten og blive frigjort.</td>
+              </tr>
+              <tr id="term-dl">
+                <td><b>DL</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-dl">Kapitel 4</a></small></td>
+                <td>Dansk Lov</td>
+                <td>Den gamle danske lovsamling fra 1683. Nogle paragraffer er stadig i kraft.</td>
+              </tr>
+              <tr id="term-dl-dansk-lov">
+                <td><b>DL (Dansk Lov)</b></td>
+                <td>Dansk Lov - den gamle danske lovsamling fra 1683. Nogle paragraffer er stadig i
+                  kraft, fx DL 3-19-2 om principalansvar.</td>
+                <td>DL 3-19-2 regulerer principalansvar - arbejdsgiverens ansvar for ansattes
+                  handlinger i tjenesten. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/1683/1"
+                    target="_blank">Dansk
+                    Lov 3-19-2</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-E">E</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-eal-erstatningsansvarsloven">
+                <td><b>EAL (Erstatningsansvarsloven)</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-eal">Kapitel 4</a></small></td>
+                <td>Erstatningsansvarsloven</td>
+                <td>Regulerer personskadeerstatning samt forsikringsmæssige forhold. Supplerer
+                  culpa-reglen.</td>
+              </tr>
+              <tr id="term-ejendomsforbehold">
+                <td><b>Ejendomsforbehold</b><br><small><b>Findes i:</b> <a
+                      href="kapitel3.html#term-ejendomsforbehold">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-ejendomsforbehold">Kapitel 5</a>, <a
+                      href="kapitel7.html#term-ejendomsforbehold">Kapitel 7</a></small></td>
+                <td>Sælgerens ret til at tage varen tilbage, hvis køber ikke betaler. For at et ejendomsforbehold er
+                  gyldigt i forbrugerkøb (KAL), skal 4 betingelser være opfyldt: 1) Aftalt senest ved overgivelse, 2)
+                  Pris over 2.000 kr., 3) Udbetaling på mindst 20%, 4) Må ikke være variabel kredit.</td>
+                <td><b>Bilfinansiering:</b> En kunde køber en bil til 200.000 kr. via en købekontrakt med
+                  ejendomsforbehold. Kunden skal lægge 40.000 kr. (20%) kontant. Finansieringsselskabet ejer bilen,
+                  indtil sidste afdrag er betalt. For biler skal forbeholdet tinglyses i <b>Bilbogen</b> for at være
+                  gyldigt mod andre kreditorer. Hvis kunden stopper med at betale, kan bilen hentes via Fogedretten.
+                  <b>Lov:</b> KAL § 34.</td>
+              </tr>
+              <tr id="term-ejendomsret">
+                <td><b>Ejendomsret</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-ejendomsret">Kapitel
+                      4</a>, <a href="kapitel7.html#term-ejendomsret">Kapitel 7</a></small></td>
+                <td>Den fulde ret til en ting. Adskilt fra besiddelse (faktisk kontrol over tingen).</td>
+                <td>Køber køber bil på afbetaling. Køberen har besiddelsen, men sælgeren har
+                  ejendomsretten, indtil sidste afdrag er betalt.</td>
+              </tr>
+              <tr id="term-ejerpantebrev">
+                <td><b>Ejerpantebrev</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-ejerpantebrev">Kapitel
+                      7</a></small></td>
+                <td>Ejeren udsteder et pantebrev til sig selv ("Jeg skylder mig selv 500.000 kr.").
+                  Dette underpantsættes derefter til banken.</td>
+                <td>Ejeren udsteder ejerpantebrev på 1 mio. kr. til sig selv. Dette underpantsættes
+                  til banken som sikkerhed for kassekredit. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2014/1075#P47c" target="_blank">TL § 47 c</a></td>
+              </tr>
+              <tr id="term-erhvervsdrivende">
+                <td><b>Erhvervsdrivende</b><br><small><b>Findes i:</b> <a
+                      href="kapitel2.html#term-erhvervsdrivende">Kapitel 2</a>, <a
+                      href="kapitel3.html#term-erhvervsdrivende">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-erhvervsdrivende">Kapitel 5</a></small></td>
+                <td>En person eller virksomhed, der driver erhverv (ikke privatperson).</td>
+                <td>Bank, realkreditinstitut, forsikringsselskab, ejendomsmægler er alle
+                  erhvervsdrivende. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P4"
+                    target="_blank">KBL § 4</a></td>
+              </tr>
+              <tr id="term-erhvervsevnetab">
+                <td><b>Erhvervsevnetab</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-erhvervsevnetab">Kapitel 4</a></small></td>
+                <td>Tab eller forringelse af erhvervsevne som følge af personskade. Ofte den dyreste
+                  post ved personskadeerstatning.</td>
+                <td>Kunde falder i banken og ødelægger ryggen, så han aldrig kan arbejde igen.
+                  Banken skal erstatte hele hans fremtidige tabte arbejdsindtægt. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P2" target="_blank">EAL § 2</a>, <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P5" target="_blank">EAL § 5</a></td>
+              </tr>
+              <tr id="term-erstatning">
+                <td><b>Erstatning</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-erstatning">Kapitel 1</a>,
+                    <a href="kapitel2.html#term-erstatning">Kapitel 2</a>, <a
+                      href="kapitel3.html#term-erstatning">Kapitel 3</a>, <a
+                      href="kapitel4.html#term-erstatning">Kapitel 4</a>, <a
+                      href="kapitel5.html#term-erstatning">Kapitel 5</a>, <a
+                      href="kapitel7.html#term-erstatning">Kapitel 7</a></small></td>
+                <td>Penge, der betales for at dække en skade eller et tab. Kan være formueskade,
+                  personskade eller tingsskade.</td>
+                <td>Bankrådgiver giver fejlagtig rådgivning → Kunde taber 100.000 kr. → Banken skal
+                  erstatte 100.000 kr. <b>Lov:</b> Culpa-reglen, EAL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-F">F</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-fast-ejendom">
+                <td><b>Fast ejendom</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-fast-ejendom">Kapitel
+                      2</a>, <a href="kapitel3.html#term-fast-ejendom">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-fast-ejendom">Kapitel 5</a>, <a
+                      href="kapitel7.html#term-fast-ejendom">Kapitel 7</a></small></td>
+                <td>Ejendom, der er fastgjort til jorden (huse, lejligheder, jord). Modsat løsøre.</td>
+                <td>Bolig, erhvervsejendom, jord er fast ejendom. Pant i fast ejendom skal
+                  tinglyses. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075"
+                    target="_blank">TL</a></td>
+              </tr>
+              <tr id="term-fil">
+                <td><b>FIL</b><br><small><b>Findes i:</b> <a href="kapitel6.html#term-fil">Kapitel 6</a></small></td>
+                <td>Lov om Finansiel Virksomhed</td>
+                <td>Regulerer finansielle virksomheder (banker, realkreditinstitutter, forsikringsselskaber). Indeholder
+                  særlige regler om kaution og forbrugerbeskyttelse.</td>
+              </tr>
+              <tr id="term-forbruger">
+                <td><b>Forbruger</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-forbruger">Kapitel 2</a>, <a
+                      href="kapitel3.html#term-forbruger">Kapitel 3</a>, <a href="kapitel5.html#term-forbruger">Kapitel
+                      5</a></small></td>
+                <td>En fysisk person, der handler uden for erhvervsmæssig eller erhvervslignende
+                  virksomhed.</td>
+                <td>Privatperson, der låner penge til boligkøb eller bilkøb er forbruger. Ikke:
+                  Virksomhed, der låner penge til investering. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2019/817#P1" target="_blank">KAL § 1</a>, <a
+                    href="https://www.retsinformation.dk/eli/lta/2021/1853#P83" target="_blank">KBL § 83</a></td>
+              </tr>
+              <tr id="term-forbrugerbeskyttelse-ved-fast-ejendom-lffe">
+                <td><b>Forbrugerbeskyttelse ved fast ejendom (LFFE)</b></td>
+                <td>Lov om forbrugerbeskyttelse ved erhvervelse af fast ejendom. Giver forbrugeren fortrydelsesret ved
+                  køb af bolig.</td>
+                <td>Privatperson køber hus og har 6 hverdage til at fortryde købet uden begrundelse. Dette gælder kun
+                  for forbrugerkøb, ikke erhvervskøb. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2017/1025" target="_blank">LFFE</a></td>
+              </tr>
+              <tr id="term-forbrugerkoeb">
+                <td><b>Forbrugerkøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-forbrugerkoeb">Kapitel
+                      3</a>, <a href="kapitel5.html#term-forbrugerkoeb">Kapitel 5</a>, <a
+                      href="kapitel7.html#term-forbrugerkoeb">Kapitel 7</a></small></td>
+                <td>Køb, hvor køberen er en forbruger (fysisk person, der handler uden for
+                  erhvervsmæssig virksomhed). Særlige beskyttelsesregler gælder.</td>
+                <td>Privatperson køber computer i butik → Forbrugerkøb. 2 års ufravigelig
+                  reklamationsret. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P83"
+                    target="_blank">KBL § 83</a></td>
+              </tr>
+              <tr id="term-forsikringsdaekning">
+                <td><b>Forsikringsdækning</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-forsikringsdaekning">Kapitel 4</a></small></td>
+                <td>Når en skade er dækket af forsikring. Skadevolder kan være ansvarsfri, medmindre
+                  der er forsæt eller grov uagtsomhed.</td>
+                <td>Skade er dækket af bankens tingsforsikring → Skadevolder er ansvarsfri. Men ved
+                  forsæt eller grov uagtsomhed hæfter skadevolder stadig. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P19" target="_blank">EAL § 19</a></td>
+              </tr>
+              <tr id="term-forsaet">
+                <td><b>Forsæt</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-forsaet">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-forsaet">Kapitel 2</a>, <a href="kapitel4.html#term-forsaet">Kapitel
+                      4</a></small></td>
+                <td>Bevidst handling med vilje. Man vidste eller forudså skaden.</td>
+                <td>Investeringsrådgiver anbefaler en aktie, han ved er værdiløs, blot for at tjene
+                  provision → Forsæt. <b>Lov:</b> Culpa-reglen</td>
+              </tr>
+              <tr id="term-fortrydelsesret">
+                <td><b>Fortrydelsesret</b><br><small><b>Findes i:</b> <a
+                      href="kapitel1.html#term-fortrydelsesret">Kapitel 1</a>, <a
+                      href="kapitel5.html#term-fortrydelsesret">Kapitel 5</a>, <a
+                      href="kapitel7.html#term-fortrydelsesret">Kapitel 7</a></small></td>
+                <td>Forbrugerens ret til at fortryde en aftale inden for en bestemt frist.</td>
+                <td>Kunde indgår låneaftale på 500.000 kr. den 1. januar. Kunden kan fortryde lånet inden for 14 dage
+                  (til 15. januar) uden begrundelse og uden omkostning. Dette gælder kun for forbrugerlån, ikke
+                  erhvervslån. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2019/817#P19"
+                    target="_blank">KAL § 19</a></td>
+              </tr>
+              <tr id="term-foraeldelse">
+                <td><b>Forældelse</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-foraeldelse">Kapitel
+                      5</a></small></td>
+                <td>Ophør af en fordring på grund af dennes alder. Normalt 10 år fra fordringens
+                  stiftelse.</td>
+                <td>Kunde skylder banken 100.000 kr. fra 2014. Efter 10 år (i 2024) kan banken ikke længere kræve
+                  pengene, medmindre kunden har anerkendt gælden. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2015/1238#P6" target="_blank">Forældelsesloven § 6</a>
+                </td>
+              </tr>
+              <tr id="term-fuldmagt">
+                <td><b>Fuldmagt</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-fuldmagt">Kapitel
+                      2</a></small></td>
+                <td>Ret til at handle på en andens vegne. Kan være stillingsfuldmagt (automatisk ved
+                  ansættelse) eller særskilt fuldmagt.</td>
+                <td>Senior Erhvervsrådgiver har automatisk fuldmagt (stillingsfuldmagt) til at
+                  bevilge lån inden for normale grænser. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2016/193#P10" target="_blank">AFTL § 10</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-G">G</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-gbl-gaeldsbrevsloven">
+                <td><b>GBL (Gældsbrevsloven)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gbl">Kapitel
+                      5</a>, <a href="kapitel7.html#term-gbl">Kapitel 7</a></small></td>
+                <td>Gældsbrevsloven</td>
+                <td>Regulerer handel med fordringer gennem gældsbreve. Skelner mellem simple
+                  gældsbreve og omsætningsgældsbreve.</td>
+              </tr>
+              <tr id="term-gdpr">
+                <td><b>GDPR</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gdpr">Kapitel 5</a>, <a
+                      href="kapitel6.html#term-gdpr">Kapitel 6</a></small></td>
+                <td>General Data Protection Regulation (Databeskyttelsesforordningen)</td>
+                <td>EU's forordning om beskyttelse af personoplysninger. Gælder for alle, der behandler
+                  personoplysninger. Suppleres af Databeskyttelsesloven.</td>
+              </tr>
+              <tr id="term-gdpr-databeskyttelsesforordningen">
+                <td><b>GDPR (Databeskyttelsesforordningen)</b></td>
+                <td>General Data Protection Regulation - EU's forordning om beskyttelse af personoplysninger. Gælder for
+                  alle, der behandler personoplysninger.</td>
+                <td>Banken må kun behandle kundens CPR-nummer, hvis det er nødvendigt (fx til kreditvurdering).
+                  CPR-numre skal sendes krypteret. Kunden har ret til at se, hvad banken har registreret om dem.
+                  <b>Lov:</b> <a href="https://eur-lex.europa.eu/legal-content/DA/TXT/?uri=celex%3A32016R0679"
+                    target="_blank">GDPR</a>, <a href="https://www.retsinformation.dk/eli/lta/2018/502"
+                    target="_blank">Databeskyttelsesloven</a></td>
+              </tr>
+              <tr id="term-god-tro">
+                <td><b>God tro</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-god-tro">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-god-tro">Kapitel 2</a>, <a href="kapitel5.html#term-god-tro">Kapitel
+                      5</a>, <a href="kapitel7.html#term-god-tro">Kapitel 7</a></small></td>
+                <td>Uvidende (uskyldig). Man vidste ikke og burde ikke vide om noget.</td>
+                <td>Køber af lejlighed er i god tro om en gæld, hvis intet fremgik af tingbogen.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P6" target="_blank">TL § 6</a>
+                </td>
+              </tr>
+              <tr id="term-grov-uagtsomhed">
+                <td><b>Grov uagtsomhed</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-grov-uagtsomhed">Kapitel 4</a></small></td>
+                <td>Meget manglende forsigtighed. Klar overskridelse af forventet standard.</td>
+                <td>Bankrådgiver bevilger millionlån til kunde i RKI uden at tjekke registret → Grov
+                  uagtsomhed. <b>Lov:</b> Culpa-reglen</td>
+              </tr>
+              <tr id="term-gaeldsbrev">
+                <td><b>Gældsbrev</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gaeldsbrev">Kapitel
+                      5</a></small></td>
+                <td>Et dokument, der bekræfter en gæld. Kan være simpelt gældsbrev eller
+                  omsætningsgældsbrev.</td>
+                <td>Virksomhed skylder banken 1 mio. kr. og udsteder gældsbrev som dokumentation. Gældsbrevet kan være
+                  simpelt (kun mellem virksomhed og bank) eller omsætningsgældsbrev (kan sælges til anden bank).
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/333"
+                    target="_blank">Gældsbrevsloven</a></td>
+              </tr>
+              <tr id="term-gaeldsfaktor">
+                <td><b>Gældsfaktor</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gaeldsfaktor">Kapitel
+                      5</a></small></td>
+                <td>Samlet gæld divideret med årsindtægt. Bruges ved kreditvurdering.</td>
+                <td>Kunde har 2 mio. kr. i gæld (boliglån + billån) og tjener 500.000 kr. om året → Gældsfaktor er 4
+                  (2.000.000 ÷ 500.000). Banken accepterer normalt maks 4-5 for boliglån. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2019/817#P7c" target="_blank">KAL § 7c</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-H">H</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-handelsbrug">
+                <td><b>Handelsbrug</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-handelsbrug">Kapitel
+                      2</a>, <a href="kapitel3.html#term-handelsbrug">Kapitel 3</a></small></td>
+                <td>Sædvane inden for handel. Kan fravige købeloven ved handelskøb.</td>
+                <td>Banken køber aktier fra anden bank. Inden for handel med værdipapirer gælder kutyme om, at handel er
+                  bindende mundtligt straks (ikke først når kontrakten er underskrevet). <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2021/1853#P16" target="_blank">KBL § 16</a></td>
+              </tr>
+              <tr id="term-handelskoeb">
+                <td><b>Handelskøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-handelskoeb">Kapitel 3</a>,
+                    <a href="kapitel5.html#term-handelskoeb">Kapitel 5</a></small></td>
+                <td>Et køb mellem to erhvervsdrivende. Særlige, skærpede regler gælder.</td>
+                <td>Bank køber IT-udstyr fra leverandør → Handelskøb. Skærpede reklamationsfrister.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P4" target="_blank">KBL § 4</a>
+                </td>
+              </tr>
+              <tr id="term-hvidvaskloven-aml">
+                <td><b>Hvidvaskloven (AML)</b><br><small><b>Findes i:</b> <a
+                      href="kapitel6.html#term-hvidvaskloven">Kapitel 6</a></small></td>
+                <td>Lov om forebyggelse af hvidvask og terrorfinansiering</td>
+                <td>Gælder for banker, ejendomsmæglere, revisorer m.fl. Stilller krav til KYC, risikovurdering,
+                  undersøgelsespligt og underretningspligt.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-K">K</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-kal-kreditaftaleloven">
+                <td><b>KAL (Kreditaftaleloven)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-kal">Kapitel
+                      5</a>, <a href="kapitel6.html#term-kal">Kapitel 6</a></small></td>
+                <td>Kreditaftaleloven</td>
+                <td>Reglerne om forbrugerbeskyttelse ved lån. Præceptiv lov (kan ikke fraviges til
+                  skade for forbrugeren).</td>
+              </tr>
+              <tr id="term-kausalitet">
+                <td><b>Kausalitet</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-kausalitet">Kapitel
+                      4</a></small></td>
+                <td>Årsagssammenhæng mellem handling og skade. "Hvis ikke" testen: Hvis ikke
+                  handlingen var sket, ville skaden ikke være indtrådt.</td>
+                <td>Hvis banken ikke havde givet fejlagtig rådgivning, ville kunden ikke have tabt
+                  penge → Kausalitet opfyldt. <b>Lov:</b> Culpa-reglen</td>
+              </tr>
+              <tr id="term-kaution">
+                <td><b>Kaution</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-kaution">Kapitel 2</a>, <a
+                      href="kapitel5.html#term-kaution">Kapitel 5</a>, <a href="kapitel6.html#term-kaution">Kapitel
+                      6</a></small></td>
+                <td>Personlig hæftelse. En tredjemand (kautionist) hæfter for en andens gæld.</td>
+                <td>Barn ansøger om lån på 500.000 kr. til boligkøb. Banken kræver kaution, så forældrene stiller
+                  kaution. Hvis barnet stopper med at betale, kan banken kræve pengene af forældrene. Kautionisten
+                  hæfter for hele gælden. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/406#P48"
+                    target="_blank">Lov om finansiel virksomhed § 48</a></td>
+              </tr>
+              <tr id="term-kbl-koebeloven">
+                <td><b>KBL (Købeloven)</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-kbl">Kapitel
+                      3</a></small></td>
+                <td>Købeloven</td>
+                <td>Reglerne om køb af løsøre. Skelner mellem handelskøb, civilkøb og forbrugerkøb.</td>
+              </tr>
+              <tr id="term-kreditaftale">
+                <td><b>Kreditaftale</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-kreditaftale">Kapitel
+                      5</a>, <a href="kapitel6.html#term-kreditaftale">Kapitel 6</a></small></td>
+                <td>En aftale om henstand med betalingen, lån eller anden tilsvarende finansiel
+                  ordning.</td>
+                <td>Banklån, kreditkøb, afbetalingskøb, leasingaftaler (hvis de opfylder
+                  definitionen). <b>Lov:</b> KAL § 4, nr. 3</td>
+              </tr>
+              <tr id="term-kreditgiver">
+                <td><b>Kreditgiver</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-kreditgiver">Kapitel
+                      5</a></small></td>
+                <td>Den (typisk juridiske person), der i forhold til forbrugeren yder kredit.</td>
+                <td>Bank, realkreditinstitut, finansieringsselskab eller sælger ved kreditkøb er
+                  kreditgiver. <b>Lov:</b> KAL § 4, nr. 2</td>
+              </tr>
+              <tr id="term-kreditvurdering">
+                <td><b>Kreditvurdering</b><br><small><b>Findes i:</b> <a
+                      href="kapitel3.html#term-kreditvurdering">Kapitel 3</a>, <a
+                      href="kapitel4.html#term-kreditvurdering">Kapitel 4</a>, <a
+                      href="kapitel5.html#term-kreditvurdering">Kapitel 5</a>, <a
+                      href="kapitel6.html#term-kreditvurdering">Kapitel 6</a></small></td>
+                <td>Bankens pligt til at vurdere kundens kreditværdighed grundigt før bevilling.</td>
+                <td>Kunde ansøger om lån på 500.000 kr. Banken skal indhente lønsedler, årsopgørelser, budget, tjekke
+                  RKI, beregne rådighedsbeløb og gældsfaktor. Hvis banken glemmer dette, kan lånet være ugyldigt.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2019/817#P7c" target="_blank">KAL § 7c</a>
+                </td>
+              </tr>
+              <tr id="term-kutyme">
+                <td><b>Kutyme</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-kutyme">Kapitel 1</a>, <a
+                      href="kapitel3.html#term-kutyme">Kapitel 3</a></small></td>
+                <td>Sædvane - uskrevne regler, der er blevet praksis over tid i en branche.</td>
+                <td>Inden for handel med værdipapirer gælder kutyme om, at handel er bindende mundtligt straks. "God
+                  skik" regler inden for forsikring er også kutymer. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2021/1853#P16" target="_blank">KBL § 16</a></td>
+              </tr>
+              <tr id="term-kyc-know-your-customer">
+                <td><b>KYC (Know Your Customer)</b></td>
+                <td>"Know Your Customer" - pligten til at vide, hvem kunden er, og hvor pengene kommer fra. En del af
+                  hvidvaskloven.</td>
+                <td>Ny kunde vil åbne konto. Banken skal indhente legitimation (pas/kørekort), tjekke identitet og
+                  spørge til pengenes oprindelse. Hvis kunden vil indsætte store beløb kontant, skal banken kræve
+                  dokumentation. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/316"
+                    target="_blank">Hvidvaskloven</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-L">L</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-leasing">
+                <td><b>Leasing</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-leasing">Kapitel 2</a>, <a
+                      href="kapitel3.html#term-leasing">Kapitel 3</a></small></td>
+                <td>En aftale om vederlagsfri brug af en ting, hvor tingen skal leveres tilbage til
+                  långiver, når forholdet ophører.</td>
+                <td>Banken leaser bil til 5.000 kr. om måneden i 3 år. Efter 3 år skal bilen leveres tilbage til
+                  leasingfirmaet. Banken ejer aldrig bilen, modsat ved køb. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2019/817#P4" target="_blank">KAL § 4</a> (hvis det
+                  opfylder definitionen af kreditaftale)</td>
+              </tr>
+              <tr id="term-lempelse">
+                <td><b>Lempelse</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-lempelse">Kapitel
+                      4</a></small></td>
+                <td>Mulighed for at nedsætte eller fjerne erstatningsansvar i visse situationer.</td>
+                <td>Arbejdstagers erstatningsansvar kan lempes, hvis skaden er dækket af
+                  arbejdsgiverens ansvarsforsikring. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P23" target="_blank">EAL § 23</a>, <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P24" target="_blank">EAL § 24</a></td>
+              </tr>
+              <tr id="term-lffe-lov-om-forbrugerbeskyttelse-ved-fast-ejendom">
+                <td><b>LFFE (Lov om forbrugerbeskyttelse ved fast ejendom)</b><br><small><b>Findes i:</b> <a
+                      href="kapitel7.html#term-lffe">Kapitel 7</a></small></td>
+                <td>Lov om forbrugerbeskyttelse ved erhvervelse af fast ejendom</td>
+                <td>Giver forbrugeren fortrydelsesret ved køb af bolig. Gælder kun for forbrugerkøb, ikke erhvervskøb.
+                </td>
+              </tr>
+              <tr id="term-lofe">
+                <td><b>LOFE</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-lofe">Kapitel 7</a></small></td>
+                <td>Lov om formidling af fast ejendom</td>
+                <td>Regulerer ejendomsmæglervirksomhed. Stiller krav til formidlingsaftaler, vederlag og ansvarlig
+                  ejendomsmægler.</td>
+              </tr>
+              <tr id="term-lofe-lov-om-formidling-af-fast-ejendom">
+                <td><b>LOFE (Lov om formidling af fast ejendom)</b></td>
+                <td>Loven regulerer ejendomsmæglervirksomhed. Stiller krav til formidlingsaftaler, vederlag og ansvarlig
+                  ejendomsmægler.</td>
+                <td>Ejendomsmægler skal have skriftlig formidlingsaftale med sælger, hvor vederlaget (fx 2% af
+                  købesummen) og ansvarlig ejendomsmægler fremgår. Uden skriftlig aftale er formidlingsaftalen ugyldig.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/510#P29" target="_blank">LOFE §
+                    29</a></td>
+              </tr>
+              <tr id="term-lov-om-finansiel-virksomhed-fil">
+                <td><b>Lov om Finansiel Virksomhed (FIL)</b></td>
+                <td>Loven regulerer finansielle virksomheder (banker, realkreditinstitutter, forsikringsselskaber).
+                  Indeholder særlige regler om kaution.</td>
+                <td>Forældre kautionerer for barnets lån. Banken skal oplyse forældrene om barnets økonomi, gæld og
+                  risiko før kautionen indgås. Hvis banken glemmer det, kan kautionen være ugyldig. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2022/406#P48" target="_blank">FIL § 48</a></td>
+              </tr>
+              <tr id="term-loesoere">
+                <td><b>Løsøre</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-loesoere">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-loesoere">Kapitel 5</a>, <a href="kapitel7.html#term-loesoere">Kapitel
+                      7</a></small></td>
+                <td>Rørlige, fysiske genstande (ikke fast ejendom eller fordringer).</td>
+                <td>Biler, møbler, computere er løsøre. Pant i løsøre kan tinglyses i bilbogen eller
+                  personbogen. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853"
+                    target="_blank">KBL</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-M">M</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-mangel">
+                <td><b>Mangel</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-mangel">Kapitel 3</a>, <a
+                      href="kapitel5.html#term-mangel">Kapitel 5</a></small></td>
+                <td>Når varen afviger fra det, der er aftalt, ikke har de egenskaber, sælgeren har
+                  oplyst, eller ikke er egnet til det formål, den normalt bruges til.</td>
+                <td>Bank køber printer til 50.000 kr., der skulle kunne håndtere 10.000 sider om måneden, men kan kun
+                  håndtere 5.000 → Mangel. Banken kan kræve afhjælpning (reparation), nedsættelse af prisen eller ophæve
+                  købet. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P17" target="_blank">KBL
+                    § 17</a></td>
+              </tr>
+              <tr id="term-misligholdelse">
+                <td><b>Misligholdelse</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-misligholdelse">Kapitel
+                      3</a>, <a href="kapitel5.html#term-misligholdelse">Kapitel 5</a>, <a
+                      href="kapitel7.html#term-misligholdelse">Kapitel 7</a></small></td>
+                <td>Når en part ikke opfylder sine forpligtelser efter aftalen.</td>
+                <td>Kunde har låneaftale og skal betale 5.000 kr. den 1. hver måned. Kunden betaler ikke →
+                  Misligholdelse. Banken kan kræve hele lånet tilbagebetalt med det samme eller ophæve aftalen.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P47" target="_blank">KBL §
+                    47</a>, <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P52" target="_blank">KBL § 52</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-N">N</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-nsk-hvidvasksekretariatet">
+                <td><b>NSK (Hvidvasksekretariatet)</b></td>
+                <td>Nationalt Sekretariat for Bekæmpelse af Hvidvask - myndigheden, der modtager underretninger om
+                  mistænkelig hvidvask.</td>
+                <td>Banken opdager mistænkelig transaktion (fx kunde indsætter 50.000 kr. kontant uden dokumentation).
+                  Banken skal underrette NSK via hvidvaskansvarlig. Banken må IKKE advare kunden (meddelelsesforbud).
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/316"
+                    target="_blank">Hvidvaskloven</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-O">O</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-omsaetningsgaeldsbrev">
+                <td><b>Omsætningsgældsbrev</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-omsaetningsgaeldsbrev">Kapitel 5</a></small></td>
+                <td>Et gældsbrev beregnet til at blive solgt (omsat). Giver køberen særlig beskyttelse gennem
+                  ekstinktion. <b>VIKTIGT:</b> Forskelligt fra simple gældsbreve! <b>Sikringsakt:</b> Rådighedsberøvelse
+                  (fysisk besiddelse). <b>Debitors indsigelser:</b> Godtroende køber kan ekstingvere svage indsigelser,
+                  men IKKE stærke (fx falsk underskrift).</td>
+                <td><b>Eksempler:</b> Pantebreve i fast ejendom, ihændehavergældsbreve ("Betales til ihændehaveren"),
+                  ordregældsbreve ("Betales til [Navn] eller ordre"). Sælger sælger pantebrev til kursinvestor →
+                  Investoren skal have pantebrevet fysisk i hånden. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2014/333#P11" target="_blank">GBL § 11</a></td>
+              </tr>
+              <tr id="term-omsaetningsgaeldsbreve">
+                <td><b>Omsætningsgældsbreve</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-omsaetningsgaeldsbreve">Kapitel 5</a></small></td>
+                <td>Gældsbreve beregnet til at blive solgt (omsat). Giver køberen særlig beskyttelse gennem ekstinktion.
+                </td>
+                <td><b>Eksempler:</b> Ihændehavergældsbreve ("Betales til ihændehaveren"), ordregældsbreve ("Betales til
+                  [Navn] eller ordre"), pantebreve i fast ejendom. <b>Sikringsakt:</b> Rådighedsberøvelse (GBL § 22) -
+                  køberen skal have gældsbrevet fysisk i hånden. <b>Debitors indsigelser:</b> Godtroende køber kan
+                  ekstingvere svage indsigelser (fx mangler i varen), men IKKE stærke (fx falsk underskrift).
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/333#P11" target="_blank">GBL § 11</a>
+                </td>
+              </tr>
+              <tr id="term-ond-tro">
+                <td><b>Ond tro</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-ond-tro">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-ond-tro">Kapitel 2</a></small></td>
+                <td>Vidste eller burde vide om noget. Modsat god tro.</td>
+                <td>Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. <b>Lov:</b>
+                  <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P6" target="_blank">TL
+                    § 6</a>
+                </td>
+              </tr>
+              <tr id="term-ophaevelse">
+                <td><b>Ophævelse</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-ophaevelse">Kapitel 2</a>,
+                    <a href="kapitel3.html#term-ophaevelse">Kapitel 3</a>, <a
+                      href="kapitel7.html#term-ophaevelse">Kapitel 7</a></small></td>
+                <td>Når en aftale ophæves, så den ikke længere gælder.</td>
+                <td>Ved misligholdelse kan køber ophæve købet og kræve pengene tilbage. <b>Lov:</b>
+                  <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P24" target="_blank">KBL § 24</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-P">P</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-pant">
+                <td><b>Pant</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-pant">Kapitel 5</a>, <a
+                      href="kapitel6.html#term-pant">Kapitel 6</a>, <a href="kapitel7.html#term-pant">Kapitel
+                      7</a></small></td>
+                <td>Sikkerhedsstillelse - en ret til at få dækning af gæld ved salg af en ting.</td>
+                <td>Kunde låner 2 mio. kr. til boligkøb. Banken tager pant i ejendommen som sikkerhed. Ved
+                  misligholdelse kan banken kræve ejendommen solgt på tvangsauktion og få dækning af gælden fra
+                  salgssummen. Pantet skal tinglyses for at være gyldigt. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2014/1075" target="_blank">TL</a></td>
+              </tr>
+              <tr id="term-pantebrev">
+                <td><b>Pantebrev</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-pantebrev">Kapitel 2</a>, <a
+                      href="kapitel4.html#term-pantebrev">Kapitel 4</a>, <a href="kapitel5.html#term-pantebrev">Kapitel
+                      5</a>, <a href="kapitel7.html#term-pantebrev">Kapitel 7</a></small></td>
+                <td>Et dokument, der bekræfter pant i fast ejendom. Skal tinglyses for at være
+                  gyldigt.</td>
+                <td>Realkreditpantebrev eller ejerpantebrev tinglyses i tingbogen. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2014/1075" target="_blank">TL</a></td>
+              </tr>
+              <tr id="term-pep-politically-exposed-person">
+                <td><b>PEP (Politically Exposed Person)</b></td>
+                <td>Politisk eksponeret person - personer med høj politisk stilling eller deres nærmeste. Høj risiko for
+                  hvidvask.</td>
+                <td>Kunde er medlem af Folketinget eller minister. Banken skal lave ekstra grundig risikovurdering og
+                  KYC, da PEP'er er høj-risiko kunder. Banken skal spørge ekstra grundigt til pengenes oprindelse.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/316"
+                    target="_blank">Hvidvaskloven</a></td>
+              </tr>
+              <tr id="term-personskade">
+                <td><b>Personskade</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-personskade">Kapitel
+                      4</a></small></td>
+                <td>Fysisk skade på en person (ikke kun økonomisk tab). Giver anledning til særlig
+                  erstatning.</td>
+                <td>Kunde falder i banken og brækker benet → Personskade. Banken skal erstatte tabt arbejdsfortjeneste,
+                  helbredelsesudgifter, smerte og lidelse osv. Dette er dyrere end almindelig formueskade. <b>Lov:</b>
+                  <a href="https://www.retsinformation.dk/eli/lta/2018/1070#P1" target="_blank">EAL §§ 1-5</a></td>
+              </tr>
+              <tr id="term-principalansvar">
+                <td><b>Principalansvar</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-principalansvar">Kapitel 4</a></small></td>
+                <td>Arbejdsgiverens ansvar for ansattes handlinger i tjenesten. Arbejdsgiveren
+                  hæfter fuldt ud over for skadelidte.</td>
+                <td>Banken hæfter for bankrådgiverens fejl. Banken kan søge regres mod rådgiveren
+                  ved forsæt eller grov uagtsomhed. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/1683/1"
+                    target="_blank">DL
+                    3-19-2</a></td>
+              </tr>
+              <tr id="term-prioritet">
+                <td><b>Prioritet</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-prioritet">Kapitel
+                      7</a></small></td>
+                <td>Rækkefølgen, hvori pantebreve dækkes ved tvangsauktion. "Først i tid, bedst i
+                  ret".</td>
+                <td>Ejendom sælges på tvangsauktion for 3 mio. kr. Realkreditpantebrev på 2,4 mio. kr. tinglyses først →
+                  1. prioritet (får først dækning). Bankpantebrev på 500.000 kr. tinglyses derefter → 2. prioritet (får
+                  derefter dækning). <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P4"
+                    target="_blank">TL § 4</a></td>
+              </tr>
+              <tr id="term-praeceptiv">
+                <td><b>Præceptiv</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-praeceptiv">Kapitel 1</a>,
+                    <a href="kapitel2.html#term-praeceptiv">Kapitel 2</a>, <a
+                      href="kapitel5.html#term-praeceptiv">Kapitel 5</a></small></td>
+                <td>En lovregel, der ikke kan fraviges til skade for forbrugeren. Modsat
+                  deklaratorisk.</td>
+                <td>Kreditaftaleloven er præceptiv → Banken kan ikke aftale med kunden, at SEF-skemaet ikke skal
+                  udleveres eller at kreditvurderingen springes over. Det er ufravigeligt til skade for forbrugeren.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2019/817#P1" target="_blank">KAL § 1</a>
+                </td>
+              </tr>
+              <tr id="term-praejudikat">
+                <td><b>Præjudikat</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-praejudikat">Kapitel
+                      1</a></small></td>
+                <td>En tidligere dom, der "skaber ret" og følges i fremtidige sager.</td>
+                <td>En Højesteretsdom om, at banker altid skal rådgive om særlige lånerisici, bliver
+                  et præjudikat, alle banker skal følge.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-R">R</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-realkreditpantebrev">
+                <td><b>Realkreditpantebrev</b><br><small><b>Findes i:</b> <a
+                      href="kapitel7.html#term-realkreditpantebrev">Kapitel 7</a></small></td>
+                <td>Pantebrev udstedt til et realkreditinstitut mod udstedelse af obligationer.</td>
+                <td>Køber køber hus for 3 mio. kr. Realkreditinstituttet låner 2,4 mio. kr. (80%)
+                  mod pantebrev. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075"
+                    target="_blank">TL</a></td>
+              </tr>
+              <tr id="term-regres">
+                <td><b>Regres</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-regres">Kapitel 4</a></small>
+                </td>
+                <td>Forsikringsselskabets ret til at kræve pengene tilbage fra skadevolder, efter at
+                  have udbetalt erstatning.</td>
+                <td>Ejendomsmæglers ansvarsforsikring betaler kunden, men kræver derefter pengene
+                  tilbage fra mægleren ved forsæt. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P22" target="_blank">EAL § 22</a></td>
+              </tr>
+              <tr id="term-reklamationsret">
+                <td><b>Reklamationsret</b><br><small><b>Findes i:</b> <a
+                      href="kapitel1.html#term-reklamationsret">Kapitel 1</a>, <a
+                      href="kapitel3.html#term-reklamationsret">Kapitel 3</a></small></td>
+                <td>Købers ret til at reklamere over mangler ved varen. Fristen er 2 år ved
+                  handelskøb og forbrugerkøb.</td>
+                <td>Bank opdager mangel ved IT-udstyr efter 18 måneder → Kan stadig reklamere, da
+                  fristen er 2 år. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P21"
+                    target="_blank">KBL § 21</a>, <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P51"
+                    target="_blank">KBL § 51</a>, <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P83"
+                    target="_blank">KBL § 83</a></td>
+              </tr>
+              <tr id="term-risikoens-overgang">
+                <td><b>Risikoens overgang</b><br><small><b>Findes i:</b> <a
+                      href="kapitel3.html#term-risikoens-overgang">Kapitel 3</a></small></td>
+                <td>Når risikoen for varen overgår til køber ved levering.</td>
+                <td>Bank køber servere. Risikoen overgår til banken ved levering. Hvis serveren går
+                  i stykker efter levering, er det bankens problem. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2021/1853#P13" target="_blank">KBL § 13</a></td>
+              </tr>
+              <tr id="term-rki">
+                <td><b>RKI</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-rki">Kapitel 2</a>, <a
+                      href="kapitel4.html#term-rki">Kapitel 4</a>, <a href="kapitel5.html#term-rki">Kapitel
+                      5</a></small></td>
+                <td>Ribers Kredit Information</td>
+                <td>Danmarks største kreditoplysningsbureau. Registrerer gældsforhold og
+                  betalingsanmærkninger.</td>
+              </tr>
+              <tr id="term-rki-ribers-kredit-information">
+                <td><b>RKI (Ribers Kredit Information)</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-rki-ribers-kredit-information">Kapitel 5</a></small></td>
+                <td>RKI - Danmarks største kreditoplysningsbureau. Registrerer gældsforhold og
+                  betalingsanmærkninger.</td>
+                <td>Kunde ansøger om lån. Banken tjekker RKI og opdager, at kunden har 3 misligholdte lån hos andre
+                  banker. Banken skal vurdere risikoen grundigt før bevilling. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2019/817#P7c" target="_blank">KAL § 7c</a></td>
+              </tr>
+              <tr id="term-raadighedsbeloeb">
+                <td><b>Rådighedsbeløb</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-raadighedsbeloeb">Kapitel 4</a>, <a
+                      href="kapitel5.html#term-raadighedsbeloeb">Kapitel 5</a>, <a
+                      href="kapitel6.html#term-raadighedsbeloeb">Kapitel 6</a></small></td>
+                <td>Indtægt minus faste udgifter. Bruges ved kreditvurdering.</td>
+                <td>Kunde tjener 30.000 kr. om måneden og har faste udgifter (husleje, mad, forsikringer) på 20.000 kr.
+                  → Rådighedsbeløb er 10.000 kr. Banken bruger dette til at vurdere, om kunden kan betale lånet.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2019/817#P7c" target="_blank">KAL § 7c</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-S">S</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-sef-skemaet">
+                <td><b>SEF-skemaet</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-sef-skemaet">Kapitel
+                      5</a>, <a href="kapitel6.html#term-sef-skemaet">Kapitel 6</a></small></td>
+                <td>Standardiserede Europæiske Forbrugerkreditoplysninger - et skema, banken SKAL
+                  udlevere før kreditaftalen indgås. Indeholder ÅOP, kreditbeløb, samlede
+                  omkostninger osv.</td>
+                <td>Kunde ansøger om lån på 500.000 kr. Banken skal give kunden SEF-skemaet med ÅOP (fx 5,2%), samlede
+                  omkostninger (fx 75.000 kr.) og alle vilkår FØR kunden skriver under. Hvis banken glemmer det, kan
+                  lånet være ugyldigt. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2019/817#P7a"
+                    target="_blank">KAL § 7a</a></td>
+              </tr>
+              <tr id="term-selvskyldnerkaution">
+                <td><b>Selvskyldnerkaution</b><br><small><b>Findes i:</b> <a
+                      href="kapitel2.html#term-selvskyldnerkaution">Kapitel 2</a>, <a
+                      href="kapitel5.html#term-selvskyldnerkaution">Kapitel 5</a></small></td>
+                <td>Kaution, hvor kautionisten hæfter som hovedskyldner (samme rettigheder og
+                  pligter som hovedskyldneren).</td>
+                <td>Forældre stiller selvskyldnerkaution for barnets lån på 500.000 kr. Når barnet stopper med at
+                  betale, kan banken straks kræve hele beløbet af forældrene uden først at forsøge at inddrive fra
+                  barnet. Dette er standard i bankforhold. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2022/406#P48" target="_blank">Lov om finansiel
+                    virksomhed § 48</a></td>
+              </tr>
+              <tr id="term-servitut">
+                <td><b>Servitut</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-servitut">Kapitel
+                      7</a></small></td>
+                <td>En rettighed over anden mands ejendom (fx retsvej, brugsret, ledningsret). Kan
+                  tinglyses.</td>
+                <td>Nabo har retsvej over ejendom. Dette tinglyses → Retsvejen er sikret ved
+                  ejendomskøb. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P9"
+                    target="_blank">TL § 9</a></td>
+              </tr>
+              <tr id="term-simpel-kaution">
+                <td><b>Simpel kaution</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-simpel-kaution">Kapitel
+                      5</a></small></td>
+                <td>Kaution, hvor kautionisten kun hæfter, hvis hovedskyldneren ikke kan betale
+                  (sekundært ansvar).</td>
+                <td>Ven kautionerer for vens lån på 200.000 kr. Banken skal først forsøge at inddrive gælden fra ven ved
+                  udlæg. Kun hvis det mislykkes, kan banken kræve pengene af kautionisten. Dette er sjældent i
+                  bankforhold. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2022/406#P48"
+                    target="_blank">Lov om finansiel virksomhed § 48</a></td>
+              </tr>
+              <tr id="term-simpel-uagtsomhed">
+                <td><b>Simpel uagtsomhed</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-simpel-uagtsomhed">Kapitel 4</a></small></td>
+                <td>Manglende forsigtighed. Man burde have vidst eller forudset skaden.</td>
+                <td>Bankrådgiver overser en enkelt post i kundens budget → Simpel uagtsomhed. I
+                  finanssektoren medfører selv simple fejl ansvar. <b>Lov:</b> Culpa-reglen</td>
+              </tr>
+              <tr id="term-simple-gaeldsbreve">
+                <td><b>Simple gældsbreve</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-simple-gaeldsbreve">Kapitel 5</a></small></td>
+                <td>Gældsbreve, der IKKE er beregnet til videresalg. Køberen får INGEN særlig beskyttelse - "ingen ret
+                  bedre end overdrageren".</td>
+                <td><b>Eksempler:</b> Fakturaer, navnegældsbreve ("Betales til [Navn]" uden "eller ordre"), låneaftaler
+                  i banken. <b>Sikringsakt:</b> Denunciation (GBL § 31) - køberen skal give debitor besked. <b>Debitors
+                    indsigelser:</b> Debitor bevarer ALLE indsigelser mod køberen. Ingen ekstinktion mulig. <b>Lov:</b>
+                  <a href="https://www.retsinformation.dk/eli/lta/2014/333#P26" target="_blank">GBL § 26</a></td>
+              </tr>
+              <tr id="term-skadesloesbrev">
+                <td><b>Skadesløsbrev</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-skadesloesbrev">Kapitel
+                      7</a></small></td>
+                <td>Sikkerhed for et maksimalt beløb for enhver gæld, debitor måtte få til kreditor.
+                  "Sikkerhed for alt mellemværende".</td>
+                <td>Virksomhed pantsætter ejendom til banken med skadesløsbrev på 5 mio. kr. Dette
+                  dækker alle gældsforhold op til 5 mio. kr. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2014/1075#P47d" target="_blank">TL § 47 d</a></td>
+              </tr>
+              <tr id="term-solidarisk-ansvar">
+                <td><b>Solidarisk ansvar</b><br><small><b>Findes i:</b> <a
+                      href="kapitel4.html#term-solidarisk-ansvar">Kapitel 4</a></small></td>
+                <td>Når flere er erstatningsansvarlige, hæfter de solidarisk. Skadelidte kan kræve
+                  hele erstatningen af én af de ansvarlige.</td>
+                <td>Bank og ejendomsmægler hæfter begge for fejl ved boligkøb → Skadelidte kan kræve
+                  hele erstatningen af enten banken eller mægleren. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2018/1070#P25" target="_blank">EAL § 25</a></td>
+              </tr>
+              <tr id="term-subsumption">
+                <td><b>Subsumption</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-subsumption">Kapitel
+                      1</a>, <a href="kapitel3.html#term-subsumption">Kapitel 3</a></small></td>
+                <td>Anvendelse af reglen på fakta. At vurdere, om fakta passer med reglen.</td>
+                <td>Reglen siger "uagtsomhed giver ansvar". Fakta: Bankrådgiver glemte at tjekke RKI
+                  → Passer fakta med reglen? Ja → Subsumption opfyldt.</td>
+              </tr>
+              <tr id="term-svig">
+                <td><b>Svig</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-svig">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-svig">Kapitel 2</a></small></td>
+                <td>Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten
+                  vidste besked (ond tro).</td>
+                <td>Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis
+                  køberen var i god tro. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P30"
+                    target="_blank">AFTL § 30</a></td>
+              </tr>
+              <tr id="term-saedvane">
+                <td><b>Sædvane</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-saedvane">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-saedvane">Kapitel 2</a>, <a href="kapitel3.html#term-saedvane">Kapitel
+                      3</a></small></td>
+                <td>Uskrevne regler, der er blevet praksis over tid. "Sådan gør man i branchen."</td>
+                <td>Kutymer for handel med værdipapirer, "God skik" regler inden for forsikring.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P16" target="_blank">KBL §
+                    16</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-T">T</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-tavshed-som-accept">
+                <td><b>Tavshed som accept</b><br><small><b>Findes i:</b> <a
+                      href="kapitel2.html#term-tavshed-som-accept">Kapitel 2</a></small></td>
+                <td>Undtagelse fra hovedreglen om, at tavshed ikke er accept. Hvis tilbudsgiveren
+                  eksplicit siger, at tavshed betyder accept.</td>
+                <td>Banken siger "Hvis jeg ikke hører fra dig inden fredag, regner jeg det som
+                  accept" → Kunden er bundet ved tavshed. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2016/193#P8" target="_blank">AFTL § 8</a></td>
+              </tr>
+              <tr id="term-tilbud">
+                <td><b>Tilbud</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tilbud">Kapitel 2</a>, <a
+                      href="kapitel7.html#term-tilbud">Kapitel 7</a></small></td>
+                <td>En parts erklæring om at indgå en aftale på bestemte vilkår. Er bindende for
+                  afgiveren.</td>
+                <td>Banken sender lånetilbud til kunden → Tilbuddet er bindende for banken.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P1" target="_blank">AFTL § 1</a>
+                </td>
+              </tr>
+              <tr id="term-tinglysning">
+                <td><b>Tinglysning</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tinglysning">Kapitel
+                      2</a>, <a href="kapitel3.html#term-tinglysning">Kapitel 3</a>, <a
+                      href="kapitel6.html#term-tinglysning">Kapitel 6</a>, <a
+                      href="kapitel7.html#term-tinglysning">Kapitel 7</a></small></td>
+                <td>Offentlig registrering af rettigheder over fast ejendom og visse typer løsøre.
+                  Skaber gyldighed, prioritet og god tro.</td>
+                <td>Pantebrev tinglyses → Panthaver får prioritet. Uden tinglysning er pantet ikke
+                  gyldigt mod andre kreditorer. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2014/1075#P1" target="_blank">TL § 1</a></td>
+              </tr>
+              <tr id="term-tingsskade">
+                <td><b>Tingsskade</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-tingsskade">Kapitel
+                      4</a></small></td>
+                <td>Skade på en ting (ikke personskade eller formueskade).</td>
+                <td>IT-udstyr beskadiges ved fejl → Tingsskade. Kan kræve erstatning for
+                  reparationsomkostninger.</td>
+              </tr>
+              <tr id="term-tl-tinglysningsloven">
+                <td><b>TL (Tinglysningsloven)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-tl">Kapitel
+                      5</a>, <a href="kapitel7.html#term-tl">Kapitel 7</a></small></td>
+                <td>Tinglysningsloven</td>
+                <td>Regulerer tinglysning (offentlig registrering) af rettigheder over fast ejendom og visse løsøre.
+                  Sikrer rettigheder ved bolighandel og pantstillelse.</td>
+              </tr>
+              <tr id="term-trepartsforhold">
+                <td><b>Trepartsforhold</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-trepartsforhold">Kapitel 5</a></small></td>
+                <td>Når der er tre parter i en transaktion. Kan være oprindeligt trepartsforhold
+                  (KAL) eller efterfølgende trepartsforhold (GBL).</td>
+                <td>Oprindeligt trepartsforhold: Køber køber bil hos bilforhandler, men finansierer
+                  gennem bank. Efterfølgende trepartsforhold: Bank sælger gældsbrev til anden
+                  bank. <b>Lov:</b> KAL § 4, nr. 15, litra b, GBL</td>
+              </tr>
+              <tr id="term-tvangsauktion">
+                <td><b>Tvangsauktion</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tvangsauktion">Kapitel
+                      2</a>, <a href="kapitel4.html#term-tvangsauktion">Kapitel 4</a>, <a
+                      href="kapitel7.html#term-tvangsauktion">Kapitel 7</a></small></td>
+                <td>Retslig proces, hvor panthaver kan kræve ejendommen solgt for at få dækning af
+                  sin gæld.</td>
+                <td>Kunde betaler ikke realkreditlån → Realkreditinstituttet kan kræve ejendommen
+                  solgt på tvangsauktion. Salgssummen fordeles efter prioritetsordenen.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-U">U</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-uagtsomhed">
+                <td><b>Uagtsomhed</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-uagtsomhed">Kapitel 1</a>,
+                    <a href="kapitel4.html#term-uagtsomhed">Kapitel 4</a></small></td>
+                <td>Ikke med vilje, men en fejl man burde have undgået. Kan være simpel eller grov
+                  uagtsomhed.</td>
+                <td>Bankrådgiver glemmer at tjekke kundens lønsedler før lån → Uagtsomhed.
+                  <b>Lov:</b> Culpa-reglen
+                </td>
+              </tr>
+              <tr id="term-ugyldighed">
+                <td><b>Ugyldighed</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-ugyldighed">Kapitel 2</a>,
+                    <a href="kapitel5.html#term-ugyldighed">Kapitel 5</a></small></td>
+                <td>Når en aftale ikke er gyldig og kan tilsidesættes. Kan være absolut ugyldighed
+                  eller relativ ugyldighed.</td>
+                <td>Aftale indgået under tvang eller svig kan være ugyldig. Urimelige kreditaftaler
+                  kan tilsidesættes. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P28"
+                    target="_blank">AFTL § 28-31</a>, <a href="https://www.retsinformation.dk/eli/lta/2019/817#P36"
+                    target="_blank">KAL § 36</a></td>
+              </tr>
+              <tr id="term-underpantsforbud">
+                <td><b>Underpantsforbud</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-underpantsforbud">Kapitel 5</a></small></td>
+                <td>Forbrugeren må ikke pantsætte eller overdrage det købte som sikkerhed for anden
+                  gæld, før købesummen er betalt.</td>
+                <td>Køber køber bil på kredit med ejendomsforbehold. Køber må ikke pantsætte bilen i
+                  banken som sikkerhed for andet lån. <b>Lov:</b> <a
+                    href="https://www.retsinformation.dk/eli/lta/2019/817#P21" target="_blank">KAL § 21</a></td>
+              </tr>
+              <tr id="term-urimelig-aftale">
+                <td><b>Urimelig aftale</b><br><small><b>Findes i:</b> <a
+                      href="kapitel5.html#term-urimelig-aftale">Kapitel 5</a></small></td>
+                <td>En aftale, der er urimelig og kan tilsidesættes. Vurderes efter
+                  generalklausulen.</td>
+                <td>Kreditaftale med meget høj rente og urimelige vilkår kan tilsidesættes.
+                  <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P36" target="_blank">AFTL §
+                    36</a>, <a href="https://www.retsinformation.dk/eli/lta/2019/817#P36" target="_blank">KAL § 36</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-V">V</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-varigt-m-n">
+                <td><b>Varigt mén</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-varigt-m-n">Kapitel
+                      4</a></small></td>
+                <td>Varigt fysisk mén (mindst 5%). Giver anledning til godtgørelse.</td>
+                <td>Kunde mister lillefingeren i en svingdør i banken. Det giver ikke nødvendigvis
+                  lønnedgang, men er en fysisk "defekt". Der betales et engangsbeløb baseret på
+                  méngraden. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2018/1070#P4"
+                    target="_blank">EAL § 4</a></td>
+              </tr>
+              <tr id="term-virksomhedspant">
+                <td><b>Virksomhedspant</b><br><small><b>Findes i:</b> <a
+                      href="kapitel7.html#term-virksomhedspant">Kapitel 7</a></small></td>
+                <td>Flydende pant i løsøre (varelager, debitorer). Virksomheden kan stadig sælge
+                  varerne, men nye varer bliver automatisk pantsat.</td>
+                <td>Virksomhed pantsætter varelager og debitorer til banken. Pantet skal tinglyses i
+                  personbogen. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P47"
+                    target="_blank">TL § 47</a></td>
+              </tr>
+              <tr id="term-vold">
+                <td><b>Vold</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-vold">Kapitel 1</a>, <a
+                      href="kapitel2.html#term-vold">Kapitel 2</a></small></td>
+                <td>En stærk ugyldighedsgrund. Aftale indgået under tvang er absolut ugyldig.</td>
+                <td>Kunde tvinges til at underskrive låneaftale under trusler → Aftalen er absolut
+                  ugyldig. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P28"
+                    target="_blank">AFTL § 28</a></td>
+              </tr>
+              <tr id="term-vaernberettiget-interesse">
+                <td><b>Værnberettiget interesse</b></td>
+                <td>Den interesse, der er krænket, skal være værnberettiget (person, ting, økonomi).</td>
+                <td>Kundens økonomiske interesser er værnet → Kan kræve erstatning. <b>Lov:</b>
+                  Culpa-reglen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="letter-Å">Å</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 20%;">Begreb</th>
+                <th style="width: 40%;">Forklaring</th>
+                <th style="width: 40%;">Eksempel fra finanssektoren</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="term-aaop-aarlige-omkostninger-i-procent">
+                <td><b>ÅOP (Årlige Omkostninger i Procent)</b><br><small><b>Findes i:</b> <a
+                      href="kapitel2.html#term-aaop">Kapitel 2</a>, <a href="kapitel5.html#term-aaop">Kapitel
+                      5</a></small></td>
+                <td>Årlige Omkostninger i Procent</td>
+                <td>Kiloprisen på penge. Det vigtigste tal for sammenligning af lån. Inkluderer både
+                  renter, gebyrer og renters rente.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
     </div>
+  </div>
+  </article>
+  </div>
+  </div>
+  <!-- jQuery and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- External JavaScript Files -->
+  <script src="menu.js"></script>
+  <script src="script.js"></script>
+  <script src="info.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- MDB JS -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
+  <script>
+    // Add typing animation for video overlays
+    document.addEventListener('DOMContentLoaded', function () {
+      function typeWriter(element, text, speed = 100, callback) {
+        let i = 0;
+        element.innerHTML = '';
+        let cursor = element.querySelector('.typing-cursor');
+        if (!cursor) {
+          cursor = document.createElement('span');
+          cursor.className = 'typing-cursor';
+          element.appendChild(cursor);
+        }
+        function type() {
+          if (i < text.length) {
+            cursor.insertAdjacentText('beforebegin', text.charAt(i));
+            i++;
+            setTimeout(type, speed);
+          } else {
+            // Keep cursor visible for video overlays
+            if (callback) callback();
+          }
+        }
+        type();
+      }
 
-    <!-- Page Content -->
-    <div class="content">
-        <div class="container mt-4">
-            <article><div class="alphabet-nav mb-4" style="font-size: 1.2rem; text-align: center;">
-<a href="#letter-A" class="mx-2 font-weight-bold">A</a> <a href="#letter-B" class="mx-2 font-weight-bold">B</a> <a href="#letter-C" class="mx-2 font-weight-bold">C</a> <a href="#letter-D" class="mx-2 font-weight-bold">D</a> <a href="#letter-E" class="mx-2 font-weight-bold">E</a> <a href="#letter-F" class="mx-2 font-weight-bold">F</a> <a href="#letter-G" class="mx-2 font-weight-bold">G</a> <a href="#letter-H" class="mx-2 font-weight-bold">H</a> <a href="#letter-K" class="mx-2 font-weight-bold">K</a> <a href="#letter-L" class="mx-2 font-weight-bold">L</a> <a href="#letter-M" class="mx-2 font-weight-bold">M</a> <a href="#letter-N" class="mx-2 font-weight-bold">N</a> <a href="#letter-O" class="mx-2 font-weight-bold">O</a> <a href="#letter-P" class="mx-2 font-weight-bold">P</a> <a href="#letter-R" class="mx-2 font-weight-bold">R</a> <a href="#letter-S" class="mx-2 font-weight-bold">S</a> <a href="#letter-T" class="mx-2 font-weight-bold">T</a> <a href="#letter-U" class="mx-2 font-weight-bold">U</a> <a href="#letter-V" class="mx-2 font-weight-bold">V</a> <a href="#letter-Å" class="mx-2 font-weight-bold">Å</a> 
-</div>
-<h3 id="letter-A">A</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-accept">
-  <td><b>Accept</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-accept">Kapitel 1</a>, <a href="kapitel2.html#term-accept">Kapitel 2</a>, <a href="kapitel7.html#term-accept">Kapitel 7</a></small></td>
-  <td>En parts svar på et tilbud, der gør aftalen bindende. Accepten skal være
-                                        overensstemmende med tilbuddet.</td>
-  <td>Banken sender lånetilbud på 500.000 kr. med ÅOP 5,2% til kunden. Når kunden siger "ja tak" eller skriver under, er det en accept, og låneaftalen er bindende. Kunden kan ikke længere fortryde uden omkostning. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P1"
-                                            target="_blank">AFTL § 1-6</a></td>
-</tr>
-<tr id="term-adaekvans">
-  <td><b>Adækvans</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-adaekvans">Kapitel 4</a></small></td>
-  <td>Påregnelighed - skaden skal være en forudsigelig følge af den uagtsomme handling. Hvis en skade er helt usandsynlig eller 'fjern', kan der ikke pålægges ansvar, selvom der er årsagssammenhæng (kausalitet).</td>
-  <td><b>Bankrådgivning (Adækvat):</b> En bankrådgiver glemmer at tjekke RKI på en låneansøger. Det er en påregnelig (adækvat) følge, at banken lider tab, hvis kunden viser sig at være dårlig betaler. <b>Inadækvat (Inadækvat):</b> Hvis en fejlbehandling på et hospital forlænger en patients ophold, og patienten derefter bliver forbrændt under en brand på sygehuset, anses brandskaden normalt for inadækvat (uforudsigelig), og hospitalet hæfter ikke for brandskaden som følge af den oprindelige fejlbehandling.</td>
-</tr>
-<tr id="term-afbetalingskoeb">
-  <td><b>Afbetalingskøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-afbetalingskoeb">Kapitel 3</a>, <a href="kapitel5.html#term-afbetalingskoeb">Kapitel 5</a></small></td>
-  <td>Et køb, hvor købesummen betales i flere rater over tid. Oftest med
-                                        ejendomsforbehold.</td>
-  <td>Køber køber bil til 200.000 kr. og betaler i 12 månedlige rater på 20.000 kr. Sælgeren (fx bilforhandler eller finansieringsselskab) har ejendomsforbehold, indtil sidste afdrag er betalt. Hvis køberen stopper med at betale, kan sælgeren kræve bilen tilbage. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P6"
-                                            target="_blank">KBL § 6</a></td>
-</tr>
-<tr id="term-afhjaelpning">
-  <td><b>Afhjælpning</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-afhjaelpning">Kapitel 3</a></small></td>
-  <td>Sælgerens ret til at rette en mangel ved varen, før køber kan kræve pengene
-                                        tilbage.</td>
-  <td>Banken køber printer til 50.000 kr., men den virker ikke. Leverandøren har ret til at reparere eller levere ny printer først. Banken kan ikke umiddelbart kræve pengene tilbage eller ophæve købet - sælgeren får en chance for at rette fejlen først. <b>Lov:</b>
-                                        <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P23"
-                                            target="_blank">KBL § 23</a></td>
-</tr>
-<tr id="term-afslag">
-  <td><b>Afslag</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-afslag">Kapitel 2</a></small></td>
-  <td>Når en part afviser et tilbud. Tilbuddet er bortfaldet, selvom fristen endnu
-                                        ikke er udløbet.</td>
-  <td>Kunden siger "Nej tak" til lånetilbuddet → Tilbuddet er bortfaldet straks.
-                                        Kunden kan ikke fortryde sit afslag. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P5"
-                                            target="_blank">AFTL § 5</a></td>
-</tr>
-<tr id="term-aftl-aftaleloven">
-  <td><b>AFTL (Aftaleloven)</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-aftl">Kapitel 1</a>, <a href="kapitel2.html#term-aftl">Kapitel 2</a>, <a href="kapitel7.html#term-aftl">Kapitel 7</a></small></td>
-  <td>Aftaleloven</td>
-  <td>Grundloven for alle aftaler i Danmark. Regulerer indgåelse af aftaler,
-                                        fuldmagtsforhold, ugyldighedsgrunde og fortolkning.</td>
-</tr>
-<tr id="term-afvikling">
-  <td><b>Afvikling</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-afvikling">Kapitel 3</a></small></td>
-  <td>Levering og betaling ved handel med værdipapirer. Sker typisk efter faste
-                                        frister (fx T+2 dage).</td>
-  <td>Banken køber aktier mandag → Afvikling sker onsdag (T+2). Pengene og aktierne
-                                        overføres på dette tidspunkt.</td>
-</tr>
-<tr id="term-analogislutning">
-  <td><b>Analogislutning</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-analogislutning">Kapitel 1</a></small></td>
-  <td>Anvende en lovregel på et område, den ikke direkte gælder for, fordi situationen
-                                        ligner.</td>
-  <td>Regler om "køb" bruges ofte analogisk på "bytte" af varer, da situationerne
-                                        minder om hinanden.</td>
-</tr>
-<tr id="term-ansvarsfrihed">
-  <td><b>Ansvarsfrihed</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-ansvarsfrihed">Kapitel 4</a></small></td>
-  <td>Når skadevolder ikke skal betale erstatning, fordi skaden er dækket af
-                                        forsikring.</td>
-  <td>Bankassistent taber ved uheld en computer. Skaden er dækket af bankens
-                                        tingsforsikring → Assistenten er ansvarsfri. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P19"
-                                            target="_blank">EAL § 19</a></td>
-</tr>
-<tr id="term-ansvarsgrundlag">
-  <td><b>Ansvarsgrundlag</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-ansvarsgrundlag">Kapitel 4</a></small></td>
-  <td>Det juridiske grundlag for erstatningsansvar. Kræver skyld (forsæt eller
-                                        uagtsomhed).</td>
-  <td>Bankrådgiver giver bevidst urigtige oplysninger → Forsæt → Ansvarsgrundlag
-                                        opfyldt. <b>Lov:</b> Culpa-reglen (ulovbestemt)</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-B">B</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-betalingssted">
-  <td><b>Betalingssted</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-betalingssted">Kapitel 5</a></small></td>
-  <td>Normalt fordringshaverens bopæl eller forretningssted. Grundsætningen:
-                                        "Pengeskyld er bringeskyld".</td>
-  <td>Kunde skylder banken 100.000 kr. Kunden skal bringe pengene til bankens kontor, ikke omvendt. Banken er ikke forpligtet til at hente pengene hos kunden. Dette er standardreglen, medmindre andet er aftalt.</td>
-</tr>
-<tr id="term-bevisbyrde">
-  <td><b>Bevisbyrde</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-bevisbyrde">Kapitel 1</a>, <a href="kapitel2.html#term-bevisbyrde">Kapitel 2</a></small></td>
-  <td>Hvem skal bevise hvad? Hovedregel: Den der påstår noget, skal bevise det.</td>
-  <td>I en forsikringssag: Kunden skal bevise, at der er sket en skade, der er dækket
-                                        af policen. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P25"
-                                            target="_blank">AFTL § 25</a></td>
-</tr>
-<tr id="term-bilbog">
-  <td><b>Bilbog</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-bilbog">Kapitel 7</a></small></td>
-  <td>Det offentlige register for motorkøretøjer. Pant i biler skal tinglyses i
-                                        bilbogen.</td>
-  <td>Banken tager pant i bil. Pantet skal tinglyses i bilbogen for at være gyldigt
-                                        mod andre kreditorer. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P42d"
-                                            target="_blank">TL § 42 d</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-C">C</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-cisg-den-internationale-koebelov">
-  <td><b>CISG (Den internationale købelov)</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-cisg">Kapitel 2</a>, <a href="kapitel3.html#term-cisg">Kapitel 3</a></small></td>
-  <td>Convention on Contracts for the International Sale of Goods - Den internationale
-                                        købelov. FN's konvention om internationale køb.</td>
-  <td>Ved internationale køb mellem virksomheder fra forskellige lande kan CISG gælde
-                                        i stedet for Købeloven. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P9a"
-                                            target="_blank">AFTL § 9a</a></td>
-</tr>
-<tr id="term-civilkoeb">
-  <td><b>Civilkøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-civilkoeb">Kapitel 3</a>, <a href="kapitel5.html#term-civilkoeb">Kapitel 5</a></small></td>
-  <td>Et køb mellem to private personer (ikke erhvervsdrivende). Mindre skærpede
-                                        regler end handelskøb.</td>
-  <td>To private personer handler bil i Den Blå Avis til 100.000 kr. → Civilkøb. Mindre strenge reklamationsfrister end ved handelskøb. Køber har stadig 2 års reklamationsret ved mangler. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P4"
-                                            target="_blank">KBL § 4</a></td>
-</tr>
-<tr id="term-compliance">
-  <td><b>Compliance</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-compliance">Kapitel 3</a>, <a href="kapitel5.html#term-compliance">Kapitel 5</a>, <a href="kapitel6.html#term-compliance">Kapitel 6</a></small></td>
-  <td>Overholdelse af love, regler og interne retningslinjer. I finanssektoren er det en central funktion, der sikrer, at virksomheden ikke udsættes for bøder eller tab af omdømme. Begrebet dækker også 'Fit & Proper' regler for ledelsen.</td>
-  <td><b>Finanstilsynet:</b> En bank skal have en uafhængig compliance-funktion, der løbende tjekker, om reglerne for hvidvask, kreditvurdering og god skik overholdes. Hvis banken ikke har styr på compliance, kan Finanstilsynet udstede påbud eller inddrage bankens tilladelse til at drive virksomhed.</td>
-</tr>
-<tr id="term-condictio-indebiti">
-  <td><b>Condictio indebiti</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-condictio-indebiti">Kapitel 1</a>, <a href="kapitel2.html#term-condictio-indebiti">Kapitel 2</a></small></td>
-  <td>Krav om tilbagebetaling af penge, der er betalt ved en fejl. Det centrale juridiske spørgsmål er, om modtageren var i 'god tro' eller 'ond tro'. Hvis man modtager penge, man ved eller burde vide ikke tilhører en (ond tro), skal de altid betales tilbage.</td>
-  <td><b>Fejludbetaling i banken:</b> Banken overfører ved en fejl 50.000 kr. til en forkert konto. Hvis modtageren ser beløbet og skynder sig at bruge det (ond tro), er der et klart tilbagebetalingskrav. <b>Pensionsfejl:</b> Et pensionsfirma udbetaler 35.000 kr. i stedet for 32.000 kr. Hvis modtageren er i god tro og har indrettet sit forbrug efter beløbet, kan kravet i særlige tilfælde bortfalde (retssædvane).</td>
-</tr>
-<tr id="term-culpa">
-  <td><b>Culpa</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-culpa">Kapitel 1</a>, <a href="kapitel4.html#term-culpa">Kapitel 4</a></small></td>
-  <td>Skyld - den ulovbestemte hovedregel om erstatningsansvar. Man hæfter, hvis man har udvist forsæt eller uagtsomhed. Domstolen vurderer handlingen i forhold til 'Bonus Pater' (en fornuftig referenceperson).</td>
-  <td><b>Finansiel rådgivning:</b> En bankrådgiver glemmer en enkelt post i et komplekst budget (simpel uagtsomhed). En bankrådgiver bevilger et millionlån uden overhovedet at indhente lønsedler eller tjekke RKI (grov uagtsomhed). Begge dele medfører ansvar for banken (principalansvar), men graden af uagtsomhed har betydning for eventuelle forsikringsdækninger og regres.</td>
-</tr>
-<tr id="term-culpa-reglen">
-  <td><b>Culpa-reglen</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-culpa-reglen">Kapitel 4</a></small></td>
-  <td>Den ulovbestemte hovedregel i erstatningsretten: Man hæfter kun for skader, man
-                                        har forvoldt ved forsæt eller uagtsomhed.</td>
-  <td>Hovedreglen for erstatningsansvar. Kræver skyld (forsæt eller uagtsomhed),
-                                        kausalitet, adækvans, tab og værnberettiget interesse.</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-D">D</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-deklaratorisk">
-  <td><b>Deklaratorisk</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-deklaratorisk">Kapitel 1</a>, <a href="kapitel2.html#term-deklaratorisk">Kapitel 2</a>, <a href="kapitel3.html#term-deklaratorisk">Kapitel 3</a></small></td>
-  <td>En lovregel, der kan fraviges ved aftale. Modsat præceptiv (ufravigelig).</td>
-  <td>Købeloven er deklaratorisk ved handelskøb → Parterne kan aftale anden
-                                        fremgangsmåde. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P4"
-                                            target="_blank">KBL § 4</a></td>
-</tr>
-<tr id="term-deponering">
-  <td><b>Deponering</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-deponering">Kapitel 7</a></small></td>
-  <td>Når skyldneren afleverer pengene til en tredjemand (fx retten), hvis
-                                        fordringshaveren ikke vil modtage betalingen.</td>
-  <td>Kunden vil betale gælden, men banken nægter at modtage pengene → Kunden kan
-                                        deponere pengene hos retten og blive frigjort.</td>
-</tr>
-<tr id="term-dl">
-  <td><b>DL</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-dl">Kapitel 4</a></small></td>
-  <td>Dansk Lov</td>
-  <td>Den gamle danske lovsamling fra 1683. Nogle paragraffer er stadig i kraft.</td>
-</tr>
-<tr id="term-dl-dansk-lov">
-  <td><b>DL (Dansk Lov)</b></td>
-  <td>Dansk Lov - den gamle danske lovsamling fra 1683. Nogle paragraffer er stadig i
-                                        kraft, fx DL 3-19-2 om principalansvar.</td>
-  <td>DL 3-19-2 regulerer principalansvar - arbejdsgiverens ansvar for ansattes
-                                        handlinger i tjenesten. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/1683/1" target="_blank">Dansk
-                                            Lov 3-19-2</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-E">E</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-eal-erstatningsansvarsloven">
-  <td><b>EAL (Erstatningsansvarsloven)</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-eal">Kapitel 4</a></small></td>
-  <td>Erstatningsansvarsloven</td>
-  <td>Regulerer personskadeerstatning samt forsikringsmæssige forhold. Supplerer
-                                        culpa-reglen.</td>
-</tr>
-<tr id="term-ejendomsforbehold">
-  <td><b>Ejendomsforbehold</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-ejendomsforbehold">Kapitel 3</a>, <a href="kapitel5.html#term-ejendomsforbehold">Kapitel 5</a>, <a href="kapitel7.html#term-ejendomsforbehold">Kapitel 7</a></small></td>
-  <td>Sælgerens ret til at tage varen tilbage, hvis køber ikke betaler. For at et ejendomsforbehold er gyldigt i forbrugerkøb (KAL), skal 4 betingelser være opfyldt: 1) Aftalt senest ved overgivelse, 2) Pris over 2.000 kr., 3) Udbetaling på mindst 20%, 4) Må ikke være variabel kredit.</td>
-  <td><b>Bilfinansiering:</b> En kunde køber en bil til 200.000 kr. via en købekontrakt med ejendomsforbehold. Kunden skal lægge 40.000 kr. (20%) kontant. Finansieringsselskabet ejer bilen, indtil sidste afdrag er betalt. For biler skal forbeholdet tinglyses i <b>Bilbogen</b> for at være gyldigt mod andre kreditorer. Hvis kunden stopper med at betale, kan bilen hentes via Fogedretten. <b>Lov:</b> KAL § 34.</td>
-</tr>
-<tr id="term-ejendomsret">
-  <td><b>Ejendomsret</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-ejendomsret">Kapitel 4</a>, <a href="kapitel7.html#term-ejendomsret">Kapitel 7</a></small></td>
-  <td>Den fulde ret til en ting. Adskilt fra besiddelse (faktisk kontrol over tingen).</td>
-  <td>Køber køber bil på afbetaling. Køberen har besiddelsen, men sælgeren har
-                                        ejendomsretten, indtil sidste afdrag er betalt.</td>
-</tr>
-<tr id="term-ejerpantebrev">
-  <td><b>Ejerpantebrev</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-ejerpantebrev">Kapitel 7</a></small></td>
-  <td>Ejeren udsteder et pantebrev til sig selv ("Jeg skylder mig selv 500.000 kr.").
-                                        Dette underpantsættes derefter til banken.</td>
-  <td>Ejeren udsteder ejerpantebrev på 1 mio. kr. til sig selv. Dette underpantsættes
-                                        til banken som sikkerhed for kassekredit. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P47c"
-                                            target="_blank">TL § 47 c</a></td>
-</tr>
-<tr id="term-erhvervsdrivende">
-  <td><b>Erhvervsdrivende</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-erhvervsdrivende">Kapitel 2</a>, <a href="kapitel3.html#term-erhvervsdrivende">Kapitel 3</a>, <a href="kapitel5.html#term-erhvervsdrivende">Kapitel 5</a></small></td>
-  <td>En person eller virksomhed, der driver erhverv (ikke privatperson).</td>
-  <td>Bank, realkreditinstitut, forsikringsselskab, ejendomsmægler er alle
-                                        erhvervsdrivende. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P4"
-                                            target="_blank">KBL § 4</a></td>
-</tr>
-<tr id="term-erhvervsevnetab">
-  <td><b>Erhvervsevnetab</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-erhvervsevnetab">Kapitel 4</a></small></td>
-  <td>Tab eller forringelse af erhvervsevne som følge af personskade. Ofte den dyreste
-                                        post ved personskadeerstatning.</td>
-  <td>Kunde falder i banken og ødelægger ryggen, så han aldrig kan arbejde igen.
-                                        Banken skal erstatte hele hans fremtidige tabte arbejdsindtægt. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P2"
-                                            target="_blank">EAL § 2</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P5"
-                                            target="_blank">EAL § 5</a></td>
-</tr>
-<tr id="term-erstatning">
-  <td><b>Erstatning</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-erstatning">Kapitel 1</a>, <a href="kapitel2.html#term-erstatning">Kapitel 2</a>, <a href="kapitel3.html#term-erstatning">Kapitel 3</a>, <a href="kapitel4.html#term-erstatning">Kapitel 4</a>, <a href="kapitel5.html#term-erstatning">Kapitel 5</a>, <a href="kapitel7.html#term-erstatning">Kapitel 7</a></small></td>
-  <td>Penge, der betales for at dække en skade eller et tab. Kan være formueskade,
-                                        personskade eller tingsskade.</td>
-  <td>Bankrådgiver giver fejlagtig rådgivning → Kunde taber 100.000 kr. → Banken skal
-                                        erstatte 100.000 kr. <b>Lov:</b> Culpa-reglen, EAL</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-F">F</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-fast-ejendom">
-  <td><b>Fast ejendom</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-fast-ejendom">Kapitel 2</a>, <a href="kapitel3.html#term-fast-ejendom">Kapitel 3</a>, <a href="kapitel5.html#term-fast-ejendom">Kapitel 5</a>, <a href="kapitel7.html#term-fast-ejendom">Kapitel 7</a></small></td>
-  <td>Ejendom, der er fastgjort til jorden (huse, lejligheder, jord). Modsat løsøre.</td>
-  <td>Bolig, erhvervsejendom, jord er fast ejendom. Pant i fast ejendom skal
-                                        tinglyses. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075"
-                                            target="_blank">TL</a></td>
-</tr>
-<tr id="term-fil">
-  <td><b>FIL</b><br><small><b>Findes i:</b> <a href="kapitel6.html#term-fil">Kapitel 6</a></small></td>
-  <td>Lov om Finansiel Virksomhed</td>
-  <td>Regulerer finansielle virksomheder (banker, realkreditinstitutter, forsikringsselskaber). Indeholder særlige regler om kaution og forbrugerbeskyttelse.</td>
-</tr>
-<tr id="term-forbruger">
-  <td><b>Forbruger</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-forbruger">Kapitel 2</a>, <a href="kapitel3.html#term-forbruger">Kapitel 3</a>, <a href="kapitel5.html#term-forbruger">Kapitel 5</a></small></td>
-  <td>En fysisk person, der handler uden for erhvervsmæssig eller erhvervslignende
-                                        virksomhed.</td>
-  <td>Privatperson, der låner penge til boligkøb eller bilkøb er forbruger. Ikke:
-                                        Virksomhed, der låner penge til investering. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P1"
-                                            target="_blank">KAL § 1</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P83"
-                                            target="_blank">KBL § 83</a></td>
-</tr>
-<tr id="term-forbrugerbeskyttelse-ved-fast-ejendom-lffe">
-  <td><b>Forbrugerbeskyttelse ved fast ejendom (LFFE)</b></td>
-  <td>Lov om forbrugerbeskyttelse ved erhvervelse af fast ejendom. Giver forbrugeren fortrydelsesret ved køb af bolig.</td>
-  <td>Privatperson køber hus og har 6 hverdage til at fortryde købet uden begrundelse. Dette gælder kun for forbrugerkøb, ikke erhvervskøb. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2017/1025"
-                                            target="_blank">LFFE</a></td>
-</tr>
-<tr id="term-forbrugerkoeb">
-  <td><b>Forbrugerkøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-forbrugerkoeb">Kapitel 3</a>, <a href="kapitel5.html#term-forbrugerkoeb">Kapitel 5</a>, <a href="kapitel7.html#term-forbrugerkoeb">Kapitel 7</a></small></td>
-  <td>Køb, hvor køberen er en forbruger (fysisk person, der handler uden for
-                                        erhvervsmæssig virksomhed). Særlige beskyttelsesregler gælder.</td>
-  <td>Privatperson køber computer i butik → Forbrugerkøb. 2 års ufravigelig
-                                        reklamationsret. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P83"
-                                            target="_blank">KBL § 83</a></td>
-</tr>
-<tr id="term-forsikringsdaekning">
-  <td><b>Forsikringsdækning</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-forsikringsdaekning">Kapitel 4</a></small></td>
-  <td>Når en skade er dækket af forsikring. Skadevolder kan være ansvarsfri, medmindre
-                                        der er forsæt eller grov uagtsomhed.</td>
-  <td>Skade er dækket af bankens tingsforsikring → Skadevolder er ansvarsfri. Men ved
-                                        forsæt eller grov uagtsomhed hæfter skadevolder stadig. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P19"
-                                            target="_blank">EAL § 19</a></td>
-</tr>
-<tr id="term-forsaet">
-  <td><b>Forsæt</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-forsaet">Kapitel 1</a>, <a href="kapitel2.html#term-forsaet">Kapitel 2</a>, <a href="kapitel4.html#term-forsaet">Kapitel 4</a></small></td>
-  <td>Bevidst handling med vilje. Man vidste eller forudså skaden.</td>
-  <td>Investeringsrådgiver anbefaler en aktie, han ved er værdiløs, blot for at tjene
-                                        provision → Forsæt. <b>Lov:</b> Culpa-reglen</td>
-</tr>
-<tr id="term-fortrydelsesret">
-  <td><b>Fortrydelsesret</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-fortrydelsesret">Kapitel 1</a>, <a href="kapitel5.html#term-fortrydelsesret">Kapitel 5</a>, <a href="kapitel7.html#term-fortrydelsesret">Kapitel 7</a></small></td>
-  <td>Forbrugerens ret til at fortryde en aftale inden for en bestemt frist.</td>
-  <td>Kunde indgår låneaftale på 500.000 kr. den 1. januar. Kunden kan fortryde lånet inden for 14 dage (til 15. januar) uden begrundelse og uden omkostning. Dette gælder kun for forbrugerlån, ikke erhvervslån. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P19"
-                                            target="_blank">KAL § 19</a></td>
-</tr>
-<tr id="term-foraeldelse">
-  <td><b>Forældelse</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-foraeldelse">Kapitel 5</a></small></td>
-  <td>Ophør af en fordring på grund af dennes alder. Normalt 10 år fra fordringens
-                                        stiftelse.</td>
-  <td>Kunde skylder banken 100.000 kr. fra 2014. Efter 10 år (i 2024) kan banken ikke længere kræve pengene, medmindre kunden har anerkendt gælden. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2015/1238#P6"
-                                            target="_blank">Forældelsesloven § 6</a></td>
-</tr>
-<tr id="term-fuldmagt">
-  <td><b>Fuldmagt</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-fuldmagt">Kapitel 2</a></small></td>
-  <td>Ret til at handle på en andens vegne. Kan være stillingsfuldmagt (automatisk ved
-                                        ansættelse) eller særskilt fuldmagt.</td>
-  <td>Senior Erhvervsrådgiver har automatisk fuldmagt (stillingsfuldmagt) til at
-                                        bevilge lån inden for normale grænser. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P10"
-                                            target="_blank">AFTL § 10</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-G">G</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-gbl-gaeldsbrevsloven">
-  <td><b>GBL (Gældsbrevsloven)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gbl">Kapitel 5</a>, <a href="kapitel7.html#term-gbl">Kapitel 7</a></small></td>
-  <td>Gældsbrevsloven</td>
-  <td>Regulerer handel med fordringer gennem gældsbreve. Skelner mellem simple
-                                        gældsbreve og omsætningsgældsbreve.</td>
-</tr>
-<tr id="term-gdpr">
-  <td><b>GDPR</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gdpr">Kapitel 5</a>, <a href="kapitel6.html#term-gdpr">Kapitel 6</a></small></td>
-  <td>General Data Protection Regulation (Databeskyttelsesforordningen)</td>
-  <td>EU's forordning om beskyttelse af personoplysninger. Gælder for alle, der behandler personoplysninger. Suppleres af Databeskyttelsesloven.</td>
-</tr>
-<tr id="term-gdpr-databeskyttelsesforordningen">
-  <td><b>GDPR (Databeskyttelsesforordningen)</b></td>
-  <td>General Data Protection Regulation - EU's forordning om beskyttelse af personoplysninger. Gælder for alle, der behandler personoplysninger.</td>
-  <td>Banken må kun behandle kundens CPR-nummer, hvis det er nødvendigt (fx til kreditvurdering). CPR-numre skal sendes krypteret. Kunden har ret til at se, hvad banken har registreret om dem. <b>Lov:</b> <a
-                                            href="https://eur-lex.europa.eu/legal-content/DA/TXT/?uri=celex%3A32016R0679"
-                                            target="_blank">GDPR</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/502"
-                                            target="_blank">Databeskyttelsesloven</a></td>
-</tr>
-<tr id="term-god-tro">
-  <td><b>God tro</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-god-tro">Kapitel 1</a>, <a href="kapitel2.html#term-god-tro">Kapitel 2</a>, <a href="kapitel5.html#term-god-tro">Kapitel 5</a>, <a href="kapitel7.html#term-god-tro">Kapitel 7</a></small></td>
-  <td>Uvidende (uskyldig). Man vidste ikke og burde ikke vide om noget.</td>
-  <td>Køber af lejlighed er i god tro om en gæld, hvis intet fremgik af tingbogen.
-                                        <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P6"
-                                            target="_blank">TL § 6</a></td>
-</tr>
-<tr id="term-grov-uagtsomhed">
-  <td><b>Grov uagtsomhed</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-grov-uagtsomhed">Kapitel 4</a></small></td>
-  <td>Meget manglende forsigtighed. Klar overskridelse af forventet standard.</td>
-  <td>Bankrådgiver bevilger millionlån til kunde i RKI uden at tjekke registret → Grov
-                                        uagtsomhed. <b>Lov:</b> Culpa-reglen</td>
-</tr>
-<tr id="term-gaeldsbrev">
-  <td><b>Gældsbrev</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gaeldsbrev">Kapitel 5</a></small></td>
-  <td>Et dokument, der bekræfter en gæld. Kan være simpelt gældsbrev eller
-                                        omsætningsgældsbrev.</td>
-  <td>Virksomhed skylder banken 1 mio. kr. og udsteder gældsbrev som dokumentation. Gældsbrevet kan være simpelt (kun mellem virksomhed og bank) eller omsætningsgældsbrev (kan sælges til anden bank). <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/333"
-                                            target="_blank">Gældsbrevsloven</a></td>
-</tr>
-<tr id="term-gaeldsfaktor">
-  <td><b>Gældsfaktor</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-gaeldsfaktor">Kapitel 5</a></small></td>
-  <td>Samlet gæld divideret med årsindtægt. Bruges ved kreditvurdering.</td>
-  <td>Kunde har 2 mio. kr. i gæld (boliglån + billån) og tjener 500.000 kr. om året → Gældsfaktor er 4 (2.000.000 ÷ 500.000). Banken accepterer normalt maks 4-5 for boliglån. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P7c"
-                                            target="_blank">KAL § 7c</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-H">H</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-handelsbrug">
-  <td><b>Handelsbrug</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-handelsbrug">Kapitel 2</a>, <a href="kapitel3.html#term-handelsbrug">Kapitel 3</a></small></td>
-  <td>Sædvane inden for handel. Kan fravige købeloven ved handelskøb.</td>
-  <td>Banken køber aktier fra anden bank. Inden for handel med værdipapirer gælder kutyme om, at handel er bindende mundtligt straks (ikke først når kontrakten er underskrevet). <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P16"
-                                            target="_blank">KBL § 16</a></td>
-</tr>
-<tr id="term-handelskoeb">
-  <td><b>Handelskøb</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-handelskoeb">Kapitel 3</a>, <a href="kapitel5.html#term-handelskoeb">Kapitel 5</a></small></td>
-  <td>Et køb mellem to erhvervsdrivende. Særlige, skærpede regler gælder.</td>
-  <td>Bank køber IT-udstyr fra leverandør → Handelskøb. Skærpede reklamationsfrister.
-                                        <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P4"
-                                            target="_blank">KBL § 4</a></td>
-</tr>
-<tr id="term-hvidvaskloven-aml">
-  <td><b>Hvidvaskloven (AML)</b><br><small><b>Findes i:</b> <a href="kapitel6.html#term-hvidvaskloven">Kapitel 6</a></small></td>
-  <td>Lov om forebyggelse af hvidvask og terrorfinansiering</td>
-  <td>Gælder for banker, ejendomsmæglere, revisorer m.fl. Stilller krav til KYC, risikovurdering, undersøgelsespligt og underretningspligt.</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-K">K</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-kal-kreditaftaleloven">
-  <td><b>KAL (Kreditaftaleloven)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-kal">Kapitel 5</a>, <a href="kapitel6.html#term-kal">Kapitel 6</a></small></td>
-  <td>Kreditaftaleloven</td>
-  <td>Reglerne om forbrugerbeskyttelse ved lån. Præceptiv lov (kan ikke fraviges til
-                                        skade for forbrugeren).</td>
-</tr>
-<tr id="term-kausalitet">
-  <td><b>Kausalitet</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-kausalitet">Kapitel 4</a></small></td>
-  <td>Årsagssammenhæng mellem handling og skade. "Hvis ikke" testen: Hvis ikke
-                                        handlingen var sket, ville skaden ikke være indtrådt.</td>
-  <td>Hvis banken ikke havde givet fejlagtig rådgivning, ville kunden ikke have tabt
-                                        penge → Kausalitet opfyldt. <b>Lov:</b> Culpa-reglen</td>
-</tr>
-<tr id="term-kaution">
-  <td><b>Kaution</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-kaution">Kapitel 2</a>, <a href="kapitel5.html#term-kaution">Kapitel 5</a>, <a href="kapitel6.html#term-kaution">Kapitel 6</a></small></td>
-  <td>Personlig hæftelse. En tredjemand (kautionist) hæfter for en andens gæld.</td>
-  <td>Barn ansøger om lån på 500.000 kr. til boligkøb. Banken kræver kaution, så forældrene stiller kaution. Hvis barnet stopper med at betale, kan banken kræve pengene af forældrene. Kautionisten hæfter for hele gælden. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/406#P48"
-                                            target="_blank">Lov om finansiel virksomhed § 48</a></td>
-</tr>
-<tr id="term-kbl-koebeloven">
-  <td><b>KBL (Købeloven)</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-kbl">Kapitel 3</a></small></td>
-  <td>Købeloven</td>
-  <td>Reglerne om køb af løsøre. Skelner mellem handelskøb, civilkøb og forbrugerkøb.</td>
-</tr>
-<tr id="term-kreditaftale">
-  <td><b>Kreditaftale</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-kreditaftale">Kapitel 5</a>, <a href="kapitel6.html#term-kreditaftale">Kapitel 6</a></small></td>
-  <td>En aftale om henstand med betalingen, lån eller anden tilsvarende finansiel
-                                        ordning.</td>
-  <td>Banklån, kreditkøb, afbetalingskøb, leasingaftaler (hvis de opfylder
-                                        definitionen). <b>Lov:</b> KAL § 4, nr. 3</td>
-</tr>
-<tr id="term-kreditgiver">
-  <td><b>Kreditgiver</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-kreditgiver">Kapitel 5</a></small></td>
-  <td>Den (typisk juridiske person), der i forhold til forbrugeren yder kredit.</td>
-  <td>Bank, realkreditinstitut, finansieringsselskab eller sælger ved kreditkøb er
-                                        kreditgiver. <b>Lov:</b> KAL § 4, nr. 2</td>
-</tr>
-<tr id="term-kreditvurdering">
-  <td><b>Kreditvurdering</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-kreditvurdering">Kapitel 3</a>, <a href="kapitel4.html#term-kreditvurdering">Kapitel 4</a>, <a href="kapitel5.html#term-kreditvurdering">Kapitel 5</a>, <a href="kapitel6.html#term-kreditvurdering">Kapitel 6</a></small></td>
-  <td>Bankens pligt til at vurdere kundens kreditværdighed grundigt før bevilling.</td>
-  <td>Kunde ansøger om lån på 500.000 kr. Banken skal indhente lønsedler, årsopgørelser, budget, tjekke RKI, beregne rådighedsbeløb og gældsfaktor. Hvis banken glemmer dette, kan lånet være ugyldigt. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P7c"
-                                            target="_blank">KAL § 7c</a></td>
-</tr>
-<tr id="term-kutyme">
-  <td><b>Kutyme</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-kutyme">Kapitel 1</a>, <a href="kapitel3.html#term-kutyme">Kapitel 3</a></small></td>
-  <td>Sædvane - uskrevne regler, der er blevet praksis over tid i en branche.</td>
-  <td>Inden for handel med værdipapirer gælder kutyme om, at handel er bindende mundtligt straks. "God skik" regler inden for forsikring er også kutymer. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P16"
-                                            target="_blank">KBL § 16</a></td>
-</tr>
-<tr id="term-kyc-know-your-customer">
-  <td><b>KYC (Know Your Customer)</b></td>
-  <td>"Know Your Customer" - pligten til at vide, hvem kunden er, og hvor pengene kommer fra. En del af hvidvaskloven.</td>
-  <td>Ny kunde vil åbne konto. Banken skal indhente legitimation (pas/kørekort), tjekke identitet og spørge til pengenes oprindelse. Hvis kunden vil indsætte store beløb kontant, skal banken kræve dokumentation. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/316"
-                                            target="_blank">Hvidvaskloven</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-L">L</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-leasing">
-  <td><b>Leasing</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-leasing">Kapitel 2</a>, <a href="kapitel3.html#term-leasing">Kapitel 3</a></small></td>
-  <td>En aftale om vederlagsfri brug af en ting, hvor tingen skal leveres tilbage til
-                                        långiver, når forholdet ophører.</td>
-  <td>Banken leaser bil til 5.000 kr. om måneden i 3 år. Efter 3 år skal bilen leveres tilbage til leasingfirmaet. Banken ejer aldrig bilen, modsat ved køb. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P4"
-                                            target="_blank">KAL § 4</a> (hvis det opfylder definitionen af kreditaftale)</td>
-</tr>
-<tr id="term-lempelse">
-  <td><b>Lempelse</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-lempelse">Kapitel 4</a></small></td>
-  <td>Mulighed for at nedsætte eller fjerne erstatningsansvar i visse situationer.</td>
-  <td>Arbejdstagers erstatningsansvar kan lempes, hvis skaden er dækket af
-                                        arbejdsgiverens ansvarsforsikring. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P23"
-                                            target="_blank">EAL § 23</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P24"
-                                            target="_blank">EAL § 24</a></td>
-</tr>
-<tr id="term-lffe-lov-om-forbrugerbeskyttelse-ved-fast-ejendom">
-  <td><b>LFFE (Lov om forbrugerbeskyttelse ved fast ejendom)</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-lffe">Kapitel 7</a></small></td>
-  <td>Lov om forbrugerbeskyttelse ved erhvervelse af fast ejendom</td>
-  <td>Giver forbrugeren fortrydelsesret ved køb af bolig. Gælder kun for forbrugerkøb, ikke erhvervskøb.</td>
-</tr>
-<tr id="term-lofe">
-  <td><b>LOFE</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-lofe">Kapitel 7</a></small></td>
-  <td>Lov om formidling af fast ejendom</td>
-  <td>Regulerer ejendomsmæglervirksomhed. Stiller krav til formidlingsaftaler, vederlag og ansvarlig ejendomsmægler.</td>
-</tr>
-<tr id="term-lofe-lov-om-formidling-af-fast-ejendom">
-  <td><b>LOFE (Lov om formidling af fast ejendom)</b></td>
-  <td>Loven regulerer ejendomsmæglervirksomhed. Stiller krav til formidlingsaftaler, vederlag og ansvarlig ejendomsmægler.</td>
-  <td>Ejendomsmægler skal have skriftlig formidlingsaftale med sælger, hvor vederlaget (fx 2% af købesummen) og ansvarlig ejendomsmægler fremgår. Uden skriftlig aftale er formidlingsaftalen ugyldig. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/510#P29"
-                                            target="_blank">LOFE § 29</a></td>
-</tr>
-<tr id="term-lov-om-finansiel-virksomhed-fil">
-  <td><b>Lov om Finansiel Virksomhed (FIL)</b></td>
-  <td>Loven regulerer finansielle virksomheder (banker, realkreditinstitutter, forsikringsselskaber). Indeholder særlige regler om kaution.</td>
-  <td>Forældre kautionerer for barnets lån. Banken skal oplyse forældrene om barnets økonomi, gæld og risiko før kautionen indgås. Hvis banken glemmer det, kan kautionen være ugyldig. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/406#P48"
-                                            target="_blank">FIL § 48</a></td>
-</tr>
-<tr id="term-loesoere">
-  <td><b>Løsøre</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-loesoere">Kapitel 3</a>, <a href="kapitel5.html#term-loesoere">Kapitel 5</a>, <a href="kapitel7.html#term-loesoere">Kapitel 7</a></small></td>
-  <td>Rørlige, fysiske genstande (ikke fast ejendom eller fordringer).</td>
-  <td>Biler, møbler, computere er løsøre. Pant i løsøre kan tinglyses i bilbogen eller
-                                        personbogen. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853"
-                                            target="_blank">KBL</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-M">M</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-mangel">
-  <td><b>Mangel</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-mangel">Kapitel 3</a>, <a href="kapitel5.html#term-mangel">Kapitel 5</a></small></td>
-  <td>Når varen afviger fra det, der er aftalt, ikke har de egenskaber, sælgeren har
-                                        oplyst, eller ikke er egnet til det formål, den normalt bruges til.</td>
-  <td>Bank køber printer til 50.000 kr., der skulle kunne håndtere 10.000 sider om måneden, men kan kun håndtere 5.000 → Mangel. Banken kan kræve afhjælpning (reparation), nedsættelse af prisen eller ophæve købet. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P17"
-                                            target="_blank">KBL § 17</a></td>
-</tr>
-<tr id="term-misligholdelse">
-  <td><b>Misligholdelse</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-misligholdelse">Kapitel 3</a>, <a href="kapitel5.html#term-misligholdelse">Kapitel 5</a>, <a href="kapitel7.html#term-misligholdelse">Kapitel 7</a></small></td>
-  <td>Når en part ikke opfylder sine forpligtelser efter aftalen.</td>
-  <td>Kunde har låneaftale og skal betale 5.000 kr. den 1. hver måned. Kunden betaler ikke → Misligholdelse. Banken kan kræve hele lånet tilbagebetalt med det samme eller ophæve aftalen. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P47"
-                                            target="_blank">KBL § 47</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P52"
-                                            target="_blank">KBL § 52</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-N">N</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-nsk-hvidvasksekretariatet">
-  <td><b>NSK (Hvidvasksekretariatet)</b></td>
-  <td>Nationalt Sekretariat for Bekæmpelse af Hvidvask - myndigheden, der modtager underretninger om mistænkelig hvidvask.</td>
-  <td>Banken opdager mistænkelig transaktion (fx kunde indsætter 50.000 kr. kontant uden dokumentation). Banken skal underrette NSK via hvidvaskansvarlig. Banken må IKKE advare kunden (meddelelsesforbud). <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/316"
-                                            target="_blank">Hvidvaskloven</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-O">O</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-omsaetningsgaeldsbrev">
-  <td><b>Omsætningsgældsbrev</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-omsaetningsgaeldsbrev">Kapitel 5</a></small></td>
-  <td>Et gældsbrev beregnet til at blive solgt (omsat). Giver køberen særlig beskyttelse gennem ekstinktion. <b>VIKTIGT:</b> Forskelligt fra simple gældsbreve! <b>Sikringsakt:</b> Rådighedsberøvelse (fysisk besiddelse). <b>Debitors indsigelser:</b> Godtroende køber kan ekstingvere svage indsigelser, men IKKE stærke (fx falsk underskrift).</td>
-  <td><b>Eksempler:</b> Pantebreve i fast ejendom, ihændehavergældsbreve ("Betales til ihændehaveren"), ordregældsbreve ("Betales til [Navn] eller ordre"). Sælger sælger pantebrev til kursinvestor → Investoren skal have pantebrevet fysisk i hånden. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/333#P11"
-                                            target="_blank">GBL § 11</a></td>
-</tr>
-<tr id="term-omsaetningsgaeldsbreve">
-  <td><b>Omsætningsgældsbreve</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-omsaetningsgaeldsbreve">Kapitel 5</a></small></td>
-  <td>Gældsbreve beregnet til at blive solgt (omsat). Giver køberen særlig beskyttelse gennem ekstinktion.</td>
-  <td><b>Eksempler:</b> Ihændehavergældsbreve ("Betales til ihændehaveren"), ordregældsbreve ("Betales til [Navn] eller ordre"), pantebreve i fast ejendom. <b>Sikringsakt:</b> Rådighedsberøvelse (GBL § 22) - køberen skal have gældsbrevet fysisk i hånden. <b>Debitors indsigelser:</b> Godtroende køber kan ekstingvere svage indsigelser (fx mangler i varen), men IKKE stærke (fx falsk underskrift). <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/333#P11" target="_blank">GBL § 11</a></td>
-</tr>
-<tr id="term-ond-tro">
-  <td><b>Ond tro</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-ond-tro">Kapitel 1</a>, <a href="kapitel2.html#term-ond-tro">Kapitel 2</a></small></td>
-  <td>Vidste eller burde vide om noget. Modsat god tro.</td>
-  <td>Køber af lejlighed er i ond tro om en gæld, hvis sælger sagde det. <b>Lov:</b>
-                                        <a href="https://www.retsinformation.dk/eli/lta/2014/1075#P6" target="_blank">TL
-                                            § 6</a></td>
-</tr>
-<tr id="term-ophaevelse">
-  <td><b>Ophævelse</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-ophaevelse">Kapitel 2</a>, <a href="kapitel3.html#term-ophaevelse">Kapitel 3</a>, <a href="kapitel7.html#term-ophaevelse">Kapitel 7</a></small></td>
-  <td>Når en aftale ophæves, så den ikke længere gælder.</td>
-  <td>Ved misligholdelse kan køber ophæve købet og kræve pengene tilbage. <b>Lov:</b>
-                                        <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P24"
-                                            target="_blank">KBL § 24</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-P">P</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-pant">
-  <td><b>Pant</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-pant">Kapitel 5</a>, <a href="kapitel6.html#term-pant">Kapitel 6</a>, <a href="kapitel7.html#term-pant">Kapitel 7</a></small></td>
-  <td>Sikkerhedsstillelse - en ret til at få dækning af gæld ved salg af en ting.</td>
-  <td>Kunde låner 2 mio. kr. til boligkøb. Banken tager pant i ejendommen som sikkerhed. Ved misligholdelse kan banken kræve ejendommen solgt på tvangsauktion og få dækning af gælden fra salgssummen. Pantet skal tinglyses for at være gyldigt. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075"
-                                            target="_blank">TL</a></td>
-</tr>
-<tr id="term-pantebrev">
-  <td><b>Pantebrev</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-pantebrev">Kapitel 2</a>, <a href="kapitel4.html#term-pantebrev">Kapitel 4</a>, <a href="kapitel5.html#term-pantebrev">Kapitel 5</a>, <a href="kapitel7.html#term-pantebrev">Kapitel 7</a></small></td>
-  <td>Et dokument, der bekræfter pant i fast ejendom. Skal tinglyses for at være
-                                        gyldigt.</td>
-  <td>Realkreditpantebrev eller ejerpantebrev tinglyses i tingbogen. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075"
-                                            target="_blank">TL</a></td>
-</tr>
-<tr id="term-pep-politically-exposed-person">
-  <td><b>PEP (Politically Exposed Person)</b></td>
-  <td>Politisk eksponeret person - personer med høj politisk stilling eller deres nærmeste. Høj risiko for hvidvask.</td>
-  <td>Kunde er medlem af Folketinget eller minister. Banken skal lave ekstra grundig risikovurdering og KYC, da PEP'er er høj-risiko kunder. Banken skal spørge ekstra grundigt til pengenes oprindelse. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/316"
-                                            target="_blank">Hvidvaskloven</a></td>
-</tr>
-<tr id="term-personskade">
-  <td><b>Personskade</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-personskade">Kapitel 4</a></small></td>
-  <td>Fysisk skade på en person (ikke kun økonomisk tab). Giver anledning til særlig
-                                        erstatning.</td>
-  <td>Kunde falder i banken og brækker benet → Personskade. Banken skal erstatte tabt arbejdsfortjeneste, helbredelsesudgifter, smerte og lidelse osv. Dette er dyrere end almindelig formueskade. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P1"
-                                            target="_blank">EAL §§ 1-5</a></td>
-</tr>
-<tr id="term-principalansvar">
-  <td><b>Principalansvar</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-principalansvar">Kapitel 4</a></small></td>
-  <td>Arbejdsgiverens ansvar for ansattes handlinger i tjenesten. Arbejdsgiveren
-                                        hæfter fuldt ud over for skadelidte.</td>
-  <td>Banken hæfter for bankrådgiverens fejl. Banken kan søge regres mod rådgiveren
-                                        ved forsæt eller grov uagtsomhed. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/1683/1" target="_blank">DL
-                                            3-19-2</a></td>
-</tr>
-<tr id="term-prioritet">
-  <td><b>Prioritet</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-prioritet">Kapitel 7</a></small></td>
-  <td>Rækkefølgen, hvori pantebreve dækkes ved tvangsauktion. "Først i tid, bedst i
-                                        ret".</td>
-  <td>Ejendom sælges på tvangsauktion for 3 mio. kr. Realkreditpantebrev på 2,4 mio. kr. tinglyses først → 1. prioritet (får først dækning). Bankpantebrev på 500.000 kr. tinglyses derefter → 2. prioritet (får derefter dækning). <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P4"
-                                            target="_blank">TL § 4</a></td>
-</tr>
-<tr id="term-praeceptiv">
-  <td><b>Præceptiv</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-praeceptiv">Kapitel 1</a>, <a href="kapitel2.html#term-praeceptiv">Kapitel 2</a>, <a href="kapitel5.html#term-praeceptiv">Kapitel 5</a></small></td>
-  <td>En lovregel, der ikke kan fraviges til skade for forbrugeren. Modsat
-                                        deklaratorisk.</td>
-  <td>Kreditaftaleloven er præceptiv → Banken kan ikke aftale med kunden, at SEF-skemaet ikke skal udleveres eller at kreditvurderingen springes over. Det er ufravigeligt til skade for forbrugeren. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2019/817#P1"
-                                            target="_blank">KAL § 1</a></td>
-</tr>
-<tr id="term-praejudikat">
-  <td><b>Præjudikat</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-praejudikat">Kapitel 1</a></small></td>
-  <td>En tidligere dom, der "skaber ret" og følges i fremtidige sager.</td>
-  <td>En Højesteretsdom om, at banker altid skal rådgive om særlige lånerisici, bliver
-                                        et præjudikat, alle banker skal følge.</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-R">R</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-realkreditpantebrev">
-  <td><b>Realkreditpantebrev</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-realkreditpantebrev">Kapitel 7</a></small></td>
-  <td>Pantebrev udstedt til et realkreditinstitut mod udstedelse af obligationer.</td>
-  <td>Køber køber hus for 3 mio. kr. Realkreditinstituttet låner 2,4 mio. kr. (80%)
-                                        mod pantebrev. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075"
-                                            target="_blank">TL</a></td>
-</tr>
-<tr id="term-regres">
-  <td><b>Regres</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-regres">Kapitel 4</a></small></td>
-  <td>Forsikringsselskabets ret til at kræve pengene tilbage fra skadevolder, efter at
-                                        have udbetalt erstatning.</td>
-  <td>Ejendomsmæglers ansvarsforsikring betaler kunden, men kræver derefter pengene
-                                        tilbage fra mægleren ved forsæt. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P22"
-                                            target="_blank">EAL § 22</a></td>
-</tr>
-<tr id="term-reklamationsret">
-  <td><b>Reklamationsret</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-reklamationsret">Kapitel 1</a>, <a href="kapitel3.html#term-reklamationsret">Kapitel 3</a></small></td>
-  <td>Købers ret til at reklamere over mangler ved varen. Fristen er 2 år ved
-                                        handelskøb og forbrugerkøb.</td>
-  <td>Bank opdager mangel ved IT-udstyr efter 18 måneder → Kan stadig reklamere, da
-                                        fristen er 2 år. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P21"
-                                            target="_blank">KBL § 21</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P51"
-                                            target="_blank">KBL § 51</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P83"
-                                            target="_blank">KBL § 83</a></td>
-</tr>
-<tr id="term-risikoens-overgang">
-  <td><b>Risikoens overgang</b><br><small><b>Findes i:</b> <a href="kapitel3.html#term-risikoens-overgang">Kapitel 3</a></small></td>
-  <td>Når risikoen for varen overgår til køber ved levering.</td>
-  <td>Bank køber servere. Risikoen overgår til banken ved levering. Hvis serveren går
-                                        i stykker efter levering, er det bankens problem. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2021/1853#P13"
-                                            target="_blank">KBL § 13</a></td>
-</tr>
-<tr id="term-rki">
-  <td><b>RKI</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-rki">Kapitel 2</a>, <a href="kapitel4.html#term-rki">Kapitel 4</a>, <a href="kapitel5.html#term-rki">Kapitel 5</a></small></td>
-  <td>Ribers Kredit Information</td>
-  <td>Danmarks største kreditoplysningsbureau. Registrerer gældsforhold og
-                                        betalingsanmærkninger.</td>
-</tr>
-<tr id="term-rki-ribers-kredit-information">
-  <td><b>RKI (Ribers Kredit Information)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-rki-ribers-kredit-information">Kapitel 5</a></small></td>
-  <td>RKI - Danmarks største kreditoplysningsbureau. Registrerer gældsforhold og
-                                        betalingsanmærkninger.</td>
-  <td>Kunde ansøger om lån. Banken tjekker RKI og opdager, at kunden har 3 misligholdte lån hos andre banker. Banken skal vurdere risikoen grundigt før bevilling. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P7c"
-                                            target="_blank">KAL § 7c</a></td>
-</tr>
-<tr id="term-raadighedsbeloeb">
-  <td><b>Rådighedsbeløb</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-raadighedsbeloeb">Kapitel 4</a>, <a href="kapitel5.html#term-raadighedsbeloeb">Kapitel 5</a>, <a href="kapitel6.html#term-raadighedsbeloeb">Kapitel 6</a></small></td>
-  <td>Indtægt minus faste udgifter. Bruges ved kreditvurdering.</td>
-  <td>Kunde tjener 30.000 kr. om måneden og har faste udgifter (husleje, mad, forsikringer) på 20.000 kr. → Rådighedsbeløb er 10.000 kr. Banken bruger dette til at vurdere, om kunden kan betale lånet. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P7c"
-                                            target="_blank">KAL § 7c</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-S">S</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-sef-skemaet">
-  <td><b>SEF-skemaet</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-sef-skemaet">Kapitel 5</a>, <a href="kapitel6.html#term-sef-skemaet">Kapitel 6</a></small></td>
-  <td>Standardiserede Europæiske Forbrugerkreditoplysninger - et skema, banken SKAL
-                                        udlevere før kreditaftalen indgås. Indeholder ÅOP, kreditbeløb, samlede
-                                        omkostninger osv.</td>
-  <td>Kunde ansøger om lån på 500.000 kr. Banken skal give kunden SEF-skemaet med ÅOP (fx 5,2%), samlede omkostninger (fx 75.000 kr.) og alle vilkår FØR kunden skriver under. Hvis banken glemmer det, kan lånet være ugyldigt. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P7a"
-                                            target="_blank">KAL § 7a</a></td>
-</tr>
-<tr id="term-selvskyldnerkaution">
-  <td><b>Selvskyldnerkaution</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-selvskyldnerkaution">Kapitel 2</a>, <a href="kapitel5.html#term-selvskyldnerkaution">Kapitel 5</a></small></td>
-  <td>Kaution, hvor kautionisten hæfter som hovedskyldner (samme rettigheder og
-                                        pligter som hovedskyldneren).</td>
-  <td>Forældre stiller selvskyldnerkaution for barnets lån på 500.000 kr. Når barnet stopper med at betale, kan banken straks kræve hele beløbet af forældrene uden først at forsøge at inddrive fra barnet. Dette er standard i bankforhold. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/406#P48"
-                                            target="_blank">Lov om finansiel virksomhed § 48</a></td>
-</tr>
-<tr id="term-servitut">
-  <td><b>Servitut</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-servitut">Kapitel 7</a></small></td>
-  <td>En rettighed over anden mands ejendom (fx retsvej, brugsret, ledningsret). Kan
-                                        tinglyses.</td>
-  <td>Nabo har retsvej over ejendom. Dette tinglyses → Retsvejen er sikret ved
-                                        ejendomskøb. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P9"
-                                            target="_blank">TL § 9</a></td>
-</tr>
-<tr id="term-simpel-kaution">
-  <td><b>Simpel kaution</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-simpel-kaution">Kapitel 5</a></small></td>
-  <td>Kaution, hvor kautionisten kun hæfter, hvis hovedskyldneren ikke kan betale
-                                        (sekundært ansvar).</td>
-  <td>Ven kautionerer for vens lån på 200.000 kr. Banken skal først forsøge at inddrive gælden fra ven ved udlæg. Kun hvis det mislykkes, kan banken kræve pengene af kautionisten. Dette er sjældent i bankforhold. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2022/406#P48"
-                                            target="_blank">Lov om finansiel virksomhed § 48</a></td>
-</tr>
-<tr id="term-simpel-uagtsomhed">
-  <td><b>Simpel uagtsomhed</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-simpel-uagtsomhed">Kapitel 4</a></small></td>
-  <td>Manglende forsigtighed. Man burde have vidst eller forudset skaden.</td>
-  <td>Bankrådgiver overser en enkelt post i kundens budget → Simpel uagtsomhed. I
-                                        finanssektoren medfører selv simple fejl ansvar. <b>Lov:</b> Culpa-reglen</td>
-</tr>
-<tr id="term-simple-gaeldsbreve">
-  <td><b>Simple gældsbreve</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-simple-gaeldsbreve">Kapitel 5</a></small></td>
-  <td>Gældsbreve, der IKKE er beregnet til videresalg. Køberen får INGEN særlig beskyttelse - "ingen ret bedre end overdrageren".</td>
-  <td><b>Eksempler:</b> Fakturaer, navnegældsbreve ("Betales til [Navn]" uden "eller ordre"), låneaftaler i banken. <b>Sikringsakt:</b> Denunciation (GBL § 31) - køberen skal give debitor besked. <b>Debitors indsigelser:</b> Debitor bevarer ALLE indsigelser mod køberen. Ingen ekstinktion mulig. <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2014/333#P26" target="_blank">GBL § 26</a></td>
-</tr>
-<tr id="term-skadesloesbrev">
-  <td><b>Skadesløsbrev</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-skadesloesbrev">Kapitel 7</a></small></td>
-  <td>Sikkerhed for et maksimalt beløb for enhver gæld, debitor måtte få til kreditor.
-                                        "Sikkerhed for alt mellemværende".</td>
-  <td>Virksomhed pantsætter ejendom til banken med skadesløsbrev på 5 mio. kr. Dette
-                                        dækker alle gældsforhold op til 5 mio. kr. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P47d"
-                                            target="_blank">TL § 47 d</a></td>
-</tr>
-<tr id="term-solidarisk-ansvar">
-  <td><b>Solidarisk ansvar</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-solidarisk-ansvar">Kapitel 4</a></small></td>
-  <td>Når flere er erstatningsansvarlige, hæfter de solidarisk. Skadelidte kan kræve
-                                        hele erstatningen af én af de ansvarlige.</td>
-  <td>Bank og ejendomsmægler hæfter begge for fejl ved boligkøb → Skadelidte kan kræve
-                                        hele erstatningen af enten banken eller mægleren. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P25"
-                                            target="_blank">EAL § 25</a></td>
-</tr>
-<tr id="term-subsumption">
-  <td><b>Subsumption</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-subsumption">Kapitel 1</a>, <a href="kapitel3.html#term-subsumption">Kapitel 3</a></small></td>
-  <td>Anvendelse af reglen på fakta. At vurdere, om fakta passer med reglen.</td>
-  <td>Reglen siger "uagtsomhed giver ansvar". Fakta: Bankrådgiver glemte at tjekke RKI
-                                        → Passer fakta med reglen? Ja → Subsumption opfyldt.</td>
-</tr>
-<tr id="term-svig">
-  <td><b>Svig</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-svig">Kapitel 1</a>, <a href="kapitel2.html#term-svig">Kapitel 2</a></small></td>
-  <td>Bevidst vildledning. En svag ugyldighedsgrund - kun gældende, når modparten
-                                        vidste besked (ond tro).</td>
-  <td>Ejendomsmægler fortier bevidst skjulte fejl → Svig. Aftalen kan ophæves, hvis
-                                        køberen var i god tro. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P30"
-                                            target="_blank">AFTL § 30</a></td>
-</tr>
-<tr id="term-saedvane">
-  <td><b>Sædvane</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-saedvane">Kapitel 1</a>, <a href="kapitel2.html#term-saedvane">Kapitel 2</a>, <a href="kapitel3.html#term-saedvane">Kapitel 3</a></small></td>
-  <td>Uskrevne regler, der er blevet praksis over tid. "Sådan gør man i branchen."</td>
-  <td>Kutymer for handel med værdipapirer, "God skik" regler inden for forsikring.
-                                        <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2021/1853#P16"
-                                            target="_blank">KBL § 16</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-T">T</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-tavshed-som-accept">
-  <td><b>Tavshed som accept</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tavshed-som-accept">Kapitel 2</a></small></td>
-  <td>Undtagelse fra hovedreglen om, at tavshed ikke er accept. Hvis tilbudsgiveren
-                                        eksplicit siger, at tavshed betyder accept.</td>
-  <td>Banken siger "Hvis jeg ikke hører fra dig inden fredag, regner jeg det som
-                                        accept" → Kunden er bundet ved tavshed. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P8"
-                                            target="_blank">AFTL § 8</a></td>
-</tr>
-<tr id="term-tilbud">
-  <td><b>Tilbud</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tilbud">Kapitel 2</a>, <a href="kapitel7.html#term-tilbud">Kapitel 7</a></small></td>
-  <td>En parts erklæring om at indgå en aftale på bestemte vilkår. Er bindende for
-                                        afgiveren.</td>
-  <td>Banken sender lånetilbud til kunden → Tilbuddet er bindende for banken.
-                                        <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P1"
-                                            target="_blank">AFTL § 1</a></td>
-</tr>
-<tr id="term-tinglysning">
-  <td><b>Tinglysning</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tinglysning">Kapitel 2</a>, <a href="kapitel3.html#term-tinglysning">Kapitel 3</a>, <a href="kapitel6.html#term-tinglysning">Kapitel 6</a>, <a href="kapitel7.html#term-tinglysning">Kapitel 7</a></small></td>
-  <td>Offentlig registrering af rettigheder over fast ejendom og visse typer løsøre.
-                                        Skaber gyldighed, prioritet og god tro.</td>
-  <td>Pantebrev tinglyses → Panthaver får prioritet. Uden tinglysning er pantet ikke
-                                        gyldigt mod andre kreditorer. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P1"
-                                            target="_blank">TL § 1</a></td>
-</tr>
-<tr id="term-tingsskade">
-  <td><b>Tingsskade</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-tingsskade">Kapitel 4</a></small></td>
-  <td>Skade på en ting (ikke personskade eller formueskade).</td>
-  <td>IT-udstyr beskadiges ved fejl → Tingsskade. Kan kræve erstatning for
-                                        reparationsomkostninger.</td>
-</tr>
-<tr id="term-tl-tinglysningsloven">
-  <td><b>TL (Tinglysningsloven)</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-tl">Kapitel 5</a>, <a href="kapitel7.html#term-tl">Kapitel 7</a></small></td>
-  <td>Tinglysningsloven</td>
-  <td>Regulerer tinglysning (offentlig registrering) af rettigheder over fast ejendom og visse løsøre. Sikrer rettigheder ved bolighandel og pantstillelse.</td>
-</tr>
-<tr id="term-trepartsforhold">
-  <td><b>Trepartsforhold</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-trepartsforhold">Kapitel 5</a></small></td>
-  <td>Når der er tre parter i en transaktion. Kan være oprindeligt trepartsforhold
-                                        (KAL) eller efterfølgende trepartsforhold (GBL).</td>
-  <td>Oprindeligt trepartsforhold: Køber køber bil hos bilforhandler, men finansierer
-                                        gennem bank. Efterfølgende trepartsforhold: Bank sælger gældsbrev til anden
-                                        bank. <b>Lov:</b> KAL § 4, nr. 15, litra b, GBL</td>
-</tr>
-<tr id="term-tvangsauktion">
-  <td><b>Tvangsauktion</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-tvangsauktion">Kapitel 2</a>, <a href="kapitel4.html#term-tvangsauktion">Kapitel 4</a>, <a href="kapitel7.html#term-tvangsauktion">Kapitel 7</a></small></td>
-  <td>Retslig proces, hvor panthaver kan kræve ejendommen solgt for at få dækning af
-                                        sin gæld.</td>
-  <td>Kunde betaler ikke realkreditlån → Realkreditinstituttet kan kræve ejendommen
-                                        solgt på tvangsauktion. Salgssummen fordeles efter prioritetsordenen.</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-U">U</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-uagtsomhed">
-  <td><b>Uagtsomhed</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-uagtsomhed">Kapitel 1</a>, <a href="kapitel4.html#term-uagtsomhed">Kapitel 4</a></small></td>
-  <td>Ikke med vilje, men en fejl man burde have undgået. Kan være simpel eller grov
-                                        uagtsomhed.</td>
-  <td>Bankrådgiver glemmer at tjekke kundens lønsedler før lån → Uagtsomhed.
-                                        <b>Lov:</b> Culpa-reglen</td>
-</tr>
-<tr id="term-ugyldighed">
-  <td><b>Ugyldighed</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-ugyldighed">Kapitel 2</a>, <a href="kapitel5.html#term-ugyldighed">Kapitel 5</a></small></td>
-  <td>Når en aftale ikke er gyldig og kan tilsidesættes. Kan være absolut ugyldighed
-                                        eller relativ ugyldighed.</td>
-  <td>Aftale indgået under tvang eller svig kan være ugyldig. Urimelige kreditaftaler
-                                        kan tilsidesættes. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P28"
-                                            target="_blank">AFTL § 28-31</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P36"
-                                            target="_blank">KAL § 36</a></td>
-</tr>
-<tr id="term-underpantsforbud">
-  <td><b>Underpantsforbud</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-underpantsforbud">Kapitel 5</a></small></td>
-  <td>Forbrugeren må ikke pantsætte eller overdrage det købte som sikkerhed for anden
-                                        gæld, før købesummen er betalt.</td>
-  <td>Køber køber bil på kredit med ejendomsforbehold. Køber må ikke pantsætte bilen i
-                                        banken som sikkerhed for andet lån. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P21"
-                                            target="_blank">KAL § 21</a></td>
-</tr>
-<tr id="term-urimelig-aftale">
-  <td><b>Urimelig aftale</b><br><small><b>Findes i:</b> <a href="kapitel5.html#term-urimelig-aftale">Kapitel 5</a></small></td>
-  <td>En aftale, der er urimelig og kan tilsidesættes. Vurderes efter
-                                        generalklausulen.</td>
-  <td>Kreditaftale med meget høj rente og urimelige vilkår kan tilsidesættes.
-                                        <b>Lov:</b> <a href="https://www.retsinformation.dk/eli/lta/2016/193#P36"
-                                            target="_blank">AFTL § 36</a>, <a
-                                            href="https://www.retsinformation.dk/eli/lta/2019/817#P36"
-                                            target="_blank">KAL § 36</a></td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-V">V</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-varigt-m-n">
-  <td><b>Varigt mén</b><br><small><b>Findes i:</b> <a href="kapitel4.html#term-varigt-m-n">Kapitel 4</a></small></td>
-  <td>Varigt fysisk mén (mindst 5%). Giver anledning til godtgørelse.</td>
-  <td>Kunde mister lillefingeren i en svingdør i banken. Det giver ikke nødvendigvis
-                                        lønnedgang, men er en fysisk "defekt". Der betales et engangsbeløb baseret på
-                                        méngraden. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2018/1070#P4"
-                                            target="_blank">EAL § 4</a></td>
-</tr>
-<tr id="term-virksomhedspant">
-  <td><b>Virksomhedspant</b><br><small><b>Findes i:</b> <a href="kapitel7.html#term-virksomhedspant">Kapitel 7</a></small></td>
-  <td>Flydende pant i løsøre (varelager, debitorer). Virksomheden kan stadig sælge
-                                        varerne, men nye varer bliver automatisk pantsat.</td>
-  <td>Virksomhed pantsætter varelager og debitorer til banken. Pantet skal tinglyses i
-                                        personbogen. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2014/1075#P47"
-                                            target="_blank">TL § 47</a></td>
-</tr>
-<tr id="term-vold">
-  <td><b>Vold</b><br><small><b>Findes i:</b> <a href="kapitel1.html#term-vold">Kapitel 1</a>, <a href="kapitel2.html#term-vold">Kapitel 2</a></small></td>
-  <td>En stærk ugyldighedsgrund. Aftale indgået under tvang er absolut ugyldig.</td>
-  <td>Kunde tvinges til at underskrive låneaftale under trusler → Aftalen er absolut
-                                        ugyldig. <b>Lov:</b> <a
-                                            href="https://www.retsinformation.dk/eli/lta/2016/193#P28"
-                                            target="_blank">AFTL § 28</a></td>
-</tr>
-<tr id="term-vaernberettiget-interesse">
-  <td><b>Værnberettiget interesse</b></td>
-  <td>Den interesse, der er krænket, skal være værnberettiget (person, ting, økonomi).</td>
-  <td>Kundens økonomiske interesser er værnet → Kan kræve erstatning. <b>Lov:</b>
-                                        Culpa-reglen</td>
-</tr>
-</tbody></table></div>
-<h3 id="letter-Å">Å</h3>
-<div class="table-responsive mb-4">
-<table class="table table-striped table-bordered table-hover">
-<thead class="table-dark"><tr><th style="width: 20%;">Begreb</th><th style="width: 40%;">Forklaring</th><th style="width: 40%;">Eksempel fra finanssektoren</th></tr></thead>
-<tbody>
-<tr id="term-aaop-aarlige-omkostninger-i-procent">
-  <td><b>ÅOP (Årlige Omkostninger i Procent)</b><br><small><b>Findes i:</b> <a href="kapitel2.html#term-aaop">Kapitel 2</a>, <a href="kapitel5.html#term-aaop">Kapitel 5</a></small></td>
-  <td>Årlige Omkostninger i Procent</td>
-  <td>Kiloprisen på penge. Det vigtigste tal for sammenligning af lån. Inkluderer både
-                                        renter, gebyrer og renters rente.</td>
-</tr>
-</tbody></table></div>
-</div></div></article></div></div>
-<!-- jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- External JavaScript Files -->
-    <script src="menu.js"></script>
-    <script src="script.js"></script>
-    <script src="info.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- MDB JS -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+      // Intersection Observer for video text animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const overlay = entry.target;
+            overlay.classList.add('is-visible');
 
-    <script>
-        // Add typing animation for video overlays
-        document.addEventListener('DOMContentLoaded', function () {
-            function typeWriter(element, text, speed = 100, callback) {
-                let i = 0;
-                element.innerHTML = '';
-                let cursor = element.querySelector('.typing-cursor');
-                if (!cursor) {
-                    cursor = document.createElement('span');
-                    cursor.className = 'typing-cursor';
-                    element.appendChild(cursor);
-                }
-                function type() {
-                    if (i < text.length) {
-                        cursor.insertAdjacentText('beforebegin', text.charAt(i));
-                        i++;
-                        setTimeout(type, speed);
-                    } else {
-                        // Keep cursor visible for video overlays
-                        if (callback) callback();
-                    }
-                }
-                type();
-            }
+            // Start typing animation after overlay becomes visible
+            setTimeout(() => {
+              const text = overlay.dataset.typeText;
+              const speed = parseInt(overlay.dataset.typeSpeed) || 150;
+              if (text && !overlay.hasAttribute('data-typed')) {
+                overlay.setAttribute('data-typed', 'true');
+                typeWriter(overlay, text, speed);
+              }
+            }, 300);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
 
-            // Intersection Observer for video text animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const overlay = entry.target;
-                        overlay.classList.add('is-visible');
+      // Observe all video text overlays
+      document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
+        observer.observe(overlay);
+      });
 
-                        // Start typing animation after overlay becomes visible
-                        setTimeout(() => {
-                            const text = overlay.dataset.typeText;
-                            const speed = parseInt(overlay.dataset.typeSpeed) || 150;
-                            if (text && !overlay.hasAttribute('data-typed')) {
-                                overlay.setAttribute('data-typed', 'true');
-                                typeWriter(overlay, text, speed);
-                            }
-                        }, 300);
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-
-            // Observe all video text overlays
-            document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
-                observer.observe(overlay);
-            });
-
-            // Handle video end events for white background
-            const videos = document.querySelectorAll('.book-cover-wrapper video');
-            videos.forEach(video => {
-                video.addEventListener('ended', function () {
-                    // Create white overlay when video ends
-                    const whiteOverlay = document.createElement('div');
-                    whiteOverlay.style.cssText = `
+      // Handle video end events for white background
+      const videos = document.querySelectorAll('.book-cover-wrapper video');
+      videos.forEach(video => {
+        video.addEventListener('ended', function () {
+          // Create white overlay when video ends
+          const whiteOverlay = document.createElement('div');
+          whiteOverlay.style.cssText = `
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -1166,11 +1544,11 @@
                         background-color: white;
                         z-index: 1;
                     `;
-                    this.parentElement.appendChild(whiteOverlay);
-                });
-            });
+          this.parentElement.appendChild(whiteOverlay);
         });
-    </script>
+      });
+    });
+  </script>
 </body>
 
 </html>
