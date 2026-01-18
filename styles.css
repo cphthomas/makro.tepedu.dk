@@ -750,8 +750,8 @@ kbd {
     font-size: 4rem;
     font-weight: 400;
     /* Regular font weight for better readability */
-    color: black;
-    /* Black color */
+    color: #14b8a6;
+    /* Turquoise color (same as link color) */
     text-shadow: none;
     /* Remove text shadow */
     font-style: normal;
@@ -878,12 +878,13 @@ kbd {
 }
 
 #sidebar-toggle-button:hover,
-#sidebar-toggle-button:focus {
-    /* Add focus for keyboard navigation */
-    background: #fd7e14;
-    /* Orange on hover/focus */
-    border: 2px solid #fd7e14;
-    /* Orange border on hover/focus */
+#sidebar-toggle-button:focus,
+#sidebar-toggle-button:active {
+    /* Add focus for keyboard navigation and active for clicks */
+    background: #14b8a6;
+    /* Turquoise on hover/focus/active */
+    border: 2px solid #14b8a6;
+    /* Turquoise border on hover/focus/active */
     transform: translateY(-50%) scale(1.1);
     outline: none;
     /* Remove blue outline on focus */

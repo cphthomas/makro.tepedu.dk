@@ -70,15 +70,13 @@
             </a>
 
             <!-- Right-aligned Navbar Items -->
+            <ul class="navbar-nav ml-auto align-items-center">
                 <!-- Search Icon -->
                 <li class="nav-item">
                     <a class="nav-link search-icon-nav" id="search-icon-nav" role="button" aria-label="Søg">
                         <i class="bi bi-search"></i>
                     </a>
                 </li>
-                
-
-            <ul class="navbar-nav ml-auto align-items-center">
                 <!-- Dropdown Menu for Pages -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -2745,8 +2743,9 @@
                 threshold: 0.5
             });
 
-            // Observe all video text overlays
+            // Clear text immediately on page load to prevent flash before typing animation
             document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
+                overlay.innerHTML = '';
                 observer.observe(overlay);
             });
 

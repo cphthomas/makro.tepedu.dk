@@ -125,7 +125,9 @@ document.addEventListener("DOMContentLoaded", function() {
         threshold: 0.5
     });
 
+    // Clear text immediately on page load to prevent flash before typing animation
     document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
+        overlay.innerHTML = '';
         observer.observe(overlay);
     });
 });

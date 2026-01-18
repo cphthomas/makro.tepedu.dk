@@ -99,31 +99,51 @@
         console.log('Starting to preload chapters...');
         console.log('Total chapters to load:', chapters.length);
 
+        // Check if we're using file:// protocol (CORS will block fetch)
+        const isFileProtocol = window.location.protocol === 'file:';
+        console.log('Protocol:', window.location.protocol, isFileProtocol ? '(file:// - CORS may block fetch)' : '(http/https - OK for fetch)');
+
         // Get current page filename
         const currentPage = window.location.pathname.split('/').pop();
         console.log('Current page:', currentPage);
         console.log('Window location:', window.location.href);
 
+        // Load current page content first
+        for (const chapter of chapters) {
+            if (chapter.file === currentPage) {
+                const article = document.querySelector('article');
+                if (article) {
+                    const clonedArticle = article.cloneNode(true);
+                    clonedArticle.querySelectorAll('script, style, .quiz-container, .podcast-section').forEach(el => el.remove());
+                    const textContent = clonedArticle.textContent || clonedArticle.innerText;
+                    chaptersContent[chapter.file] = textContent;
+                    console.log(`✓ Loaded ${chapter.file} (current page): ${textContent.length} characters`);
+                } else {
+                    console.warn(`✗ No article found for current page ${chapter.file}`);
+                }
+                break;
+            }
+        }
+
+        // If using file:// protocol, we can't fetch other files due to CORS
+        if (isFileProtocol) {
+            console.warn('⚠ Using file:// protocol - cannot fetch other chapters due to CORS. Only current chapter will be searchable.');
+            console.warn('💡 Tip: Use a local web server (e.g., `python -m http.server` or `npx serve`) for full cross-chapter search.');
+            isLoadingChapters = false;
+            chaptersLoaded = true;
+            console.log(`Finished preloading. Total chapters loaded: ${Object.keys(chaptersContent).length} (limited by file:// protocol)`);
+            return;
+        }
+
+        // Fetch other chapters (only works on http/https)
         for (const chapter of chapters) {
             try {
-                console.log(`\n=== Processing ${chapter.file} ===`);
-                console.log(`Current page check: "${chapter.file}" === "${currentPage}" ?`, chapter.file === currentPage);
-
-                // If this is the current page, use the current document instead of fetching
+                // Skip current page (already loaded)
                 if (chapter.file === currentPage) {
-                    const article = document.querySelector('article');
-                    if (article) {
-                        const clonedArticle = article.cloneNode(true);
-                        clonedArticle.querySelectorAll('script, style, .quiz-container, .podcast-section').forEach(el => el.remove());
-                        const textContent = clonedArticle.textContent || clonedArticle.innerText;
-                        chaptersContent[chapter.file] = textContent;
-                        console.log(`✓ Loaded ${chapter.file} (current page): ${textContent.length} characters`);
-                        console.log(`chaptersContent now has:`, Object.keys(chaptersContent));
-                    } else {
-                        console.warn(`✗ No article found for current page ${chapter.file}`);
-                    }
                     continue;
                 }
+
+                console.log(`\n=== Processing ${chapter.file} ===`);
 
                 // Fetch other chapters
                 console.log(`Fetching ${chapter.file}...`);
@@ -152,7 +172,13 @@
                     console.warn(`✗ No article found in ${chapter.file}`);
                 }
             } catch (error) {
-                console.error(`✗ Error loading ${chapter.file}:`, error.message, error);
+                // Check if it's a CORS error
+                if (error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+                    console.error(`✗ CORS error loading ${chapter.file} - likely using file:// protocol`);
+                    console.error('💡 Tip: Use a local web server for full cross-chapter search');
+                } else {
+                    console.error(`✗ Error loading ${chapter.file}:`, error.message, error);
+                }
             }
         }
 
@@ -269,7 +295,21 @@
             return;
         }
 
-        searchInfo.textContent = `Fandt ${results.length} resultat${results.length !== 1 ? 'er' : ''} for "${query}"`;
+        // Check if we're using file:// protocol and only have 1 chapter loaded
+        const isFileProtocol = window.location.protocol === 'file:';
+        const loadedChaptersCount = Object.keys(chaptersContent).length;
+        const isLimitedSearch = isFileProtocol && loadedChaptersCount === 1;
+
+        if (isLimitedSearch) {
+            searchInfo.textContent = `Fandt ${results.length} resultat${results.length !== 1 ? 'er' : ''} for "${query}" (kun i dette kapitel)`;
+            // Add a note about file:// limitation
+            const warningNote = document.createElement('div');
+            warningNote.style.cssText = 'background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin-bottom: 15px; font-size: 13px; color: #856404;';
+            warningNote.innerHTML = '<strong>Note:</strong> Søgning fungerer kun i dette kapitel når filen åbnes direkte (file://). Brug en lokal webserver for at søge på tværs af alle kapitler.';
+            searchResults.appendChild(warningNote);
+        } else {
+            searchInfo.textContent = `Fandt ${results.length} resultat${results.length !== 1 ? 'er' : ''} for "${query}"`;
+        }
 
         results.forEach(result => {
             const resultItem = document.createElement('div');

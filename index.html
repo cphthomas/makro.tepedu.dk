@@ -59,8 +59,8 @@
             font-size: 2.5rem;
             font-weight: 400;
             /* Regular weight for readability */
-            color: black;
-            /* Black color */
+            color: #14b8a6;
+            /* Turquoise color (same as link color) */
             text-shadow: none;
             /* Remove text shadow */
             font-style: normal;
@@ -424,8 +424,9 @@
                 threshold: 0.5
             });
 
-            // Observe all video text overlays
+            // Clear text immediately on page load to prevent flash before typing animation
             document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => {
+                overlay.innerHTML = '';
                 observer.observe(overlay);
             });
 

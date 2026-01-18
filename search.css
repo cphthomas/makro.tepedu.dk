@@ -186,6 +186,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    z-index: 1;
 }
 
 .search-icon-nav:hover {
@@ -204,6 +205,8 @@
     background-color: rgba(20, 184, 166, 0.1);
     border-radius: 50%;
     animation: pulse 1.5s infinite;
+    z-index: -1;
+    pointer-events: none;
 }
 
 @keyframes pulse {
@@ -216,6 +219,34 @@
         transform: translate(-50%, -50%) scale(1.5);
         opacity: 0;
     }
+}
+
+/* Home Icon in Navbar - same turquoise hover effect */
+.navbar-brand {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.navbar-brand:hover {
+    color: #14b8a6 !important;
+    transform: scale(1.1);
+}
+
+.navbar-brand:hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(20, 184, 166, 0.1);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Loading spinner */
