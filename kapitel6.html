@@ -43,6 +43,31 @@
             max-width: 100%;
             display: block;
             background-color: white;
+            /* Hide Safari's default video controls and poster */
+            -webkit-appearance: none;
+            appearance: none;
+            object-fit: cover;
+        }
+
+        /* Hide Safari's default video controls when src is empty */
+        .book-cover-wrapper video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .book-cover-wrapper video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        .book-cover-wrapper video::-webkit-media-controls-panel {
+            display: none !important;
+        }
+
+        /* Ensure video doesn't show poster or default UI in Safari */
+        .book-cover-wrapper video:not([src]),
+        .book-cover-wrapper video[src=""] {
+            background-color: white !important;
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Ensure text overlay stays above white background */

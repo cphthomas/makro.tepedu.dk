@@ -734,6 +734,7 @@ kbd {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .book-cover-wrapper video,
@@ -741,6 +742,31 @@ kbd {
     width: 100%;
     object-fit: cover;
     max-height: 600px;
+    background-color: white;
+    /* Hide Safari's default video controls and poster */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* Hide Safari's default video controls when src is empty */
+.book-cover-wrapper video::-webkit-media-controls {
+    display: none !important;
+}
+
+.book-cover-wrapper video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+.book-cover-wrapper video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+/* Ensure video doesn't show poster or default UI in Safari */
+.book-cover-wrapper video:not([src]),
+.book-cover-wrapper video[src=""] {
+    background-color: white !important;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .cover-text-overlay {
