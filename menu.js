@@ -1,14 +1,15 @@
 // Menu configuration
 const menuItems = [
     { href: 'index.html', text: 'Forside' },
-    { href: 'kapitel1.html', text: 'Juridisk Metode' },
-    { href: 'kapitel2.html', text: 'Aftaleloven' },
-    { href: 'kapitel3.html', text: 'Købeloven' },
-    { href: 'kapitel4.html', text: 'Erstatning' },
-    { href: 'kapitel5.html', text: 'Kreditaftale, Kaution & Gældsbreve' },
-    { href: 'kapitel6.html', text: 'Compliance, Hvidvask & GDPR' },
-    { href: 'kapitel7.html', text: 'Ejendomshandel, Tinglysning & Pant' },
-    { href: 'kapitel8.html', text: 'Ordliste' }
+    { href: 'kapitel1.html', text: 'Introduktion til makroøkonomi' },
+    { href: 'kapitel2.html', text: 'Nationalregnskabet' },
+    { href: 'kapitel3.html', text: 'Konjunkturbeskrivelse' },
+    { href: 'kapitel4.html', text: 'Penge og finansielle markeder' },
+    { href: 'kapitel5.html', text: 'Rentedannelse og finansiel stabilitet' },
+    { href: 'kapitel6.html', text: 'Varemarkedet på kort sigt' },
+    { href: 'kapitel7.html', text: 'Arbejdsmarked og inflation' },
+    { href: 'kapitel8.html', text: 'Økonomisk politik og konkurrenceevne' },
+    { href: 'kapitel9.html', text: 'Arbejdsmarkedet i makroøkonomien' }
 ];
 
 // Function to generate dropdown menu HTML

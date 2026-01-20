@@ -4,14 +4,15 @@
 
     // Chapter configuration
     const chapters = [
-        { file: 'kapitel1.html', name: 'Kapitel 1: Juridisk Metode' },
-        { file: 'kapitel2.html', name: 'Kapitel 2: Aftaleret' },
-        { file: 'kapitel3.html', name: 'Kapitel 3: Købeloven' },
-        { file: 'kapitel4.html', name: 'Kapitel 4: Forbrugeraftaler' },
-        { file: 'kapitel5.html', name: 'Kapitel 5: Kreditaftaler' },
-        { file: 'kapitel6.html', name: 'Kapitel 6: Kaution og Gældsbreve' },
-        { file: 'kapitel7.html', name: 'Kapitel 7: Compliance og Regulering' },
-        { file: 'kapitel8.html', name: 'Kapitel 8: Ordliste' }
+        { file: 'kapitel1.html', name: 'Kapitel 1: Introduktion til makroøkonomi' },
+        { file: 'kapitel2.html', name: 'Kapitel 2: Nationalregnskabet' },
+        { file: 'kapitel3.html', name: 'Kapitel 3: Konjunkturbeskrivelse' },
+        { file: 'kapitel4.html', name: 'Kapitel 4: Penge og finansielle markeder' },
+        { file: 'kapitel5.html', name: 'Kapitel 5: Rentedannelse og finansiel stabilitet' },
+        { file: 'kapitel6.html', name: 'Kapitel 6: Varemarkedet på kort sigt' },
+        { file: 'kapitel7.html', name: 'Kapitel 7: Arbejdsmarked og inflation' },
+        { file: 'kapitel8.html', name: 'Kapitel 8: Økonomisk politik og konkurrenceevne' },
+        { file: 'kapitel9.html', name: 'Kapitel 9: Arbejdsmarkedet i makroøkonomien' }
     ];
 
     let chaptersContent = {};

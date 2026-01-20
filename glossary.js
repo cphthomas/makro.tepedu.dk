@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h4>${term}</h4>
                 <div class="definition">${definition}</div>
                 ${example ? `<div class="example"><strong>Eksempel:</strong> ${example}</div>` : ''}
-                <div class="footer" style="cursor: pointer;" onclick="window.location.href='kapitel8.html#term-${slug}'">
+                <div class="footer" style="cursor: pointer;" onclick="window.location.href='kapitel9.html#term-${slug}'">
                     <span>Læs mere i ordlisten</span>
                     <i class="bi bi-arrow-right"></i>
                 </div>

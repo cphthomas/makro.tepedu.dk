@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordliste - Makroøkonomi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@100;400;500&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="icon" type="image/x-icon" href="favicon.svg">
+    <style>
+        .table-hover tbody tr:hover { background-color: #f5f5f5; cursor: pointer; }
+        .book-cover-wrapper { position: relative; width: 100%; max-width: 100%; overflow: hidden; background-color: white; }
+        .book-cover-wrapper video { width: 100%; height: auto; max-width: 100%; display: block; background-color: white; -webkit-appearance: none; appearance: none; object-fit: cover; }
+        .book-cover-wrapper video::-webkit-media-controls { display: none !important; }
+        .book-cover-wrapper video::-webkit-media-controls-enclosure { display: none !important; }
+        .book-cover-wrapper video::-webkit-media-controls-panel { display: none !important; }
+        .book-cover-wrapper video:not([src]), .book-cover-wrapper video[src=""] { background-color: white !important; opacity: 0; pointer-events: none; }
+        .cover-text-overlay { z-index: 2; }
+        .glossary-term-row { scroll-margin-top: 100px; }
+    </style>
+    <link rel="stylesheet" href="glossary.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-light transparent-navbar fixed-top">
+        <div class="container-fluid">
+            <a href="https://tepedu.dk/" target="_blank" rel="noopener noreferrer"><img src="tepedulogoanim.svg" alt="Te Pedu Logo" style="height: 35px; margin-right: 15px;"></a>
+            <a class="navbar-brand" href="index.html"><i class="bi bi-house-door"></i></a>
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item"><a class="nav-link search-icon-nav" id="search-icon-nav" role="button" aria-label="Søg"><i class="bi bi-search"></i></a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-list icon-margin"></i></a><div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink"></div></li>
+                <li class="nav-item"><a class="nav-link" id="prev-page-link" href="kapitel8.html"><i class="bi bi-arrow-left"></i></a></li>
+                <li class="nav-item"><a class="nav-link" id="next-page-link" href="index.html"><i class="bi bi-arrow-right"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="left-aligned-sidebar" class="sidebar">
+        <button id="sidebar-toggle-button" class="sidebar-toggle" aria-label="Toggle navigation"><i class="bi bi-list"></i></button>
+        <div class="sidebar-content">
+            <h5 class="sidebar-title">Indholdsfortegnelse</h5>
+            <ul id="sidebar-toc" class="list-unstyled"></ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container mt-4">
+            <article>
+                <h1 style="display: none;">Ordliste</h1>
+                <div class="book-cover-wrapper">
+                    <video autoplay muted playsinline src="" alt="Ordliste" class="img-fluid" width="100%" style="min-height: 400px; object-fit: cover;"></video>
+                    <div class="cover-text-overlay animate-cover-text" data-type-text="9. Ordliste" data-type-speed="150">Ordliste</div>
+                </div>
+                <div class="info-box">
+                    <p>Dette er <b>ordlisten</b> for makroøkonomi. Her finder du definitioner og eksempler på alle de vigtige begreber, der bruges i kapitlerne.</p>
+                    <p>Klik på et begreb i teksten for at se en kort definition, eller brug denne ordliste til at slå op på begreber.</p>
+                </div>
+                <br>
+
+                <h2>Ordliste</h2>
+                <div class="info-box">
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Begreb</th>
+                                    <th>Definition</th>
+                                    <th>Eksempel</th>
+                                    <th>Reference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="term-deflation" class="glossary-term-row">
+                                    <td><b>Deflation</b></td>
+                                    <td>Når det generelle prisniveau falder over tid. Deflation kan være farlig, fordi folk udskyder køb i håb om lavere priser.</td>
+                                    <td>Hvis priserne falder med 2% per år, venter folk med at købe, hvilket kan føre til recession.</td>
+                                    <td><a href="kapitel7.html#term-deflation">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-forbrugerprisindeks" class="glossary-term-row">
+                                    <td><b>Forbrugerprisindeks (CPI)</b></td>
+                                    <td>Et indeks, der måler udviklingen i priserne på en kurv af varer og tjenester, som en typisk familie køber.</td>
+                                    <td>Forbrugerprisindekset inkluderer priser på mad, bolig, transport, tøj osv. Hvis indekset stiger med 2%, er inflationen 2%.</td>
+                                    <td><a href="kapitel7.html#term-forbrugerprisindeks">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-indkomstdannelsesmodel" class="glossary-term-row">
+                                    <td><b>Indkomstdannelsesmodellen</b></td>
+                                    <td>En makroøkonomisk model, der viser, hvordan beskæftigelsen på kort sigt bestemmes af den samlede efterspørgsel (SE) på varemarkedet. Hvis efterspørgslen stiger, ansætter virksomheder flere medarbejdere.</td>
+                                    <td>Hvis virksomheder får flere ordrer (SE stiger med 10%), ansætter de flere medarbejdere. Hvis efterspørgslen falder (SE falder med 5%), sker der fyringer.</td>
+                                    <td><a href="kapitel7.html#term-indkomstdannelsesmodel">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-inflation" class="glossary-term-row">
+                                    <td><b>Inflation</b></td>
+                                    <td>Den generelle stigning i priserne over tid. Måles typisk som den procentvise ændring i forbrugerprisindekset.</td>
+                                    <td>Hvis inflationen er 2% per år, koster en vare, der kostede 100 kr. i år, 102 kr. næste år.</td>
+                                    <td><a href="kapitel7.html#term-inflation">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-loennedbrydning" class="glossary-term-row">
+                                    <td><b>Lønnedbrydning</b></td>
+                                    <td>Processen hvor lønninger bestemmes på arbejdsmarkedet gennem forhandlinger mellem arbejdstagere og arbejdsgivere.</td>
+                                    <td>Fagforeninger forhandler lønninger med arbejdsgivere. Hvis der er mangel på arbejdskraft, kan lønningerne stige.</td>
+                                    <td><a href="kapitel7.html#term-loennedbrydning">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-loennomkostninger" class="glossary-term-row">
+                                    <td><b>Lønomkostninger</b></td>
+                                    <td>Lønninger justeret for produktivitet. Lave lønomkostninger pr. produceret enhed giver konkurrenceevne.</td>
+                                    <td>Hvis en dansk arbejder får 300 kr. i timen og producerer 10 enheder, er lønomkostningen 30 kr. pr. enhed. Hvis en tysk arbejder får 200 kr. i timen og producerer 5 enheder, er lønomkostningen 40 kr. pr. enhed - Danmark er billigere!</td>
+                                    <td><a href="kapitel7.html#term-loennomkostninger">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-phillips-kurve" class="glossary-term-row">
+                                    <td><b>Phillips-kurven</b></td>
+                                    <td>En kurve, der viser sammenhængen mellem ledighed og inflation. Typisk er der en omvendt sammenhæng: Høj ledighed giver lav inflation, lav ledighed giver høj inflation.</td>
+                                    <td>I 1970'erne var ledigheden lav og inflationen høj. I 1980'erne var ledigheden høj og inflationen lav.</td>
+                                    <td><a href="kapitel7.html#term-phillips-kurve">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-samlet-efterspoergsel" class="glossary-term-row">
+                                    <td><b>Samlet efterspørgsel (SE)</b></td>
+                                    <td>Den samlede efterspørgsel efter varer og tjenester i hele økonomien. Inkluderer forbrug, investeringer, offentlige udgifter og nettoeksport.</td>
+                                    <td>Hvis alle øger deres forbrug samtidigt, stiger den samlede efterspørgsel. Virksomhederne får flere ordrer og ansætter flere medarbejdere.</td>
+                                    <td><a href="kapitel7.html#term-samlet-efterspoergsel">Kapitel 7</a></td>
+                                </tr>
+                                <tr id="term-strukturel-ledighed" class="glossary-term-row">
+                                    <td><b>Strukturel ledighed</b></td>
+                                    <td>Langvarig ledighed, der skyldes uoverensstemmelse mellem de jobs, der er tilgængelige, og de kvalifikationer, arbejdskraften har. Strukturel ledighed kan ikke løses ved at øge efterspørgslen.</td>
+                                    <td>Hvis der er mangel på programmører, men mange arbejdsløse fabriksarbejdere, er der strukturel ledighed. Den kan kun løses ved om- eller efteruddannelse.</td>
+                                    <td><a href="kapitel7.html#term-strukturel-ledighed">Kapitel 7</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br><br>
+            </article>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="menu.js"></script>
+    <script src="script.js"></script>
+    <script src="info.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function typeWriter(element, text, speed = 100, callback) {
+                let i = 0;
+                element.innerHTML = '';
+                let cursor = element.querySelector('.typing-cursor');
+                if (!cursor) { cursor = document.createElement('span'); cursor.className = 'typing-cursor'; element.appendChild(cursor); }
+                function type() { if (i < text.length) { cursor.insertAdjacentText('beforebegin', text.charAt(i)); i++; setTimeout(type, speed); } else { if (callback) callback(); } }
+                type();
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const overlay = entry.target;
+                        overlay.classList.add('is-visible');
+                        setTimeout(() => {
+                            const text = overlay.dataset.typeText;
+                            const speed = parseInt(overlay.dataset.typeSpeed) || 150;
+                            if (text && !overlay.hasAttribute('data-typed')) {
+                                overlay.setAttribute('data-typed', 'true');
+                                typeWriter(overlay, text, speed);
+                            }
+                        }, 300);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.cover-text-overlay[data-type-text]').forEach(overlay => { overlay.innerHTML = ''; observer.observe(overlay); });
+            const videos = document.querySelectorAll('.book-cover-wrapper video');
+            videos.forEach(video => {
+                video.addEventListener('ended', function () {
+                    const whiteOverlay = document.createElement('div');
+                    whiteOverlay.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white; z-index: 1;';
+                    this.parentElement.appendChild(whiteOverlay);
+                });
+            });
+        });
+    </script>
+    <script src="glossary.js"></script>
+    <div id="search-modal" class="search-modal">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" class="search-input" placeholder="Søg på tværs af alle kapitler..." autocomplete="off">
+                    <i class="bi bi-search search-icon-input"></i>
+                </div>
+                <button id="search-close" class="search-close" aria-label="Luk søgning">&times;</button>
+            </div>
+            <div class="search-results">
+                <div id="search-info" class="search-info">Skriv mindst 3 tegn for at søge...</div>
+                <div id="search-results"></div>
+            </div>
+        </div>
+    </div>
+    <script src="search.js"></script>
+</body>
+</html>

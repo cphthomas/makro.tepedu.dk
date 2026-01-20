@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi</title>
+     <link rel="stylesheet"
+           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet"
+           href="styles.css">
+     <link rel="icon"
+           href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script"
+             async
+             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af konjunkturbeskrivelse og økonomiske svingninger."
+     data-forudsætning="Grundlæggende kendskab til nationalregnskabet.">
+     <header> <a href="index.html"
+             target="_blank"><img src="tepedulogoanim.svg"
+                    alt="Logo"
+                    width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+
+
+
+
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi: Konjunkturbeskrivelse
+                                        </h1>
+                                   </div>
+                              </div>
+
+
+                              <br>
+                              <br>
+
+
+                              <h1 id="question"
+                                  class="card-title"></h1>
+                              <div id="options"
+                                   class="mt-4"></div>
+                              <div id="progress-bar"
+                                   class="progress-bar-container"></div>
+
+
+
+
+
+
+
+
+
+                                                         <!-- 3.12 -->
+                              <div class="question"
+                                   data-question="Hvordan hænger inflation sammen med betalingsbalancen?"
+                                   data-answer="3"
+                                   data-explanation="Sammenhængen mellem inflation og betalingsbalance:<br><br>
+                                        • Høj inflation svækker konkurrenceevnen<br>
+                                        • Forringet konkurrenceevne mindsker eksport<br>
+                                        • Lavere eksport forværrer betalingsbalancen<br>
+                                        • Lavere inflation forbedrer typisk betalingsbalancen<br><br>
+                                        Dette viser betydningen af prisstabilitet for udenrigshandlen.<br><br>
+                                        <a href='https://chat.openai.com'
+                                           class='effectLinks'
+                                           data-replace='ChatGPT prompt: Hvordan påvirker inflation betalingsbalancen?'
+                                           target='_blank'>
+                                             <span>ChatGPT prompt: Hvordan påvirker inflation betalingsbalancen?</span>
+                                        </a>
+                                        <br>
+                                        <br>
+                                        <a href='https://claude.ai'
+                                           class='effectLinks'
+                                           data-replace='Claude prompt: Forklar sammenhængen mellem inflation og betalingsbalancen'
+                                           target='_blank'>
+                                             <span>Claude prompt: Forklar sammenhængen mellem inflation og betalingsbalancen</span>
+                                        </a>
+                                        <br>">
+                                   <div class="option"
+                                        data-option="Ingen sammenhæng"></div>
+                                   <div class="option"
+                                        data-option="Høj inflation forbedrer altid betalingsbalancen"></div>
+                                   <div class="option"
+                                        data-option="Kun påvirkning via renter"></div>
+                                   <div class="option"
+                                        data-option="Høj inflation forværrer typisk betalingsbalancen"></div>
+                              </div>
+
+                            
+
+                              <!-- 3.1 -->
+<div class="question"
+     data-question="Hvordan måles økonomisk vækst?"
+     data-answer="1"
+     data-explanation="Økonomisk vækst måles ved den procentvise stigning i BNP i faste priser fra et år til det næste.<br><br>
+     <strong>Formel:</strong><br>
+     ((BNP år 2 - BNP år 1) / BNP år 1) × 100<br><br>
+     <table class='info-table'>
+       <tr><th>År</th><th>BNP (faste priser)</th></tr>
+       <tr><td>2023</td><td>1000 mia. kr</td></tr>
+       <tr><td>2024</td><td>1030 mia. kr</td></tr>
+       <tr class='table-success'><td>Vækst</td><td>(1030-1000)/1000 × 100 = 3%</td></tr>
+     </table><br>
+     <a href='https://gemini.google.com' class='effectLinks' target='_blank'>Gemini: Forklar BNP-vækstberegning</a>">
+    <div class="option" data-option="Nominelt BNP divideret med befolkningstal"></div>
+    <div class="option" data-option="Procentvis ændring i real-BNP"></div>
+    <div class="option" data-option="Gennemsnitlig lønstigning"></div>
+    <div class="option" data-option="Antal nye virksomheder årligt"></div>
+</div>
+
+<!-- 3.2 -->
+<div class="question"
+     data-question="Hvad er den korrete formel for ledighedsprocent?"
+     data-answer="3"
+     data-explanation="Ledighedsprocent = (Antal ledige / Arbejdsstyrken) × 100<br><br>
+     <table class='info-table'>
+       <tr><th>Parameter</th><th>Eksempel</th></tr>
+       <tr><td>Ledige</td><td>150.000</td></tr>
+       <tr><td>Arbejdsstyrke</td><td>3.000.000</td></tr>
+       <tr class='table-success'><td>Ledighed</td><td>(150.000/3.000.000) × 100 = 5%</td></tr>
+     </table><br>
+     <a href='https://claude.ai' class='effectLinks' target='_blank'>Claude: Vis beregning af ledighedsprocent</a>">
+    <div class="option" data-option="(Arbejdsløse / BNP) × 100"></div>
+    <div class="option" data-option="(Beskæftigede / BNP) × 100"></div>
+    <div class="option" data-option="(Ledige / Befolkning) × 100"></div>
+    <div class="option" data-option="(Ledige / Arbejdsstyrke) × 100"></div>
+</div>
+
+
+<!-- 3.4 -->
+<div class="question"
+     data-question="Hvad måler betalingsbalancen?"
+     data-answer="0"
+     data-explanation="Betalingsbalancen viser et lands transaktioner med udlandet. Beregnes som:<br>
+     (Eksport - Import) + Nettooverførsler<br><br>
+     <table class='info-table'>
+       <tr><th>Land</th><th>Eksport</th><th>Import</th><th>Saldo</th></tr>
+       <tr><td>Danmark</td><td>800 mia</td><td>700 mia</td><td class='text-success'>+100 mia</td></tr>
+       <tr><td>Sverige</td><td>600 mia</td><td>650 mia</td><td class='text-danger'>-50 mia</td></tr>
+     </table><br>
+     <a href='https://claude.ai' class='effectLinks' target='_blank'>Claude: Forklar betalingsbalance</a>">
+    <div class="option" data-option="Handel og finansielle strømme med udlandet"></div>
+    <div class="option" data-option="Indenlandsk produktionsvækst"></div>
+    <div class="option" data-option="Antal udenlandske turister"></div>
+    <div class="option" data-option="Valutakursudsving"></div>
+</div>
+
+<!-- 3.5 -->
+<div class="question"
+     data-question="Hvad siger Okun's lov om sammenhængen mellem BNP og ledighed?"
+     data-answer="1"
+     data-explanation="Okun's lov: Hvis væksten overstiger potentialet, falder ledigheden.<br><br>
+     <strong>Eksempel:</strong><br>
+     Potentiel vækst = 1,5%<br>
+     Faktisk vækst = 2,5%<br>
+     → Ledigheden falder med f.eks. 0,5%<br><br>
+     <table class='info-table'>
+       <tr><th>Vækst vs potentiale</th><th>Ledighedseffekt</th></tr>
+       <tr><td>+1% over</td><td>F.eks. fald med 0,5%</td></tr>
+       <tr><td>-1% under</td><td>F.eks. stigning med 0,5%</td></tr>
+     </table><br>
+     <a href='https://gemini.google.com' class='effectLinks' target='_blank'>Gemini: Forklar Okun's lov</a>">
+    <div class="option" data-option="Højere BNP altid skaber højere ledighed"></div>
+    <div class="option" data-option="Vækst over potentialet reducerer ledighed"></div>
+    <div class="option" data-option="Ledighed påvirker ikke BNP-vækst"></div>
+    <div class="option" data-option="Inflation er hovedårsag til ledighed"></div>
+</div>
+
+<!-- 3.6 -->
+<div class="question"
+     data-question="Hvilken er en ledende konjunkturindikator?"
+     data-answer="3"
+     data-explanation="Ledende indikatorer varsler fremtidig udvikling:<br><br>
+     <table class='info-table'>
+       <tr><th>Type</th><th>Eksempler</th></tr>
+       <tr><td>Ledende</td><td>Byggetilladelser, aktiekurser</td></tr>
+       <tr><td>Laggende</td><td>Arbejdsløshed, tvangsauktioner</td></tr>
+     </table><br>
+     <strong>Eksempel:</strong> Flere byggetilladelser → Forventet øget byggeaktivitet om 6 måneder<br><br>
+     <a href='https://claude.ai' class='effectLinks' target='_blank'>Claude: Forklar konjunkturindikatorer</a>">
+    <div class="option" data-option="Antal tvangsauktioner"></div>
+    <div class="option" data-option="Gammel arbejdsløshedsstatistik"></div>
+    <div class="option" data-option="Energiforbrug fra sidste år"></div>
+    <div class="option" data-option="Industriens ordrebeholdninger"></div>
+</div>
+
+<!-- 3.7 -->
+<div class="question"
+     data-question="Hvad er formålet med makroøkonomiske modeller som ADAM?"
+     data-answer="2"
+     data-explanation="ADAM-modellen bruges til:<br>
+     - Fremskrive økonomisk udvikling<br>
+     - Analysere politiske tiltags effekt<br><br>
+     <table class='info-table'>
+       <tr><th>Scenario</th><th>Anvendelse</th></tr>
+       <tr><td>Skattenedsættelse</td><td>Forudsig effekt på BNP og forbrug</td></tr>
+       <tr><td>Rentestigning</td><td>Vurder konsekvenser for investeringer</td></tr>
+     </table><br>
+     <a href='https://gemini.google.com' class='effectLinks' target='_blank'>Gemini: Forklar ADAM-modellen</a>">
+    <div class="option" data-option="Måle historisk inflation"></div>
+    <div class="option" data-option="Registrere aktiekurser"></div>
+    <div class="option" data-option="Lave økonomiske prognoser"></div>
+    <div class="option" data-option="Analysere enkeltvirksomheders regnskab"></div>
+</div>
+                           
+<!-- 3.8 -->
+<div class="question"
+     data-question="Hvordan påvirker inflation typisk betalingsbalancen?"
+     data-answer="0"
+     data-explanation="Lav inflation forbedrer betalingsbalancen ved at gøre eksporten mere konkurrencedygtig.<br><br>
+     <table class='info-table'>
+       <tr><th>Inflation i Danmark</th><th>Betalingsbalance</th></tr>
+       <tr><td>2%</td><td class='text-success'>+50 mia kr</td></tr>
+       <tr><td>5%</td><td class='text-danger'>-30 mia kr</td></tr>
+     </table><br>
+     <strong>Eksempel:</strong> Hvis danske varer bliver 3% dyrere end udenlandske, vil eksporten falde.<br><br>
+     <a href='https://claude.ai' class='effectLinks' target='_blank'>Claude: Forklar inflation og betalingsbalance</a>">
+    <div class="option" data-option="Lav inflation → bedre betalingsbalance"></div>
+    <div class="option" data-option="Høj inflation → mere eksport"></div>
+    <div class="option" data-option="Inflation har ingen effekt"></div>
+    <div class="option" data-option="Kun valutakurser påvirker"></div>
+</div>
+
+<!-- 3.9 -->
+<div class="question"
+     data-question="Hvorfor er konjunkturprognoser ofte unøjagtige?"
+     data-answer="3"
+     data-explanation="Hovedårsager:<br>
+     - Uforudsete begivenheder (krig, pandemi)<br>
+     - Ændringer i forbrugeradfærd<br>
+     - Usikre internationale forhold<br><br>
+     <table class='info-table'>
+       <tr><th>Eksempel</th><th>Effekt på prognose</th></tr>
+       <tr><td>Ukrainekrigen 2022</td><td>Uventet energiprisstigning</td></tr>
+       <tr><td>Finanskrise 2008</td><td>Global recession ikke forudset</td></tr>
+     </table><br>
+     <a href='https://gemini.google.com' class='effectLinks' target='_blank'>Gemini: Forklar prognoseusikkerhed</a>">
+    <div class="option" data-option="Modeller er altid 100% præcise"></div>
+    <div class="option" data-option="Kun nationale faktorer tæller"></div>
+    <div class="option" data-option="Pga af softwarefejl"></div>
+    <div class="option" data-option="Uforudsete eksterne chok"></div>
+</div>
+
+<!-- 3.10 -->
+<div class="question"
+     data-question="Hvornår er der tale om højkonjunktur?"
+     data-answer="2"
+     data-explanation="Højkonjunktur defineres ved vækst over 2,5% i gennemsnit.<br><br>
+     <table class='info-table'>
+       <tr><th>Periode</th><th>Vækst</th><th>Klassifikation</th></tr>
+       <tr><td>2004-2008</td><td>3,1%</td><td class='text-success'>Højkonjunktur</td></tr>
+       <tr><td>2009-2015</td><td>0,8%</td><td class='text-danger'>Lavkonjunktur</td></tr>
+     </table><br>
+     <strong>Eksempel:</strong> Hvis BNP stiger 3% årligt i 4 år, er det en højkonjunktur.<br><br>
+     <a href='https://claude.ai' class='effectLinks' target='_blank'>Claude: Forklar højkonjunkturkriterier</a>">
+    <div class="option" data-option="Vækst under 1%"></div>
+    <div class="option" data-option="Ledighed over 10%"></div>
+    <div class="option" data-option="Gennemsnitlig vækst over 2,5%"></div>
+    <div class="option" data-option="Negativ BNP-vækst"></div>
+</div>
+                              
+
+
+
+
+
+
+
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="
+                                        script.js">
+                                        </script>
+</body>
+
+</html>

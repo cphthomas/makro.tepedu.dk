@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi</title>
+     <link rel="stylesheet"
+           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet"
+           href="styles.css">
+     <link rel="icon"
+           href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script"
+             async
+             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af penge og finansielle markeder."
+     data-forudsætning="Grundlæggende kendskab til betalingsbalance og valutamarkeder.">
+     <header> <a href="index.html"
+             target="_blank"><img src="tepedulogoanim.svg"
+                    alt="Logo"
+                    width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+
+
+
+
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi: Penge og finansielle markeder
+                                        </h1>
+                                   </div>
+                              </div>
+
+
+                              <br>
+                              <br>
+
+
+                              <h1 id="question"
+                                  class="card-title"></h1>
+                              <div id="options"
+                                   class="mt-4"></div>
+                              <div id="progress-bar"
+                                   class="progress-bar-container">
+                              </div>
+                               <!-- 5.1 -->
+                              <div class="question"
+                                   data-question="Hvilken af følgende er IKKE en hovedfunktion for den finansielle sektor?"
+                                   data-answer="1"
+                                   data-explanation="Den finansielle sektor har flere vigtige opgaver, men de kan opsummeres i tre hovedfunktioner. Corporate governance er vigtigt for en velfungerende økonomi, men det er ikke en af de primære funktioner:<br><br>
+                                        <ul>
+                                             <li><b>Kreditformidling:</b> Den finansielle sektor hjælper med at flytte penge fra dem, der har penge til overs (opsparere), til dem der mangler penge (låntagere). Det sker fx gennem lån, hvor en bank eller et realkreditinstitut giver et lån til en virksomhed eller en boligkøber.</li>
+                                             <li><b>Betalingsformidling:</b> Den finansielle sektor sørger for, at vi kan overføre penge mellem hinanden, både elektronisk og kontant. For eksempel når du bruger dit betalingskort eller overfører penge via netbank.</li>
+                                             <li><b>Risikoformidling:</b> Den finansielle sektor hjælper med at sprede risiko, så enkeltpersoner eller virksomheder ikke bærer hele risikoen selv. Det sker fx gennem forsikringer, hvor man betaler en præmie for at være dækket mod uheldige situationer.</li>
+                                             <li><b>Corporate governance:</b> Dette handler om god selskabsledelse. Hvordan virksomheder styres og kontrolleres for at sikre ansvarlighed.</li>
+                                        </ul>
+                                        <br>
+                                   Selvom alle er vigtige, er det altså kun de tre førstnævnte, der er de primære funktioner i den finansielle sektor.<br><br>
+                                   For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvilke er de primære funktioner for den finansielle sektor?' target='_blank'>
+                                        <span>ChatGPT: 'Hvilke er de primære funktioner for den finansielle sektor?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: List de vigtigste funktioner i den finansielle sektor' target='_blank'>
+                                        <span>Gemini: 'List de vigtigste funktioner i den finansielle sektor'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er de vigtigste funktioner for den finansielle sektor?' target='_blank'>
+                                        <span>Claude: 'Hvad er de vigtigste funktioner for den finansielle sektor?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Kreditformidling"></div>
+                                   <div class="option"
+                                        data-option="Corporate governance"></div>
+                                   <div class="option"
+                                        data-option="Betalingsformidling"></div>
+                                   <div class="option"
+                                        data-option="Risikoformidling"></div>
+                              </div>
+                              <!-- 5.2 -->
+                              <div class="question"
+                                   data-question="Hvad kaldes et finansielt system, hvor enheder med overskud køber værdipapirer direkte fra enheder med finansieringsbehov?"
+                                   data-answer="0"
+                                   data-explanation="Et finansielt system kan fungere på forskellige måder, afhængigt af hvordan pengene flyttes fra dem, der har dem, til dem, der har brug for dem. Her er de to hovedtyper:<br><br>
+                                        <ul>
+                                             <li><b>Værdipapirbaseret system:</b> Her går pengene direkte fra dem der har et overskud (fx en investor) til dem, der mangler dem (fx en virksomhed der skal skaffe penge til et nyt projekt). Det sker ved at virksomheden udsteder værdipapirer, fx aktier eller obligationer, som investoren så køber. Det er som at købe direkte fra producenten uden en mellemhandler.</li>
+                                             <li><b>Bankbaseret system:</b> Her går pengene gennem banker eller andre finansielle institutioner. Bankerne modtager indlån fra dem med overskud, og låner pengene videre til dem der har brug for dem, og fungerer dermed som en mellemhandler.</li>
+                                        </ul>
+                                   I et værdipapirbaseret system er der altså en direkte forbindelse mellem den der har pengene og den der har brug for dem, via køb og salg af værdipapirer.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad kendetegner et værdipapirbaseret finansielt system?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad kendetegner et værdipapirbaseret finansielt system?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er karakteristisk for et værdipapirbaseret finansielt system?' target='_blank'>
+                                        <span>Gemini: 'Hvad er karakteristisk for et værdipapirbaseret finansielt system?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er definitionen på et værdipapirbaseret finansielt system?' target='_blank'>
+                                        <span>Claude: 'Hvad er definitionen på et værdipapirbaseret finansielt system?'</span>
+                                        </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Værdipapirbaseret"></div>
+                                   <div class="option"
+                                        data-option="Bankbaseret"></div>
+                                        <div class="option"
+                                        data-option="Investeringsbaseret"></div>
+                                   <div class="option"
+                                        data-option="Hybridbaseret"></div>
+                              </div>
+                              <!-- 5.3 -->
+                              <div class="question"
+                                   data-question="Hvad karakteriserer et 'universalbanksystem'?"
+                                   data-answer="3"
+                                   data-explanation="Et 'universalbanksystem' er en type finansielt system, hvor bankerne ikke er begrænset til kun at udføre traditionelle bankopgaver. I stedet har de lov til at lave en bred vifte af finansielle aktiviteter:<br><br>
+                                        <ul>
+                                             <li><b>Traditionelle bankopgaver:</b> Dette inkluderer at modtage indlån (fx fra din opsparingskonto) og yde udlån (fx et boliglån eller et billån).</li>
+                                             <li><b>Værdipapirhandel:</b> Bankerne kan også købe og sælge værdipapirer, som aktier og obligationer, både for deres egne penge og for deres kunders.</li>
+                                             <li><b>Investeringsrådgivning:</b> De kan også rådgive kunder om investeringer og hjælpe dem med at købe og sælge værdipapirer.</li>
+                                        </ul>
+                                   <br>
+                                   Det betyder at en bank ikke kun er et sted, hvor man sætter penge ind og låner penge. De kan agere som både bank, mægler og investor.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad betyder universalbanksystem?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad betyder universalbanksystem?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er et universalbanksystem?' target='_blank'>
+                                        <span>Gemini: 'Hvad er et universalbanksystem?'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er definitionen på et universalbanksystem?' target='_blank'>
+                                        <span>Claude: 'Hvad er definitionen på et universalbanksystem?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Banker kun må yde lån."></div>
+                                        <div class="option"
+                                             data-option="Banker kun må handle værdipapirer."></div>
+                                   <div class="option"
+                                        data-option="Banker er begrænset til at formidle realkreditlån."></div>
+                                   <div class="option"
+                                        data-option="Banker har mulighed for at udføre både traditionelle bankfunktioner og værdipapirtransaktioner."></div>
+                              </div>
+                              <!-- 5.4 -->
+                              <div class="question"
+                                   data-question="Hvad er 'The Volcker Rule'?"
+                                   data-answer="2"
+                                   data-explanation="'The Volcker Rule' er en regel, som blev indført i USA efter finanskrisen i 2008, og som har til formål at begrænse bankernes risikotagning. Reglen er opkaldt efter den tidligere chef for den amerikanske centralbank, Paul Volcker.<br><br>
+                                        <b>Hovedpunkter i reglen:</b>
+                                        <ul>
+                                             <li><b>Begrænsning af investeringer:</b> Bankerne må ikke længere spekulere med deres egne penge. Det betyder at de ikke må købe og sælge værdipapirer for at tjene hurtige penge, i stedet skal de fokusere på deres kerneforretning: at yde lån og servicere deres kunder.</li>
+                                             <li><b>Beskyttelse af indskydere:</b> Reglen er med til at beskytte bankernes indskydere, da det mindsker risikoen for, at bankerne går konkurs pga. risikable investeringer.</li>
+                                             <li><b>Del af Dodd-Frank loven:</b> The Volcker Rule er en del af en større lovpakke kaldet Dodd-Frank Wall Street Reform and Consumer Protection Act, som blev vedtaget for at regulere finanssektoren og forebygge en ny finansiel krise.</li>
+                                        </ul>
+                                   <br>
+                                   The Volcker Rule er altså et redskab til at sørge for at bankerne ikke løber for store risici, ved at begrænse den måde de handler med værdipapirer.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er The Volcker Rule?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er The Volcker Rule?'</span>
+                                   </a><br><br>
+                                        <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er Volcker Reglen?' target='_blank'>
+                                        <span>Gemini: 'Hvad er Volcker Reglen?'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er Volcker reglen?' target='_blank'>
+                                        <span>Claude: 'Hvad er Volcker reglen?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="En lov der tillader banker at investere i aktier."></div>
+                                   <div class="option"
+                                        data-option="En lov der kun gælder for udenlandske banker."></div>
+                                   <div class="option"
+                                        data-option="En restriktion for bankers investeringsaktiviteter."></div>
+                                   <div class="option"
+                                        data-option="En lov der fremmer aktiehandel."></div>
+                              </div>
+                              <!-- 5.5 -->
+                              <div class="question"
+                                   data-question="Hvad er 'finansiel opsparing'?"
+                                   data-answer="1"
+                                   data-explanation="'Finansiel opsparing' er det beløb, der er tilbage af en persons, en virksomheds eller en stats indtægter, når man har betalt for forbrug og reale investeringer. Det er altså den del af opsparingen som bruges til køb af finansielle aktiver.<br><br>
+                                   <b>Forklaring:</b>
+                                        <ul>
+                                             <li><b>Indtægter:</b> Det er penge der kommer ind, f.eks. løn, overskud eller skatteindtægter.</li>
+                                             <li><b>Forbrug:</b> Det er penge der bruges på dagligdags ting som mad, tøj, husleje osv.</li>
+                                             <li><b>Reale investeringer:</b> Det er investeringer i fysiske aktiver, fx maskiner, bygninger eller et nyt produktionsanlæg.</li>
+                                             <li><b>Finansiel opsparing:</b> Det er det der er tilbage når forbrug og reale investeringer er betalt, og som nu kan bruges til køb af finansielle aktiver, som aktier, obligationer og indlån.</li>
+                                        </ul>
+                                   <br>
+                                   Det er altså de penge der er tilbage efter alt det 'almindelige' er betalt, som man så kan vælge at bruge til at tjene endnu flere penge i finansverdenen.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er finansiel opsparing?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er finansiel opsparing?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Definer finansiel opsparing' target='_blank'>
+                                        <span>Gemini: 'Definer finansiel opsparing'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er definitionen på finansiel opsparing?' target='_blank'>
+                                        <span>Claude: 'Hvad er definitionen på finansiel opsparing?'</span>
+                                        </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Den samlede indtægt fratrukket alle udgifter."></div>
+                                   <div class="option"
+                                        data-option="Den del af opsparingen der er tilbage efter fratræk af reale investeringer."></div>
+                                   <div class="option"
+                                        data-option="De samlede aktiver minus passiver."></div>
+                                        <div class="option"
+                                             data-option="Summen af alle indlån."></div>
+                              </div>
+                              <!-- 5.6 -->
+                              <div class="question"
+                                   data-question="Hvilken funktion har den finansielle sektor som formidler af kapital eller kredit?"
+                                   data-answer="0"
+                                   data-explanation="Den finansielle sektor har en afgørende rolle som 'brobygger' mellem dem, der har penge til overs, og dem, der har brug for dem. Den hjælper med at flytte kapital og kredit rundt i økonomien, hvilket er nødvendigt for at økonomien kan fungere:<br><br>
+                                        <ul>
+                                             <li><b>Modtager indlån:</b> Den finansielle sektor, især bankerne, modtager indlån fra borgere og virksomheder med overskud. Det er de penge, vi har stående på vores konti, i vores pensionsopsparing mv.</li>
+                                             <li><b>Udlåner penge:</b> De indlånte penge bruges til at udlåne til borgere eller virksomheder, som har brug for kapital til fx investeringer, forbrug eller boligkøb.</li>
+                                             <li><b>Effektiv ressourceallokering:</b> Denne formidling sikrer, at pengene ender der, hvor de kan gøre mest gavn for økonomien. Det er ikke sikkert at alle dem som har penge i overskud kan skabe de bedste investeringer og dermed er formidlingen afgørende for at kapitalen bliver udnyttet bedst muligt.</li>
+                                        </ul>
+                                   <br>
+                                   Kort sagt, den finansielle sektor gør det muligt at flytte penge derhen, hvor der er et behov, hvilket er afgørende for økonomisk vækst.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvordan formidler den finansielle sektor kapital og kredit?' target='_blank'>
+                                        <span>ChatGPT: 'Hvordan formidler den finansielle sektor kapital og kredit?'</span>
+                                   </a><br><br>
+                                        <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvordan formidler den finansielle sektor kapital og kredit?' target='_blank'>
+                                        <span>Gemini: 'Hvordan formidler den finansielle sektor kapital og kredit?'</span>
+                                        </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvordan faciliterer den finansielle sektor flowet af kapital og kredit?' target='_blank'>
+                                        <span>Claude: 'Hvordan faciliterer den finansielle sektor flowet af kapital og kredit?'</span>
+                                        </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="At overføre kapital fra overskud til underskudsenheder."></div>
+                                   <div class="option"
+                                        data-option="At regulere rentesatser i økonomien."></div>
+                                   <div class="option"
+                                        data-option="At udstede statsobligationer"></div>
+                                   <div class="option"
+                                        data-option="At overvåge betalingsbalancen."></div>
+                              </div>
+                              <!-- 5.7 -->
+                              <div class="question"
+                                   data-question="Hvad er formålet med et factoring-selskab?"
+                                   data-answer="2"
+                                   data-explanation="Et factoring-selskab har til formål at hjælpe virksomheder med at få hurtigere adgang til penge, som de ellers ville have bundet i ubetalte regninger. Det fungerer som en form for 'likviditets-booster' for virksomhederne:<br><br>
+                                        <b>Sådan fungerer det:</b>
+                                        <ul>
+                                             <li><b>Opkøb af fakturaer:</b> En virksomhed sælger sine ubetalte fakturaer (regninger) til et factoring-selskab.</li>
+                                             <li><b>Underpris:</b> Factoring-selskabet betaler et beløb for fakturaerne, som er lavere end det beløb, der står på fakturaen.</li>
+                                             <li><b>Overfører risiko:</b> Dermed overtager factoring-selskabet også risikoen for, at kunderne ikke betaler det fulde beløb.</li>
+                                             </ul>
+                                        <br>
+                                        <b>Eksempel:</b><br>
+                                        Forestil dig en lille virksomhed, der har solgt varer for 100.000 kr. til en kunde, hvor betalingen først skal ske om 30 dage. I stedet for at vente 30 dage på pengene, kan virksomheden sælge regningen til et factoring-selskab for fx 95.000 kr. Factoring-selskabet sørger så for at opkræve de 100.000 kr fra kunden og det behøver den lille virksomhed altså ikke bruge tid på.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er formålet med et factoring-selskab?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er formålet med et factoring-selskab?'</span>
+                                   </a><br><br>
+                                        <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er formålet med et factoring-selskab?' target='_blank'>
+                                        <span>Gemini: 'Hvad er formålet med et factoring-selskab?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er målet med et factoring-selskab?' target='_blank'>
+                                        <span>Claude: 'Hvad er målet med et factoring-selskab?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="At udstede lån med sikkerhed i fast ejendom."></div>
+                                   <div class="option"
+                                        data-option="At formidle aktiehandel."></div>
+                                   <div class="option"
+                                        data-option="At opkøbe ubetalte regninger og overtage betalingsrisikoen."></div>
+                                   <div class="option"
+                                        data-option="At yde forsikring mod tab på aktier."></div>
+                              </div>
+                              <!-- 5.8 -->
+                              <div class="question"
+                                   data-question="Hvad er det primære formål med 'corporate governance' i den finansielle sektor?"
+                                   data-answer="3"
+                                   data-explanation="Corporate governance i den finansielle sektor handler om at sikre, at de virksomheder, der opererer i sektoren, bliver styret på en ansvarlig og fornuftig måde. Det er et sæt af regler, praksis og processer, der skal sikre:<br><br>
+                                   <ul>
+                                             <li><b>Gennemsigtighed:</b> At virksomhederne er åbne om deres økonomiske forhold og beslutninger, så investorer og andre interessenter kan følge med.</li>
+                                             <li><b>Ansvarlighed:</b> At ledelsen er ansvarlig for virksomhedens handlinger og resultater, så de ikke tager unødvendige chancer.</li>
+                                             <li><b>Beskyttelse af interessenter:</b> At både långivere (banker, realkreditinstitutter), ejere (aktionærer) og kunder beskyttes, så deres penge er i trygge hænder.</li>
+                                        </ul>
+                                   <br>
+                                   Tænk på det som at have et sæt kontrolmekanismer, der sørger for at virksomhederne opfører sig ordentligt, så der ikke opstår økonomisk kaos.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er formålet med corporate governance i den finansielle sektor?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er formålet med corporate governance i den finansielle sektor?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er det primære formål med corporate governance i den finansielle sektor?' target='_blank'>
+                                        <span>Gemini: 'Hvad er det primære formål med corporate governance i den finansielle sektor?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad er det primære mål med corporate governance i den finansielle sektor?' target='_blank'>
+                                        <span>Claude: 'Hvad er det primære mål med corporate governance i den finansielle sektor?'</span>
+                                        </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="At overvåge valutakurser."></div>
+                                   <div class="option"
+                                        data-option="At fremme aktiehandel."></div>
+                                   <div class="option"
+                                        data-option="At regulere finansielle markeder."></div>
+                                   <div class="option"
+                                        data-option="At sikre en forsvarlig økonomisk adfærd hos låntagerne."></div>
+                              </div>
+                              <!-- 5.9 -->
+                              <div class="question"
+                                   data-question="Hvad er karakteristisk for pengemarkedet?"
+                                   data-answer="1"
+                                   data-explanation="Pengemarkedet er et sted, hvor der handles med meget kortfristede lån og indskud. Det kan sammenlignes med et hurtigt 'lånemarked' hvor likviditet er vigtig.<br><br>
+                                        <b>Kendetegn:</b>
+                                        <ul>
+                                             <li><b>Kort løbetid:</b> Lån og indskud har typisk en løbetid på få dage eller måneder. Det er et marked for hurtige 'penge' bevægelser.</li>
+                                             <li><b>Likviditet:</b> Der handles med meget likvide fordringer, som hurtigt kan omsættes til kontanter. Det er for at sikre at der altid er penge til at betale regninger og andre forpligtelser.</li>
+                                             <li><b>Større aktører:</b> Det er primært banker, realkreditinstitutter, Nationalbanken og store virksomheder der handler på pengemarkedet. De udlåner eller låner penge for at styre deres likviditet.</li>
+                                        </ul>
+                                        <br>
+                                   Pengemarkedet bruges altså til at styre den daglige likviditet hos de finansielle virksomheder og for at Nationalbanken kan styre renten og dermed pengepolitikken. <br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad karakteriserer pengemarkedet?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad karakteriserer pengemarkedet?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er de karakteristiske træk ved pengemarkedet?' target='_blank'>
+                                        <span>Gemini: 'Hvad er de karakteristiske træk ved pengemarkedet?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad kendetegner pengemarkedet?' target='_blank'>
+                                        <span>Claude: 'Hvad kendetegner pengemarkedet?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Langsigtet finansiering af virksomheder."></div>
+                                   <div class="option"
+                                        data-option="Kortsigtede lån og indskud."></div>
+                                   <div class="option"
+                                        data-option="Handel med aktier."></div>
+                                        <div class="option"
+                                        data-option="Lån med lang løbetid."></div>
+                              </div>
+                              <!-- 5.10 -->
+                              <div class="question"
+                                   data-question="Hvad er det karakteristiske ved kapitalmarkedet?"
+                                   data-answer="3"
+                                   data-explanation="Kapitalmarkedet er stedet hvor der handles med finansielle fordringer med lang løbetid, og hvor virksomheder og stater kan skaffe kapital til deres langsigtede behov.<br><br>
+                                        <b>Kendetegn ved kapitalmarkedet:</b>
+                                        <ul>
+                                             <li><b>Lang løbetid:</b> Lån og investeringer har en løbetid på over et år. Det kan være fra 1 år til mange år, i modsætning til pengemarkedets korte lån.</li>
+                                             <li><b>Aktie- og obligationshandel:</b> Her handles aktier, som er ejerandele i virksomheder, og obligationer, som er gældsbreve der lover at betale et beløb tilbage med rente.</li>
+                                             <li><b>Langsigtet kapital:</b> Det bruges til at finansiere store, langsigtede projekter, som fx at bygge en fabrik eller udvikle ny teknologi, men også statens langsigtede gæld.</li>
+                                        </ul>
+                                        <br>
+                                        Kapitalmarkedet er altså ikke for hurtige penge, men for langsigtet finansiering og investering.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad karakteriserer kapitalmarkedet?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad karakteriserer kapitalmarkedet?'</span>
+                                   </a><br><br>
+                                        <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er hovedtrækkene ved kapitalmarkedet?' target='_blank'>
+                                        <span>Gemini: 'Hvad er hovedtrækkene ved kapitalmarkedet?'</span>
+                                        </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad kendetegner typisk kapitalmarkedet?' target='_blank'>
+                                        <span>Claude: 'Hvad kendetegner typisk kapitalmarkedet?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Kortfristede lån til virksomheder."></div>
+                                   <div class="option"
+                                        data-option="Lån mellem private husholdninger."></div>
+                                        <div class="option"
+                                        data-option="Finansiering af statens kortsigtede gæld."></div>
+                                   <div class="option"
+                                        data-option="Finansielle fordringer med lang løbetid."></div>
+                              </div>
+
+                              <!-- 5.11 -->
+                              <div class="question"
+                                   data-question="Hvad er det overordnede formål for Nationalbanken ifølge Nationalbankloven af 1936?"
+                                   data-answer="0"
+                                   data-explanation="Nationalbankens primære formål, som fastlagt i Nationalbankloven af 1936, er at sikre et stabilt pengevæsen og fremme en velfungerende økonomi. Dette kan forklares med følgende punkter:<br><br>
+                                        <ul>
+                                        <li><b>Sikkert pengevæsen:</b> Det betyder, at Nationalbanken skal sørge for, at pengene i Danmark bevarer deres værdi og ikke mister købekraft over tid.</li>
+                                        <li><b>Let og reguler pengeomsætning:</b> Det handler om at sikre, at det er let for virksomheder og borgere at handle og låne penge.</li>
+                                             <li><b>Kreditgivning:</b> Nationalbanken er også med til at sørge for at der er den rigtige mængde af lån i omløb så der hverken er for lidt eller for meget.</li>
+                                        </ul>
+                                        <br>
+                                        Tænk på Nationalbanken som en slags 'økonomisk vagthund', der skal holde øje med pengestrømmen og sikre, at økonomien kører glat. Hvis der for eksempel er for mange penge i omløb, kan det føre til inflation (prisstigninger), hvilket Nationalbanken skal forsøge at undgå ved at trække penge ud af økonomien. Omvendt skal de sikre, at der er penge nok til at handle for, så økonomien ikke går i stå ved at sætte penge i omløb.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er Nationalbankens primære formål ifølge Nationalbankloven af 1936?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er Nationalbankens primære formål ifølge Nationalbankloven af 1936?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er hovedformålet med Danmarks Nationalbank ifølge Nationalbankloven af 1936?' target='_blank'>
+                                        <span>Gemini: 'Hvad er hovedformålet med Danmarks Nationalbank ifølge Nationalbankloven af 1936?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Ifølge Nationalbankloven af 1936, hvad er hovedformålet med Danmarks Nationalbank?' target='_blank'>
+                                        <span>Claude: 'Ifølge Nationalbankloven af 1936, hvad er hovedformålet med Danmarks Nationalbank?'</span>
+                                        </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="At opretholde et sikkert pengevæsen og regulere kreditgivning."></div>
+                                   <div class="option"
+                                        data-option="At maksimere statens overskud."></div>
+                                   <div class="option"
+                                        data-option="At støtte virksomheders eksport."></div>
+                                        <div class="option"
+                                        data-option="At sikre høj beskæftigelse."></div>
+                              </div>
+                              <!-- 5.12 -->
+                              <div class="question"
+                                   data-question="Hvad er et 'pengepolitisk modpart' i relation til Nationalbanken?"
+                                   data-answer="2"
+                                        data-explanation="En 'pengepolitisk modpart' er de finansielle institutioner, især banker og realkreditinstitutter, som Nationalbanken arbejder sammen med for at styre landets økonomi. De er afgørende for at Nationalbanken kan udføre sin pengepolitik.<br><br>
+                                        <table class='info-table'table w-100'>
+                                        <thead>
+                                             <tr>
+                                                  <th>Hvad er en pengepolitisk modpart</th>
+                                                  <th>Eksempel</th>
+                                                  <th>Hvorfor er de vigtige</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr>
+                                                  <td>Banker og realkreditinstitutter</td>
+                                                  <td>Danske Bank, Nykredit</td>
+                                                  <td>De har konti i Nationalbanken og kan låne eller indskyde penge</td>
+                                             </tr>
+                                             <tr>
+                                                  <td>Nationalbankens redskaber</td>
+                                                  <td>Udlån, indskudsbeviser, rentestyring</td>
+                                                  <td>Nationalbanken bruger modparterne til at påvirke rente og pengemængde</td>
+                                             </tr>
+                                             <tr>
+                                                  <td>Effekt på økonomien</td>
+                                                  <td>Boliglån, erhvervslån</td>
+                                                  <td>Modparternes handlinger påvirker hvor let det er at låne penge.</td>
+                                             </tr>
+                                        </tbody>
+                                        </table>
+                                        <br>
+                                        Forestil dig det som Nationalbankens 'samarbejdspartnere' i den finansielle verden. For eksempel, hvis Nationalbanken ønsker at sænke renten, kan de låne penge ud til disse pengepolitiske modparter, hvilket gør det billigere for dem at låne penge videre til deres kunder, såsom dig, der vil have et boliglån. Eller omvendt, Nationalbanken kan tage penge fra disse institutter for at begrænse pengemængden i samfundet. Disse institutter, der altså er penge- og realkreditinstitutter, har en konto i Nationalbanken, hvor de kan indskyde eller låne penge, og dermed er de en del af Nationalbankens daglige arbejde med at regulere økonomien.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er en pengepolitisk modpart i relation til Nationalbanken?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er en pengepolitisk modpart i relation til Nationalbanken?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Forklar hvad en 'pengepolitisk modpart' er i forhold til Nationalbanken?' target='_blank'>
+                                        <span>Gemini: 'Forklar hvad en 'pengepolitisk modpart' er i forhold til Nationalbanken?'</span>
+                                        </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Forklar begrebet 'pengepolitisk modpart' i forhold til Nationalbanken' target='_blank'>
+                                        <span>Claude: 'Forklar begrebet 'pengepolitisk modpart' i forhold til Nationalbanken'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Udenlandske banker."></div>
+                                   <div class="option"
+                                        data-option="Private investorer."></div>
+                                   <div class="option"
+                                        data-option="Penge- og realkreditinstitutter med konti i Nationalbanken."></div>
+                                   <div class="option"
+                                        data-option="Større virksomheder."></div>
+                              </div>
+                         
+                                       <!-- 5.13 -->
+                              <div class="question"
+                                   data-question="Hvad er 'monetær finansiering', som er forbudt ifølge EU-traktaten?"
+                                   data-answer="1"
+                                   data-explanation="Monetær finansiering er, når en stat direkte finansierer sine udgifter ved at bruge sin konto i centralbanken, i stedet for at låne pengene på de finansielle markeder. Det er lidt som at staten 'printer' sine egne penge for at betale regningerne. <br><br>
+                                        <b>Eksempel:</b><br>
+                                        Forestil dig, at staten skal bygge en ny bro til 1 milliard kroner, men i stedet for at låne pengene af investorer, så siger de til Nationalbanken: 'Vi skal bruge 1 milliard kroner, sæt dem lige ind på vores konto'. Nationalbanken gør så det, og staten har nu 1 milliard kroner, som er skabt ud af den blå luft. Dette er monetær finansiering og er forbudt i EU.<br><br>
+                                        <b>Hvorfor er det forbudt?</b><br>
+                                        EU-traktaten forbyder monetær finansiering fordi det kan føre til:
+                                        <ul>
+                                             <li><b>Inflation:</b> Når der pludselig er mange flere penge i omløb, men ikke flere varer, kan det få priserne til at stige kraftigt (inflation).</li>
+                                             <li><b>Tab af tillid:</b> Det kan svække tilliden til centralbanken og pengene, da det virker som om at staten kan skabe penge ud af ingenting</li>
+                                             <li><b>Økonomisk ustabilitet:</b> Det kan føre til dårlig økonomisk styring da staten så ikke behøver at tage hensyn til markedets vurdering.</li>
+                                        </ul>
+                                        <br>
+                                        Derfor skal stater låne penge på de finansielle markeder, ligesom alle andre, for at sikre at økonomien er sund og stabil.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er monetær finansiering?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er monetær finansiering?'</span>
+                                   </a><br><br>
+                                        <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er monetær finansiering ifølge EU traktaten?' target='_blank'>
+                                        <span>Gemini: 'Hvad er monetær finansiering ifølge EU traktaten?'</span>
+                                        </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Forklar monetær finansiering og hvorfor det er forbudt i EU traktaten' target='_blank'>
+                                        <span>Claude: 'Forklar monetær finansiering og hvorfor det er forbudt i EU traktaten'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Staten udsteder statsobligationer."></div>
+                                        <div class="option"
+                                             data-option="Staten finansierer udgifter via Nationalbanken."></div>
+                                   <div class="option"
+                                        data-option="Staten sælger ud af sine aktiver."></div>
+                                   <div class="option"
+                                        data-option="Staten opkræver ekstra skatter."></div>
+                              </div>
+                              <!-- 5.14 -->
+                              <div class="question"
+                                   data-question="Hvad kendetegner pengeinstitutternes traditionelle særstilling i forhold til indlån?"
+                                   data-answer="0"
+                                        data-explanation="Pengeinstitutter, som banker, har traditionelt haft en særlig rolle i forhold til indlån, der adskilte dem fra andre finansielle virksomheder. Denne særstilling kan forklares således:<br><br>
+                                        <ul>
+                                             <li><b>Eneret til indlån:</b> Pengeinstitutter havde i mange år eneret til at henvende sig til den almindelige befolkning for at modtage indlån. Det betød, at de var de eneste, der lovligt kunne samle penge ind fra offentligheden i form af indskud på konti.</li>
+                                             <li><b>Samfundets tillid:</b> Denne særstilling var med til at skabe en stor tillid til bankerne, da de blev betragtet som de sikreste steder at opbevare penge.</li>
+                                             <li><b>Ændret lovgivning:</b> Denne eneret er dog ikke så entydig længere, især efter at EU's indre marked er blevet en realitet, som har åbnet for konkurrence fra udenlandske kreditinstitutter. Tilladelsen til at modtage indlån er også blevet udvidet til udstedere af elektroniske penge.</li>
+                                        </ul>
+                                        <br>
+                                        Tidligere var det altså kun bankerne, der måtte 'invitere' folk til at sætte deres penge ind hos dem. I dag er den 'klub' blevet lidt større, hvilket har ændret konkurrencevilkårene i finanssektoren.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad har traditionelt været pengeinstitutternes særstilling i forhold til indlån?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad har traditionelt været pengeinstitutternes særstilling i forhold til indlån?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad har været pengeinstitutternes traditionelle særstilling i forhold til indlån?' target='_blank'>
+                                        <span>Gemini: 'Hvad har været pengeinstitutternes traditionelle særstilling i forhold til indlån?'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad var den traditionelle unikke position for pengeinstitutter vedrørende indlån?' target='_blank'>
+                                        <span>Claude: 'Hvad var den traditionelle unikke position for pengeinstitutter vedrørende indlån?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Eneret på at modtage indlån fra offentligheden."></div>
+                                   <div class="option"
+                                        data-option="Eneret på at yde realkreditlån."></div>
+                                   <div class="option"
+                                        data-option="Eneret på at handle med værdipapirer."></div>
+                                   <div class="option"
+                                        data-option="Eneret på at udstede elektroniske penge."></div>
+                              </div>
+                                   <!-- 5.15 -->
+                              <div class="question"
+                                   data-question="Hvad er 'rentemarginalen' for pengeinstitutter?"
+                                   data-answer="1"
+                                        data-explanation="'Rentemarginalen' er forskellen mellem den rente, en bank opkræver for udlån (fx et boliglån), og den rente, de betaler for indlån (fx en opsparingskonto). Det kan illustreres med et simpelt eksempel:<br><br>
+                                   <table class='info-table'table w-100'>
+                                        <thead>
+                                             <tr>
+                                                  <th>Aktivitet</th>
+                                                  <th>Rente</th>
+                                                  <th>Forklaring</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr>
+                                                  <td>Banken yder et boliglån</td>
+                                             <td>5%</td>
+                                             <td>Banken tjener 5% af det beløb du låner.</td>
+                                             </tr>
+                                             <tr>
+                                                  <td>Du har penge på en opsparingskonto</td>
+                                                  <td>1%</td>
+                                                  <td>Banken betaler dig 1% af de penge du har stående.</td>
+                                             </tr>
+                                             <tr>
+                                                  <td>Rentemarginalen</td>
+                                                  <td>4%</td>
+                                                  <td>Forskellen på 5% og 1%, hvilket er bankens indtjening</td>
+                                             </tr>
+                                        </tbody>
+                                        </table>
+                                        <br>
+                                        Pengeinstitutter tjener penge på denne forskel. Rentemarginalen er altså en vigtig del af bankernes indtjening og en måde for dem at dække deres omkostninger og risici ved udlån. Jo større forskel, jo mere tjener banken.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er rentemarginalen for pengeinstitutter?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er rentemarginalen for pengeinstitutter?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er 'rentemarginalen' for pengeinstitutter?' target='_blank'>
+                                        <span>Gemini: 'Hvad er 'rentemarginalen' for pengeinstitutter?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Forklar hvad rentemarginalen er for pengeinstitutter?' target='_blank'>
+                                        <span>Claude: 'Forklar hvad rentemarginalen er for pengeinstitutter?'</span>
+                                        </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Den samlede renteindtjening fra udlån."></div>
+                                   <div class="option"
+                                        data-option="Forskellen mellem udlåns- og indlånsrente."></div>
+                                        <div class="option"
+                                        data-option="Bankernes samlede gebyrindtægter."></div>
+                                   <div class="option"
+                                        data-option="Renten på statsobligationer."></div>
+                              </div>
+                              <!-- 5.16 -->
+                              <div class="question"
+                                   data-question="Hvad kendetegner realkreditinstitutter i forhold til deres udlån?"
+                                   data-answer="2"
+                                   data-explanation="Realkreditinstitutter adskiller sig fra almindelige banker ved, hvordan de formidler udlån. De bruger nemlig ikke direkte penge som banker, men udsteder i stedet obligationer. Her er de vigtigste kendetegn:<br><br>
+                                   <ul>
+                                        <li><b>Obligationer i stedet for penge:</b> Når du låner penge til et hus gennem et realkreditinstitut, får du ikke udbetalt kontanter. I stedet udsteder de obligationer, som de sælger på markedet.</li>
+                                        <li><b>Pant i ejendommen:</b> Lånet er typisk sikret med pant i din ejendom, hvilket betyder at de har sikkerhed for lånet.</li>
+                                        <li><b>Langfristede lån:</b> Realkreditlån er normalt langfristede med en løbetid på op til 30 år. Det giver låntager en lang periode til at betale lånet tilbage.</li>
+                                   </ul>
+                                   <br>
+                                   Så realkreditinstitutter fungerer lidt som en mellemmand, der hjælper med at forbinde folk, der gerne vil låne penge til boligkøb med dem der vil investere i obligationer.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad kendetegner realkreditinstitutter i forhold til deres udlån?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad kendetegner realkreditinstitutter i forhold til deres udlån?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er karakteristisk for realkreditinstitutters udlån?' target='_blank'>
+                                        <span>Gemini: 'Hvad er karakteristisk for realkreditinstitutters udlån?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Beskriv de karakteristiske træk ved realkreditinstitutters udlån' target='_blank'>
+                                        <span>Claude: 'Beskriv de karakteristiske træk ved realkreditinstitutters udlån'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="De yder kun kortfristede lån."></div>
+                                   <div class="option"
+                                        data-option="De yder lån via betalingsmidler."></div>
+                                        <div class="option"
+                                        data-option="De formidler lån via obligationer."></div>
+                                   <div class="option"
+                                        data-option="De yder kun lån til virksomheder."></div>
+                              </div>
+                                   <!-- 5.17 -->
+                              <div class="question"
+                                   data-question="Hvad er 'balanceprincippet' i realkreditloven?"
+                                   data-answer="1"
+                                   data-explanation="Balanceprincippet i realkreditloven er en slags 'ligevægtsregel', der sikrer, at der er en direkte sammenhæng mellem de lån, som realkreditinstituttet yder til boligkøbere, og de obligationer de udsteder til investorer. <br><br>
+                                        <b>Forklaring:</b>
+                                        <ul>
+                                             <li><b>Låntagers betalinger:</b> Når en boligejer betaler afdrag og renter på sit realkreditlån, går disse penge til realkreditinstituttet.</li>
+                                             <li><b>Instituttets betalinger:</b> Realkreditinstituttet skal betale de samme beløb videre til de investorer, der har købt de obligationer, som realkreditinstituttet har udstedt.
+                                                  <br>
+                                                  <center><b>Låntager  --> Realkreditinstitut --> Obligationskøber</b></center>
+                                             </li>
+                                             <li><b>Ingen fortjeneste:</b> Realkreditinstituttet må ikke selv tjene penge på denne 'mellemmandsrolle'. De lever af gebyrer der dækker deres omkostninger.</li>
+                                        </ul>
+                                        <br>
+                                        Det vil sige, at pengene der kommer ind i den ene ende, skal også gå ud i den anden ende. Dette sikrer at der ikke er spekulation på baggrund af rentespændet mellem udlån og lån. <br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad indebærer 'balanceprincippet' i realkreditloven?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad indebærer 'balanceprincippet' i realkreditloven?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er 'balanceprincippet' i realkreditloven?' target='_blank'>
+                                        <span>Gemini: 'Hvad er 'balanceprincippet' i realkreditloven?'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvad indebærer 'balanceprincippet' i realkreditloven?' target='_blank'>
+                                        <span>Claude: 'Hvad indebærer 'balanceprincippet' i realkreditloven?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="At realkreditinstitutter skal have balance i deres regnskab."></div>
+                                   <div class="option"
+                                        data-option="Ydelser fra låntager svarer til ydelser til obligationsejer."></div>
+                                   <div class="option"
+                                        data-option="At realkreditinstitutter skal have samme bidragsprocent."></div>
+                                   <div class="option"
+                                        data-option="At lånene skal være fastforrentede."></div>
+                              </div>
+                              <!-- 5.18 -->
+                              <div class="question"
+                                   data-question="Hvad er en 'SDO-lån'?"
+                                   data-answer="3"
+                                   data-explanation="SDO-lån, eller 'Særligt Dækkede Obligationer', er en type boliglån, der er lidt anderledes end de traditionelle realkreditlån. <br><br>
+                                        <b>Forskellen på SDO og Realkredit:</b>
+                                        <ul>
+                                             <li><b>Udstedere:</b> SDO-lån bliver udstedt af banker, mens realkreditlån udstedes af realkreditinstitutter.</li>
+                                             <li><b>Obligationsdækning:</b> SDO-lån er baseret på særligt dækkede obligationer, hvilket giver en ekstra sikkerhed for investorerne.</li>
+                                             <li><b>Belåningsgrænse:</b> SDO-lån må maksimalt udgøre 75% af boligens værdi. Banken skal løbende sikre at belåningsgrænsen overholdes.</li>
+                                        </ul>
+                                   <br>
+                                   Forestil dig, at du tager et lån i banken for at købe et hus. I stedet for at banken selv finansierer hele lånet, udsteder de SDO'er, som investorer kan købe. Dermed får banken penge fra investorerne, som de låner ud til dig. Disse SDO'er giver investorerne en sikkerhed for deres investering. Det er med til at give banker mere fleksibilitet i deres udlån.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad er et 'SDO-lån'?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad er et 'SDO-lån'?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad er et 'SDO-lån'?' target='_blank'>
+                                        <span>Gemini: 'Hvad er et 'SDO-lån'?'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Kan du forklare hvad et 'SDO lån' er?' target='_blank'>
+                                        <span>Claude: 'Kan du forklare hvad et 'SDO lån' er?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Et lån med variabel rente."></div>
+                                   <div class="option"
+                                        data-option="Et lån med statsgaranti."></div>
+                                   <div class="option"
+                                        data-option="Et lån der altid har fast rente i 30 år."></div>
+                                   <div class="option"
+                                        data-option="Et boliglån, som banker kan udstede, baseret på særligt dækkede obligationer."></div>
+                              </div>
+                              <!-- 5.19 -->
+                              <div class="question"
+                                   data-question="Hvad er det specielle ved obligationer som 'udtrækkes'?"
+                                   data-answer="2"
+                                        data-explanation="Når man taler om at obligationer 'udtrækkes' i forbindelse med realkreditlån, betyder det, at en del af de obligationer, der er udstedt for at finansiere dit lån, bliver indfriet. Det sker i takt med at du betaler afdrag på dit lån. <br><br>
+                                        <b>Eksempel:</b>
+                                        Lad os sige, at du har et realkreditlån, hvor der er udstedt obligationer for 1 million kroner. Hver gang du betaler et afdrag på dit lån, svarer det til, at en del af disse obligationer bliver indløst. Det foregår ved at realkreditinstituttet 'udtrækker' de obligationer. <br><br>
+                                        <b>Hvad sker der når obligationen 'udtrækkes'?</b><br>
+                                        <ul>
+                                             <li><b>Tilbagebetaling:</b> De investorer, som ejer de udtrukne obligationer, får udbetalt obligationernes pålydende værdi, som er det beløb der står på obligationen (typisk kurs 100).</li>
+                                             <li><b>Lånets nedbringelse:</b> For låntageren betyder det, at restgælden på lånet bliver mindre, fordi de underliggende obligationer er blevet tilbagebetalt.</li>
+                                        </ul>
+                                        <br>Det er altså en måde hvorpå lånet bliver nedbragt løbende og obligationsejeren får sin investering udbetalt.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvad sker der når obligationer bliver 'udtrukket'?' target='_blank'>
+                                        <span>ChatGPT: 'Hvad sker der når obligationer bliver 'udtrukket'?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvad betyder det når obligationer 'udtrækkes'?' target='_blank'>
+                                        <span>Gemini: 'Hvad betyder det når obligationer 'udtrækkes'?'</span>
+                                   </a><br><br>
+                                   <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Kan du forklare hvad der sker når obligationer 'udtrækkes'?' target='_blank'>
+                                        <span>Claude: 'Kan du forklare hvad der sker når obligationer 'udtrækkes'?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="De sælges til underkurs."></div>
+                                   <div class="option"
+                                        data-option="De bliver omdannet til aktier."></div>
+                                   <div class="option"
+                                        data-option="De udbetales til pålydende værdi."></div>
+                                   <div class="option"
+                                        data-option="De annulleres."></div>
+                              </div>
+                              <!-- 5.20 -->
+                              <div class="question"
+                                   data-question="Hvad er 'direkte rente' for en obligation?"
+                                   data-answer="0"
+                                   data-explanation="Den 'direkte rente' for en obligation er en måde at beregne det årlige afkast på i forhold til prisen du har betalt for obligationen. <br><br>
+                                        <b>Beregning:</b>
+                                        <ul>
+                                        <li><b>Pålydende rente:</b> Den rente der står skrevet på obligationen.</li>
+                                        <li><b>Kurs:</b> Den aktuelle markedspris for obligationen som ofte er angivet i procent af pålydende.</li>
+                                             <li><b>Beregning:</b> Den direkte rente = (Pålydende rente / Kurs) * 100.</li>
+                                        </ul>
+                                   <br>
+                                   <b>Eksempel:</b><br>
+                                   Lad os sige at du har en obligation med en pålydende rente på 5%, og kursen er 95. Så vil den direkte rente være (5 / 95) * 100 = 5,26%. Det vil sige, selvom obligationen har en pålydende rente på 5%, så vil dit årlige afkast reelt være 5,26%, fordi du købte obligationen til en pris under pålydende. Den direkte rente tager altså højde for, at man ofte køber obligationer til en anden pris end det de er udstedt for.<br><br>For at tjekke dette kan du undersøge hos:<br><br>
+                                   <a href='https://chat.openai.com' class='effectLinks' data-replace='ChatGPT: Hvordan beregnes den 'direkte rente' for en obligation?' target='_blank'>
+                                        <span>ChatGPT: 'Hvordan beregnes den 'direkte rente' for en obligation?'</span>
+                                   </a><br><br>
+                                   <a href='https://gemini.google.com' class='effectLinks' data-replace='Gemini: Hvordan beregnes den 'direkte rente' for en obligation?' target='_blank'>
+                                        <span>Gemini: 'Hvordan beregnes den 'direkte rente' for en obligation?'</span>
+                                   </a><br><br>
+                                        <a href='https://claude.ai' class='effectLinks' data-replace='Claude: Hvordan beregnes den 'direkte rente' for en obligation?' target='_blank'>
+                                        <span>Claude: 'Hvordan beregnes den 'direkte rente' for en obligation?'</span>
+                                   </a>
+                                   ">
+                                   <div class="option"
+                                        data-option="Pålydende rente i forhold til kursen."></div>
+                                   <div class="option"
+                                        data-option="Den rente som er skrevet på obligationen."></div>
+                                   <div class="option"
+                                        data-option="Den effektive rente fratrukket kursgevinst."></div>
+                                   <div class="option"
+                                        data-option="Den årlige rente efter skat."></div>
+                              </div>
+    
+
+
+                            
+
+
+
+
+
+
+
+                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js">
+     </script>
+</body>
+
+</html>
