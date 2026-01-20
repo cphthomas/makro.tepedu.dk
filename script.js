@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const article = document.querySelector('article');
     if (!article) return;
 
@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
             numberPrefix = chapterNumber + '.' + h2Counter + '.' + h3Counter + '.' + h4Counter + ' ';
         }
 
-        let headingText = heading.innerText.replace(/^\d+(\.\d+)*\s+/, '');
+        // Improved regex to remove existing numbering like "1. ", "1.1 ", "1.1.1 ", "1. Vækst"
+        let headingText = heading.innerText.replace(/^[\d.]+\s+/, '').trim();
         const id = heading.id || headingText.replace(/\s+/g, '-').toLowerCase();
         heading.id = id;
         heading.innerHTML = numberPrefix + headingText;
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (entry.isIntersecting) {
                 const overlay = entry.target;
                 overlay.classList.add('is-visible');
-                
+
                 setTimeout(() => {
                     const text = overlay.dataset.typeText;
                     const speed = parseInt(overlay.dataset.typeSpeed) || 150;

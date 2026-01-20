@@ -25,6 +25,7 @@
             background-color: #f5f5f5;
             cursor: pointer;
         }
+
         .book-cover-wrapper {
             position: relative;
             width: 100%;
@@ -32,6 +33,7 @@
             overflow: hidden;
             background-color: white;
         }
+
         .book-cover-wrapper video {
             width: 100%;
             height: auto;
@@ -42,26 +44,65 @@
             appearance: none;
             object-fit: cover;
         }
+
         .book-cover-wrapper video::-webkit-media-controls {
             display: none !important;
         }
+
         .book-cover-wrapper video::-webkit-media-controls-enclosure {
             display: none !important;
         }
+
         .book-cover-wrapper video::-webkit-media-controls-panel {
             display: none !important;
         }
+
         .book-cover-wrapper video:not([src]),
         .book-cover-wrapper video[src=""] {
             background-color: white !important;
             opacity: 0;
             pointer-events: none;
         }
+
         .cover-text-overlay {
             z-index: 2;
         }
+
+        /* Premium Info Box Styles */
+        .border-left-turquoise {
+            border-left: 5px solid #14b8a6 !important;
+        }
+
+        .border-left-red {
+            border-left: 5px solid #ff6384 !important;
+        }
+
+        .text-turquoise {
+            color: #14b8a6 !important;
+        }
+
+        .custom-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .custom-list i {
+            margin-right: 10px;
+            margin-top: 4px;
+            font-size: 0.9em;
+            pointer-events: none;
+        }
+
+        .shadow-sm-hover:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
     </style>
     <link rel="stylesheet" href="glossary.css">
+    <!-- Vis-Network for interactive diagrams -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
 
 <body>
@@ -125,16 +166,19 @@
                     <div class="cover-text-overlay animate-cover-text" data-type-text="2. Nationalregnskabet"
                         data-type-speed="150">Nationalregnskabet</div>
                 </div>
-                
+
                 <div class="info-box">
-                    <p>Dette kapitel handler om <b>nationalregnskabet</b> - systemet til at måle en nations samlede økonomi.
+                    <p>Dette kapitel handler om <b>nationalregnskabet</b> - systemet til at måle en nations samlede
+                        økonomi.
                         Som finansøkonom skal du kunne læse og forstå økonomiske tal som BNP, BVT og forsyningsbalance.
-                        Disse tal fortæller os, hvor meget landet producerer, hvordan indkomsten fordeles, og hvordan økonomien udvikler sig.
+                        Disse tal fortæller os, hvor meget landet producerer, hvordan indkomsten fordeles, og hvordan
+                        økonomien udvikler sig.
                     </p>
 
                     <h4>Centrale emner</h4>
                     <ul>
-                        <li><b>Bruttoværditilvækst (BVT):</b> Værdien af det producerede minus det, der er brugt i produktionen</li>
+                        <li><b>Bruttoværditilvækst (BVT):</b> Værdien af det producerede minus det, der er brugt i
+                            produktionen</li>
                         <li><b>Bruttonationalprodukt (BNP):</b> Målet for hele landets produktion</li>
                         <li><b>Forsyningsbalance:</b> Balance mellem tilgang og anvendelse af varer og tjenester</li>
                         <li><b>Fastprisberegninger:</b> Sådan måler vi den reale vækst uden priseffekter</li>
@@ -144,7 +188,54 @@
                 <br>
 
                 <h2>Hvad er nationalregnskabet?</h2>
-                <div class="info-box">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="chart-container"
+                            style="position: relative; min-height: 600px; width: 100%; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.05));">
+                            <div id="economicCircuit" data-chart-type="economic-circuit"></div>
+                        </div>
+                        <small class="d-block mt-3"><b>Figur 2.1:</b> Det samfundsøkonomiske betalingskredsløb. Modellen
+                            viser strømmene af penge mellem de centrale sektorer i økonomien.</small>
+                    </div>
+                </div>
+
+                <div class="info-box mt-4">
+                    <h3>Oversigt over symboler og sammenhænge</h3>
+                    <p>For at forstå hvordan tallene i nationalregnskabet hænger sammen, bruger vi en række
+                        standardiserede symboler:</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><b>C:</b> Forbrugsudgift (privat og offentligt)</li>
+                                <li><b>S:</b> Bruttoopsparing</li>
+                                <li><b>I:</b> Bruttoinvesteringer</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><b>IM:</b> Import af varer og tjenester</li>
+                                <li><b>X:</b> Eksport af varer og tjenester</li>
+                                <li><b>RU:</b> Renter og overførsler til/fra udlandet (netto)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="equation-box p-3 bg-light border rounded mt-3">
+                        <h4 class="h6 mb-2"><b>Forsyningsbalancen</b> (Hvor kommer varerne fra, og hvad bruges de til?)
+                        </h4>
+                        <p class="mb-0 text-center font-monospace">BNP + IM = C + I + X</p>
+                    </div>
+
+                    <div class="equation-box p-3 bg-light border rounded mt-3">
+                        <h4 class="h6 mb-2"><b>Opsparing og investering</b> (Hvordan finansieres landets vækst?)</h4>
+                        <p class="mb-2 text-center font-monospace">S = I + (X - IM + RU)</p>
+                        <small class="text-muted d-block text-center">(X - IM + RU) er overskuddet på betalingsbalancens
+                            løbende poster.</small>
+                    </div>
+                </div>
+
+                <div class="info-box mt-4">
                     <p>Nationalregnskabet er ligesom en virksomheds regnskab, men for hele landet. Det fortæller os:</p>
                     <ul>
                         <li>Hvor meget producerer landet?</li>
@@ -154,10 +245,12 @@
                     </ul>
 
                     <h3>1. Bruttoværditilvækst (BVT) - Hvad tilføjer vi i værdi?</h3>
-                    <p>Bruttoværditilvækst (BVT) måler værdien, der tilføjes ved produktion. Det er den værdi, der skabes ved at forarbejde råvarer til færdige produkter.</p>
+                    <p>Bruttoværditilvækst (BVT) måler værdien, der tilføjes ved produktion. Det er den værdi, der
+                        skabes ved at forarbejde råvarer til færdige produkter.</p>
 
                     <p><b>Hvordan beregnes BVT?</b></p>
-                    <p>BVT beregnes simpelt ved at trække det, der er brugt i produktionen, fra det, der er produceret:</p>
+                    <p>BVT beregnes simpelt ved at trække det, der er brugt i produktionen, fra det, der er produceret:
+                    </p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -222,7 +315,8 @@
                         </table>
                     </div>
 
-                    <p><b>Eksempel:</b> En bil koster 200.000 kr. i butikken (BNP). Producenten fik 170.000 kr. (BVT). Forskellen på 30.000 kr. er primært moms og andre produktskatter.</p>
+                    <p><b>Eksempel:</b> En bil koster 200.000 kr. i butikken (BNP). Producenten fik 170.000 kr. (BVT).
+                        Forskellen på 30.000 kr. er primært moms og andre produktskatter.</p>
 
                     <h3>3. Forsyningsbalancen - Hvor kommer varerne fra og hvor går de hen?</h3>
                     <p>Forsyningsbalancen viser, hvordan landet får fat i varer og tjenester, og hvordan de bruges:</p>
@@ -260,8 +354,44 @@
 
                     <p><b>Vigtigt:</b> Tilgang skal altid være lig anvendelse - ellers er der fejl i regnskabet!</p>
 
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div class="chart-container mb-2" style="position: relative; height: 300px; width: 100%;">
+                                <canvas id="supplyPieChart" data-chart-type="supply-pie"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 2.2:</b> Tilgang af varer og tjenester. Kilde: Danmarks
+                                Statistik (2024).</small>
+
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="chart-container mb-2" style="position: relative; height: 300px; width: 100%;">
+                                <canvas id="usePieChart" data-chart-type="use-pie"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 2.3:</b> Anvendelse af varer og tjenester. Kilde:
+                                Danmarks Statistik (2024).</small>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h3>3.1 Nationalregnskabets Kredsløb (Sankey)</h3>
+                            <p>For at forstå flowet i økonomien kan man se på et Sankey-diagram, der viser hvordan
+                                <b>Tilgangen</b> (hvor varerne kommer fra) flyder ind i <b>Anvendelsen</b> (hvad varerne
+                                bruges til).
+                            </p>
+                            <div class="chart-container mb-2" style="position: relative; height: 400px; width: 100%;">
+                                <canvas id="nationalSankey" data-chart-type="national-sankey"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 2.4:</b> Nationalregnskabets flow fra tilgang til
+                                anvendelse (mia. kr.). Kilde: Skøn baseret på Nationalregnskabet 2024.</small>
+
+                        </div>
+                    </div>
+
                     <h3>4. Disponibel bruttonationalindkomst - Hvad har landet råd til?</h3>
-                    <p>Disponibel bruttonationalindkomst viser, hvor meget landet faktisk har til rådighed til at bruge. Den beregnes i flere trin:</p>
+                    <p>Disponibel bruttonationalindkomst viser, hvor meget landet faktisk har til rådighed til at bruge.
+                        Den beregnes i flere trin:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -308,7 +438,8 @@
                     </div>
 
                     <h3>5. Fastprisberegninger - Sådan måler vi den reale vækst</h3>
-                    <p>Problemet: Hvis priserne stiger, ser det ud til, at vi producerer mere, selvom mængden er den samme.</p>
+                    <p>Problemet: Hvis priserne stiger, ser det ud til, at vi producerer mere, selvom mængden er den
+                        samme.</p>
 
                     <p><b>Eksempel:</b></p>
                     <ul>
@@ -332,7 +463,8 @@
                     </ul>
 
                     <h3>6. Bruttofaktorindkomsten (BFI) - Hvordan fordeles indkomsten?</h3>
-                    <p>BFI viser, hvordan indkomsten fra produktionen fordeles mellem de forskellige produktionsfaktorer:</p>
+                    <p>BFI viser, hvordan indkomsten fra produktionen fordeles mellem de forskellige
+                        produktionsfaktorer:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -364,14 +496,28 @@
                     </div>
 
                     <p><b>Hvad betyder det?</b> Af hver krone, der produceres i Danmark, går:</p>
-                    <ul>
-                        <li>59 øre til arbejdere i løn</li>
-                        <li>22 øre til ejere/virksomheder som profit</li>
-                        <li>19 øre til at dække slid på maskiner og bygninger</li>
-                    </ul>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>59 øre til arbejdere i løn</li>
+                                <li>22 øre til ejere/virksomheder som profit</li>
+                                <li>19 øre til at dække slid på maskiner og bygninger</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="chart-container mb-2" style="position: relative; height: 300px; width: 100%;">
+                                <canvas id="bfiPieChart" data-chart-type="bfi-pie"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 2.5:</b> Fordeling af Bruttofaktorindkomst (BFI).
+                                Kilde: Danmarks Statistik.</small>
+
+                        </div>
+                    </div>
 
                     <h3>7. Det grønne nationalregnskab - Økonomi og miljø</h3>
-                    <p>Det grønne nationalregnskab supplerer det almindelige nationalregnskab med miljø- og ressourceoplysninger:</p>
+                    <p>Det grønne nationalregnskab supplerer det almindelige nationalregnskab med miljø- og
+                        ressourceoplysninger:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -391,7 +537,8 @@
                                 <tr>
                                     <td><b>2. Grøn økonomi</b></td>
                                     <td>Miljøudgifter, grønne afgifter og miljøstøtte</td>
-                                    <td>Hvor meget bruger vi på miljøbeskyttelse? Hvor meget får vi i grønne afgifter?</td>
+                                    <td>Hvor meget bruger vi på miljøbeskyttelse? Hvor meget får vi i grønne afgifter?
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><b>3. Naturressourcer</b></td>
@@ -403,7 +550,8 @@
                     </div>
 
                     <h3>8. Human Development Index (HDI) - Mere end bare BNP</h3>
-                    <p>BNP måler kun økonomi. HDI er et bredere mål for udvikling, der også tager sundhed og uddannelse med:</p>
+                    <p>BNP måler kun økonomi. HDI er et bredere mål for udvikling, der også tager sundhed og uddannelse
+                        med:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -434,7 +582,8 @@
                         </table>
                     </div>
 
-                    <p><b>Hvorfor bruge HDI?</b> Et land kan have højt BNP, men dårlig sundhed eller uddannelse. HDI giver et bedre billede af folks velstand.</p>
+                    <p><b>Hvorfor bruge HDI?</b> Et land kan have højt BNP, men dårlig sundhed eller uddannelse. HDI
+                        giver et bedre billede af folks velstand.</p>
 
                     <p><b>Eksempel:</b> Danmark ligger højt på HDI (rang 6) fordi vi har:</p>
                     <ul>
@@ -499,37 +648,196 @@
                     </ul>
 
                     <h4>10.1. Nationalregnskabets udvikling i Danmark</h4>
-                    <p>Nedenfor kan du se den faktiske udvikling i Danmarks nationalregnskab over de sidste 20 år. Diagrammet viser udviklingen i BNP, eksport, import, forbrug og investeringer. Disse tal opdateres regelmæssigt baseret på data fra Danmarks Statistik.</p>
-                    <div class="chart-container mb-4" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="nationalAccountsChart"></canvas>
+                    <p>Nedenfor kan du se den faktiske udvikling i Danmarks nationalregnskab over de sidste 20 år.
+                        Diagrammet viser udviklingen i BNP, eksport, import, forbrug og investeringer. Disse tal
+                        opdateres regelmæssigt baseret på data fra Danmarks Statistik.</p>
+                    <div class="chart-container mb-2" style="position: relative; height: 500px; width: 100%;">
+                        <canvas id="nationalAccountsChart" data-chart-type="national-accounts"></canvas>
                     </div>
-                    <p><small><b>Figur 2.1:</b> Nationalregnskabets udvikling i Danmark over de sidste 20 år. Viser BNP, eksport, import, forbrug og investeringer. Kilde: Danmarks Statistik - Nationalregnskab. Data opdateres kvartalsvis.</small></p>
-                    
-                    <p><small><b>Detaljeret forklaring af tallene:</b> Diagrammet viser udviklingen i Danmarks nationalregnskab fra 2006 til 2026. Her er en detaljeret forklaring af hvad tallene betyder og hvordan de har udviklet sig:</small></p>
-                    
-                    <p><small><b>1. BNP (Bruttonationalprodukt) - Den blå linje (øverst):</b> I 2006 var BNP ca. 1.800 mia. kr. (Danmarks samlede produktion). I 2026 er det steget til ca. 2.800 mia. kr. BNP er den største linje fordi det inkluderer ALT hvad Danmark producerer. Stigningen betyder, at Danmark er blevet 56% rigere på 20 år (i faste priser).</small></p>
-                    
-                    <p><small><b>2. Forbrug (Privat og offentligt) - Den gule linje (næststørste):</b> I 2006 var forbruget ca. 1.200 mia. kr. (hvad danskerne og det offentlige forbrugte). I 2026 er det steget til ca. 1.800 mia. kr. Forbruget udgør den største del af BNP (typisk omkring 65-70%). Det viser, at danskerne og det offentlige har brugt flere penge på varer og tjenester - alt fra dagligvarer til sundhedsydelser og uddannelse.</small></p>
-                    
-                    <p><small><b>3. Eksport - Den pink/røde linje:</b> I 2006 var eksporten ca. 900 mia. kr. (hvad Danmark solgte til udlandet). I 2026 er den steget til ca. 1.500 mia. kr. Danmark er et lille land, der eksporterer meget. Stigningen viser, at vi bliver bedre til at sælge til udlandet - både varer (som medicin, fødevarer) og tjenester. Eksporten er vigtig for Danmarks velstand.</small></p>
-                    
-                    <p><small><b>4. Import - Den mørkeblå linje:</b> I 2006 var importen ca. 850 mia. kr. (hvad Danmark købte fra udlandet). I 2026 er den steget til ca. 1.300 mia. kr. Danmark importerer også meget - alt fra biler til elektronik. Bemærk at eksporten er lidt større end importen, hvilket betyder at Danmark har et <b>eksportoverskud</b> (vi sælger mere til udlandet end vi køber). Dette er godt for økonomien.</small></p>
-                    
-                    <p><small><b>5. Investeringer - Den lilla linje (nederst):</b> I 2006 var investeringerne ca. 400 mia. kr. (hvad virksomheder og det offentlige investerede). I 2026 er de steget til ca. 600 mia. kr. Investeringer er penge brugt på nye maskiner, bygninger, infrastruktur osv. Det er vigtigt for fremtidig vækst. At investeringerne er den mindste linje er normalt - de udgør typisk 20-25% af BNP.</small></p>
-                    
+                    <p><small><b>Figur 2.6:</b> Nationalregnskabets udvikling i Danmark over de sidste 20 år. Viser BNP,
+                            eksport, import, forbrug og investeringer. Kilde: Danmarks Statistik - Nationalregnskab.
+                            Data opdateres kvartalsvis.</small></p>
+
+
+                    <p><small><b>Detaljeret forklaring af tallene:</b> Diagrammet viser udviklingen i Danmarks
+                            nationalregnskab fra 2006 til 2026. Her er en detaljeret forklaring af hvad tallene betyder
+                            og hvordan de har udviklet sig:</small></p>
+
+                    <p><small><b>1. BNP (Bruttonationalprodukt) - Den blå linje (øverst):</b> I 2006 var BNP ca. 1.800
+                            mia. kr. (Danmarks samlede produktion). I 2026 er det steget til ca. 2.800 mia. kr. BNP er
+                            den største linje fordi det inkluderer ALT hvad Danmark producerer. Stigningen betyder, at
+                            Danmark er blevet 56% rigere på 20 år (i faste priser).</small></p>
+
+                    <p><small><b>2. Forbrug (Privat og offentligt) - Den gule linje (næststørste):</b> I 2006 var
+                            forbruget ca. 1.200 mia. kr. (hvad danskerne og det offentlige forbrugte). I 2026 er det
+                            steget til ca. 1.800 mia. kr. Forbruget udgør den største del af BNP (typisk omkring
+                            65-70%). Det viser, at danskerne og det offentlige har brugt flere penge på varer og
+                            tjenester - alt fra dagligvarer til sundhedsydelser og uddannelse.</small></p>
+
+                    <p><small><b>3. Eksport - Den pink/røde linje:</b> I 2006 var eksporten ca. 900 mia. kr. (hvad
+                            Danmark solgte til udlandet). I 2026 er den steget til ca. 1.500 mia. kr. Danmark er et
+                            lille land, der eksporterer meget. Stigningen viser, at vi bliver bedre til at sælge til
+                            udlandet - både varer (som medicin, fødevarer) og tjenester. Eksporten er vigtig for
+                            Danmarks velstand.</small></p>
+
+                    <p><small><b>4. Import - Den mørkeblå linje:</b> I 2006 var importen ca. 850 mia. kr. (hvad Danmark
+                            købte fra udlandet). I 2026 er den steget til ca. 1.300 mia. kr. Danmark importerer også
+                            meget
+                            - alt fra biler til elektronik. Bemærk at eksporten er lidt større end importen,
+                            hvilket betyder at Danmark har et <b>eksportoverskud</b> (vi sælger mere til udlandet end vi
+                            køber). Dette er godt for økonomien.</small></p>
+
+                    <p><small><b>5. Investeringer - Den lilla linje (nederst):</b> I 2006 var investeringerne ca. 400
+                            mia. kr. (hvad virksomheder og det offentlige investerede). I 2026 er de steget til ca. 600
+                            mia. kr. Investeringer er penge brugt på nye maskiner, bygninger, infrastruktur osv. Det er
+                            vigtigt for fremtidig vækst. At investeringerne er den mindste linje er normalt - de udgør
+                            typisk 20-25% af BNP.</small></p>
+
                     <p><small><b>Vigtige observationer:</b></small></p>
                     <ul><small>
-                        <li><b>Alle linjer stiger:</b> Dette viser, at Danmarks økonomi er vokset betydeligt over de 20 år. Alle komponenter følger opadgående tendens.</li>
-                        <li><b>BNP er størst:</b> BNP skal altid være større end de enkelte komponenter, fordi BNP = Forbrug + Investeringer + Eksport - Import + Offentlige udgifter.</li>
-                        <li><b>Eksport > Import:</b> Danmark har eksportoverskud, hvilket er positivt for økonomien. Det betyder, at vi tjener penge på handel med udlandet.</li>
-                        <li><b>Forbrug dominerer:</b> Forbruget er den største enkeltkomponent af BNP, hvilket viser at danskere bruger en stor del af deres indkomst.</li>
-                    </small></ul>
-                    
-                    <p><small><b>Bemærk:</b> Tallene er angivet i milliarder kroner (mia. kr.) og er justeret for inflation, så de viser den reale udvikling. En mia. kr. = 1.000.000.000 kr. = 1 milliard kroner.</small></p>
+                            <li><b>Alle linjer stiger:</b> Dette viser, at Danmarks økonomi er vokset betydeligt over de
+                                20 år. Alle komponenter følger opadgående tendens.</li>
+                            <li><b>BNP er størst:</b> BNP skal altid være større end de enkelte komponenter, fordi BNP =
+                                Forbrug + Investeringer + Eksport - Import + Offentlige udgifter.</li>
+                            <li><b>Eksport > Import:</b> Danmark har eksportoverskud, hvilket er positivt for økonomien.
+                                Det betyder, at vi tjener penge på handel med udlandet.</li>
+                            <li><b>Forbrug dominerer:</b> Forbruget er den største enkeltkomponent af BNP, hvilket viser
+                                at danskere bruger en stor del af deres indkomst.</li>
+                        </small></ul>
 
-                    <h3>11. Sammenfatning</h3>
+                    <p><small><b>Bemærk:</b> Tallene er angivet i milliarder kroner (mia. kr.) og er justeret for
+                            inflation, så de viser den reale udvikling. En mia. kr. = 1.000.000.000 kr. = 1 milliard
+                            kroner.</small></p>
+
+                    <h4>10.2. Nationalregnskabet i tal (2024-skøn)</h4>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Post</th>
+                                    <th>Mia. kr.</th>
+                                    <th>Forklaring</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>BNP (markedspriser)</b></td>
+                                    <td>2.850</td>
+                                    <td>Landets samlede produktion målt i det, forbrugerne betaler.</td>
+                                </tr>
+                                <tr>
+                                    <td>+ Import</td>
+                                    <td>1.300</td>
+                                    <td>Varer og tjenester købt i udlandet.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>= Samlet tilgang</b></td>
+                                    <td><b>4.150</b></td>
+                                    <td>Den samlede mængde varer til rådighed i økonomien.</td>
+                                </tr>
+                                <tr>
+                                    <td>- Privat forbrug</td>
+                                    <td>1.250</td>
+                                    <td>Husholdningernes køb af varer og tjenester.</td>
+                                </tr>
+                                <tr>
+                                    <td>- Offentligt forbrug</td>
+                                    <td>650</td>
+                                    <td>Statens og kommunernes udgifter til velfærd, forsvar m.m.</td>
+                                </tr>
+                                <tr>
+                                    <td>- Investeringer</td>
+                                    <td>650</td>
+                                    <td>Køb af maskiner, bygninger og lagerændringer.</td>
+                                </tr>
+                                <tr>
+                                    <td>- Eksport</td>
+                                    <td>1.600</td>
+                                    <td>Salg af varer og tjenester til udlandet.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>= Samlet anvendelse</b></td>
+                                    <td><b>4.150</b></td>
+                                    <td>Brug af alle tilgængelige varer (skal matche tilgang).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>11. Betalingsbalancen og udlandsgæld</h3>
+                    <p>Betalingsbalancen er en opgørelse over Danmarks økonomiske transaktioner med udlandet. Den
+                        fortæller os, om vi som nation tjener flere penge i udlandet, end vi bruger.</p>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive mb-4">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead class="table-dark text-center">
+                                        <tr>
+                                            <th>Hovedpost</th>
+                                            <th>Underpost</th>
+                                            <th>Mia. kr. (2023)</th>
+                                            <th>Forklaring & Detaljer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="4" class="align-middle text-center"><b>De løbende
+                                                    poster</b><br>(Current Account)</td>
+                                            <td><b>Varebalance</b></td>
+                                            <td class="text-center">+178</td>
+                                            <td>Eksport minus import af fysiske varer (f.eks. medicin, maskiner).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tjenestebalance</b></td>
+                                            <td class="text-center">+126</td>
+                                            <td>Salg af ydelser (især Mærsks søtransport samt turisme og rådgivning).
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Løn- & formueindkomst</b></td>
+                                            <td class="text-center">+92</td>
+                                            <td>Renter og udbytter fra danske investeringer i udlandet (f.eks. Novo
+                                                Nordisk eller LEGO) samt løn fra danskere, der arbejder i udlandet.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Løbende overførsler</b></td>
+                                            <td class="text-center">-54</td>
+                                            <td>Overførsler uden modydelse, såsom <b>ulandsbistand</b>, <b>EU-bidrag</b>
+                                                og private gaver til udlandet.</td>
+                                        </tr>
+                                        <tr class="table-success">
+                                            <td class="text-center"><b>Samlet overskud</b></td>
+                                            <td><b>Løbende poster (ialt)</b></td>
+                                            <td class="text-center"><b>+342</b></td>
+                                            <td><b>Danmarks samlede opsparing</b> overfor udlandet i 2023. Det gør os
+                                                til en stor kreditor-nation.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="bopDetailedChart" data-chart-type="bop-detailed"></canvas>
+                            </div>
+                            <div class="text-center">
+                                <small class="d-block mb-4 text-muted"><b>Figur 2.7:</b> Sammensætning af overskuddet på
+                                    betalingsbalancens løbende poster. Estimat (2023). Kilde: Danmarks
+                                    Statistik.</small>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Når Danmark har overskud på betalingsbalancen, som vist i <b>Figur 2.6</b>, betyder det, at vi
+                        opbygger formue i udlandet. Danmark har haft overskud uafbrudt siden 1990 (undtagen 1998),
+                        hvilket har gjort os til en af verdens største kreditor-nationer målt i forhold til økonomiens
+                        størrelse.</p>
+
+                    <h3>12. Sammenfatning</h3>
+
                     <p>Nationalregnskabet er værktøjet til at måle en nations økonomi. De vigtigste punkter:</p>
-                    
+
                     <ol>
                         <li><b>BVT:</b> Værdien, der tilføjes ved produktion</li>
                         <li><b>BNP:</b> BVT plus produktskatter minus produkttilskud</li>
@@ -537,6 +845,7 @@
                         <li><b>Fastprisberegninger:</b> Måler den reale vækst uden priseffekter</li>
                         <li><b>HDI:</b> Bredere mål for udvikling end bare BNP</li>
                         <li><b>Vækst måles i realt BNP:</b> BNP i faste priser</li>
+                        <li><b>Betalingsbalance:</b> Viser om vi tjener mere end vi bruger overfor udlandet</li>
                     </ol>
                 </div>
 
@@ -544,8 +853,7 @@
                 <h2>Quiz</h2>
                 <div class="quiz-container">
                     <a href="MAKROQUIZ/makro2.html" class="effectLinks"
-                        data-replace="Start Quiz 2.1 om Nationalregnskabet"
-                        target="_blank">
+                        data-replace="Start Quiz 2.1 om Nationalregnskabet" target="_blank">
                         <span>Quiz 2.1 om Nationalregnskabet</span> </a>
                 </div>
                 <br><br>
@@ -567,13 +875,12 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.0/dist/chartjs-chart-sankey.min.js"></script>
     <!-- Charts API Integration -->
     <script src="charts-api.js"></script>
     <script>
-        // Initialize National Accounts chart when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            createNationalAccountsChart('nationalAccountsChart');
-        });
+        // Charts are now initialized via IntersectionObserver in charts-api.js 
+        // linked to data-chart-type attributes on canvas elements.
     </script>
 
     <script>
