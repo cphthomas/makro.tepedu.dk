@@ -5720,8 +5720,9 @@ function createPhillipsCurveChart(canvasId) {
     if (!ctx) return;
 
     // Phillips curve data: inverse relationship between unemployment and inflation
-    const unemployment = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const inflation = [5, 4.5, 4, 3, 2, 1.5, 1, 0.5, 0];
+    // Data points matching the image: unemployment decreases from left to right, inflation increases
+    const unemployment = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+    const inflation = [0.2, 0.5, 1.0, 1.5, 2.0, 2.7, 3.5, 4.3, 4.9];
 
     new Chart(ctx, {
         type: 'line',
@@ -5745,7 +5746,7 @@ function createPhillipsCurveChart(canvasId) {
                 ...chartConfig.plugins,
                 title: {
                     display: true,
-                    text: 'Phillips-kurven: Sammenhengen mellem ledighed og inflation',
+                    text: 'Phillips-kurven: Sammenhængen mellem ledighed og inflation',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 }
             },
