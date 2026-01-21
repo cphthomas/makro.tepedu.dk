@@ -211,6 +211,13 @@
                             data-example="Hvis efterspørgslen stiger, vil produktionen og priserne typisk stige. Hvis udbuddet stiger, vil produktionen stige, men priserne falde."
                             data-slug="ad-as-model">AD-AS modellen</span> er en vigtig model til at forstå varemarkedet:</p>
 
+                    <h4>3.1. AD-AS modellen (SESU-modellen)</h4>
+                    <p>Diagrammet nedenfor viser AD-AS modellen, også kaldet SESU-modellen (Samlet Efterspørgsel - Samlet Udbud). Modellen viser sammenhængen mellem prisniveauet og BNP.</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="adasChart" data-chart-type="adas-model"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.1:</b> AD-AS modellen (SESU-modellen). SE-kurven (Samlet Efterspørgsel/Aggregate Demand) er negativt hældende - højere priser reducerer efterspørgslen. SU-kurven kort sigt (Samlet Udbud kort sigt) er positivt hældende - højere priser stimulerer produktionen. SU-kurven lang sigt er lodret - på lang sigt er produktionen uafhængig af prisniveauet. Ligevægten opstår, hvor SE og SU krydser hinanden. Kilde: Teoretisk model baseret på standard makroøkonomisk teori.</small></p>
+
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
@@ -289,6 +296,20 @@
                         <li>Den samlede effekt kan være 200-300 mia. kr. - mere end den oprindelige 100 mia.</li>
                     </ol>
 
+                    <h4>6.1. Multiplikatoreffekten visuelt</h4>
+                    <p>Diagrammet nedenfor viser, hvordan multiplikatoreffekten spreder sig gennem flere runder. Den initiale stigning i efterspørgslen fører til kumulativt større effekt på produktionen.</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="multiplierChart" data-chart-type="multiplier"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.2:</b> Multiplikatoreffekten. Diagrammet viser den kumulerede effekt af en initial stigning i efterspørgslen gennem flere runder. Hver runde spreder effekten videre, hvilket resulterer i en total effekt, der er større end den initiale stigning. Multiplikatoren afhænger af den marginale forbrugskvote (c). Kilde: Teoretisk model baseret på Keynes-modellen.</small></p>
+
+                    <h4>6.2. Keynes-modellen: Samlet Efterspørgsel</h4>
+                    <p>Keynes-modellen viser, hvordan samlet efterspørgsel (SE) består af flere komponenter: privat forbrug (C), investering (I), offentlige udgifter (G) og nettoeksport (X-IM).</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="keynesianADChart" data-chart-type="keynesian-ad"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.3:</b> Keynes-modellen: Samlet Efterspørgsel. Diagrammet viser de forskellige komponenter af samlet efterspørgsel (SE = C + I + G + X - IM) og hvordan de varierer med nationalindkomsten. 45°-linjen viser ligevægtsbetingelsen (Y = SE). Ligevægten opstår, hvor SE-kurven krydser 45°-linjen. Kilde: Teoretisk model baseret på Keynes' General Theory.</small></p>
+
                     <h3>7. Hvordan bruger vi dette i praksis?</h3>
                     <p>Som finansøkonom eller Financial Controller møder du varemarkedet i din daglige arbejde:</p>
                     
@@ -335,6 +356,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Charts API Integration -->
+    <script src="charts-api.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

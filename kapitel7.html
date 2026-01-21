@@ -359,6 +359,13 @@
                     <h3>5. Phillips-kurven - Sammenhengen mellem ledighed og inflation</h3>
                     <p><span class="legal-term" id="term-phillips-kurve" data-definition="En kurve, der viser sammenhængen mellem ledighed og inflation. Typisk er der en omvendt sammenhæng: Høj ledighed giver lav inflation, lav ledighed giver høj inflation." data-example="I 1970'erne var ledigheden lav og inflationen høj. I 1980'erne var ledigheden høj og inflationen lav." data-slug="phillips-kurve">Phillips-kurven</span> viser sammenhængen mellem ledighed og inflation:</p>
 
+                    <h4>5.1. Phillips-kurven visuelt</h4>
+                    <p>Diagrammet nedenfor viser Phillips-kurven, der illustrerer den omvendte sammenhæng mellem ledighed og inflation. Lav ledighed er typisk forbundet med højere inflation, og høj ledighed med lavere inflation.</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="phillipsCurveChart" data-chart-type="phillips-curve"></canvas>
+                    </div>
+                    <p><small><b>Figur 7.1:</b> Phillips-kurven. Diagrammet viser den omvendte sammenhæng mellem ledighed og inflation. Når ledigheden er lav, er inflationen typisk højere, og omvendt. Dette skyldes, at lav ledighed fører til højere lønninger, hvilket øger produktionsomkostningerne og dermed priserne. Kilde: Teoretisk model baseret på Phillips' oprindelige observationer og senere udvikling af teorien.</small></p>
+
                     <div class="table-responsive mb-4">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead class="table-dark">
@@ -472,6 +479,10 @@
     <script src="info.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Charts API Integration -->
+    <script src="charts-api.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             function typeWriter(element, text, speed = 100, callback) {

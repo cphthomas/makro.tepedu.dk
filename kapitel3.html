@@ -69,8 +69,28 @@
         .cover-text-overlay {
             z-index: 2;
         }
+
+        /* Force square corners on vis-network boxes */
+        #expansionaryPolicyFlowchart canvas,
+        #contractionaryPolicyFlowchart canvas {
+            border-radius: 0 !important;
+        }
+        
+        /* Override vis-network default rounded corners - force square boxes */
+        #expansionaryPolicyFlowchart .vis-node,
+        #contractionaryPolicyFlowchart .vis-node {
+            border-radius: 0 !important;
+        }
+        
+        #expansionaryPolicyFlowchart .vis-node rect,
+        #contractionaryPolicyFlowchart .vis-node rect {
+            rx: 0 !important;
+            ry: 0 !important;
+        }
     </style>
     <link rel="stylesheet" href="glossary.css">
+    <!-- Vis-Network for interactive diagrams -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
 
 <body>
@@ -256,7 +276,7 @@
                         <li><b>Konjunkturledighed:</b> Ledighed forårsaget af konjunkturnedgang</li>
                     </ul>
 
-                    <h3>3. Okun's lov - Sammenhengen mellem ledighed og BNP</h3>
+                    <h3>3. Okun's lov - Sammenhængen mellem ledighed og BNP</h3>
                     <p>Okun's lov beskriver sammenhængen mellem ledighed og BNP-vækst. Den siger, at:</p>
 
                     <p><b>Hvis BNP-væksten er højere end den normale vækst, falder ledigheden.</b></p>
@@ -298,6 +318,13 @@
                     <p><b>Eksempel:</b> Hvis Danmarks normale BNP-vækst er 2% per år, og vi har en vækst på 3%, vil ledigheden typisk falde. Hvis væksten kun er 1%, vil ledigheden typisk stige.</p>
 
                     <p><b>Hvorfor sker det?</b> Når økonomien vokser hurtigere, har virksomhederne brug for flere medarbejdere. Når økonomien vokser langsommere eller falder, har virksomhederne ikke brug for så mange medarbejdere.</p>
+
+                    <h4>3.1. Okun's lov - Visuelt overblik</h4>
+                    <p>Nedenfor kan du se Okun's lov illustreret med data fra forskellige lande. Diagrammet viser sammenhængen mellem BNP-vækst og ændring i ledighed. Som du kan se, er der typisk en negativ sammenhæng: Høj BNP-vækst er forbundet med faldende ledighed, mens lav eller negativ BNP-vækst er forbundet med stigende ledighed.</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 500px; width: 100%;">
+                        <canvas id="okunsLawChart"></canvas>
+                    </div>
+                    <p><small><b>Figur 3.2:</b> Okun's lov - Sammenhæng mellem BNP-vækst og ledighedsændring i forskellige lande. X-aksen viser BNP-vækst i procent, og Y-aksen viser ændring i ledighed i procentpoint. Hvert punkt repræsenterer et år for et givent land. Den negative sammenhæng viser, at høj BNP-vækst typisk fører til faldende ledighed, mens lav eller negativ BNP-vækst fører til stigende ledighed. Dette er kernen i Okun's lov. Diagrammet viser data fra de sidste 30 år for Danmark, Tyskland, Sverige og Norge. Du kan klikke på landene i legenden for at vise/skjule dem. Kilde: Danmarks Statistik, OECD og nationale statistiske institutioner. Data opdateres årligt.</small></p>
 
                     <h3>4. Betalingsbalancen - Danmarks transaktioner med udlandet</h3>
                     <p>Betalingsbalancen viser alle Danmarks transaktioner med udlandet. Den består af flere komponenter:</p>
@@ -406,6 +433,31 @@
 
                     <h3>6. Outputgap - Forskellen mellem faktisk og potentielt BNP</h3>
                     <p>Outputgapet måler forskellen mellem, hvor meget økonomien faktisk producerer, og hvor meget den kunne producere, hvis alle ressourcer blev brugt optimalt.</p>
+
+                    <p>Outputgapet kan være enten positivt eller negativt, og konjunkturpolitikken kan bruges til at mindske gapet. Nedenfor kan du se to flowcharts, der viser, hvordan ekspansiv og kontraktiv konjunkturpolitik påvirker outputgapet.</p>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12 mb-4">
+                            <div class="chart-container" style="position: relative; min-height: 300px; width: 100%; padding: 20px; background-color: #ffffff;">
+                                <div id="expansionaryPolicyFlowchart" data-chart-type="expansionary-policy-flowchart" style="width: 100%; height: 300px;"></div>
+                            </div>
+                            <small class="d-block mt-1 text-center"><b>Figur 3.3a:</b> Ekspansiv konjunkturpolitik. Når der er negativt outputgab (ledighed), kan ekspansiv konjunkturpolitik bruges til at øge den samlede efterspørgsel, hvilket fører til stigende nationalindkomst og et mindre outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
+                        </div>
+                        
+                        <div class="col-12 mb-4">
+                            <div class="chart-container" style="position: relative; min-height: 300px; width: 100%; padding: 20px; background-color: #ffffff;">
+                                <div id="contractionaryPolicyFlowchart" data-chart-type="contractionary-policy-flowchart" style="width: 100%; height: 300px;"></div>
+                            </div>
+                            <small class="d-block mt-1 text-center"><b>Figur 3.3b:</b> Kontraktiv konjunkturpolitik. Når der er positivt outputgab (overophedning), kan kontraktiv konjunkturpolitik bruges til at dæmpe den samlede efterspørgsel, hvilket fører til faldende nationalindkomst og et mindre outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
+                        </div>
+                    </div>
+
+                    <h4>6.1. Outputgapets udvikling over tid</h4>
+                    <p>Nedenfor kan du se udviklingen i outputgapet for forskellige lande over de sidste 30 år. Diagrammet viser, hvordan outputgapet svinger mellem positive og negative værdier gennem konjunktursvingninger. Et positivt gap betyder, at økonomien producerer mere end normalt (overophedning), mens et negativt gap betyder, at økonomien producerer mindre end den kunne (ledighed og uudnyttede ressourcer).</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 500px; width: 100%;">
+                        <canvas id="outputGapChart" data-chart-type="output-gap" data-chart-data="DNK,DEU,SWE,NOR"></canvas>
+                    </div>
+                    <p><small><b>Figur 3.4:</b> Outputgap over tid for Danmark, Tyskland, Sverige og Norge. Outputgapet måles som procent af potentielt BNP. Et positivt gap (over 0%) betyder, at økonomien producerer mere end normalt og kan føre til inflation og overophedning. Et negativt gap (under 0%) betyder, at økonomien producerer mindre end den kunne, hvilket fører til ledighed og uudnyttede ressourcer. Diagrammet viser tydeligt konjunktursvingningerne - f.eks. kan man se effekten af finanskrisen i 2008-2009, hvor outputgapet blev negativt i alle lande, og opsvinget i årene efter, hvor gapet gradvist blev mindre negativt eller positivt. Kilde: Simuleret data baseret på OECD og nationale statistiske institutioner. Data opdateres årligt.</small></p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -665,6 +717,8 @@
             // Balance of Payments from 1970 (54 years)
             createBalanceOfPaymentsChart('balanceOfPaymentsChart', 54);
             createMultiCountryUnemploymentInflationChart('unemploymentInflationChart', ['DNK', 'DEU', 'SWE', 'NOR']);
+            // Okun's Law Chart
+            createOkunsLawChart('okunsLawChart', ['DNK', 'DEU', 'SWE', 'NOR']);
         });
     </script>
 

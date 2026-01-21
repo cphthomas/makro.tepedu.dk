@@ -510,6 +510,24 @@
                             og Indien har vokset meget hurtigt, selvom de stadig har lavere BNP pr. indbygger end de
                             rige lande. Kilde: World Bank API (NY.GDP.PCAP.CD). Data opdateres årligt.</small></p>
 
+                    <h4>1.3.1. BNP pr. indbygger - International sammenligning</h4>
+                    <p>Nedenfor kan du se BNP pr. indbygger for en bred vifte af lande verden over. 
+                        Diagrammet viser lande fra forskellige indkomstniveauer, så du kan se forskellen mellem 
+                        meget rige lande (som Monaco, Luxembourg og Danmark), medium-indkomstlande og 
+                        lavindkomstlande. BNP pr. indbygger måles i USD og viser den gennemsnitlige økonomiske 
+                        produktion per person i hvert land.</p>
+                    
+                    <div class="chart-container mb-2" style="position: relative; height: 900px; width: 100%;">
+                        <canvas id="gdpPerCapitaBarChart" data-chart-type="gdp-per-capita-bar"></canvas>
+                    </div>
+                    <small class="d-block mb-4"><b>Figur 1.3.1:</b> BNP pr. indbygger (USD) for forskellige lande. 
+                        BNP pr. indbygger måler den gennemsnitlige økonomiske produktion per person i hvert land. 
+                        Værdier over $40.000 betegnes som meget høj indkomst (grøn), $12.000-$40.000 som høj 
+                        (lysegrøn), $3.000-$12.000 som medium (gul), og under $3.000 som lav indkomst (rød). 
+                        Danmark er markeret med rød farve og tykkere kant for nemmere identificering. 
+                        Diagrammet viser en selektion af lande fra forskellige indkomstniveauer. 
+                        Kilde: World Bank (2024), IMF (2024).</small>
+
                     <h4>Avanceret oversigt: Velstand vs. Økonomisk Størrelse</h4>
                     <p>Dette boblediagram viser sammenhængen mellem et lands samlede økonomiske størrelse (BNP) og den
                         gennemsnitlige velstand (BNP pr. indbygger). Størrelsen på boblerne indikerer landets samlede
@@ -588,6 +606,75 @@
 
                     <p><b>Hvad betyder det?</b> Danmark er gået fra at være et landbrugsland til at være et service- og
                         videnland. Vi producerer ikke længere primært mad og varer, men tjenester og viden.</p>
+
+                    <h4>3.1. Erhvervsfordeling i Danmark og andre lande</h4>
+                    <p>Nedenfor kan du se erhvervsfordelingen (beskæftigelsesfordeling) for Danmark og andre lande. 
+                        Diagrammerne viser, hvor stor en andel af arbejdsstyrken der arbejder i hver sektor. 
+                        Dette giver et godt overblik over, hvordan forskellige landes økonomier er struktureret.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 text-center mb-4">
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="employmentSectorDK" data-chart-type="employment-sector-pie" data-chart-data="DK"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 1.5:</b> Erhvervsfordeling i Danmark. Kilde: Danmarks Statistik (2024).</small>
+                        </div>
+                        <div class="col-md-6 text-center mb-4">
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="employmentSectorCN" data-chart-type="employment-sector-pie" data-chart-data="CN"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 1.6:</b> Erhvervsfordeling i Kina. Kilde: Statista (2024).</small>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 text-center mb-4">
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="employmentSectorIN" data-chart-type="employment-sector-pie" data-chart-data="IN"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 1.7:</b> Erhvervsfordeling i Indien. Kilde: Statista (2023).</small>
+                        </div>
+                        <div class="col-md-6 text-center mb-4">
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="employmentSectorUS" data-chart-type="employment-sector-pie" data-chart-data="US"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 1.8:</b> Erhvervsfordeling i USA. Kilde: Statista (2024).</small>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 text-center mb-4">
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="employmentSectorDE" data-chart-type="employment-sector-pie" data-chart-data="DE"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 1.9:</b> Erhvervsfordeling i Tyskland. Kilde: Statista (2024).</small>
+                        </div>
+                        <div class="col-md-6 text-center mb-4">
+                            <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                                <canvas id="employmentSectorBR" data-chart-type="employment-sector-pie" data-chart-data="BR"></canvas>
+                            </div>
+                            <small class="d-block mb-4"><b>Figur 1.10:</b> Erhvervsfordeling i Brasilien. Kilde: Statista (2024).</small>
+                        </div>
+                    </div>
+
+                    <div class="info-box mt-4">
+                        <h5>Hvad viser diagrammerne?</h5>
+                        <p>Diagrammerne viser tydelige forskelle mellem lande:</p>
+                        <ul>
+                            <li><b>Danmark og USA:</b> Meget lille landbrugssektor (under 3%), stor service-sektor (over 70%). 
+                                Dette er typisk for højtudviklede lande med høj produktivitet i landbrug.</li>
+                            <li><b>Kina:</b> Mere balanceret fordeling med betydelig industri-sektor (29%) og stor service-sektor (49%). 
+                                Kina er stadig i gang med transformation fra landbrugs- til industriland.</li>
+                            <li><b>Indien:</b> Meget stor landbrugssektor (46%), hvilket viser at landet stadig er i en tidlig fase 
+                                af økonomisk udvikling. Mange arbejder stadig i landbrug.</li>
+                            <li><b>Tyskland:</b> Stærk industri-sektor (28%) sammenlignet med Danmark, hvilket afspejler Tysklands 
+                                position som industrination.</li>
+                            <li><b>Brasilien:</b> Moderat landbrugssektor (9%) og stor service-sektor (70%), men stadig større 
+                                landbrugssektor end de mest udviklede lande.</li>
+                        </ul>
+                        <p><b>Bemærk:</b> Disse forskelle afspejler landenes økonomiske udviklingsniveau. Generelt gælder det, 
+                            at jo højere udviklet et land er, desto mindre landbrugssektor og desto større service-sektor har det.</p>
+                    </div>
 
                     <h3>4. Neoklassisk vs. Keynesiansk tradition</h3>
                     <p>I makroøkonomi findes der to hovedtraditioner, der ser forskelligt på, hvordan økonomien

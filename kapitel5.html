@@ -300,6 +300,20 @@
 
                     <p><b>Vigtigt:</b> Realrenten viser den reale købekraft. Hvis realrenten er negativ, betyder det, at inflationen æder op i renterne.</p>
 
+                    <h4>4.1. Risikopræmie for forskellige låntyper</h4>
+                    <p>Diagrammet nedenfor viser, hvordan risikopræmien varierer mellem forskellige låntyper. Statslån har den laveste risikopræmie, mens forbrugslån har den højeste.</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="riskPremiumChart" data-chart-type="risk-premium"></canvas>
+                    </div>
+                    <p><small><b>Figur 5.1:</b> Risikopræmie for forskellige låntyper. Diagrammet viser den risikofrie rente (fx statsrente) og den ekstra risikopræmie, der tilføjes for forskellige låntyper. Jo højere risiko, jo højere risikopræmie. Kilde: Illustrativt baseret på typiske markedsrenter i Danmark.</small></p>
+
+                    <h4>4.2. Nominel rente vs. Realrente</h4>
+                    <p>Diagrammet nedenfor viser udviklingen i nominel rente, inflation og realrente over de sidste år. Realrenten beregnes som nominel rente minus inflation.</p>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="realNominalRateChart" data-chart-type="real-nominal-rate"></canvas>
+                    </div>
+                    <p><small><b>Figur 5.2:</b> Udvikling i nominel rente, inflation og realrente i Danmark. Realrenten viser den reale købekraft af renterne efter justering for inflation. Når inflationen er højere end den nominelle rente, bliver realrenten negativ. Kilde: Danmarks Nationalbank og Danmarks Statistik. Data er illustrativt baseret på typiske udviklinger.</small></p>
+
                     <h3>5. Finansiel stabilitet - Hvad betyder det?</h3>
                     <p><span class="legal-term" id="term-finansiel-stabilitet"
                             data-definition="At det finansielle system fungerer stabilt og kan modstå chok uden at kollapse. Banker kan betale deres forpligtelser, og markederne fungerer normalt."
@@ -448,6 +462,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Charts API Integration -->
+    <script src="charts-api.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
