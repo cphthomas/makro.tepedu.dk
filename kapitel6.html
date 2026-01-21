@@ -25,6 +25,7 @@
             background-color: #f5f5f5;
             cursor: pointer;
         }
+
         .book-cover-wrapper {
             position: relative;
             width: 100%;
@@ -32,6 +33,7 @@
             overflow: hidden;
             background-color: white;
         }
+
         .book-cover-wrapper video {
             width: 100%;
             height: auto;
@@ -42,21 +44,26 @@
             appearance: none;
             object-fit: cover;
         }
+
         .book-cover-wrapper video::-webkit-media-controls {
             display: none !important;
         }
+
         .book-cover-wrapper video::-webkit-media-controls-enclosure {
             display: none !important;
         }
+
         .book-cover-wrapper video::-webkit-media-controls-panel {
             display: none !important;
         }
+
         .book-cover-wrapper video:not([src]),
         .book-cover-wrapper video[src=""] {
             background-color: white !important;
             opacity: 0;
             pointer-events: none;
         }
+
         .cover-text-overlay {
             z-index: 2;
         }
@@ -120,216 +127,440 @@
             <article>
                 <h1 style="display: none;">Varemarkedet på kort sigt</h1>
                 <div class="book-cover-wrapper">
-                    <video autoplay muted playsinline src="" alt="Varemarkedet på kort sigt" class="img-fluid" width="100%"
-                        style="min-height: 400px; object-fit: cover;"></video>
+                    <video autoplay muted playsinline src="" alt="Varemarkedet på kort sigt" class="img-fluid"
+                        width="100%" style="min-height: 400px; object-fit: cover;"></video>
                     <div class="cover-text-overlay animate-cover-text" data-type-text="6. Varemarkedet på kort sigt"
                         data-type-speed="150">Varemarkedet på kort sigt</div>
                 </div>
-                
+
                 <div class="info-box">
-                    <p>Dette kapitel handler om <b>varemarkedet på kort sigt</b> - hvordan efterspørgsel og udbud fungerer på kort sigt og hvordan økonomiske udsving opstår.
-                        Som finansøkonom skal du forstå AD-AS modeller, hvordan efterspørgslen påvirkes af forskellige faktorer, og hvordan markedet finder ligevægt.
+                    <p>Dette kapitel handler om <b>Keynes-modellen og varemarkedet på kort sigt</b>. Vi fokuserer på,
+                        hvordan den samlede efterspørgsel bestemmer nationalindkomsten, og hvordan politiske indgreb kan
+                        stabilisere økonomien.
+                        Som finansøkonom skal du forstå, hvordan ændringer i forbrug, investeringer og offentlige
+                        udgifter forplanter sig gennem økonomien via multiplikatoren.
                     </p>
 
                     <h4>Centrale emner</h4>
                     <ul>
-                        <li><b>Efterspørgsel:</b> Hvad bestemmer efterspørgslen efter varer og tjenester?</li>
-                        <li><b>Udbud:</b> Hvordan reagerer producenterne på kort sigt?</li>
-                        <li><b>AD-AS modeller:</b> Sådan analyserer vi varemarkedet</li>
-                        <li><b>Økonomiske udsving:</b> Hvordan opstår konjunktursvingninger?</li>
-                        <li><b>Ligevægt:</b> Hvordan finder markedet ligevægt?</li>
+                        <li><b>Keynes-modellen:</b> Forstå efterspørgselsstyret ligevægt (Y = SE).</li>
+                        <li><b>Multiplikatoreffekten:</b> Hvorfor små ændringer kan få stor effekt.</li>
+                        <li><b>Økonomisk politik:</b> Erfaringer med finans- og pengepolitik.</li>
+                        <li><b>Afledte effekter:</b> Hvordan politik påvirker saldo, beskæftigelse og betalingsbalance.
+                        </li>
                     </ul>
                 </div>
                 <br>
 
                 <h2>Hvad er varemarkedet?</h2>
                 <div class="info-box">
-                    <p>Varemarkedet er markedet for varer og tjenester. Det bestemmes af <span class="legal-term" id="term-efterspoergsel"
-                            data-definition="Hvor meget folk og virksomheder vil købe til en given pris. Efterspørgslen afhænger af indkomst, priser, renter og forventninger."
-                            data-example="Hvis prisen på biler falder, vil flere købe biler - efterspørgslen stiger."
-                            data-slug="efterspoergsel">efterspørgsel</span> (hvad folk vil købe) og <span class="legal-term" id="term-udbud"
-                            data-definition="Hvor meget virksomheder vil producere og sælge til en given pris. Udbuddet afhænger af produktionsomkostninger, teknologi og produktionskapacitet."
-                            data-example="Hvis prisen på biler stiger, vil producenterne producere flere biler - udbuddet stiger."
-                            data-slug="udbud">udbud</span> (hvad virksomheder vil producere).</p>
+                    <p>Varemarkedet er markedet for varer og tjenester. I Keynes-modellen antager vi, at det er
+                        <b>efterspørgselsstyret</b> på kort sigt. Det betyder, at produktionen (BNP) tilpasser sig den
+                        samlede efterspørgsel.
+                    </p>
 
-                    <h3>1. Efterspørgslen - Hvad bestemmer, hvor meget folk vil købe?</h3>
-                    <p>Efterspørgslen efter varer og tjenester afhænger af flere faktorer:</p>
+                    <h3>1. Efterspørgslen - Hvad bestemmer forbruget?</h3>
+                    <p>Efterspørgslen (SE) består af privat forbrug (C), investeringer (I), offentlige udgifter (G) og
+                        nettoeksport (X-IM). Her er de vigtigste faktorer:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Faktor</th>
-                                    <th>Effekt</th>
-                                    <th>Eksempel</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><b>Indkomst</b></td>
-                                    <td>Højere indkomst → Mere forbrug</td>
-                                    <td>Hvis din løn stiger, køber du typisk flere varer</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Priser</b></td>
-                                    <td>Laveste priser → Mere forbrug</td>
-                                    <td>Hvis prisen på biler falder, køber flere biler</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Renter</b></td>
-                                    <td>Lav rente → Mere forbrug</td>
-                                    <td>Hvis renten falder, låner folk mere og køber flere varer</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Forventninger</b></td>
-                                    <td>Optimisme → Mere forbrug</td>
-                                    <td>Hvis folk tror, økonomien bliver bedre, køber de mere nu</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Offentlige udgifter</b></td>
-                                    <td>Højere offentlige udgifter → Mere efterspørgsel</td>
-                                    <td>Hvis staten bygger flere veje, stiger efterspørgslen efter beton og asfalt</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h3>2. Udbuddet på kort sigt - Hvordan reagerer producenterne?</h3>
-                    <p>På kort sigt er produktionskapaciteten ofte fast, så udbuddet reagerer primært på priserne:</p>
-
-                    <ul>
-                        <li><b>Højere priser:</b> Producenterne vil producere mere, fordi de kan tjene mere</li>
-                        <li><b>Lavere priser:</b> Producenterne vil producere mindre, fordi de tjener mindre</li>
-                        <li><b>Produktionsomkostninger:</b> Hvis omkostningerne stiger, vil producenterne producere mindre til samme pris</li>
-                    </ul>
-
-                    <p><b>Vigtigt:</b> På kort sigt kan producenterne ikke ændre produktionskapaciteten meget. De kan kun producere mere eller mindre med de eksisterende fabrikker og maskiner.</p>
-
-                    <h3>3. AD-AS modellen - Sådan analyserer vi varemarkedet</h3>
-                    <p><span class="legal-term" id="term-ad-as-model"
-                            data-definition="Aggregate Demand - Aggregate Supply modellen. En model, der viser sammenhængen mellem samlet efterspørgsel (AD) og samlet udbud (AS) i økonomien."
-                            data-example="Hvis efterspørgslen stiger, vil produktionen og priserne typisk stige. Hvis udbuddet stiger, vil produktionen stige, men priserne falde."
-                            data-slug="ad-as-model">AD-AS modellen</span> er en vigtig model til at forstå varemarkedet:</p>
-
-                    <h4>3.1. AD-AS modellen (SESU-modellen)</h4>
-                    <p>Diagrammet nedenfor viser AD-AS modellen, også kaldet SESU-modellen (Samlet Efterspørgsel - Samlet Udbud). Modellen viser sammenhængen mellem prisniveauet og BNP.</p>
-                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="adasChart" data-chart-type="adas-model"></canvas>
-                    </div>
-                    <p><small><b>Figur 6.1:</b> AD-AS modellen (SESU-modellen). SE-kurven (Samlet Efterspørgsel/Aggregate Demand) er negativt hældende - højere priser reducerer efterspørgslen. SU-kurven kort sigt (Samlet Udbud kort sigt) er positivt hældende - højere priser stimulerer produktionen. SU-kurven lang sigt er lodret - på lang sigt er produktionen uafhængig af prisniveauet. Ligevægten opstår, hvor SE og SU krydser hinanden. Kilde: Teoretisk model baseret på standard makroøkonomisk teori.</small></p>
-
-                    <div class="table-responsive mb-4">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Komponent</th>
+                                    <th>Effekt på SE</th>
                                     <th>Forklaring</th>
-                                    <th>Hvad påvirker den?</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>AD (Aggregate Demand)</b><br>Samlet efterspørgsel</td>
-                                    <td>Den samlede efterspørgsel efter varer og tjenester i hele økonomien</td>
-                                    <td>Indkomst, priser, renter, forventninger, offentlige udgifter</td>
+                                    <td><b>Indkomst (Y)</b></td>
+                                    <td>Stiger</td>
+                                    <td>Når vi tjener mere, bruger vi en del af det på forbrug (C). Dette kaldes den
+                                        marginale forbrugskvote.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>AS (Aggregate Supply)</b><br>Samlet udbud</td>
-                                    <td>Den samlede produktion af varer og tjenester i hele økonomien</td>
-                                    <td>Priser, produktionsomkostninger, teknologi, produktionskapacitet</td>
+                                    <td><b>Renter (i)</b></td>
+                                    <td>Falder</td>
+                                    <td>Højere renter gør det dyrere at låne til investeringer (I) og dyre
+                                        forbrugsgoder.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Skatter (T)</b></td>
+                                    <td>Falder</td>
+                                    <td>Højere skat giver os færre penge mellem hænderne til forbrug (lavere disponibel
+                                        indkomst).</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Optimisme</b></td>
+                                    <td>Stiger</td>
+                                    <td>Hvis vi tror på fremtiden, tør vi bruge flere penge nu og investere mere.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <h3>4. Ligevægt på varemarkedet</h3>
-                    <p>Ligevægt opstår, når efterspørgsel og udbud er lige store:</p>
+                    <h3>2. Keynes-modellen: Ligevægt på varemarkedet</h3>
+                    <p>Keynes-modellen viser, hvordan den samlede efterspørgsel (SE) bestemmer produktionen (Y).
+                        Ligevægten findes, hvor efterspørgslen er præcis lig med produktionen (Y = SE). For at finde
+                        dette punkt bruger vi en <b>45°-linje</b>.</p>
 
-                    <ul>
-                        <li><b>Hvis efterspørgslen er større end udbuddet:</b> Priserne stiger, og producenterne producerer mere</li>
-                        <li><b>Hvis udbuddet er større end efterspørgslen:</b> Priserne falder, og producenterne producerer mindre</li>
-                        <li><b>I ligevægt:</b> Efterspørgsel = Udbud, og priserne er stabile</li>
-                    </ul>
+                    <p>45°-linjen er en hjælpelinje der viser alle de punkter i koordinatsystemet, hvor værdien på
+                        x-aksen (Y) er præcis den samme som værdien på y-aksen (SE). Det er en <b>grundforudsætning for
+                            modellen</b>, da en økonomi kun kan være i ligevægt, når alt det der produceres (Y), også
+                        bliver efterspurgt (SE).</p>
 
-                    <h3>5. Økonomiske udsving - Hvordan opstår konjunktursvingninger?</h3>
-                    <p>Økonomiske udsving opstår, når efterspørgslen eller udbuddet ændrer sig:</p>
-
-                    <div class="table-responsive mb-4">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Type udsving</th>
-                                    <th>Hvad sker der?</th>
-                                    <th>Effekt</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><b>Efterspørgselschok</b></td>
-                                    <td>Efterspørgslen ændrer sig pludseligt</td>
-                                    <td>Hvis efterspørgslen stiger, stiger produktionen og priserne</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Udbudschok</b></td>
-                                    <td>Udbuddet ændrer sig pludseligt</td>
-                                    <td>Hvis udbuddet falder (fx pga. højere oliepriser), falder produktionen, men priserne stiger</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="keynesBasicChart" data-chart-type="keynes-basic"></canvas>
                     </div>
 
-                    <p><b>Eksempel på efterspørgselschok:</b> Hvis staten pludseligt øger udgifterne markant, stiger efterspørgslen. Producenterne producerer mere, og priserne stiger.</p>
+                    <p><small><b>Figur 6.1: Keynes-modellen i ligevægt.</b>
+                            <br><b>SE-kurven:</b> Viser den samlede efterspørgsel. Den starter over nul pga. det
+                            "autonome" forbrug.
+                            <br><b>45°-linjen (Stiplet):</b> Dette er ligevægtslinjen. Den består af alle de punkter,
+                            hvor X og Y værdier er præcis de samme (Y = SE). Det er her, udbud og efterspørgsel stemmer
+                            overens.
+                            <br><b>Punkt 0:</b> Her krydser SE-kurven 45°-linjen, og økonomien lander i sin faktiske
+                            ligevægt.
+                        </small></p>
 
-                    <p><b>Eksempel på udbudschok:</b> Hvis olieprisen stiger markant, stiger produktionsomkostningerne. Producenterne producerer mindre, og priserne stiger.</p>
-
-                    <h3>6. Multiplikatoreffekten - Hvordan spreder ændringer sig?</h3>
+                    <h3>3. Multiplikatoreffekten</h3>
                     <p><span class="legal-term" id="term-multiplikatoreffekt"
                             data-definition="Når en ændring i efterspørgslen fører til en større ændring i produktionen. Fx hvis staten øger udgifterne med 100 mia., kan produktionen stige med mere end 100 mia."
                             data-example="Staten bygger en vej for 100 mio. kr. Vejbyggerne får løn og bruger pengene på at købe varer. Butikkerne får flere penge og ansætter flere. Effekten spreder sig."
-                            data-slug="multiplikatoreffekt">Multiplikatoreffekten</span> betyder, at en ændring i efterspørgslen kan have større effekt på produktionen:</p>
+                            data-slug="multiplikatoreffekt">Multiplikatoreffekten</span> betyder, at en indledende
+                        stigning i efterspørgslen (f.eks. ved højere G) starter en kædereaktion af forbrug og
+                        produktion.</p>
 
-                    <p><b>Eksempel:</b></p>
-                    <ol>
-                        <li>Staten øger udgifterne med 100 mia. kr. (bygger veje)</li>
-                        <li>Vejbyggerne får løn og bruger 80 mia. kr. på at købe varer</li>
-                        <li>Butikkerne får flere penge og ansætter flere, som også bruger penge</li>
-                        <li>Den samlede effekt kan være 200-300 mia. kr. - mere end den oprindelige 100 mia.</li>
-                    </ol>
-
-                    <h4>6.1. Multiplikatoreffekten visuelt</h4>
-                    <p>Diagrammet nedenfor viser, hvordan multiplikatoreffekten spreder sig gennem flere runder. Den initiale stigning i efterspørgslen fører til kumulativt større effekt på produktionen.</p>
                     <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="multiplierChart" data-chart-type="multiplier"></canvas>
                     </div>
-                    <p><small><b>Figur 6.2:</b> Multiplikatoreffekten. Diagrammet viser den kumulerede effekt af en initial stigning i efterspørgslen gennem flere runder. Hver runde spreder effekten videre, hvilket resulterer i en total effekt, der er større end den initiale stigning. Multiplikatoren afhænger af den marginale forbrugskvote (c). Kilde: Teoretisk model baseret på Keynes-modellen.</small></p>
+                    <p><small><b>Figur 6.2: Multiplikatoreffekten.</b> Diagrammet viser den kumulerede effekt runder for
+                            runde. Den samlede vækst bliver større end det oprindelige spark.</small></p>
 
-                    <h4>6.2. Keynes-modellen: Samlet Efterspørgsel</h4>
-                    <p>Keynes-modellen viser, hvordan samlet efterspørgsel (SE) består af flere komponenter: privat forbrug (C), investering (I), offentlige udgifter (G) og nettoeksport (X-IM).</p>
+                    <h3>4. Økonomisk politik i Keynes-modellen</h3>
+                    <p>Staten og centralbanken kan bruge politik til at påvirke efterspørgslen og derved
+                        nationalindkomsten.</p>
+
+                    <h4>4.1 Kontraktiv Politik: Skift i SE-kurven</h4>
+                    <p>Når vi fører kontraktiv politik (skærer i G eller hæver renten), skifter SE-kurven parallelt
+                        nedad.</p>
+
                     <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="keynesianADChart" data-chart-type="keynesian-ad"></canvas>
+                        <canvas id="keynesFPChart" data-chart-type="keynes-fp"></canvas>
                     </div>
-                    <p><small><b>Figur 6.3:</b> Keynes-modellen: Samlet Efterspørgsel. Diagrammet viser de forskellige komponenter af samlet efterspørgsel (SE = C + I + G + X - IM) og hvordan de varierer med nationalindkomsten. 45°-linjen viser ligevægtsbetingelsen (Y = SE). Ligevægten opstår, hvor SE-kurven krydser 45°-linjen. Kilde: Teoretisk model baseret på Keynes' General Theory.</small></p>
+                    <p><small><b>Figur 6.3: Kontraktiv politik i Keynes-modellen.</b> Økonomien flytter sig fra punkt 0
+                            til punkt 1, og nationalindkomsten falder fra <i>Y<sub>0</sub></i> til
+                            <i>Y<sub>1</sub></i>.</small></p>
 
-                    <h3>7. Hvordan bruger vi dette i praksis?</h3>
-                    <p>Som finansøkonom eller Financial Controller møder du varemarkedet i din daglige arbejde:</p>
-                    
-                    <ul>
-                        <li><b>Salgsprognoser:</b> Du skal forstå, hvordan efterspørgslen påvirkes af forskellige faktorer</li>
-                        <li><b>Prisstrategi:</b> Du skal forstå sammenhængen mellem priser og efterspørgsel</li>
-                        <li><b>Budgettering:</b> Du skal tage højde for, hvordan økonomiske udsving påvirker virksomheden</li>
-                        <li><b>Rådgivning:</b> Du skal kunne forklare kunder, hvordan konjunkturer påvirker deres situation</li>
-                    </ul>
+                    <h4>4.2 Ekspansiv Politik: Skift og rotation af SE-kurven</h4>
+                    <p>Når vi fører ekspansiv politik (øger G eller sænker skatten t), skifter SE-kurven opad og kan
+                        blive stejlere pga. en højere multiplikator.</p>
 
-                    <h3>8. Sammenfatning</h3>
-                    <p>Varemarkedet på kort sigt bestemmes af efterspørgsel og udbud. De vigtigste punkter er:</p>
-                    
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="keynesExpansiveChart" data-chart-type="keynes-expansive"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.4: Ekspansiv politik i Keynes-modellen.</b> Økonomien flytter sig fra punkt 0
+                            til punkt 1, og nationalindkomsten stiger fra <i>Y<sub>0</sub></i> til
+                            <i>Y<sub>1</sub></i>.</small></p>
+
+                    <h3>5. Konsekvenser af økonomisk politik</h3>
+                    <p>Herunder ser vi på, hvordan henholdsvis kontraktiv og ekspansiv politik påvirker de centrale
+                        økonomiske nøgletal.</p>
+
+                    <h4>5.1 Den offentlige saldo</h4>
+                    <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="publicBalanceChart" data-chart-type="public-balance"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.5 (Kontraktiv):</b> Forbedrer statens budgetsaldo (flytter den opad), da man
+                            sparer penge.</small></p>
+
+                    <div class="chart-container mb-4" style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="publicBalanceExpansiveChart" data-chart-type="public-balance-expansive"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.6 (Ekspansiv):</b> Forværrer statens budgetsaldo (flytter den nedad), da man
+                            bruger flere penge.</small></p>
+
+                    <h4>5.2 Beskæftigelsen</h4>
+                    <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="employmentChart" data-chart-type="employment-y"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.7 (Kontraktiv):</b> Når Y falder (0->1), falder beskæftigelsen.</small></p>
+
+                    <div class="chart-container mb-4" style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="employmentExpansiveChart" data-chart-type="employment-expansive"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.8 (Ekspansiv):</b> Når Y stiger (0->1), stiger beskæftigelsen.</small></p>
+
+                    <h4>5.3 Betalingsbalancen</h4>
+                    <div class="chart-container mb-2" style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="balanceOfPaymentsChart" data-chart-type="balance-of-payments"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.9 (Kontraktiv):</b> Betalingsbalancen forbedres alt andet lige pga. lavere
+                            import.</small></p>
+
+                    <div class="chart-container mb-4" style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="balanceOfPaymentsExpansiveChart"
+                            data-chart-type="balance-of-payments-expansive"></canvas>
+                    </div>
+                    <p><small><b>Figur 6.10 (Ekspansiv):</b> Betalingsbalancen forværres alt andet lige pga. højere
+                            import.</small></p>
+
+                    <br>
+                    <h3>6. Historiske eksempler på politik-indgreb</h3>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 12%;">Begivenhed</th>
+                                    <th style="width: 28%;">Baggrund & Udfordring</th>
+                                    <th style="width: 30%;">Politik (<span class="legal-term"
+                                            data-definition="Finanspolitik (FP): Statens regulering af økonomien via de offentlige finanser (G og T).">FP</span>
+                                        / <span class="legal-term"
+                                            data-definition="Pengepolitik (PP): Centralbankens styring af økonomien via renten (i) og pengemængden.">PP</span>)
+                                    </th>
+                                    <th style="width: 30%;">Effekt (Keynesiansk optik)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #d1fae5;">
+                                    <td><b>Danmark (COVID-19, 2020)</b></td>
+                                    <td>COVID-19-pandemien forårsagede en pludselig og dyb økonomisk nedgang med høj
+                                        <span class="legal-term"
+                                            data-definition="Andelen af arbejdsstyrken, der er uden job men søger arbejde.">arbejdsløshed</span>
+                                        og tvungne <span class="legal-term"
+                                            data-definition="Midlertidig lukning af fysiske butikker, restauranter og liberale erhverv for at begrænse smittespredning, hvilket lammede varemarkedet.">nedlukning</span>
+                                        af virksomheder. Usikkerheden var enorm, hvilket fik <span class="legal-term"
+                                            data-definition="Husholdningernes samlede forbrug af varer og tjenester (C).">privatforbruget</span>
+                                        til at dykke.
+                                    </td>
+                                    <td><b>Ekspansiv FP:</b> Den danske regering indførte omfattende økonomiske <span
+                                            class="legal-term"
+                                            data-definition="Statslige tiltag der yder økonomisk støtte til borgere og virksomheder under en krise.">hjælpepakker</span>,
+                                        der inkluderede direkte støtte til virksomheder, <span class="legal-term"
+                                            data-definition="En ordning hvor staten betaler en del af de ansattes løn for at undgå fyringer under en krise.">lønkompensation</span>
+                                        og øgede <span class="legal-term"
+                                            data-definition="Statens investeringer i f.eks. veje, broer og bygninger for at skabe job.">offentlige
+                                            investeringer</span>.</td>
+                                    <td>Tiltagene hjalp med at reducere stigningen i arbejdsløsheden markant og holdt
+                                        hånden under økonomien gennem pandemien. Dette bidrog til en bemærkelsesværdig
+                                        hurtig økonomisk genopretning, da samfundet genåbnede.</td>
+                                </tr>
+                                <tr style="background-color: #d1fae5;">
+                                    <td><b>USA (The New Deal, 1930'erne)</b></td>
+                                    <td>USA oplevede <span class="legal-term"
+                                            data-definition="Den værste økonomiske krise i moderne historie, som startede med krakket på Wall Street i 1929.">Den
+                                            Store Depression</span> med massiv arbejdsløshed (op mod 25%), bankkrak og
+                                        et fuldstændigt kollaps i produktion og <span class="legal-term"
+                                            data-definition="Mængden af varer og tjenester som forbrugere og virksomheder ønsker at købe.">efterspørgsel</span>.
+                                        Landet var i en dyb
+                                        spiral af pessimisme.</td>
+                                    <td><b>Ekspansiv FP:</b> Præsident Roosevelt introducerede "New Deal"-programmet,
+                                        som omfattede massive offentlige udgifter på <span class="legal-term"
+                                            data-definition="Grundlæggende fysiske anlæg såsom veje, broer, elforsyning og jernbaner.">infrastrukturprojekter</span>
+                                        (veje,
+                                        dæmninger), sociale ydelser og jobprogrammer som <span class="legal-term"
+                                            data-definition="Statstøttede arbejdsprogrammer der skabte millioner af job til arbejdsløse under depressionen.">CCC
+                                            og WPA</span>.</td>
+                                    <td>New Deal stimulerede efterspørgslen direkte og hjalp med at reducere
+                                        arbejdsløsheden og genskabe økonomisk vækst. Selvom det tog tid at komme helt ud
+                                        af depressionen, skabte det fundamentet for den moderne amerikanske velfærdsstat
+                                        og viste <span class="legal-term"
+                                            data-definition="Når statens forbrug sætter gang i en kædereaktion af forbrug hos borgere og virksomheder.">multiplikatoreffekten</span>
+                                        i praksis.</td>
+                                </tr>
+                                <tr style="background-color: #d1fae5;">
+                                    <td><b>USA (Finanskrisen, 2008)</b></td>
+                                    <td>Den globale <span class="legal-term"
+                                            data-definition="En alvorlig krise i det finansielle system der påvirker banker, aktiemarkeder og den reelle økonomi.">finanskrise</span>,
+                                        udløst af <span class="legal-term"
+                                            data-definition="Når priserne på boliger stiger urealistisk meget og derefter kollapser.">boligboblen</span>
+                                        i USA, forårsagede en alvorlig
+                                        <span class="legal-term"
+                                            data-definition="To eller flere kvartaler i træk med negativ økonomisk vækst (BNP-fald).">recession</span>.
+                                        Bankerne stoppede med at låne penge ud, og boligpriserne faldt, hvilket knuste
+                                        forbrugernes købekraft.
+                                    </td>
+                                    <td><b>Ekspansiv FP:</b> Regeringen under Barack Obama vedtog "American Recovery and
+                                        Reinvestment Act" (ARRA) i 2009. Pakken omfattede 787 mia. USD til
+                                        infrastruktur, uddannelse og <span class="legal-term"
+                                            data-definition="Investeringer i f.eks. vindmøller og solceller for at mindske CO2-udledningen.">grøn
+                                            energi</span> samt betydelige <span class="legal-term"
+                                            data-definition="Når staten sænker skatten for at give borgerne flere penge mellem hænderne til forbrug.">skattenedsættelser</span>.
+                                    </td>
+                                    <td>Tiltagene hjalp med at stimulere økonomien, stoppe faldet i <span
+                                            class="legal-term"
+                                            data-definition="Bruttonationalproduktet: Værdien af landets samlede produktion på et år.">BNP</span>
+                                        og sætte gang i beskæftigelsen igen. Der var dog efterfølgende debat om,
+                                        hvorvidt pakken var stor nok til at skabe en hurtig genopretning.</td>
+                                </tr>
+                                <tr style="background-color: #d1fae5;">
+                                    <td><b>Kina (Finanskrisen, 2008)</b></td>
+                                    <td>Finanskrisen ramte Kinas <span class="legal-term"
+                                            data-definition="En økonomi der i høj grad lever af at sælge varer til udlandet.">eksportdrevne
+                                            økonomi</span> hårdt, da efterspørgslen fra USA
+                                        og Europa forsvandt næsten natten over. Millioner af fabrikshverv var i fare.
+                                    </td>
+                                    <td><b>Ekspansiv FP:</b> Den kinesiske regering lancerede en gigantisk <span
+                                            class="legal-term"
+                                            data-definition="Et massivt økonomisk indgreb med det formål at sætte fart i den økonomiske aktivitet.">stimuluspakke</span>
+                                        på 4 billioner yuan (ca. 586 mia. USD), som målrettet gik til lynhurtige
+                                        investeringer i jernbaner, lufthavne, boliger og sundhedsvæsen.</td>
+                                    <td>Stimuluspakken var ekstremt effektiv og hjalp Kina med at opretholde en meget
+                                        høj <span class="legal-term"
+                                            data-definition="Når økonomien vokser år efter år, typisk målt i BNP-stigning.">økonomisk
+                                            vækst</span>, mens resten af verden var i krise. Det betød dog også en
+                                        massiv stigning i gæld hos lokale myndigheder.</td>
+                                </tr>
+                                <tr style="background-color: #d1fae5;">
+                                    <td><b>Japan (den tabte dekade, 2010'erne)</b></td>
+                                    <td>Japan havde været fanget i en tilstand af langsom vækst og vedvarende <span
+                                            class="legal-term"
+                                            data-definition="Når det generelle prisniveau falder over tid, hvilket kan føre til stagnation.">deflation</span>
+                                        i over to årtier (<span class="legal-term"
+                                            data-definition="Betegnelse for Japans langvarige periode med økonomisk stagnation og lave priser efter boblen bristede i 1990.">den
+                                            tabte dekade</span>).</td>
+                                    <td><b>Ekspansiv FP & PP:</b> Premierminister Shinzo Abe introducerede "Abenomics" –
+                                        de tre pile: 1) Aggressiv <span class="legal-term"
+                                            data-definition="Centralbankens brug af lave renter og opkøb af obligationer for at øge pengemængden.">pengepolitik</span>,
+                                        2) Ekspansiv finanspolitik og 3) <span class="legal-term"
+                                            data-definition="Ændringer i samfundets grundlæggende opbygning for at øge effektiviteten.">Strukturreformer</span>.
+                                    </td>
+                                    <td>Abenomics bidrog til at stimulere væksten og bekæmpe deflation midlertidigt.
+                                        Resultaterne var dog blandede i forhold til at skabe langsigtede
+                                        strukturforandringer, og Japans <span class="legal-term"
+                                            data-definition="Det samlede beløb som staten skylder væk.">statsgæld</span>
+                                        voksede voldsomt.</td>
+                                </tr>
+
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>USA (Paul Volcker, 1980'erne)</b></td>
+                                    <td>USA oplevede ekstrem høj <span class="legal-term"
+                                            data-definition="Vedvarende prisstigninger der udhuler købekraften og skaber økonomisk usikkerhed.">inflation</span>
+                                        (op mod 14%) og lav vækst i slutningen af 1970'erne – en kombination kaldet
+                                        <span class="legal-term"
+                                            data-definition="En økonomisk situation med både høj inflation og høj arbejdsløshed/lav vækst.">stagflation</span>.
+                                    </td>
+                                    <td><b>Kontraktiv PP:</b> Centralbankchefen Paul Volcker hævede <span
+                                            class="legal-term"
+                                            data-definition="Prisen på penge: Den rente som centralbanken fastsætter for at styre økonomien.">styringsrenten</span>
+                                        voldsomt for at dæmpe pengemængden og efterspørgslen. Renten nåede helt op på
+                                        20%.</td>
+                                    <td>Tiltagene knækkede inflationen effektivt, men førte også til en kort, men
+                                        smertefuld recession med høj arbejdsløshed. Volckers hårde kurs betragtes i dag
+                                        som fundamentet for årtier med lav inflation.</td>
+                                </tr>
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>Danmark (Kartoffelkuren, 1986)</b></td>
+                                    <td>I midten af 1980'erne var den danske økonomi præget af <span class="legal-term"
+                                            data-definition="Når efterspørgslen stiger så hurtigt, at udbuddet ikke kan følge med, hvilket giver underskud og inflation.">overophedning</span>,
+                                        et kæmpe underskud på <span class="legal-term"
+                                            data-definition="Forholdet mellem landets eksport og import af varer og tjenester.">betalingsbalancen</span>
+                                        og stigende inflation på grund af forbrugsfest.</td>
+                                    <td><b>Kontraktiv FP & PP:</b> Regeringen indførte "Kartoffelkuren", som gjorde det
+                                        mindre attraktivt at låne penge til forbrug (via <span class="legal-term"
+                                            data-definition="En skat på de renter man betaler for forbrugslån, indført for at dæmpe lånelysten.">renteafgifter</span>)
+                                        og strammede kravene til lån.</td>
+                                    <td>Kuren virkede: Forbruget faldt brat, og betalingsbalancen blev markant
+                                        forbedret. Bagsiden var dog en lang periode med lav vækst og stigende
+                                        arbejdsløshed, der varede helt ind i 1990'erne.</td>
+                                </tr>
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>Eurozonen (ECB, 2011-2012)</b></td>
+                                    <td>Efter finanskrisen var inflationen i eurozonen stigende, og <span
+                                            class="legal-term"
+                                            data-definition="European Central Bank: Centralbanken for de lande der bruger Euroen.">ECB</span>
+                                        frygtede, at <span class="legal-term"
+                                            data-definition="Hvad husholdninger og virksomheder forventer at inflationen bliver i fremtiden.">inflationsforventningerne</span>
+                                        ville løbe løbsk og svække den fælles
+                                        valuta.</td>
+                                    <td><b>Kontraktiv PP:</b> ECB hævede styringsrenten i to omgange i 2011 for at dæmpe
+                                        inflationen, på trods af at mange lande i Sydeuropa stadig kæmpede med dyb
+                                        krise.</td>
+                                    <td>Tiltagene blev kritiseret for at være forhastede og for at forværre den
+                                        økonomiske nedgang i Sydeuropa (især Grækenland, Spanien og Italien), hvor den
+                                        høje rente bremsede genopretningen.</td>
+                                </tr>
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>Grækenland (Gældskrisen, 2010'erne)</b></td>
+                                    <td>Grækenland stod over for en næsten statsbankerot med en uholdbar statsgæld og
+                                        massive <span class="legal-term"
+                                            data-definition="Når statens udgifter overstiger dens indtægter på et år.">underskud</span>
+                                        på de offentlige finanser.</td>
+                                    <td><b>Kontraktiv FP:</b> Som betingelse for hjælpepakker fra EU og <span
+                                            class="legal-term"
+                                            data-definition="International Monetary Fund: International organisation der yder lån til lande i økonomisk krise.">IMF</span>
+                                        (Troikaen) blev Grækenland tvunget til ekstrem <span class="legal-term"
+                                            data-definition="Voldsomme nedskæringer i de offentlige budgetter og skattestigninger for at reducere gælden.">austerity</span>.
+                                    </td>
+                                    <td>Selvom underskuddet faldt, førte det til en økonomisk depression med et BNP-fald
+                                        på 25% og en arbejdsløshed på 28%, hvilket skabte omfattende social nød og
+                                        politisk ustabilitet.</td>
+                                </tr>
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>Storbritannien (Thatcher, 1980'erne)</b></td>
+                                    <td>Storbritannien kæmpede med ineffektive <span class="legal-term"
+                                            data-definition="Virksomheder ejet af staten, f.eks. kulforsyning, jernbaner og teleselskaber.">statslige
+                                            industrier</span>, hyppige strejker og
+                                        en inflation, der ødelagde landets <span class="legal-term"
+                                            data-definition="Landets evne til at sælge varer og tjenester i udlandet i konkurrence med andre lande.">konkurrenceevne</span>.
+                                    </td>
+                                    <td><b>Kontraktiv PP & FP:</b> Margaret Thatcher førte en stram <span
+                                            class="legal-term"
+                                            data-definition="En økonomisk teori der fokuserer på at kontrollere pengemængden for at dæmpe inflationen.">monetaristisk</span>
+                                        politik med høje renter kombineret med drastiske nedskæringer og <span
+                                            class="legal-term"
+                                            data-definition="Salg af statslige virksomheder til private investorer for at øge effektiviteten.">privatiseringer</span>.
+                                    </td>
+                                    <td>Politikken reducerede inflationen og moderniserede den britiske økonomi, men
+                                        medførte også en dyb recession i industriområderne og en voldsom stigning i
+                                        arbejdsløshed og social ulighed.</td>
+                                </tr>
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>Japan (1990'erne - Bristede bobler)</b></td>
+                                    <td>Japan havde i 1980'erne en voldsom boble på både aktie- og ejendomsmarkedet, som
+                                        pludselig bristede og udløste en omfattende <span class="legal-term"
+                                            data-definition="En situation hvor priserne på f.eks. ejendomme er steget meget hurtigere end deres reelle værdi og derefter kollapser.">boble-krise</span>.
+                                    </td>
+                                    <td><b>Kontraktiv PP:</b> Centralbanken hævede renten markant for at bremse den
+                                        vilde <span class="legal-term"
+                                            data-definition="Når man køber aktiver i håb om at prisen stiger hurtigt, uden hensyn til deres langsigtede værdi.">spekulation</span>
+                                        og bringe inflationen under kontrol, men ramte for hårdt.</td>
+                                    <td>Selvom inflationen faldt, bristede boblerne så hårdt, at det udløste en
+                                        økonomisk nedgang, bankkrise og en langvarig periode med stagnation og deflation
+                                        (den tabte dekade).</td>
+                                </tr>
+                                <tr style="background-color: #fee2e2;">
+                                    <td><b>Tyskland (Agenda 2010, 2003)</b></td>
+                                    <td>Tyskland blev kaldt "Europas syge mand" omkring år 2000 pga. lav vækst, stive
+                                        <span class="legal-term"
+                                            data-definition="Regler og love der bestemmer hvordan arbejdsmarkedet fungerer (f.eks. dagpengeregler).">arbejdsmarkeds-strukturer</span>
+                                        og meget høj ledighed.
+                                    </td>
+                                    <td><b>Kontraktiv/Strukturel FP:</b> Regeringen indførte <span class="legal-term"
+                                            data-definition="En række reformer med det formål at få flere i arbejde og sænke statens udgifter til dagpenge.">Hartz-reformerne</span>,
+                                        som inkluderede kraftige reduktioner i ydelser og strammere krav til jobsøgende.
+                                    </td>
+                                    <td>Reformerne forbedrede Tysklands konkurrenceevne enormt og forvandlede landet til
+                                        Europas vækstmotor igen, men skabte også en større gruppe af socialt udsatte.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>7. Sammenfatning</h3>
+                    <p>Varemarkedet på kort sigt forstås bedst gennem <b>Keynes-modellen</b>. De vigtigste punkter er:
+                    </p>
+
                     <ol>
-                        <li><b>Efterspørgslen afhænger af:</b> Indkomst, priser, renter, forventninger og offentlige udgifter</li>
-                        <li><b>Udbuddet på kort sigt:</b> Reagerer primært på priserne, da produktionskapaciteten er fast</li>
-                        <li><b>AD-AS modellen:</b> Viser sammenhængen mellem samlet efterspørgsel og samlet udbud</li>
-                        <li><b>Ligevægt:</b> Opstår, når efterspørgsel og udbud er lige store</li>
-                        <li><b>Økonomiske udsving:</b> Opstår ved efterspørgsels- eller udbudschok</li>
-                        <li><b>Multiplikatoreffekten:</b> Gør, at ændringer kan have større effekt end forventet</li>
+                        <li><b>Efterspørgslen (SE):</b> Består af C + I + G + (X - IM). Det er den, der driver BNP på
+                            kort sigt.</li>
+                        <li><b>Ligevægt:</b> Opstår der, hvor den samlede efterspørgsel er lig med produktionen (SE =
+                            Y).</li>
+                        <li><b>Multiplikatoreffekten:</b> Gør, at en ændring i efterspørgslen får en forstærket effekt
+                            på nationalindkomsten.</li>
+                        <li><b>Politik:</b> Valget mellem ekspansiv og kontraktiv politik afhænger af, om man vil
+                            bekæmpe ledighed eller forbedre saldo og betalingsbalance.</li>
                     </ol>
                 </div>
 
@@ -337,8 +568,7 @@
                 <h2>Quiz</h2>
                 <div class="quiz-container">
                     <a href="MAKROQUIZ/makro6.html" class="effectLinks"
-                        data-replace="Start Quiz 6.1 om Varemarkedet på kort sigt"
-                        target="_blank">
+                        data-replace="Start Quiz 6.1 om Varemarkedet på kort sigt" target="_blank">
                         <span>Quiz 6.1 om Varemarkedet på kort sigt</span> </a>
                 </div>
                 <br><br>

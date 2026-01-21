@@ -9,7 +9,7 @@ const menuItems = [
     { href: 'kapitel6.html', text: 'Varemarkedet på kort sigt' },
     { href: 'kapitel7.html', text: 'Arbejdsmarked og inflation' },
     { href: 'kapitel8.html', text: 'Økonomisk politik og konkurrenceevne' },
-    { href: 'kapitel9.html', text: 'Arbejdsmarkedet i makroøkonomien' }
+    { href: 'kapitel9.html', text: 'Ordliste' }
 ];
 
 // Function to generate dropdown menu HTML

@@ -69,24 +69,6 @@
         .cover-text-overlay {
             z-index: 2;
         }
-
-        /* Force square corners on vis-network boxes */
-        #expansionaryPolicyFlowchart canvas,
-        #contractionaryPolicyFlowchart canvas {
-            border-radius: 0 !important;
-        }
-        
-        /* Override vis-network default rounded corners - force square boxes */
-        #expansionaryPolicyFlowchart .vis-node,
-        #contractionaryPolicyFlowchart .vis-node {
-            border-radius: 0 !important;
-        }
-        
-        #expansionaryPolicyFlowchart .vis-node rect,
-        #contractionaryPolicyFlowchart .vis-node rect {
-            rx: 0 !important;
-            ry: 0 !important;
-        }
     </style>
     <link rel="stylesheet" href="glossary.css">
     <!-- Vis-Network for interactive diagrams -->
@@ -168,10 +150,12 @@
                     <div class="cover-text-overlay animate-cover-text" data-type-text="3. Konjunkturbeskrivelse"
                         data-type-speed="150">Konjunkturbeskrivelse</div>
                 </div>
-                
+
                 <div class="info-box">
-                    <p>Dette kapitel handler om <b>konjunkturbeskrivelse</b> - hvordan vi måler og beskriver økonomiens op- og nedgange.
-                        Som finansøkonom skal du kunne forstå konjunktursvingninger, ledighed, betalingsbalancen og konjunkturindikatorer.
+                    <p>Dette kapitel handler om <b>konjunkturbeskrivelse</b> - hvordan vi måler og beskriver økonomiens
+                        op- og nedgange.
+                        Som finansøkonom skal du kunne forstå konjunktursvingninger, ledighed, betalingsbalancen og
+                        konjunkturindikatorer.
                         Disse begreber er centrale for at forstå, hvor økonomien befinder sig og hvor den er på vej hen.
                     </p>
 
@@ -181,14 +165,17 @@
                         <li><b>Ledighed:</b> Måling af arbejdsløshed og sammenhængen med økonomisk aktivitet</li>
                         <li><b>Okun's lov:</b> Sammenhengen mellem ledighed og BNP-vækst</li>
                         <li><b>Betalingsbalancen:</b> Danmarks transaktioner med udlandet</li>
-                        <li><b>Konjunkturindikatorer:</b> Førindikatorer, samtidige indikatorer og efterslæbende indikatorer</li>
+                        <li><b>Konjunkturindikatorer:</b> Førindikatorer, samtidige indikatorer og efterslæbende
+                            indikatorer</li>
                     </ul>
                 </div>
                 <br>
 
                 <h2>Hvad er konjunkturer?</h2>
                 <div class="info-box">
-                    <p>Konjunkturer er de op- og nedgange, som økonomien gennemgår over tid. Nogle perioder går det godt - produktionen stiger, flere får job, og virksomhederne tjener penge. Andre perioder går det dårligt - produktionen falder, folk mister deres job, og virksomhederne kæmper.</p>
+                    <p>Konjunkturer er de op- og nedgange, som økonomien gennemgår over tid. Nogle perioder går det godt
+                        - produktionen stiger, flere får job, og virksomhederne tjener penge. Andre perioder går det
+                        dårligt - produktionen falder, folk mister deres job, og virksomhederne kæmper.</p>
 
                     <h3>1. Konjunkturens faser</h3>
                     <p>En konjunkturcyklus har typisk fire faser:</p>
@@ -207,19 +194,22 @@
                                 <tr>
                                     <td><b>Opsving</b><br>(Expansion)</td>
                                     <td>Økonomien vokser - produktionen stiger</td>
-                                    <td>• Stigende BNP<br>• Faldende ledighed<br>• Stigende investeringer<br>• Øget forbrug</td>
+                                    <td>• Stigende BNP<br>• Faldende ledighed<br>• Stigende investeringer<br>• Øget
+                                        forbrug</td>
                                     <td>2010-2019: Langt opsving efter finanskrisen</td>
                                 </tr>
                                 <tr>
                                     <td><b>Højkonjunktur</b><br>(Boom)</td>
                                     <td>Økonomien er på toppunktet</td>
-                                    <td>• Høj produktion<br>• Lav ledighed<br>• Høje priser<br>• Mange investeringer</td>
+                                    <td>• Høj produktion<br>• Lav ledighed<br>• Høje priser<br>• Mange investeringer
+                                    </td>
                                     <td>2006-2007: Før finanskrisen</td>
                                 </tr>
                                 <tr>
                                     <td><b>Nedgang</b><br>(Recession)</td>
                                     <td>Økonomien falder - produktionen går ned</td>
-                                    <td>• Faldende BNP<br>• Stigende ledighed<br>• Faldende investeringer<br>• Reduceret forbrug</td>
+                                    <td>• Faldende BNP<br>• Stigende ledighed<br>• Faldende investeringer<br>• Reduceret
+                                        forbrug</td>
                                     <td>2008-2009: Finanskrisen</td>
                                 </tr>
                                 <tr>
@@ -235,7 +225,8 @@
                     <p><b>Vigtigt:</b> En recession defineres typisk som to kvartaler i træk med negativ BNP-vækst.</p>
 
                     <h3>2. Ledighed - Hvor mange er arbejdsløse?</h3>
-                    <p>Ledighed er et af de vigtigste mål for konjunkturen. Hvis mange er arbejdsløse, går det dårligt. Hvis få er arbejdsløse, går det godt.</p>
+                    <p>Ledighed er et af de vigtigste mål for konjunkturen. Hvis mange er arbejdsløse, går det dårligt.
+                        Hvis få er arbejdsløse, går det godt.</p>
 
                     <p><b>Hvordan måles ledighed?</b></p>
                     <p>Ledighed beregnes som antallet af arbejdsløse divideret med arbejdsstyrken:</p>
@@ -253,7 +244,8 @@
                                 <tr>
                                     <td><b>Arbejdsstyrken</b></td>
                                     <td>Alle, der enten har job eller aktivt søger job</td>
-                                    <td>Hvis 3 millioner har job og 100.000 søger job, er arbejdsstyrken 3,1 millioner</td>
+                                    <td>Hvis 3 millioner har job og 100.000 søger job, er arbejdsstyrken 3,1 millioner
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><b>Arbejdsløse</b></td>
@@ -272,7 +264,8 @@
                     <p><b>Typer af ledighed:</b></p>
                     <ul>
                         <li><b>Friktionsledighed:</b> Kortvarig ledighed, når folk skifter job (normalt og sundt)</li>
-                        <li><b>Strukturledighed:</b> Langvarig ledighed pga. strukturelle problemer (f.eks. manglende kvalifikationer)</li>
+                        <li><b>Strukturledighed:</b> Langvarig ledighed pga. strukturelle problemer (f.eks. manglende
+                            kvalifikationer)</li>
                         <li><b>Konjunkturledighed:</b> Ledighed forårsaget af konjunkturnedgang</li>
                     </ul>
 
@@ -315,19 +308,33 @@
                         </table>
                     </div>
 
-                    <p><b>Eksempel:</b> Hvis Danmarks normale BNP-vækst er 2% per år, og vi har en vækst på 3%, vil ledigheden typisk falde. Hvis væksten kun er 1%, vil ledigheden typisk stige.</p>
+                    <p><b>Eksempel:</b> Hvis Danmarks normale BNP-vækst er 2% per år, og vi har en vækst på 3%, vil
+                        ledigheden typisk falde. Hvis væksten kun er 1%, vil ledigheden typisk stige.</p>
 
-                    <p><b>Hvorfor sker det?</b> Når økonomien vokser hurtigere, har virksomhederne brug for flere medarbejdere. Når økonomien vokser langsommere eller falder, har virksomhederne ikke brug for så mange medarbejdere.</p>
+                    <p><b>Hvorfor sker det?</b> Når økonomien vokser hurtigere, har virksomhederne brug for flere
+                        medarbejdere. Når økonomien vokser langsommere eller falder, har virksomhederne ikke brug for så
+                        mange medarbejdere.</p>
 
                     <h4>3.1. Okun's lov - Visuelt overblik</h4>
-                    <p>Nedenfor kan du se Okun's lov illustreret med data fra forskellige lande. Diagrammet viser sammenhængen mellem BNP-vækst og ændring i ledighed. Som du kan se, er der typisk en negativ sammenhæng: Høj BNP-vækst er forbundet med faldende ledighed, mens lav eller negativ BNP-vækst er forbundet med stigende ledighed.</p>
+                    <p>Nedenfor kan du se Okun's lov illustreret med data fra forskellige lande. Diagrammet viser
+                        sammenhængen mellem BNP-vækst og ændring i ledighed. Som du kan se, er der typisk en negativ
+                        sammenhæng: Høj BNP-vækst er forbundet med faldende ledighed, mens lav eller negativ BNP-vækst
+                        er forbundet med stigende ledighed.</p>
                     <div class="chart-container mb-4" style="position: relative; height: 500px; width: 100%;">
                         <canvas id="okunsLawChart"></canvas>
                     </div>
-                    <p><small><b>Figur 3.2:</b> Okun's lov - Sammenhæng mellem BNP-vækst og ledighedsændring i forskellige lande. X-aksen viser BNP-vækst i procent, og Y-aksen viser ændring i ledighed i procentpoint. Hvert punkt repræsenterer et år for et givent land. Den negative sammenhæng viser, at høj BNP-vækst typisk fører til faldende ledighed, mens lav eller negativ BNP-vækst fører til stigende ledighed. Dette er kernen i Okun's lov. Diagrammet viser data fra de sidste 30 år for Danmark, Tyskland, Sverige og Norge. Du kan klikke på landene i legenden for at vise/skjule dem. Kilde: Danmarks Statistik, OECD og nationale statistiske institutioner. Data opdateres årligt.</small></p>
+                    <p><small><b>Figur 3.1:</b> Okun's lov - Sammenhæng mellem BNP-vækst og ledighedsændring i
+                            forskellige lande. X-aksen viser BNP-vækst i procent, og Y-aksen viser ændring i ledighed i
+                            procentpoint. Hvert punkt repræsenterer et år for et givent land. Den negative sammenhæng
+                            viser, at høj BNP-vækst typisk fører til faldende ledighed, mens lav eller negativ BNP-vækst
+                            fører til stigende ledighed. Dette er kernen i Okun's lov. Diagrammet viser data fra de
+                            sidste 30 år for Danmark, Tyskland, Sverige og Norge. Du kan klikke på landene i legenden
+                            for at vise/skjule dem. Kilde: Danmarks Statistik, OECD og nationale statistiske
+                            institutioner. Data opdateres årligt.</small></p>
 
                     <h3>4. Betalingsbalancen - Danmarks transaktioner med udlandet</h3>
-                    <p>Betalingsbalancen viser alle Danmarks transaktioner med udlandet. Den består af flere komponenter:</p>
+                    <p>Betalingsbalancen viser alle Danmarks transaktioner med udlandet. Den består af flere
+                        komponenter:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -342,17 +349,20 @@
                                 <tr>
                                     <td><b>Handelsbalance</b></td>
                                     <td>Eksport minus import af varer</td>
-                                    <td>Danmark eksporterer medicin for 100 mia. kr. og importerer olie for 50 mia. kr. → Handelsbalance = +50 mia. kr.</td>
+                                    <td>Danmark eksporterer medicin for 100 mia. kr. og importerer olie for 50 mia. kr.
+                                        → Handelsbalance = +50 mia. kr.</td>
                                 </tr>
                                 <tr>
                                     <td><b>Servicebalance</b></td>
                                     <td>Eksport minus import af tjenester</td>
-                                    <td>Danske turister bruger penge i udlandet (import af tjenester), og udenlandske turister bruger penge i Danmark (eksport af tjenester)</td>
+                                    <td>Danske turister bruger penge i udlandet (import af tjenester), og udenlandske
+                                        turister bruger penge i Danmark (eksport af tjenester)</td>
                                 </tr>
                                 <tr>
                                     <td><b>Indkomstbalance</b></td>
                                     <td>Indkomst fra udland minus indkomst til udland</td>
-                                    <td>Danske virksomheder får udbytte fra udland, og udenlandske virksomheder får udbytte fra Danmark</td>
+                                    <td>Danske virksomheder får udbytte fra udland, og udenlandske virksomheder får
+                                        udbytte fra Danmark</td>
                                 </tr>
                                 <tr>
                                     <td><b>Overførselsbalance</b></td>
@@ -362,7 +372,8 @@
                                 <tr>
                                     <td><b>Betalingsbalance</b></td>
                                     <td>Summen af alle komponenter</td>
-                                    <td>Hvis summen er positiv, har Danmark overskud. Hvis den er negativ, har Danmark underskud.</td>
+                                    <td>Hvis summen er positiv, har Danmark overskud. Hvis den er negativ, har Danmark
+                                        underskud.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -370,26 +381,36 @@
 
                     <p><b>Hvad betyder det?</b></p>
                     <ul>
-                        <li><b>Overskud på betalingsbalancen:</b> Danmark modtager flere penge fra udlandet end vi sender ud. Dette kan være tegn på stærk konkurrenceevne.</li>
-                        <li><b>Underskud på betalingsbalancen:</b> Danmark sender flere penge til udlandet end vi modtager. Dette kan være tegn på svag konkurrenceevne eller højt forbrug.</li>
+                        <li><b>Overskud på betalingsbalancen:</b> Danmark modtager flere penge fra udlandet end vi
+                            sender ud. Dette kan være tegn på stærk konkurrenceevne.</li>
+                        <li><b>Underskud på betalingsbalancen:</b> Danmark sender flere penge til udlandet end vi
+                            modtager. Dette kan være tegn på svag konkurrenceevne eller højt forbrug.</li>
                     </ul>
 
                     <h4>4.1. Betalingsbalancens udvikling i Danmark</h4>
-                    <p>Nedenfor kan du se udviklingen i Danmarks betalingsbalance fra 1970 til i dag. Diagrammet viser, hvordan betalingsbalancen har udviklet sig over mere end 50 år, hvilket giver et godt overblik over Danmarks økonomiske udvikling.</p>
+                    <p>Nedenfor kan du se udviklingen i Danmarks betalingsbalance fra 1970 til i dag. Diagrammet viser,
+                        hvordan betalingsbalancen har udviklet sig over mere end 50 år, hvilket giver et godt overblik
+                        over Danmarks økonomiske udvikling.</p>
                     <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="balanceOfPaymentsChart"></canvas>
                     </div>
-                    <p><small><b>Figur 3.1:</b> Betalingsbalancens udvikling i Danmark fra 1970 til i dag. Viser løbende konto og samlet betalingsbalance i milliarder kroner. <b>Forklaring på negative tal:</b> Når tallet er negativt, betyder det, at Danmark sender flere penge ud til udlandet end vi modtager. Dette kaldes et underskud eller deficit. Det kan ske, når vi importerer mere end vi eksporterer, eller når danske virksomheder betaler udbytte til udenlandske ejere. Når tallet er positivt, modtager Danmark flere penge end vi sender ud (overskud eller surplus). I 1970'erne og 1980'erne havde Danmark ofte underskud på betalingsbalancen, men siden 1990'erne har vi generelt haft overskud, hvilket viser, at Danmarks konkurrenceevne er forbedret. Løbende konto inkluderer handelsbalance (eksport minus import), servicebalance, indkomstbalance og overførselsbalance. Kilde: Danmarks Statistik - Betalingsbalance. Data opdateres kvartalsvis.</small></p>
+                    <p><small><b>Figur 3.2:</b> Betalingsbalancens udvikling i Danmark fra 1970 til i dag. Viser løbende
+                            konto og samlet betalingsbalance i milliarder kroner. <b>Forklaring på negative tal:</b> Når
+                            tallet er negativt, betyder det, at Danmark sender flere penge ud til udlandet end vi
+                            modtager. Dette kaldes et underskud eller deficit. Det kan ske, når we importerer mere end
+                            vi eksporterer, eller når danske virksomheder betaler udbytte til udenlandske ejere. Når
+                            tallet er positivt, modtager Danmark flere penge end vi sender ud (overskud eller surplus).
+                            I 1970'erne og 1980'erne havde Danmark ofte underskud på betalingsbalancen, men siden
+                            1990'erne har vi generelt haft overskud, hvilket viser, at Danmarks konkurrenceevne er
+                            forbedret. Løbende konto inkluderer handelsbalance (eksport minus import), servicebalance,
+                            indkomstbalance og overførselsbalance. Kilde: Danmarks Statistik - Betalingsbalance. Data
+                            opdateres kvartalsvis.</small></p>
 
-                    <h4>4.2. Ledighed og inflation i forskellige lande</h4>
-                    <p>Ledighed og inflation er to centrale konjunkturindikatorer. De viser, hvordan økonomien befinder sig. Generelt er der en sammenhæng mellem ledighed og inflation - høj ledighed giver typisk lav inflation, og lav ledighed giver højere inflation. Dette kaldes Phillips-kurven. Diagrammet nedenfor viser, hvordan ledighed og inflation har udviklet sig i forskellige lande, hvilket giver et godt overblik over internationale forskelle og lignende udviklinger.</p>
-                    <div class="chart-container mb-4" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="unemploymentInflationChart"></canvas>
-                    </div>
-                    <p><small><b>Figur 3.2:</b> Ledighed og inflation i forskellige lande over de sidste 40 år. Venstre akse viser ledighed (fuld linje) i procent af arbejdsstyrken. Højre akse viser inflation (stiplet linje) som den årlige stigning i forbrugerprisindekset. Diagrammet viser, hvordan ledighed og inflation har udviklet sig gennem forskellige konjunkturer i Danmark, Tyskland, Sverige og Norge. I 1980'erne var ledigheden høj og inflationen var også høj i mange lande. I 1990'erne faldt både ledighed og inflation i de fleste lande. I 2000'erne var ledigheden lav (omkring 4-5%) og inflationen var stabil (omkring 2%) i de fleste nordiske lande og Tyskland. Under finanskrisen 2008-2009 steg ledigheden i mange lande, mens inflationen faldt. I 2020-2022 kan man se effekten af corona-krisen og energikrisen, hvor inflationen steg markant i alle lande, mens ledigheden forblev relativt lav. Dette er en udfordring for pengepolitikken, da høj inflation og lav ledighed samtidig er uønsket. Kilde: Danmarks Statistik, OECD og nationale statistiske institutioner. Data opdateres månedligt.</small></p>
+
 
                     <h3>5. Konjunkturindikatorer - Hvor er økonomien på vej hen?</h3>
-                    <p>Konjunkturindikatorer er tal og mål, der fortæller os, hvor økonomien befinder sig og hvor den er på vej hen. De deles i tre kategorier:</p>
+                    <p>Konjunkturindikatorer er tal og mål, der fortæller os, hvor økonomien befinder sig og hvor den er
+                        på vej hen. De deles i tre kategorier:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -426,38 +447,68 @@
 
                     <p><b>Eksempel på førindikatorer:</b></p>
                     <ul>
-                        <li><b>Aktiekurser:</b> Hvis aktiekurserne stiger, forventer investorerne, at økonomien vil vokse</li>
-                        <li><b>Byggetilladelser:</b> Hvis mange byggetilladelser gives, forventer man, at byggeriet vil stige</li>
-                        <li><b>Forbrugerkonfidens:</b> Hvis forbrugerne er optimistiske, vil de sandsynligvis bruge flere penge</li>
+                        <li><b>Aktiekurser:</b> Hvis aktiekurserne stiger, forventer investorerne, at økonomien vil
+                            vokse</li>
+                        <li><b>Byggetilladelser:</b> Hvis mange byggetilladelser gives, forventer man, at byggeriet vil
+                            stige</li>
+                        <li><b>Forbrugerkonfidens:</b> Hvis forbrugerne er optimistiske, vil de sandsynligvis bruge
+                            flere penge</li>
                     </ul>
 
                     <h3>6. Outputgap - Forskellen mellem faktisk og potentielt BNP</h3>
-                    <p>Outputgapet måler forskellen mellem, hvor meget økonomien faktisk producerer, og hvor meget den kunne producere, hvis alle ressourcer blev brugt optimalt.</p>
+                    <p>Outputgapet måler forskellen mellem, hvor meget økonomien faktisk producerer, og hvor meget den
+                        kunne producere, hvis alle ressourcer blev brugt optimalt.</p>
 
-                    <p>Outputgapet kan være enten positivt eller negativt, og konjunkturpolitikken kan bruges til at mindske gapet. Nedenfor kan du se to flowcharts, der viser, hvordan ekspansiv og kontraktiv konjunkturpolitik påvirker outputgapet.</p>
-                    
+                    <p>Outputgapet kan være enten positivt eller negativt, og konjunkturpolitikken kan bruges til at
+                        mindske gapet. Nedenfor kan du se to flowcharts, der viser, hvordan ekspansiv og kontraktiv
+                        konjunkturpolitik påvirker outputgapet.</p>
+
                     <div class="row mb-4">
                         <div class="col-12 mb-4">
-                            <div class="chart-container" style="position: relative; min-height: 300px; width: 100%; padding: 20px; background-color: #ffffff;">
-                                <div id="expansionaryPolicyFlowchart" data-chart-type="expansionary-policy-flowchart" style="width: 100%; height: 300px;"></div>
+                            <div class="chart-container"
+                                style="position: relative; height: 120px !important; width: 100%; padding: 0px; margin: 10px auto; background-color: #ffffff;">
+                                <div id="expansionaryPolicyFlowchart" data-chart-type="expansionary-policy-flowchart"
+                                    style="width: 100%; height: 120px;"></div>
                             </div>
-                            <small class="d-block mt-1 text-center"><b>Figur 3.3a:</b> Ekspansiv konjunkturpolitik. Når der er negativt outputgab (ledighed), kan ekspansiv konjunkturpolitik bruges til at øge den samlede efterspørgsel, hvilket fører til stigende nationalindkomst og et mindre outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
+                            <small class="d-block mt-1 text-center"><b>Figur 3.3a:</b> Ekspansiv konjunkturpolitik. Når
+                                der er negativt outputgab (ledighed), kan ekspansiv konjunkturpolitik bruges til at øge
+                                den samlede efterspørgsel, hvilket fører til stigende nationalindkomst og et mindre
+                                outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
                         </div>
-                        
+
                         <div class="col-12 mb-4">
-                            <div class="chart-container" style="position: relative; min-height: 300px; width: 100%; padding: 20px; background-color: #ffffff;">
-                                <div id="contractionaryPolicyFlowchart" data-chart-type="contractionary-policy-flowchart" style="width: 100%; height: 300px;"></div>
+                            <div class="chart-container"
+                                style="position: relative; height: 120px !important; width: 100%; padding: 0px; margin: 10px auto; background-color: #ffffff;">
+                                <div id="contractionaryPolicyFlowchart"
+                                    data-chart-type="contractionary-policy-flowchart"
+                                    style="width: 100%; height: 120px;"></div>
                             </div>
-                            <small class="d-block mt-1 text-center"><b>Figur 3.3b:</b> Kontraktiv konjunkturpolitik. Når der er positivt outputgab (overophedning), kan kontraktiv konjunkturpolitik bruges til at dæmpe den samlede efterspørgsel, hvilket fører til faldende nationalindkomst og et mindre outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
+                            <small class="d-block mt-1 text-center"><b>Figur 3.3b:</b> Kontraktiv konjunkturpolitik. Når
+                                der er positivt outputgab (overophedning), kan kontraktiv konjunkturpolitik bruges til
+                                at dæmpe den samlede efterspørgsel, hvilket fører til faldende nationalindkomst og et
+                                mindre outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
                         </div>
                     </div>
 
                     <h4>6.1. Outputgapets udvikling over tid</h4>
-                    <p>Nedenfor kan du se udviklingen i outputgapet for forskellige lande over de sidste 30 år. Diagrammet viser, hvordan outputgapet svinger mellem positive og negative værdier gennem konjunktursvingninger. Et positivt gap betyder, at økonomien producerer mere end normalt (overophedning), mens et negativt gap betyder, at økonomien producerer mindre end den kunne (ledighed og uudnyttede ressourcer).</p>
+                    <p>Nedenfor kan you se udviklingen i outputgapet for forskellige lande over de sidste 30 år.
+                        Diagrammet viser, hvordan outputgapet svinger mellem positive og negative værdier gennem
+                        konjunktursvingninger. Et positivt gap betyder, at økonomien producerer mere end normalt
+                        (overophedning), mens et negativt gap betyder, at økonomien producerer mindre end den kunne
+                        (ledighed og uudnyttede ressourcer).</p>
                     <div class="chart-container mb-4" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="outputGapChart" data-chart-type="output-gap" data-chart-data="DNK,DEU,SWE,NOR"></canvas>
+                        <canvas id="outputGapChart" data-chart-type="output-gap"
+                            data-chart-data="DNK,DEU,SWE,NOR"></canvas>
                     </div>
-                    <p><small><b>Figur 3.4:</b> Outputgap over tid for Danmark, Tyskland, Sverige og Norge. Outputgapet måles som procent af potentielt BNP. Et positivt gap (over 0%) betyder, at økonomien producerer mere end normalt og kan føre til inflation og overophedning. Et negativt gap (under 0%) betyder, at økonomien producerer mindre end den kunne, hvilket fører til ledighed og uudnyttede ressourcer. Diagrammet viser tydeligt konjunktursvingningerne - f.eks. kan man se effekten af finanskrisen i 2008-2009, hvor outputgapet blev negativt i alle lande, og opsvinget i årene efter, hvor gapet gradvist blev mindre negativt eller positivt. Kilde: Simuleret data baseret på OECD og nationale statistiske institutioner. Data opdateres årligt.</small></p>
+                    <p><small><b>Figur 3.4:</b> Outputgap over tid for Danmark, Tyskland, Sverige og Norge. Outputgapet
+                            måles som procent af potentielt BNP. Et positivt gap (over 0%) betyder, at økonomien
+                            producerer mere end normalt og kan føre til inflation og overophedning. Et negativt gap
+                            (under 0%) betyder, at økonomien producerer mindre end den kunne, hvilket fører til ledighed
+                            og uudnyttede ressourcer. Diagrammet viser tydeligt konjunktursvingningerne - f.eks. kan man
+                            se effekten af finanskrisen i 2008-2009, hvor outputgapet blev negativt i alle lande, og
+                            opsvinget i årene efter, hvor gapet gradvist blev mindre negativt eller positivt. Kilde:
+                            Simuleret data baseret på OECD og nationale statistiske institutioner. Data opdateres
+                            årligt.</small></p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -490,7 +541,8 @@
                                     <td>Lavere end potentielt</td>
                                     <td>Normal produktion</td>
                                     <td>Negativt gap</td>
-                                    <td>Økonomien producerer mindre end den kunne - ledighed og uudnyttede ressourcer</td>
+                                    <td>Økonomien producerer mindre end den kunne - ledighed og uudnyttede ressourcer
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -498,10 +550,35 @@
 
                     <p><b>Hvorfor er outputgapet vigtigt?</b></p>
                     <ul>
-                        <li><b>Positivt gap:</b> Økonomien kører for hurtigt - kan føre til inflation og overophedning</li>
-                        <li><b>Negativt gap:</b> Økonomien kører for langsomt - ressourcer bliver ikke brugt, og der er ledighed</li>
+                        <li><b>Positivt gap:</b> Økonomien kører for hurtigt - kan føre til inflation og overophedning
+                        </li>
+                        <li><b>Negativt gap:</b> Økonomien kører for langsomt - ressourcer bliver ikke brugt, og der er
+                            ledighed</li>
                         <li><b>Ingen gap:</b> Økonomien kører optimalt</li>
                     </ul>
+
+                    <h4>6.2. Ledighed og inflation i forskellige lande</h4>
+                    <p>Ledighed og inflation er to centrale konjunkturindikatorer. De viser, hvordan økonomien befinder
+                        sig. Generelt er der en sammenhæng mellem ledighed og inflation - høj ledighed giver typisk lav
+                        inflation, og lav ledighed giver højere inflation. Dette kaldes Phillips-kurven. Diagrammet
+                        nedenfor viser, hvordan ledighed og inflation har udviklet sig i forskellige lande, hvilket
+                        giver et godt overblik over internationale forskelle og lignende udviklinger.</p>
+                    <div class="chart-container mb-5" style="position: relative; height: 500px; width: 100%;">
+                        <canvas id="unemploymentInflationChart"></canvas>
+                    </div>
+                    <p><small><b>Figur 3.5:</b> Ledighed og inflation i forskellige lande over de sidste 40 år. Venstre
+                            akse viser ledighed (fuld linje) i procent af arbejdsstyrken. Højre akse viser inflation
+                            (stiplet linje) som den årlige stigning i forbrugerprisindekset. Diagrammet viser, hvordan
+                            ledighed og inflation har udviklet sig gennem forskellige konjunkturer i Danmark, Tyskland,
+                            Sverige og Norge. I 1980'erne var ledigheden høj og inflationen var også høj i mange lande.
+                            I 1990'erne faldt både ledighed og inflation i de fleste lande. I 2000'erne var ledigheden
+                            lav (omkring 4-5%) og inflationen var stabil (omkring 2%) i de fleste nordiske lande og
+                            Tyskland. Under finanskrisen 2008-2009 steg ledigheden i many lande, mens inflationen
+                            faldt. I 2020-2022 kan man se effekten af corona-krisen og energikrisen, hvor inflationen
+                            steg markant i alle lande, mens ledigheden forblev relativt lav. Dette er en udfordring for
+                            pengepolitikken, da høj inflation og lav ledighed samtidig er uønsket. Kilde: Danmarks
+                            Statistik, OECD og nationale statistiske institutioner. Data opdateres månedligt.</small>
+                    </p>
 
                     <h3>7. Konjunkturens påvirkning på forskellige sektorer</h3>
                     <p>Ikke alle sektorer påvirkes ens af konjunkturerne. Nogle er mere følsomme end andre:</p>
@@ -589,26 +666,35 @@
 
                     <h3>9. Hvordan bruger vi konjunkturbeskrivelse i praksis?</h3>
                     <p>Som finansøkonom eller Financial Controller bruger du konjunkturbeskrivelse til:</p>
-                    
+
                     <ul>
-                        <li><b>Virksomhedsplanlægning:</b> Hvis økonomien går godt, kan virksomheden vokse. Hvis den går dårligt, skal man være forsigtig.</li>
-                        <li><b>Budgettering:</b> Konjunkturen påvirker salg, omkostninger og profit. Du skal tage højde for konjunkturen i budgettet.</li>
-                        <li><b>Risikovurdering:</b> Høj ledighed eller negativt outputgap kan påvirke virksomhedens kunder og dermed virksomheden.</li>
-                        <li><b>Investering:</b> Forståelse af konjunkturen hjælper med at tage gode investeringsbeslutninger.</li>
-                        <li><b>Rådgivning:</b> Du skal kunne forklare kunder, hvordan konjunkturen påvirker deres situation.</li>
+                        <li><b>Virksomhedsplanlægning:</b> Hvis økonomien går godt, kan virksomheden vokse. Hvis den går
+                            dårligt, skal man være forsigtig.</li>
+                        <li><b>Budgettering:</b> Konjunkturen påvirker salg, omkostninger og profit. Du skal tage højde
+                            for konjunkturen i budgettet.</li>
+                        <li><b>Risikovurdering:</b> Høj ledighed eller negativt outputgap kan påvirke virksomhedens
+                            kunder og dermed virksomheden.</li>
+                        <li><b>Investering:</b> Forståelse af konjunkturen hjælper med at tage gode
+                            investeringsbeslutninger.</li>
+                        <li><b>Rådgivning:</b> Du skal kunne forklare kunder, hvordan konjunkturen påvirker deres
+                            situation.</li>
                     </ul>
 
                     <h3>10. Sammenfatning</h3>
-                    <p>Konjunkturbeskrivelse handler om at forstå og måle økonomiens op- og nedgange. De vigtigste punkter er:</p>
-                    
+                    <p>Konjunkturbeskrivelse handler om at forstå og måle økonomiens op- og nedgange. De vigtigste
+                        punkter er:</p>
+
                     <ol>
                         <li><b>Konjunkturer har fire faser:</b> Opsving, højkonjunktur, nedgang og lavkonjunktur</li>
-                        <li><b>Ledighed måler arbejdsløshed:</b> Høj ledighed betyder dårlig konjunktur, lav ledighed betyder god konjunktur</li>
-                        <li><b>Okun's lov:</b> Høj BNP-vækst fører til faldende ledighed, lav vækst fører til stigende ledighed</li>
+                        <li><b>Ledighed måler arbejdsløshed:</b> Høj ledighed betyder dårlig konjunktur, lav ledighed
+                            betyder god konjunktur</li>
+                        <li><b>Okun's lov:</b> Høj BNP-vækst fører til faldende ledighed, lav vækst fører til stigende
+                            ledighed</li>
                         <li><b>Betalingsbalancen:</b> Viser Danmarks transaktioner med udlandet</li>
                         <li><b>Konjunkturindikatorer:</b> Førindikatorer fortæller os, hvor økonomien er på vej hen</li>
                         <li><b>Outputgap:</b> Måler forskellen mellem faktisk og potentielt BNP</li>
-                        <li><b>Det påvirker dig:</b> Som finansøkonom skal du forstå konjunkturer for at rådgive korrekt</li>
+                        <li><b>Det påvirker dig:</b> Som finansøkonom skal du forstå konjunkturer for at rådgive korrekt
+                        </li>
                     </ol>
                 </div>
 
@@ -616,8 +702,7 @@
                 <h2>Quiz</h2>
                 <div class="quiz-container">
                     <a href="MAKROQUIZ/makro3.html" class="effectLinks"
-                        data-replace="Start Quiz 3.1 om Konjunkturbeskrivelse"
-                        target="_blank">
+                        data-replace="Start Quiz 3.1 om Konjunkturbeskrivelse" target="_blank">
                         <span>Quiz 3.1 om Konjunkturbeskrivelse</span> </a>
                 </div>
                 <br><br>
@@ -713,7 +798,7 @@
     <script src="charts-api.js"></script>
     <script>
         // Initialize charts when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Balance of Payments from 1970 (54 years)
             createBalanceOfPaymentsChart('balanceOfPaymentsChart', 54);
             createMultiCountryUnemploymentInflationChart('unemploymentInflationChart', ['DNK', 'DEU', 'SWE', 'NOR']);
