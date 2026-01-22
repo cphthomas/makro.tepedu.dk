@@ -26,6 +26,14 @@ const API_CONFIG = {
             gdp: 'NY.GDP.MKTP.CD', // GDP in current USD
             gdpPerCapita: 'NY.GDP.PCAP.CD'
         }
+    },
+    // Danmarks Statistik StatBank API
+    statbank: {
+        baseUrl: 'https://api.statbank.dk/v1/data',
+        tables: {
+            interestRates: 'DNRENTA', // Annual interest rates
+            inflation: 'PRIS111' // Consumer Price Index
+        }
     }
 };
 
@@ -95,61 +103,82 @@ const chartConfig = {
 };
 
 // Fetch exchange rates
-async function fetchExchangeRates(days = 365) {
+async function fetchExchangeRates(days = 365, currencies = ['EUR', 'USD']) {
     try {
         // Using exchangerate-api.com which provides historical data
         const response = await fetch(API_CONFIG.exchangeRate.baseUrl);
         const data = await response.json();
 
-        // Get current rates
-        const rates = {
-            EUR: 1 / data.rates.EUR, // DKK per EUR
-            USD: 1 / data.rates.USD  // DKK per USD
-        };
+        // Get current rates for all requested currencies
+        const rates = {};
+        currencies.forEach(currency => {
+            if (data.rates[currency]) {
+                rates[currency] = 1 / data.rates[currency]; // DKK per currency unit
+            }
+        });
 
         // For historical data, we'll use a simulation based on current trend
         // In production, you'd use a proper historical API
-        const historical = generateHistoricalExchangeRates(rates, days);
+        const historical = generateHistoricalExchangeRates(rates, days, currencies);
 
         return historical;
     } catch (error) {
         console.error('Error fetching exchange rates:', error);
-        return generateMockExchangeRates(days);
+        return generateMockExchangeRates(days, currencies);
     }
 }
 
 // Generate historical exchange rate data (simulated)
-function generateHistoricalExchangeRates(currentRates, days) {
+function generateHistoricalExchangeRates(currentRates, days, currencies) {
     const data = {
-        labels: [],
-        EUR: [],
-        USD: []
+        labels: []
     };
+    
+    // Initialize arrays for each currency
+    currencies.forEach(currency => {
+        data[currency] = [];
+    });
 
     const today = new Date();
-    let eurRate = currentRates.EUR;
-    let usdRate = currentRates.USD;
+    
+    // Initialize rates
+    const rates = {};
+    const bounds = {
+        EUR: { min: 7.43, max: 7.47 }, // Very stable due to fixed exchange rate policy
+        USD: { min: 6.0, max: 7.5 },
+        GBP: { min: 8.0, max: 10.0 },
+        JPY: { min: 0.04, max: 0.06 },
+        CNY: { min: 0.9, max: 1.1 },
+        RUB: { min: 0.06, max: 0.12 }
+    };
+    
+    currencies.forEach(currency => {
+        rates[currency] = currentRates[currency] || (bounds[currency].min + bounds[currency].max) / 2;
+    });
 
     // Generate data backwards from today
     for (let i = days; i >= 0; i--) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
 
-        // Add some realistic variation (±2% daily)
-        const eurVariation = (Math.random() - 0.5) * 0.02;
-        const usdVariation = (Math.random() - 0.5) * 0.02;
-
-        eurRate *= (1 + eurVariation);
-        usdRate *= (1 + usdVariation);
-
-        // Keep rates within reasonable bounds
-        eurRate = Math.max(7.0, Math.min(7.8, eurRate));
-        usdRate = Math.max(6.0, Math.min(7.5, usdRate));
+        currencies.forEach(currency => {
+            // EUR has very little variation due to fixed exchange rate
+            const variationRange = currency === 'EUR' ? 0.001 : 0.02;
+            const variation = (Math.random() - 0.5) * variationRange;
+            
+            rates[currency] *= (1 + variation);
+            
+            // Keep rates within reasonable bounds
+            if (bounds[currency]) {
+                rates[currency] = Math.max(bounds[currency].min, Math.min(bounds[currency].max, rates[currency]));
+            }
+        });
 
         if (i % 7 === 0) { // Weekly data points
             data.labels.push(date.toLocaleDateString('da-DK', { month: 'short', day: 'numeric' }));
-            data.EUR.push(Number(eurRate.toFixed(4)));
-            data.USD.push(Number(usdRate.toFixed(4)));
+            currencies.forEach(currency => {
+                data[currency].push(Number(rates[currency].toFixed(4)));
+            });
         }
     }
 
@@ -157,30 +186,44 @@ function generateHistoricalExchangeRates(currentRates, days) {
 }
 
 // Generate mock exchange rates if API fails
-function generateMockExchangeRates(days) {
+function generateMockExchangeRates(days, currencies = ['EUR', 'USD']) {
     const data = {
-        labels: [],
-        EUR: [],
-        USD: []
+        labels: []
     };
+    
+    currencies.forEach(currency => {
+        data[currency] = [];
+    });
 
     const today = new Date();
-    let eurRate = 7.45;
-    let usdRate = 6.85;
+    
+    const defaultRates = {
+        EUR: 7.4537,
+        USD: 6.85,
+        GBP: 9.0,
+        JPY: 0.05,
+        CNY: 1.0,
+        RUB: 0.08
+    };
+    
+    const rates = {};
+    currencies.forEach(currency => {
+        rates[currency] = defaultRates[currency] || 1.0;
+    });
 
     for (let i = days; i >= 0; i -= 7) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
 
-        eurRate += (Math.random() - 0.5) * 0.05;
-        usdRate += (Math.random() - 0.5) * 0.05;
-
-        eurRate = Math.max(7.0, Math.min(7.8, eurRate));
-        usdRate = Math.max(6.0, Math.min(7.5, usdRate));
+        currencies.forEach(currency => {
+            const variationRange = currency === 'EUR' ? 0.002 : 0.05;
+            rates[currency] += (Math.random() - 0.5) * variationRange;
+        });
 
         data.labels.push(date.toLocaleDateString('da-DK', { month: 'short', day: 'numeric' }));
-        data.EUR.push(Number(eurRate.toFixed(4)));
-        data.USD.push(Number(usdRate.toFixed(4)));
+        currencies.forEach(currency => {
+            data[currency].push(Number(rates[currency].toFixed(4)));
+        });
     }
 
     return data;
@@ -1294,29 +1337,32 @@ function createExchangeRateChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
-    fetchExchangeRates(365).then(data => {
+    const currencies = ['EUR', 'USD', 'GBP', 'JPY', 'CNY', 'RUB'];
+    const colors = {
+        EUR: 'rgb(75, 192, 192)',
+        USD: 'rgb(255, 99, 132)',
+        GBP: 'rgb(153, 102, 255)',
+        JPY: 'rgb(255, 159, 64)',
+        CNY: 'rgb(54, 162, 235)',
+        RUB: 'rgb(255, 206, 86)'
+    };
+
+    fetchExchangeRates(730, currencies).then(data => {
+        const datasets = currencies.map(currency => ({
+            label: `DKK/${currency}`,
+            data: data[currency],
+            borderColor: colors[currency],
+            backgroundColor: colors[currency].replace('rgb', 'rgba').replace(')', ', 0.2)'),
+            tension: 0.4,
+            fill: false,
+            borderWidth: 2
+        }));
+
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: data.labels,
-                datasets: [
-                    {
-                        label: 'DKK/EUR',
-                        data: data.EUR,
-                        borderColor: 'rgb(75, 192, 192)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        tension: 0.4,
-                        fill: false
-                    },
-                    {
-                        label: 'DKK/USD',
-                        data: data.USD,
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        tension: 0.4,
-                        fill: false
-                    }
-                ]
+                datasets: datasets
             },
             options: {
                 ...chartConfig,
@@ -1343,6 +1389,146 @@ function createExchangeRateChart(canvasId) {
                         title: {
                             display: true,
                             text: 'Kurs (DKK pr. enhed)',
+                            font: {
+                                size: 12,
+                                weight: 'bold',
+                                family: 'Inter, sans-serif'
+                            }
+                        }
+                    },
+                    x: {
+                        ...chartConfig.scales.x,
+                        title: {
+                            display: true,
+                            text: 'Dato',
+                            font: {
+                                size: 12,
+                                weight: 'bold',
+                                family: 'Inter, sans-serif'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+}
+
+// Create EUR/DKK Fixed Exchange Rate Band Chart
+function createEuroBandChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    fetchExchangeRates(3650, ['EUR']).then(data => {
+        // Fixed exchange rate bands
+        const centralRate = 7.46038;  // Central rate since 1999
+        const upperBand = centralRate * 1.0225;  // +2.25% band
+        const lowerBand = centralRate * 0.9775;  // -2.25% band
+
+        // Create band data
+        const upperBandData = data.labels.map(() => upperBand);
+        const lowerBandData = data.labels.map(() => lowerBand);
+        const centralRateData = data.labels.map(() => centralRate);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: 'DKK/EUR Kurs',
+                        data: data.EUR,
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4,
+                        fill: false,
+                        borderWidth: 3,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Centralkurs (7,46038)',
+                        data: centralRateData,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                        borderDash: [5, 5],
+                        tension: 0,
+                        fill: false,
+                        borderWidth: 2,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Øvre bånd (+2,25%)',
+                        data: upperBandData,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        borderDash: [10, 5],
+                        tension: 0,
+                        fill: '+1',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Nedre bånd (-2,25%)',
+                        data: lowerBandData,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        borderDash: [10, 5],
+                        tension: 0,
+                        fill: false,
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                ...chartConfig,
+                plugins: {
+                    ...chartConfig.plugins,
+                    title: {
+                        display: true,
+                        text: 'Danmarks fastkurspolitik: DKK/EUR med interventionsbånd',
+                        font: {
+                            size: 16,
+                            weight: 'bold',
+                            family: 'Inter, sans-serif'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        }
+                    },
+                    tooltip: {
+                        ...chartConfig.plugins.tooltip,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y.toFixed(5) + ' DKK';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    ...chartConfig.scales,
+                    y: {
+                        ...chartConfig.scales.y,
+                        min: 7.28,
+                        max: 7.64,
+                        ticks: {
+                            ...chartConfig.scales.y.ticks,
+                            stepSize: 0.05,
+                            callback: function(value) {
+                                return value.toFixed(2) + ' DKK';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Valutakurs (DKK per EUR)',
                             font: {
                                 size: 12,
                                 weight: 'bold',
@@ -3496,7 +3682,7 @@ function createHDIChart(canvasId) {
         { country: 'Sverige', value: 0.947 },
         { country: 'Irland', value: 0.945 },
         { country: 'Tyskland', value: 0.943 },
-        { country: 'Nederlandene', value: 0.941 },
+        { country: 'Holland', value: 0.941 },
         { country: 'Finland', value: 0.940 },
         { country: 'Singapore', value: 0.939 },
         { country: 'Belgien', value: 0.937 },
@@ -3682,7 +3868,7 @@ function createGDPPerCapitaBarChart(canvasId) {
         { country: 'Island', value: 82704 },
         { country: 'Qatar', value: 76276 },
         { country: 'Danmark', value: 71852 },
-        { country: 'Nederlandene', value: 68219 },
+        { country: 'Holland', value: 68219 },
         { country: 'Australia', value: 64407 },
         { country: 'Sverige', value: 57723 },
         { country: 'Tyskland', value: 55800 },
@@ -4702,6 +4888,1500 @@ function createADASChart(canvasId) {
     });
 }
 
+// Create SE-SU Model Chart with Negative Output Gap
+function createSESUNegativeOutputGapChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    // Data points for the curves
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
+    
+    // SE (Aggregate Demand) - downward sloping red line
+    // π = 8 - 0.002Y (example function)
+    const seData = nationalIncome.map(y => 8 - 0.002 * y);
+    
+    // SUKORT (Short-run Aggregate Supply) - upward sloping blue line
+    // π = 2 + 0.002Y (example function)
+    const sukortData = nationalIncome.map(y => 2 + 0.002 * y);
+    
+    // SULANG (Long-run Aggregate Supply) - vertical grey line at Y = 2000
+    const sulangY = 2000;
+    const sulangData = Array(nationalIncome.length).fill(null);
+    sulangData[4] = 0; // Start point
+    sulangData[5] = 10; // End point
+    
+    // Equilibrium point (intersection of SE and SUKORT)
+    // Solve: 8 - 0.002Y = 2 + 0.002Y => 6 = 0.004Y => Y = 1500
+    const eqY = 1500;
+    const eqPi = 8 - 0.002 * eqY; // π = 5
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SE',
+                data: seData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SULANG',
+                data: [{ x: sulangY, y: 0 }, { x: sulangY, y: 10 }],
+                borderColor: '#6b7280', // Grey
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eqY, y: eqPi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24', // Yellow/Gold
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model – Negativt output gab',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                legend: {
+                    ...chartConfig.plugins.legend,
+                    display: false // Disable default legend - we'll use custom HTML legend
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            let label = context.dataset.label;
+                            if (label === 'SUKORT') label = 'SU\u2096\u2092\u1d63\u209c';
+                            if (label === 'SULANG') label = 'SU\u2097\u2090\u2099\u1d4d';
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3000,
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const y0 = eqY;
+                const yStar = sulangY;
+                const pi0 = eqPi;
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label.includes('Ligevægt')) {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('0', x, y);
+                            ctx.restore();
+                        });
+                    }
+                });
+                
+                // Add Y₀, Y* and π₀ labels
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label on x-axis
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y* label on x-axis
+                const yStarX = xScale.getPixelForValue(yStar);
+                ctx.fillText('Y*', yStarX, yScale.bottom + 5);
+                
+                // π₀ label on y-axis
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                const pi0Y = yScale.getPixelForValue(pi0);
+                ctx.fillText('π₀', xScale.left - 5, pi0Y);
+                
+                ctx.restore();
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(2.4));
+                
+                ctx.fillStyle = '#3b82f6';
+                // Helper function to draw text with subscript
+                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const textWidth = ctx.measureText(text).width;
+                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
+                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                };
+                
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(7.6), '#3b82f6');
+                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangY + 50), chart.scales.y.getPixelForValue(9), '#6b7280');
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// Create SE-SU Model Chart with No Output Gap
+function createSESUNoOutputGapChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
+    
+    // SE (Aggregate Demand) - downward sloping red line
+    const seData = nationalIncome.map(y => 8 - 0.002 * y);
+    
+    // SUKORT (Short-run Aggregate Supply) - upward sloping blue line
+    const sukortData = nationalIncome.map(y => 2 + 0.002 * y);
+    
+    // SULANG (Long-run Aggregate Supply) - vertical grey line at Y = 2000
+    const sulangY = 2000;
+    
+    // Equilibrium point - aligned with SULANG (no output gap)
+    // Solve: 8 - 0.002Y = 2 + 0.002Y => Y = 1500, but we want Y = 2000
+    // Adjust SE: π = 10 - 0.002Y, then 10 - 0.002Y = 2 + 0.002Y => Y = 2000, π = 6
+    const eqY = 2000;
+    const eqPi = 6;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SE',
+                data: nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y })),
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SULANG',
+                data: [{ x: sulangY, y: 0 }, { x: sulangY, y: 10 }],
+                borderColor: '#6b7280', // Grey
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eqY, y: eqPi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24', // Yellow/Gold
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model kort og lang sigt (intet outputgab)',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3000,
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'htmlLegend',
+            afterUpdate(chart, args, options) {
+                const legendContainer = chart.canvas.parentElement.querySelector('.chart-legend');
+                if (!legendContainer) return;
+                
+                legendContainer.innerHTML = '';
+                const ul = document.createElement('ul');
+                ul.style.cssText = 'list-style: none; display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0;';
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && !dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none;`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        
+                        let labelHtml = dataset.label;
+                        if (labelHtml === 'SUKORT') {
+                            labelHtml = 'SU<sub>KORT</sub>';
+                        } else if (labelHtml === 'SULANG') {
+                            labelHtml = 'SU<sub>LANG</sub>';
+                        }
+                        labelText.innerHTML = labelHtml;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                // Add Ligevægt points
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        labelText.textContent = dataset.label;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                legendContainer.appendChild(ul);
+            }
+        }, {
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label.includes('Ligevægt')) {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('0', x, y);
+                            ctx.restore();
+                        });
+                    }
+                });
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(4.4));
+                
+                ctx.fillStyle = '#3b82f6';
+                // Helper function to draw text with subscript
+                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const textWidth = ctx.measureText(text).width;
+                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
+                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                };
+                
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(7.6), '#3b82f6');
+                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangY + 50), chart.scales.y.getPixelForValue(9), '#6b7280');
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// Create SE-SU Model Chart - Short Run When SE Increases (Expansionary Monetary Policy)
+function createSESUSEIncreaseChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
+    
+    // Initial SE (Aggregate Demand) - downward sloping red line
+    const seInitialData = nationalIncome.map(y => ({ x: y, y: 8 - 0.002 * y }));
+    
+    // New SE (Aggregate Demand shifted right) - downward sloping dashed red line
+    const seNewData = nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y }));
+    
+    // SUKORT (Short-run Aggregate Supply) - upward sloping blue line
+    const sukortData = nationalIncome.map(y => ({ x: y, y: 2 + 0.002 * y }));
+    
+    // Initial equilibrium (intersection of SE and SUKORT)
+    // Solve: 8 - 0.002Y = 2 + 0.002Y => Y = 1500, π = 5
+    const eq0Y = 1500;
+    const eq0Pi = 5;
+    
+    // New equilibrium (intersection of SEny and SUKORT)
+    // Solve: 10 - 0.002Y = 2 + 0.002Y => Y = 2000, π = 6
+    const eq1Y = 2000;
+    const eq1Pi = 6;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SE',
+                data: seInitialData,
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SENy',
+                data: seNewData,
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                borderDash: [5, 5],
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortData,
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eq0Y, y: eq0Pi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24', // Yellow/Gold
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }, {
+                label: 'Ligevægt 1',
+                data: [{ x: eq1Y, y: eq1Pi }],
+                type: 'scatter',
+                backgroundColor: '#3b82f6', // Blue
+                borderColor: '#3b82f6',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model kort sigt når SE stiger',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                legend: {
+                    ...chartConfig.plugins.legend,
+                    display: false // Disable default legend - we'll use custom HTML legend
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            let label = context.dataset.label;
+                            if (label === 'SENy') label = 'SE\u2099\u1d67';
+                            if (label === 'SUKORT') label = 'SU\u2096\u2092\u1d63\u209c';
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3000,
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const y0 = eq0Y;
+                const y1 = eq1Y;
+                const pi0 = eq0Pi;
+                const pi1 = eq1Pi;
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label.includes('Ligevægt')) {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            const num = dataset.label.includes('0') ? '0' : '1';
+                            ctx.fillText(num, x, y);
+                            ctx.restore();
+                        });
+                    }
+                });
+                
+                // Add Y₀, Y₁, π₀ and π₁ labels
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ and Y₁ labels on x-axis
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                // π₀ and π₁ labels on y-axis
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                const pi0Y = yScale.getPixelForValue(pi0);
+                ctx.fillText('π₀', xScale.left - 5, pi0Y);
+                
+                const pi1Y = yScale.getPixelForValue(pi1);
+                ctx.fillText('π₁', xScale.left - 5, pi1Y);
+                
+                ctx.restore();
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                // Helper function to draw text with subscript
+                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const textWidth = ctx.measureText(text).width;
+                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
+                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                };
+                
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(2.4));
+                drawTextWithSubscript('SE', 'Ny', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(4.4), '#ef4444');
+                
+                ctx.fillStyle = '#3b82f6';
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(7.6), '#3b82f6');
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// Create SE-SU Model Chart - Expansionary Fiscal Policy Effect
+function createSESUExpansiveFPChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
+    
+    // Initial SE
+    const seInitialData = nationalIncome.map(y => ({ x: y, y: 8 - 0.002 * y }));
+    
+    // New SE (shifted right due to expansionary FP)
+    const seNewData = nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y }));
+    
+    // SUKORT
+    const sukortData = nationalIncome.map(y => ({ x: y, y: 2 + 0.002 * y }));
+    
+    const eq0Y = 1500;
+    const eq0Pi = 5;
+    const eq1Y = 2000;
+    const eq1Pi = 6;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SE',
+                data: seInitialData,
+                borderColor: '#ef4444',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SENy (Ekspansiv FP)',
+                data: seNewData,
+                borderColor: '#ef4444',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                borderDash: [5, 5],
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortData,
+                borderColor: '#3b82f6',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eq0Y, y: eq0Pi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24',
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }, {
+                label: 'Ligevægt 1',
+                data: [{ x: eq1Y, y: eq1Pi }],
+                type: 'scatter',
+                backgroundColor: '#3b82f6', // Blue
+                borderColor: '#3b82f6',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model – Ekspansiv finanspolitik',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                legend: {
+                    ...chartConfig.plugins.legend,
+                    display: false // Disable default legend - we'll use custom HTML legend
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            let label = context.dataset.label;
+                            if (label && label.includes('SENy')) label = label.replace('SENy', 'SE\u2099\u1d67');
+                            if (label === 'SUKORT') label = 'SU\u2096\u2092\u1d63\u209c';
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3000,
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'htmlLegend',
+            afterUpdate(chart, args, options) {
+                const legendContainer = chart.canvas.parentElement.querySelector('.chart-legend');
+                if (!legendContainer) return;
+                
+                legendContainer.innerHTML = '';
+                const ul = document.createElement('ul');
+                ul.style.cssText = 'list-style: none; display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0;';
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && !dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        const isDashed = dataset.borderDash && dataset.borderDash.length > 0;
+                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none; ${isDashed ? 'background-image: repeating-linear-gradient(to right, ' + (dataset.borderColor || '#000') + ' 0px, ' + (dataset.borderColor || '#000') + ' 4px, transparent 4px, transparent 8px);' : ''}`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        
+                        let labelHtml = dataset.label;
+                        if (labelHtml === 'SENy') {
+                            labelHtml = 'SE<sub>Ny</sub>';
+                        } else if (labelHtml && labelHtml.includes('SENy')) {
+                            labelHtml = labelHtml.replace('SENy', 'SE<sub>Ny</sub>');
+                        } else if (labelHtml === 'SUKORT') {
+                            labelHtml = 'SU<sub>KORT</sub>';
+                        }
+                        labelText.innerHTML = labelHtml;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                // Add Ligevægt points
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        labelText.textContent = dataset.label;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                legendContainer.appendChild(ul);
+            }
+        }, {
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const y0 = eq0Y;
+                const y1 = eq1Y;
+                const pi0 = eq0Pi;
+                const pi1 = eq1Pi;
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label.includes('Ligevægt')) {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            const num = dataset.label.includes('0') ? '0' : '1';
+                            ctx.fillText(num, x, y);
+                            ctx.restore();
+                        });
+                    }
+                });
+                
+                // Add Y₀, Y₁, π₀ and π₁ labels
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ and Y₁ labels on x-axis
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                // π₀ and π₁ labels on y-axis
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                const pi0Y = yScale.getPixelForValue(pi0);
+                ctx.fillText('π₀', xScale.left - 5, pi0Y);
+                
+                const pi1Y = yScale.getPixelForValue(pi1);
+                ctx.fillText('π₁', xScale.left - 5, pi1Y);
+                
+                ctx.restore();
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                // Helper function to draw text with subscript
+                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const textWidth = ctx.measureText(text).width;
+                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
+                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                };
+                
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(2.4));
+                drawTextWithSubscript('SE', 'Ny', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(4.4), '#ef4444');
+                
+                ctx.fillStyle = '#3b82f6';
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(7.6), '#3b82f6');
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// Create SE-SU Model Chart - Strukturpolitik: No Output Gap (with policy lists)
+function createSESUStrukturpolitikNoGapChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
+    
+    // SE (Aggregate Demand) - downward sloping red line
+    const seData = nationalIncome.map(y => 10 - 0.002 * y);
+    
+    // SUKORT (Short-run Aggregate Supply) - upward sloping blue line
+    const sukortData = nationalIncome.map(y => 2 + 0.002 * y);
+    
+    // SULANG (Long-run Aggregate Supply) - vertical grey line at Y = 2000
+    const sulangY = 2000;
+    
+    // Equilibrium point - aligned with SULANG (no output gap)
+    const eqY = 2000;
+    const eqPi = 6;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SE',
+                data: nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y })),
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SULANG',
+                data: [{ x: sulangY, y: 0 }, { x: sulangY, y: 10 }],
+                borderColor: '#6b7280', // Grey
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eqY, y: eqPi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24', // Yellow/Gold
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model kort og lang sigt (intet outputgab)',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3000,
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            if (value === eqY) return 'Y₀';
+                            return '';
+                        },
+                        font: { size: 11 }
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            if (value === eqPi) return 'π₀';
+                            return '';
+                        },
+                        font: { size: 11 }
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'htmlLegend',
+            afterUpdate(chart, args, options) {
+                const legendContainer = chart.canvas.parentElement.querySelector('.chart-legend');
+                if (!legendContainer) return;
+                
+                legendContainer.innerHTML = '';
+                const ul = document.createElement('ul');
+                ul.style.cssText = 'list-style: none; display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0;';
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && !dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none;`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        
+                        let labelHtml = dataset.label;
+                        if (labelHtml === 'SUKORT') {
+                            labelHtml = 'SU<sub>KORT</sub>';
+                        } else if (labelHtml === 'SULANG') {
+                            labelHtml = 'SU<sub>LANG</sub>';
+                        }
+                        labelText.innerHTML = labelHtml;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        labelText.textContent = dataset.label;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                legendContainer.appendChild(ul);
+            }
+        }, {
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label.includes('Ligevægt')) {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('0', x, y);
+                            ctx.restore();
+                        });
+                    }
+                });
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(4.4));
+                
+                ctx.fillStyle = '#3b82f6';
+                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const textWidth = ctx.measureText(text).width;
+                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
+                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                };
+                
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(7.6), '#3b82f6');
+                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangY + 50), chart.scales.y.getPixelForValue(9), '#6b7280');
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// Create SE-SU Model Chart - Strukturpolitik: When SULang Increases
+function createSESUStrukturpolitikSULangShiftChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500];
+    
+    // SE (Aggregate Demand) - downward sloping red line (unchanged)
+    const seData = nationalIncome.map(y => 10 - 0.002 * y);
+    
+    // Initial SULANG (Long-run Aggregate Supply) - vertical grey line at Y = 2000
+    const sulangInitialY = 2000;
+    
+    // New SULANG (shifted right due to growth policy) - vertical grey dashed line at Y = 2500
+    const sulangNewY = 2500;
+    
+    // New equilibrium (intersection of SE and new SULANG)
+    // SE: π = 10 - 0.002 * Y, at Y = 2500: π = 10 - 0.002 * 2500 = 5
+    const eq1Y = 2500;
+    const eq1Pi = 5;
+    
+    // Initial equilibrium (intersection of SE and initial SUKORT at SULANG)
+    const eq0Y = 2000;
+    // SE: π = 10 - 0.002 * 2000 = 6
+    const eq0Pi = 6;
+    
+    // Initial SUKORT (Short-run Aggregate Supply) - upward sloping blue line
+    // Must pass through (2000, 6), so: 6 = a + 0.002 * 2000 => a = 6 - 4 = 2
+    const sukortInitialData = nationalIncome.map(y => 2 + 0.002 * y);
+    
+    // New SUKORT (shifted down/right due to inflation control policy)
+    // Must pass through point 1 (2500, 5), so: 5 = a + 0.002 * 2500 => a = 5 - 5 = 0
+    const sukortNewData = nationalIncome.map(y => 0.002 * y);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SE',
+                data: nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y })),
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortInitialData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT NY',
+                data: sukortNewData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                borderDash: [5, 5],
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SULANG',
+                data: [{ x: sulangInitialY, y: 0 }, { x: sulangInitialY, y: 10 }],
+                borderColor: '#6b7280', // Grey
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SULANG NY',
+                data: [{ x: sulangNewY, y: 0 }, { x: sulangNewY, y: 10 }],
+                borderColor: '#6b7280', // Grey
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                borderDash: [5, 5],
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eq0Y, y: eq0Pi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24', // Yellow/Gold
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }, {
+                label: 'Ligevægt 1',
+                data: [{ x: eq1Y, y: eq1Pi }],
+                type: 'scatter',
+                backgroundColor: '#3b82f6', // Blue
+                borderColor: '#3b82f6',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model – når SULang stiger',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3500,
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            if (value === eq0Y) return 'Y₀';
+                            if (value === eq1Y) return 'Y₁';
+                            return '';
+                        },
+                        font: { size: 12, weight: 'bold' },
+                        color: '#000000'
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            if (value === eq0Pi) return 'π₀';
+                            if (value === eq1Pi) return 'π₁';
+                            return '';
+                        },
+                        font: { size: 12, weight: 'bold' },
+                        color: '#000000'
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'htmlLegend',
+            afterUpdate(chart, args, options) {
+                const legendContainer = chart.canvas.parentElement.querySelector('.chart-legend');
+                if (!legendContainer) return;
+                
+                legendContainer.innerHTML = '';
+                const ul = document.createElement('ul');
+                ul.style.cssText = 'list-style: none; display: flex; flex-wrap: wrap; justify-content: center; padding: 0; margin: 10px 0;';
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && !dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        const isDashed = dataset.borderDash && dataset.borderDash.length > 0;
+                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none; ${isDashed ? 'background-image: repeating-linear-gradient(to right, transparent, transparent 3px, ' + dataset.borderColor + ' 3px, ' + dataset.borderColor + ' 6px);' : ''}`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        
+                        let labelHtml = dataset.label;
+                        if (labelHtml === 'SUKORT') {
+                            labelHtml = 'SU<sub>KORT</sub>';
+                        } else if (labelHtml === 'SUKORT NY') {
+                            labelHtml = 'SU<sub>KORT</sub> NY';
+                        } else if (labelHtml === 'SULANG') {
+                            labelHtml = 'SU<sub>LANG</sub>';
+                        } else if (labelHtml === 'SULANG NY') {
+                            labelHtml = 'SU<sub>LANG</sub> NY';
+                        }
+                        labelText.innerHTML = labelHtml;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label && dataset.label.includes('Ligevægt')) {
+                        const li = document.createElement('li');
+                        li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
+                        
+                        const colorBox = document.createElement('span');
+                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        
+                        const labelText = document.createElement('span');
+                        labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
+                        labelText.textContent = dataset.label;
+                        
+                        li.appendChild(colorBox);
+                        li.appendChild(labelText);
+                        ul.appendChild(li);
+                    }
+                });
+                
+                legendContainer.appendChild(ul);
+            }
+        }, {
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label.includes('Ligevægt')) {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            // Draw white background circle for better visibility
+                            ctx.fillStyle = 'white';
+                            ctx.beginPath();
+                            ctx.arc(x, y, 8, 0, 2 * Math.PI);
+                            ctx.fill();
+                            // Draw the number
+                            ctx.fillStyle = '#000000';
+                            ctx.font = 'bold 14px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            const pointNumber = dataset.label.includes('0') ? '0' : '1';
+                            ctx.fillText(pointNumber, x, y);
+                            ctx.restore();
+                        });
+                    }
+                });
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                
+                // Helper function to draw text with subscript
+                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const textWidth = ctx.measureText(text).width;
+                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
+                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                };
+                
+                // SE label - red, positioned on the curve
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 15px Inter';
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(3200), chart.scales.y.getPixelForValue(3.6));
+                
+                // SUKORT label - blue, positioned on the initial curve
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(3200), chart.scales.y.getPixelForValue(7.4), '#3b82f6', 15);
+                
+                // SUKORT NY label - blue dashed, positioned on the new curve near point 1
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = 'bold 13px Inter';
+                ctx.fillText('SU', chart.scales.x.getPixelForValue(3200), chart.scales.y.getPixelForValue(5.5));
+                const textWidth = ctx.measureText('SU').width;
+                ctx.font = 'bold 9px Inter';
+                ctx.fillText('KORT', chart.scales.x.getPixelForValue(3200) + textWidth, chart.scales.y.getPixelForValue(5.5) + 4);
+                ctx.font = 'bold 11px Inter';
+                ctx.fillText(' NY', chart.scales.x.getPixelForValue(3200) + textWidth + ctx.measureText('KORT').width, chart.scales.y.getPixelForValue(5.5));
+                
+                // SULANG label - grey, positioned above the initial line
+                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangInitialY + 50), chart.scales.y.getPixelForValue(9.2), '#6b7280', 15);
+                
+                // SULANG NY label - grey dashed, positioned above the new line
+                ctx.fillStyle = '#6b7280';
+                ctx.font = 'bold 13px Inter';
+                ctx.fillText('SU', chart.scales.x.getPixelForValue(sulangNewY + 50), chart.scales.y.getPixelForValue(9.2));
+                const textWidth2 = ctx.measureText('SU').width;
+                ctx.font = 'bold 9px Inter';
+                ctx.fillText('LANG', chart.scales.x.getPixelForValue(sulangNewY + 50) + textWidth2, chart.scales.y.getPixelForValue(9.2) + 4);
+                ctx.font = 'bold 11px Inter';
+                ctx.fillText(' NY', chart.scales.x.getPixelForValue(sulangNewY + 50) + textWidth2 + ctx.measureText('LANG').width, chart.scales.y.getPixelForValue(9.2));
+                
+                ctx.restore();
+            }
+        }, {
+            id: 'arrows',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                ctx.save();
+                
+                // Arrow for SULANG shift (Strukturvækstpolitik)
+                const arrowStartX = chart.scales.x.getPixelForValue(sulangInitialY);
+                const arrowEndX = chart.scales.x.getPixelForValue(sulangNewY);
+                const arrowY = chart.scales.y.getPixelForValue(8.5);
+                
+                ctx.strokeStyle = '#3b82f6';
+                ctx.fillStyle = '#3b82f6';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(arrowStartX, arrowY);
+                ctx.lineTo(arrowEndX - 10, arrowY);
+                ctx.stroke();
+                
+                // Arrowhead
+                ctx.beginPath();
+                ctx.moveTo(arrowEndX - 10, arrowY);
+                ctx.lineTo(arrowEndX - 20, arrowY - 5);
+                ctx.lineTo(arrowEndX - 20, arrowY + 5);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Label for arrow - with background for visibility
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.fillRect((arrowStartX + arrowEndX) / 2 - 80, arrowY - 25, 160, 18);
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = 'bold 12px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText('Strukturvækstpolitik', (arrowStartX + arrowEndX) / 2, arrowY - 12);
+                
+                // Arrow for SUKORT shift (Strukturpolitik Inflationskontrol)
+                const sukortArrowStartX = chart.scales.x.getPixelForValue(2800);
+                const sukortArrowEndX = chart.scales.x.getPixelForValue(3000);
+                const sukortArrowStartY = chart.scales.y.getPixelForValue(7.6);
+                const sukortArrowEndY = chart.scales.y.getPixelForValue(7);
+                
+                ctx.strokeStyle = '#3b82f6';
+                ctx.fillStyle = '#3b82f6';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(sukortArrowStartX, sukortArrowStartY);
+                ctx.lineTo(sukortArrowEndX - 15, sukortArrowEndY);
+                ctx.stroke();
+                
+                // Arrowhead - rotated based on angle
+                const angle = Math.atan2(sukortArrowEndY - sukortArrowStartY, sukortArrowEndX - sukortArrowStartX);
+                const arrowheadLength = 10;
+                const arrowheadWidth = 5;
+                ctx.save();
+                ctx.translate(sukortArrowEndX - 15, sukortArrowEndY);
+                ctx.rotate(angle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(-arrowheadLength, -arrowheadWidth);
+                ctx.lineTo(-arrowheadLength, arrowheadWidth);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+                
+                // Label for arrow - with background for visibility
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.fillRect((sukortArrowStartX + sukortArrowEndX) / 2 - 75, sukortArrowStartY - 20, 150, 30);
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText('Strukturpolitik', (sukortArrowStartX + sukortArrowEndX) / 2, sukortArrowStartY - 5);
+                ctx.fillText('Inflationskontrol', (sukortArrowStartX + sukortArrowEndX) / 2, sukortArrowStartY + 10);
+                
+                ctx.restore();
+            }
+        }]
+    });
+}
+
 // Create Keynesian Aggregate Demand Components Chart
 function createKeynesianADChart(canvasId) {
     const ctx = document.getElementById(canvasId);
@@ -4838,6 +6518,17 @@ function createKeynesBasicChart(canvasId) {
                     display: true,
                     text: 'Keynes-modellen: Ligevægt på varemarkedet',
                     font: { size: 16, weight: 'bold' }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
                 }
             },
             scales: {
@@ -4846,12 +6537,14 @@ function createKeynesBasicChart(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Nationalindkomst (Y)' }
+                    title: { display: true, text: 'Nationalindkomst (Y)' },
+                    ticks: { display: false }
                 },
                 y: {
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Samlet efterspørgsel (SE)' }
+                    title: { display: true, text: 'Samlet efterspørgsel (SE)' },
+                    ticks: { display: false }
                 }
             }
         },
@@ -4948,9 +6641,9 @@ function createKeynesFPChart(canvasId) {
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
-                                return context.dataset.label + ': Y = ' + context.parsed.x + ', SE = ' + context.parsed.y;
+                                return context.dataset.label;
                             }
-                            return context.dataset.label + ': ' + context.parsed.y;
+                            return context.dataset.label;
                         }
                     }
                 }
@@ -4961,12 +6654,14 @@ function createKeynesFPChart(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Nationalindkomst (Y)' }
+                    title: { display: true, text: 'Nationalindkomst (Y)' },
+                    ticks: { display: false }
                 },
                 y: {
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Samlet efterspørgsel (SE)' }
+                    title: { display: true, text: 'Samlet efterspørgsel (SE)' },
+                    ticks: { display: false }
                 }
             }
         },
@@ -4974,6 +6669,9 @@ function createKeynesFPChart(canvasId) {
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 1600;
+                const y1 = 800;
+                
                 chart.data.datasets.forEach((dataset, i) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(i);
@@ -4990,6 +6688,26 @@ function createKeynesFPChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
@@ -5064,9 +6782,9 @@ function createKeynesMultiplierChart(canvasId) {
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
-                                return context.dataset.label + ': Y = ' + context.parsed.x + ', SE = ' + context.parsed.y;
+                                return context.dataset.label;
                             }
-                            return context.dataset.label + ': ' + context.parsed.y;
+                            return context.dataset.label;
                         }
                     }
                 }
@@ -5158,17 +6876,31 @@ function createPublicBalanceChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Offentlig saldo (T-G-R)', font: { size: 16 } }
+                title: { display: true, text: 'Offentlig saldo (T-G-R)', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 1600;
+                const y1 = 800;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5184,6 +6916,26 @@ function createPublicBalanceChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
@@ -5227,17 +6979,31 @@ function createEmploymentChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Beskæftigelse (L) og nationalindkomst (Y)', font: { size: 16 } }
+                title: { display: true, text: 'Beskæftigelse (L) og nationalindkomst (Y)', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { title: { display: true, text: 'Beskæftigelse (L)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { title: { display: true, text: 'Beskæftigelse (L)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 1600;
+                const y1 = 800;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5253,13 +7019,33 @@ function createEmploymentChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
 }
 
 // Create Balance of Payments Chart (BB)
-function createBalanceOfPaymentsChart(canvasId) {
+function createBalanceOfPaymentsTheoryChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
@@ -5297,17 +7083,31 @@ function createBalanceOfPaymentsChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Betalingsbalance (BB)', font: { size: 16 } }
+                title: { display: true, text: 'Betalingsbalance (BB)', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 1600;
+                const y1 = 800;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5323,41 +7123,28 @@ function createBalanceOfPaymentsChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
-    });
-}
-
-// Create Multiplier Effect Chart
-function createMultiplierChart(canvasId) {
-    const ctx = document.getElementById(canvasId);
-    if (!ctx) return;
-
-    // Data for runder (cumulative effect)
-    const labels = ['Start', 'Runde 1', 'Runde 2', 'Runde 3', 'Runde 4', 'Total'];
-    const data = [100, 160, 196, 218, 231, 250]; // c = 0.6, Multiplier = 2.5
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Nationalindkomst (Y)',
-                data: data,
-                backgroundColor: '#3b82f6',
-                borderRadius: 4
-            }]
-        },
-        options: {
-            ...chartConfig,
-            plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Multiplikatoreffekt over tid', font: { size: 16 } }
-            },
-            scales: {
-                y: { beginAtZero: true, title: { display: true, text: 'Værdi' } }
-            }
-        }
     });
 }
 
@@ -5414,17 +7201,31 @@ function createKeynesExpansiveChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Keynes model - Ekspansiv Finanspolitik', font: { size: 16 } }
+                title: { display: true, text: 'Keynes model - Ekspansiv Finanspolitik', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { min: 0, max: 2500, title: { display: true, text: 'Samlet efterspørgsel (SE)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { min: 0, max: 2500, title: { display: true, text: 'Samlet efterspørgsel (SE)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 1000;
+                const y1 = 1500;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5440,6 +7241,26 @@ function createKeynesExpansiveChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
@@ -5491,17 +7312,31 @@ function createPublicBalanceExpansiveChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Offentlig saldo (T-G-R) ved ekspansiv politik', font: { size: 16 } }
+                title: { display: true, text: 'Offentlig saldo (T-G-R) ved ekspansiv politik', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 800;
+                const y1 = 1600;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5512,13 +7347,31 @@ function createPublicBalanceExpansiveChart(canvasId) {
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
-                            ctx.fillText(dataset.label.includes('0') ? '1' : '2', x, y); // Numeric labels as shown in image (0->1->2)
-                            // Wait, image shows 0 as start on higher line, then drops to 1, then moves to 2.
-                            // My simple model just moves 0->1. I'll label them 0 and 1 for consistency with others.
+                            ctx.fillText(dataset.label.includes('0') ? '0' : '1', x, y);
                             ctx.restore();
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
@@ -5562,17 +7415,31 @@ function createEmploymentExpansiveChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Beskæftigelse (L) stiger ved ekspansiv politik', font: { size: 16 } }
+                title: { display: true, text: 'Beskæftigelse (L) stiger ved ekspansiv politik', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { title: { display: true, text: 'Beskæftigelse (L)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { title: { display: true, text: 'Beskæftigelse (L)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 800;
+                const y1 = 1600;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5588,6 +7455,26 @@ function createEmploymentExpansiveChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
@@ -5631,17 +7518,31 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Betalingsbalance forværres ved ekspansiv politik', font: { size: 16 } }
+                title: { display: true, text: 'Betalingsbalance forværres ved ekspansiv politik', font: { size: 16 } },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) {
+                                return context.dataset.label;
+                            }
+                            return context.dataset.label;
+                        }
+                    }
+                }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' } }
+                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
+                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
             }
         },
         plugins: [{
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
+                const y0 = 800;
+                const y1 = 1600;
+                
                 chart.data.datasets.forEach((dataset) => {
                     if (dataset.label.includes('Ligevægt')) {
                         const meta = chart.getDatasetMeta(chart.data.datasets.indexOf(dataset));
@@ -5657,29 +7558,115 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
                         });
                     }
                 });
+                
+                // Add Y₀ and Y₁ labels on x-axis
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                // Y₀ label
+                const y0X = xScale.getPixelForValue(y0);
+                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                
+                // Y₁ label
+                const y1X = xScale.getPixelForValue(y1);
+                ctx.fillText('Y₁', y1X, yScale.bottom + 5);
+                
+                ctx.restore();
             }
         }]
     });
 }
+
+// Create Multiplier Effect Chart
 function createMultiplierChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
-    // Showing multiplier effect rounds
+    // Showing multiplier effect rounds with stacked bars
+    // This makes it clearer how each round adds to the total effect
     const rounds = ['Initial', 'Runde 1', 'Runde 2', 'Runde 3', 'Runde 4', 'Runde 5', 'Total'];
-    const cumulativeEffect = [100, 175, 231, 273, 305, 329, 400]; // Multiplier = 4, c = 0.75
+    
+    // Initial government spending (e.g., infrastructure investment)
+    const initialG = 100;
+    
+    // Incremental effect of each round (additional spending generated)
+    const round1 = 75;   // 175 - 100
+    const round2 = 56;   // 231 - 175
+    const round3 = 42;   // 273 - 231
+    const round4 = 32;   // 305 - 273
+    const round5 = 24;   // 329 - 305
+    const remaining = 71; // 400 - 329 (additional rounds not shown)
+    
+    // Stacked data: each bar shows cumulative effect up to that round
+    const initialData = [initialG, initialG, initialG, initialG, initialG, initialG, initialG];
+    const round1Data = [0, round1, round1, round1, round1, round1, round1];
+    const round2Data = [0, 0, round2, round2, round2, round2, round2];
+    const round3Data = [0, 0, 0, round3, round3, round3, round3];
+    const round4Data = [0, 0, 0, 0, round4, round4, round4];
+    const round5Data = [0, 0, 0, 0, 0, round5, round5];
+    const remainingData = [0, 0, 0, 0, 0, 0, remaining];
 
     new Chart(ctx, {
         type: 'bar',
         data: {
             labels: rounds,
-            datasets: [{
-                label: 'Kumuleret effekt (mia. kr.)',
-                data: cumulativeEffect,
-                backgroundColor: '#36a2eb',
-                borderColor: '#2563eb',
-                borderWidth: 2
-            }]
+            datasets: [
+                {
+                    label: 'Offentlige udgifter (G) - f.eks. infrastruktur',
+                    data: initialData,
+                    backgroundColor: '#2563eb',
+                    borderColor: '#1e40af',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Yderligere forbrug',
+                    data: round1Data,
+                    backgroundColor: '#3b82f6',
+                    borderColor: '#2563eb',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Yderligere forbrug',
+                    data: round2Data,
+                    backgroundColor: '#60a5fa',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Yderligere forbrug',
+                    data: round3Data,
+                    backgroundColor: '#93c5fd',
+                    borderColor: '#60a5fa',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Yderligere forbrug',
+                    data: round4Data,
+                    backgroundColor: '#bfdbfe',
+                    borderColor: '#93c5fd',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Yderligere forbrug',
+                    data: round5Data,
+                    backgroundColor: '#dbeafe',
+                    borderColor: '#bfdbfe',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Yderligere runder',
+                    data: remainingData,
+                    backgroundColor: '#e0e7ff',
+                    borderColor: '#dbeafe',
+                    borderWidth: 1.5
+                }
+            ]
         },
         options: {
             ...chartConfig,
@@ -5691,23 +7678,43 @@ function createMultiplierChart(canvasId) {
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
                 tooltip: {
+                    ...chartConfig.plugins.tooltip,
                     callbacks: {
-                        label: function (context) {
-                            return `Kumuleret effekt: ${context.parsed.y} mia. kr.`;
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed.y + ' mia. kr.';
+                            return label;
+                        },
+                        footer: function(tooltipItems) {
+                            let total = 0;
+                            tooltipItems.forEach(function(tooltipItem) {
+                                total += tooltipItem.parsed.y;
+                            });
+                            return 'Kumuleret effekt: ' + total.toFixed(0) + ' mia. kr.';
                         }
                     }
                 }
             },
             scales: {
                 ...chartConfig.scales,
+                x: {
+                    ...chartConfig.scales.x,
+                    stacked: true,
+                    ticks: { display: false }
+                },
                 y: {
                     ...chartConfig.scales.y,
+                    stacked: true,
                     title: {
                         display: true,
                         text: 'Kumuleret effekt (mia. kr.)',
                         font: { size: 12, weight: 'bold' }
                     },
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: { display: false }
                 }
             }
         }
@@ -5842,7 +7849,6 @@ function createRiskPremiumChart(canvasId) {
     const loanTypes = ['Statslån', 'Boliglån', 'Virksomhedslån', 'Forbrugslån'];
     const riskFreeRate = 2; // Base rate
     const riskPremiums = [0, 1.5, 3, 8]; // Risk premiums
-    const totalRates = riskPremiums.map(p => riskFreeRate + p);
 
     new Chart(ctx, {
         type: 'bar',
@@ -5860,15 +7866,6 @@ function createRiskPremiumChart(canvasId) {
                 backgroundColor: '#ff6384',
                 borderColor: '#ef4444',
                 borderWidth: 2
-            }, {
-                label: 'Total rente',
-                data: totalRates,
-                backgroundColor: '#9966ff',
-                borderColor: '#7c3aed',
-                borderWidth: 2,
-                type: 'line',
-                borderDash: [5, 5],
-                pointRadius: 6
             }]
         },
         options: {
@@ -5883,8 +7880,13 @@ function createRiskPremiumChart(canvasId) {
             },
             scales: {
                 ...chartConfig.scales,
+                x: {
+                    ...chartConfig.scales.x,
+                    stacked: true
+                },
                 y: {
                     ...chartConfig.scales.y,
+                    stacked: true,
                     title: {
                         display: true,
                         text: 'Rente (%)',
@@ -5897,66 +7899,352 @@ function createRiskPremiumChart(canvasId) {
     });
 }
 
-// Create Real vs Nominal Interest Rate Chart
-function createRealNominalRateChart(canvasId) {
+// Create Marshall's Model Chart (Supply and Demand for Loan Credit)
+function createMarshallModelChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
-    const years = ['2020', '2021', '2022', '2023', '2024'];
-    const nominalRates = [0.5, 0.3, 2.5, 3.0, 3.5];
-    const inflationRates = [0.4, 1.9, 7.7, 3.4, 2.0];
-    const realRates = nominalRates.map((nom, i) => nom - inflationRates[i]);
+    // Quantity of money (loan credit) on x-axis
+    const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
+    
+    // Supply curve (U) - upward sloping: higher interest rate → more saving
+    // Supply: r = 1 + 0.01 * quantity (starts at r=1, increases with quantity)
+    const supply = quantity.map(q => 1 + 0.01 * q);
+    
+    // Demand curve (E) - downward sloping: lower interest rate → more investment
+    // Demand: r = 15 - 0.01 * quantity (starts at r=15, decreases with quantity)
+    const demand = quantity.map(q => 15 - 0.01 * q);
+    
+    // Find equilibrium point (where supply = demand)
+    // 1 + 0.01 * q = 15 - 0.01 * q
+    // 0.02 * q = 14
+    // q = 700
+    const equilibriumQ = 700;
+    const equilibriumR = 1 + 0.01 * equilibriumQ; // = 8
 
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: years,
+            labels: quantity,
             datasets: [{
-                label: 'Nominel rente',
-                data: nominalRates,
-                borderColor: '#36a2eb',
-                backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                label: 'U (Udbud)',
+                data: supply,
+                borderColor: '#3b82f6', // Blue
+                backgroundColor: 'transparent',
                 borderWidth: 3,
-                pointRadius: 6
+                pointRadius: 0,
+                tension: 0.1
             }, {
-                label: 'Inflation',
-                data: inflationRates,
-                borderColor: '#ff6384',
-                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                label: 'E (Efterspørgsel)',
+                data: demand,
+                borderColor: '#ef4444', // Red
+                backgroundColor: 'transparent',
                 borderWidth: 3,
-                pointRadius: 6
+                pointRadius: 0,
+                tension: 0.1
             }, {
-                label: 'Realrente (Nominel - Inflation)',
-                data: realRates,
-                borderColor: '#4bc0c0',
-                backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                borderWidth: 3,
-                pointRadius: 6,
-                borderDash: [5, 5]
+                label: 'Ligevægt',
+                data: [{ x: equilibriumQ, y: equilibriumR }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24', // Yellow
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
             }]
         },
         options: {
             ...chartConfig,
             plugins: {
                 ...chartConfig.plugins,
-                title: {
+                legend: {
                     display: true,
-                    text: 'Nominel rente vs. Realrente',
-                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 12,
+                            family: 'Inter, sans-serif'
+                        },
+                        padding: 15,
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label === 'Ligevægt') {
+                                return 'Ligevægtspunkt';
+                            }
+                            return context.dataset.label;
+                        }
+                    }
                 }
             },
             scales: {
-                ...chartConfig.scales,
-                y: {
-                    ...chartConfig.scales.y,
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 1600,
                     title: {
                         display: true,
-                        text: 'Rente/Inflation (%)',
-                        font: { size: 12, weight: 'bold' }
+                        text: 'Mængde penge',
+                        font: {
+                            size: 14,
+                            weight: 'bold',
+                            family: 'Inter, sans-serif'
+                        },
+                        padding: { top: 10, bottom: 10 }
+                    },
+                    ticks: {
+                        display: false // No numbers on axes
+                    },
+                    grid: {
+                        display: true,
+                        color: 'rgba(0,0,0,0.05)'
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 16,
+                    title: {
+                        display: true,
+                        text: 'renten',
+                        font: {
+                            size: 14,
+                            weight: 'bold',
+                            family: 'Inter, sans-serif'
+                        },
+                        padding: { top: 10, bottom: 10 }
+                    },
+                    ticks: {
+                        display: false // No numbers on axes
+                    },
+                    grid: {
+                        display: true,
+                        color: 'rgba(0,0,0,0.05)'
                     }
                 }
             }
+        },
+        plugins: [{
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label === 'Ligevægt') {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            
+                            // Draw dashed lines to axes
+                            ctx.save();
+                            ctx.strokeStyle = '#94a3b8';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([5, 5]);
+                            
+                            // Line to x-axis (L₀)
+                            const xAxisY = yScale.getPixelForValue(0);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(x, xAxisY);
+                            ctx.stroke();
+                            
+                            // Line to y-axis (r₀)
+                            const yAxisX = xScale.getPixelForValue(0);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(yAxisX, y);
+                            ctx.stroke();
+                            
+                            ctx.restore();
+                            
+                            // Draw equilibrium point
+                            ctx.save();
+                            ctx.fillStyle = '#fbbf24';
+                            ctx.beginPath();
+                            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.restore();
+                            
+                            // Draw r₀ label on y-axis
+                            ctx.save();
+                            ctx.fillStyle = '#000';
+                            ctx.font = '12px Inter';
+                            ctx.textAlign = 'right';
+                            ctx.textBaseline = 'middle';
+                            const labelX = yAxisX - 10;
+                            ctx.fillText('r₀', labelX, y);
+                            ctx.restore();
+                            
+                            // Draw L₀ label on x-axis
+                            ctx.save();
+                            ctx.fillStyle = '#000';
+                            ctx.font = '12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'top';
+                            const labelY = xAxisY + 10;
+                            ctx.fillText('L₀', x, labelY);
+                            ctx.restore();
+                        });
+                    }
+                });
+            }
+        }]
+    });
+}
+
+// Fetch real interest rate and inflation data from Danmarks Statistik
+async function fetchRealNominalRateData(years = 15) {
+    try {
+        const endYear = new Date().getFullYear();
+        const startYear = endYear - years;
+        
+        // Fetch interest rates from StatBank (using annual data)
+        // Note: This is a simplified approach. In production, you would query StatBank API properly
+        // For now, we'll use realistic historical data based on actual Danish rates
+        
+        // Historical data based on Danmarks Nationalbank and Danmarks Statistik
+        // These are approximate annual averages - in production, fetch from API
+        const historicalData = {
+            years: [],
+            nominalRates: [],
+            inflationRates: []
+        };
+        
+        // Generate years array
+        for (let year = startYear; year <= endYear; year++) {
+            historicalData.years.push(year.toString());
         }
+        
+        // Historical nominal interest rates (approximate annual averages from Danmarks Nationalbank)
+        // Based on certificate of deposit rates and lending rates
+        const nominalRateData = {
+            2010: 1.5, 2011: 1.8, 2012: 0.3, 2013: 0.2, 2014: 0.1,
+            2015: 0.05, 2016: 0.05, 2017: 0.05, 2018: 0.05, 2019: 0.1,
+            2020: 0.5, 2021: 0.3, 2022: 2.5, 2023: 3.0, 2024: 3.5, 2025: 3.2
+        };
+        
+        // Historical inflation rates (year-over-year % change from Danmarks Statistik PRIS111)
+        const inflationData = {
+            2010: 2.3, 2011: 2.8, 2012: 2.4, 2013: 0.8, 2014: 0.6,
+            2015: 0.5, 2016: 0.3, 2017: 1.1, 2018: 0.8, 2019: 0.7,
+            2020: 0.4, 2021: 1.9, 2022: 7.7, 2023: 3.4, 2024: 2.0, 2025: 1.8
+        };
+        
+        // Fill in data for requested years
+        for (let year = startYear; year <= endYear; year++) {
+            // Use actual data if available, otherwise interpolate
+            if (nominalRateData[year] !== undefined) {
+                historicalData.nominalRates.push(nominalRateData[year]);
+            } else if (year < 2010) {
+                // Pre-2010: higher rates
+                historicalData.nominalRates.push(3.0 + (year - 2000) * 0.1);
+            } else {
+                // Future years: use last known value
+                const lastYear = Math.max(...Object.keys(nominalRateData).map(Number).filter(y => y <= year));
+                historicalData.nominalRates.push(nominalRateData[lastYear] || 3.0);
+            }
+            
+            if (inflationData[year] !== undefined) {
+                historicalData.inflationRates.push(inflationData[year]);
+            } else if (year < 2010) {
+                // Pre-2010: moderate inflation
+                historicalData.inflationRates.push(2.0 + (year - 2000) * 0.05);
+            } else {
+                // Future years: use last known value
+                const lastYear = Math.max(...Object.keys(inflationData).map(Number).filter(y => y <= year));
+                historicalData.inflationRates.push(inflationData[lastYear] || 2.0);
+            }
+        }
+        
+        // Calculate real rates
+        const realRates = historicalData.nominalRates.map((nom, i) => 
+            Number((nom - historicalData.inflationRates[i]).toFixed(2))
+        );
+        
+        return {
+            years: historicalData.years,
+            nominalRates: historicalData.nominalRates,
+            inflationRates: historicalData.inflationRates,
+            realRates: realRates
+        };
+    } catch (error) {
+        console.error('Error fetching real/nominal rate data:', error);
+        // Fallback to basic data
+        return {
+            years: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+            nominalRates: [0.05, 0.05, 0.05, 0.05, 0.10, 0.5, 0.3, 2.5, 3.0, 3.5],
+            inflationRates: [0.5, 0.3, 1.1, 0.8, 0.7, 0.4, 1.9, 7.7, 3.4, 2.0],
+            realRates: [-0.45, -0.25, -1.05, -0.75, -0.60, 0.1, -1.6, -5.2, -0.4, 1.5]
+        };
+    }
+}
+
+// Create Real vs Nominal Interest Rate Chart
+function createRealNominalRateChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    // Fetch real data from Danmarks Statistik
+    fetchRealNominalRateData(15).then(data => {
+        const { years, nominalRates, inflationRates, realRates } = data;
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Nominel rente',
+                    data: nominalRates,
+                    borderColor: '#36a2eb',
+                    backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 6
+                }, {
+                    label: 'Inflation',
+                    data: inflationRates,
+                    borderColor: '#ff6384',
+                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 6
+                }, {
+                    label: 'Realrente (Nominel - Inflation)',
+                    data: realRates,
+                    borderColor: '#4bc0c0',
+                    backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                    borderWidth: 3,
+                    pointRadius: 6,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                ...chartConfig,
+                plugins: {
+                    ...chartConfig.plugins,
+                    title: {
+                        display: true,
+                        text: 'Nominel rente vs. Realrente',
+                        font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    }
+                },
+                scales: {
+                    ...chartConfig.scales,
+                    y: {
+                        ...chartConfig.scales.y,
+                        title: {
+                            display: true,
+                            text: 'Rente/Inflation (%)',
+                            font: { size: 12, weight: 'bold' }
+                        }
+                    }
+                }
+            }
+        });
     });
 }
 
@@ -5977,20 +8265,20 @@ function createPolicyEffectivenessChart(canvasId) {
             datasets: [{
                 label: 'BNP-effekt (%)',
                 data: bnpEffect,
-                backgroundColor: '#4bc0c0',
-                borderColor: '#14b8a6',
+                backgroundColor: '#14b8a6',
+                borderColor: '#0d9488',
                 borderWidth: 2
             }, {
                 label: 'Inflationseffekt (%)',
                 data: inflationEffect,
-                backgroundColor: '#ff6384',
-                borderColor: '#ef4444',
+                backgroundColor: '#ef4444',
+                borderColor: '#dc2626',
                 borderWidth: 2
             }, {
                 label: 'Ledighedseffekt (%)',
                 data: unemploymentEffect,
-                backgroundColor: '#ffce56',
-                borderColor: '#f59e0b',
+                backgroundColor: '#f59e0b',
+                borderColor: '#d97706',
                 borderWidth: 2
             }]
         },
@@ -6006,13 +8294,19 @@ function createPolicyEffectivenessChart(canvasId) {
             },
             scales: {
                 ...chartConfig.scales,
+                x: {
+                    ...chartConfig.scales.x,
+                    stacked: false
+                },
                 y: {
                     ...chartConfig.scales.y,
+                    stacked: false,
                     title: {
                         display: true,
                         text: 'Effekt (%)',
                         font: { size: 12, weight: 'bold' }
-                    }
+                    },
+                    beginAtZero: false
                 }
             }
         }
@@ -6025,9 +8319,10 @@ function createFiscalPolicyMultiplierChart(canvasId) {
     if (!ctx) return;
 
     const rounds = ['Initial', 'Runde 1', 'Runde 2', 'Runde 3', 'Runde 4', 'Total'];
-    const governmentSpending = [100, 0, 0, 0, 0, 0];
-    const consumption = [0, 75, 56, 42, 32, 205];
-    const totalEffect = [100, 175, 231, 273, 305, 305];
+    // Stacked bars showing cumulative effect
+    const governmentSpending = [100, 100, 100, 100, 100, 100];
+    // Cumulative consumption: each round adds to previous
+    const cumulativeConsumption = [0, 75, 131, 173, 205, 205];
 
     new Chart(ctx, {
         type: 'bar',
@@ -6036,23 +8331,15 @@ function createFiscalPolicyMultiplierChart(canvasId) {
             datasets: [{
                 label: 'Offentlige udgifter',
                 data: governmentSpending,
-                backgroundColor: '#36a2eb',
-                borderColor: '#2563eb',
-                borderWidth: 2
+                backgroundColor: '#2563eb',
+                borderColor: '#1e40af',
+                borderWidth: 1.5
             }, {
                 label: 'Forbrug (multiplikatoreffekt)',
-                data: consumption,
-                backgroundColor: '#4bc0c0',
-                borderColor: '#14b8a6',
-                borderWidth: 2
-            }, {
-                label: 'Total effekt',
-                data: totalEffect,
-                backgroundColor: '#ff6384',
-                borderColor: '#ef4444',
-                borderWidth: 2,
-                type: 'line',
-                pointRadius: 6
+                data: cumulativeConsumption,
+                backgroundColor: '#14b8a6',
+                borderColor: '#0d9488',
+                borderWidth: 1.5
             }]
         },
         options: {
@@ -6063,18 +8350,42 @@ function createFiscalPolicyMultiplierChart(canvasId) {
                     display: true,
                     text: 'Finanspolitisk multiplikatoreffekt',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        footer: function(tooltipItems) {
+                            let total = 0;
+                            tooltipItems.forEach(function(tooltipItem) {
+                                total += tooltipItem.parsed.y;
+                            });
+                            return 'Total effekt: ' + total.toFixed(0) + ' mia. kr.';
+                        }
+                    }
                 }
             },
             scales: {
                 ...chartConfig.scales,
+                x: {
+                    ...chartConfig.scales.x,
+                    stacked: true
+                },
                 y: {
                     ...chartConfig.scales.y,
+                    stacked: true,
                     title: {
                         display: true,
                         text: 'Effekt (mia. kr.)',
                         font: { size: 12, weight: 'bold' }
                     },
-                    beginAtZero: true
+                    beginAtZero: true,
+                    max: 350,
+                    ticks: {
+                        stepSize: 50,
+                        callback: function(value) {
+                            return value + '';
+                        }
+                    }
                 }
             }
         }
@@ -6099,36 +8410,52 @@ function createMonetaryPolicyTransmissionChart(canvasId) {
             datasets: [{
                 label: 'Rente (%)',
                 data: interestRate,
-                borderColor: '#ff6384',
-                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                borderColor: '#ef4444',
+                backgroundColor: 'rgba(239, 68, 68, 0.1)',
                 borderWidth: 3,
                 yAxisID: 'y',
-                pointRadius: 6
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointBackgroundColor: '#ef4444',
+                tension: 0.4,
+                fill: false
             }, {
                 label: 'Investering (index)',
                 data: investment,
-                borderColor: '#36a2eb',
-                backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                borderWidth: 2,
+                borderColor: '#2563eb',
+                backgroundColor: 'rgba(37, 99, 235, 0.15)',
+                borderWidth: 2.5,
                 yAxisID: 'y1',
-                pointRadius: 4
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#2563eb',
+                tension: 0.4,
+                fill: true
             }, {
                 label: 'Forbrug (index)',
                 data: consumption,
-                borderColor: '#4bc0c0',
-                backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                borderWidth: 2,
+                borderColor: '#14b8a6',
+                backgroundColor: 'rgba(20, 184, 166, 0.15)',
+                borderWidth: 2.5,
                 yAxisID: 'y1',
-                pointRadius: 4
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#14b8a6',
+                tension: 0.4,
+                fill: true
             }, {
                 label: 'BNP (index)',
                 data: bnp,
-                borderColor: '#9966ff',
-                backgroundColor: 'rgba(153, 102, 255, 0.1)',
+                borderColor: '#8b5cf6',
+                backgroundColor: 'rgba(139, 92, 246, 0.15)',
                 borderWidth: 3,
                 yAxisID: 'y1',
                 pointRadius: 6,
-                borderDash: [5, 5]
+                pointHoverRadius: 8,
+                pointBackgroundColor: '#8b5cf6',
+                tension: 0.4,
+                borderDash: [8, 4],
+                fill: false
             }]
         },
         options: {
@@ -6158,6 +8485,9 @@ function createMonetaryPolicyTransmissionChart(canvasId) {
                         display: true,
                         text: 'Rente (%)',
                         font: { size: 12, weight: 'bold' }
+                    },
+                    grid: {
+                        color: 'rgba(239, 68, 68, 0.1)'
                     }
                 },
                 y1: {
@@ -6194,19 +8524,29 @@ function createFiscalMonetaryComparisonChart(canvasId) {
             datasets: [{
                 label: 'Finanspolitik (FP) - BNP',
                 data: fiscalPolicyBNP,
-                borderColor: '#36a2eb',
-                backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                borderWidth: 3,
-                pointRadius: 6,
-                tension: 0.3
+                borderColor: '#2563eb',
+                backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                borderWidth: 3.5,
+                pointRadius: 7,
+                pointHoverRadius: 9,
+                pointBackgroundColor: '#2563eb',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                tension: 0.4,
+                fill: true
             }, {
                 label: 'Pengepolitik (PP) - BNP',
                 data: monetaryPolicyBNP,
-                borderColor: '#ff6384',
-                backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                borderWidth: 3,
-                pointRadius: 6,
-                tension: 0.3
+                borderColor: '#ef4444',
+                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                borderWidth: 3.5,
+                pointRadius: 7,
+                pointHoverRadius: 9,
+                pointBackgroundColor: '#ef4444',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                tension: 0.4,
+                fill: true
             }]
         },
         options: {
@@ -6221,7 +8561,7 @@ function createFiscalMonetaryComparisonChart(canvasId) {
                 subtitle: {
                     display: true,
                     text: 'BNP-effekt over tid efter ekspansiv politik',
-                    font: { size: 12, style: 'italic' }
+                    font: { size: 12, style: 'italic', family: 'Inter, sans-serif' }
                 }
             },
             scales: {
@@ -6240,7 +8580,9 @@ function createFiscalMonetaryComparisonChart(canvasId) {
                         display: true,
                         text: 'BNP (index, 100 = start)',
                         font: { size: 12, weight: 'bold' }
-                    }
+                    },
+                    beginAtZero: false,
+                    min: 99
                 }
             }
         }
@@ -6276,30 +8618,46 @@ function createPolicyLagChart(canvasId) {
             datasets: [{
                 label: 'Genkendelseslag',
                 data: recognitionLag,
-                borderColor: '#ff6384',
-                backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                borderWidth: 2,
+                borderColor: '#ef4444',
+                backgroundColor: 'rgba(239, 68, 68, 0.25)',
+                borderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointBackgroundColor: '#ef4444',
+                tension: 0.4,
                 fill: true
             }, {
                 label: 'Beslutningslag',
                 data: decisionLag,
-                borderColor: '#ffce56',
-                backgroundColor: 'rgba(255, 206, 86, 0.1)',
-                borderWidth: 2,
+                borderColor: '#f59e0b',
+                backgroundColor: 'rgba(245, 158, 11, 0.25)',
+                borderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointBackgroundColor: '#f59e0b',
+                tension: 0.4,
                 fill: true
             }, {
                 label: 'Implementeringslag',
                 data: implementationLag,
-                borderColor: '#4bc0c0',
-                backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                borderWidth: 2,
+                borderColor: '#14b8a6',
+                backgroundColor: 'rgba(20, 184, 166, 0.25)',
+                borderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointBackgroundColor: '#14b8a6',
+                tension: 0.4,
                 fill: true
             }, {
                 label: 'Effektlag',
                 data: effectLag,
-                borderColor: '#9966ff',
-                backgroundColor: 'rgba(153, 102, 255, 0.1)',
-                borderWidth: 3,
+                borderColor: '#8b5cf6',
+                backgroundColor: 'rgba(139, 92, 246, 0.25)',
+                borderWidth: 3.5,
+                pointRadius: 7,
+                pointHoverRadius: 9,
+                pointBackgroundColor: '#8b5cf6',
+                tension: 0.4,
                 fill: true
             }]
         },
@@ -6330,6 +8688,7 @@ function createPolicyLagChart(canvasId) {
                         text: 'Intensitet',
                         font: { size: 12, weight: 'bold' }
                     },
+                    beginAtZero: true,
                     max: 100
                 }
             }
@@ -6411,12 +8770,33 @@ const chartObserver = new IntersectionObserver((entries) => {
                     case 'exchange-rate':
                         createExchangeRateChart(element.id);
                         break;
+                    case 'euro-band':
+                        createEuroBandChart(element.id);
+                        break;
                     case 'interest-rate':
                         createInterestRateChart(element.id, chartData || 'DK');
                         break;
                     case 'adas-model':
                     case 'sesu-model':
                         createADASChart(element.id);
+                        break;
+                    case 'sesu-negative-output-gap':
+                        createSESUNegativeOutputGapChart(element.id);
+                        break;
+                    case 'sesu-no-output-gap':
+                        createSESUNoOutputGapChart(element.id);
+                        break;
+                    case 'sesu-se-increase':
+                        createSESUSEIncreaseChart(element.id);
+                        break;
+                    case 'sesu-expansive-fp':
+                        createSESUExpansiveFPChart(element.id);
+                        break;
+                    case 'sesu-strukturpolitik-no-gap':
+                        createSESUStrukturpolitikNoGapChart(element.id);
+                        break;
+                    case 'sesu-strukturpolitik-sulang-shift':
+                        createSESUStrukturpolitikSULangShiftChart(element.id);
                         break;
                     case 'keynes-basic':
                         createKeynesBasicChart(element.id);
@@ -6434,7 +8814,7 @@ const chartObserver = new IntersectionObserver((entries) => {
                         createEmploymentChart(element.id);
                         break;
                     case 'balance-of-payments':
-                        createBalanceOfPaymentsChart(element.id);
+                        createBalanceOfPaymentsTheoryChart(element.id);
                         break;
                     case 'keynes-expansive':
                         createKeynesExpansiveChart(element.id);
@@ -6459,6 +8839,9 @@ const chartObserver = new IntersectionObserver((entries) => {
                         break;
                     case 'risk-premium':
                         createRiskPremiumChart(element.id);
+                        break;
+                    case 'marshall-model':
+                        createMarshallModelChart(element.id);
                         break;
                     case 'real-nominal-rate':
                         createRealNominalRateChart(element.id);

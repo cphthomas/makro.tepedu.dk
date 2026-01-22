@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Rentedannelse og finansiel stabilitet - Makroøkonomi</title>
+    <title>Rentedannelse - Makroøkonomi</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Bootstrap Icons -->
@@ -118,115 +118,475 @@
     <div class="content">
         <div class="container mt-4">
             <article>
-                <h1 style="display: none;">Rentedannelse og finansiel stabilitet</h1>
+                <h1 style="display: none;">Rentedannelse</h1>
                 <div class="book-cover-wrapper">
-                    <video autoplay muted playsinline src="" alt="Rentedannelse og finansiel stabilitet" class="img-fluid" width="100%"
+                    <video autoplay muted playsinline src="" alt="Rentedannelse" class="img-fluid" width="100%"
                         style="min-height: 400px; object-fit: cover;"></video>
-                    <div class="cover-text-overlay animate-cover-text" data-type-text="5. Rentedannelse og finansiel stabilitet"
-                        data-type-speed="150">Rentedannelse og finansiel stabilitet</div>
+                    <div class="cover-text-overlay animate-cover-text" data-type-text="5. Rentedannelse"
+                        data-type-speed="150">Rentedannelse</div>
                 </div>
                 
                 <div class="info-box">
-                    <p>Dette kapitel handler om <b>rentedannelse og finansiel stabilitet</b> - hvordan renter bestemmes og hvordan vi sikrer stabilitet i det finansielle system.
-                        Som finansøkonom skal du forstå forskellen mellem netto- og brutto renter, hvordan renter dannes på markederne, og hvilke risici der findes i det finansielle system.
+                    <p>Dette kapitel handler om <b>rentedannelse</b> - hvordan renter bestemmes og hvorfor der findes forskellige typer renter.
+                        Som finansøkonom skal du forstå forskellen mellem forskellige rentetyper (netto, brutto, ÅOP), den klassiske renteteori, tidspræference og hvordan nutidsværdi beregnes.
+                        Disse begreber er centrale for at forstå, hvordan finansielle markeder fungerer og hvordan du kan vurdere investeringer.
                     </p>
 
                     <h4>Centrale emner</h4>
                     <ul>
-                        <li><b>Netto vs. brutto rente:</b> Forskellen mellem renter før og efter skat</li>
-                        <li><b>Rentedannelse:</b> Hvordan renter bestemmes på markederne</li>
+                        <li><b>Rentetyper:</b> Netto, brutto, ÅOP og effektiv rente</li>
+                        <li><b>Klassisk renteteori:</b> Hvorfor findes renter overhovedet?</li>
+                        <li><b>Tidspræference:</b> Hvorfor foretrækker vi penge nu frem for senere?</li>
+                        <li><b>Nutidsværdi:</b> Hvordan beregnes værdien af fremtidige penge?</li>
+                        <li><b>Marshall's model:</b> Udbud og efterspørgsel på kreditmarkedet</li>
                         <li><b>Risikopræmie:</b> Hvorfor nogle lån har højere rente end andre</li>
-                        <li><b>Finansiel stabilitet:</b> Hvordan vi sikrer, at det finansielle system fungerer stabilt</li>
-                        <li><b>Systemiske risici:</b> Risici, der kan ramme hele det finansielle system</li>
                     </ul>
                 </div>
                 <br>
 
-                <h2>Hvad er renter?</h2>
+                <h2>Rente findes i mange udgaver</h2>
                 <div class="info-box">
-                    <p>Renter er prisen for at låne penge. Ligesom du betaler for at købe en vare, betaler du renter for at låne penge.</p>
+                    <p>Når man taler om "renten" i samfundet, er det ikke et entydigt begreb. Der findes mange forskellige typer renter, og det er vigtigt at forstå forskellen mellem dem. Renter er grundlæggende <b>prisen for at låne penge</b> eller <b>afkastet på en opsparing</b>.</p>
 
-                    <h3>1. Netto vs. brutto rente</h3>
-                    <p>Der er forskel mellem <span class="legal-term" id="term-brutto-rente"
-                            data-definition="Renten før skat. Det er den rente, du betaler til banken eller modtager fra banken."
-                            data-example="Hvis du låner 100.000 kr. til 5% brutto rente, betaler du 5.000 kr. i renter om året."
-                            data-slug="brutto-rente">brutto rente</span> (før skat) og <span class="legal-term" id="term-netto-rente"
-                            data-definition="Renten efter skat. Det er den rente, du faktisk får eller betaler efter skat er trukket fra."
-                            data-example="Hvis du får 3% brutto rente på en opsparing og betaler 37% i skat, er netto renten 3% × (1 - 0,37) = 1,89%."
-                            data-slug="netto-rente">netto rente</span> (efter skat):</p>
+                    <h3>1. Forskellige rentetyper</h3>
+                    <p>Der findes flere måder at måle og beskrive renter på:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Type</th>
+                                    <th>Rentetype</th>
                                     <th>Forklaring</th>
                                     <th>Eksempel</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>Brutto rente</b></td>
-                                    <td>Renten før skat</td>
-                                    <td>Du låner 100.000 kr. til 5% brutto rente → Du betaler 5.000 kr. i renter om året</td>
+                                    <td><b>Netto rente</b></td>
+                                    <td>Den egentlige rente uden gebyrer og omkostninger</td>
+                                    <td>Du låner til 5% netto rente - det er den rene rentesats</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Netto rente</b></td>
-                                    <td>Renten efter skat</td>
-                                    <td>Hvis du betaler 37% i skat af renterne, er netto renten 5% × (1 - 0,37) = 3,15%</td>
+                                    <td><b>Brutto rente (ÅOP)</b></td>
+                                    <td>Renten inklusiv alle gebyrer og omkostninger (Årlige Omkostninger i Procent)</td>
+                                    <td>Du låner til 5% netto, men med gebyrer bliver ÅOP 6,2%</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Lånerente</b></td>
+                                    <td>Den rente du betaler, når du låner penge</td>
+                                    <td>Banken låner dig penge til 5% i rente</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Indlånsrente</b></td>
+                                    <td>Den rente du får, når du sætter penge på en opsparingskonto</td>
+                                    <td>Du får 2% i rente på din opsparingskonto</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Pålydende rente</b></td>
+                                    <td>Den rente, der står på obligationen (fast)</td>
+                                    <td>En obligation har 3% pålydende rente - den betaler 3% hvert år</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Effektiv rente</b></td>
+                                    <td>Det reelle afkast på en obligation, når man tager højde for kursen</td>
+                                    <td>Du køber en obligation til kurs 95 med 3% pålydende rente - den effektive rente er højere</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <p><b>Vigtigt:</b> Når du sammenligner lån eller opsparinger, skal du altid sammenligne brutto renter, da skattesatsen kan variere.</p>
+                    <p><b>Vigtigt:</b> <span class="legal-term" id="term-aop"
+                            data-definition="Årlige Omkostninger i Procent - viser de samlede omkostninger ved et lån inklusiv renter, gebyrer og andre omkostninger."
+                            data-example="Et billån til 5% netto rente + 500 kr. i månedligt gebyr kan have en ÅOP på 7%."
+                            data-slug="aop">ÅOP</span> (Årlige Omkostninger i Procent) giver det mest retvisende billede af, hvor dyrt et lån er, fordi det inkluderer alle omkostninger. I bruttorenten kan også være en kompensation for den risiko, som långiver påtager sig i forhold til låntagers tilbagebetalingsevne (<span class="legal-term" id="term-debitorrisiko"
+                            data-definition="Risikoen for, at låntager ikke kan betale lånet tilbage. Jo højere debitorrisiko, jo højere rente kræver långiver."
+                            data-example="Et lån til en person med dårlig kreditvurdering har høj debitorrisiko og derfor højere rente end et lån til en person med god kreditvurdering."
+                            data-slug="debitorrisiko">debitorrisikoen</span>).</p>
 
-                    <h3>2. Hvordan dannes renter?</h3>
-                    <p>Renter bestemmes på <span class="legal-term" id="term-pengemarkedet"
-                            data-definition="Markedet hvor penge lånes og udlånes. Renten bestemmes af udbud og efterspørgsel efter penge."
-                            data-example="Hvis mange vil låne penge, men få vil låne ud, stiger renten. Hvis få vil låne penge, men mange vil låne ud, falder renten."
-                            data-slug="pengemarkedet">pengemarkedet</span> gennem udbud og efterspørgsel:</p>
+                    <h3>2. Forskellen mellem lånerente og indlånsrente</h3>
+                    <p>Der er typisk en forskel mellem den rente, du betaler som låntager, og den rente, du får som opsparer:</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Situation</th>
-                                    <th>Udbud/Efterspørgsel</th>
+                                    <th>Type</th>
                                     <th>Rente</th>
                                     <th>Forklaring</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>Mange vil låne</b></td>
-                                    <td>Høj efterspørgsel</td>
-                                    <td>Stiger</td>
-                                    <td>Bankerne kan kræve højere rente, når mange vil låne</td>
+                                    <td><b>Lånerente</b></td>
+                                    <td>Højere (fx 5%)</td>
+                                    <td>Banken skal dække omkostninger og risiko ved udlån</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Mange vil låne ud</b></td>
-                                    <td>Højt udbud</td>
-                                    <td>Falder</td>
-                                    <td>Bankerne konkurrerer om at låne ud, så renten falder</td>
+                                    <td><b>Indlånsrente</b></td>
+                                    <td>Lavere (fx 2%)</td>
+                                    <td>Banken betaler mindre for at tage imod penge</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Ligevægt</b></td>
-                                    <td>Udbud = Efterspørgsel</td>
-                                    <td>Stabil</td>
-                                    <td>Renten er i ligevægt</td>
+                                    <td><b>Rentemarginal</b></td>
+                                    <td>Forskellen (3%)</td>
+                                    <td>Dette er bankens indtjening fra renteforretning</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <h3>3. Risikopræmie - Hvorfor har nogle lån højere rente?</h3>
-                    <p>Ikke alle lån har samme rente. <span class="legal-term" id="term-risikopraemie"
-                            data-definition="Ekstra rente, der betales for at kompensere for risikoen ved at låne ud. Jo højere risiko, jo højere risikopræmie."
-                            data-example="Et lån til en virksomhed med dårlig kreditvurdering har højere rente end et lån til en stat, fordi risikoen er højere."
-                            data-slug="risikopraemie">Risikopræmien</span> er den ekstra rente, der betales for risiko:</p>
+                    <p><b>Hvorfor er lånerenten højere?</b> Banken påtager sig kreditvurdering, risici på låntagersiden og yder opbevaring og sikkerhed på långiversiden. Denne service koster penge, og derfor er der en rentemarginal.</p>
+
+                    <h3>3. Afkast på andre aktiver</h3>
+                    <p>Renter findes ikke kun på lån og indlån. Mange andre aktiver giver også afkast:</p>
+
+                    <ul>
+                        <li><b>Realkapital:</b> Placerer man sin opsparing i erhvervsvirksomhed, vil produktionsfaktorerne jord, bygninger og maskiner normalt give et afkast gennem deres anvendelse i produktionen</li>
+                        <li><b>Egen bolig:</b> Din egen bolig giver ikke et løbende afkast, men kan alligevel siges at forrente sig i form af værdistigninger og nytteværdi for ejeren (du slipper for husleje)</li>
+                        <li><b>Varige forbrugsgoder:</b> Kunst og ædelmetaller giver ikke et løbende afkast, men kan alligevel siges at forrente sig i form af værdistigninger og nytteværdi for ejeren</li>
+                    </ul>
+                </div>
+                <br>
+
+                <h2>Klassisk renteteori - Hvorfor findes renter?</h2>
+                <div class="info-box">
+                    <p>Historisk set har det været omdiskuteret, om det overhovedet er rigtigt at kræve renter af udlån. Men med den industrielle revolution blev det klart, at renter spiller en central rolle i økonomien.</p>
+
+                    <h3>1. Historisk baggrund - Fra åger til legitim rente</h3>
+                    <p>I oldtiden og middelalderen var det ikke velset at kræve rente. Det blev ofte betragtet som <b>åger</b> (urimelig høj rente):</p>
 
                     <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Periode</th>
+                                    <th>Syn på renter</th>
+                                    <th>Begrundelse</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Oldtiden og middelalderen</b></td>
+                                    <td>Renter var ikke velset</td>
+                                    <td>Lånebehov opstod pga. nødsituationer (sygdom, krig). Et udlån skabte ikke økonomisk værdi i sig selv.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Den industrielle revolution (1800-tallet)</b></td>
+                                    <td>Renter blev accepteret</td>
+                                    <td>Kapitalapparatet (maskiner, fabrikker) kunne skabe værdi, og derfor burde det give et afkast.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><b>Ændringen:</b> Med den industrielle revolution kom maskiner, transportmateriel og bygninger til at spille en central rolle. Dette <span class="legal-term" id="term-realkapital"
+                            data-definition="Produktionsudstyr som maskiner, bygninger og transportmidler. Realkapital bruges til at producere varer og tjenester."
+                            data-example="En fabrik med maskiner er realkapital. Maskinen kan producere varer, som kan sælges for penge."
+                            data-slug="realkapital">realkapitalapparat</span> kunne øge produktionen markant.</p>
+
+                    <h3>2. Kapitalens marginalprodukt - Hvorfor giver kapital afkast?</h3>
+                    <p><span class="legal-term" id="term-marginalprodukt"
+                            data-definition="Den ekstra produktion, man får ved at tilføje en enhed mere af en produktionsfaktor (fx en maskine mere)."
+                            data-example="Hvis en virksomhed køber en ekstra maskine og producerer 100 enheder mere, er kapitalens marginalprodukt 100 enheder."
+                            data-slug="marginalprodukt">Kapitalens marginalprodukt</span> er den ekstra produktion, man får ved at investere i en ekstra enhed kapital. Afkastet af en enhed kapital kan måles som den ekstra mængde færdigvareproduktion (output), som enheden giver i produktionen.</p>
+
+                    <p><b>Faktorprisen på kapital:</b> Kapitalapparatet er en beholdning, der "udbyder" kapitalydelser, som efterspørges af virksomhederne. Prisen for disse ydelser er <span class="legal-term" id="term-faktorpris-kapital"
+                            data-definition="Prisen for at bruge kapital i produktionen. Den består af realrenten plus nedslidning (forbrug af fast realkapital)."
+                            data-example="Hvis realrenten er 3% og nedslidningen er 2%, er faktorprisen på kapital 5%."
+                            data-slug="faktorpris-kapital">faktorprisen på kapital</span> og kan sammenlignes med prisen på arbejdskraft, arbejdslønnen. Denne faktorpris består af omkostningerne ved at finansiere og eje kapital, som er realrenten på gæld med tillæg for nedslidning, dvs. forbrug af fast realkapital. Faktorprisen på kapital har altså en tæt sammenhæng med realrenten og bliver sædvanligvis også betegnet med "rente".</p>
+
+                    <p><b>Logikken:</b></p>
+                    <ol>
+                        <li>En virksomhed køber en maskine for 100.000 kr.</li>
+                        <li>Maskinen producerer ekstra varer til en værdi af 10.000 kr. om året</li>
+                        <li>Afkastet er 10.000 / 100.000 = 10% om året</li>
+                        <li>Dette afkast er <b>kapitalens marginalprodukt</b></li>
+                    </ol>
+
+                    <p><b>Fra mikroteorien vides, at en virksomhed, der profitmaksimerer, vil efterspørge en produktionsfaktor, indtil den sidste enheds marginalprodukt netop svarer til dens reale pris.</b> Derfor er der en tæt sammenhæng mellem kapitalens effektivitet (produktivitet), den reale pris på kapital (faktorprisen) og realrenten.</p>
+
+                    <p>En virksomhed vil investere i kapital, så længe <b>marginalprodukt > realrente</b>. Hvis renten er 5%, vil virksomheden købe maskinen i eksemplet ovenfor (10% > 5%). I ligevægt vil marginalproduktet ligge med faktorprisen på kapital (realrente + nedslidning).</p>
+
+                    <h3>3. Tidspræference - Hvorfor foretrækker vi penge nu?</h3>
+                    <p>Ud over kapitalens produktivitet findes der et andet grundlæggende argument for, hvorfor renter er positive. Dette argument bygger på et almindeligt anerkendt karaktertræk hos mennesker: <span class="legal-term" id="term-tidspraeference"
+                            data-definition="Menneskers naturlige præference for forbrug nu frem for forbrug i fremtiden. Vi er utålmodige og vil have tingene nu."
+                            data-example="De fleste mennesker foretrækker 100 kr. nu frem for 100 kr. om et år, selvom værdien er den samme."
+                            data-slug="tidspraeference">tidspræference</span> - vi foretrækker forbrug nu frem for forbrug i fremtiden.</p>
+
+                    <p><b>Hvad er tidspræference?</b> Mennesker er naturligt utålmodige. Vi vil hellere have tingene nu end senere. Dette betyder, at hvis vi skal udskyde vores forbrug (spare op), kræver vi en kompensation i form af renter. Teorien kaldes også for <b>abstinensteorien</b>, fordi forbrugeren afholder sig fra et nutidigt forbrug ved at spare op.</p>
+
+                    <p><b>Hvordan fungerer det?</b> Når en forbruger vælger at spare op ved at købe finansielle fordringer (fx en obligation), udskyder han et muligt nutidigt forbrug til et tidspunkt i fremtiden. Til gengæld forlanger han en præmie i form af et større fremtidigt forbrug - altså renter. Jo højere rente, jo mere er det værd at vente.</p>
+
+                    <p><b>Neddiskontering:</b> Tidspræference betyder også, at fremtidige penge vurderes lavere end penge nu. Et givet pengebeløb i fremtiden er mindre værd i dag, fordi vi foretrækker penge nu. Dette kaldes <b>neddiskontering</b>.</p>
+
+                    <ul>
+                        <li><b>Utålmodighed:</b> Mennesker er naturligt utålmodige og foretrækker forbrug nu</li>
+                        <li><b>Præmie for opsparing:</b> For at spare op (udskyde forbrug) kræver vi en præmie i form af renter</li>
+                        <li><b>Fremtidigt forbrug:</b> Renten skal være høj nok til, at det fremtidige forbrug er værd at vente på</li>
+                        <li><b>Neddiskontering:</b> Fremtidige penge vurderes med en lavere værdi i dag</li>
+                    </ul>
+
+                    <p><b>Eksempel:</b> Hvis du sparer 10.000 kr. op i dag til 5% rente, har du 10.500 kr. om et år. De ekstra 500 kr. er din præmie for at udskyde forbruget. Omvendt betyder det, at 100 kr. om 1 år vurderes til 100/(1+0,05) = 95,2 kr. i dag, når renten er 5% p.a.</p>
+
+                    <h3>4. Nutidsværdi og diskontering</h3>
+                    <p><span class="legal-term" id="term-nutidsvaerdi"
+                            data-definition="Værdien af fremtidige penge omregnet til nutiden. Fremtidige penge er mindre værd end penge nu pga. tidspræference."
+                            data-example="Hvis renten er 5%, er 100 kr. om et år værd 100 / 1,05 = 95,2 kr. i dag."
+                            data-slug="nutidsvaerdi">Nutidsværdi</span> betyder, at fremtidige penge vurderes med en lavere værdi i dag. Dette kaldes <b>diskontering</b>. Hvis renten fx er 5 pct. p.a., vil 100 kr. om 1 år vurderes til 100/(1+0,05) = 95,2 kr. Faktoren 1/(1+0,05) kaldes <span class="legal-term" id="term-diskonteringsfaktor"
+                            data-definition="Faktoren, man dividerer fremtidige penge med for at få nutidsværdien. Diskontéringsfaktoren = 1/(1+rente)."
+                            data-example="Hvis renten er 5%, er diskonteringsfaktoren 1/1,05 = 0,952. 100 kr. om et år er derfor værd 100 × 0,952 = 95,2 kr. i dag."
+                            data-slug="diskonteringsfaktor">diskonteringsfaktoren</span>.</p>
+
+                    <p><b>Kapitalværdi:</b> Kender man en fordrings afkast over en bestemt periode, kan man beregne fordringens kapitalværdi ved at tilbagediskontere de fremtidige afkast til udgangspunktet, hvorved man får dens nutidsværdi.</p>
+
+                    <p><b>Diskonteringsformel:</b></p>
+                    <p>Nutidsværdi = Fremtidig værdi / (1 + rente)<sup>år</sup></p>
+                    
+                    <p><b>Eksempel:</b> Hvis renten er 5%, er 100 kr. om 1 år værd: 100 / (1 + 0,05) = 100 / 1,05 = 95,2 kr. i dag</p>
+
+                    <p><b>Evig løbende afkast:</b> Er det årlige afkast det samme over tid og evigt løbende, er beregningen enkel, da diskonteringsfaktoren da bliver 1/i, hvor "i" er den årlige rente. Hvis denne er 5 pct., vil en fordring med et årligt afkast på 1000 kr. ud i al fremtid få en nutidsværdi på 1000/0,05 = 20.000 kr.</p>
+
+                    <p><b>Nutidsværdi for evig løbende afkast:</b> Nutidsværdi = Årligt afkast / Rente</p>
+                    
+                    <p><b>Eksempel:</b> En fordring giver 1.000 kr. om året for evigt. Hvis renten er 5%: Nutidsværdi = 1.000 / 0,05 = 20.000 kr.</p>
+
+                    <p><b>Anvendelse:</b> Dette bruges til at vurdere værdien af obligationer, aktier og andre investeringer med løbende afkast.</p>
+
+                    <h3>5. To grunde til positive renter</h3>
+                    <p>Den klassiske renteteori samler to argumenter for, hvorfor renter er positive:</p>
+
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Argument</th>
+                                    <th>Forklaring</th>
+                                    <th>Konklusion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>1. Kapitalens produktivitet</b></td>
+                                    <td>Investering i realkapital (maskiner, bygninger) giver afkast gennem produktion</td>
+                                    <td>Virksomheder er villige til at betale renter for at kunne investere</td>
+                                </tr>
+                                <tr>
+                                    <td><b>2. Tidspræference</b></td>
+                                    <td>Mennesker foretrækker forbrug nu frem for i fremtiden (utålmodighed)</td>
+                                    <td>Opsparere kræver en præmie (rente) for at udskyde forbrug</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><b>Ligevægt:</b> Sammenholdes de to argumenter i den klassiske renteteori, dvs. de nye muligheder for afkast/rente af investering i realkapital og den iboende uvilje mod at udskyde forbrug hos dem, der sparer op, og dem, der investerer, vil dette føre til en ligevægt med en <b>positiv rente</b>. Når disse to kræfter mødes - investorernes villighed til at betale renter og opsparernes krav om præmie - opstår en <b>positiv ligevægtsrente</b>.</p>
+                </div>
+                <br>
+
+                <h2>Lånerenten i centrum - Marshall's model</h2>
+                <div class="info-box">
+                    <p>Senere i slutningen af 1800-tallet og videre frem i 1900-tallet betød den voksende industrialisering et stigende behov for lånefinansiering af investeringer i realkapital fremfor gennem individuelt opsparede midler. Behovet blev imødekommet gennem opbygningen af den finansielle sektor med etablering af banker, realkreditinstitutter og forsikringsselskaber. Det blev derfor renten på lån eller kredit og forklaringen heraf, der kom i fokus i den økonomiske teori.</p>
+
+                    <p>Den engelske økonom <b>Alfred Marshall (1842-1924)</b> fik samlet dele af de eksisterende forklaringer på rentedannelsen til en sammenhængende teori efter samme model, som gjaldt for prisdannelsen på varer, dvs. en efterspørgsels-udbudsmodel.</p>
+
+                    <h3>1. Renten som pris på lånekapital</h3>
+                    <p>I Marshall's model er <b>renten prisen for at få kredit</b> (lånekapital). Renten bliver her betragtet som prisen for at få kredit. Ligesom prisen på en vare bestemmes af udbud og efterspørgsel, bestemmes renten af:</p>
+
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Side</th>
+                                    <th>Hvem?</th>
+                                    <th>Afhængighed af renten</th>
+                                    <th>Begrundelse</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Udbud</b></td>
+                                    <td>Opsparere (husholdninger)</td>
+                                    <td>Stigende: Jo højere rente, jo mere opsparing</td>
+                                    <td>Udbudet af lånekapital kommer fra opsparing, altså den del af folks indkomst, der ikke forbruges. Det blev antaget, at opsparingen afhænger positivt af renten, dvs. jo højere rente, jo større opsparing, hvilket bl.a. kan begrundes med den omtalte præference for forbrug nu fremfor i fremtiden.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Efterspørgsel</b></td>
+                                    <td>Investorer (virksomheder)</td>
+                                    <td>Faldende: Jo lavere rente, jo flere investeringer</td>
+                                    <td>Efterspørgslen efter lånekapital kommer fra investeringer i realkapital og blev antaget at variere negativt med renten, idet prisen på kapital som nævnt afhænger af realrenten, og jo lavere denne er, jo flere investeringer vil blive gennemført.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4>1.1 Hvem udbyder kredit? - Opsparere og husholdninger</h4>
+                    <p>Udbuddet af kredit kommer fra <b>opsparere</b> - primært husholdninger, men også virksomheder og institutioner, der har penge til overs, som de ikke bruger til umiddelbart forbrug eller investering.</p>
+                    
+                    <p><b>Hvem er opsparerne?</b></p>
+                    <ul>
+                        <li><b>Husholdninger:</b> Privatpersoner, der sparer op til pension, boligkøb, børneopsparing eller bare til uforudsete udgifter</li>
+                        <li><b>Virksomheder:</b> Virksomheder med overskud, der ikke umiddelbart skal investeres i nye projekter</li>
+                        <li><b>Institutioner:</b> Pensionskasser, forsikringsselskaber og fonde, der samler opsparing fra mange mennesker</li>
+                        <li><b>Staten:</b> I nogle tilfælde kan staten også være opsparer, hvis den har overskud på budgettet</li>
+                    </ul>
+
+                    <p><b>Hvorfor udbyder de kredit?</b></p>
+                    <ul>
+                        <li><b>Afkast:</b> Opsparere vil have et afkast på deres penge i stedet for at lade dem ligge og miste værdi til inflation</li>
+                        <li><b>Tidspræference:</b> Opsparere er villige til at udskyde forbrug nu, hvis de får en tilstrækkelig høj rente (præmie) i fremtiden</li>
+                        <li><b>Sikkerhed:</b> Ved at låne penge ud gennem banker eller obligationer får opsparere en relativt sikker investering</li>
+                        <li><b>Pensionsopsparing:</b> Mange opsparer til pension og har brug for at investere deres opsparing for at opretholde købekraften</li>
+                    </ul>
+
+                    <p><b>Hvordan fungerer det i praksis?</b></p>
+                    <ul>
+                        <li><b>Bankindlån:</b> Når du sætter penge på en opsparingskonto, låner du faktisk penge til banken. Banken betaler dig renter (indlånsrente) og låner pengene videre ud til højere rente</li>
+                        <li><b>Obligationer:</b> Når du køber en obligation (fx en statsobligation), låner du penge til staten eller en virksomhed. Du får renter hvert år og får hovedstolen tilbage ved udløb</li>
+                        <li><b>Pensionsopsparing:</b> Når du indbetaler til en pensionsordning, samles pengene og investeres i obligationer, aktier og andre aktiver</li>
+                    </ul>
+
+                    <p><b>Hvorfor stiger udbuddet, når renten stiger?</b></p>
+                    <p>Jo højere rente, jo mere attraktivt bliver det at spare op og udskyde forbrug. Hvis renten stiger fra 2% til 5%, får du meget mere i afkast for at vente med at bruge pengene. Dette betyder, at flere mennesker vil vælge at spare op i stedet for at forbruge, hvilket øger udbuddet af kredit.</p>
+
+                    <div class="info-box" style="background-color: #f0f9ff; border-left: 4px solid #3b82f6; padding: 15px; margin-bottom: 20px;">
+                        <p><b>Eksempel:</b> Hvis renten er 2%, vil du måske vælge at bruge 10.000 kr. nu på en ferie. Men hvis renten stiger til 8%, bliver det meget mere attraktivt at spare op. Du kan få 800 kr. i renter om året i stedet for at bruge pengene nu. Derfor vil flere vælge at spare op, når renten er høj.</p>
+                    </div>
+
+                    <h4>1.2 Hvem efterspørger kredit? - Investorer og virksomheder</h4>
+                    <p>Efterspørgslen efter kredit kommer fra <b>investorer</b> - primært virksomheder, men også husholdninger og staten, der har brug for at låne penge til investeringer eller forbrug.</p>
+                    
+                    <p><b>Hvem er investorerne?</b></p>
+                    <ul>
+                        <li><b>Virksomheder:</b> Virksomheder, der skal investere i maskiner, bygninger, teknologi eller udvide produktionen</li>
+                        <li><b>Husholdninger:</b> Privatpersoner, der skal låne til boligkøb, bilkøb eller andre store køb</li>
+                        <li><b>Staten:</b> Staten låner penge til infrastrukturprojekter, skoler, hospitaler eller for at finansiere budgetunderskud</li>
+                        <li><b>Startups:</b> Nye virksomheder, der skal finansiere deres opstart og vækst</li>
+                    </ul>
+
+                    <p><b>Hvorfor efterspørger de kredit?</b></p>
+                    <ul>
+                        <li><b>Investering i realkapital:</b> Virksomheder har brug for at låne penge for at købe maskiner, bygninger og udstyr, der kan skabe værdi gennem produktion</li>
+                        <li><b>Vækst:</b> Virksomheder vil udvide deres forretning, men har ikke nok egenkapital. De låner derfor penge for at finansiere vækst</li>
+                        <li><b>Kapitalens marginalprodukt:</b> Hvis en investering giver et højere afkast end renten, er det profitabelt at låne penge. Fx hvis en maskine giver 10% afkast, og renten er 5%, er det profitabelt at låne</li>
+                        <li><b>Forbrug:</b> Husholdninger låner penge til store køb (bolig, bil), som de ikke har råd til at betale kontant</li>
+                    </ul>
+
+                    <p><b>Hvordan fungerer det i praksis?</b></p>
+                    <ul>
+                        <li><b>Virksomhedslån:</b> En virksomhed låner penge fra banken til at købe en ny produktionslinje, der kan øge produktionen og omsætningen</li>
+                        <li><b>Realkreditlån:</b> En familie låner penge til at købe en bolig. De betaler renter til realkreditinstituttet og afdrager over mange år</li>
+                        <li><b>Statslån:</b> Staten udsteder obligationer for at finansiere store infrastrukturprojekter som broer, veje eller hospitaler</li>
+                        <li><b>Investeringslån:</b> En virksomhed låner penge til at bygge en ny fabrik, der kan producere flere varer og give højere indtægter</li>
+                    </ul>
+
+                    <p><b>Hvorfor falder efterspørgslen, når renten stiger?</b></p>
+                    <p>Jo højere rente, jo dyrere bliver det at låne penge. Hvis renten stiger fra 3% til 8%, skal virksomhederne betale meget mere i renter for at finansiere deres investeringer. Dette betyder, at færre investeringer bliver profitabelt. En investering, der gav 5% afkast, var profitabel ved 3% rente, men bliver ulønnsom ved 8% rente. Derfor vil færre virksomheder låne penge, når renten er høj.</p>
+
+                    <div class="info-box" style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin-bottom: 20px;">
+                        <p><b>Eksempel:</b> En virksomhed overvejer at købe en maskine til 1.000.000 kr., der kan producere varer til en værdi af 60.000 kr. om året (6% afkast).</p>
+                        <ul style="margin-bottom: 0;">
+                            <li><b>Ved 3% rente:</b> Maskinen koster 30.000 kr. om året i renter. Den giver 60.000 kr. i værdi, så der er 30.000 kr. i overskud. Det er profitabelt at låne!</li>
+                            <li><b>Ved 8% rente:</b> Maskinen koster nu 80.000 kr. om året i renter. Den giver stadig 60.000 kr. i værdi, men nu er der et tab på 20.000 kr. Det er ikke profitabelt at låne.</li>
+                        </ul>
+                        <p style="margin-top: 10px; margin-bottom: 0;">Derfor vil virksomheden kun låne penge, når renten er lav nok til, at investeringen er profitabel.</p>
+                    </div>
+
+                    <h4>1.3 Bankernes rolle som mellemmand</h4>
+                    <p>I praksis fungerer <b>banker</b> som mellemmænd mellem opsparere og investorer:</p>
+                    
+                    <ul>
+                        <li><b>Opsparere sætter penge ind:</b> Husholdninger sætter penge på opsparingskonti eller køber obligationer</li>
+                        <li><b>Banker samler opsparing:</b> Bankerne samler alle disse indlån og investerer dem i lån til virksomheder og husholdninger</li>
+                        <li><b>Banker låner ud:</b> Bankerne låner pengene videre til virksomheder og husholdninger til højere rente</li>
+                        <li><b>Rentemarginal:</b> Forskellen mellem lånerente og indlånsrente er bankens indtjening og dækker omkostninger og risiko</li>
+                    </ul>
+
+                    <p><b>Eksempel på bankens rolle:</b></p>
+                    <ul>
+                        <li>Du sætter 100.000 kr. på en opsparingskonto til 2% rente (du får 2.000 kr. om året)</li>
+                        <li>Banken låner dine 100.000 kr. videre til en virksomhed til 5% rente (virksomheden betaler 5.000 kr. om året)</li>
+                        <li>Banken tjener forskellen: 5.000 kr. - 2.000 kr. = 3.000 kr. (minus omkostninger og risiko)</li>
+                    </ul>
+
+                    <h3>2. Ligevægt på kreditmarkedet</h3>
+                    <p>I skæringspunktet mellem udbudskurven (stigende) og efterspørgselskurven (faldende) findes <span class="legal-term" id="term-ligev%C3%A6gtsrente"
+                            data-definition="Den rente, hvor udbud af opsparing = efterspørgsel efter lån. På dette niveau er markedet i balance."
+                            data-example="Hvis mange vil spare op til 5% rente, og mange vil låne ved 5% rente, er 5% ligevægtsrenten."
+                            data-slug="ligevaegtsrente">ligevægtsrenten</span>.</p>
+
+                    <p><b>Hvordan fungerer markedet?</b></p>
+                    <ul>
+                        <li><b>Hvis renten er for høj:</b> For mange vil spare op, for få vil låne → Renten falder</li>
+                        <li><b>Hvis renten er for lav:</b> For få vil spare op, for mange vil låne → Renten stiger</li>
+                        <li><b>I ligevægt:</b> Mængden af opsparing = Mængden af lån</li>
+                    </ul>
+
+                    <p><b>Eksempel:</b> Hvis renten er 10%, vil mange spare op, men få vil låne. Bankerne vil konkurrere om at låne penge ud og sænke renten. Når renten er 5%, er der balance mellem opsparing og lån.</p>
+
+                    <h3>3. Grafisk illustration</h3>
+                    <p>Marshall's model kan illustreres grafisk. I skæringspunktet mellem den stigende udbudskurve og den faldende efterspørgselskurve fremkom ligevægtsrenten (se figur 6.1 i den klassiske teori):</p>
+
+                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="marshallModelChart" data-chart-type="marshall-model"></canvas>
+                    </div>
+                    <p><small><b>Figur 5.1: Udbud og efterspørgsel efter lånekredit.</b>
+                            <br><b>Vandret akse:</b> Mængde penge
+                            <br><b>Lodret akse:</b> Renten (r)
+                            <br><b>Blå kurve (U):</b> Udbud fra opsparing - stigende (højere rente → mere opsparing)
+                            <br><b>Rød kurve (E):</b> Efterspørgsel fra investeringer - faldende (lavere rente → flere investeringer)
+                            <br><b>Skæringspunkt:</b> Ligevægtsrente (r₀) og ligevægtsmængde (L₀)
+                        </small></p>
+                </div>
+                <br>
+
+                <h2>Hvordan dannes renter i praksis?</h2>
+                <p>I praksis bestemmes renter på <span class="legal-term" id="term-pengemarkedet"
+                        data-definition="Markedet hvor penge lånes og udlånes. Renten bestemmes af udbud og efterspørgsel efter penge."
+                        data-example="Hvis mange vil låne penge, men få vil låne ud, stiger renten. Hvis få vil låne penge, men mange vil låne ud, falder renten."
+                        data-slug="pengemarkedet">pengemarkedet</span> gennem udbud og efterspørgsel - præcis som i Marshall's model.</p>
+
+                <h3>1. Udbud og efterspørgsel i praksis</h3>
+
+                <div class="table-responsive mb-4">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Situation</th>
+                                <th>Udbud/Efterspørgsel</th>
+                                <th>Rente</th>
+                                <th>Forklaring</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Mange vil låne</b></td>
+                                <td>Høj efterspørgsel</td>
+                                <td>Stiger</td>
+                                <td>Bankerne kan kræve højere rente, når mange vil låne</td>
+                            </tr>
+                            <tr>
+                                <td><b>Mange vil låne ud</b></td>
+                                <td>Højt udbud</td>
+                                <td>Falder</td>
+                                <td>Bankerne konkurrerer om at låne ud, så renten falder</td>
+                            </tr>
+                            <tr>
+                                <td><b>Ligevægt</b></td>
+                                <td>Udbud = Efterspørgsel</td>
+                                <td>Stabil</td>
+                                <td>Renten er i ligevægt</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>2. Risikopræmie - Hvorfor har nogle lån højere rente?</h3>
+                <p>Ikke alle lån har samme rente. <span class="legal-term" id="term-risikopraemie"
+                        data-definition="Ekstra rente, der betales for at kompensere for risikoen ved at låne ud. Jo højere risiko, jo højere risikopræmie."
+                        data-example="Et lån til en virksomhed med dårlig kreditvurdering har højere rente end et lån til en stat, fordi risikoen er højere."
+                        data-slug="risikopraemie">Risikopræmien</span> er den ekstra rente, der betales for risiko:</p>
+
+                <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
@@ -263,18 +623,18 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                </div>
 
-                    <h3>4. Realrente vs. nominel rente</h3>
-                    <p>Der er forskel mellem <span class="legal-term" id="term-nominel-rente"
-                            data-definition="Renten i kroner - den rente, du faktisk betaler eller modtager. Den tager ikke højde for inflation."
-                            data-example="Hvis du låner til 5% nominel rente, betaler du 5% af lånebeløbet i renter."
-                            data-slug="nominel-rente">nominel rente</span> (i kroner) og <span class="legal-term" id="term-realrente"
-                            data-definition="Renten justeret for inflation. Realrenten = Nominel rente - Inflation. Den viser den reale købekraft af renterne."
-                            data-example="Hvis nominel rente er 5% og inflationen er 2%, er realrenten 5% - 2% = 3%."
-                            data-slug="realrente">realrente</span> (justeret for inflation):</p>
+                <h3>3. Realrente vs. nominel rente</h3>
+                <p>Der er forskel mellem <span class="legal-term" id="term-nominel-rente"
+                        data-definition="Renten i kroner - den rente, du faktisk betaler eller modtager. Den tager ikke højde for inflation."
+                        data-example="Hvis du låner til 5% nominel rente, betaler du 5% af lånebeløbet i renter."
+                        data-slug="nominel-rente">nominel rente</span> (i kroner) og <span class="legal-term" id="term-realrente"
+                        data-definition="Renten justeret for inflation. Realrenten = Nominel rente - Inflation. Den viser den reale købekraft af renterne."
+                        data-example="Hvis nominel rente er 5% og inflationen er 2%, er realrenten 5% - 2% = 3%."
+                        data-slug="realrente">realrente</span> (justeret for inflation):</p>
 
-                    <div class="table-responsive mb-4">
+                <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
@@ -296,44 +656,126 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                </div>
 
-                    <p><b>Vigtigt:</b> Realrenten viser den reale købekraft. Hvis realrenten er negativ, betyder det, at inflationen æder op i renterne.</p>
+                <p><b>Vigtigt:</b> Realrenten viser den reale købekraft. Hvis realrenten er negativ, betyder det, at inflationen æder op i renterne.</p>
 
-                    <h4>4.1. Risikopræmie for forskellige låntyper</h4>
-                    <p>Diagrammet nedenfor viser, hvordan risikopræmien varierer mellem forskellige låntyper. Statslån har den laveste risikopræmie, mens forbrugslån har den højeste.</p>
-                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="riskPremiumChart" data-chart-type="risk-premium"></canvas>
-                    </div>
-                    <p><small><b>Figur 5.1:</b> Risikopræmie for forskellige låntyper. Diagrammet viser den risikofrie rente (fx statsrente) og den ekstra risikopræmie, der tilføjes for forskellige låntyper. Jo højere risiko, jo højere risikopræmie. Kilde: Illustrativt baseret på typiske markedsrenter i Danmark.</small></p>
+                <h4>3.1. Risikopræmie for forskellige låntyper</h4>
+                <p>Diagrammet nedenfor viser, hvordan risikopræmien varierer mellem forskellige låntyper. Statslån har den laveste risikopræmie, mens forbrugslån har den højeste.</p>
+                <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                    <canvas id="riskPremiumChart" data-chart-type="risk-premium"></canvas>
+                </div>
+                <p><small><b>Figur 5.1:</b> Risikopræmie for forskellige låntyper. Diagrammet viser den risikofrie rente (fx statsrente) og den ekstra risikopræmie, der tilføjes for forskellige låntyper. Jo højere risiko, jo højere risikopræmie. Kilde: Illustrativt baseret på typiske markedsrenter i Danmark.</small></p>
 
-                    <h4>4.2. Nominel rente vs. Realrente</h4>
-                    <p>Diagrammet nedenfor viser udviklingen i nominel rente, inflation og realrente over de sidste år. Realrenten beregnes som nominel rente minus inflation.</p>
-                    <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="realNominalRateChart" data-chart-type="real-nominal-rate"></canvas>
-                    </div>
-                    <p><small><b>Figur 5.2:</b> Udvikling i nominel rente, inflation og realrente i Danmark. Realrenten viser den reale købekraft af renterne efter justering for inflation. Når inflationen er højere end den nominelle rente, bliver realrenten negativ. Kilde: Danmarks Nationalbank og Danmarks Statistik. Data er illustrativt baseret på typiske udviklinger.</small></p>
+                <h4>3.2. Nominel rente vs. Realrente</h4>
+                <p>Diagrammet nedenfor viser udviklingen i nominel rente, inflation og realrente over de sidste år. Realrenten beregnes som nominel rente minus inflation.</p>
+                <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
+                    <canvas id="realNominalRateChart" data-chart-type="real-nominal-rate"></canvas>
+                </div>
+                <p><small><b>Figur 5.2:</b> Udvikling i nominel rente, inflation og realrente i Danmark. Realrenten viser den reale købekraft af renterne efter justering for inflation. Når inflationen er højere end den nominelle rente, bliver realrenten negativ. Kilde: Danmarks Nationalbank og Danmarks Statistik. Data baseret på historiske årlige gennemsnit fra Danmarks Nationalbank (renter) og Danmarks Statistik (inflation/PRIS111).</small></p>
 
-                    <h3>5. Finansiel stabilitet - Hvad betyder det?</h3>
-                    <p><span class="legal-term" id="term-finansiel-stabilitet"
-                            data-definition="At det finansielle system fungerer stabilt og kan modstå chok uden at kollapse. Banker kan betale deres forpligtelser, og markederne fungerer normalt."
-                            data-example="Under finanskrisen 2008 mistede mange banker penge og kunne ikke betale deres forpligtelser - det var mangel på finansiel stabilitet."
-                            data-slug="finansiel-stabilitet">Finansiel stabilitet</span> betyder, at det finansielle system fungerer stabilt:</p>
+                <h5>Konkrete eksempler: 2014 vs. 2022</h5>
+                <p>Lad os se på to konkrete år for at forstå forskellen mellem nominel rente, inflation og realrente:</p>
 
+                <div class="table-responsive mb-4">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>År</th>
+                                <th>Nominel rente</th>
+                                <th>Inflation</th>
+                                <th>Realrente</th>
+                                <th>Beregning</th>
+                                <th>Forklaring</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>2014</b></td>
+                                <td>0,1%</td>
+                                <td>0,6%</td>
+                                <td><span style="color: #dc3545;"><b>-0,5%</b></span></td>
+                                <td>0,1% - 0,6% = -0,5%</td>
+                                <td>Selvom renten var meget lav (0,1%), var realrenten negativ, fordi inflationen var højere end renten. Dette betød, at opsparere faktisk mistede købekraft.</td>
+                            </tr>
+                            <tr>
+                                <td><b>2022</b></td>
+                                <td>2,5%</td>
+                                <td>7,7%</td>
+                                <td><span style="color: #dc3545;"><b>-5,2%</b></span></td>
+                                <td>2,5% - 7,7% = -5,2%</td>
+                                <td>Selvom renten var steget til 2,5%, var realrenten meget negativ (-5,2%), fordi inflationen var ekstremt høj (7,7%). Opsparere mistede betydelig købekraft.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><b>Hvad betyder dette i praksis?</b></p>
+                <ul>
+                    <li><b>2014:</b> Hvis du havde 100.000 kr. på en opsparingskonto til 0,1% rente, fik du 100 kr. i renter. Men fordi inflationen var 0,6%, skulle du have 600 kr. for at bevare samme købekraft. Du mistede faktisk 500 kr. i reel købekraft.</li>
+                    <li><b>2022:</b> Hvis du havde 100.000 kr. på en opsparingskonto til 2,5% rente, fik du 2.500 kr. i renter. Men fordi inflationen var 7,7%, skulle du have 7.700 kr. for at bevare samme købekraft. Du mistede faktisk 5.200 kr. i reel købekraft - en meget større tab end i 2014.</li>
+                </ul>
+
+                <h5>Hvorfor var inflationen så høj i 2022?</h5>
+                <p>Inflationen på 7,7% i 2022 var den højeste i Danmark siden 1980'erne. Der var flere vigtige årsager:</p>
+
+                <div class="info-box">
+                    <h6>1. Forsyningskædeproblemer efter COVID-19</h6>
+                    <p>Efter COVID-19-pandemien opstod der store problemer i globale forsyningskæder:</p>
                     <ul>
-                        <li><b>Bankernes stabilitet:</b> Banker kan betale deres forpligtelser</li>
-                        <li><b>Markedernes funktion:</b> Finansielle markeder fungerer normalt</li>
-                        <li><b>Risikostyring:</b> Risici er spredt og håndteret</li>
-                        <li><b>Modstandsdygtighed:</b> Systemet kan modstå chok</li>
+                        <li><b>Fabrikker lukkede:</b> Under lockdown lukkede mange fabrikker i Kina og andre produktionslande, hvilket skabte mangel på råvarer og færdigvarer.</li>
+                        <li><b>Transportproblemer:</b> Containerskibe og lastbiler kunne ikke transportere varer normalt, hvilket skabte køer og forsinkelser i havne.</li>
+                        <li><b>Efterspørgselsboom:</b> Da økonomierne åbnede igen, steg efterspørgslen kraftigt, mens produktionen stadig var langsom. Dette skabte mangel og drev priserne op.</li>
                     </ul>
 
-                    <h3>6. Systemiske risici - Risici, der rammer hele systemet</h3>
-                    <p><span class="legal-term" id="term-systemisk-risiko"
-                            data-definition="Risiko, der kan ramme hele det finansielle system, ikke kun én bank eller virksomhed. Hvis én stor bank går konkurs, kan det påvirke alle andre banker."
-                            data-example="Under finanskrisen 2008 gik Lehman Brothers konkurs, hvilket ramte hele det finansielle system globalt."
-                            data-slug="systemisk-risiko">Systemiske risici</span> er risici, der kan ramme hele det finansielle system:</p>
+                    <h6>2. Energipriser steg kraftigt</h6>
+                    <p>Ruslands invasion af Ukraine i februar 2022 fik store konsekvenser for energimarkederne:</p>
+                    <ul>
+                        <li><b>Gaspriser:</b> Europa var afhængig af russisk gas, og da leverancerne blev reduceret, steg gaspriserne dramatisk.</li>
+                        <li><b>Oliefpriser:</b> Oliepriserne steg også, fordi man frygtede forsyningsproblemer.</li>
+                        <li><b>Elpriser:</b> Høje gaspriser drev elpriserne op, da meget elproduktion i Europa bruger gas.</li>
+                    </ul>
+                    <p>Høje energipriser påvirker alle dele af økonomien, fordi energi bruges i produktion, transport og opvarmning.</p>
 
-                    <div class="table-responsive mb-4">
+                    <h6>3. Stigende fødevarepriser</h6>
+                    <p>Ukraine og Rusland er store eksportører af korn og gødning:</p>
+                    <ul>
+                        <li><b>Korn:</b> Krig i Ukraine reducerede eksporten af hvede og majs, hvilket drev priserne op.</li>
+                        <li><b>Gødning:</b> Høje gaspriser påvirkede produktionen af gødning (som kræver meget energi), hvilket igen drev fødevarepriserne op.</li>
+                    </ul>
+
+                    <h6>4. Løntryk og efterspørgsel</h6>
+                    <p>Efter COVID-19 havde mange husholdninger sparet op og havde råd til at forbruge mere:</p>
+                    <ul>
+                        <li><b>Opsparet forbrug:</b> Mange havde sparet penge op under lockdown og brugte dem, da økonomierne åbnede.</li>
+                        <li><b>Løntryk:</b> Mange virksomheder havde svært ved at finde arbejdskraft, hvilket drev lønningerne op og yderligere øgede efterspørgslen.</li>
+                    </ul>
+                </div>
+
+                <p><b>Sammenfattende:</b> Kombinationen af forsyningskædeproblemer, høje energipriser, stigende fødevarepriser og stærk efterspørgsel skabte en "perfekt storm" der drev inflationen op til 7,7% i 2022. Dette var en meget usædvanlig situation sammenlignet med de lave inflationsniveauer (0,3-1,1%) vi havde set i årene 2015-2021.</p>
+                <br>
+
+                <h2>Finansiel stabilitet</h2>
+                <h3>1. Finansiel stabilitet - Hvad betyder det?</h3>
+                <p><span class="legal-term" id="term-finansiel-stabilitet"
+                        data-definition="At det finansielle system fungerer stabilt og kan modstå chok uden at kollapse. Banker kan betale deres forpligtelser, og markederne fungerer normalt."
+                        data-example="Under finanskrisen 2008 mistede mange banker penge og kunne ikke betale deres forpligtelser - det var mangel på finansiel stabilitet."
+                        data-slug="finansiel-stabilitet">Finansiel stabilitet</span> betyder, at det finansielle system fungerer stabilt:</p>
+
+                <ul>
+                    <li><b>Bankernes stabilitet:</b> Banker kan betale deres forpligtelser</li>
+                    <li><b>Markedernes funktion:</b> Finansielle markeder fungerer normalt</li>
+                    <li><b>Risikostyring:</b> Risici er spredt og håndteret</li>
+                    <li><b>Modstandsdygtighed:</b> Systemet kan modstå chok</li>
+                </ul>
+
+                <h3>2. Systemiske risici - Risici, der rammer hele systemet</h3>
+                <p><span class="legal-term" id="term-systemisk-risiko"
+                        data-definition="Risiko, der kan ramme hele det finansielle system, ikke kun én bank eller virksomhed. Hvis én stor bank går konkurs, kan det påvirke alle andre banker."
+                        data-example="Under finanskrisen 2008 gik Lehman Brothers konkurs, hvilket ramte hele det finansielle system globalt."
+                        data-slug="systemisk-risiko">Systemiske risici</span> er risici, der kan ramme hele det finansielle system:</p>
+
+                <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
@@ -344,12 +786,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>Kontagionsrisiko</b></td>
-                                    <td>En banks problemer smitter af på andre banker</td>
-                                    <td>Hvis én stor bank går konkurs, mister andre banker tillid og kan også få problemer</td>
+                                    <td><b>Systemisk risiko</b></td>
+                                    <td>Problemer i én del af systemet spreder sig til hele det finansielle system</td>
+                                    <td>Hvis én stor bank går konkurs, mister andre banker tillid, kan ikke låne penge af hinanden, og hele systemet kan kollapse</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Liquiditetsrisiko</b></td>
+                                    <td><b>Likviditetsrisiko</b></td>
                                     <td>Banker kan ikke få likviditet, når de har brug for det</td>
                                     <td>Under kriser kan banker ikke låne penge af hinanden, selvom de har sikkerhed</td>
                                 </tr>
@@ -365,12 +807,12 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                </div>
 
-                    <h3>7. Hvordan sikrer vi finansiel stabilitet?</h3>
-                    <p>Der er flere måder at sikre finansiel stabilitet på:</p>
+                <h3>3. Hvordan sikrer vi finansiel stabilitet?</h3>
+                <p>Der er flere måder at sikre finansiel stabilitet på:</p>
 
-                    <div class="table-responsive mb-4">
+                <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
@@ -386,7 +828,7 @@
                                     <td>En bank skal have mindst 8% kapital i forhold til risikovægtede aktiver</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Liquiditetskrav</b></td>
+                                    <td><b>Likviditetskrav</b></td>
                                     <td>Banker skal have nok likvide midler til at betale kunder</td>
                                     <td>En bank skal kunne betale alle kunder, der vil hæve penge på én dag</td>
                                 </tr>
@@ -402,50 +844,52 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-
-                    <h3>8. Finanskrisen 2008 - Et eksempel på mangel på stabilitet</h3>
-                    <p>Finanskrisen 2008 viste, hvad der kan ske, når der mangler finansiel stabilitet:</p>
-
-                    <ul>
-                        <li><b>For meget gearing:</b> Banker havde lånt for meget i forhold til deres kapital</li>
-                        <li><b>Risikable lån:</b> Mange lån blev givet til folk, der ikke kunne betale dem tilbage</li>
-                        <li><b>Mangel på gennemsigtighed:</b> Det var svært at se, hvor risikable lånene var</li>
-                        <li><b>Kontagion:</b> Når én bank gik konkurs, påvirkede det alle andre</li>
-                    </ul>
-
-                    <p><b>Resultatet:</b> Mange banker gik konkurs eller måtte reddes af staterne. Hele det finansielle system var tæt på at kollapse.</p>
-
-                    <h3>9. Hvordan bruger vi dette i praksis?</h3>
-                    <p>Som finansøkonom eller Financial Controller møder du rentedannelse og finansiel stabilitet i din daglige arbejde:</p>
-                    
-                    <ul>
-                        <li><b>Rentevurdering:</b> Du skal forstå, hvorfor forskellige lån har forskellige renter</li>
-                        <li><b>Risikovurdering:</b> Du skal vurdere risikoen ved forskellige investeringer og lån</li>
-                        <li><b>Likviditetsstyring:</b> Du skal sikre, at virksomheden har nok likvide midler</li>
-                        <li><b>Rådgivning:</b> Du skal kunne forklare kunder forskellen mellem netto- og brutto renter</li>
-                    </ul>
-
-                    <h3>10. Sammenfatning</h3>
-                    <p>Rentedannelse og finansiel stabilitet er centrale for økonomien. De vigtigste punkter er:</p>
-                    
-                    <ol>
-                        <li><b>Netto vs. brutto rente:</b> Brutto er før skat, netto er efter skat</li>
-                        <li><b>Renter dannes på markederne:</b> Gennem udbud og efterspørgsel</li>
-                        <li><b>Risikopræmie:</b> Højere risiko giver højere rente</li>
-                        <li><b>Realrente:</b> Nominel rente minus inflation</li>
-                        <li><b>Finansiel stabilitet:</b> Sikrer, at det finansielle system fungerer stabilt</li>
-                        <li><b>Systemiske risici:</b> Risici, der kan ramme hele systemet</li>
-                    </ol>
                 </div>
+
+                <h3>4. Finanskrisen 2008 - Et eksempel på mangel på stabilitet</h3>
+                <p>Finanskrisen 2008 viste, hvad der kan ske, når der mangler finansiel stabilitet:</p>
+
+                <ul>
+                    <li><b>For meget gearing:</b> Banker havde lånt for meget i forhold til deres kapital</li>
+                    <li><b>Risikable lån:</b> Mange lån blev givet til folk, der ikke kunne betale dem tilbage</li>
+                    <li><b>Mangel på gennemsigtighed:</b> Det var svært at se, hvor risikable lånene var</li>
+                    <li><b>Systemisk risiko:</b> Når én bank gik konkurs, spredte problemet sig til hele det finansielle system</li>
+                </ul>
+
+                <p><b>Resultatet:</b> Mange banker gik konkurs eller måtte reddes af staterne. Hele det finansielle system var tæt på at kollapse.</p>
+
+                <h3>5. Hvordan bruger vi dette i praksis?</h3>
+                <p>Som finansøkonom eller Financial Controller møder du rentedannelse og finansiel stabilitet i din daglige arbejde:</p>
+                
+                <ul>
+                    <li><b>Rentevurdering:</b> Du skal forstå, hvorfor forskellige lån har forskellige renter</li>
+                    <li><b>Risikovurdering:</b> Du skal vurdere risikoen ved forskellige investeringer og lån</li>
+                    <li><b>Likviditetsstyring:</b> Du skal sikre, at virksomheden har nok likvide midler</li>
+                    <li><b>Rådgivning:</b> Du skal kunne forklare kunder forskellen mellem netto- og brutto renter</li>
+                </ul>
+
+                <h3>6. Sammenfatning</h3>
+                <p>Rentedannelse og finansiel stabilitet er centrale for økonomien. De vigtigste punkter er:</p>
+                
+                <ol>
+                    <li><b>Rentetyper:</b> Netto rente, ÅOP (brutto), lånerente, indlånsrente, pålydende og effektiv rente</li>
+                    <li><b>Klassisk renteteori:</b> Renter findes pga. kapitalens produktivitet og tidspræference</li>
+                    <li><b>Tidspræference:</b> Vi foretrækker penge nu, derfor kræver vi en præmie (rente) for at udskyde forbrug</li>
+                    <li><b>Nutidsværdi:</b> Fremtidige penge er mindre værd i dag - beregnes ved diskontering</li>
+                    <li><b>Marshall's model:</b> Renten bestemmes af udbud (opsparing) og efterspørgsel (investeringer)</li>
+                    <li><b>Risikopræmie:</b> Højere risiko giver højere rente</li>
+                    <li><b>Realrente:</b> Nominel rente minus inflation</li>
+                    <li><b>Finansiel stabilitet:</b> Sikrer, at det finansielle system fungerer stabilt</li>
+                    <li><b>Systemiske risici:</b> Risici, der kan ramme hele systemet</li>
+                </ol>
 
                 <br><br>
                 <h2>Quiz</h2>
                 <div class="quiz-container">
                     <a href="MAKROQUIZ/makro5.html" class="effectLinks"
-                        data-replace="Start Quiz 5.1 om Rentedannelse og finansiel stabilitet"
+                        data-replace="Start Quiz 5.1 om Rentedannelse"
                         target="_blank">
-                        <span>Quiz 5.1 om Rentedannelse og finansiel stabilitet</span> </a>
+                        <span>Quiz 5.1 om Rentedannelse</span> </a>
                 </div>
                 <br><br>
 

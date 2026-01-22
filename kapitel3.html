@@ -152,9 +152,18 @@
                 </div>
 
                 <div class="info-box">
-                    <p>Dette kapitel handler om <b>konjunkturbeskrivelse</b> - hvordan vi måler og beskriver økonomiens
+                    <p>Dette kapitel handler om <span class="legal-term"
+                        data-definition="Systematisk analyse og måling af økonomiens cykliske svingninger mellem højkonjunktur og lavkonjunktur."
+                        data-example="Konjunkturbeskrivelse viser fx at Danmark havde lavkonjunktur i 2008-2009 og højkonjunktur i 2017-2019."
+                        data-slug="konjunkturbeskrivelse">konjunkturbeskrivelse</span> - hvordan vi måler og beskriver økonomiens
                         op- og nedgange.
-                        Som finansøkonom skal du kunne forstå konjunktursvingninger, ledighed, betalingsbalancen og
+                        Som finansøkonom skal du kunne forstå <span class="legal-term"
+                        data-definition="De cykliske svingninger i økonomisk aktivitet over tid, med vekslende perioder af vækst og tilbagegang."
+                        data-example="En typisk konjunkturcyklus varer 4-8 år og går fra opsving over boom til nedgang og lavkonjunktur."
+                        data-slug="konjunktursvingninger">konjunktursvingninger</span>, ledighed, <span class="legal-term"
+                        data-definition="Opgørelse over landets samlede økonomiske transaktioner med udlandet. Viser eksport, import, indkomst og overførsler."
+                        data-example="Hvis Danmark eksporterer for 1.600 mia. kr. og importerer for 1.300 mia. kr., har vi overskud på betalingsbalancen."
+                        data-slug="betalingsbalance">betalingsbalancen</span> og
                         konjunkturindikatorer.
                         Disse begreber er centrale for at forstå, hvor økonomien befinder sig og hvor den er på vej hen.
                     </p>
@@ -199,14 +208,20 @@
                                     <td>2010-2019: Langt opsving efter finanskrisen</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Højkonjunktur</b><br>(Boom)</td>
+                                    <td><b>Højkonjunktur</b><br>(<span class="legal-term"
+                                        data-definition="En periode hvor økonomien opererer tæt på eller over sit produktionspotentiale med høj vækst og lav ledighed."
+                                        data-example="I 2006-2007 havde Danmark højkonjunktur med 3-4% vækst og ledighed under 4%."
+                                        data-slug="boom">Boom</span>)</td>
                                     <td>Økonomien er på toppunktet</td>
                                     <td>• Høj produktion<br>• Lav ledighed<br>• Høje priser<br>• Mange investeringer
                                     </td>
                                     <td>2006-2007: Før finanskrisen</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Nedgang</b><br>(Recession)</td>
+                                    <td><b>Nedgang</b><br>(<span class="legal-term"
+                                        data-definition="En periode med faldende økonomisk aktivitet, typisk defineret som to kvartaler i træk med negativ BNP-vækst."
+                                        data-example="Under finanskrisen 2008-2009 havde Danmark recession med faldende BNP og stigende arbejdsløshed."
+                                        data-slug="recession">Recession</span>)</td>
                                     <td>Økonomien falder - produktionen går ned</td>
                                     <td>• Faldende BNP<br>• Stigende ledighed<br>• Faldende investeringer<br>• Reduceret
                                         forbrug</td>
@@ -269,7 +284,10 @@
                         <li><b>Konjunkturledighed:</b> Ledighed forårsaget af konjunkturnedgang</li>
                     </ul>
 
-                    <h3>3. Okun's lov - Sammenhængen mellem ledighed og BNP</h3>
+                    <h3>3. <span class="legal-term"
+                        data-definition="En empirisk sammenhæng der viser, at når BNP-væksten er højere end normal, falder ledigheden, og omvendt."
+                        data-example="Hvis normal vækst er 2% og faktisk vækst er 3%, falder ledigheden typisk med ca. 0,5 procentpoint."
+                        data-slug="okuns-lov">Okun's lov</span> - Sammenhængen mellem ledighed og BNP</h3>
                     <p>Okun's lov beskriver sammenhængen mellem ledighed og BNP-vækst. Den siger, at:</p>
 
                     <p><b>Hvis BNP-væksten er højere end den normale vækst, falder ledigheden.</b></p>
@@ -387,24 +405,14 @@
                             modtager. Dette kan være tegn på svag konkurrenceevne eller højt forbrug.</li>
                     </ul>
 
-                    <h4>4.1. Betalingsbalancens udvikling i Danmark</h4>
+                    <h4>3.1.4.1 Betalingsbalancens udvikling i Danmark</h4>
                     <p>Nedenfor kan du se udviklingen i Danmarks betalingsbalance fra 1970 til i dag. Diagrammet viser,
                         hvordan betalingsbalancen har udviklet sig over mere end 50 år, hvilket giver et godt overblik
                         over Danmarks økonomiske udvikling.</p>
                     <div class="chart-container mb-4" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="balanceOfPaymentsChart"></canvas>
+                        <canvas id="balanceOfPaymentsHistoricalChart"></canvas>
                     </div>
-                    <p><small><b>Figur 3.2:</b> Betalingsbalancens udvikling i Danmark fra 1970 til i dag. Viser løbende
-                            konto og samlet betalingsbalance i milliarder kroner. <b>Forklaring på negative tal:</b> Når
-                            tallet er negativt, betyder det, at Danmark sender flere penge ud til udlandet end vi
-                            modtager. Dette kaldes et underskud eller deficit. Det kan ske, når we importerer mere end
-                            vi eksporterer, eller når danske virksomheder betaler udbytte til udenlandske ejere. Når
-                            tallet er positivt, modtager Danmark flere penge end vi sender ud (overskud eller surplus).
-                            I 1970'erne og 1980'erne havde Danmark ofte underskud på betalingsbalancen, men siden
-                            1990'erne har vi generelt haft overskud, hvilket viser, at Danmarks konkurrenceevne er
-                            forbedret. Løbende konto inkluderer handelsbalance (eksport minus import), servicebalance,
-                            indkomstbalance og overførselsbalance. Kilde: Danmarks Statistik - Betalingsbalance. Data
-                            opdateres kvartalsvis.</small></p>
+                    <p><small><b>Figur 3.2:</b> Betalingsbalancens udvikling i Danmark fra 1970 til i dag. Diagrammet viser to forskellige mål: <b>Løbende konto</b> (turkis linje) og <b>Samlet betalingsbalance</b> (rød linje), begge målt i milliarder kroner. <b>Forskellen på de to:</b> Løbende konto inkluderer handelsbalance (eksport minus import), servicebalance, indkomstbalance og overførselsbalance - altså løbende transaktioner. Samlet betalingsbalance inkluderer også kapitaloverførsler og finansielle investeringer (køb og salg af aktiver som aktier, obligationer og ejendomme). Derfor ligger de to linjer tæt på hinanden, men ikke helt sammenfaldende. <b>Forklaring på negative tal:</b> Når tallet er negativt, betyder det, at Danmark sender flere penge ud til udlandet end vi modtager. Dette kaldes et underskud. Det kan ske, når vi importerer mere end vi eksporterer, eller når danske virksomheder betaler udbytte til udenlandske ejere. Når tallet er positivt, modtager Danmark flere penge end vi sender ud (overskud). I 1970'erne og 1980'erne havde Danmark ofte underskud på betalingsbalancen, men siden 1990'erne har vi generelt haft overskud, hvilket viser, at Danmarks konkurrenceevne er forbedret. Kilde: Danmarks Statistik - Betalingsbalance. Data opdateres kvartalsvis.</small></p>
 
 
 
@@ -424,19 +432,28 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><b>Førindikatorer</b><br>(Leading indicators)</td>
+                                    <td><b><span class="legal-term"
+                                        data-definition="Økonomiske indikatorer der ændrer sig før økonomien ændrer retning. Bruges til at forudsige fremtidige konjunkturer."
+                                        data-example="Hvis aktiekurserne stiger kraftigt, tyder det på, at investorer forventer fremtidig vækst."
+                                        data-slug="forindikatorer">Førindikatorer</span></b><br>(Leading indicators)</td>
                                     <td>Tal, der ændrer sig FØR økonomien ændrer sig</td>
                                     <td>• Aktiekurser<br>• Byggetilladelser<br>• Forbrugerkonfidens<br>• Nye ordrer</td>
                                     <td>Fortæller os, hvor økonomien er på vej hen</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Samtidige indikatorer</b><br>(Coincident indicators)</td>
+                                    <td><b><span class="legal-term"
+                                        data-definition="Økonomiske indikatorer der ændrer sig samtidig med den generelle økonomiske udvikling."
+                                        data-example="BNP og industriproduktion viser den nuværende tilstand i økonomien."
+                                        data-slug="samtidige-indikatorer">Samtidige indikatorer</span></b><br>(Coincident indicators)</td>
                                     <td>Tal, der ændrer sig SAMTIDIG med økonomien</td>
                                     <td>• BNP<br>• Industriproduktion<br>• Indkomst<br>• Forbrug</td>
                                     <td>Fortæller os, hvor økonomien er nu</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Efterslæbende indikatorer</b><br>(Lagging indicators)</td>
+                                    <td><b><span class="legal-term"
+                                        data-definition="Økonomiske indikatorer der ændrer sig efter økonomien har ændret retning. Bruges til at bekræfte konjunkturer."
+                                        data-example="Arbejdsløsheden begynder først at falde flere måneder efter, at økonomien er begyndt at vokse igen."
+                                        data-slug="efterslaebende-indikatorer">Efterslæbende indikatorer</span></b><br>(Lagging indicators)</td>
                                     <td>Tal, der ændrer sig EFTER økonomien har ændret sig</td>
                                     <td>• Ledighed<br>• Lønninger<br>• Inflationsrate<br>• Virksomhedsprofit</td>
                                     <td>Bekræfter, hvad der allerede er sket</td>
@@ -455,7 +472,10 @@
                             flere penge</li>
                     </ul>
 
-                    <h3>6. Outputgap - Forskellen mellem faktisk og potentielt BNP</h3>
+                    <h3>6. <span class="legal-term"
+                        data-definition="Forskellen mellem den faktiske produktion (<span class='legal-term' data-definition='Nationalindkomst/Produktion: Landets samlede produktion eller nationalindkomst. I ligevægt er Y = SE (samlet efterspørgsel).' data-example='Hvis Y = 2.850 mia. kr., betyder det at Danmark producerer varer og tjenester til en værdi af 2.850 mia. kr.' data-slug='symbol-y'>Y</span>) og den potentielle produktion (Y*). Måles typisk i procent af potentielt BNP."
+                        data-example="Hvis faktisk BNP er 2.800 mia. kr. og potentielt BNP er 2.850 mia. kr., er outputgapet -1,75% (negativt gap)."
+                        data-slug="outputgap">Outputgap</span> - Forskellen mellem faktisk og potentielt BNP</h3>
                     <p>Outputgapet måler forskellen mellem, hvor meget økonomien faktisk producerer, og hvor meget den
                         kunne producere, hvis alle ressourcer blev brugt optimalt.</p>
 
@@ -795,12 +815,12 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Charts API Integration -->
-    <script src="charts-api.js"></script>
+    <script src="charts-api.js?v=2"></script>
     <script>
         // Initialize charts when page loads
         document.addEventListener('DOMContentLoaded', function () {
-            // Balance of Payments from 1970 (54 years)
-            createBalanceOfPaymentsChart('balanceOfPaymentsChart', 54);
+            // Balance of Payments Historical Chart (from 1970, 54 years)
+            createBalanceOfPaymentsChart('balanceOfPaymentsHistoricalChart', 54);
             createMultiCountryUnemploymentInflationChart('unemploymentInflationChart', ['DNK', 'DEU', 'SWE', 'NOR']);
             // Okun's Law Chart
             createOkunsLawChart('okunsLawChart', ['DNK', 'DEU', 'SWE', 'NOR']);
