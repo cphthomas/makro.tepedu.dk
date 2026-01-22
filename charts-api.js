@@ -6111,7 +6111,7 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                 ...chartConfig.plugins,
                 title: {
                     display: true,
-                    text: 'SE/SU model – når SULang stiger',
+                    text: 'SE/SU model – når SU\u2097\u2090\u2099\u1d4d stiger',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
                 tooltip: {
@@ -6193,11 +6193,11 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                         if (labelHtml === 'SUKORT') {
                             labelHtml = 'SU<sub>KORT</sub>';
                         } else if (labelHtml === 'SUKORT NY') {
-                            labelHtml = 'SU<sub>KORT</sub> NY';
+                            labelHtml = 'SU<sub>KORT NY</sub>';
                         } else if (labelHtml === 'SULANG') {
                             labelHtml = 'SU<sub>LANG</sub>';
                         } else if (labelHtml === 'SULANG NY') {
-                            labelHtml = 'SU<sub>LANG</sub> NY';
+                            labelHtml = 'SU<sub>LANG NY</sub>';
                         }
                         labelText.innerHTML = labelHtml;
                         
@@ -6270,36 +6270,36 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                     ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
                 };
                 
-                // SE label - red, positioned on the curve
+                // SE label - red, positioned on the curve, far right to avoid other labels
                 ctx.fillStyle = '#ef4444';
                 ctx.font = 'bold 15px Inter';
-                ctx.fillText('SE', chart.scales.x.getPixelForValue(3200), chart.scales.y.getPixelForValue(3.6));
+                ctx.fillText('SE', chart.scales.x.getPixelForValue(3300), chart.scales.y.getPixelForValue(3.6));
                 
-                // SUKORT label - blue, positioned on the initial curve
-                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(3200), chart.scales.y.getPixelForValue(7.4), '#3b82f6', 15);
+                // SUKORT label - blue, positioned on the initial curve, far right
+                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(3300), chart.scales.y.getPixelForValue(7.4), '#3b82f6', 15);
                 
-                // SUKORT NY label - blue dashed, positioned on the new curve near point 1
+                // SUKORT NY label - blue dashed, positioned on the new curve near point 1, far right
                 ctx.fillStyle = '#3b82f6';
                 ctx.font = 'bold 13px Inter';
-                ctx.fillText('SU', chart.scales.x.getPixelForValue(3200), chart.scales.y.getPixelForValue(5.5));
+                ctx.fillText('SU', chart.scales.x.getPixelForValue(3300), chart.scales.y.getPixelForValue(5.5));
                 const textWidth = ctx.measureText('SU').width;
                 ctx.font = 'bold 9px Inter';
-                ctx.fillText('KORT', chart.scales.x.getPixelForValue(3200) + textWidth, chart.scales.y.getPixelForValue(5.5) + 4);
-                ctx.font = 'bold 11px Inter';
-                ctx.fillText(' NY', chart.scales.x.getPixelForValue(3200) + textWidth + ctx.measureText('KORT').width, chart.scales.y.getPixelForValue(5.5));
+                ctx.fillText('KORT', chart.scales.x.getPixelForValue(3300) + textWidth, chart.scales.y.getPixelForValue(5.5) + 4);
+                const kortWidth = ctx.measureText('KORT').width;
+                ctx.fillText(' NY', chart.scales.x.getPixelForValue(3300) + textWidth + kortWidth, chart.scales.y.getPixelForValue(5.5) + 4);
                 
-                // SULANG label - grey, positioned above the initial line
-                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangInitialY + 50), chart.scales.y.getPixelForValue(9.2), '#6b7280', 15);
+                // SULANG label - grey, positioned near x-axis (bottom) to avoid overlap
+                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangInitialY + 50), chart.scales.y.getPixelForValue(0.8), '#6b7280', 15);
                 
-                // SULANG NY label - grey dashed, positioned above the new line
+                // SULANG NY label - grey dashed, positioned near x-axis (bottom) to avoid overlap
                 ctx.fillStyle = '#6b7280';
                 ctx.font = 'bold 13px Inter';
-                ctx.fillText('SU', chart.scales.x.getPixelForValue(sulangNewY + 50), chart.scales.y.getPixelForValue(9.2));
+                ctx.fillText('SU', chart.scales.x.getPixelForValue(sulangNewY + 50), chart.scales.y.getPixelForValue(0.8));
                 const textWidth2 = ctx.measureText('SU').width;
                 ctx.font = 'bold 9px Inter';
-                ctx.fillText('LANG', chart.scales.x.getPixelForValue(sulangNewY + 50) + textWidth2, chart.scales.y.getPixelForValue(9.2) + 4);
-                ctx.font = 'bold 11px Inter';
-                ctx.fillText(' NY', chart.scales.x.getPixelForValue(sulangNewY + 50) + textWidth2 + ctx.measureText('LANG').width, chart.scales.y.getPixelForValue(9.2));
+                ctx.fillText('LANG', chart.scales.x.getPixelForValue(sulangNewY + 50) + textWidth2, chart.scales.y.getPixelForValue(0.8) + 4);
+                const langWidth = ctx.measureText('LANG').width;
+                ctx.fillText(' NY', chart.scales.x.getPixelForValue(sulangNewY + 50) + textWidth2 + langWidth, chart.scales.y.getPixelForValue(0.8) + 4);
                 
                 ctx.restore();
             }
@@ -6330,19 +6330,19 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                 ctx.closePath();
                 ctx.fill();
                 
-                // Label for arrow - with background for visibility
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-                ctx.fillRect((arrowStartX + arrowEndX) / 2 - 80, arrowY - 25, 160, 18);
+                // Label for arrow - transparent background, positioned to avoid overlap
                 ctx.fillStyle = '#3b82f6';
                 ctx.font = 'bold 12px Inter';
                 ctx.textAlign = 'center';
-                ctx.fillText('Strukturvækstpolitik', (arrowStartX + arrowEndX) / 2, arrowY - 12);
+                // Position label above the arrow, but lower to avoid SU LANG labels
+                ctx.fillText('Strukturvækstpolitik', (arrowStartX + arrowEndX) / 2, arrowY - 20);
                 
                 // Arrow for SUKORT shift (Strukturpolitik Inflationskontrol)
-                const sukortArrowStartX = chart.scales.x.getPixelForValue(2800);
-                const sukortArrowEndX = chart.scales.x.getPixelForValue(3000);
-                const sukortArrowStartY = chart.scales.y.getPixelForValue(7.6);
-                const sukortArrowEndY = chart.scales.y.getPixelForValue(7);
+                // Position arrow further left to avoid SU KORT labels at x=3200
+                const sukortArrowStartX = chart.scales.x.getPixelForValue(2400);
+                const sukortArrowEndX = chart.scales.x.getPixelForValue(2600);
+                const sukortArrowStartY = chart.scales.y.getPixelForValue(6.5);
+                const sukortArrowEndY = chart.scales.y.getPixelForValue(5.8);
                 
                 ctx.strokeStyle = '#3b82f6';
                 ctx.fillStyle = '#3b82f6';
@@ -6367,14 +6367,13 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                 ctx.fill();
                 ctx.restore();
                 
-                // Label for arrow - with background for visibility
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-                ctx.fillRect((sukortArrowStartX + sukortArrowEndX) / 2 - 75, sukortArrowStartY - 20, 150, 30);
+                // Label for arrow - transparent background, positioned to avoid SU KORT labels
                 ctx.fillStyle = '#3b82f6';
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
-                ctx.fillText('Strukturpolitik', (sukortArrowStartX + sukortArrowEndX) / 2, sukortArrowStartY - 5);
-                ctx.fillText('Inflationskontrol', (sukortArrowStartX + sukortArrowEndX) / 2, sukortArrowStartY + 10);
+                // Position labels further left and lower to avoid overlap with SU KORT labels
+                ctx.fillText('Strukturpolitik', (sukortArrowStartX + sukortArrowEndX) / 2, sukortArrowStartY - 8);
+                ctx.fillText('Inflationskontrol', (sukortArrowStartX + sukortArrowEndX) / 2, sukortArrowStartY + 5);
                 
                 ctx.restore();
             }
