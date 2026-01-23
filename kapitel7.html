@@ -162,7 +162,18 @@
                         </table>
                     </div>
 
-                    <h3>2. Ledighedstyper</h3>
+                    <h3>2. Beveridge-kurven - Sammenhængen mellem ledige og ledighed</h3>
+                    <p>Beveridge-kurven viser sammenhængen mellem antallet af ledige stillinger og arbejdsløsheden. Den
+                        hjælper os med at forstå, hvor effektivt arbejdsmarkedet er til at matche folk med jobs.</p>
+                    <div class="chart-container mb-3" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="beveridgeCurveChart" data-chart-type="beveridge-curve"></canvas>
+                    </div>
+                    <p><small><b>Figur 7.1:</b> Beveridge-kurven. Når økonomien er stærk (højkonjunktur), er der mange
+                            ledige stillinger og lav ledighed (øverst til venstre). Under recession er der få ledige
+                            stillinger og høj ledighed (nederst til højre). Hvis kurven rykker udad, betyder det, at det
+                            er blevet sværere at matche ledige med jobs (fx pga. manglende kvalifikationer).</small></p>
+
+                    <h3>3. Ledighedstyper</h3>
                     <p>Der findes forskellige typer ledighed:</p>
 
                     <div class="table-responsive mb-4">
@@ -285,6 +296,25 @@
 
                     <p><b>Vigtigt:</b> Høje lønninger er ikke nødvendigvis dårligt for konkurrenceevnen, hvis
                         produktiviteten er høj nok.</p>
+
+                    <h3>5. WS-PS Modellen - Bestemmelse af strukturel ledighed</h3>
+                    <p>Hvordan bestemmes den "naturlige" eller strukturelle ledighed? Det forklares ofte med WS-PS
+                        modellen, som ser på balancen mellem arbejdstagernes lønkrav (WS) og virksomhedernes prissætning
+                        (PS).</p>
+                    <div class="chart-container mb-3" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="wsPsChart" data-chart-type="ws-ps"></canvas>
+                    </div>
+                    <p><small><b>Figur 7.4:</b> WS-PS Modellen. <b>WS (Wage Setting):</b> Arbejderne kræver højere
+                            realløn, når ledigheden er lav. <b>PS (Price Setting):</b> Virksomhederne sætter priser, der
+                            bestemmer, hvilken realløn de reelt kan tilbyde. Hvor kurverne krydser, findes ligevægten
+                            (NAIRU), som er den ledighed, hvor inflationen er stabil.</small></p>
+
+                    <ul>
+                        <li><b>WS rykker op:</b> Hvis fagforeninger bliver stærkere eller dagpenge stiger (øger
+                            strukturel ledighed).</li>
+                        <li><b>PS rykker op:</b> Hvis produktiviteten stiger eller konkurrencen bliver hårdere (mindsker
+                            strukturel ledighed).</li>
+                    </ul>
                 </div>
 
                 <h2>Inflation</h2>
@@ -334,7 +364,17 @@
                         </table>
                     </div>
 
-                    <h3>2. Hvad forårsager inflation?</h3>
+                    <h3>2. Historisk inflation i Danmark</h3>
+                    <p>Inflation er ikke altid stabil. I Danmark har vi oplevet store svingninger, især under
+                        oliekriserne i 1970'erne og senest i kølvandet på corona-pandemien og energikrisen i 2022.</p>
+                    <div class="chart-container mb-3" style="position: relative; height: 450px; width: 100%;">
+                        <canvas id="dkInflationTimeChart" data-chart-type="dk-inflation-time"></canvas>
+                    </div>
+                    <p><small><b>Figur 7.5:</b> Udvikling i inflation og ledighed i Danmark. Bemærk hvordan inflationen
+                            toppede i 2022, mens ledigheden har været historisk lav i samme periode. Kilde: Egne
+                            beregninger baseret på data fra World Bank og Danmarks Statistik.</small></p>
+
+                    <h3>3. Hvad forårsager inflation?</h3>
                     <p>Inflation kan forårsages af flere faktorer:</p>
 
                     <div class="table-responsive mb-4">
@@ -372,7 +412,22 @@
                         </table>
                     </div>
 
-                    <h3>3. Hvad er konsekvenserne af inflation?</h3>
+                    <div class="info-box bg-light border-info">
+                        <h4>Løn-pris-spiralen visualiseret</h4>
+                        <p>Når priserne stiger, kræver arbejderne højere løn for at bevare deres købekraft.
+                            Virksomhederne svarer igen ved at hæve priserne yderligere for at dække de højere
+                            lønomkostninger. Dette skaber en selvforstærkende spiral:</p>
+                        <div class="text-center my-4">
+                            <div class="p-3 border rounded d-inline-block bg-white shadow-sm">
+                                <b>Højere priser</b> <i class="bi bi-arrow-right mx-2"></i>
+                                <b>Højere lønkrav</b> <i class="bi bi-arrow-right mx-2"></i>
+                                <b>Højere omkostninger</b> <i class="bi bi-arrow-right mx-2"></i>
+                                <b>Højere priser...</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>4. Hvad er konsekvenserne af inflation?</h3>
                     <p>Inflation har både positive og negative konsekvenser:</p>
 
                     <div class="table-responsive mb-4">
@@ -476,8 +531,68 @@
                         </table>
                     </div>
 
-                    <p><b>Vigtigt:</b> Phillips-kurven viser en trade-off mellem ledighed og inflation. Men på lang sigt
-                        kan denne sammenhæng svækkes, hvis forventningerne til inflation ændrer sig.</p>
+                    <p><b>Vigtigt:</b> Phillips-kurven viser en trade-off mellem ledighed og inflation. Men historien
+                        har vist, at denne sammenhæng ikke er statisk.</p>
+
+                    <h4>5.2. Phillips-kurven i praksis (Realdata)</h4>
+                    <p>Når vi ser på faktiske data for Danmark og USA, ser vi, at den teoretiske Phillips-kurve ikke
+                        altid er så tydelig. Herunder ses sammenhængen baseret på data hentet direkte fra World Bank
+                        API.</p>
+                    <div class="chart-container mb-3" style="position: relative; height: 500px; width: 100%;">
+                        <canvas id="phillipsCurveAPIChart" data-chart-type="phillips-curve-api"></canvas>
+                    </div>
+                    <p><small><b>Figur 7.2:</b> Phillips-kurven med API-data (1980-2024). Hvert punkt i diagrammet
+                            repræsenterer et specifikt år for henholdsvis Danmark og USA. I nogle perioder ses en
+                            tydelig omvendt sammenhæng, mens punkterne i andre perioder er meget spredte. Kilde: Egne
+                            beregninger baseret på data fra World Bank.</small></p>
+
+                    <h4>5.3. Hvorfor teorien ikke altid holder</h4>
+                    <p>Selvom Phillips-kurven er et vigtigt teoretisk redskab, er virkeligheden ofte mere kompleks. Der
+                        er flere årsager til, at den simple sammenhæng mellem ledighed og inflation kan bryde sammen:
+                    </p>
+
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Fænomen</th>
+                                    <th>Forklaring</th>
+                                    <th>Konsekvens for Phillips-kurven</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Stagflation</b></td>
+                                    <td>En situation med både høj inflation og høj ledighed (oplevet i 1970'erne pga.
+                                        oliechok).</td>
+                                    <td>Sammenhængen bryder helt sammen - kurven forsvinder eller bliver positiv.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Inflationsforventninger</b></td>
+                                    <td>Hvis folk forventer 5% inflation, vil de kræve 5% lønstigning uanset ledigheden.
+                                    </td>
+                                    <td>Kurven forskyder sig opad (shifting Phillips curve).</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Den lodrette kurve</b></td>
+                                    <td>På lang sigt mener de fleste økonomer, at ledigheden altid vil søge mod sit
+                                        naturlige niveau (NAIRU).</td>
+                                    <td>På lang sigt er der ingen trade-off; man får blot højere inflation uden lavere
+                                        ledighed.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Udbudschok</b></td>
+                                    <td>Pludselige prisstigninger på råvarer (fx energi) øger priserne uden at mindske
+                                        ledigheden.</td>
+                                    <td>Skaber inflation "udefra", som ikke skyldes pres på arbejdsmarkedet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><b>Konklusion:</b> Phillips-kurven er god til at forstå det korte sigt og effekten af
+                        efterspørgselspolitik, men som finansøkonom skal man være opmærksom på, at udbudschok og
+                        forventninger kan ændre spillereglerne markant.</p>
 
                     <h3>6. Forventet vs. uforventet inflation</h3>
                     <p>Der er forskel mellem forventet og uforventet inflation:</p>

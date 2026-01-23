@@ -2796,6 +2796,102 @@ function createMultiCountryUnemploymentInflationChart(canvasId, countries = ['DN
         });
 }
 
+// Create Phillips Curve Chart with real API data
+function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const countryNames = {
+        'DNK': 'Danmark',
+        'DEU': 'Tyskland',
+        'SWE': 'Sverige',
+        'NOR': 'Norge',
+        'USA': 'USA',
+        'FRA': 'Frankrig',
+        'GBR': 'Storbritannien',
+        'KOR': 'Sydkorea'
+    };
+
+    const countryColors = {
+        'DNK': 'rgb(255, 99, 132)',
+        'USA': 'rgb(54, 162, 235)',
+        'DEU': 'rgb(75, 192, 192)',
+        'SWE': 'rgb(255, 206, 86)'
+    };
+
+    Promise.all(countries.map(country => fetchUnemploymentInflationData(country, 40)))
+        .then(dataArray => {
+            const datasets = [];
+
+            countries.forEach((countryCode, index) => {
+                const data = dataArray[index];
+                const points = [];
+
+                data.labels.forEach((year, i) => {
+                    if (data.unemployment[i] !== null && data.inflation[i] !== null) {
+                        points.push({
+                            x: data.unemployment[i],
+                            y: data.inflation[i],
+                            year: year
+                        });
+                    }
+                });
+
+                if (points.length > 0) {
+                    const color = countryColors[countryCode] || `hsl(${index * 137.5}, 70%, 50%)`;
+                    datasets.push({
+                        label: countryNames[countryCode] || countryCode,
+                        data: points,
+                        backgroundColor: color.replace('rgb', 'rgba').replace(')', ', 0.6)'),
+                        borderColor: color,
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 8,
+                        showLine: false
+                    });
+                }
+            });
+
+            new Chart(ctx, {
+                type: 'scatter',
+                data: { datasets },
+                options: {
+                    ...chartConfig,
+                    plugins: {
+                        ...chartConfig.plugins,
+                        title: {
+                            display: true,
+                            text: 'Phillips-kurven: Faktiske data for inflation og ledighed',
+                            font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
+                            padding: { top: 10, bottom: 20 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const point = context.raw;
+                                    const datasetLabel = context.dataset.label || '';
+                                    return `${datasetLabel} (${point.year}): Ledighed: ${point.x.toFixed(1)}%, Inflation: ${point.y.toFixed(1)}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Ledighed (%)', font: { weight: 'bold' } },
+                            ticks: { callback: v => v.toFixed(1) + '%' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Inflation (%)', font: { weight: 'bold' } },
+                            ticks: { callback: v => v.toFixed(1) + '%' }
+                        }
+                    }
+                }
+            });
+        }).catch(error => {
+            console.error('Error creating API Phillips Curve chart:', error);
+        });
+}
+
 // Create Okun's Law Chart - Shows relationship between GDP growth and unemployment change
 function createOkunsLawChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']) {
     const ctx = document.getElementById(canvasId);
@@ -8816,6 +8912,209 @@ function createPolicyLagChart(canvasId) {
     });
 }
 
+// Create WS-PS Model Chart (Wage Setting - Price Setting)
+function createWSPSChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const unemployment = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    // WS: Real wage increases as unemployment decreases (workers have more power)
+    const ws = [4.5, 4.0, 3.6, 3.3, 3.0, 2.7, 2.4, 2.2, 2.0, 1.8];
+    // PS: Real wage offered by firms (constant in simple models)
+    const ps = [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0];
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: unemployment.map(u => u + '%'),
+            datasets: [
+                {
+                    label: 'WS (Lønrelation)',
+                    data: ws,
+                    borderColor: '#ff6384',
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 0
+                },
+                {
+                    label: 'PS (Prisrelation)',
+                    data: ps,
+                    borderColor: '#36a2eb',
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'WS-PS Modellen: Bestemmelse af strukturel ledighed',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return `${context.dataset.label}: ${context.parsed.y.toFixed(2)}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Ledighedsprocent (%)', font: { weight: 'bold', family: 'Inter, sans-serif' } }
+                },
+                y: {
+                    title: { display: true, text: 'Realløn (W/P)', font: { weight: 'bold', family: 'Inter, sans-serif' } },
+                    min: 0,
+                    max: 6
+                }
+            }
+        },
+        plugins: [{
+            id: 'nairu-line',
+            afterDraw: (chart) => {
+                const { ctx, scales: { x, y } } = chart;
+                const nairuIndex = 4; // index 4 corresponds to 5% unemployment where WS=PS=3.0
+                const xPos = x.getPixelForValue(nairuIndex);
+                const yPosTop = y.getPixelForValue(3.0);
+                const yPosBottom = y.getPixelForValue(0);
+
+                ctx.save();
+                ctx.setLineDash([5, 5]);
+                ctx.strokeStyle = '#666';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(xPos, yPosTop);
+                ctx.lineTo(xPos, yPosBottom);
+                ctx.stroke();
+
+                ctx.font = 'bold 12px Inter';
+                ctx.fillStyle = '#666';
+                ctx.textAlign = 'center';
+                ctx.fillText('Strukturel ledighed (NAIRU)', xPos, yPosBottom - 10);
+                ctx.restore();
+            }
+        }]
+    });
+}
+
+// Create Beveridge Curve Chart
+function createBeveridgeCurveChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    // Inverse relationship between job vacancies and unemployment
+    const data = [
+        { x: 10.0, y: 0.3 },
+        { x: 8.0, y: 0.5 },
+        { x: 7.0, y: 0.8 },
+        { x: 6.0, y: 1.2 },
+        { x: 5.0, y: 2.0 },
+        { x: 4.0, y: 3.5 },
+        { x: 3.0, y: 5.5 },
+        { x: 2.0, y: 8.5 }
+    ];
+
+    new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Beveridge-kurven',
+                data: data,
+                borderColor: '#4bc0c0',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 3,
+                showLine: true,
+                tension: 0.4,
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'Beveridge-kurven: Ledige stillinger vs. Ledighed',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Ledighedsprocent (%)', font: { weight: 'bold', family: 'Inter, sans-serif' } },
+                    min: 0,
+                    max: 12
+                },
+                y: {
+                    title: { display: true, text: 'Ledige stillinger (%)', font: { weight: 'bold', family: 'Inter, sans-serif' } },
+                    min: 0,
+                    max: 10
+                }
+            }
+        }
+    });
+}
+
+// Create Danish Inflation Time Series Chart
+function createDanishInflationTimeChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    fetchUnemploymentInflationData('DNK', 35).then(data => {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: 'Inflation (%)',
+                        data: data.inflation,
+                        borderColor: '#ff6384',
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Ledighed (%)',
+                        data: data.unemployment,
+                        borderColor: '#36a2eb',
+                        backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 2
+                    }
+                ]
+            },
+            options: {
+                ...chartConfig,
+                plugins: {
+                    ...chartConfig.plugins,
+                    title: {
+                        display: true,
+                        text: 'Inflation og ledighed i Danmark (1989-2024)',
+                        font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: { display: true, text: 'Procent (%)', font: { weight: 'bold' } }
+                    }
+                }
+            }
+        });
+    });
+}
+
 // Chart Observer to trigger animations when visible
 const chartObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -8954,8 +9253,20 @@ const chartObserver = new IntersectionObserver((entries) => {
                     case 'phillips-curve':
                         createPhillipsCurveChart(element.id);
                         break;
+                    case 'phillips-curve-api':
+                        createAPIPhillipsCurveChart(element.id);
+                        break;
                     case 'money-supply':
                         createMoneySupplyChart(element.id);
+                        break;
+                    case 'ws-ps':
+                        createWSPSChart(element.id);
+                        break;
+                    case 'beveridge-curve':
+                        createBeveridgeCurveChart(element.id);
+                        break;
+                    case 'dk-inflation-time':
+                        createDanishInflationTimeChart(element.id);
                         break;
                     case 'risk-premium':
                         createRiskPremiumChart(element.id);
