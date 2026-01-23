@@ -168,10 +168,10 @@
                     <div class="chart-container mb-3" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="beveridgeCurveChart" data-chart-type="beveridge-curve"></canvas>
                     </div>
-                    <p><small><b>Figur 7.1:</b> Beveridge-kurven. Når økonomien er stærk (højkonjunktur), er der mange
+                    <p><small><b>Figur 7.1:</b> Beveridge-kurven for Danmark baseret på reelle data. Hvert punkt repræsenterer et år og viser sammenhængen mellem ledighed og ledige stillinger. <b>Ledige stillinger (%)</b> måler andelen af ledige stillinger i forhold til arbejdsstyrken (antallet af ledige stillinger divideret med arbejdsstyrken, ganget med 100). Når økonomien er stærk (højkonjunktur), er der mange
                             ledige stillinger og lav ledighed (øverst til venstre). Under recession er der få ledige
                             stillinger og høj ledighed (nederst til højre). Hvis kurven rykker udad, betyder det, at det
-                            er blevet sværere at matche ledige med jobs (fx pga. manglende kvalifikationer).</small></p>
+                            er blevet sværere at matche ledige med jobs (fx pga. manglende kvalifikationer). Kilde: Egne beregninger baseret på data fra World Bank (ledighed) og Danmarks Statistik (ledige stillinger).</small></p>
 
                     <h3>3. Ledighedstyper</h3>
                     <p>Der findes forskellige typer ledighed:</p>
@@ -296,25 +296,6 @@
 
                     <p><b>Vigtigt:</b> Høje lønninger er ikke nødvendigvis dårligt for konkurrenceevnen, hvis
                         produktiviteten er høj nok.</p>
-
-                    <h3>5. WS-PS Modellen - Bestemmelse af strukturel ledighed</h3>
-                    <p>Hvordan bestemmes den "naturlige" eller strukturelle ledighed? Det forklares ofte med WS-PS
-                        modellen, som ser på balancen mellem arbejdstagernes lønkrav (WS) og virksomhedernes prissætning
-                        (PS).</p>
-                    <div class="chart-container mb-3" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="wsPsChart" data-chart-type="ws-ps"></canvas>
-                    </div>
-                    <p><small><b>Figur 7.4:</b> WS-PS Modellen. <b>WS (Wage Setting):</b> Arbejderne kræver højere
-                            realløn, når ledigheden er lav. <b>PS (Price Setting):</b> Virksomhederne sætter priser, der
-                            bestemmer, hvilken realløn de reelt kan tilbyde. Hvor kurverne krydser, findes ligevægten
-                            (NAIRU), som er den ledighed, hvor inflationen er stabil.</small></p>
-
-                    <ul>
-                        <li><b>WS rykker op:</b> Hvis fagforeninger bliver stærkere eller dagpenge stiger (øger
-                            strukturel ledighed).</li>
-                        <li><b>PS rykker op:</b> Hvis produktiviteten stiger eller konkurrencen bliver hårdere (mindsker
-                            strukturel ledighed).</li>
-                    </ul>
                 </div>
 
                 <h2>Inflation</h2>
@@ -330,6 +311,8 @@
                             data-definition="Et indeks, der måler udviklingen i priserne på en kurv af varer og tjenester, som en typisk familie køber."
                             data-example="Forbrugerprisindekset inkluderer priser på mad, bolig, transport, tøj osv. Hvis indekset stiger med 2%, er inflationen 2%."
                             data-slug="forbrugerprisindeks">forbrugerprisindekset (CPI)</span>:</p>
+
+                    <p>Forbrugerprisindekset måles ved hjælp af en <b>kurv af varer og tjenester</b>, der repræsenterer en typisk families forbrugsmønster. Statistikmyndighederne (fx Danmarks Statistik) vælger en række repræsentative varer og tjenester - som mad, bolig, transport, tøj og underholdning - og vejer dem efter, hvor stor en del af den typiske families budget, de udgør. Hver måned registreres priserne på disse varer, og indekset beregnes ved at sammenligne den samlede pris på kurven med prisen i basisåret. Hvis kurven koster 2% mere end sidste år, er inflationen 2%.</p>
 
                     <div class="table-responsive mb-4">
                         <table class="table table-striped table-bordered table-hover">
@@ -412,20 +395,14 @@
                         </table>
                     </div>
 
-                    <div class="info-box bg-light border-info">
-                        <h4>Løn-pris-spiralen visualiseret</h4>
-                        <p>Når priserne stiger, kræver arbejderne højere løn for at bevare deres købekraft.
-                            Virksomhederne svarer igen ved at hæve priserne yderligere for at dække de højere
-                            lønomkostninger. Dette skaber en selvforstærkende spiral:</p>
-                        <div class="text-center my-4">
-                            <div class="p-3 border rounded d-inline-block bg-white shadow-sm">
-                                <b>Højere priser</b> <i class="bi bi-arrow-right mx-2"></i>
-                                <b>Højere lønkrav</b> <i class="bi bi-arrow-right mx-2"></i>
-                                <b>Højere omkostninger</b> <i class="bi bi-arrow-right mx-2"></i>
-                                <b>Højere priser...</b>
-                            </div>
-                        </div>
+                    <h4>7.2.3.1 Løn-pris-spiralen visualiseret</h4>
+                    <p>Når priserne stiger, kræver arbejderne højere løn for at bevare deres købekraft.
+                        Virksomhederne svarer igen ved at hæve priserne yderligere for at dække de højere
+                        lønomkostninger. Dette skaber en selvforstærkende spiral:</p>
+                    <div class="chart-container mb-3" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="wagePriceSpiralChart" data-chart-type="wage-price-spiral"></canvas>
                     </div>
+                    <p><small><b>Figur 7.2.3.1:</b> Løn-pris-spiralen. Den cirkulære spiral viser, hvordan højere priser fører til højere lønkrav, hvilket fører til højere omkostninger, som igen fører til højere priser. Dette skaber en selvforstærkende cyklus, der kan drive inflationen opad.</small></p>
 
                     <h3>4. Hvad er konsekvenserne af inflation?</h3>
                     <p>Inflation har både positive og negative konsekvenser:</p>

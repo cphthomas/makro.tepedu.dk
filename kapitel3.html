@@ -544,32 +544,73 @@
                         mindske gapet. Nedenfor kan du se to flowcharts, der viser, hvordan ekspansiv og kontraktiv
                         konjunkturpolitik påvirker outputgapet.</p>
 
-                    <div class="row mb-4">
-                        <div class="col-12 mb-4">
-                            <div class="chart-container"
-                                style="position: relative; height: 120px !important; width: 100%; padding: 0px; margin: 10px auto; background-color: #ffffff;">
-                                <div id="expansionaryPolicyFlowchart" data-chart-type="expansionary-policy-flowchart"
-                                    style="width: 100%; height: 120px;"></div>
-                            </div>
-                            <small class="d-block mt-1 text-center"><b>Figur 3.3a:</b> Ekspansiv konjunkturpolitik. Når
-                                der er negativt outputgab (ledighed), kan ekspansiv konjunkturpolitik bruges til at øge
-                                den samlede efterspørgsel, hvilket fører til stigende nationalindkomst og et mindre
-                                outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
-                        </div>
-
-                        <div class="col-12 mb-4">
-                            <div class="chart-container"
-                                style="position: relative; height: 120px !important; width: 100%; padding: 0px; margin: 10px auto; background-color: #ffffff;">
-                                <div id="contractionaryPolicyFlowchart"
-                                    data-chart-type="contractionary-policy-flowchart"
-                                    style="width: 100%; height: 120px;"></div>
-                            </div>
-                            <small class="d-block mt-1 text-center"><b>Figur 3.3b:</b> Kontraktiv konjunkturpolitik. Når
-                                der er positivt outputgab (overophedning), kan kontraktiv konjunkturpolitik bruges til
-                                at dæmpe den samlede efterspørgsel, hvilket fører til faldende nationalindkomst og et
-                                mindre outputgab. <i>Hold musen over boksene for at se forklaring.</i></small>
+                    <h4>6.0.1 Ekspansiv konjunkturpolitik visualiseret</h4>
+                    <p><i>Når der er negativt outputgab (ledighed), kan ekspansiv konjunkturpolitik bruges til at øge
+                        den samlede efterspørgsel, hvilket fører til stigende nationalindkomst og et mindre outputgab.
+                        Dette skaber en proces:</i></p>
+                    <div class="text-center my-4">
+                        <div class="p-3 border d-inline-block bg-white shadow-sm" style="position: relative; border-radius: 0;">
+                            <span class="policy-step" 
+                                  data-popup="Negativt outputgab (Ledighed)&#10;Når faktisk BNP er lavere end potentielt BNP, er der ledighed og uudnyttede ressourcer i økonomien. Dette sker typisk under recessioner."
+                                  style="cursor: help; text-decoration: underline; color: #1f2937;">
+                                <b>Negativt outputgab</b>
+                            </span>
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <span class="policy-step" 
+                                  data-popup="Ekspansiv konjunkturpolitik&#10;Regeringen og centralbanken bruger ekspansiv politik (f.eks. lavere renter, højere offentlige udgifter) for at stimulere økonomien."
+                                  style="cursor: help; text-decoration: underline; color: #15803d;">
+                                <b>Ekspansiv politik</b>
+                            </span>
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <span class="policy-step" 
+                                  data-popup="Samlet efterspørgsel stiger&#10;Den ekspansive politik fører til, at både privat forbrug (Cp) og investeringer (I) stiger, hvilket øger den samlede efterspørgsel."
+                                  style="cursor: help; text-decoration: underline; color: #1f2937;">
+                                <b>Efterspørgsel stiger</b>
+                            </span>
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <span class="policy-step" 
+                                  data-popup="Nationalindkomst stiger og outputgab mindskes&#10;Stigende efterspørgsel fører til højere produktion, hvilket øger nationalindkomsten og reducerer outputgapet."
+                                  style="cursor: help; text-decoration: underline; color: #1f2937;">
+                                <b>Nationalindkomst stiger</b>
+                            </span>
+                            <div class="policy-popup" style="display: none; position: absolute; background: #ffffff; border: 2px solid #14b8a6; border-radius: 0; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000; max-width: 300px; white-space: pre-line; font-size: 14px; line-height: 1.4;"></div>
                         </div>
                     </div>
+                    <p><small><b>Figur 3.3a:</b> Ekspansiv konjunkturpolitik. <i>Hold musen over boksene for at se forklaring.</i></small></p>
+
+                    <h4>6.0.2 Kontraktiv konjunkturpolitik visualiseret</h4>
+                    <p><i>Når der er positivt outputgab (overophedning), kan kontraktiv konjunkturpolitik bruges til
+                        at dæmpe den samlede efterspørgsel, hvilket fører til faldende nationalindkomst og et mindre outputgab.
+                        Dette skaber en proces:</i></p>
+                    <div class="text-center my-4">
+                        <div class="p-3 border d-inline-block bg-white shadow-sm" style="position: relative; border-radius: 0;">
+                            <span class="policy-step" 
+                                  data-popup="Positivt outputgab (Overophedning)&#10;Når faktisk BNP er højere end potentielt BNP, kører økonomien for hurtigt. Dette kan føre til inflation og overophedning."
+                                  style="cursor: help; text-decoration: underline; color: #1f2937;">
+                                <b>Positivt outputgab</b>
+                            </span>
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <span class="policy-step" 
+                                  data-popup="Kontraktiv konjunkturpolitik&#10;Regeringen og centralbanken bruger kontraktiv politik (f.eks. højere renter, lavere offentlige udgifter) for at dæmpe økonomien."
+                                  style="cursor: help; text-decoration: underline; color: #15803d;">
+                                <b>Kontraktiv politik</b>
+                            </span>
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <span class="policy-step" 
+                                  data-popup="Samlet efterspørgsel falder&#10;Den kontraktive politik fører til, at både privat forbrug (Cp) og investeringer (I) falder, hvilket reducerer den samlede efterspørgsel."
+                                  style="cursor: help; text-decoration: underline; color: #1f2937;">
+                                <b>Efterspørgsel falder</b>
+                            </span>
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <span class="policy-step" 
+                                  data-popup="Nationalindkomst falder og outputgab mindskes&#10;Faldende efterspørgsel fører til lavere produktion, hvilket reducerer nationalindkomsten og outputgapet."
+                                  style="cursor: help; text-decoration: underline; color: #1f2937;">
+                                <b>Nationalindkomst falder</b>
+                            </span>
+                            <div class="policy-popup" style="display: none; position: absolute; background: #ffffff; border: 2px solid #14b8a6; border-radius: 0; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000; max-width: 300px; white-space: pre-line; font-size: 14px; line-height: 1.4;"></div>
+                        </div>
+                    </div>
+                    <p><small><b>Figur 3.3b:</b> Kontraktiv konjunkturpolitik. <i>Hold musen over boksene for at se forklaring.</i></small></p>
 
                     <h4>6.1. Outputgapets udvikling over tid</h4>
                     <p>Nedenfor kan du se udviklingen i outputgapet for forskellige lande. Det er vigtigt at forstå, at
@@ -874,6 +915,89 @@
                         z-index: 1;
                     `;
                     this.parentElement.appendChild(whiteOverlay);
+                });
+            });
+
+            // Policy flowchart popup handling with hover
+            const allPolicySteps = document.querySelectorAll('.policy-step');
+            const allPopups = document.querySelectorAll('.policy-popup');
+            let hoverTimeout = null;
+            
+            // Close all popups
+            function closeAllPopups() {
+                allPopups.forEach(popup => {
+                    popup.style.display = 'none';
+                });
+            }
+            
+            function showPopup(step, popup) {
+                popup.textContent = step.getAttribute('data-popup').replace(/&#10;/g, '\n');
+                popup.style.display = 'block';
+                
+                // Position popup relative to hovered element
+                const rect = step.getBoundingClientRect();
+                const containerRect = step.parentElement.getBoundingClientRect();
+                popup.style.left = (rect.left - containerRect.left + rect.width / 2 - 150) + 'px';
+                popup.style.top = (rect.top - containerRect.top + rect.height + 10) + 'px';
+                
+                // Adjust if popup goes off screen
+                setTimeout(() => {
+                    const popupRect = popup.getBoundingClientRect();
+                    if (popupRect.right > window.innerWidth) {
+                        popup.style.left = (rect.left - containerRect.left - popupRect.width + rect.width) + 'px';
+                    }
+                    if (popupRect.bottom > window.innerHeight) {
+                        popup.style.top = (rect.top - containerRect.top - popupRect.height - 10) + 'px';
+                    }
+                    if (popupRect.left < 0) {
+                        popup.style.left = (rect.left - containerRect.left) + 'px';
+                    }
+                }, 0);
+            }
+            
+            allPolicySteps.forEach(step => {
+                const popup = step.parentElement.querySelector('.policy-popup');
+
+                step.addEventListener('mouseenter', function(e) {
+                    // Clear any existing timeout
+                    if (hoverTimeout) {
+                        clearTimeout(hoverTimeout);
+                    }
+                    
+                    // Close all other popups
+                    closeAllPopups();
+                    
+                    // Show this popup after a short delay
+                    hoverTimeout = setTimeout(() => {
+                        showPopup(this, popup);
+                    }, 200);
+                });
+
+                step.addEventListener('mouseleave', function(e) {
+                    // Clear timeout if mouse leaves before delay
+                    if (hoverTimeout) {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = null;
+                    }
+                    
+                    // Don't close if mouse moves to popup
+                    setTimeout(() => {
+                        if (!popup.matches(':hover') && !step.matches(':hover')) {
+                            popup.style.display = 'none';
+                        }
+                    }, 100);
+                });
+
+                // Keep popup open when hovering over it
+                popup.addEventListener('mouseenter', function(e) {
+                    if (hoverTimeout) {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = null;
+                    }
+                });
+
+                popup.addEventListener('mouseleave', function(e) {
+                    popup.style.display = 'none';
                 });
             });
         });

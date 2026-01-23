@@ -61,6 +61,11 @@
         .cover-text-overlay {
             z-index: 2;
         }
+
+        /* Glow effect for policy effectiveness chart */
+        #policyEffectivenessChart {
+            filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+        }
     </style>
     <link rel="stylesheet" href="glossary.css">
 </head>
@@ -171,7 +176,7 @@
                     <div class="chart-container mb-1" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="fiscalMultiplierChart" data-chart-type="fiscal-multiplier"></canvas>
                     </div>
-                    <p><small><b>Figur 8.2:</b> Finanspolitisk multiplikatoreffekt. Diagrammet viser, hvordan en initial
+                    <p><small><b>Figur 8.1:</b> Finanspolitisk multiplikatoreffekt. Diagrammet viser, hvordan en initial
                             stigning i offentlige udgifter på 100 mia. kr. fører til flere runder af forbrug (hvor folk
                             bruger en del af deres ekstra indkomst), hvilket resulterer i en total effekt på omkring 305
                             mia. kr. Multiplikatoren afhænger af den marginale forbrugskvote. Kilde: Teoretisk model
@@ -213,7 +218,7 @@
                     <div class="chart-container mb-1" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="monetaryTransmissionChart" data-chart-type="monetary-transmission"></canvas>
                     </div>
-                    <p><small><b>Figur 8.3:</b> Pengepolitisk transmission - Ekspansiv pengepolitik. Diagrammet viser,
+                    <p><small><b>Figur 8.2:</b> Pengepolitisk transmission - Ekspansiv pengepolitik. Diagrammet viser,
                             hvordan en rentesænkning påvirker investeringer, forbrug og BNP over tid. Rentesænkningen
                             sker hurtigt, men effekten på investeringer og forbrug tager tid at sprede sig gennem
                             økonomien. BNP reagerer gradvist med en vis forsinkelse. Kilde: Teoretisk model baseret på
@@ -227,7 +232,7 @@
                         <canvas id="fiscalMonetaryComparisonChart"
                             data-chart-type="fiscal-monetary-comparison"></canvas>
                     </div>
-                    <p><small><b>Figur 8.4:</b> Sammenligning: Finanspolitik vs. Pengepolitik. Diagrammet viser
+                    <p><small><b>Figur 8.3:</b> Sammenligning: Finanspolitik vs. Pengepolitik. Diagrammet viser
                             BNP-effekten over tid efter en ekspansiv politik. Finanspolitik (FP) har typisk en hurtigere
                             og mere direkte effekt, da staten direkte øger udgifterne. Pengepolitik (PP) virker mere
                             gradvist, da rentesænkningen først skal påvirke investeringer og forbrug. Kilde: Teoretisk
@@ -239,7 +244,7 @@
                     <div class="chart-container mb-1" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="policyLagChart" data-chart-type="policy-lag"></canvas>
                     </div>
-                    <p><small><b>Figur 8.5:</b> Politiklags - Tidsforsinkelser i økonomisk politik. Diagrammet viser de
+                    <p><small><b>Figur 8.4:</b> Politiklags - Tidsforsinkelser i økonomisk politik. Diagrammet viser de
                             fire typer af lags: Genkendelseslag (tiden før man opdager problemet), beslutningslag (tiden
                             før man beslutter sig for politik), implementeringslag (tiden før politikken sættes i værk)
                             og effektlag (tiden før politikken har fuld effekt). Pengepolitik har typisk kortere lags
@@ -259,7 +264,7 @@
                     <div class="chart-container mb-1" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="policyEffectivenessChart" data-chart-type="policy-effectiveness"></canvas>
                     </div>
-                    <p><small><b>Figur 8.1:</b> Effekt af økonomisk politik. Diagrammet viser de typiske effekter af
+                    <p><small><b>Figur 8.5:</b> Effekt af økonomisk politik. Diagrammet viser de typiske effekter af
                             ekspansiv og kontraktiv finanspolitik samt pengepolitik på BNP, inflation og ledighed.
                             Ekspansiv politik stimulerer typisk BNP og reducerer ledighed, men kan også øge inflation.
                             Kontraktiv politik bremser typisk BNP og inflation, men kan øge ledighed. Kilde: Teoretisk
