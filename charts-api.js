@@ -3902,43 +3902,43 @@ function createEmploymentSectorPieChart(canvasId, country = 'DK') {
     // Data for different countries (percentage of employment by sector)
     const countryData = {
         'DK': {
-            labels: ['Primære erhverv (landbrug, fiskeri)', 'Industri', 'Serviceerhverv', 'Offentlig sektor'],
+            labels: ['Primære erhverv', 'Industri', 'Service', 'Offentlig sektor'],
             data: [2.6, 15, 51.4, 31],
             colors: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'],
             title: 'Erhvervsfordeling i Danmark (2024)',
             countryName: 'Danmark',
-            note: 'Bemærk: Serviceerhverv og offentlig sektor er opdelt. Serviceerhverv inkluderer handel, transport, finans osv.'
+            note: 'Bemærk: Service og offentlig sektor er opdelt. Service inkluderer handel, transport, finans osv.'
         },
         'CN': {
-            labels: ['Landbrug', 'Industri', 'Service', 'Offentlig sektor'],
+            labels: ['Primære erhverv', 'Industri', 'Service', 'Offentlig sektor'],
             data: [22.2, 29.0, 34.8, 14.0],
             colors: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'],
             title: 'Erhvervsfordeling i Kina (2024)',
             countryName: 'Kina'
         },
         'IN': {
-            labels: ['Landbrug', 'Industri', 'Service', 'Offentlig sektor'],
+            labels: ['Primære erhverv', 'Industri', 'Service', 'Offentlig sektor'],
             data: [46.1, 11.4, 29.5, 13.0],
             colors: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'],
             title: 'Erhvervsfordeling i Indien (2023)',
             countryName: 'Indien'
         },
         'US': {
-            labels: ['Landbrug', 'Industri', 'Service', 'Offentlig sektor'],
+            labels: ['Primære erhverv', 'Industri', 'Service', 'Offentlig sektor'],
             data: [1.4, 19.1, 63.5, 16.0],
             colors: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'],
             title: 'Erhvervsfordeling i USA (2024)',
             countryName: 'USA'
         },
         'DE': {
-            labels: ['Landbrug', 'Industri', 'Service', 'Offentlig sektor'],
+            labels: ['Primære erhverv', 'Industri', 'Service', 'Offentlig sektor'],
             data: [1.3, 27.7, 57.0, 14.0],
             colors: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'],
             title: 'Erhvervsfordeling i Tyskland (2024)',
             countryName: 'Tyskland'
         },
         'BR': {
-            labels: ['Landbrug', 'Industri', 'Service', 'Offentlig sektor'],
+            labels: ['Primære erhverv', 'Industri', 'Service', 'Offentlig sektor'],
             data: [9.1, 20.7, 56.2, 14.0],
             colors: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'],
             title: 'Erhvervsfordeling i Brasilien (2024)',
@@ -9206,13 +9206,139 @@ function createWSPSChart(canvasId) {
     });
 }
 
+// Fetch job vacancies from Danmarks Statistik StatBank API (LSK03)
+// Uses cache-first strategy: always use cached data if available, only update when API works
+async function fetchJobVacanciesFromStatBank(years = 20) {
+    const cacheKey = `statbank_job_vacancies_${years}`;
+    
+    // Always try cache first (even expired cache)
+    const cachedData = getAnyCachedData(cacheKey);
+    const freshCache = getCachedData(cacheKey);
+    
+    // If we have fresh cache, use it
+    if (freshCache) {
+        console.log('Using fresh cached job vacancy data from Danmarks Statistik');
+        return freshCache;
+    }
+
+    // Try to fetch new data from API
+    try {
+        const endYear = new Date().getFullYear();
+        const startYear = endYear - years;
+        
+        // Build time periods - Q4 data for each year
+        const timeValues = [];
+        for (let year = startYear; year <= endYear; year++) {
+            timeValues.push(`${year}K4`);
+        }
+        
+        const requestBody = {
+            table: "LSK03",
+            format: "JSONSTAT",
+            lang: "da",
+            variables: [
+                {
+                    code: "SESSION",
+                    values: ["101"]
+                },
+                {
+                    code: "Tid",
+                    values: timeValues
+                }
+            ]
+        };
+
+        console.log('Fetching job vacancies from StatBank API...');
+        
+        const response = await fetch('https://api.statbank.dk/v1/data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            throw new Error(`StatBank API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const vacancyData = {};
+        
+        // JSONSTAT format parsing
+        if (data && data.dataset && data.dataset.value) {
+            const values = data.dataset.value;
+            const dimensions = data.dataset.dimension;
+            const timeDim = dimensions.Tid || dimensions.TID || dimensions.tid;
+            
+            if (timeDim && timeDim.category && timeDim.category.index) {
+                const timeLabels = Object.keys(timeDim.category.index);
+                
+                timeLabels.forEach((timeLabel, i) => {
+                    const year = timeLabel.substring(0, 4);
+                    const value = values[i];
+                    
+                    if (value !== null && value !== undefined && !isNaN(value)) {
+                        // Convert to % of workforce (~3 million)
+                        const vacancyRate = (value / 3000000) * 100;
+                        vacancyData[year] = vacancyRate;
+                    }
+                });
+            }
+        }
+        // Alternative: Simple JSON array format
+        else if (Array.isArray(data)) {
+            data.forEach(row => {
+                const time = row.TID || row.Tid || row.tid;
+                const value = row.INDHOLD || row.value || row.Value;
+                
+                if (time && value !== null && value !== undefined) {
+                    const year = time.substring(0, 4);
+                    const vacancyRate = (parseFloat(value) / 3000000) * 100;
+                    vacancyData[year] = vacancyRate;
+                }
+            });
+        }
+        
+        // Save new data to cache
+        if (Object.keys(vacancyData).length > 0) {
+            setCachedData(cacheKey, vacancyData);
+            console.log(`Updated cache with ${Object.keys(vacancyData).length} years of real job vacancy data from Danmarks Statistik`);
+            return vacancyData;
+        }
+        
+        // If no data parsed, use old cache
+        if (cachedData) {
+            console.log('API returned empty data, using cached data');
+            return cachedData;
+        }
+        
+        return null;
+    } catch (error) {
+        console.log('StatBank API unavailable:', error.message);
+        
+        // Use old cached data if available (even if expired)
+        if (cachedData) {
+            console.log('Using cached job vacancy data (API unavailable)');
+            return cachedData;
+        }
+        
+        return null;
+    }
+}
+
 // Fetch Beveridge Curve data (job vacancies and unemployment) for Denmark
+// Cache-first strategy: uses cached data, only updates when APIs are available
 async function fetchBeveridgeCurveData(years = 20) {
     const cacheKey = `beveridge_curve_DNK_${years}`;
     
-    // Try cache first
-    const cached = getCachedData(cacheKey);
-    if (cached) return cached;
+    // Check for fresh cache first
+    const freshCache = getCachedData(cacheKey);
+    if (freshCache) {
+        console.log('Using fresh cached Beveridge curve data');
+        return freshCache;
+    }
+    
+    // Check for any cached data (even expired)
+    const anyCache = getAnyCachedData(cacheKey);
 
     try {
         // Fetch unemployment from World Bank
@@ -9223,9 +9349,18 @@ async function fetchBeveridgeCurveData(years = 20) {
         );
         const unempData = unempResults[0]?.data || {};
 
-        // For job vacancies, we'll use a realistic simulation based on unemployment
-        // This follows the inverse Beveridge curve relationship
-        const vacancyData = generateJobVacancyDataFromUnemployment(unempData);
+        // Fetch real job vacancy data from Danmarks Statistik
+        let vacancyData = await fetchJobVacanciesFromStatBank(years);
+        let usingRealData = true;
+        
+        // If no real data, use simulation
+        if (!vacancyData || Object.keys(vacancyData).length === 0) {
+            console.log('No real vacancy data available, using simulation');
+            vacancyData = generateJobVacancyDataFromUnemployment(unempData);
+            usingRealData = false;
+        } else {
+            console.log('Using real job vacancy data from Danmarks Statistik');
+        }
 
         // Combine data for years where we have both unemployment and vacancies
         const allYears = Array.from(new Set([
@@ -9265,7 +9400,15 @@ async function fetchBeveridgeCurveData(years = 20) {
         return result;
     } catch (error) {
         console.error('Error fetching Beveridge curve data:', error);
-        // Fallback to theoretical curve
+        
+        // Use cached data if available (even expired)
+        if (anyCache) {
+            console.log('Using cached Beveridge curve data (API error)');
+            return anyCache;
+        }
+        
+        // Last resort: theoretical fallback
+        console.log('No cached data available, using theoretical fallback');
         return {
             dataPoints: [
                 { x: 10.0, y: 0.3, year: '2008' },
@@ -9791,6 +9934,41 @@ const chartObserver = new IntersectionObserver((entries) => {
                         fetchGDPPerCapitaData().then(data => {
                             new Chart(element, { type: 'line', data: data, options: chartConfig });
                         });
+                        break;
+                    case 'gdp-development':
+                        const gdpDevCountries = element.dataset.chartData ?
+                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+                        createGDPChart(element.id, gdpDevCountries);
+                        break;
+                    case 'gdp-indexed':
+                        const gdpIdxCountries = element.dataset.chartData ?
+                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+                        createGDPIndexedChart(element.id, gdpIdxCountries);
+                        break;
+                    case 'gdp-per-capita-line':
+                        const gdpPcCountries = element.dataset.chartData ?
+                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+                        createGDPPerCapitaChart(element.id, gdpPcCountries);
+                        break;
+                    case 'gdp-bubble':
+                        const gdpBubbleCountries = element.dataset.chartData ?
+                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+                        createGDPBubbleChart(element.id, gdpBubbleCountries);
+                        break;
+                    case 'okuns-law':
+                        const okunsCountries = element.dataset.chartData ?
+                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
+                        createOkunsLawChart(element.id, okunsCountries);
+                        break;
+                    case 'bop-historical':
+                        const bopYears = element.dataset.chartData ?
+                            parseInt(element.dataset.chartData) : 54;
+                        createBalanceOfPaymentsChart(element.id, bopYears);
+                        break;
+                    case 'unemployment-inflation':
+                        const uiCountries = element.dataset.chartData ?
+                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
+                        createMultiCountryUnemploymentInflationChart(element.id, uiCountries);
                         break;
                 }
             }

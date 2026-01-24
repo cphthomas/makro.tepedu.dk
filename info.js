@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
             object-position: center top;
         }
         
+        .info-popup img[alt="Theis Bjerken"] {
+            object-position: center 35%;
+        }
+        
         .info-icon-container:hover .info-popup,
         .info-popup.show {
             visibility: visible;
@@ -87,16 +91,11 @@ document.addEventListener('DOMContentLoaded', function () {
         infoPopup.innerHTML = `
             <h6>Om onlinebogen</h6>
             <small>Denne onlinebog er udviklet af:
-            <img src="images/hanke.avif" alt="Thomas Hanke">
-            Advokat Thomas Hanke <br>Redaktør<br>&<br>
+            <img src="images/tb.jpeg" alt="Theis Bjerken">
+            Lektor Theis Bjerken <br>Redaktør<br>&<br>
             <img src="images/mig.jpg" alt="Thomas Petersen">Lektor Thomas Petersen
               <br><br>
-            <p><strong>APA reference:</strong><br>
-            Hanke, T., & Petersen, T. (${currentYear}). <em>Jura for de finansielle uddannelser</em>. Tepedu. https://jura.tepedu.dk</p><br>
             <p>Onlinebogen er udviklet med anvendelse af kunstig intelligens til udformning af teknisk struktur (navigation, HTML, CSS, JavaScript) samt fagligt indhold og eksempelmateriale.</p>
-            <p><strong>Disclaimer:</strong> Onlinebogen er udarbejdet til undervisningsformål og stilles frit til rådighed. Indholdet bør ikke anvendes som grundlag for juridiske dispositioner eller beslutninger. For konkret juridisk bistand henvises til en advokat.
-            </p>
-          
             </small>
         `;
 

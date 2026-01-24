@@ -497,7 +497,7 @@
                         viser, hvordan forskellige landes økonomier har udviklet sig og giver et godt overblik over de
                         internationale forskelle i økonomisk vækst.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="gdpDevelopmentChart"></canvas>
+                        <canvas id="gdpDevelopmentChart" data-chart-type="gdp-development"></canvas>
                     </div>
                     <p><small><b>Figur 1.1:</b> BNP-udvikling for forskellige lande over de sidste 30 år. Diagrammet
                             viser den absolutte BNP i milliarder USD for Danmark, Tyskland, Sverige, Norge, USA, Japan,
@@ -511,7 +511,7 @@
                         basisåret. Dette gør det lettere at sammenligne vækstrater mellem lande, uanset hvor store deres
                         økonomier er. Et land, der vokser hurtigere, vil have en stejlere kurve.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="gdpIndexedChart"></canvas>
+                        <canvas id="gdpIndexedChart" data-chart-type="gdp-indexed"></canvas>
                     </div>
                     <p><small><b>Figur 1.2:</b> BNP-udvikling indekseret (basisår = 100) for forskellige lande. Alle
                             lande starter med værdien 100 i basisåret (første år i serien). En værdi på 200 betyder, at
@@ -534,7 +534,7 @@
                         landet. Et land kan have stort BNP, men lavt BNP pr. indbygger, hvis der bor mange mennesker
                         der.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="gdpPerCapitaChart"></canvas>
+                        <canvas id="gdpPerCapitaChart" data-chart-type="gdp-per-capita-line"></canvas>
                     </div>
                     <p><small><b>Figur 1.3:</b> BNP pr. indbygger (i USD) for forskellige lande over de sidste 30 år.
                             BNP pr. indbygger beregnes ved at dividere landets samlede BNP med antallet af indbyggere.
@@ -567,7 +567,7 @@
                         gennemsnitlige velstand (BNP pr. indbygger). Størrelsen på boblerne indikerer landets samlede
                         BNP.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="gdpBubbleChart"></canvas>
+                        <canvas id="gdpBubbleChart" data-chart-type="gdp-bubble"></canvas>
                     </div>
                     <p><small><b>Figur 1.4:</b> Sammenhæng mellem velstand (BNP pr. indb.) og BNP. Diagrammet viser på
                             en logaritmisk skala, hvordan lande som USA og Kina har enorme økonomier, mens lande som
@@ -868,19 +868,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Charts API Integration -->
     <script src="charts-api.js"></script>
-    <script>
-        // Initialize GDP charts when page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            const allCountries = ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
-            createGDPChart('gdpDevelopmentChart', allCountries);
-            createGDPIndexedChart('gdpIndexedChart', allCountries);
-            createGDPPerCapitaChart('gdpPerCapitaChart', allCountries);
-            if (typeof createGDPBubbleChart === 'function') {
-                createGDPBubbleChart('gdpBubbleChart', allCountries);
-            }
-        });
-    </script>
-
+    <!-- Charts are now initialized via IntersectionObserver in charts-api.js
+         linked to data-chart-type attributes on canvas elements -->
     <script>
         // Add typing animation for video overlays
         document.addEventListener('DOMContentLoaded', function () {

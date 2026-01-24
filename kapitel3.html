@@ -202,8 +202,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><b>Opsving</b><br>(Expansion)</td>
+                                <tr id="term-opsving">
+                                    <td><b><span class="legal-term"
+                                            data-definition="En fase i konjunkturcyklussen hvor økonomien vokser og bevæger sig fra lavkonjunktur mod højkonjunktur."
+                                            data-example="Efter finanskrisen 2008-2009 kom et opsving i 2010-2019 med stigende BNP og faldende ledighed."
+                                            data-slug="opsving">Opsving</span></b><br>(Expansion)</td>
                                     <td>Økonomien vokser - produktionen stiger</td>
                                     <td>• Stigende BNP<br>• Faldende ledighed<br>• Stigende investeringer<br>• Øget
                                         forbrug</td>
@@ -229,8 +232,11 @@
                                         forbrug</td>
                                     <td>2008-2009: Finanskrisen</td>
                                 </tr>
-                                <tr>
-                                    <td><b>Lavkonjunktur</b><br>(Trough)</td>
+                                <tr id="term-lavkonjunktur">
+                                    <td><b><span class="legal-term"
+                                            data-definition="En periode med lav økonomisk aktivitet, høj ledighed og faldende produktion. Økonomien producerer under sit potentiale."
+                                            data-example="Under finanskrisen 2008-2009 havde Danmark lavkonjunktur med stigende arbejdsløshed og faldende BNP."
+                                            data-slug="lavkonjunktur">Lavkonjunktur</span></b><br>(Trough)</td>
                                     <td>Økonomien er på bunden</td>
                                     <td>• Lav produktion<br>• Høj ledighed<br>• Lave priser<br>• Få investeringer</td>
                                     <td>2009: Bunden af finanskrisen</td>
@@ -258,8 +264,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><b>Arbejdsstyrken</b></td>
+                                <tr id="term-arbejdsstyrke">
+                                    <td><b><span class="legal-term"
+                                            data-definition="Alle personer i den arbejdsdygtige alder, der enten er i arbejde eller aktivt søger arbejde."
+                                            data-example="Hvis 3 mio. har job og 150.000 søger job, er arbejdsstyrken 3,15 mio."
+                                            data-slug="arbejdsstyrke">Arbejdsstyrken</span></b></td>
                                     <td>Alle, der enten har job eller aktivt søger job</td>
                                     <td>Hvis 3 millioner har job og 100.000 søger job, er arbejdsstyrken 3,1 millioner
                                     </td>
@@ -342,7 +351,7 @@
                         sammenhæng: Høj BNP-vækst er forbundet med faldende ledighed, mens lav eller negativ BNP-vækst
                         er forbundet med stigende ledighed.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="okunsLawChart"></canvas>
+                        <canvas id="okunsLawChart" data-chart-type="okuns-law" data-chart-data="DNK,DEU,SWE,NOR"></canvas>
                     </div>
                     <p><small><b>Figur 3.1:</b> Okun's lov - Sammenhæng mellem BNP-vækst og ledighedsændring i
                             forskellige lande. X-aksen viser BNP-vækst i procent, og Y-aksen viser ændring i ledighed i
@@ -370,26 +379,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><b>Handelsbalance</b></td>
+                                <tr id="term-handelsbalance">
+                                    <td><b><span class="legal-term"
+                                            data-definition="Eksport minus import af varer. En del af betalingsbalancen."
+                                            data-example="Danmark eksporterer medicin for 100 mia. kr. og importerer olie for 50 mia. kr. → Handelsbalance = +50 mia. kr."
+                                            data-slug="handelsbalance">Handelsbalance</span></b></td>
                                     <td>Eksport minus import af varer</td>
                                     <td>Danmark eksporterer medicin for 100 mia. kr. og importerer olie for 50 mia. kr.
                                         → Handelsbalance = +50 mia. kr.</td>
                                 </tr>
-                                <tr>
-                                    <td><b>Servicebalance</b></td>
+                                <tr id="term-servicebalance">
+                                    <td><b><span class="legal-term"
+                                            data-definition="Eksport minus import af tjenester. En del af betalingsbalancen."
+                                            data-example="Danske turister bruger penge i udlandet (import), udenlandske turister bruger penge i Danmark (eksport)."
+                                            data-slug="servicebalance">Servicebalance</span></b></td>
                                     <td>Eksport minus import af tjenester</td>
                                     <td>Danske turister bruger penge i udlandet (import af tjenester), og udenlandske
                                         turister bruger penge i Danmark (eksport af tjenester)</td>
                                 </tr>
-                                <tr>
-                                    <td><b>Indkomstbalance</b></td>
+                                <tr id="term-indkomstbalance">
+                                    <td><b><span class="legal-term"
+                                            data-definition="Indkomst fra udlandet minus indkomst til udlandet. En del af betalingsbalancen."
+                                            data-example="Danske virksomheder får udbytte fra udlandet, og udenlandske virksomheder får udbytte fra Danmark."
+                                            data-slug="indkomstbalance">Indkomstbalance</span></b></td>
                                     <td>Indkomst fra udland minus indkomst til udland</td>
                                     <td>Danske virksomheder får udbytte fra udland, og udenlandske virksomheder får
                                         udbytte fra Danmark</td>
                                 </tr>
-                                <tr>
-                                    <td><b>Overførselsbalance</b></td>
+                                <tr id="term-overfoerselsbalance">
+                                    <td><b><span class="legal-term"
+                                            data-definition="Overførsler fra udlandet minus overførsler til udlandet. En del af betalingsbalancen."
+                                            data-example="Danmark modtager EU-støtte og betaler bidrag til EU."
+                                            data-slug="overfoerselsbalance">Overførselsbalance</span></b></td>
                                     <td>Overførsler fra udland minus overførsler til udland</td>
                                     <td>Danmark modtager EU-støtte og betaler til EU</td>
                                 </tr>
@@ -416,12 +437,18 @@
                         hvordan betalingsbalancen har udviklet sig over mere end 50 år, hvilket giver et godt overblik
                         over Danmarks økonomiske udvikling.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 400px; width: 100%;">
-                        <canvas id="balanceOfPaymentsHistoricalChart"></canvas>
+                        <canvas id="balanceOfPaymentsHistoricalChart" data-chart-type="bop-historical" data-chart-data="54"></canvas>
                     </div>
                     <p><small><b>Figur 3.2:</b> Betalingsbalancens udvikling i Danmark fra 1970 til i dag. Diagrammet
-                            viser to forskellige mål: <b>Løbende konto</b> (turkis linje) og <b>Samlet
+                            viser to forskellige mål: <b><span class="legal-term"
+                                    data-definition="Del af betalingsbalancen der inkluderer handelsbalance, servicebalance, indkomstbalance og overførselsbalance."
+                                    data-example="Løbende konto viser de løbende transaktioner med udlandet, uden kapitaloverførsler."
+                                    data-slug="loebende-konto">Løbende konto</span></b> (turkis linje) og <b>Samlet
                                 betalingsbalance</b> (rød linje), begge målt i milliarder kroner. <b>Forskellen på de
-                                to:</b> Løbende konto inkluderer handelsbalance (eksport minus import), servicebalance,
+                                to:</b> <span class="legal-term"
+                                    data-definition="Del af betalingsbalancen der inkluderer handelsbalance, servicebalance, indkomstbalance og overførselsbalance."
+                                    data-example="Løbende konto viser de løbende transaktioner med udlandet, uden kapitaloverførsler."
+                                    data-slug="loebende-konto">Løbende konto</span> inkluderer handelsbalance (eksport minus import), servicebalance,
                             indkomstbalance og overførselsbalance - altså løbende transaktioner. Samlet betalingsbalance
                             inkluderer også kapitaloverførsler og finansielle investeringer (køb og salg af aktiver som
                             aktier, obligationer og ejendomme). Derfor ligger de to linjer tæt på hinanden, men ikke
@@ -469,7 +496,10 @@
                                         byggeriet vil stige.</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Forbrugerkonfidens:</b> Hvis forbrugerne er optimistiske, vil de
+                                    <td><b><span class="legal-term"
+                                            data-definition="Et mål for hvor optimistiske forbrugerne er omkring økonomiens fremtid. Høj konfidens fører typisk til mere forbrug."
+                                            data-example="Hvis forbrugerne er optimistiske, vil de sandsynligvis bruge flere penge på store køb som biler og møbler."
+                                            data-slug="forbrugerkonfidens">Forbrugerkonfidens</span>:</b> Hvis forbrugerne er optimistiske, vil de
                                         sandsynligvis bruge flere penge.</td>
                                 </tr>
                                 <tr>
@@ -690,7 +720,7 @@
                         nedenfor viser, hvordan ledighed og inflation har udviklet sig i forskellige lande, hvilket
                         giver et godt overblik over internationale forskelle og lignende udviklinger.</p>
                     <div class="chart-container mb-1" style="position: relative; height: 500px; width: 100%;">
-                        <canvas id="unemploymentInflationChart"></canvas>
+                        <canvas id="unemploymentInflationChart" data-chart-type="unemployment-inflation" data-chart-data="DNK,DEU,SWE,NOR"></canvas>
                     </div>
                     <p><small><b>Figur 3.5:</b> Ledighed og inflation i forskellige lande over de sidste 40 år. Venstre
                             akse viser ledighed (fuld linje) i procent af arbejdsstyrken. Højre akse viser inflation
@@ -1007,16 +1037,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Charts API Integration -->
     <script src="charts-api.js?v=2"></script>
-    <script>
-        // Initialize charts when page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            // Balance of Payments Historical Chart (from 1970, 54 years)
-            createBalanceOfPaymentsChart('balanceOfPaymentsHistoricalChart', 54);
-            createMultiCountryUnemploymentInflationChart('unemploymentInflationChart', ['DNK', 'DEU', 'SWE', 'NOR']);
-            // Okun's Law Chart
-            createOkunsLawChart('okunsLawChart', ['DNK', 'DEU', 'SWE', 'NOR']);
-        });
-    </script>
+    <!-- Charts are now initialized via IntersectionObserver in charts-api.js
+         linked to data-chart-type attributes on canvas elements -->
 
     <!-- Search Modal -->
     <div id="search-modal" class="search-modal">
