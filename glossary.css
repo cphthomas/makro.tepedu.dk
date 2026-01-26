@@ -97,7 +97,7 @@
 
 /* Arrow removed as per user request */
 
-/* Offset for table rows in glossary when linked to */
+/* Offset for table rows in glossary when linked to (navbar + alphabet header on kapitel9) */
 tr[id^="term-"] {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 220px;
 }
