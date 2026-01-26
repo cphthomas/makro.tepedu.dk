@@ -286,15 +286,99 @@ function generateMockExchangeRates(days, currencies = ['EUR', 'USD']) {
     return data;
 }
 
-// Fetch interest rates
+// Parse DNRENTD CSV into date -> { diskonto, destr }; return { labels, rates, ratesDESTR } aligned by date
+function parseInterestRatesCsv(csv) {
+    const lines = csv.trim().split('\n');
+    if (lines.length < 2) return null;
+    const byDate = {};
+    const instrumentCol = 0, tidCol = 3, indholdCol = 4;
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(';');
+        const instrument = (parts[instrumentCol] || '').toLowerCase();
+        const tid = parts[tidCol];
+        const indhold = parts[indholdCol];
+        if (!tid || indhold === undefined) continue;
+        const rate = parseFloat(String(indhold).replace(',', '.'));
+        if (Number.isNaN(rate)) continue;
+        if (!byDate[tid]) byDate[tid] = { diskonto: null, destr: null };
+        if (instrument.indexOf('diskonto') !== -1) byDate[tid].diskonto = Number(rate.toFixed(2));
+        if (instrument.indexOf('destr') !== -1 && instrument.indexOf('referencerente') !== -1) byDate[tid].destr = Number(rate.toFixed(2));
+    }
+    const dates = Object.keys(byDate).sort();
+    const labels = [];
+    const rates = [];
+    const ratesDESTR = [];
+    for (const tid of dates) {
+        const match = tid.match(/^(\d{4})M(\d{2})D(\d{2})$/);
+        const y = match ? parseInt(match[1], 10) : 0;
+        const mo = match ? parseInt(match[2], 10) - 1 : 0;
+        const day = match ? parseInt(match[3], 10) : 1;
+        const date = match ? new Date(y, mo, day) : new Date(tid);
+        labels.push(date.toLocaleDateString('da-DK', { month: 'short', day: 'numeric', year: 'numeric' }));
+        rates.push(byDate[tid].diskonto);
+        ratesDESTR.push(byDate[tid].destr);
+    }
+    return { labels, rates, ratesDESTR, hasDESTR: ratesDESTR.some(v => v != null) };
+}
+
+// Fetch interest rates from Danmarks Nationalbank (StatBank API: DNRENTD = diskonto + DESTR referencerente)
+async function fetchInterestRatesFromStatBank(country = 'DK', approximateDays = 3650) {
+    if (country !== 'DK') return null;
+    const cacheKey = `interest_rates_statbank_dk_${approximateDays}_v2`;
+    const cached = getCachedData(cacheKey);
+    if (cached) return cached;
+    try {
+        const nObs = Math.min(approximateDays, 2600);
+        const response = await fetch('https://api.statbank.dk/v1/data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                table: 'DNRENTD',
+                format: 'CSV',
+                lang: 'da',
+                variables: [
+                    { code: 'INSTRUMENT', values: ['ODKNAA', 'DESNAA'] },
+                    { code: 'LAND', values: ['DK'] },
+                    { code: 'OPGOER', values: ['E'] },
+                    { code: 'Tid', values: [`(-n+${nObs})`] }
+                ]
+            })
+        });
+        if (!response.ok) throw new Error(`StatBank API: ${response.status}`);
+        const csv = await response.text();
+        const parsed = parseInterestRatesCsv(csv);
+        if (!parsed || parsed.labels.length === 0) throw new Error('Ingen data');
+        const data = {
+            labels: parsed.labels,
+            rates: parsed.rates,
+            ratesDESTR: parsed.hasDESTR ? parsed.ratesDESTR : undefined,
+            source: 'statbank',
+            seriesName: 'Diskonto'
+        };
+        setCachedData(cacheKey, data);
+        return data;
+    } catch (error) {
+        console.warn('StatBank rente (DNRENTD) ikke tilgængelig:', error.message);
+        return null;
+    }
+}
+
+// Fetch interest rates: real data (diskonto + DESTR) for DK, derefter backup fra fil, ellers simuleret
 async function fetchInterestRates(country = 'DK', days = 365) {
     const cacheKey = `interest_rates_${country}_${days}`;
+    if (country === 'DK' && days >= 365) {
+        const statbankData = await fetchInterestRatesFromStatBank(country, days);
+        if (statbankData) {
+            setCachedData(cacheKey, statbankData);
+            return statbankData;
+        }
+        const backup = await loadInterestRatesBackup();
+        if (backup) {
+            setCachedData(cacheKey, backup);
+            return backup;
+        }
+    }
     try {
-        // In production, you would fetch from a real API like:
-        // const response = await fetch(`${API_CONFIG.statbank.baseUrl}/DNRENTA...`);
-        // For now, we simulate a fetch with a slight delay to "prove" it's working
-        await new Promise(resolve => setTimeout(resolve, 100));
-
         const data = generateInterestRates(country, days);
         setCachedData(cacheKey, data);
         return data;
@@ -302,8 +386,26 @@ async function fetchInterestRates(country = 'DK', days = 365) {
         console.error('Error fetching interest rates:', error);
         const cached = getAnyCachedData(cacheKey);
         if (cached) return cached;
+        const backup = await loadInterestRatesBackup();
+        if (backup) return backup;
         return generateInterestRates(country, days);
     }
+}
+
+async function loadInterestRatesBackup() {
+    try {
+        const cache = await loadCachedChartData();
+        const backup = cache && cache.interestRatesBackup;
+        if (backup && backup.labels && Array.isArray(backup.rates)) return backup;
+    } catch (e) { }
+    try {
+        const r = await fetch('interest-rates-backup.json');
+        if (r.ok) {
+            const backup = await r.json();
+            if (backup && backup.labels && Array.isArray(backup.rates)) return backup;
+        }
+    } catch (e) { }
+    return null;
 }
 
 // Fetch Money Supply Data
@@ -1774,27 +1876,45 @@ function createInterestRateChart(canvasId, country = 'DK') {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
-    // Fetch more years to show negative rate period (10 years = ~3650 days)
     fetchInterestRates(country, 3650).then(data => {
-        // Find min and max for proper scaling
-        const minRate = Math.min(...data.rates);
-        const maxRate = Math.max(...data.rates);
-
+        const allRates = data.rates.concat((data.ratesDESTR || []).filter(v => v != null));
+        const minRate = allRates.length ? Math.min(...allRates) : 0;
+        const maxRate = allRates.length ? Math.max(...allRates) : 1;
+        const chartTitle = (data.source === 'statbank')
+            ? 'Diskonto og DESTR (referencerente)'
+            : (country === 'DK' ? 'Udvikling i danske renter' : 'Udvikling i ECB renter');
+        const datasets = [
+            {
+                label: 'Diskonto (%)',
+                data: data.rates,
+                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                tension: 0.4,
+                fill: false,
+                borderWidth: 2
+            }
+        ];
+        if (data.ratesDESTR && data.ratesDESTR.some(v => v != null)) {
+            datasets.push({
+                label: 'DESTR / referencerente (%)',
+                data: data.ratesDESTR,
+                borderColor: 'rgb(220, 120, 50)',
+                backgroundColor: 'rgba(220, 120, 50, 0.15)',
+                tension: 0.4,
+                fill: false,
+                borderWidth: 2,
+                spanGaps: true
+            });
+        } else if (data.seriesName) {
+            datasets[0].label = data.seriesName + ' (%)';
+        } else if (country !== 'DK') {
+            datasets[0].label = 'ECB renter (%)';
+        }
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: data.labels,
-                datasets: [
-                    {
-                        label: country === 'DK' ? 'Danske renter (%)' : 'ECB renter (%)',
-                        data: data.rates,
-                        borderColor: 'rgb(54, 162, 235)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        tension: 0.4,
-                        fill: false,
-                        borderWidth: 2
-                    }
-                ]
+                datasets: datasets
             },
             options: {
                 ...chartConfig,
@@ -1802,7 +1922,7 @@ function createInterestRateChart(canvasId, country = 'DK') {
                     ...chartConfig.plugins,
                     title: {
                         display: true,
-                        text: country === 'DK' ? 'Udvikling i danske renter' : 'Udvikling i ECB renter',
+                        text: chartTitle,
                         font: {
                             size: 16,
                             weight: 'bold',
@@ -8480,6 +8600,445 @@ function createMarshallModelChart(canvasId) {
     });
 }
 
+// Create Valuta Market Chart (Supply and Demand for Foreign Currency - e.g. EUR)
+function createValutaMarketChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    // Quantity of foreign currency (e.g. euro) on x-axis
+    const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
+
+    // Supply of EUR - upward sloping: higher kurs (DKK per EUR) → more euro supplied
+    // Supply: kurs = 4 + 0.004 * quantity
+    const supply = quantity.map(q => 4 + 0.004 * q);
+
+    // Demand for EUR - downward sloping: lower kurs → higher demand for euro
+    // Demand: kurs = 12 - 0.004 * quantity
+    const demand = quantity.map(q => 12 - 0.004 * q);
+
+    // Equilibrium: 4 + 0.004*q = 12 - 0.004*q → q = 1000, kurs = 8
+    const equilibriumQ = 1000;
+    const equilibriumKurs = 4 + 0.004 * equilibriumQ;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: quantity,
+            datasets: [{
+                label: 'U (Udbud)',
+                data: supply,
+                borderColor: '#3b82f6',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'E (Efterspørgsel)',
+                data: demand,
+                borderColor: '#ef4444',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'Ligevægt',
+                data: [{ x: equilibriumQ, y: equilibriumKurs }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24',
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            layout: {
+                padding: { left: 78, right: 24, top: 24, bottom: 52 }
+            },
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'Kurs (DKK per EUR)',
+                    position: 'top',
+                    font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' },
+                    padding: { top: 0, bottom: 12 }
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: { size: 12, family: 'Inter, sans-serif' },
+                        padding: 15,
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label === 'Ligevægt') return 'Ligevægtspunkt';
+                            return context.dataset.label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 1600,
+                    title: {
+                        display: true,
+                        text: 'Mængde valuta (fx euro)',
+                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' },
+                        padding: { top: 8, bottom: 24 }
+                    },
+                    ticks: { display: false },
+                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                },
+                y: {
+                    min: 0,
+                    max: 14,
+                    title: { display: false },
+                    ticks: { display: false },
+                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                }
+            }
+        },
+        plugins: [{
+            id: 'pointLabelsValuta',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.label === 'Ligevægt') {
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((element) => {
+                            const { x, y } = element.getProps(['x', 'y'], true);
+                            ctx.save();
+                            ctx.strokeStyle = '#94a3b8';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([5, 5]);
+                            const xAxisY = yScale.getPixelForValue(0);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(x, xAxisY);
+                            ctx.stroke();
+                            const yAxisX = xScale.getPixelForValue(0);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(yAxisX, y);
+                            ctx.stroke();
+                            ctx.restore();
+                            ctx.save();
+                            ctx.fillStyle = '#fbbf24';
+                            ctx.beginPath();
+                            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.restore();
+                            ctx.save();
+                            ctx.fillStyle = '#000';
+                            ctx.font = '12px Inter';
+                            ctx.textAlign = 'right';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('kurs₀', yAxisX - 12, y);
+                            ctx.restore();
+                            ctx.save();
+                            ctx.fillStyle = '#000';
+                            ctx.font = '12px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'top';
+                            ctx.fillText('Q₀', x, xAxisY + 8);
+                            ctx.restore();
+                        });
+                    }
+                });
+            }
+        }]
+    });
+}
+
+var valutaChartLayout = { padding: { left: 78, right: 24, top: 24, bottom: 52 } };
+var valutaScaleTitlePadding = { x: { top: 8, bottom: 28 }, y: { top: 8, bottom: 8 } };
+
+// Valuta chart: Appreciering – efterspørgsel efter valuta falder (E skifter til venstre) → kursen falder
+function createValutaMarketChartAppreciering(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
+    const supply = quantity.map(q => 4 + 0.004 * q);
+    const demand = quantity.map(q => 12 - 0.004 * q);
+    const demandNew = quantity.map(q => 10 - 0.004 * q); // E skifter til venstre
+    const eq0Q = 1000, eq0Kurs = 8;
+    const eq1Q = 750, eq1Kurs = 7; // ny ligevægt: appreciering
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: quantity,
+            datasets: [{
+                label: 'U (Udbud)',
+                data: supply,
+                borderColor: '#3b82f6',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'E (Efterspørgsel)',
+                data: demand,
+                borderColor: 'rgba(239,68,68,0.5)',
+                borderDash: [6, 4],
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'E₁ (Efterspørgsel efter skift)',
+                data: demandNew,
+                borderColor: '#ef4444',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'Ligevægt (før)',
+                data: [{ x: eq0Q, y: eq0Kurs }],
+                type: 'scatter',
+                backgroundColor: '#94a3b8',
+                borderColor: '#94a3b8',
+                pointRadius: 8,
+                pointHoverRadius: 10,
+                showLine: false
+            }, {
+                label: 'Ligevægt (efter)',
+                data: [{ x: eq1Q, y: eq1Kurs }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24',
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            layout: valutaChartLayout,
+            plugins: {
+                ...chartConfig.plugins,
+                title: { display: true, text: 'Kurs (DKK per GBP)', position: 'top', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
+                legend: { display: true, position: 'top', labels: { font: { size: 11, family: 'Inter, sans-serif' }, padding: 12, usePointStyle: true } }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 1600,
+                    title: { display: true, text: 'Mængde valuta (fx GBP)', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: valutaScaleTitlePadding.x },
+                    ticks: { display: false },
+                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                },
+                y: {
+                    min: 0,
+                    max: 14,
+                    title: { display: false },
+                    ticks: { display: false },
+                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                }
+            }
+        },
+        plugins: [valutaEquilibriumPlugin('Ligevægt (før)', 'Ligevægt (efter)', 'kurs₀', 'Q₀', 'kurs₁', 'Q₁')]
+    });
+}
+
+// Valuta chart: Depreciering – efterspørgsel efter valuta stiger (E skifter til højre) → kursen stiger
+function createValutaMarketChartDepreciering(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
+    const supply = quantity.map(q => 4 + 0.004 * q);
+    const demand = quantity.map(q => 12 - 0.004 * q);
+    const demandNew = quantity.map(q => 14 - 0.004 * q); // E skifter til højre
+    const eq0Q = 1000, eq0Kurs = 8;
+    const eq1Q = 1250, eq1Kurs = 9; // ny ligevægt: depreciering
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: quantity,
+            datasets: [{
+                label: 'U (Udbud)',
+                data: supply,
+                borderColor: '#3b82f6',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'E (Efterspørgsel)',
+                data: demand,
+                borderColor: 'rgba(239,68,68,0.5)',
+                borderDash: [6, 4],
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'E₁ (Efterspørgsel efter skift)',
+                data: demandNew,
+                borderColor: '#ef4444',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.1
+            }, {
+                label: 'Ligevægt (før)',
+                data: [{ x: eq0Q, y: eq0Kurs }],
+                type: 'scatter',
+                backgroundColor: '#94a3b8',
+                borderColor: '#94a3b8',
+                pointRadius: 8,
+                pointHoverRadius: 10,
+                showLine: false
+            }, {
+                label: 'Ligevægt (efter)',
+                data: [{ x: eq1Q, y: eq1Kurs }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24',
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            layout: valutaChartLayout,
+            plugins: {
+                ...chartConfig.plugins,
+                title: { display: true, text: 'Kurs (DKK per GBP)', position: 'top', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
+                legend: { display: true, position: 'top', labels: { font: { size: 11, family: 'Inter, sans-serif' }, padding: 12, usePointStyle: true } }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 1600,
+                    title: { display: true, text: 'Mængde valuta (fx GBP)', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: valutaScaleTitlePadding.x },
+                    ticks: { display: false },
+                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                },
+                y: {
+                    min: 0,
+                    max: 16,
+                    title: { display: false },
+                    ticks: { display: false },
+                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                }
+            }
+        },
+        plugins: [valutaEquilibriumPlugin('Ligevægt (før)', 'Ligevægt (efter)', 'kurs₀', 'Q₀', 'kurs₁', 'Q₁')]
+    });
+}
+
+function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBefore, yLabelAfter, xLabelAfter) {
+    return {
+        id: 'pointLabelsValutaShift',
+        afterDatasetsDraw(chart) {
+            const { ctx } = chart;
+            const xScale = chart.scales.x;
+            const yScale = chart.scales.y;
+            const datasets = chart.data.datasets;
+            let before = null, after = null;
+            datasets.forEach((dataset, i) => {
+                if (dataset.label === labelBefore) {
+                    const meta = chart.getDatasetMeta(i);
+                    if (meta.data[0]) before = meta.data[0].getProps(['x', 'y'], true);
+                } else if (dataset.label === labelAfter) {
+                    const meta = chart.getDatasetMeta(i);
+                    if (meta.data[0]) after = meta.data[0].getProps(['x', 'y'], true);
+                }
+            });
+            const xAxisY = yScale.getPixelForValue(0);
+            const yAxisX = xScale.getPixelForValue(0);
+            
+            // Check if y-values are close vertically (overlap risk)
+            const yDiff = before && after ? Math.abs(before.y - after.y) : 100;
+            const yLabelsOverlap = yDiff < 35; // hvis kurs₀ og kurs₁ er mindre end 35px fra hinanden
+            
+            [before, after].forEach((pt, idx) => {
+                if (!pt) return;
+                const { x, y } = pt;
+                ctx.save();
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x, xAxisY);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(yAxisX, y);
+                ctx.stroke();
+                ctx.restore();
+                ctx.save();
+                ctx.fillStyle = idx === 0 ? '#94a3b8' : '#fbbf24';
+                ctx.beginPath();
+                ctx.arc(x, y, idx === 0 ? 4 : 5, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.restore();
+                
+                const yLabel = idx === 0 ? yLabelBefore : yLabelAfter;
+                const xLabel = idx === 0 ? xLabelBefore : xLabelAfter;
+                
+                // Y-axis labels (kurs₀, kurs₁) - placer dem smart så de ikke overlapper
+                ctx.save();
+                ctx.fillStyle = '#000';
+                ctx.font = '11px Inter';
+                ctx.textAlign = 'right';
+                
+                let yLabelY = y;
+                let yLabelX = yAxisX - 12;
+                
+                if (yLabelsOverlap) {
+                    // Hvis de overlapper: placer den første lidt over, den anden lidt under
+                    if (idx === 0) {
+                        yLabelY = y - 10; // kurs₀ lidt over punktet
+                        ctx.textBaseline = 'bottom';
+                    } else {
+                        yLabelY = y + 10; // kurs₁ lidt under punktet
+                        ctx.textBaseline = 'top';
+                    }
+                } else {
+                    // Normal placering ved siden af punktet
+                    ctx.textBaseline = 'middle';
+                }
+                
+                ctx.fillText(yLabel, yLabelX, yLabelY);
+                ctx.restore();
+                
+                // X-axis labels (Q₀, Q₁) - undgå overlap hvis punkter er tætte
+                const xLabelY = xAxisY + (idx === 1 && before && Math.abs(x - before.x) < 80 ? 22 : 8);
+                ctx.save();
+                ctx.fillStyle = '#000';
+                ctx.font = '11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText(xLabel, x, xLabelY);
+                ctx.restore();
+            });
+        }
+    };
+}
+
 // Fetch real interest rate and inflation data from Danmarks Statistik
 async function fetchRealNominalRateData(years = 15) {
     try {
@@ -9910,6 +10469,15 @@ const chartObserver = new IntersectionObserver((entries) => {
                         break;
                     case 'marshall-model':
                         createMarshallModelChart(element.id);
+                        break;
+                    case 'valuta-market':
+                        createValutaMarketChart(element.id);
+                        break;
+                    case 'valuta-market-appreciering':
+                        createValutaMarketChartAppreciering(element.id);
+                        break;
+                    case 'valuta-market-depreciering':
+                        createValutaMarketChartDepreciering(element.id);
                         break;
                     case 'real-nominal-rate':
                         createRealNominalRateChart(element.id);
