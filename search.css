@@ -54,7 +54,7 @@
 
 .search-header {
     padding: 20px 25px;
-    border-bottom: 2px solid #14b8a6;
+    border-bottom: 2px solid #d3d3d3;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -79,7 +79,7 @@
 }
 
 .search-input:focus {
-    border-color: #14b8a6;
+    border-color: #d3d3d3;
 }
 
 .search-input::placeholder {
@@ -92,7 +92,7 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #14b8a6;
+    color: #d3d3d3;
     font-size: 20px;
     pointer-events: none;
 }
@@ -109,7 +109,7 @@
 }
 
 .search-close:hover {
-    color: #14b8a6;
+    color: #d3d3d3;
     transform: rotate(90deg);
 }
 
@@ -128,7 +128,7 @@
 .search-result-item {
     padding: 15px;
     margin-bottom: 10px;
-    border-left: 4px solid #14b8a6;
+    border-left: 4px solid #d3d3d3;
     background-color: #f8f9fa;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -143,7 +143,7 @@
 
 .search-result-chapter {
     font-weight: 600;
-    color: #14b8a6;
+    color: #d3d3d3;
     font-size: 14px;
     margin-bottom: 5px;
     text-transform: uppercase;
@@ -157,7 +157,7 @@
 }
 
 .search-result-text mark {
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     color: white;
     padding: 2px 4px;
     font-weight: 500;
@@ -190,7 +190,7 @@
 }
 
 .search-icon-nav:hover {
-    color: #14b8a6 !important;
+    color: #d3d3d3 !important;
     transform: scale(1.1);
 }
 
@@ -202,7 +202,7 @@
     transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
-    background-color: rgba(20, 184, 166, 0.1);
+    background-color: rgba(211, 211, 211, 0.1);
     border-radius: 50%;
     animation: pulse 1.5s infinite;
     z-index: -1;
@@ -230,7 +230,7 @@
 }
 
 .navbar-brand:hover {
-    color: #14b8a6 !important;
+    color: #d3d3d3 !important;
     transform: scale(1.1);
 }
 
@@ -242,7 +242,7 @@
     transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
-    background-color: rgba(20, 184, 166, 0.1);
+    background-color: rgba(211, 211, 211, 0.1);
     border-radius: 50%;
     animation: pulse 1.5s infinite;
     z-index: -1;
@@ -253,7 +253,7 @@
 .search-loading {
     text-align: center;
     padding: 40px 20px;
-    color: #14b8a6;
+    color: #d3d3d3;
 }
 
 .search-loading i {
@@ -281,12 +281,12 @@
 }
 
 .search-container::-webkit-scrollbar-thumb {
-    background: #14b8a6;
+    background: #d3d3d3;
     border-radius: 0;
 }
 
 .search-container::-webkit-scrollbar-thumb:hover {
-    background: #0d9488;
+    background: #b0b0b0;
 }
 
 /* Responsive design */

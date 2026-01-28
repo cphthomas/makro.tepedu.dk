@@ -389,7 +389,7 @@
                             parent.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
                             // Highlight the parent element temporarily
-                            parent.style.backgroundColor = '#14b8a633';
+                            parent.style.backgroundColor = '#d3d3d333';
                             setTimeout(() => {
                                 parent.style.backgroundColor = '';
                             }, 3000);

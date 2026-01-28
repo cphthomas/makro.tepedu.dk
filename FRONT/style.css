@@ -88,9 +88,9 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
     padding: 2px 8px;
     margin: 0 2px;
     border-radius: 0;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 2px 4px rgba(211, 211, 211, 0.2);
 }
 
 /* External link icon - appears after text */
@@ -120,9 +120,9 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
 article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover,
 article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 /* Icon animation on hover - superflot animation */
@@ -140,7 +140,7 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
 .content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
 article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
 article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus {
-    outline: 2px solid #14b8a6;
+    outline: 2px solid #d3d3d3;
     outline-offset: 2px;
     border-radius: 0;
 }
@@ -155,11 +155,11 @@ article .info-box a[href^="https://"],
 article .example-box a[href^="http://"],
 article .example-box a[href^="https://"] {
     color: #ffffff;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
     padding: 2px 8px;
     border-radius: 0;
-    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+    box-shadow: 0 2px 4px rgba(211, 211, 211, 0.2);
 }
 
 .content .info-box a[href^="http://"]:hover,
@@ -171,9 +171,9 @@ article .info-box a[href^="https://"]:hover,
 article .example-box a[href^="http://"]:hover,
 article .example-box a[href^="https://"]:hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 /* Smooth pulse animation for link icon - superflot animation */

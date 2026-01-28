@@ -28,10 +28,10 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
     padding: 0.5px 8px;
     margin: 0 2px;
     border-radius: 0;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
     line-height: 1.2;
-    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+    box-shadow: 0 1px 2px rgba(211, 211, 211, 0.15);
 }
 
 /* External link icon - appears after text */
@@ -61,9 +61,9 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
 article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover,
 article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 /* Icon animation on hover - superflot animation */
@@ -81,7 +81,7 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
 .content a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
 article a[href^="http://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus,
 article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):focus {
-    outline: 2px solid #14b8a6;
+    outline: 2px solid #d3d3d3;
     outline-offset: 2px;
     border-radius: 0;
 }
@@ -92,12 +92,12 @@ article a[href^="https://"]:not(.navbar-brand):not(.nav-link):not(.dropdown-item
 article table a[href^="http://"]:not(.effectLinksTable),
 article table a[href^="https://"]:not(.effectLinksTable) {
     color: #ffffff;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
     padding: 0 8px;
     line-height: 1.2;
     border-radius: 0;
-    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+    box-shadow: 0 1px 2px rgba(211, 211, 211, 0.15);
 }
 
 .content table a[href^="http://"]:not(.effectLinksTable):hover,
@@ -105,9 +105,9 @@ article table a[href^="https://"]:not(.effectLinksTable) {
 article table a[href^="http://"]:not(.effectLinksTable):hover,
 article table a[href^="https://"]:not(.effectLinksTable):hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 /* Links in info boxes - external links */
@@ -120,12 +120,12 @@ article .info-box a[href^="https://"],
 article .example-box a[href^="http://"],
 article .example-box a[href^="https://"] {
     color: #ffffff;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
     padding: 0 8px;
     line-height: 1.2;
     border-radius: 0;
-    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+    box-shadow: 0 1px 2px rgba(211, 211, 211, 0.15);
 }
 
 .content .info-box a[href^="http://"]:hover,
@@ -137,9 +137,9 @@ article .info-box a[href^="https://"]:hover,
 article .example-box a[href^="http://"]:hover,
 article .example-box a[href^="https://"]:hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 /* Links in info boxes - internal links (same styling as external) */
@@ -156,10 +156,10 @@ article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not
     padding: 0.5px 8px;
     margin: 0 2px;
     border-radius: 0;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
     line-height: 1.2;
-    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+    box-shadow: 0 1px 2px rgba(211, 211, 211, 0.15);
 }
 
 /* Internal link icon in info boxes */
@@ -188,9 +188,9 @@ article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not
 article .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover,
 article .example-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 .content .info-box a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover::after,
@@ -240,10 +240,10 @@ article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks
     padding: 0.5px 8px;
     margin: 0 2px;
     border-radius: 0;
-    background-color: #14b8a6;
+    background-color: #d3d3d3;
     font-weight: 500;
     line-height: 1.2;
-    box-shadow: 0 1px 2px rgba(20, 184, 166, 0.15);
+    box-shadow: 0 1px 2px rgba(211, 211, 211, 0.15);
 }
 
 /* Internal link icon - appears after text */
@@ -269,9 +269,9 @@ article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks
 .content a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover,
 article a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):not([href^="http"]):not([href^="https"]):not([href^="#"]):not([href^="mailto:"]):hover {
     color: #ffffff;
-    background-color: #0d9488;
+    background-color: #b0b0b0;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 4px 12px rgba(211, 211, 211, 0.35);
 }
 
 /* Icon animation on hover for internal links */
@@ -465,7 +465,7 @@ table {
     display: block;
     text-decoration: none;
     color: white;
-    background: #14b8a6;
+    background: #d3d3d3;
     padding: 15px 20px;
     width: 100%;
     transition: background 0.3s cubic-bezier(0.76, 0, 0.24, 1);
@@ -638,8 +638,8 @@ kbd {
 }
 
 .info-box {
-    background-color: #f8f9fa;
-    border-left: 4px solid #14b8a6;
+    background-color: #ffffff;
+    border-left: 4px solid #d3d3d3;
     padding: 15px;
     margin: 20px 0;
     border-radius: 0 !important;
@@ -653,7 +653,7 @@ kbd {
 .info-box:hover {
     transform: translateY(-5px);
     /* Lift effect on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
     /* Enhanced shadow on hover */
 }
 
@@ -776,8 +776,8 @@ kbd {
     font-size: 4rem;
     font-weight: 400;
     /* Regular font weight for better readability */
-    color: #14b8a6;
-    /* Turquoise color (same as link color) */
+    color: #d3d3d3;
+    /* Light grey color (same as link color) */
     text-shadow: none;
     /* Remove text shadow */
     font-style: normal;
@@ -907,10 +907,10 @@ kbd {
 #sidebar-toggle-button:focus,
 #sidebar-toggle-button:active {
     /* Add focus for keyboard navigation and active for clicks */
-    background: #14b8a6;
-    /* Turquoise on hover/focus/active */
-    border: 2px solid #14b8a6;
-    /* Turquoise border on hover/focus/active */
+    background: #d3d3d3;
+    /* Light grey on hover/focus/active */
+    border: 2px solid #d3d3d3;
+    /* Light grey border on hover/focus/active */
     transform: translateY(-50%) scale(1.1);
     outline: none;
     /* Remove blue outline on focus */

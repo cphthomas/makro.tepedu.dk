@@ -1174,11 +1174,11 @@ function createEconomicCircuit(containerId) {
             </g>
         </svg>
 
-        <div id="circuit-tooltip" style="position: absolute; display: none; background: #ffffff; border: 2px solid #14b8a6; padding: 10px; border-radius: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 1000; max-width: 220px; font-size: 12px; pointer-events: none;"></div>
+        <div id="circuit-tooltip" style="position: absolute; display: none; background: #ffffff; border: 2px solid #d3d3d3; padding: 10px; border-radius: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 1000; max-width: 220px; font-size: 12px; pointer-events: none;"></div>
     </div>
 
     <style>
-        .circuit-node:hover rect { stroke: #14b8a6; stroke-width: 2px; cursor: pointer; }
+        .circuit-node:hover rect { stroke: #d3d3d3; stroke-width: 2px; cursor: pointer; }
         .flow-path { opacity: 0.7; transition: opacity 0.2s ease; }
         .flow-path:hover { opacity: 1; stroke-width: 2.5; cursor: help; }
     </style>
@@ -1541,12 +1541,12 @@ function createEconomicCircuitVis(containerId) {
                 borderWidth: 1,
                 highlight: {
                     background: '#f0f9ff',
-                    border: '#14b8a6',
+                    border: '#d3d3d3',
                     borderWidth: 2
                 },
                 hover: {
                     background: '#f8fafc',
-                    border: '#14b8a6'
+                    border: '#d3d3d3'
                 }
             },
             shadow: { enabled: true, size: 8, x: 0, y: 2 },
@@ -1566,7 +1566,7 @@ function createEconomicCircuitVis(containerId) {
                 multi: false
             },
             smooth: { type: 'straight' },
-            color: { highlight: '#14b8a6' }
+            color: { highlight: '#d3d3d3' }
         },
         physics: false,
         interaction: {
@@ -1620,7 +1620,7 @@ function createEconomicCircuitVis(containerId) {
                 }
                 .vis-network .vis-node.vis-selected {
                     background-color: #f0f9ff !important;
-                    border-color: #14b8a6 !important;
+                    border-color: #d3d3d3 !important;
                     color: #0f172a !important;
                 }
                 .vis-network .vis-node {
@@ -1665,10 +1665,10 @@ function createEconomicCircuitVis(containerId) {
         opacity: 0;
         background: #ffffff !important;
         background-color: #ffffff !important;
-        border: 2px solid #14b8a6 !important;
+        border: 2px solid #d3d3d3 !important;
         border-radius: 0 !important;
         padding: 14px 16px;
-        box-shadow: 0 10px 25px rgba(20, 184, 166, 0.15), 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 25px rgba(211, 211, 211, 0.15), 0 4px 10px rgba(0,0,0,0.1);
         font-family: 'Open Sans', sans-serif !important;
         font-size: 13px;
         color: #0f172a;
@@ -1688,7 +1688,7 @@ function createEconomicCircuitVis(containerId) {
             #economic-circuit-tooltip {
                 font-weight: 500;
                 background: #ffffff !important;
-                border: 2px solid #14b8a6 !important;
+                border: 2px solid #d3d3d3 !important;
             }
             /* Hide vis.js default tooltip */
             .vis-tooltip {
@@ -1725,7 +1725,7 @@ function createEconomicCircuitVis(containerId) {
                 tooltip.textContent = node.title;
                 tooltip.style.display = 'block';
                 tooltip.style.background = '#ffffff';
-                tooltip.style.border = '2px solid #14b8a6';
+                tooltip.style.border = '2px solid #d3d3d3';
                 tooltip.style.borderRadius = '0';
                 tooltip.style.visibility = 'visible';
                 tooltip.style.opacity = '1';
@@ -9488,7 +9488,7 @@ function createRiskPremiumChart(canvasId) {
                 label: 'Risikofri rente',
                 data: Array(4).fill(riskFreeRate),
                 backgroundColor: '#4bc0c0',
-                borderColor: '#14b8a6',
+                borderColor: '#d3d3d3',
                 borderWidth: 2
             }, {
                 label: 'Risikopræmie',
@@ -10544,13 +10544,13 @@ function createMonetaryPolicyTransmissionChart(canvasId) {
             }, {
                 label: 'Forbrug (index)',
                 data: consumption,
-                borderColor: '#14b8a6',
-                backgroundColor: 'rgba(20, 184, 166, 0.15)',
+                borderColor: '#d3d3d3',
+                backgroundColor: 'rgba(211, 211, 211, 0.15)',
                 borderWidth: 2.5,
                 yAxisID: 'y1',
                 pointRadius: 5,
                 pointHoverRadius: 7,
-                pointBackgroundColor: '#14b8a6',
+                pointBackgroundColor: '#d3d3d3',
                 tension: 0.4,
                 fill: true
             }, {
@@ -10750,12 +10750,12 @@ function createPolicyLagChart(canvasId) {
             }, {
                 label: 'Implementeringslag',
                 data: implementationLag,
-                borderColor: '#14b8a6',
-                backgroundColor: 'rgba(20, 184, 166, 0.25)',
+                borderColor: '#d3d3d3',
+                backgroundColor: 'rgba(211, 211, 211, 0.25)',
                 borderWidth: 3,
                 pointRadius: 6,
                 pointHoverRadius: 8,
-                pointBackgroundColor: '#14b8a6',
+                pointBackgroundColor: '#d3d3d3',
                 tension: 0.4,
                 fill: true
             }, {
