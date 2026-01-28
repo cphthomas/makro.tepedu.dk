@@ -709,45 +709,115 @@
 
                 <h3>12. De korte renter – fra Nationalbanken til boliglånet</h3>
                 <div class="info-box">
-                    <p>Når vi taler om "den korte rente", dækker det over flere forskellige renter, der dog alle følges
-                        tæt ad. Her skelner vi mellem centralbankens renter, markedsrenterne mellem bankerne og den
-                        rente, boligejere betaler.</p>
-                </div>
+                    <p>Når vi taler om "den korte rente" i Danmark, dækker det over flere forskellige renter, der dog alle følges tæt ad. Disse renter påvirker direkte husholdningernes boliglån, virksomhedernes investeringer og den generelle økonomiske aktivitet. For at forstå renteudviklingen er det vigtigt at skelne mellem tre niveauer: Nationalbankens officielle renter, markedsrenterne mellem bankerne og den rente, som boligejere og virksomheder betaler.</p>
+                    
+                    <p><b>Oversigt over de korte renter og deres sammenhæng:</b></p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 18%;">Rentetype</th>
+                                    <th style="width: 25%;">Hvad er det?</th>
+                                    <th style="width: 25%;">Hvem fastsætter den?</th>
+                                    <th style="width: 20%;">Sammenhæng med andre renter</th>
+                                    <th style="width: 12%;">Niveau (jan. 2026)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="term-diskonto-kap5">
+                                    <td><b><span class="legal-term"
+                                                data-definition="Den officielle pengepolitiske rente, som Danmarks Nationalbank fastsætter. Bruges til at styre pengemængden, inflationen og holde kronen stabil over for euroen."
+                                                data-example="Når Nationalbanken hæver diskontoen for at bekæmpe høj inflation, stiger de korte markedsrenter og bankernes udlånsrenter typisk med."
+                                                data-slug="diskonto">Diskontoen<br><small>(pengepolitisk rente)</small></span></b></td>
+                                    <td>Den <b>officielle pengepolitiske rente</b>, som Nationalbanken fastsætter som overordnet styringsrente. Diskontoen er den <b>beslutning</b>, Nationalbanken tager om renteniveauet. Den er historisk set den oprindelige rente, som Nationalbanken brugte til at styre økonomien.</td>
+                                    <td>Fastlægges af Danmarks Nationalbank ud fra hensynet til fastkurspolitikken over for euroen (følger ECB's rente) og udviklingen i inflation og konjunkturer.</td>
+                                    <td>Diskontoen er den <b>overordnede beslutning</b> om renteniveauet. Når diskontoen fastsættes, justeres foliorenten (det konkrete værktøj) til samme niveau. Diskontoen danner dermed rammen for alle andre korte renter.</td>
+                                    <td class="text-center"><b>1,60%</b><br><small>(overordnet beslutning)</small></td>
+                                </tr>
+                                <tr id="term-foliorenten-kap5">
+                                    <td><b><span class="legal-term"
+                                                data-definition="Den rente, bankerne får på deres indestående i Danmarks Nationalbank. Foliorenten er Nationalbankens vigtigste pengepolitiske instrument."
+                                                data-example="Når Nationalbanken hæver foliorenten, stiger renterne i hele økonomien, hvilket bremser væksten og inflationen."
+                                                data-slug="foliorenten">Foliorenten</span></b></td>
+                                    <td>Den <b>konkrete rente</b>, som bankerne får på deres indestående i Nationalbanken. Foliorenten er det <b>værktøj</b>, som Nationalbanken faktisk bruger til at styre likviditeten i bankerne. Den følger typisk diskontoen tæt (ofte samme niveau).</td>
+                                    <td>Danmarks Nationalbank fastsætter foliorenten baseret på diskontoen. Foliorenten er det konkrete instrument, som påvirker bankernes likviditet direkte.</td>
+                                    <td>Foliorenten er det <b>konkrete værktøj</b>, som påvirker bankernes likviditet og dermed markedsrenterne. Når foliorenten ændres, påvirker det hurtigt CIBOR, DESTR og F-kort renten. <b>Forskellen fra diskontoen:</b> Diskontoen er beslutningen, foliorenten er værktøjet.</td>
+                                    <td class="text-center"><b>1,60%</b><br><small>(konkret værktøj)</small></td>
+                                </tr>
+                                <tr id="term-udlaansrenten-kap5">
+                                    <td><b><span class="legal-term"
+                                                data-definition="Den rente, som bankerne betaler, når de låner penge af Danmarks Nationalbank (udlånsfaciliteten)."
+                                                data-example="Hvis en bank pludseligt mangler likviditet i løbet af dagen, kan den låne af Nationalbanken til udlånsrenten."
+                                                data-slug="udlaansrenten">Udlånsrenten</span></b></td>
+                                    <td>Den rente, bankerne betaler for at låne penge af Nationalbanken gennem udlånsfaciliteten. Fungerer som et "sikkerhedsnet" for banker med midlertidigt likviditetsbehov.</td>
+                                    <td>Danmarks Nationalbank fastsætter udlånsrenten, som typisk ligger 0,15 procentpoint over foliorenten.</td>
+                                    <td>Udlånsrenten sætter et "loft" for de korte markedsrenter - bankerne vil aldrig betale mere end udlånsrenten for at låne på markedet.</td>
+                                    <td class="text-center"><b>1,75%</b></td>
+                                </tr>
+                                <tr id="term-cibor-kap5">
+                                    <td><b><span class="legal-term"
+                                                data-definition="Copenhagen Interbank Offered Rate - den rente, bankerne vurderer de kan låne til hinanden for på det usikrede pengemarked."
+                                                data-example="Mange boliglån med variabel rente er koblet til CIBOR 3M plus et tillæg på ca. 0,5-1,0 procentpoint."
+                                                data-slug="cibor">CIBOR<br><small>(Copenhagen Interbank Offered Rate)</small></span></b></td>
+                                    <td>En referencerente baseret på, hvad et panel af banker vurderer, de kan låne til hinanden for på det usikrede pengemarked. CIBOR findes i forskellige løbetider (1, 3, 6, 12 måneder), hvor 3-måneders CIBOR er mest anvendt.</td>
+                                    <td>Fastsættes dagligt af et panel af store banker i Danmark, der indberetter deres vurdering af låneomkostninger. Beregnes som gennemsnittet af disse indberetninger.</td>
+                                    <td>CIBOR følger tæt foliorenten, men ligger typisk lidt højere (ca. 0,3-0,5 procentpoint) for at kompensere for kreditrisiko og løbetidsrisiko.</td>
+                                    <td class="text-center"><b>2,01%</b><br><small>(3-måneders)</small></td>
+                                </tr>
+                                <tr id="term-destr-kap5">
+                                    <td><b><span class="legal-term"
+                                                data-definition="Denmark Short-Term Rate - en referencerente beregnet ud fra faktiske handler på det sikrede pengemarked i Danmark."
+                                                data-example="DESTR erstatter gradvist CIBOR som referencerente for mange finansielle kontrakter, fordi den er baseret på faktiske handler."
+                                                data-slug="destr">DESTR<br><small>(Denmark Short-Term Rate)</small></span></b></td>
+                                    <td>Efterfølgeren til den helt korte CIBOR. En referencerente baseret på <i>faktiske</i> handler mellem banker på det sikrede pengemarked (hvor lånene er sikret med værdipapirer som sikkerhed).</td>
+                                    <td>Beregnes dagligt af Danmarks Nationalbank ud fra faktiske transaktioner på det danske pengemarked. Dette gør DESTR mere robust og pålidelig end CIBOR.</td>
+                                    <td>DESTR ligger typisk tæt på eller lidt under foliorenten, fordi den måler sikrede lån (med pant). DESTR er en mere "ren" måling af renteniveauet end CIBOR.</td>
+                                    <td class="text-center"><b>1,55%</b><br><small>(typisk)</small></td>
+                                </tr>
+                                <tr id="term-f-kort-rente-kap5">
+                                    <td><b><span class="legal-term"
+                                                data-definition="Den korte obligationsrente, som boligejere med variabel forrentning betaler på deres boliglån (F-kort obligationer)."
+                                                data-example="En boligejer med et F-kort boliglån på 2 mio. kr. betaler den aktuelle F-kort rente plus bidragssats og gebyr."
+                                                data-slug="f-kort-rente">F-kort rente<br><small>(Kort boligrente)</small></span></b></td>
+                                    <td>Den rente, som boligejere betaler på boliglån med variabel forrentning. Renten følger de korte obligationer (F-kort), som har løbetider på typisk 1-2 år og nulstilles regelmæsigt.</td>
+                                    <td>Fastsættes på obligationsmarkedet gennem udbud og efterspørgsel efter F-kort obligationer. Investorernes villighed til at købe obligationer bestemmer renten.</td>
+                                    <td>F-kort renten følger tæt CIBOR og dermed foliorenten, men ligger typisk lidt under CIBOR på grund af sikkerhedsstillelsen (pant i boligen). Til den egentlige rente, boligejeren betaler, tillægges bidragssats (ca. 0,5-1,0%) og administrationsgebyr.</td>
+                                    <td class="text-center"><b>1,79%</b><br><small>(før bidrag)</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <h3>12.1. Nationalbankens officielle renter (Pengepolitisk rente)</h3>
-                <div class="info-box">
-                    <p>Dette er de renter, som Danmarks Nationalbank fastsætter for at styre kronekursen og økonomien.
-                        Den vigtigste er <span class="legal-term"
-                            data-definition="Den rente, bankerne får for at have penge stående på deres løbende konto (folio) i Nationalbanken. Det er Nationalbankens primære styringsrente."><b>foliorenten</b></span>.
-                    </p>
+                    <div style="background-color: #f0f9ff; border-left: 4px solid #3b82f6; padding: 15px; margin-bottom: 20px;">
+                        <p><b>Vigtigt: Forskellen mellem diskontoen og foliorenten</b></p>
+                        <p>Selvom diskontoen og foliorenten ofte ligger på samme niveau (som nu 1,60%), er der en vigtig forskel:</p>
+                        <ul style="margin-bottom: 0;">
+                            <li><b>Diskontoen</b> er den <b>overordnede beslutning</b> om renteniveauet - det er den officielle pengepolitiske rente, som Nationalbanken fastsætter.</li>
+                            <li><b>Foliorenten</b> er det <b>konkrete værktøj</b>, som Nationalbanken bruger til at styre bankernes likviditet - det er den faktiske rente, bankerne får på deres indestående.</li>
+                        </ul>
+                        <p style="margin-top: 10px; margin-bottom: 0;"><b>I praksis:</b> Når Nationalbanken beslutter at hæve diskontoen, justeres foliorenten typisk til samme niveau. Diskontoen er "beslutningen", foliorenten er "værktøjet". Historisk set var diskontoen den oprindelige rente, mens foliorenten blev indført senere som et mere præcist styringsværktøj.</p>
+                    </div>
+
+                    <p><b>Sådan hænger renterne sammen:</b></p>
                     <ul>
-                        <li><b>Foliorenten:</b> Renten på bankernes indestående i Nationalbanken.</li>
-                        <li><b>Udlånsrenten:</b> Den rente, bankerne betaler for at låne penge af Nationalbanken.</li>
+                        <li><b>Nationalbanken styrer (diskontoen):</b> Nationalbanken fastsætter <b>diskontoen</b> som den officielle pengepolitiske rente. Det er her, den overordnede beslutning om renteniveauet træffes. På baggrund af diskontoen fastsætter Nationalbanken de konkrete styringsrenter som <b>foliorenten</b> og <b>udlånsrenten</b>, der direkte påvirker bankernes likviditet.</li>
+                        <li><b>Fra diskonto til foliorente:</b> Når Nationalbanken ændrer diskontoen, justeres foliorenten typisk til samme niveau. Diskontoen er dermed <b>\"beslutningen\"</b>, mens foliorenten er det <b>\"konkrete værktøj\"</b>, som banker faktisk mærker på deres indeståender i Nationalbanken.</li>
+                        <li><b>Markedsrenterne følger trop:</b> CIBOR og DESTR følger tæt foliorenten (og dermed diskontoen), men kan ligge lidt højere på grund af kreditrisiko (CIBOR) eller lidt lavere på grund af sikkerhed (DESTR). Det er her, pengemarkedet mellem bankerne sætter sin egen pris oven på Nationalbankens beslutninger.</li>
+                        <li><b>Boligejeren mærker det:</b> F-kort renten (og dermed boligejerens betaling) følger markedsrenterne. Når diskontoen og foliorenten ændres, slår det derfor relativt hurtigt igennem på CIBOR/DESTR og videre ud i boligrenterne. Nationalbankens beslutninger om diskontoen kan derfor mærkes i helt almindelige familiers økonomi.</li>
+                        <li><b>Typisk spænd:</b> Fra diskontoen/foliorenten (1,60%) til den endelige rente, en boligejer betaler (F-kort 1,79% + bidragssats 0,7% + gebyr 0,1% = ca. 2,6%), er der typisk et spænd på ca. 1,0 procentpoint. Det dækker bankernes og realkreditinstitutternes omkostninger, risikopræmie og administration.</li>
                     </ul>
-                    <p><small><b>Aktuelt niveau (januar 2026):</b> Foliorenten ligger på <b>1,60 %</b>, mens
-                            udlånsrenten
-                            er <b>1,75 %</b>.</small></p>
-                </div>
 
-                <h3>12.2. Markedsrenten: CIBOR og DESTR</h3>
-                <div class="info-box">
-                    <p>Hvor Nationalbankens renter er "officielle", er markedsrenterne dem, bankerne låner til hinanden
-                        for på det private pengemarked.</p>
-                    <ul>
-                        <li><b>CIBOR (Copenhagen Interbank Offered Rate):</b> En referencerente baseret på, hvad
-                            bankerne <i>vurderer</i>, de kan låne til hinanden for uden sikkerhed.</li>
-                        <li><b>DESTR (Denmark Short-Term Rate):</b> Efterfølgeren til den helt korte CIBOR. Forskelen
-                            er, at DESTR beregnes ud fra <i>faktiske handler</i> på pengemarkedet.</li>
-                    </ul>
-                    <p><small><b>Aktuelt niveau (januar 2026):</b> CIBOR 3M ligger omkring <b>2,01 %</b>.</small></p>
-                </div>
+                    <p><b>Eksempel - Renteændringens vej gennem systemet:</b></p>
+                    <p>Forestil dig at ECB hæver sin rente med 0,5 procentpoint. Her er hvordan det spreder sig:</p>
+                    <ol>
+                        <li><b>Dag 1:</b> Danmarks Nationalbank hæver diskontoen (og dermed foliorenten) med 0,5 procentpoint (fra 1,60% til 2,10%) for at fastholde kronekursen over for euroen.</li>
+                        <li><b>Dag 2-3:</b> CIBOR og DESTR reagerer næsten øjeblikkeligt og stiger tilsvarende (CIBOR fra 2,01% til ca. 2,51%).</li>
+                        <li><b>Uge 1-2:</b> På obligationsmarkedet falder efterspørgslen efter F-kort obligationer, og renten stiger (fra 1,79% til ca. 2,29%).</li>
+                        <li><b>Ved næste rentetilpasning:</b> Boligejere med F-kort lån får ny rente ved næste rentetilpasning (typisk hvert halve eller hele år). En boligejer, der betalte 2,5% i alt, betaler nu ca. 3,0% (F-kort 2,29% + bidrag 0,7% + gebyr 0,1%).</li>
+                        <li><b>Måneder fremefter:</b> Den højere rente reducerer boligejerens rådighedsbeløb, dæmper efterspørgslen efter boliger og køb af andre varer, og bidrager dermed til at bremse økonomien og inflationen.</li>
+                    </ol>
 
-                <h3>12.3. Boligejerens rente: F-kort / Kort Rente</h3>
-                <div class="info-box">
-                    <p>Hvis du har et boliglån med variabel rente, er din rente ofte koblet direkte til markedsrenten
-                        plus et lille tillæg.</p>
-                    <p><small><b>Aktuelt niveau (januar 2026):</b> Den gennemsnitlige korte obligationsrente (F-kort)
-                            ligger på ca. <b>1,79 %</b>.</small></p>
+                    <p><small><b>Bemærk:</b> Renteniveauerne er fra januar 2026 og ændrer sig løbende baseret på ECB's pengepolitik (som Danmark følger gennem fastkurspolitikken), markedsforventninger og økonomiske forhold. CIBOR-systemet er under udfasning i takt med at DESTR og andre sikrede renter overtager rollen som referencerenter, hvilket følger en international trend mod mere robuste og transaktionsbaserede referencerenter.</small></p>
                 </div>
                 <br>
 
