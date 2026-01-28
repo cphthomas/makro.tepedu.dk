@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi - Kapitel 8.1</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af økonomisk politik og politiske instrumenter."
+     data-forudsætning="Læsning af kapitel 8 om økonomisk politik og konkurrenceevne."
+     data-kapitel-url="https://makro.tepedu.dk/kapitel8">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogoanim.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi:<br>
+                                             Økonomisk Politik
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <!-- 8.1.1 -->
+                              <div class="question"
+                                   data-question="Hvilken situation beskriver bedst en målkonflikt i økonomisk politik?"
+                                   data-answer="2"
+                                   data-explanation="Når man opnår ét mål (fx lavere ledighed) på bekostning af et andet (fx højere inflation eller betalingsbalanceunderskud).<br><br>Spørg AI:">
+                                   <div class="option" data-option="Lav inflation fører automatisk til højere vækst">
+                                   </div>
+                                   <div class="option" data-option="Øget offentlige afgifter forbedrer beskæftigelsen">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Skattenedsættelser reducerer ledighed men kan øge inflation"></div>
+                                   <div class="option" data-option="Bæredygtig energi øger altid produktiviteten"></div>
+                              </div>
+
+                              <!-- 8.1.2 -->
+                              <div class="question" data-question="Hvad er hovedformålet med konjunkturpolitik?"
+                                   data-answer="1"
+                                   data-explanation="At udjævne de kortsigtede udsving i økonomien for at undgå store kriser eller voldsom overophedning.">
+                                   <div class="option" data-option="At reformere uddannelsessystemet"></div>
+                                   <div class="option" data-option="At stabilisere økonomien på kort sigt"></div>
+                                   <div class="option" data-option="At reducere statsgælden over 50 år"></div>
+                                   <div class="option" data-option="At øge produktiviteten i industrien"></div>
+                              </div>
+
+                              <!-- 8.1.3 -->
+                              <div class="question" data-question="Hvad indebærer fastkurspolitik over for euroen?"
+                                   data-answer="3"
+                                   data-explanation="At Nationalbanken sørger for, at kronens værdi altid ligger fast (inden for snævre bånd) over for euroen.">
+                                   <div class="option" data-option="Indførelse af flexicurity-modellen"></div>
+                                   <div class="option" data-option="Obligatorisk klimaafgift"></div>
+                                   <div class="option" data-option="Digitaliseringsstrategi for offentlig sektor"></div>
+                                   <div class="option" data-option="At holde kronen stabil over for euroen"></div>
+                              </div>
+
+                              <!-- 8.1.4 -->
+                              <div class="question"
+                                   data-question="Hvad er en central udfordring ved eurozonens samarbejde?"
+                                   data-answer="0"
+                                   data-explanation="Landene deler den samme pengepolitik (fælles rente), men har hver deres nationale finanspolitik.">
+                                   <div class="option" data-option="Fælles pengepolitik men national finanspolitik">
+                                   </div>
+                                   <div class="option" data-option="Mangel på handelsaftaler"></div>
+                                   <div class="option" data-option="For høje toldbarrierer"></div>
+                                   <div class="option" data-option="Enighed om klimaambitioner"></div>
+                              </div>
+
+                              <!-- 8.1.5 -->
+                              <div class="question" data-question="Hvad er et eksempel på vækstpolitik?" data-answer="3"
+                                   data-explanation="Tiltag der sigter på at øge den langsigtede vækstevne, fx gennem forskning, uddannelse og innovation.">
+                                   <div class="option" data-option="Midlertidig momsnedsættelse"></div>
+                                   <div class="option" data-option="Nødhjælpspakke under en krise"></div>
+                                   <div class="option" data-option="Kvartalsvis rentejustering"></div>
+                                   <div class="option" data-option="Investering i forskning og udvikling"></div>
+                              </div>
+
+                              <!-- 8.1.6 -->
+                              <div class="question" data-question="Hvad kendetegner den danske 'Flexicurity'-model?"
+                                   data-answer="1"
+                                   data-explanation="Kombinationen af let adgang til at hyre/fyre, gode dagpenge og en aktiv indsats for at få folk i arbejde igen.<br><br>Find info:">
+                                   <div class="option" data-option="At man selv må bestemme sit skatteniveau"></div>
+                                   <div class="option" data-option="Balancen mellem fleksibilitet og sikkerhed"></div>
+                                   <div class="option" data-option="At man skal have tre forskellige jobs samtidig">
+                                   </div>
+                                   <div class="option" data-option="Regler for at man aldrig må blive fyret"></div>
+                              </div>
+
+                              <!-- 8.1.7 -->
+                              <div class="question"
+                                   data-question="Hvad er hovedformålet med EU's Stabilitets- og Vækstpagt?"
+                                   data-answer="3"
+                                   data-explanation="At sikre økonomisk disciplin ved at sætte grænser for landenes budgetunderskud og statsgæld.">
+                                   <div class="option" data-option="At forbyde handel med lande uden for EU"></div>
+                                   <div class="option" data-option="At harmonisere moms-satser i alle lande"></div>
+                                   <div class="option" data-option="At finansiere landbrugsstøtte i Sydeuropa"></div>
+                                   <div class="option" data-option="At begrænse offentlige underskud og gæld"></div>
+                              </div>
+
+                              <!-- 8.1.8 -->
+                              <div class="question"
+                                   data-question="Hvad er effekten af en højere pensionsalder (på langt sigt)?"
+                                   data-answer="2"
+                                   data-explanation="Det øger arbejdsstyrken og dermed det samlede produktionspotentiale (BNP) i samfundet.">
+                                   <div class="option" data-option="Reducerer produktiviteten pr. arbejder"></div>
+                                   <div class="option" data-option="Øger den strukturelle ledighed"></div>
+                                   <div class="option" data-option="Øger den potentielle nationalindkomst"></div>
+                                   <div class="option" data-option="Forårsager øjeblikkelig deflation"></div>
+                              </div>
+
+                              <!-- 8.1.9 -->
+                              <div class="question"
+                                   data-question="Hvad er formålet med de 'Nationale Reformprogrammer' i EU?"
+                                   data-answer="0"
+                                   data-explanation="At medlemslandene koordinerer deres strukturreformer og økonomiske politik med EU's fælles mål.">
+                                   <div class="option" data-option="At koordinere økonomisk politik på EU-plan"></div>
+                                   <div class="option" data-option="At fastsætte renter for alle europæiske banker">
+                                   </div>
+                                   <div class="option" data-option="At fordele overskud fra told direkte til borgerne">
+                                   </div>
+                                   <div class="option" data-option="At regulere hvor mange feriedage folk må have">
+                                   </div>
+                              </div>
+
+                              <!-- 8.1.10 -->
+                              <div class="question" data-question="Hvad er 'indkomstpolitik'?" data-answer="1"
+                                   data-explanation="Beslutninger der direkte påvirker indkomsterne, fx gennem forhandlinger eller lovgivning om lønudvikling.">
+                                   <div class="option" data-option="At staten udbetaler løn til alle borgere"></div>
+                                   <div class="option" data-option="Styring af lønudviklingen for at dæmpe inflation">
+                                   </div>
+                                   <div class="option" data-option="At forbyde folk at tjene mere end chefen"></div>
+                                   <div class="option" data-option="At indsamle penge til velgørende formål"></div>
+                              </div>
+
+                              <!-- 8.1.11 -->
+                              <div class="question"
+                                   data-question="Hvilken rolle spiller Nationalbanken i dansk politik?" data-answer="2"
+                                   data-explanation="Den er uafhængig af regeringen og har som hovedopgave at sikre stabile priser og den faste kronekurs.">
+                                   <div class="option" data-option="Den udbetaler folkepension hver måned"></div>
+                                   <div class="option" data-option="Den bestemmer hvor høj skatten skal være"></div>
+                                   <div class="option" data-option="Den sikrer prisstabilitet og fast kronekurs"></div>
+                                   <div class="option" data-option="Den sørger for at der bygges nye broer og veje">
+                                   </div>
+                              </div>
+
+                              <!-- 8.1.12 -->
+                              <div class="question"
+                                   data-question="Hvad er forskellen på diskretionær og automatisk politik?"
+                                   data-answer="0"
+                                   data-explanation="Diskretionær politik kræver en aktiv politisk beslutning (fx en hjælpepakke), mens automatisk politik sker af sig selv (fx dagpenge under kriser).<br><br>Spørg AI:">
+                                   <div class="option" data-option="Aktiv beslutning vs. automatisk reaktion"></div>
+                                   <div class="option" data-option="Militær politik vs. civil politik"></div>
+                                   <div class="option" data-option="Politik for de rige vs. de fattige"></div>
+                                   <div class="option" data-option="Digital politik vs. analog politik"></div>
+                              </div>
+
+                              <!-- 8.1.13 -->
+                              <div class="question" data-question="Hvad dækker 'omfordelingspolitik' over?"
+                                   data-answer="2"
+                                   data-explanation="At mindske de økonomiske forskelle i samfundet via skatter (fx progression) og overførselsindkomster.">
+                                   <div class="option" data-option="At alle får de samme pakker med posten"></div>
+                                   <div class="option" data-option="At flytte penge fra staten til udlandet"></div>
+                                   <div class="option" data-option="At mindske ulighed via skatter og ydelser"></div>
+                                   <div class="option" data-option="At bytte jobs med hinanden en gang om året"></div>
+                              </div>
+
+                              <!-- 8.1.14 -->
+                              <div class="question" data-question="Hvad er et 'finanspolitisk holdbarhedsproblem'?"
+                                   data-answer="0"
+                                   data-explanation="Når de forventede udgifter på langt sigt (fx pga. flere ældre) er større end de forventede indtægter.">
+                                   <div class="option" data-option="Langsigtet underskud pga. demografiske ændringer">
+                                   </div>
+                                   <div class="option" data-option="At man har glemt koden til statskassen"></div>
+                                   <div class="option" data-option="At man kun har penge til en uge ad gangen"></div>
+                                   <div class="option" data-option="At bankerne holder op med at låne penge ud"></div>
+                              </div>
+
+                              <!-- 8.1.15 -->
+                              <div class="question"
+                                   data-question="Hvad er formålet med 'miljø- og klimapolitik' i makroøkonomi?"
+                                   data-answer="3"
+                                   data-explanation="At sikre en bæredygtig udvikling, hvor økonomisk vækst ikke ødelægger de naturlige ressourcer eller klimaet.">
+                                   <div class="option" data-option="At gøre det forbudt at flyve på ferie"></div>
+                                   <div class="option" data-option="At sikre at alle huse er malet grønne"></div>
+                                   <div class="option" data-option="At flytte fabrikkerne ud i skoven"></div>
+                                   <div class="option" data-option="At sikre vækst inden for bæredygtige rammer"></div>
+                              </div>
+
+                              <!-- 8.1.16 -->
+                              <div class="question"
+                                   data-question="Hvad er effekten af 'skattelettelser på arbejde' (supply-side)?"
+                                   data-answer="2"
+                                   data-explanation="Det kan øge incitamentet til at arbejde mere eller træde ind på arbejdsmarkedet, hvilket øger arbejdsudbuddet.">
+                                   <div class="option" data-option="At ingen gider at gå på arbejde mere"></div>
+                                   <div class="option" data-option="At staten får uendelige mængder penge"></div>
+                                   <div class="option" data-option="Øget incitament til at arbejde og højere udbud">
+                                   </div>
+                                   <div class="option" data-option="At inflationen falder til nul med det samme"></div>
+                              </div>
+
+                              <!-- 8.1.17 -->
+                              <div class="question" data-question="Hvad menes der med 'politisk troværdighed'?"
+                                   data-answer="0"
+                                   data-explanation="At markederne og borgerne stoler på, at politikerne faktisk vil gennemføre det, de lover (fx inflationsbekæmpelse).">
+                                   <div class="option" data-option="Tillid til at politiske løfter holdes"></div>
+                                   <div class="option" data-option="At man har vundet det seneste valg"></div>
+                                   <div class="option" data-option="At man har lov til at trykke sine egne penge"></div>
+                                   <div class="option" data-option="At man er i familie med en økonom"></div>
+                              </div>
+
+                              <!-- 8.1.18 -->
+                              <div class="question" data-question="Hvad er en 'automatisk stabilisator'?"
+                                   data-answer="2"
+                                   data-explanation="Mekanismer som dagpenge og skat, der virker dæmpende på svingninger uden nye politiske beslutninger.">
+                                   <div class="option" data-option="En robot der styrer hele landets økonomi"></div>
+                                   <div class="option" data-option="En lov der forbyder alle prisstigninger"></div>
+                                   <div class="option" data-option="Indbyggede dæmpere på økonomiske svingninger"></div>
+                                   <div class="option" data-option="En type båndoptager brugt i parlamentet"></div>
+                              </div>
+
+                              <!-- 8.1.19 -->
+                              <div class="question" data-question="Hvad er formålet med 'OECD's landerapporter'?"
+                                   data-answer="3"
+                                   data-explanation="At give anbefalinger til økonomiske reformer baseret på analyser og sammenligning med andre lande.">
+                                   <div class="option" data-option="At bestemme hvem der må vinde VM i fodbold"></div>
+                                   <div class="option" data-option="At lave reklamer for de forskellige lande"></div>
+                                   <div class="option" data-option="At tælle hvor mange biler der er i hver by"></div>
+                                   <div class="option" data-option="Giver råd og analyser til økonomiske reformer">
+                                   </div>
+                              </div>
+
+                              <!-- 8.1.20 -->
+                              <div class="question" data-question="Hvad forstås ved 'grøn BNP'?" data-answer="0"
+                                   data-explanation="Et mål for velfærd, hvor man trækker værdien af ressourceslid og miljøskader fra det traditionelle BNP.">
+                                   <div class="option" data-option="BNP korrigeret for miljø- og ressourceslid"></div>
+                                   <div class="option" data-option="Værdien af alle de træer der bliver plantet"></div>
+                                   <div class="option" data-option="Hvor mange penge der bruges på solceller"></div>
+                                   <div class="option" data-option="At man kun bruger grønne sedler i butikkerne"></div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+
+</html>

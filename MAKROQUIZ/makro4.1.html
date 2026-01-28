@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi - Kapitel 4.1</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af penge, finansielle markeder og centralbankens rolle."
+     data-forudsætning="Læsning af kapitel 4 om penge og finansielle markeder."
+     data-kapitel-url="https://makro.tepedu.dk/kapitel4">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogoanim.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi:<br>
+                                             Penge og Finans
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <!-- 4.1.1 -->
+                              <div class="question" data-question="Hvad er de tre klassiske funktioner for penge?"
+                                   data-answer="0"
+                                   data-explanation="Penge fungerer som betalingsmiddel, værdimåler (regneenhed) og som værdiopbevaringsmiddel (opsparing).">
+                                   <div class="option" data-option="Betalingsmiddel, værdimåler og værdiopbevaring">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Investering, finansiel formidling og risikospredning"></div>
+                                   <div class="option" data-option="Stabilitet, konverterbarhed og likviditetssikring">
+                                   </div>
+                                   <div class="option" data-option="Kreditgivning, rentestyring og inflationskontrol">
+                                   </div>
+                              </div>
+
+                              <!-- 4.1.2 -->
+                              <div class="question" data-question="Hvad forstås ved 'penge mængden M1'?" data-answer="1"
+                                   data-explanation="M1 består af de mest likvide midler: sedler og mønter i omløb samt anfordringstilgodehavender (penge der står på kontoen og kan bruges med det samme med fx Dankort).">
+                                   <div class="option" data-option="Kun de mønter man har i sin sparegris"></div>
+                                   <div class="option" data-option="Sedler, mønter og indskud på anfordringskonti">
+                                   </div>
+                                   <div class="option" data-option="Værdien af alle aktier på Københavns Fondsbørs">
+                                   </div>
+                                   <div class="option" data-option="De penge som staten skylder udlandet"></div>
+                              </div>
+
+                              <!-- 4.1.3 -->
+                              <div class="question"
+                                   data-question="Hvad er den primære opgave for en centralbank som Nationalbanken?"
+                                   data-answer="2"
+                                   data-explanation="Den primære opgave er at sikre prisstabilitet (lav inflation) og stabilitet i det finansielle system. I Danmark gælder desuden fastkurspolitikken over for euroen.">
+                                   <div class="option" data-option="At låne penge direkte ud til private borgere"></div>
+                                   <div class="option" data-option="At bestemme priserne på alle fødevarer"></div>
+                                   <div class="option" data-option="At sikre prisstabilitet og finansiel stabilitet">
+                                   </div>
+                                   <div class="option" data-option="At eje alle de største kommercielle banker"></div>
+                              </div>
+
+                              <!-- 4.1.4 -->
+                              <div class="question" data-question="Hvad karakteriserer den finansielle sektor?"
+                                   data-answer="3"
+                                   data-explanation="Den finansielle sektor agerer som formidler mellem dem med overskudskapital (opsparere) og dem med behov for lånekapital (investører).">
+                                   <div class="option" data-option="At de udelukkende arbejder med guld"></div>
+                                   <div class="option" data-option="At de aldrig må tage renter for deres ydelser">
+                                   </div>
+                                   <div class="option" data-option="At de kun udsteder penge til det offentlige"></div>
+                                   <div class="option"
+                                        data-option="At de formidler kapital mellem opsparere og låntagere"></div>
+                              </div>
+
+                              <!-- 4.1.7 -->
+                              <div class="question" data-question="Hvad betyder 'fastkurspolitik' i dansk sammenhæng?"
+                                   data-answer="2"
+                                   data-explanation="Danmark fører fastkurspolitik over for euroen, hvilket betyder, at Nationalbanken holder kronens værdi stabil over for euroen inden for et snævert bånd (centralkurs 7,46038 kr. pr. euro).">
+                                   <div class="option" data-option="At renten altid skal være den samme som i USA">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At det er forbudt at veksle penge til andre valutaer"></div>
+                                   <div class="option" data-option="At kronens værdi holdes stabil over for euroen">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At priserne på varer aldrig må ændre sig i butikkerne"></div>
+                              </div>
+
+                              <!-- 4.1.10 -->
+                              <div class="question"
+                                   data-question="Hvad er forskellen på en bank og et realkreditinstitut i Danmark?"
+                                   data-answer="1"
+                                   data-explanation="Realkreditinstitutter yder primært lån mod sikkerhed i fast ejendom og finansierer disse lån ved at udstede obligationer, mens banker har en bredere vifte af ind- og udlånstjenester.">
+                                   <div class="option"
+                                        data-option="Banker fokuserer udelukkende på erhvervslån og valuta"></div>
+                                   <div class="option"
+                                        data-option="Realkredit yder lån mod ejendom og udsteder obligationer"></div>
+                                   <div class="option"
+                                        data-option="Der findes ingen lovmæssig forskel på de to instituttyper"></div>
+                                   <div class="option"
+                                        data-option="Banker fungerer som underleverandører til realkreditten">
+                                   </div>
+                              </div>
+
+                              <!-- 4.1.11 -->
+                              <div class="question" data-question="Hvad forstås ved 'finansiel stabilitet'?"
+                                   data-answer="2"
+                                   data-explanation="Det er en tilstand, hvor de finansielle markeder og institutter fungerer så effektivt, at problemer ét sted ikke spreder sig og truer hele samfundsøkonomien.">
+                                   <div class="option"
+                                        data-option="At alle huse i landet er bygget i solide materialer"></div>
+                                   <div class="option" data-option="At ingen i hele landet har nogen som helst gæld">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At det finansielle system er modstandsdygtigt over for chok"></div>
+                                   <div class="option" data-option="At renten er præcis den samme i alle banker"></div>
+                              </div>
+
+                              <!-- 4.1.13 -->
+                              <div class="question" data-question="Hvad dækker begrebet 'interventionsopkøb' over?"
+                                   data-answer="0"
+                                   data-explanation="Nationalbanken intervenerer ved at købe eller sælge valuta for at påvirke kronens valutakurs og dermed forsvare den faste valutakurs over for euroen.">
+                                   <div class="option"
+                                        data-option="Nationalbankens køb/salg af valuta for at stabilisere kursen">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Statens overtagelse af kriseramte finansielle virksomheder">
+                                   </div>
+                                   <div class="option" data-option="Indgreb i bankernes prisfastsættelse af gebyrer">
+                                   </div>
+                                   <div class="option" data-option="Forbud mod kortsigtede spekulative aktiehandler">
+                                   </div>
+                              </div>
+
+                              <!-- 4.1.14 -->
+                              <div class="question"
+                                   data-question="Hvad er formålet med kapitalkrav til banker (fx Basel-reglerne)?"
+                                   data-answer="1"
+                                   data-explanation="Kapitalkrav sikrer, at banker har en tilstrækkelig buffer af egenkapital til at kunne absorbere tab, hvilket øger stabiliteten i den finansielle sektor.">
+                                   <div class="option" data-option="At sikre at bankerne altid har guld i kælderen">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At sikre bankerne har nok kapital til at modstå tab"></div>
+                                   <div class="option" data-option="At tvinge alle banker til at have det samme navn">
+                                   </div>
+                                   <div class="option" data-option="At begrænse hvor mange ansatte en bank må have">
+                                   </div>
+                              </div>
+
+                              <!-- 4.1.17 -->
+                              <div class="question" data-question="Hvad betyder 'likviditet'?" data-answer="0"
+                                   data-explanation="Likviditet er et udtryk for, hvor let og hurtigt et aktiv kan omsættes til rede penge uden væsentligt tab i værdi.">
+                                   <div class="option" data-option="Hvor let et aktiv kan omsættes til kontanter"></div>
+                                   <div class="option" data-option="Hvor mange liter vand en virksomhed bruger i timen">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Om en virksomhed har lov til at sælge varer i udlandet"></div>
+                                   <div class="option" data-option="Hvorvidt staten tillader at man sparer op i krypto">
+                                   </div>
+                              </div>
+
+                              <!-- 4.1.19 -->
+                              <div class="question" data-question="Hvad dækker 'pengepolitik' over i en centralbank?"
+                                   data-answer="2"
+                                   data-explanation="Pengepolitik er centralbankens styring af renten og pengemængden for at påvirke inflationen og den økonomiske aktivitet.">
+                                   <div class="option" data-option="At staten beslutter hvem der skal have flere penge">
+                                   </div>
+                                   <div class="option" data-option="At man indsamler gamle mønter til omsmeltning">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Styring af rente og pengemængde for at sikre stabilitet"></div>
+                                   <div class="option"
+                                        data-option="At bankerne skal give gratis kaffe til alle deres kunder"></div>
+                              </div>
+
+
+                              <br>
+                              <br>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+
+</html>

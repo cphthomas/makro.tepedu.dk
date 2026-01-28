@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi - Kapitel 3.1</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af konjunkturbeskrivelse, arbejdsmarked og betalingsbalance."
+     data-forudsætning="Læsning af kapitel 3 om konjunkturbeskrivelse."
+     data-kapitel-url="https://makro.tepedu.dk/kapitel3">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogoanim.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi:<br>
+                                             Konjunkturer og Balance
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <!-- 3.1.1 -->
+                              <div class="question"
+                                   data-question="Hvordan defineres den økonomiske vækst i en konjunkturanalyse?"
+                                   data-answer="1"
+                                   data-explanation="Økonomisk vækst måles som den procentvise ændring i realt BNP (BNP i faste priser) fra én periode til den næste. Dette eliminerer priseffekter (inflation).">
+                                   <div class="option" data-option="Som væksten i det nominelle BNP fratrukket skatter">
+                                   </div>
+                                   <div class="option" data-option="Som den procentvise ændring i BNP i faste priser">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Som stigningen i det samlede private forbrug målt i løbende priser">
+                                   </div>
+                                   <div class="option" data-option="Som den årlige stigning i de samlede investeringer">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.2 -->
+                              <div class="question" data-question="Hvad er definitionen på en teknisk recession?"
+                                   data-answer="2"
+                                   data-explanation="En teknisk recession indtræffer, når et land oplever negativ økonomisk vækst (fald i realt BNP) i mindst to kvartaler i træk.">
+                                   <div class="option" data-option="Når inflationen stiger markant over flere år"></div>
+                                   <div class="option"
+                                        data-option="Når ledigheden i perioder er over det strukturelle niveau"></div>
+                                   <div class="option"
+                                        data-option="Negativ BNP-vækst i mindst to på hinanden følgende kvartaler">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Når betalingsbalancens løbende poster viser underskud"></div>
+                              </div>
+
+                              <!-- 3.1.3 -->
+                              <div class="question" data-question="Hvad viser Okun's lov?" data-answer="0"
+                                   data-explanation="Okun's lov beskriver den empiriske sammenhæng mellem ændringer i BNP-væksten og ændringer i arbejdsløsheden. Typisk fører vækst over den potentielle vækst til faldende ledighed.">
+                                   <div class="option" data-option="Sammenhængen mellem økonomisk vækst og ledighed">
+                                   </div>
+                                   <div class="option" data-option="Forholdet mellem inflation og renteniveau"></div>
+                                   <div class="option" data-option="Forbindelsen mellem eksport og valutakurs"></div>
+                                   <div class="option" data-option="Sammenhængen mellem skatteprocent og skatteprovenu">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.4 -->
+                              <div class="question"
+                                   data-question="Hvilken af følgende er en 'ledende' konjunkturindikator?"
+                                   data-answer="3"
+                                   data-explanation="Ledende indikatorer (fx industriens ordrebeholdninger eller forbrugertillid) skifter retning før den samlede økonomi og kan dermed varsle vendepunkter.">
+                                   <div class="option" data-option="Udviklingen i langtidsledigheden"></div>
+                                   <div class="option" data-option="Regnskabstal for den samlede produktion sidste år">
+                                   </div>
+                                   <div class="option" data-option="Udviklingen i de faktiske forbrugerpriser"></div>
+                                   <div class="option" data-option="Industriens ordrebeholdning og byggetilladelser">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.5 -->
+                              <div class="question" data-question="Hvad forstås ved 'potential vækst'?" data-answer="1"
+                                   data-explanation="Potential vækst er den vækstrate, en økonomi kan opretholde over tid uden at skabe et opadgående pres på inflationen, givet den teknologiske udvikling og arbejdsstyrkens vækst.">
+                                   <div class="option"
+                                        data-option="Den maksimale vækst man kan opnå med fuld statsstyring"></div>
+                                   <div class="option"
+                                        data-option="Den vækst økonomien kan opretholde uden at presse inflationen op">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Den gennemsnitlige vækst i de finansielle aktivværdier"></div>
+                                   <div class="option" data-option="Den vækst som centralbanken forsøger at diktere">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.6 -->
+                              <div class="question" data-question="Hvad er 'friktionsledighed'?" data-answer="0"
+                                   data-explanation="Friktionsledighed er den midlertidige ledighed, der opstår, når folk skifter job, eller når nyuddannede søger deres første job.">
+                                   <div class="option" data-option="Kortvarig ledighed der opstår ved jobskifte"></div>
+                                   <div class="option" data-option="Ledighed grundet permanent mangel på efterspørgsel">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Ledighed der skyldes uoverensstemmelse i kvalifikationer">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Personer der frivilligt har meldt sig ud af arbejdsmarkedet">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.7 -->
+                              <div class="question" data-question="Hvad karakteriserer 'strukturel ledighed'?"
+                                   data-answer="3"
+                                   data-explanation="Strukturel ledighed opstår, når der er et mismatch mellem de lediges kvalifikationer (eller geografi) og de ledige stillinger på markedet.">
+                                   <div class="option" data-option="Ledighed der udelukkende opstår i ferieperioder">
+                                   </div>
+                                   <div class="option" data-option="Når staten midlertidigt ansætter færre personer">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Ledighed forårsaget af midlertidig mangel på kapital">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Mismatch mellem de lediges kvalifikationer og udbudte jobs">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.8 -->
+                              <div class="question"
+                                   data-question="Hvad dækker 'betalingsbalancens løbende poster' over?" data-answer="2"
+                                   data-explanation="De løbende poster viser resultatet af handlen med varer og tjenester samt løn- og formueindkomster og løbende overførsler til/fra udlandet.">
+                                   <div class="option" data-option="Landets samlede beholdning af udenlandsk valuta">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Direkte investeringer i udenlandske datterselskaber">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Handel med varer, tjenester og indkomster over grænsen"></div>
+                                   <div class="option" data-option="Køb og salg af obligationer og aktier i udlandet">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.9 -->
+                              <div class="question"
+                                   data-question="Hvad betyder det, hvis et land har underskud på betalingsbalancen?"
+                                   data-answer="0"
+                                   data-explanation="Et underskud betyder, at landet bruger flere penge i udlandet, end det tjener. Dette skal finansieres ved at optage lån eller trække på formuen (øge nettogælden).">
+                                   <div class="option" data-option="Landet stifter gæld eller tærer på sin formue">
+                                   </div>
+                                   <div class="option" data-option="Landet har forbudt al import af udenlandske varer">
+                                   </div>
+                                   <div class="option" data-option="Statens skatteindtægter er højere end udgifterne">
+                                   </div>
+                                   <div class="option" data-option="Landet har verdens højeste økonomiske vækst"></div>
+                              </div>
+
+                              <!-- 3.1.10 -->
+                              <div class="question" data-question="Hvilken rolle spiller 'automatiske stabilisatorer'?"
+                                   data-answer="1"
+                                   data-explanation="Automatiske stabilisatorer (som fx dagpenge og progressiv skat) dæmper konjunktursvingninger ved automatisk at tilpasse statens indtægter og udgifter uden nye politiske beslutninger.">
+                                   <div class="option" data-option="At generere overskud til statens opsparingskonti">
+                                   </div>
+                                   <div class="option" data-option="At dæmpe konjunktursvingninger helt automatisk">
+                                   </div>
+                                   <div class="option" data-option="At styre renteniveauet i takt med inflationen">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At regulere mængden af import via automatiske toldsatser">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.11 -->
+                              <div class="question" data-question="Hvad viser 'kapitalposterne' på betalingsbalancen?"
+                                   data-answer="2"
+                                   data-explanation="Kapitalposterne viser de finansielle transaktioner, herunder lån, direkte investeringer og handel med værdipapirer mellem landet og udlandet.">
+                                   <div class="option" data-option="Værdien af alle bygninger i hovedstaden"></div>
+                                   <div class="option" data-option="Hvor mange kontanter borgerne har i lommen"></div>
+                                   <div class="option" data-option="Finansielle transaktioner som lån og investeringer">
+                                   </div>
+                                   <div class="option" data-option="Den samlede værdi af alle skovarealer"></div>
+                              </div>
+
+                              <!-- 3.1.12 -->
+                              <div class="question" data-question="Hvad er 'overophedning' af økonomien?"
+                                   data-answer="3"
+                                   data-explanation="Overophedning opstår i en stærk højkonjunktur, hvor mangel på arbejdskraft og produktionskapacitet fører til kraftige pris- og lønstigninger.">
+                                   <div class="option" data-option="Når der er for meget strøm i elnettet"></div>
+                                   <div class="option" data-option="Når skatten bliver sat for højt op"></div>
+                                   <div class="option" data-option="En situation med ekstremt høj arbejdsløshed"></div>
+                                   <div class="option" data-option="Når efterspørgslen presser priser og lønninger op">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.13 -->
+                              <div class="question"
+                                   data-question="Hvordan påvirker en forbedret konkurrenceevne betalingsbalancen?"
+                                   data-answer="0"
+                                   data-explanation="Bedre konkurrenceevne (fx via lavere relativ inflation) gør landets varer mere attraktive, hvilket øger eksporten og forbedrer betalingsbalancen.">
+                                   <div class="option" data-option="Øger eksporten og forbedrer balancen"></div>
+                                   <div class="option" data-option="Gør det sværere at sælge varer til udlandet"></div>
+                                   <div class="option" data-option="Fører altid til højere import af luksusvarer"></div>
+                                   <div class="option" data-option="Har ingen målbar effekt på samhandlen"></div>
+                              </div>
+
+                              <!-- 3.1.14 -->
+                              <div class="question" data-question="Hvad forstås ved 'nettooverførsler' til udlandet?"
+                                   data-answer="1"
+                                   data-explanation="Nettooverførsler er ensidige betalinger uden modydelse, såsom ulandsbistand, EU-bidrag og gaver.">
+                                   <div class="option" data-option="Betaling for køb af udenlandske maskiner"></div>
+                                   <div class="option" data-option="Ensidige ydelser som EU-bidrag og ulandsbistand">
+                                   </div>
+                                   <div class="option" data-option="Lønninger tjent af pendlere over grænsen"></div>
+                                   <div class="option" data-option="Renteindtægter fra udenlandske obligationer"></div>
+                              </div>
+
+                              <!-- 3.1.15 -->
+                              <div class="question"
+                                   data-question="Hvad er sammenhængen mellem opsparing (S), investering (I) og betalingsbalance (BB)?"
+                                   data-answer="2"
+                                   data-explanation="I en åben økonomi er overskuddet på betalingsbalancens løbende poster lig med landets samlede opsparing minus de samlede investeringer ($S - I = BB$).">
+                                   <div class="option" data-option="Opsparingen skal altid være lig med eksporten">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Investeringer har ingen effekt på betalingsbalancen"></div>
+                                   <div class="option"
+                                        data-option="Betalingsbalancen er lig med opsparing minus investering"></div>
+                                   <div class="option" data-option="Jo mere man sparer op, jo mere skal man importere">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.16 -->
+                              <div class="question" data-question="Hvad er formålet med økonomiske modeller som ADAM?"
+                                   data-answer="3"
+                                   data-explanation="Økonomiske modeller bruges til at udarbejde prognoser for fremtiden og til at beregne konsekvenserne af forskellige politiske tiltag.">
+                                   <div class="option" data-option="At bestemme prisen på mælk i supermarkedet"></div>
+                                   <div class="option" data-option="At styre folks private bankkonti"></div>
+                                   <div class="option" data-option="At erstatte behovet for en regering"></div>
+                                   <div class="option" data-option="At lave prognoser og konsekvensberegninger"></div>
+                              </div>
+
+                              <!-- 3.1.17 -->
+                              <div class="question" data-question="Hvad kendetegner en 'lavkonjunktur'?" data-answer="0"
+                                   data-explanation="Lavkonjunktur er en periode med lav eller negativ vækst, stigende arbejdsløshed og ofte lav inflation grundet svag efterspørgsel.">
+                                   <div class="option" data-option="Lav vækst og stigende arbejdsløshed"></div>
+                                   <div class="option" data-option="Høj inflation og stor mangel på arbejdskraft"></div>
+                                   <div class="option" data-option="At statens budget altid viser store overskud"></div>
+                                   <div class="option" data-option="At alle virksomheder vælger at flytte til udlandet">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.18 -->
+                              <div class="question" data-question="Hvad er 'netto-tilgodehavende' over for udlandet?"
+                                   data-answer="1"
+                                   data-explanation="Det er forskellen mellem landets samlede aktiver i udlandet og udlandets samlede aktiver i landet. Et positivt tal betyder, at landet er netto-kreditor.">
+                                   <div class="option" data-option="Den mængde penge som staten skylder borgerne"></div>
+                                   <div class="option"
+                                        data-option="Forskellen mellem aktiver og passiver over for udlandet"></div>
+                                   <div class="option" data-option="Værdien af alle de varer der ligger på lager"></div>
+                                   <div class="option" data-option="Danskernes samlede indestående i danske banker">
+                                   </div>
+                              </div>
+
+                              <!-- 3.1.19 -->
+                              <div class="question"
+                                   data-question="Hvornår reagerer en 'efterslæbende' (lagging) indikator?"
+                                   data-answer="2"
+                                   data-explanation="En efterslæbende indikator (som fx langtidsledighed) skifter først retning et stykke tid efter, at den generelle konjunktur er vendt.">
+                                   <div class="option" data-option="Længe før selve konjunkturen vender"></div>
+                                   <div class="option" data-option="Præcis samtidig med at BNP-væksten ændres"></div>
+                                   <div class="option" data-option="Efter at konjunkturvendepunktet er indtruffet">
+                                   </div>
+                                   <div class="option" data-option="Kun når der er krig eller naturkatastrofer"></div>
+                              </div>
+
+                              <!-- 3.1.20 -->
+                              <div class="question" data-question="Hvad er hovedformålet med konjunkturpolitik?"
+                                   data-answer="3"
+                                   data-explanation="Konjunkturpolitik (fx finanspolitik eller pengepolitik) har til formål at stabilisere de økonomiske svingninger og sikre høj beskæftigelse og stabil inflation.">
+                                   <div class="option" data-option="At afskaffe alle skatter for altid"></div>
+                                   <div class="option" data-option="At forbyde import af varer fra lande uden for EU">
+                                   </div>
+                                   <div class="option" data-option="At sikre at alle i landet tjener det samme"></div>
+                                   <div class="option"
+                                        data-option="At dæmpe økonomiske svingninger og sikre stabilitet"></div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+
+</html>

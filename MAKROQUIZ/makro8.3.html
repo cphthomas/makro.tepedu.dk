@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi - Kapitel 8.3</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af konkurrenceevne, globalisering og international handel."
+     data-forudsætning="Læsning af kapitel 8 om økonomisk politik og konkurrenceevne."
+     data-kapitel-url="https://makro.tepedu.dk/kapitel8">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogoanim.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi:<br>
+                                             Konkurrenceevne & Globalisering
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <!-- 8.3.1 -->
+                              <div class="question" data-question="Hvad forstås ved et lands 'konkurrenceevne'?"
+                                   data-answer="2"
+                                   data-explanation="Konkurrenceevne er et lands evne til at afsætte sine varer og tjenester på det internationale marked i konkurrence med andre lande.">
+                                   <div class="option" data-option="At man har de hurtigste sportshold i verden"></div>
+                                   <div class="option" data-option="At alle virksomheder betaler den samme løn"></div>
+                                   <div class="option"
+                                        data-option="Evnen til at afsætte varer i konkurrence med udlandet"></div>
+                                   <div class="option" data-option="At man har de laveste skatter i hele EU"></div>
+                              </div>
+
+                              <!-- 8.3.2 -->
+                              <div class="question"
+                                   data-question="Hvad er forskellen på pris- og strukturkonkurrenceevne?"
+                                   data-answer="0"
+                                   data-explanation="Priskonkurrenceevne handler om det relative pris- og lønniveau, mens strukturkonkurrenceevne handler om kvalitet, design, uddannelse og innovation.<br><br>Gå i dybden:">
+                                   <div class="option"
+                                        data-option="Pris handler om løn, struktur om kvalitet/innovation"></div>
+                                   <div class="option" data-option="Struktur handler om huse, pris handler om butikker">
+                                   </div>
+                                   <div class="option" data-option="Der er ingen forskel, det er to ord for det samme">
+                                   </div>
+                                   <div class="option" data-option="Pris er for staten, struktur er for private"></div>
+                              </div>
+
+                              <!-- 8.3.3 -->
+                              <div class="question"
+                                   data-question="Hvad viser de 'relative enhedslønomkostninger' (REL)?" data-answer="1"
+                                   data-explanation="REL måler omkostningen ved at producere én enhed i et land sammenlignet med udlandet, korrigeret for produktivitet og valutakurs.">
+                                   <div class="option" data-option="At alle arbejdere i verden får det samme i løn">
+                                   </div>
+                                   <div class="option" data-option="Lønomkostning pr. produceret enhed ift. udlandet">
+                                   </div>
+                                   <div class="option" data-option="Prisen på en big mac i forskellige lande"></div>
+                                   <div class="option" data-option="Hvor mange enheder en maskine kan lave i timen">
+                                   </div>
+                              </div>
+
+                              <!-- 8.3.4 -->
+                              <div class="question"
+                                   data-question="Hvilken betydning har valutakursen for konkurrenceevnen?"
+                                   data-answer="3"
+                                   data-explanation="Hvis den indenlandske valuta bliver stærkere (apprecierer), bliver landets varer dyrere i udlandet, hvilket svækker konkurrenceevnen.">
+                                   <div class="option"
+                                        data-option="En stærkere valuta gør det altid lettere at eksportere"></div>
+                                   <div class="option" data-option="Valutakursen påvirker kun dem der skal på ferie">
+                                   </div>
+                                   <div class="option" data-option="Det har ingen betydning for store virksomheder">
+                                   </div>
+                                   <div class="option"
+                                        data-option="En stærkere valuta gør eksportvarer dyrere i udlandet"></div>
+                              </div>
+
+                              <!-- 8.3.5 -->
+                              <div class="question"
+                                   data-question="Hvad dækker begrebet 'Terms of Trade' (Bytteforholdet) over?"
+                                   data-answer="0"
+                                   data-explanation="Terms of Trade er forholdet mellem priserne på et lands eksportvarer og priserne på dets importvarer ($P_x / P_m$). En stigning heri er en fordel.<br><br>Tjek AI:">
+                                   <div class="option" data-option="Forholdet mellem eksportpriser og importpriser">
+                                   </div>
+                                   <div class="option" data-option="Antallet af aftaler man har med andre lande"></div>
+                                   <div class="option" data-option="Prisen på at veksle penge i banken"></div>
+                                   <div class="option" data-option="Tiden det tager at fragte varer over havet"></div>
+                              </div>
+
+                              <!-- 8.3.6 -->
+                              <div class="question" data-question="Hvad måler 'eksportpræstationen'?" data-answer="2"
+                                   data-explanation="Det måler landets evne til at vinde eller tabe markedsandele på eksportmarkederne sammenlignet med den generelle importvækst i de pågældende lande.">
+                                   <div class="option" data-option="Hvor mange medaljer eksportørerne får af staten">
+                                   </div>
+                                   <div class="option" data-option="Den samlede mængde varer der sendes med skib"></div>
+                                   <div class="option" data-option="Landets evne til at vinde markedsandele i udlandet">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At man sælger varer til mere end 100 forskellige lande"></div>
+                              </div>
+
+                              <!-- 8.3.7 -->
+                              <div class="question"
+                                   data-question="Hvad kendetegner 'globalisering' i økonomisk forstand?"
+                                   data-answer="1"
+                                   data-explanation="Globalisering er den stigende integration af verdensøkonomien gennem handel, kapitalbevægelser, teknologi og flytning af arbejdskraft.">
+                                   <div class="option" data-option="At alle begynder at spise den samme mad"></div>
+                                   <div class="option"
+                                        data-option="Øget økonomisk integration og samhandel på tværs af grænser"></div>
+                                   <div class="option" data-option="At der findes internet i alle lande i verden"></div>
+                                   <div class="option" data-option="At man kun må handle med sine nabolande"></div>
+                              </div>
+
+                              <!-- 8.3.8 -->
+                              <div class="question" data-question="Hvad er 'komparative fordele'?" data-answer="3"
+                                   data-explanation="Teorien om at lande vinder ved at specialisere sig i de varer, de er relativt bedst (eller mindst dårlige) til at producere, og handle med andre.<br><br>Spørg AI:">
+                                   <div class="option" data-option="At man altid skal være den absolut bedste til alt">
+                                   </div>
+                                   <div class="option" data-option="At man har de største naturressourcer i verden">
+                                   </div>
+                                   <div class="option" data-option="At man kan producere varer uden at bruge strøm">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At specialisere sig i det man er relativt bedst til"></div>
+                              </div>
+
+                              <!-- 8.3.9 -->
+                              <div class="question" data-question="Hvad er Direkte Udenlandske Investeringer (FDI)?"
+                                   data-answer="0"
+                                   data-explanation="FDI er når en virksomhed investerer direkte i produktion eller opkøber virksomheder i et andet land for at få medejerskab og indflydelse.">
+                                   <div class="option"
+                                        data-option="Investering i produktion eller virksomheder i udlandet"></div>
+                                   <div class="option" data-option="At man køber feriehuse i Spanien"></div>
+                                   <div class="option" data-option="Når staten giver ulandsbistand til fattige lande">
+                                   </div>
+                                   <div class="option" data-option="At man køber aktier på den lokale børs"></div>
+                              </div>
+
+                              <!-- 8.3.10 -->
+                              <div class="question" data-question="Hvad er formålet med WTO (World Trade Organization)?"
+                                   data-answer="1"
+                                   data-explanation="WTO arbejder for at fremme frihandel ved at reducere toldmure og andre handelsbarrierer samt løse konflikter mellem medlemslandene.">
+                                   <div class="option" data-option="At sikre at alle taler det samme sprog i verden">
+                                   </div>
+                                   <div class="option" data-option="At fremme frihandel og reducere handelsbarrierer">
+                                   </div>
+                                   <div class="option" data-option="At udstede en fælles verdens-valuta"></div>
+                                   <div class="option" data-option="At kontrollere prisen på olie globalt"></div>
+                              </div>
+
+                              <!-- 8.3.11 -->
+                              <div class="question" data-question="Hvad er 'offshoring'?" data-answer="2"
+                                   data-explanation="Offshoring er når en virksomhed flytter dele af sin produktion eller administration til et andet land, ofte for at spare omkostninger.">
+                                   <div class="option" data-option="At man kun handler med lande der har en kystlinje">
+                                   </div>
+                                   <div class="option" data-option="At man lukker sin virksomhed helt ned permanent">
+                                   </div>
+                                   <div class="option" data-option="At flytte produktion eller opgaver til udlandet">
+                                   </div>
+                                   <div class="option" data-option="At ansætte folk fra udlandet i sin egen by"></div>
+                              </div>
+
+                              <!-- 8.3.12 -->
+                              <div class="question" data-question="Hvad er en 'toldmur' (tarif)?" data-answer="3"
+                                   data-explanation="En toldmur er en skat eller afgift på importerede varer, der gør dem dyrere og dermed beskytter den indenlandske produktion (protektionisme).">
+                                   <div class="option" data-option="En fysisk mur bygget af mursten ved grænsen"></div>
+                                   <div class="option" data-option="Et forbud mod at tale med folk fra andre lande">
+                                   </div>
+                                   <div class="option" data-option="En liste over alle de varer man må sælge gratis">
+                                   </div>
+                                   <div class="option"
+                                        data-option="En afgift på varer der krydser grænsen ind i et land"></div>
+                              </div>
+
+                              <!-- 8.3.13 -->
+                              <div class="question"
+                                   data-question="Hvordan påvirker øget konkurrence fra lavlønslande typisk industrilande?"
+                                   data-answer="0"
+                                   data-explanation="Det skaber pres på de lavtuddannedes lønninger, men giver samtidig forbrugerne adgang til billigere varer og tvinger virksomheder til innovation.">
+                                   <div class="option"
+                                        data-option="Pres på lønninger for ufaglærte og krav om innovation"></div>
+                                   <div class="option" data-option="At alle i industrilandene holder op med at arbejde">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At det bliver forbudt at bruge computere i produktionen"></div>
+                                   <div class="option" data-option="At alle priser i butikkerne stiger voldsomt"></div>
+                              </div>
+
+                              <!-- 8.3.14 -->
+                              <div class="question"
+                                   data-question="Hvad er de tre hovedkriterier i IMD's konkurrenceevne-index?"
+                                   data-answer="1"
+                                   data-explanation="IMD måler på økonomiske resultater, regeringens effektivitet, virksomhedernes effektivitet og infrastruktur.">
+                                   <div class="option" data-option="Lykke, vejr og antallet af cykelstier"></div>
+                                   <div class="option"
+                                        data-option="Økonomi, regerings/virksomhedseffektivitet og infrastruktur"></div>
+                                   <div class="option" data-option="Militær styrke, landareal og befolkningstal"></div>
+                                   <div class="option" data-option="Antal universiteter, lufthavne og biografer"></div>
+                              </div>
+
+                              <!-- 8.3.15 -->
+                              <div class="question"
+                                   data-question="Hvad er effekten af 'vidensdeling' i den globale økonomi?"
+                                   data-answer="2"
+                                   data-explanation="Globalisering gør det muligt for teknologi og viden at sprede sig hurtigt på tværs af landegrænser, hvilket øger den samlede globale produktivitet.">
+                                   <div class="option"
+                                        data-option="At man skal betale for at læse nyheder fra udlandet"></div>
+                                   <div class="option" data-option="At alle bøger i verden bliver skrevet på engelsk">
+                                   </div>
+                                   <div class="option" data-option="Hurtigere spredning af teknologi og innovation">
+                                   </div>
+                                   <div class="option" data-option="At det bliver sværere at lære nye sprog"></div>
+                              </div>
+
+                              <!-- 8.3.16 -->
+                              <div class="question" data-question="Hvad menes der med 'outsourcing'?" data-answer="3"
+                                   data-explanation="Outsourcing er når en virksomhed lader en ekstern leverandør (inden- eller udenlandsk) overtage opgaver, som virksomheden tidligere selv udførte.">
+                                   <div class="option"
+                                        data-option="At man sælger sine varer på gaden i stedet for i en butik"></div>
+                                   <div class="option" data-option="At man ansætter flere i sin kundeservice-afdeling">
+                                   </div>
+                                   <div class="option" data-option="At man flytter hele sit hovedsæde til udlandet">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At lade eksterne partnere overtage specifikke opgaver"></div>
+                              </div>
+
+                              <!-- 8.3.17 -->
+                              <div class="question" data-question="Hvad er fordelen ved 'frihandel'?" data-answer="0"
+                                   data-explanation="Frihandel giver adgang til større markeder, billigere varer, specialisering og øget konkurrence, hvilket samlet set øger velstanden.">
+                                   <div class="option" data-option="Bedre ressourceudnyttelse og højere velstand"></div>
+                                   <div class="option" data-option="At man aldrig skal betale for de varer man køber">
+                                   </div>
+                                   <div class="option" data-option="At alle lande lover at producere det samme"></div>
+                                   <div class="option"
+                                        data-option="At der ikke findes nogen love for handel overhovedet"></div>
+                              </div>
+
+                              <!-- 8.3.18 -->
+                              <div class="question" data-question="Hvad er 'den globale værdikæde'?" data-answer="1"
+                                   data-explanation="Det beskriver hvordan produktionen af en vare (fx en smartphone) foregår i mange forskellige lande, hvor hvert land bidrager med en del af processen.">
+                                   <div class="option"
+                                        data-option="En lang kæde af guld der strækker sig rundt om jorden"></div>
+                                   <div class="option" data-option="Produktion opdelt i mange trin i forskellige lande">
+                                   </div>
+                                   <div class="option" data-option="En liste over alle de rigeste lande i rækkefølge">
+                                   </div>
+                                   <div class="option" data-option="Forbindelsen mellem alle verdens centralbanker">
+                                   </div>
+                              </div>
+
+                              <!-- 8.3.19 -->
+                              <div class="question" data-question="Hvad karakteriserer 'protektionisme'?"
+                                   data-answer="2"
+                                   data-explanation="Protektionisme er en politik, der forsøger at beskytte landets egen produktion mod udenlandsk konkurrence via told, kvoter eller subsidier.">
+                                   <div class="option" data-option="At man beskytter miljøet mod forurening fra skibe">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At staten garanterer at ingen virksomheder går konkurs"></div>
+                                   <div class="option"
+                                        data-option="Beskyttelse af egen industri mod udenlandsk konkurrence"></div>
+                                   <div class="option"
+                                        data-option="At alle borgere skal bære hjelm når de er på arbejde"></div>
+                              </div>
+
+                              <!-- 8.3.20 -->
+                              <div class="question"
+                                   data-question="Hvad er sammenhængen mellem produktivitet og konkurrenceevne?"
+                                   data-answer="3"
+                                   data-explanation="Højere produktivitet betyder, at man kan producere mere med de samme ressourcer, hvilket sænker prisen pr. enhed og dermed styrker konkurrenceevnen.">
+                                   <div class="option"
+                                        data-option="Produktivitet har intet at gøre med konkurrenceevne"></div>
+                                   <div class="option" data-option="Højere produktivitet fører altid til højere priser">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Det er kun vigtigt for lande der ikke har nogen guldreserver">
+                                   </div>
+                                   <div class="option" data-option="Højere produktivitet sænker enhedsomkostningerne">
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+
+</html>

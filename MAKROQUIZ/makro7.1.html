@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi - Kapitel 7.1</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af arbejdsmarkedet og dets betydning for økonomien."
+     data-forudsætning="Læsning af kapitel 7 om arbejdsmarked og inflation." data-kapitel-url="https://makro.tepedu.dk/kapitel7">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogoanim.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi:<br>
+                                             Arbejdsmarkedet
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <!-- 7.1.1 -->
+                              <div class="question"
+                                   data-question="Hvad bestemmer beskæftigelsen på kort sigt i en typisk efterspørgselsstyret model?"
+                                   data-answer="1"
+                                   data-explanation="På kort sigt antages priser og lønninger at være relativt faste, og beskæftigelsen bestemmes derfor af den samlede efterspørgsel efter varer og tjenester.<br><br>Søg efter svar:">
+                                   <div class="option" data-option="Lønningernes udvikling alene"></div>
+                                   <div class="option" data-option="Den samlede efterspørgsel (SE)"></div>
+                                   <div class="option" data-option="Antallet af personer på pension"></div>
+                                   <div class="option" data-option="Renteniveauet i udlandet"></div>
+                              </div>
+
+                              <!-- 7.1.2 -->
+                              <div class="question"
+                                   data-question="Hvilken type ledighed skyldes manglende match mellem kvalifikationer og jobs?"
+                                   data-answer="3"
+                                   data-explanation="Strukturel ledighed opstår, når de lediges kvalifikationer eller bopæl ikke passer til de ledige stillinger (mismatch).">
+                                   <div class="option" data-option="Friktionsledighed"></div>
+                                   <div class="option" data-option="Sæsonledighed"></div>
+                                   <div class="option" data-option="Konjunkturledighed"></div>
+                                   <div class="option" data-option="Strukturel ledighed"></div>
+                              </div>
+
+                              <!-- 7.1.3 -->
+                              <div class="question"
+                                   data-question="Hvad er de tre fundamentale piller i 'Flexicurity-modellen'?"
+                                   data-answer="0"
+                                   data-explanation="Modellen kombinerer fleksible regler for hyring/fyring, et generøst sikkerhedsnet (dagpenge) og en aktiv arbejdsmarkedspolitik.<br><br>Find info:">
+                                   <div class="option" data-option="Fleksibilitet, sikkerhedsnet og aktiv politik">
+                                   </div>
+                                   <div class="option" data-option="Lave skatter, høje lønninger og pension"></div>
+                                   <div class="option" data-option="Fagforeninger, strejkeret og mindsteløn"></div>
+                                   <div class="option" data-option="Eksport, import og valutakurser"></div>
+                              </div>
+
+                              <!-- 7.1.4 -->
+                              <div class="question"
+                                   data-question="Hvad sker der typisk med reallønnen, hvis der er udbredt mangel på arbejdskraft?"
+                                   data-answer="2"
+                                   data-explanation="Når virksomhederne kæmper om for få medarbejdere, bliver de nødt til at tilbyde højere lønninger, hvilket presser reallønnen op.">
+                                   <div class="option" data-option="Reallønnen falder pga. inflation"></div>
+                                   <div class="option" data-option="Reallønnen bliver helt uændret"></div>
+                                   <div class="option" data-option="Reallønnen har en tendens til at stige"></div>
+                                   <div class="option" data-option="Staten vil straks sænke alle lønninger"></div>
+                              </div>
+
+                              <!-- 7.1.5 -->
+                              <div class="question" data-question="Hvad er formålet med 'aktive' arbejdsmarkedstiltag?"
+                                   data-answer="1"
+                                   data-explanation="Aktive tiltag (fx kurser, praktik) sigter mod at bringe de ledige hurtigere tilbage i beskæftigelse ved at forbedre deres kompetencer og søgeadfærd.">
+                                   <div class="option" data-option="Kun at udbetale dagpenge til folk"></div>
+                                   <div class="option" data-option="At forbedre lediges kompetencer og jobchancer">
+                                   </div>
+                                   <div class="option" data-option="At tvinge alle til at arbejde 50 timer om ugen">
+                                   </div>
+                                   <div class="option" data-option="At registrere hvor mange der er syge"></div>
+                              </div>
+
+                              <!-- 7.1.6 -->
+                              <div class="question"
+                                   data-question="Hvad beskriver 'substitutionseffekten' ved en lønstigning?"
+                                   data-answer="3"
+                                   data-explanation="Substitutionseffekten betyder, at man vælger at arbejde mere, fordi gevinsten ved at arbejde (alternativomkostningen ved fritid) er steget.<br><br>Spørg AI:">
+                                   <div class="option" data-option="At man køber flere varer i stedet for at arbejde">
+                                   </div>
+                                   <div class="option" data-option="At man lader maskiner gøre arbejdet i stedet"></div>
+                                   <div class="option" data-option="At man arbejder mindre fordi man er blevet rigere">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At man arbejder mere fordi det giver en højere gevinst"></div>
+                              </div>
+
+                              <!-- 7.1.7 -->
+                              <div class="question"
+                                   data-question="Hvordan påvirker kortere uddannelser det samlede arbejdsudbud?"
+                                   data-answer="0"
+                                   data-explanation="Kortere uddannelsestid betyder, at folk træder tidligere ind på arbejdsmarkedet, hvilket øger det samlede antal arbejdstimer til rådighed (arbejdsudbuddet).">
+                                   <div class="option" data-option="Arbejdsudbuddet øges på langt sigt"></div>
+                                   <div class="option" data-option="Arbejdsudbuddet falder pga. lavere viden"></div>
+                                   <div class="option" data-option="Det har ingen effekt på udbuddet af arbejdskraft">
+                                   </div>
+                                   <div class="option" data-option="Det øger altid kun den strukturelle ledighed"></div>
+                              </div>
+
+                              <!-- 7.1.8 -->
+                              <div class="question" data-question="Hvad er en 'passive' arbejdsmarkedspolitik?"
+                                   data-answer="1"
+                                   data-explanation="Passiv politik er det økonomiske sikkerhedsnet (indsatsen for at sikre forsørgelse), fx gennem udbetaling af dagpenge eller kontanthjælp uden modkrav om aktivering her og nu.">
+                                   <div class="option" data-option="Kurser i at sidde stille i længere tid"></div>
+                                   <div class="option" data-option="Økonomisk støtte som dagpenge ved ledighed"></div>
+                                   <div class="option" data-option="At man helt lader være med at søge jobs"></div>
+                                   <div class="option" data-option="Regler for hvornår man skal gå på pension"></div>
+                              </div>
+
+                              <!-- 7.1.9 -->
+                              <div class="question" data-question="Hvad menes der med 'mismatch' på arbejdsmarkedet?"
+                                   data-answer="2"
+                                   data-explanation="Mismatch opstår, når de ledige ikke har de kompetencer, som virksomhederne efterspørger, eller når de ledige bor et andet sted end hvor jobsene findes.">
+                                   <div class="option" data-option="At man har de forkerte sko på til samtalen"></div>
+                                   <div class="option" data-option="At lønnen er den samme i alle brancher"></div>
+                                   <div class="option" data-option="Uoverensstemmelse mellem kvalifikationer og behov">
+                                   </div>
+                                   <div class="option" data-option="At man arbejder i en forkert sektor"></div>
+                              </div>
+
+                              <!-- 7.1.10 -->
+                              <div class="question" data-question="Hvad viser Phillips-kurven på kort sigt?"
+                                   data-answer="3"
+                                   data-explanation="Phillips-kurven viser den historiske (og teoretiske) sammenhæng, hvor lavere ledighed ofte er forbundet med højere inflation (og omvendt).">
+                                   <div class="option" data-option="Forholdet mellem eksport og import"></div>
+                                   <div class="option" data-option="Sammenhængen mellem vækst og miljø"></div>
+                                   <div class="option" data-option="Forholdet mellem skat og opsparing"></div>
+                                   <div class="option" data-option="Sammenhængen mellem ledighed og inflation"></div>
+                              </div>
+
+                              <!-- 7.1.11 -->
+                              <div class="question" data-question="Hvad er 'NAIRU'?" data-answer="0"
+                                   data-explanation="NAIRU står for 'Non-Accelerating Inflation Rate of Unemployment' og er det ledighedsniveau, hvor inflationen holder sig stabil (det strukturelle niveau).">
+                                   <div class="option" data-option="Det ledighedsniveau hvor inflationen er stabil">
+                                   </div>
+                                   <div class="option" data-option="En ny type digital valuta fra centralbanken"></div>
+                                   <div class="option" data-option="Navnet på en international arbejdsorganisation">
+                                   </div>
+                                   <div class="option" data-option="Et mål for den samlede lykke på arbejdspladsen">
+                                   </div>
+                              </div>
+
+                              <!-- 7.1.12 -->
+                              <div class="question"
+                                   data-question="Hvordan påvirker en sænkelse af dagpengesatsen teoretisk set arbejdsudbuddet?"
+                                   data-answer="1"
+                                   data-explanation="Teoretisk set vil lavere dagpenge øge incitamentet til at søge og tage jobs, hvilket alt andet lige øger arbejdsudbuddet.">
+                                   <div class="option" data-option="Det får folk til at tage længere ferier"></div>
+                                   <div class="option" data-option="Det øger typisk incitamentet til at søge arbejde">
+                                   </div>
+                                   <div class="option" data-option="Det reducerer altid antallet af ledige jobs"></div>
+                                   <div class="option" data-option="Det har absolut ingen effekt på adfærden"></div>
+                              </div>
+
+                              <!-- 7.1.13 -->
+                              <div class="question" data-question="Hvad forstås ved 'effektivitetsløn'?" data-answer="2"
+                                   data-explanation="Effektivitetsløn er pointen, hvor arbejdsgivere vælger at betale en løn over ligevægtsniveauet for at sikre højere produktivitet, loyalitet og færre opsigelser.">
+                                   <div class="option" data-option="Den absolut laveste løn man må udbetale"></div>
+                                   <div class="option" data-option="En løn der kun udbetales i naturalier"></div>
+                                   <div class="option" data-option="Løn over ligevægt for at øge produktiviteten"></div>
+                                   <div class="option" data-option="Lønniveauet i landene omkring Danmark"></div>
+                              </div>
+
+                              <!-- 7.1.14 -->
+                              <div class="question" data-question="Hvad er 'insider-outsider' problematikken?"
+                                   data-answer="3"
+                                   data-explanation="Teorien beskriver, hvordan dem, der allerede er i job (insidere), kan presse lønnen op uden hensyn til de ledige (outsidere), der holdes ude.">
+                                   <div class="option" data-option="At nogle arbejder inde og andre arbejder ude"></div>
+                                   <div class="option"
+                                        data-option="Forskellen på ansatte i private og offentlige firmaer"></div>
+                                   <div class="option" data-option="Problemet med at finde vej til sit nye kontor">
+                                   </div>
+                                   <div class="option"
+                                        data-option="Eksisterende ansattes magt over lønnen på bekostning af ledige">
+                                   </div>
+                              </div>
+
+                              <!-- 7.1.15 -->
+                              <div class="question" data-question="Hvad er formålet med 'jobsøgningsstøtte'?"
+                                   data-answer="0"
+                                   data-explanation="At hjælpe de ledige med at finde relevante jobs hurtigere gennem vejledning, CV-hjælp og formidling af kontakt til virksomheder.">
+                                   <div class="option"
+                                        data-option="At hjælpe ledige med at finde relevante jobs hurtigere"></div>
+                                   <div class="option"
+                                        data-option="At udbetale flyttehjælp til folk der vil til udlandet"></div>
+                                   <div class="option"
+                                        data-option="At give virksomheder penge for at lade folk gå til samtale"></div>
+                                   <div class="option"
+                                        data-option="At erstatte behovet for at have en egentlig uddannelse"></div>
+                              </div>
+
+                              <!-- 7.1.16 -->
+                              <div class="question"
+                                   data-question="Hvad menes der med 'hysterese-effekter' på arbejdsmarkedet?"
+                                   data-answer="1"
+                                   data-explanation="Hysterese betyder, at en midlertidig stigning i ledigheden (fx under en krise) kan blive permanent, fordi de ledige mister kompetencer eller motivation over tid.">
+                                   <div class="option" data-option="At folk bliver meget vrede over at være ledige">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At midlertidig ledighed risikerer at blive permanent"></div>
+                                   <div class="option" data-option="At alle jobs forsvinder pga. nye robotter"></div>
+                                   <div class="option" data-option="At priserne stiger hurtigere end lønningerne"></div>
+                              </div>
+
+                              <!-- 7.1.17 -->
+                              <div class="question" data-question="Hvad karakteriserer den danske 'Guldtrekant'?"
+                                   data-answer="2"
+                                   data-explanation="Guldtrekanten er et andet navn for flexicurity-modellen, der forbinder fleksibelt arbejdsmarked, social sikkerhed og aktiv politik.">
+                                   <div class="option" data-option="En hemmelig aftale mellem de tre største banker">
+                                   </div>
+                                   <div class="option" data-option="Samarbejdet mellem staten, kirken og skolerne">
+                                   </div>
+                                   <div class="option" data-option="Samspillet i flexicurity-modellen"></div>
+                                   <div class="option" data-option="De tre største eksportvarer som Danmark sælger">
+                                   </div>
+                              </div>
+
+                              <!-- 7.1.18 -->
+                              <div class="question" data-question="Hvad er 'reel lønstivhed'?" data-answer="3"
+                                   data-explanation="Reel lønstivhed betyder, at reallønnen ikke falder hurtigt nok til at rømme arbejdsmarkedet og fjerne ledigheden, hvilket kan skyldes overenskomster eller mindsteløn-tankegange.">
+                                   <div class="option" data-option="At man slet ikke kan få sin løn udbetalt"></div>
+                                   <div class="option" data-option="At man altid får den samme løn uanset indsats">
+                                   </div>
+                                   <div class="option" data-option="At det er meget svært at bære sine penge hjem">
+                                   </div>
+                                   <div class="option"
+                                        data-option="At reallønnen ikke tilpasser sig markedsforholdene hurtigt nok">
+                                   </div>
+                              </div>
+
+                              <!-- 7.1.19 -->
+                              <div class="question"
+                                   data-question="Hvilken rolle spiller fagforeninger i den danske model?"
+                                   data-answer="0"
+                                   data-explanation="Fagforeningerne forhandler kollektive overenskomster om løn og arbejdsvilkår direkte med arbejdsgiverne (den danske model), ofte uden statslig indblanding.">
+                                   <div class="option" data-option="Kollektiv forhandling af løn og arbejdsvilkår">
+                                   </div>
+                                   <div class="option"
+                                        data-option="De ejer alle de virksomheder deres medlemmer arbejder i"></div>
+                                   <div class="option" data-option="At bestemme hvem der skal være statsminister"></div>
+                                   <div class="option" data-option="At drive alle landets hospitaler og skoler"></div>
+                              </div>
+
+                              <!-- 7.1.20 -->
+                              <div class="question" data-question="Hvad er effekten af 'geografisk mobilitet'?"
+                                   data-answer="1"
+                                   data-explanation="Høj geografisk mobilitet betyder, at ledige er villige til at flytte efter jobs, hvilket reducerer mismatch og derved den strukturelle ledighed.">
+                                   <div class="option" data-option="At man rejser meget på ferie i løbet af året"></div>
+                                   <div class="option" data-option="At ledige flytter efter hvor der er ledige jobs">
+                                   </div>
+                                   <div class="option" data-option="At alle virksomheder skal ligge i de største byer">
+                                   </div>
+                                   <div class="option" data-option="At staten betaler for alle folks togbilletter">
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+
+</html>

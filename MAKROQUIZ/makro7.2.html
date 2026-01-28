@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Quiz Makroøkonomi - Kapitel 7.2</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="styles.css">
+     <link rel="icon" href="favicon.svg">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+     <script>
+          window.MathJax = {
+               tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+               },
+               svg: {
+                    scale: 0.9,
+               },
+               chtml: {
+                    scale: 0.9,
+               }
+          };
+     </script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .card-body {
+               font-size: 1em;
+          }
+
+          .card img {
+               max-width: 100%;
+               height: auto;
+          }
+     </style>
+</head>
+
+<body data-formål="Forståelse af inflation og produktionens relation i SE/SU-modellen."
+     data-forudsætning="Læsning af kapitel 7 om arbejdsmarked og inflation."
+     data-kapitel-url="https://makro.tepedu.dk/kapitel7">
+     <header> <a href="index.html" target="_blank"><img src="tepedulogoanim.svg" alt="Logo" width="8%"></a>
+          <h2>Quiz Makroøkonomi</h2>
+     </header>
+
+     <div class="container">
+          <div class="row justify-content-center">
+               <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card mt-5">
+                         <div class="card-body">
+
+                              <div id="postProgressContent" class="mt-4" style="color: rgb(255, 255, 255);">
+                                   <div>
+                                        <h1>
+                                             Makroøkonomi:<br>
+                                             Inflation og Produktion
+                                        </h1>
+                                   </div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                              <h1 id="question" class="card-title"></h1>
+                              <div id="options" class="mt-4"></div>
+                              <div id="progress-bar" class="progress-bar-container"></div>
+
+                              <!-- 7.2.1 -->
+                              <div class="question" data-question="Hvad er den mest præcise definition af inflation?"
+                                   data-answer="2"
+                                   data-explanation="Inflation betyder en vedvarende stigning i det generelle prisniveau i en økonomi over tid.<br><br>Find info:">
+                                   <div class="option" data-option="Enkelte varer bliver dyrere"></div>
+                                   <div class="option" data-option="Fald i valutaens værdi overfor andre valutaer">
+                                   </div>
+                                   <div class="option" data-option="Vedvarende stigning i generelt prisniveau"></div>
+                                   <div class="option" data-option="Midlertidig prisvolatilitet"></div>
+                              </div>
+
+                              <!-- 7.2.2 -->
+                              <div class="question"
+                                   data-question="Hvad er forskellen mellem nominel rente og realrente?" data-answer="1"
+                                   data-explanation="Realrente = Nominel rente - Inflation. Det viser den faktiske købekraftsvækst.">
+                                   <div class="option" data-option="Nominel rente inkluderer skat"></div>
+                                   <div class="option" data-option="Realrente er nominel rente minus inflation"></div>
+                                   <div class="option" data-option="Nominel rente måles i faste priser"></div>
+                                   <div class="option" data-option="Realrente er altid højere end nominel rente"></div>
+                              </div>
+
+                              <!-- 7.2.3 -->
+                              <div class="question" data-question="Hvad illustrerer SE/SU-modellen primært?"
+                                   data-answer="3"
+                                   data-explanation="Modellen viser samspillet mellem inflation og nationalindkomst over tid.<br><br>Spørg AI:">
+                                   <div class="option" data-option="Virksomheders produktionsomkostninger"></div>
+                                   <div class="option" data-option="Arbejdsløshedsrelationer"></div>
+                                   <div class="option" data-option="Valutakursers udvikling"></div>
+                                   <div class="option" data-option="Samspil mellem inflation og nationalindkomst"></div>
+                              </div>
+
+                              <!-- 7.2.4 -->
+                              <div class="question" data-question="Hvad er en vigtig årsag til inflationstræghed?"
+                                   data-answer="0"
+                                   data-explanation="Træghed skyldes ofte langsigtede løn- og prisaftaler, der ikke ændrer sig straks når økonomien skifter.">
+                                   <div class="option" data-option="Langsigtede løn- og prisaftaler"></div>
+                                   <div class="option" data-option="Hurtige renteændringer"></div>
+                                   <div class="option" data-option="Valutamanipulation"></div>
+                                   <div class="option" data-option="Kortsigtede lån"></div>
+                              </div>
+
+                              <!-- 7.2.5 -->
+                              <div class="question"
+                                   data-question="Hvad sker der typisk ved et positivt outputgab over tid?"
+                                   data-answer="3"
+                                   data-explanation="Et positivt outputgab (hvor man producerer over evne) presser priser og lønninger op, hvilket øger inflationen.">
+                                   <div class="option" data-option="Fald i beskæftigelse"></div>
+                                   <div class="option" data-option="Deflation"></div>
+                                   <div class="option" data-option="Valutakursstabilitet"></div>
+                                   <div class="option" data-option="Stigende inflation"></div>
+                              </div>
+
+                              <!-- 7.2.6 -->
+                              <div class="question"
+                                   data-question="Hvilken effekt har høj inflation på skattesystemet (uden regulering)?"
+                                   data-answer="2"
+                                   data-explanation="Inflation kan skubbe folk op i højere skatteklasser (bracket creep), selvom deres realløn ikke er steget.">
+                                   <div class="option" data-option="Reducerer skatteindtægter"></div>
+                                   <div class="option" data-option="Forbedrer skattetransparens"></div>
+                                   <div class="option" data-option="Øger skattetrykket nominelt"></div>
+                                   <div class="option" data-option="Gør skattesystemet mere progressivt"></div>
+                              </div>
+
+                              <!-- 7.2.7 -->
+                              <div class="question" data-question="Hvad er en central konsekvens af Fisher-effekten?"
+                                   data-answer="1"
+                                   data-explanation="At de nominelle renter har en tendens til at følge de forventede inflationsrater.">
+                                   <div class="option" data-option="Reallønnen stiger altid med inflation"></div>
+                                   <div class="option" data-option="Nominelle renter følger inflationsforventninger">
+                                   </div>
+                                   <div class="option" data-option="Centralbanker mister kontrol over renter"></div>
+                                   <div class="option" data-option="Valutakurser bliver volatile"></div>
+                              </div>
+
+                              <!-- 7.2.8 -->
+                              <div class="question" data-question="Hvad kendetegner cost-push inflation?"
+                                   data-answer="3"
+                                   data-explanation="Inflation der skyldes stigende produktionsomkostninger, fx højere oliepriser eller råvarer.">
+                                   <div class="option" data-option="Stærk efterspørgsel efter forbrugsvarer"></div>
+                                   <div class="option" data-option="Fald i arbejdsløshed"></div>
+                                   <div class="option" data-option="Centralbankens pengetrykning"></div>
+                                   <div class="option" data-option="Stigende produktionsomkostninger"></div>
+                              </div>
+
+                              <!-- 7.2.9 -->
+                              <div class="question" data-question="Hvad er hovedårsagen til hyperinflation?"
+                                   data-answer="0"
+                                   data-explanation="Hyperinflation skyldes næsten altid en ekstrem og ukontrolleret vækst i pengemængden (pengetrykning fra staten).">
+                                   <div class="option" data-option="Ukontrolleret pengetrykning"></div>
+                                   <div class="option" data-option="Fald i oliepriser"></div>
+                                   <div class="option" data-option="Høj produktivitet"></div>
+                                   <div class="option" data-option="Stærk eksportvækst"></div>
+                              </div>
+
+                              <!-- 7.2.10 -->
+                              <div class="question"
+                                   data-question="Hvad er det primære mål med en kontraktiv pengepolitik?"
+                                   data-answer="3"
+                                   data-explanation="At dæmpe økonomien og køle inflationen ned ved at hæve renten og mindske pengemængden.">
+                                   <div class="option" data-option="Stimulere boligmarkedet"></div>
+                                   <div class="option" data-option="Øge statsgælden"></div>
+                                   <div class="option" data-option="Forbedre eksportkonkurrenceevne"></div>
+                                   <div class="option" data-option="Reducere inflation"></div>
+                              </div>
+
+                              <!-- 7.2.11 -->
+                              <div class="question"
+                                   data-question="Hvad sker der med realrenten, hvis inflationen overstiger den nominelle rente?"
+                                   data-answer="1"
+                                   data-explanation="Så bliver realrenten negativ, hvilket betyder at man mister købekraft ved at have penge stående.">
+                                   <div class="option" data-option="Den bliver uændret"></div>
+                                   <div class="option" data-option="Den bliver negativ"></div>
+                                   <div class="option" data-option="Den fordobles"></div>
+                                   <div class="option" data-option="Den følger valutakursen"></div>
+                              </div>
+
+                              <!-- 7.2.12 -->
+                              <div class="question" data-question="Hvad er den største risiko ved deflation?"
+                                   data-answer="2"
+                                   data-explanation="En 'deflationsspiral', hvor faldende priser får folk til at udsætte forbrug, hvilket bremser økonomien yderligere.">
+                                   <div class="option" data-option="For høj beskæftigelse"></div>
+                                   <div class="option" data-option="Stigende aktiemarkeder"></div>
+                                   <div class="option" data-option="Deflationsspiral og økonomisk opbremsning"></div>
+                                   <div class="option" data-option="For meget eksport"></div>
+                              </div>
+
+                              <!-- 7.2.13 -->
+                              <div class="question"
+                                   data-question="Hvad er en vigtig faktor for at opretholde lave inflationsforventninger?"
+                                   data-answer="0"
+                                   data-explanation="At befolkningen og markederne har tillid til, at centralbanken vil og kan holde inflationen i ro.">
+                                   <div class="option" data-option="Troværdig centralbankpolitik"></div>
+                                   <div class="option" data-option="Høje statsunderskud"></div>
+                                   <div class="option" data-option="Faldende oliepriser"></div>
+                                   <div class="option" data-option="Lav arbejdsløshed"></div>
+                              </div>
+
+                              <!-- 7.2.14 -->
+                              <div class="question"
+                                   data-question="Hvad er en typisk effekt af høj inflation på eksporten?"
+                                   data-answer="3"
+                                   data-explanation="Høj indenlandsk inflation gør eksportvarerne dyrere for udlændinge og svækker derved konkurrenceevnen.">
+                                   <div class="option" data-option="Øget markedsandel"></div>
+                                   <div class="option" data-option="Forbedret kvalitet"></div>
+                                   <div class="option" data-option="Lavere produktionsomkostninger"></div>
+                                   <div class="option" data-option="Nedsat konkurrenceevne"></div>
+                              </div>
+
+                              <!-- 7.2.15 -->
+                              <div class="question"
+                                   data-question="Hvad er den langsigtede ligevægt i SE/SU-modellen karakteriseret ved?"
+                                   data-answer="1"
+                                   data-explanation="Økonomien vender tilbage til sit 'naturlige' produktionsniveau (Y*) på lang sigt.">
+                                   <div class="option" data-option="Høj arbejdsløshed"></div>
+                                   <div class="option" data-option="Produktion på potentielt niveau (Y*)"></div>
+                                   <div class="option" data-option="Volatile renter"></div>
+                                   <div class="option" data-option="Negativ BNP-vækst"></div>
+                              </div>
+
+                              <!-- 7.2.16 -->
+                              <div class="question"
+                                   data-question="Hvilken politik vil mest effektivt bekæmpe cost-push inflation?"
+                                   data-answer="2"
+                                   data-explanation="Strukturreformer (supply-side), der øger produktiviteten og sænker produktionsomkostningerne.">
+                                   <div class="option" data-option="Rentehævninger"></div>
+                                   <div class="option" data-option="Øget skattepres"></div>
+                                   <div class="option" data-option="Strukturreformer og supply-side politik"></div>
+                                   <div class="option" data-option="Valutadevaluering"></div>
+                              </div>
+
+                              <!-- 7.2.17 -->
+                              <div class="question" data-question="Hvad dækker 'demand-pull' inflation over?"
+                                   data-answer="0"
+                                   data-explanation="Inflation der opstår pga. for høj efterspørgsel i samfundet sammenlignet med det mulige udbud.">
+                                   <div class="option" data-option="For stor efterspørgsel ift. udbud"></div>
+                                   <div class="option" data-option="Når virksomhederne hæver deres omkostninger"></div>
+                                   <div class="option" data-option="Når prisen på olie falder drastisk"></div>
+                                   <div class="option" data-option="At staten forbyder import af varer"></div>
+                              </div>
+
+                              <!-- 7.2.18 -->
+                              <div class="question" data-question="Hvad forstås ved 'forventnings-drevet' inflation?"
+                                   data-answer="2"
+                                   data-explanation="Når både lønmodtagere og virksomheder forventer høj inflation og derfor indregner det i deres krav/priser på forhånd.">
+                                   <div class="option" data-option="At man håber at priserne falder snart"></div>
+                                   <div class="option" data-option="At staten lover lavere skatter næste år"></div>
+                                   <div class="option" data-option="Når forventninger indbygges i løn og priser"></div>
+                                   <div class="option" data-option="At man tror at man bliver rigere i fremtiden"></div>
+                              </div>
+
+                              <!-- 7.2.19 -->
+                              <div class="question" data-question="Hvad viser SU-kurven (det samlede udbud)?"
+                                   data-answer="0"
+                                   data-explanation="SU-kurven viser sammenhængen mellem inflationsniveauet og den mængde varer, virksomhederne ønsker at udbyde.">
+                                   <div class="option" data-option="Sammenhæng mellem inflation og udbudt mængde"></div>
+                                   <div class="option" data-option="Hvor mange der vil købe et nyt produkt"></div>
+                                   <div class="option" data-option="Værdien af alle de penge staten har brugt"></div>
+                                   <div class="option" data-option="Hvor mange ledige der findes i hver by"></div>
+                              </div>
+
+                              <!-- 7.2.20 -->
+                              <div class="question" data-question="Hvad er effekten af 'pris-indeksering'?"
+                                   data-answer="1"
+                                   data-explanation="Når lønninger eller ydelser automatisk stiger i takt med priserne, hvilket kan forlænge inflationsperioder (løn-pris-spiral).">
+                                   <div class="option" data-option="At alle priser altid er gemt i et kartotek"></div>
+                                   <div class="option" data-option="Automatiske lønstigninger svarende til priserne">
+                                   </div>
+                                   <div class="option" data-option="At det er forbudt at ændre prisen på mælk"></div>
+                                   <div class="option" data-option="At man kun må handle i butikker med indeks"></div>
+                              </div>
+
+                              <br>
+                              <br>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+
+</html>
