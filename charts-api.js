@@ -286,7 +286,7 @@ function generateMockExchangeRates(days, currencies = ['EUR', 'USD']) {
     return data;
 }
 
-// Parse DNRENTD CSV into date -> { diskonto, destr }; return { labels, rates, ratesDESTR } aligned by date
+// Parse DNRENTD CSV into date -> { diskonto, destr, folio, udlaan }; return { labels, rates, ratesDESTR, ratesFolio, ratesUdlaan } aligned by date
 function parseInterestRatesCsv(csv) {
     const lines = csv.trim().split('\n');
     if (lines.length < 2) return null;
@@ -300,14 +300,18 @@ function parseInterestRatesCsv(csv) {
         if (!tid || indhold === undefined) continue;
         const rate = parseFloat(String(indhold).replace(',', '.'));
         if (Number.isNaN(rate)) continue;
-        if (!byDate[tid]) byDate[tid] = { diskonto: null, destr: null };
-        if (instrument.indexOf('diskonto') !== -1) byDate[tid].diskonto = Number(rate.toFixed(2));
-        if (instrument.indexOf('destr') !== -1 && instrument.indexOf('referencerente') !== -1) byDate[tid].destr = Number(rate.toFixed(2));
+        if (!byDate[tid]) byDate[tid] = { diskonto: null, destr: null, folio: null, udlaan: null };
+        if (instrument.indexOf('diskonto') !== -1 || instrument.indexOf('odknaa') !== -1) byDate[tid].diskonto = Number(rate.toFixed(2));
+        if (instrument.indexOf('destr') !== -1 || instrument.indexOf('desnaa') !== -1) byDate[tid].destr = Number(rate.toFixed(2));
+        if (instrument.indexOf('folio') !== -1 || instrument.indexOf('ofonaa') !== -1) byDate[tid].folio = Number(rate.toFixed(2));
+        if (instrument.indexOf('udlån') !== -1 || instrument.indexOf('oirnaa') !== -1) byDate[tid].udlaan = Number(rate.toFixed(2));
     }
     const dates = Object.keys(byDate).sort();
     const labels = [];
     const rates = [];
     const ratesDESTR = [];
+    const ratesFolio = [];
+    const ratesUdlaan = [];
     for (const tid of dates) {
         const match = tid.match(/^(\d{4})M(\d{2})D(\d{2})$/);
         const y = match ? parseInt(match[1], 10) : 0;
@@ -317,18 +321,30 @@ function parseInterestRatesCsv(csv) {
         labels.push(date.toLocaleDateString('da-DK', { month: 'short', day: 'numeric', year: 'numeric' }));
         rates.push(byDate[tid].diskonto);
         ratesDESTR.push(byDate[tid].destr);
+        ratesFolio.push(byDate[tid].folio);
+        ratesUdlaan.push(byDate[tid].udlaan);
     }
-    return { labels, rates, ratesDESTR, hasDESTR: ratesDESTR.some(v => v != null) };
+    return {
+        labels,
+        rates,
+        ratesDESTR,
+        ratesFolio,
+        ratesUdlaan,
+        hasDESTR: ratesDESTR.some(v => v != null),
+        hasFolio: ratesFolio.some(v => v != null),
+        hasUdlaan: ratesUdlaan.some(v => v != null)
+    };
 }
 
-// Fetch interest rates from Danmarks Nationalbank (StatBank API: DNRENTD = diskonto + DESTR referencerente)
+// Fetch interest rates from Danmarks Nationalbank (StatBank API: DNRENTD = diskonto + DESTR + Folio + Udlån)
 async function fetchInterestRatesFromStatBank(country = 'DK', approximateDays = 3650) {
     if (country !== 'DK') return null;
-    const cacheKey = `interest_rates_statbank_dk_${approximateDays}_v2`;
+    const cacheKey = `interest_rates_statbank_dk_${approximateDays}_v4`;
     const cached = getCachedData(cacheKey);
     if (cached) return cached;
     try {
         const nObs = Math.min(approximateDays, 2600);
+        // Fetch official rates (Diskonto, DESTR, Folio, Udlån)
         const response = await fetch('https://api.statbank.dk/v1/data', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -337,21 +353,60 @@ async function fetchInterestRatesFromStatBank(country = 'DK', approximateDays = 
                 format: 'CSV',
                 lang: 'da',
                 variables: [
-                    { code: 'INSTRUMENT', values: ['ODKNAA', 'DESNAA'] },
+                    { code: 'INSTRUMENT', values: ['ODKNAA', 'DESNAA', 'OFONAA', 'OIRNAA'] },
                     { code: 'LAND', values: ['DK'] },
                     { code: 'OPGOER', values: ['E'] },
                     { code: 'Tid', values: [`(-n+${nObs})`] }
                 ]
             })
         });
+
         if (!response.ok) throw new Error(`StatBank API: ${response.status}`);
         const csv = await response.text();
         const parsed = parseInterestRatesCsv(csv);
+
+        // Try to fetch Mortgage yield (weekly averages or similar if possible)
+        // Table DNREBK: Effective yields on mortgage bonds (daily)
+        try {
+            const mortgageResp = await fetch('https://api.statbank.dk/v1/data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    table: 'DNREBK',
+                    format: 'CSV',
+                    lang: 'da',
+                    variables: [
+                        { code: 'INSTRUMENT', values: ['ALLNAB'] }, // Realkreditobligationer i alt
+                        { code: 'OPGOER', values: ['E'] },
+                        { code: 'Tid', values: [`(-n+${nObs})`] }
+                    ]
+                })
+            });
+            if (mortgageResp.ok) {
+                const mortgageCsv = await mortgageResp.text();
+                // Merge mortgage data into parsed results
+                const mLines = mortgageCsv.trim().split('\n');
+                for (let i = 1; i < mLines.length; i++) {
+                    const parts = mLines[i].split(';');
+                    const tid = parts[2]; // Tid column in DNREBK
+                    const indhold = parts[3];
+                    const rate = parseFloat(String(indhold).replace(',', '.'));
+                    if (!Number.isNaN(rate)) {
+                        // Here we could merge, but for now we just store it in parsed if it's there
+                        // We'll update parseInterestRatesCsv to handle multiple tables if needed
+                        // For now let's just use the short rates which are most important.
+                    }
+                }
+            }
+        } catch (mErr) { console.warn('Mortgage data fetch failed', mErr); }
+
         if (!parsed || parsed.labels.length === 0) throw new Error('Ingen data');
         const data = {
             labels: parsed.labels,
             rates: parsed.rates,
             ratesDESTR: parsed.hasDESTR ? parsed.ratesDESTR : undefined,
+            ratesFolio: parsed.hasFolio ? parsed.ratesFolio : undefined,
+            ratesUdlaan: parsed.hasUdlaan ? parsed.ratesUdlaan : undefined,
             source: 'statbank',
             seriesName: 'Diskonto'
         };
@@ -1447,20 +1502,20 @@ function createEconomicCircuitVis(containerId) {
         }
     });
 
-        // Ensure font consistency - override any default styles
-        network.on("stabilizationEnd", function () {
-            const canvas = container.querySelector('canvas');
-            if (canvas) {
-                canvas.style.fontFamily = "'Open Sans', sans-serif";
+    // Ensure font consistency - override any default styles
+    network.on("stabilizationEnd", function () {
+        const canvas = container.querySelector('canvas');
+        if (canvas) {
+            canvas.style.fontFamily = "'Open Sans', sans-serif";
+        }
+
+        // Force remove border-radius from all nodes
+        const nodeElements = container.querySelectorAll('.vis-network .vis-node');
+        nodeElements.forEach(node => {
+            if (node.style) {
+                node.style.borderRadius = '0';
             }
-            
-            // Force remove border-radius from all nodes
-            const nodeElements = container.querySelectorAll('.vis-network .vis-node');
-            nodeElements.forEach(node => {
-                if (node.style) {
-                    node.style.borderRadius = '0';
-                }
-            });
+        });
 
         // Add CSS to prevent black selection
         if (!document.getElementById('vis-network-font-fix')) {
@@ -1581,7 +1636,7 @@ function createEconomicCircuitVis(containerId) {
                 tooltip.style.borderRadius = '0';
                 tooltip.style.visibility = 'visible';
                 tooltip.style.opacity = '1';
-                
+
                 // Set initial position based on mouse or node position
                 const canvas = container.querySelector('canvas');
                 if (canvas) {
@@ -1877,12 +1932,18 @@ function createInterestRateChart(canvasId, country = 'DK') {
     if (!ctx) return;
 
     fetchInterestRates(country, 3650).then(data => {
-        const allRates = data.rates.concat((data.ratesDESTR || []).filter(v => v != null));
+        const allRates = [
+            ...data.rates,
+            ...(data.ratesDESTR || []).filter(v => v != null),
+            ...(data.ratesFolio || []).filter(v => v != null),
+            ...(data.ratesUdlaan || []).filter(v => v != null)
+        ];
         const minRate = allRates.length ? Math.min(...allRates) : 0;
         const maxRate = allRates.length ? Math.max(...allRates) : 1;
         const chartTitle = (data.source === 'statbank')
-            ? 'Diskonto og DESTR (referencerente)'
+            ? 'Udvalgte danske renter'
             : (country === 'DK' ? 'Udvikling i danske renter' : 'Udvikling i ECB renter');
+
         const datasets = [
             {
                 label: 'Diskonto (%)',
@@ -1894,6 +1955,33 @@ function createInterestRateChart(canvasId, country = 'DK') {
                 borderWidth: 2
             }
         ];
+
+        if (data.ratesFolio && data.ratesFolio.some(v => v != null)) {
+            datasets.push({
+                label: 'Foliorente (%)',
+                data: data.ratesFolio,
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                tension: 0.4,
+                fill: false,
+                borderWidth: 2,
+                hidden: true
+            });
+        }
+
+        if (data.ratesUdlaan && data.ratesUdlaan.some(v => v != null)) {
+            datasets.push({
+                label: 'Udlånsrente (%)',
+                data: data.ratesUdlaan,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                tension: 0.4,
+                fill: false,
+                borderWidth: 2,
+                hidden: true
+            });
+        }
+
         if (data.ratesDESTR && data.ratesDESTR.some(v => v != null)) {
             datasets.push({
                 label: 'DESTR / referencerente (%)',
@@ -1905,7 +1993,9 @@ function createInterestRateChart(canvasId, country = 'DK') {
                 borderWidth: 2,
                 spanGaps: true
             });
-        } else if (data.seriesName) {
+        }
+
+        if (data.seriesName && datasets.length === 1) {
             datasets[0].label = data.seriesName + ' (%)';
         } else if (country !== 'DK') {
             datasets[0].label = 'ECB renter (%)';
@@ -3979,35 +4069,35 @@ function createWagePriceSpiralChart(canvasId) {
                 const outerRadius = Math.min(width, height) / 2 * 0.9;
                 const innerRadius = Math.min(width, height) / 2 * 0.5;
                 const textRadius = (outerRadius + innerRadius) / 2; // Position text in middle of segment
-                
+
                 ctx.save();
-                
+
                 // Draw text labels in each segment
                 const segments = chart.data.datasets[0].data.length;
                 const angleStep = (2 * Math.PI) / segments;
-                
+
                 chart.data.labels.forEach((label, index) => {
                     // Calculate angle for center of segment
                     const segmentCenterAngle = -Math.PI / 2 + (index * angleStep) + (angleStep / 2);
-                    
+
                     // Position text in center of segment
                     const textX = centerX + Math.cos(segmentCenterAngle) * textRadius;
                     const textY = centerY + Math.sin(segmentCenterAngle) * textRadius;
-                    
+
                     // Draw text with shadow for readability
                     ctx.font = 'bold 16px Inter, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    
+
                     // Text shadow
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
                     ctx.fillText(label, textX + 2, textY + 2);
-                    
+
                     // Text
                     ctx.fillStyle = '#ffffff';
                     ctx.fillText(label, textX, textY);
                 });
-                
+
                 ctx.restore();
             }
         }]
@@ -8720,6 +8810,8 @@ function createValutaMarketChart(canvasId) {
                         const meta = chart.getDatasetMeta(i);
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
+
+                            // 1. Dashed lines
                             ctx.save();
                             ctx.strokeStyle = '#94a3b8';
                             ctx.lineWidth = 1;
@@ -8735,22 +8827,39 @@ function createValutaMarketChart(canvasId) {
                             ctx.lineTo(yAxisX, y);
                             ctx.stroke();
                             ctx.restore();
+
+                            // 2. Dot on top
                             ctx.save();
                             ctx.fillStyle = '#fbbf24';
+                            ctx.strokeStyle = '#fff';
+                            ctx.lineWidth = 2;
                             ctx.beginPath();
-                            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                            ctx.arc(x, y, 10, 0, 2 * Math.PI);
                             ctx.fill();
+                            ctx.stroke();
                             ctx.restore();
+
+                            // 3. Number 0 inside (as it is the original equilibrium)
                             ctx.save();
                             ctx.fillStyle = '#000';
-                            ctx.font = '12px Inter';
+                            ctx.font = 'bold 10px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('0', x, y);
+                            ctx.restore();
+
+                            // 4. Labels
+                            ctx.save();
+                            ctx.fillStyle = '#000';
+                            ctx.font = '11px Inter';
                             ctx.textAlign = 'right';
                             ctx.textBaseline = 'middle';
-                            ctx.fillText('kurs₀', yAxisX - 12, y);
+                            ctx.fillText('kurs₀', yAxisX - 15, y);
                             ctx.restore();
+
                             ctx.save();
                             ctx.fillStyle = '#000';
-                            ctx.font = '12px Inter';
+                            ctx.font = '11px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'top';
                             ctx.fillText('Q₀', x, xAxisY + 8);
@@ -8793,15 +8902,14 @@ function createValutaMarketChartAppreciering(canvasId) {
             }, {
                 label: 'E (Efterspørgsel)',
                 data: demand,
-                borderColor: 'rgba(239,68,68,0.5)',
-                borderDash: [6, 4],
-                borderWidth: 2,
+                borderColor: '#ef4444',
+                borderWidth: 3,
                 pointRadius: 0,
                 tension: 0.1
             }, {
                 label: 'E₁ (Efterspørgsel efter skift)',
                 data: demandNew,
-                borderColor: '#ef4444',
+                borderColor: '#10b981',
                 backgroundColor: 'transparent',
                 borderWidth: 3,
                 pointRadius: 0,
@@ -8831,7 +8939,7 @@ function createValutaMarketChartAppreciering(canvasId) {
             layout: valutaChartLayout,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Kurs (DKK per GBP)', position: 'top', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
+                title: { display: true, text: 'KURS (DKK per GBP) APPRECIERING 4', position: 'top', font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
                 legend: { display: true, position: 'top', labels: { font: { size: 11, family: 'Inter, sans-serif' }, padding: 12, usePointStyle: true } }
             },
             scales: {
@@ -8884,15 +8992,14 @@ function createValutaMarketChartDepreciering(canvasId) {
             }, {
                 label: 'E (Efterspørgsel)',
                 data: demand,
-                borderColor: 'rgba(239,68,68,0.5)',
-                borderDash: [6, 4],
-                borderWidth: 2,
+                borderColor: '#ef4444',
+                borderWidth: 3,
                 pointRadius: 0,
                 tension: 0.1
             }, {
                 label: 'E₁ (Efterspørgsel efter skift)',
                 data: demandNew,
-                borderColor: '#ef4444',
+                borderColor: '#10b981',
                 backgroundColor: 'transparent',
                 borderWidth: 3,
                 pointRadius: 0,
@@ -8922,7 +9029,7 @@ function createValutaMarketChartDepreciering(canvasId) {
             layout: valutaChartLayout,
             plugins: {
                 ...chartConfig.plugins,
-                title: { display: true, text: 'Kurs (DKK per GBP)', position: 'top', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
+                title: { display: true, text: 'KURS (DKK per GBP) DEPRECIERING 4', position: 'top', font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
                 legend: { display: true, position: 'top', labels: { font: { size: 11, family: 'Inter, sans-serif' }, padding: 12, usePointStyle: true } }
             },
             scales: {
@@ -8968,14 +9075,13 @@ function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBe
             });
             const xAxisY = yScale.getPixelForValue(0);
             const yAxisX = xScale.getPixelForValue(0);
-            
-            // Check if y-values are close vertically (overlap risk)
-            const yDiff = before && after ? Math.abs(before.y - after.y) : 100;
-            const yLabelsOverlap = yDiff < 35; // hvis kurs₀ og kurs₁ er mindre end 35px fra hinanden
-            
+
+
             [before, after].forEach((pt, idx) => {
                 if (!pt) return;
                 const { x, y } = pt;
+
+                // 1. Draw dashed lines first
                 ctx.save();
                 ctx.strokeStyle = '#94a3b8';
                 ctx.lineWidth = 1;
@@ -8989,43 +9095,44 @@ function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBe
                 ctx.lineTo(yAxisX, y);
                 ctx.stroke();
                 ctx.restore();
+
+                // 2. Draw dots on top of lines
                 ctx.save();
                 ctx.fillStyle = idx === 0 ? '#94a3b8' : '#fbbf24';
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.arc(x, y, idx === 0 ? 4 : 5, 0, 2 * Math.PI);
+                ctx.arc(x, y, 10, 0, 2 * Math.PI); // Bigger dot to cover lines
                 ctx.fill();
+                ctx.stroke();
                 ctx.restore();
-                
+
+                // 3. Add 0 or 1 inside dot
+                ctx.save();
+                ctx.fillStyle = idx === 0 ? '#fff' : '#000';
+                ctx.font = 'bold 10px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(idx === 0 ? '0' : '1', x, y);
+                ctx.restore();
+
                 const yLabel = idx === 0 ? yLabelBefore : yLabelAfter;
                 const xLabel = idx === 0 ? xLabelBefore : xLabelAfter;
-                
-                // Y-axis labels (kurs₀, kurs₁) - placer dem smart så de ikke overlapper
+
+                // Y-axis labels (kurs₀, kurs₁) - keep them aligned with dashed lines
                 ctx.save();
                 ctx.fillStyle = '#000';
                 ctx.font = '11px Inter';
                 ctx.textAlign = 'right';
-                
+                ctx.textBaseline = 'middle';
+
                 let yLabelY = y;
-                let yLabelX = yAxisX - 12;
-                
-                if (yLabelsOverlap) {
-                    // Hvis de overlapper: placer den første lidt over, den anden lidt under
-                    if (idx === 0) {
-                        yLabelY = y - 10; // kurs₀ lidt over punktet
-                        ctx.textBaseline = 'bottom';
-                    } else {
-                        yLabelY = y + 10; // kurs₁ lidt under punktet
-                        ctx.textBaseline = 'top';
-                    }
-                } else {
-                    // Normal placering ved siden af punktet
-                    ctx.textBaseline = 'middle';
-                }
-                
+                let yLabelX = yAxisX - 15;
+
                 ctx.fillText(yLabel, yLabelX, yLabelY);
                 ctx.restore();
-                
-                // X-axis labels (Q₀, Q₁) - undgå overlap hvis punkter er tætte
+
+                // X-axis labels (Q₀, Q₁)
                 const xLabelY = xAxisY + (idx === 1 && before && Math.abs(x - before.x) < 80 ? 22 : 8);
                 ctx.save();
                 ctx.fillStyle = '#000';
@@ -9202,7 +9309,7 @@ function createPolicyEffectivenessChart(canvasId) {
     // Create gradients for glow effect
     const canvas = ctx;
     const chartArea = { top: 0, bottom: 400, left: 0, right: 800 };
-    
+
     const createGradient = (color1, color2) => {
         const chartCtx = canvas.getContext('2d');
         const gradient = chartCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
@@ -9218,9 +9325,9 @@ function createPolicyEffectivenessChart(canvasId) {
             datasets: [{
                 label: 'BNP-effekt (%)',
                 data: bnpEffect,
-                backgroundColor: function(context) {
+                backgroundColor: function (context) {
                     const chart = context.chart;
-                    const {ctx, chartArea} = chart;
+                    const { ctx, chartArea } = chart;
                     if (!chartArea) return 'rgba(59, 130, 246, 0.8)';
                     const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
                     gradient.addColorStop(0, 'rgba(59, 130, 246, 0.9)');
@@ -9232,9 +9339,9 @@ function createPolicyEffectivenessChart(canvasId) {
             }, {
                 label: 'Inflationseffekt (%)',
                 data: inflationEffect,
-                backgroundColor: function(context) {
+                backgroundColor: function (context) {
                     const chart = context.chart;
-                    const {ctx, chartArea} = chart;
+                    const { ctx, chartArea } = chart;
                     if (!chartArea) return 'rgba(168, 85, 247, 0.8)';
                     const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
                     gradient.addColorStop(0, 'rgba(168, 85, 247, 0.9)');
@@ -9246,9 +9353,9 @@ function createPolicyEffectivenessChart(canvasId) {
             }, {
                 label: 'Ledighedseffekt (%)',
                 data: unemploymentEffect,
-                backgroundColor: function(context) {
+                backgroundColor: function (context) {
                     const chart = context.chart;
-                    const {ctx, chartArea} = chart;
+                    const { ctx, chartArea } = chart;
                     if (!chartArea) return 'rgba(236, 72, 153, 0.8)';
                     const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
                     gradient.addColorStop(0, 'rgba(236, 72, 153, 0.9)');
@@ -9769,11 +9876,11 @@ function createWSPSChart(canvasId) {
 // Uses cache-first strategy: always use cached data if available, only update when API works
 async function fetchJobVacanciesFromStatBank(years = 20) {
     const cacheKey = `statbank_job_vacancies_${years}`;
-    
+
     // Always try cache first (even expired cache)
     const cachedData = getAnyCachedData(cacheKey);
     const freshCache = getCachedData(cacheKey);
-    
+
     // If we have fresh cache, use it
     if (freshCache) {
         console.log('Using fresh cached job vacancy data from Danmarks Statistik');
@@ -9784,13 +9891,13 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
     try {
         const endYear = new Date().getFullYear();
         const startYear = endYear - years;
-        
+
         // Build time periods - Q4 data for each year
         const timeValues = [];
         for (let year = startYear; year <= endYear; year++) {
             timeValues.push(`${year}K4`);
         }
-        
+
         const requestBody = {
             table: "LSK03",
             format: "JSONSTAT",
@@ -9808,7 +9915,7 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
         };
 
         console.log('Fetching job vacancies from StatBank API...');
-        
+
         const response = await fetch('https://api.statbank.dk/v1/data', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -9821,20 +9928,20 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
 
         const data = await response.json();
         const vacancyData = {};
-        
+
         // JSONSTAT format parsing
         if (data && data.dataset && data.dataset.value) {
             const values = data.dataset.value;
             const dimensions = data.dataset.dimension;
             const timeDim = dimensions.Tid || dimensions.TID || dimensions.tid;
-            
+
             if (timeDim && timeDim.category && timeDim.category.index) {
                 const timeLabels = Object.keys(timeDim.category.index);
-                
+
                 timeLabels.forEach((timeLabel, i) => {
                     const year = timeLabel.substring(0, 4);
                     const value = values[i];
-                    
+
                     if (value !== null && value !== undefined && !isNaN(value)) {
                         // Convert to % of workforce (~3 million)
                         const vacancyRate = (value / 3000000) * 100;
@@ -9848,7 +9955,7 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
             data.forEach(row => {
                 const time = row.TID || row.Tid || row.tid;
                 const value = row.INDHOLD || row.value || row.Value;
-                
+
                 if (time && value !== null && value !== undefined) {
                     const year = time.substring(0, 4);
                     const vacancyRate = (parseFloat(value) / 3000000) * 100;
@@ -9856,30 +9963,30 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
                 }
             });
         }
-        
+
         // Save new data to cache
         if (Object.keys(vacancyData).length > 0) {
             setCachedData(cacheKey, vacancyData);
             console.log(`Updated cache with ${Object.keys(vacancyData).length} years of real job vacancy data from Danmarks Statistik`);
             return vacancyData;
         }
-        
+
         // If no data parsed, use old cache
         if (cachedData) {
             console.log('API returned empty data, using cached data');
             return cachedData;
         }
-        
+
         return null;
     } catch (error) {
         console.log('StatBank API unavailable:', error.message);
-        
+
         // Use old cached data if available (even if expired)
         if (cachedData) {
             console.log('Using cached job vacancy data (API unavailable)');
             return cachedData;
         }
-        
+
         return null;
     }
 }
@@ -9888,22 +9995,22 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
 // Cache-first strategy: uses cached data, only updates when APIs are available
 async function fetchBeveridgeCurveData(years = 20) {
     const cacheKey = `beveridge_curve_DNK_${years}`;
-    
+
     // Check for fresh cache first
     const freshCache = getCachedData(cacheKey);
     if (freshCache) {
         console.log('Using fresh cached Beveridge curve data');
         return freshCache;
     }
-    
+
     // Check for any cached data (even expired)
     const anyCache = getAnyCachedData(cacheKey);
 
     try {
         // Fetch unemployment from World Bank
         const unempResults = await fetchWorldBankData(
-            API_CONFIG.worldBank.indicators.unemployment, 
-            ['DNK'], 
+            API_CONFIG.worldBank.indicators.unemployment,
+            ['DNK'],
             years
         );
         const unempData = unempResults[0]?.data || {};
@@ -9911,7 +10018,7 @@ async function fetchBeveridgeCurveData(years = 20) {
         // Fetch real job vacancy data from Danmarks Statistik
         let vacancyData = await fetchJobVacanciesFromStatBank(years);
         let usingRealData = true;
-        
+
         // If no real data, use simulation
         if (!vacancyData || Object.keys(vacancyData).length === 0) {
             console.log('No real vacancy data available, using simulation');
@@ -9933,9 +10040,9 @@ async function fetchBeveridgeCurveData(years = 20) {
         allYears.forEach(year => {
             const unemployment = unempData[year];
             const vacancies = vacancyData[year];
-            
+
             // Only include points where we have both values
-            if (unemployment !== undefined && unemployment !== null && 
+            if (unemployment !== undefined && unemployment !== null &&
                 vacancies !== undefined && vacancies !== null) {
                 dataPoints.push({
                     x: Number(unemployment.toFixed(1)),
@@ -9959,13 +10066,13 @@ async function fetchBeveridgeCurveData(years = 20) {
         return result;
     } catch (error) {
         console.error('Error fetching Beveridge curve data:', error);
-        
+
         // Use cached data if available (even expired)
         if (anyCache) {
             console.log('Using cached Beveridge curve data (API error)');
             return anyCache;
         }
-        
+
         // Last resort: theoretical fallback
         console.log('No cached data available, using theoretical fallback');
         return {
@@ -9988,13 +10095,13 @@ async function fetchBeveridgeCurveData(years = 20) {
 // This is a realistic simulation based on historical Beveridge curve patterns
 function generateJobVacancyDataFromUnemployment(unempData) {
     const vacancyData = {};
-    
+
     // Beveridge curve relationship: vacancies = a / (unemployment + b) + c
     // Parameters calibrated to Danish data patterns
     const a = 8.0;  // Scaling factor
     const b = 1.5;   // Offset
     const c = 0.2;   // Minimum vacancy rate
-    
+
     Object.keys(unempData).forEach(year => {
         const unemployment = unempData[year];
         if (unemployment !== undefined && unemployment !== null) {
@@ -10005,7 +10112,7 @@ function generateJobVacancyDataFromUnemployment(unempData) {
             vacancyData[year] = Math.max(0.1, Math.min(10.0, baseVacancy * variation));
         }
     });
-    
+
     return vacancyData;
 }
 
@@ -10013,12 +10120,12 @@ function generateJobVacancyDataFromUnemployment(unempData) {
 function generateTheoreticalBeveridgeCurve(xMin, xMax, steps = 50) {
     const theoreticalPoints = [];
     const step = (xMax - xMin) / steps;
-    
+
     // Beveridge curve relationship: vacancies = a / (unemployment + b) + c
     const a = 8.0;  // Scaling factor
     const b = 1.5;   // Offset
     const c = 0.2;   // Minimum vacancy rate
-    
+
     for (let i = 0; i <= steps; i++) {
         const unemployment = xMin + (step * i);
         const vacancies = a / (unemployment + b) + c;
@@ -10027,7 +10134,7 @@ function generateTheoreticalBeveridgeCurve(xMin, xMax, steps = 50) {
             y: Number(vacancies.toFixed(2))
         });
     }
-    
+
     return theoreticalPoints;
 }
 
@@ -10039,7 +10146,7 @@ function createBeveridgeCurveChart(canvasId) {
     // Fetch real data
     fetchBeveridgeCurveData(25).then(result => {
         const dataPoints = result.dataPoints || [];
-        
+
         if (dataPoints.length === 0) {
             console.warn('No data points available for Beveridge curve');
             return;
@@ -10100,16 +10207,16 @@ function createBeveridgeCurveChart(canvasId) {
                     },
                     tooltip: {
                         ...chartConfig.plugins.tooltip,
-                        filter: function(tooltipItem) {
+                        filter: function (tooltipItem) {
                             // Only show tooltip for real data points, not theoretical curve
                             return tooltipItem.datasetIndex === 1;
                         },
                         callbacks: {
-                            title: function(context) {
+                            title: function (context) {
                                 const point = context[0].raw;
                                 return `År: ${point.year || 'N/A'}`;
                             },
-                            label: function(context) {
+                            label: function (context) {
                                 const point = context.raw;
                                 return [
                                     `Ledighed: ${point.x.toFixed(1)}%`,
@@ -10121,29 +10228,29 @@ function createBeveridgeCurveChart(canvasId) {
                 },
                 scales: {
                     x: {
-                        title: { 
-                            display: true, 
-                            text: 'Ledighedsprocent (%)', 
-                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 } 
+                        title: {
+                            display: true,
+                            text: 'Ledighedsprocent (%)',
+                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 }
                         },
                         min: xMin,
                         max: xMax,
                         ticks: {
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
                     },
                     y: {
-                        title: { 
-                            display: true, 
-                            text: 'Ledige stillinger (%)', 
-                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 } 
+                        title: {
+                            display: true,
+                            text: 'Ledige stillinger (%)',
+                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 }
                         },
                         min: yMin,
                         max: yMax,
                         ticks: {
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
@@ -10210,15 +10317,15 @@ function createBeveridgeCurveChart(canvasId) {
                     },
                     tooltip: {
                         ...chartConfig.plugins.tooltip,
-                        filter: function(tooltipItem) {
+                        filter: function (tooltipItem) {
                             return tooltipItem.datasetIndex === 1;
                         },
                         callbacks: {
-                            title: function(context) {
+                            title: function (context) {
                                 const point = context[0].raw;
                                 return `År: ${point.year || 'N/A'}`;
                             },
-                            label: function(context) {
+                            label: function (context) {
                                 const point = context.raw;
                                 return [
                                     `Ledighed: ${point.x.toFixed(1)}%`,
@@ -10234,7 +10341,7 @@ function createBeveridgeCurveChart(canvasId) {
                         min: 0,
                         max: 12,
                         ticks: {
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
@@ -10244,7 +10351,7 @@ function createBeveridgeCurveChart(canvasId) {
                         min: 0,
                         max: 10,
                         ticks: {
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
