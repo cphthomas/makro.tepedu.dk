@@ -122,70 +122,121 @@ function showChartError(loadingDiv, message = 'Kunne ikke hente data. Genindlæs
     }
 }
 
+// Helper function to get current theme
+function getChartTheme() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    return theme === 'dark' ? 'dark' : 'light';
+}
+
+// Helper function to get theme-based colors
+function getThemeColors() {
+    const isDark = getChartTheme() === 'dark';
+    return {
+        grid: isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.05)', // More visible grid in dark mode
+        text: isDark ? '#ffffff' : '#333333',
+        tooltipBg: isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.8)',
+        tooltipText: isDark ? '#000000' : '#ffffff'
+    };
+}
+
 // Chart.js default configuration
-const chartConfig = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: {
-        duration: 2000,
-        easing: 'easeInOutQuart'
-    },
-    plugins: {
-        legend: {
-            display: true,
-            position: 'top',
-            labels: {
-                font: {
-                    size: 12,
-                    family: 'Inter, sans-serif'
+function getChartConfig() {
+    const colors = getThemeColors();
+    return {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+            duration: 2000,
+            easing: 'easeInOutQuart'
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 12,
+                        family: 'Inter, sans-serif'
+                    },
+                    padding: 15,
+                    color: colors.text
+                }
+            },
+            tooltip: {
+                enabled: true,
+                backgroundColor: colors.tooltipBg,
+                titleColor: colors.tooltipText,
+                bodyColor: colors.tooltipText,
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
                 },
-                padding: 15
+                bodyFont: {
+                    size: 12
+                },
+                padding: 12,
+                cornerRadius: 6
+            },
+            title: {
+                color: colors.text
             }
         },
-        tooltip: {
-            enabled: true,
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            titleFont: {
-                size: 14,
-                weight: 'bold'
-            },
-            bodyFont: {
-                size: 12
-            },
-            padding: 12,
-            cornerRadius: 6
-        }
-    },
-    scales: {
-        x: {
-            grid: {
-                display: true,
-                color: 'rgba(0,0,0,0.05)'
-            },
-            ticks: {
-                font: {
-                    size: 11,
-                    family: 'Inter, sans-serif'
-                }
-            }
-        },
-        y: {
-            grid: {
-                display: true,
-                color: 'rgba(0,0,0,0.05)'
-            },
-            ticks: {
-                font: {
-                    size: 11,
-                    family: 'Inter, sans-serif'
+        scales: {
+            x: {
+                grid: {
+                    display: true,
+                    color: colors.grid,
+                    lineWidth: 1
                 },
-                callback: function (value) {
-                    return value.toLocaleString('da-DK');
+                ticks: {
+                    font: {
+                        size: 11,
+                        family: 'Inter, sans-serif'
+                    },
+                    color: colors.text
+                },
+                title: {
+                    color: colors.text
+                }
+            },
+            y: {
+                grid: {
+                    display: true,
+                    color: colors.grid,
+                    lineWidth: 1
+                },
+                ticks: {
+                    font: {
+                        size: 11,
+                        family: 'Inter, sans-serif'
+                    },
+                    color: colors.text,
+                    callback: function (value) {
+                        return value.toLocaleString('da-DK');
+                    }
+                },
+                title: {
+                    color: colors.text
                 }
             }
         }
-    }
-};
+    };
+}
+
+// Keep backward compatibility - but make it dynamic
+// Use getChartConfig() directly in chart creation functions
+// This ensures charts always use the current theme
+let chartConfig = getChartConfig();
+
+// Function to update chartConfig when theme changes
+function updateChartConfig() {
+    chartConfig = getChartConfig();
+}
+
+// Expose updateChartConfig for theme toggle
+if (typeof window !== 'undefined') {
+    window.updateChartConfig = updateChartConfig;
+}
 
 // Fetch exchange rates
 async function fetchExchangeRates(days = 365, currencies = ['EUR', 'USD']) {
@@ -1833,6 +1884,8 @@ function createExchangeRateChart(canvasId) {
             borderWidth: 2
         }));
 
+        const currentChartConfig = getChartConfig();
+        const themeColors = getThemeColors();
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -1840,9 +1893,9 @@ function createExchangeRateChart(canvasId) {
                 datasets: datasets
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Udvikling i valutakurser (DKK)',
@@ -1851,6 +1904,7 @@ function createExchangeRateChart(canvasId) {
                             weight: 'bold',
                             family: 'Inter, sans-serif'
                         },
+                        color: themeColors.text,
                         padding: {
                             top: 10,
                             bottom: 20
@@ -1858,9 +1912,9 @@ function createExchangeRateChart(canvasId) {
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'Kurs (DKK pr. enhed)',
@@ -1872,7 +1926,7 @@ function createExchangeRateChart(canvasId) {
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'Dato',
@@ -1897,6 +1951,13 @@ function createExchangeRateChart(canvasId) {
 function createEuroBandChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     fetchExchangeRates(3650, ['EUR']).then(data => {
         // Fixed exchange rate bands
@@ -1960,9 +2021,9 @@ function createEuroBandChart(canvasId) {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Danmarks fastkurspolitik: DKK/EUR med interventionsbånd',
@@ -1974,10 +2035,11 @@ function createEuroBandChart(canvasId) {
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     },
                     tooltip: {
-                        ...chartConfig.plugins.tooltip,
+                        ...currentChartConfig.plugins.tooltip,
                         callbacks: {
                             label: function (context) {
                                 let label = context.dataset.label || '';
@@ -1993,14 +2055,15 @@ function createEuroBandChart(canvasId) {
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         min: 7.28,
                         max: 7.64,
                         ticks: {
-                            ...chartConfig.scales.y.ticks,
+                            ...currentChartConfig.scales.y.ticks,
                             stepSize: 0.05,
+                            color: colors.text,
                             callback: function (value) {
                                 return value.toFixed(2) + ' DKK';
                             }
@@ -2012,11 +2075,17 @@ function createEuroBandChart(canvasId) {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'Dato',
@@ -2024,7 +2093,17 @@ function createEuroBandChart(canvasId) {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
                         }
                     }
                 }
@@ -2119,6 +2198,8 @@ function createInterestRateChart(canvasId, country = 'DK') {
         } else if (country !== 'DK') {
             datasets[0].label = 'ECB renter (%)';
         }
+        const currentChartConfig = getChartConfig();
+        const colors = getThemeColors();
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -2126,9 +2207,9 @@ function createInterestRateChart(canvasId, country = 'DK') {
                 datasets: datasets
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: chartTitle,
@@ -2140,23 +2221,30 @@ function createInterestRateChart(canvasId, country = 'DK') {
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         min: Math.max(-2, Math.floor(minRate) - 0.5),
                         max: Math.min(5, Math.ceil(maxRate) + 0.5),
                         ticks: {
-                            ...chartConfig.scales.y.ticks,
+                            ...currentChartConfig.scales.y.ticks,
                             stepSize: 0.5,
+                            color: colors.text,
                             callback: function (value) {
                                 // Round to 0.5 increments and format
                                 const rounded = Math.round(value * 2) / 2;
                                 return rounded.toFixed(1) + '%';
                             }
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
                         },
                         title: {
                             display: true,
@@ -2165,11 +2253,12 @@ function createInterestRateChart(canvasId, country = 'DK') {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'Dato',
@@ -2177,7 +2266,17 @@ function createInterestRateChart(canvasId, country = 'DK') {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
                         }
                     }
                 }
@@ -3446,13 +3545,15 @@ function createGDPChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']) {
         if (!isChartJSReady()) {
             throw new Error('Chart.js not available');
         }
+        const currentChartConfig = getChartConfig();
+        const colors = getThemeColors();
         new Chart(ctx, {
             type: 'line',
             data: data,
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'BNP-udvikling for forskellige lande',
@@ -3464,13 +3565,14 @@ function createGDPChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']) {
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'BNP (mia. USD)',
@@ -3482,7 +3584,7 @@ function createGDPChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']) {
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'År',
@@ -3536,13 +3638,15 @@ function createGDPIndexedChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR'
             })
         };
 
+        const currentChartConfig = getChartConfig();
+        const colors = getThemeColors();
         new Chart(ctx, {
             type: 'line',
             data: indexedData,
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'BNP-udvikling indekseret (basisår = 100)',
@@ -3554,13 +3658,14 @@ function createGDPIndexedChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR'
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'Indeks (basisår = 100)',
@@ -3568,17 +3673,24 @@ function createGDPIndexedChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR'
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
                         },
                         ticks: {
-                            ...chartConfig.scales.y.ticks,
+                            ...currentChartConfig.scales.y.ticks,
+                            color: colors.text,
                             callback: function (value) {
                                 return value.toFixed(0);
                             }
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'År',
@@ -3586,7 +3698,17 @@ function createGDPIndexedChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR'
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
                         }
                     }
                 }
@@ -3630,13 +3752,15 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
             console.warn('WARNING: USA missing from datasets!');
         }
 
+        const currentChartConfig = getChartConfig();
+        const colors = getThemeColors();
         new Chart(ctx, {
             type: 'line',
             data: data,
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'BNP pr. indbygger for forskellige lande',
@@ -3648,13 +3772,14 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'BNP pr. indbygger (USD)',
@@ -3662,17 +3787,24 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
                         },
                         ticks: {
-                            ...chartConfig.scales.y.ticks,
+                            ...currentChartConfig.scales.y.ticks,
+                            color: colors.text,
                             callback: function (value) {
                                 return value.toLocaleString('da-DK');
                             }
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'År',
@@ -3680,7 +3812,17 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
                         }
                     }
                 }
@@ -3746,13 +3888,15 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                 });
 
                 if (processedData.datasets.length > 0) {
+                    const currentChartConfig = getChartConfig();
+                    const colors = getThemeColors();
                     new Chart(ctx, {
                         type: 'line',
                         data: processedData,
                         options: {
-                            ...chartConfig,
+                            ...currentChartConfig,
                             plugins: {
-                                ...chartConfig.plugins,
+                                ...currentChartConfig.plugins,
                                 title: {
                                     display: true,
                                     text: 'BNP pr. indbygger for forskellige lande',
@@ -3764,13 +3908,14 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                                     padding: {
                                         top: 10,
                                         bottom: 20
-                                    }
+                                    },
+                                    color: colors.text
                                 }
                             },
                             scales: {
-                                ...chartConfig.scales,
+                                ...currentChartConfig.scales,
                                 y: {
-                                    ...chartConfig.scales.y,
+                                    ...currentChartConfig.scales.y,
                                     title: {
                                         display: true,
                                         text: 'BNP pr. indbygger (USD)',
@@ -3778,17 +3923,24 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                                             size: 12,
                                             weight: 'bold',
                                             family: 'Inter, sans-serif'
-                                        }
+                                        },
+                                        color: colors.text
                                     },
                                     ticks: {
-                                        ...chartConfig.scales.y.ticks,
+                                        ...currentChartConfig.scales.y.ticks,
+                                        color: colors.text,
                                         callback: function (value) {
                                             return value.toLocaleString('da-DK');
                                         }
+                                    },
+                                    grid: {
+                                        display: true,
+                                        color: colors.grid,
+                                        lineWidth: 1
                                     }
                                 },
                                 x: {
-                                    ...chartConfig.scales.x,
+                                    ...currentChartConfig.scales.x,
                                     title: {
                                         display: true,
                                         text: 'År',
@@ -3796,7 +3948,17 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
                                             size: 12,
                                             weight: 'bold',
                                             family: 'Inter, sans-serif'
-                                        }
+                                        },
+                                        color: colors.text
+                                    },
+                                    grid: {
+                                        display: true,
+                                        color: colors.grid,
+                                        lineWidth: 1
+                                    },
+                                    ticks: {
+                                        ...currentChartConfig.scales.x.ticks,
+                                        color: colors.text
                                     }
                                 }
                             }
@@ -3812,6 +3974,13 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
 function createUnemploymentInflationChart(canvasId, country = 'DNK') {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     fetchUnemploymentInflationData(country, 40).then(data => {
         new Chart(ctx, {
@@ -3840,9 +4009,9 @@ function createUnemploymentInflationChart(canvasId, country = 'DNK') {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Ledighed og inflation i Danmark',
@@ -3854,13 +4023,14 @@ function createUnemploymentInflationChart(canvasId, country = 'DNK') {
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         position: 'left',
                         title: {
                             display: true,
@@ -3869,10 +4039,17 @@ function createUnemploymentInflationChart(canvasId, country = 'DNK') {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
                         },
                         ticks: {
-                            ...chartConfig.scales.y.ticks,
+                            ...currentChartConfig.scales.y.ticks,
+                            color: colors.text,
                             callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
@@ -3882,7 +4059,8 @@ function createUnemploymentInflationChart(canvasId, country = 'DNK') {
                         type: 'linear',
                         position: 'right',
                         grid: {
-                            drawOnChartArea: false
+                            drawOnChartArea: false,
+                            color: colors.grid
                         },
                         title: {
                             display: true,
@@ -3891,16 +4069,27 @@ function createUnemploymentInflationChart(canvasId, country = 'DNK') {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
                         },
                         ticks: {
+                            color: colors.text,
                             callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
+                        },
                         title: {
                             display: true,
                             text: 'År',
@@ -3908,7 +4097,8 @@ function createUnemploymentInflationChart(canvasId, country = 'DNK') {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
                         }
                     }
                 }
@@ -4018,6 +4208,13 @@ function createMultiCountryUnemploymentInflationChart(canvasId, countries = ['DN
             legendContainer.id = canvasId + '-legend';
             controlsWrapper.appendChild(legendContainer);
 
+            if (!isChartJSReady()) {
+                throw new Error('Chart.js not available');
+            }
+
+            const currentChartConfig = getChartConfig();
+            const colors = getThemeColors();
+
             const chart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -4025,10 +4222,10 @@ function createMultiCountryUnemploymentInflationChart(canvasId, countries = ['DN
                     datasets: datasets
                 },
                 options: {
-                    ...chartConfig,
+                    ...currentChartConfig,
                     maintainAspectRatio: false, // Allow it to fill the container height
                     plugins: {
-                        ...chartConfig.plugins,
+                        ...currentChartConfig.plugins,
                         title: { display: false }, // Disable Chart.js title
                         legend: { display: false },
                         htmlLegend: { containerID: canvasId + '-legend' }
@@ -4040,26 +4237,59 @@ function createMultiCountryUnemploymentInflationChart(canvasId, countries = ['DN
                         }
                     },
                     scales: {
-                        ...chartConfig.scales,
+                        ...currentChartConfig.scales,
                         y: {
-                            ...chartConfig.scales.y,
+                            ...currentChartConfig.scales.y,
                             position: 'left',
-                            title: { display: true, text: 'Ledighed (%)' },
+                            title: { 
+                                display: true, 
+                                text: 'Ledighed (%)',
+                                color: colors.text
+                            },
+                            grid: {
+                                display: true,
+                                color: colors.grid,
+                                lineWidth: 1
+                            },
                             ticks: {
-                                ...chartConfig.scales.y.ticks,
+                                ...currentChartConfig.scales.y.ticks,
+                                color: colors.text,
                                 callback: v => v.toFixed(1) + '%'
                             }
                         },
                         y1: {
                             type: 'linear',
                             position: 'right',
-                            grid: { drawOnChartArea: false },
-                            title: { display: true, text: 'Inflation (%)' },
-                            ticks: { callback: v => v.toFixed(1) + '%' }
+                            grid: { 
+                                drawOnChartArea: false,
+                                color: colors.grid
+                            },
+                            title: { 
+                                display: true, 
+                                text: 'Inflation (%)',
+                                color: colors.text
+                            },
+                            ticks: { 
+                                color: colors.text,
+                                callback: v => v.toFixed(1) + '%' 
+                            }
                         },
                         x: {
-                            ...chartConfig.scales.x,
-                            title: { display: true, text: 'År' }
+                            ...currentChartConfig.scales.x,
+                            title: { 
+                                display: true, 
+                                text: 'År',
+                                color: colors.text
+                            },
+                            grid: {
+                                display: true,
+                                color: colors.grid,
+                                lineWidth: 1
+                            },
+                            ticks: {
+                                ...currentChartConfig.scales.x.ticks,
+                                color: colors.text
+                            }
                         }
                     }
                 },
@@ -4153,6 +4383,13 @@ function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
+
     const countryNames = {
         'DNK': 'Danmark',
         'DEU': 'Tyskland',
@@ -4208,16 +4445,18 @@ function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
                 type: 'scatter',
                 data: { datasets },
                 options: {
-                    ...chartConfig,
+                    ...currentChartConfig,
                     plugins: {
-                        ...chartConfig.plugins,
+                        ...currentChartConfig.plugins,
                         title: {
                             display: true,
                             text: 'Phillips-kurven: Faktiske data for inflation og ledighed',
                             font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
-                            padding: { top: 10, bottom: 20 }
+                            padding: { top: 10, bottom: 20 },
+                            color: colors.text
                         },
                         tooltip: {
+                            ...currentChartConfig.plugins.tooltip,
                             callbacks: {
                                 label: function (context) {
                                     const point = context.raw;
@@ -4228,13 +4467,44 @@ function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
                         }
                     },
                     scales: {
+                        ...currentChartConfig.scales,
                         x: {
-                            title: { display: true, text: 'Ledighed (%)', font: { weight: 'bold' } },
-                            ticks: { callback: v => v.toFixed(1) + '%' }
+                            ...currentChartConfig.scales.x,
+                            title: { 
+                                display: true, 
+                                text: 'Ledighed (%)', 
+                                font: { weight: 'bold' },
+                                color: colors.text
+                            },
+                            grid: {
+                                display: true,
+                                color: colors.grid,
+                                lineWidth: 1
+                            },
+                            ticks: { 
+                                ...currentChartConfig.scales.x.ticks,
+                                color: colors.text,
+                                callback: v => v.toFixed(1) + '%' 
+                            }
                         },
                         y: {
-                            title: { display: true, text: 'Inflation (%)', font: { weight: 'bold' } },
-                            ticks: { callback: v => v.toFixed(1) + '%' }
+                            ...currentChartConfig.scales.y,
+                            title: { 
+                                display: true, 
+                                text: 'Inflation (%)', 
+                                font: { weight: 'bold' },
+                                color: colors.text
+                            },
+                            grid: {
+                                display: true,
+                                color: colors.grid,
+                                lineWidth: 1
+                            },
+                            ticks: { 
+                                ...currentChartConfig.scales.y.ticks,
+                                color: colors.text,
+                                callback: v => v.toFixed(1) + '%' 
+                            }
                         }
                     }
                 }
@@ -4325,13 +4595,14 @@ function createOkunsLawChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR'])
             }
         });
 
+        const currentChartConfig = getChartConfig();
         new Chart(ctx, {
             type: 'scatter',
             data: { datasets },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: "Okun's lov - Sammenhæng mellem BNP-vækst og ledighedsændring",
@@ -4437,9 +4708,9 @@ function createOkunsLawChartMock(ctx, countries) {
             datasets: datasets
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: "Okun's lov - Sammenhæng mellem BNP-vækst og ledighedsændring",
@@ -4470,9 +4741,9 @@ function createOkunsLawChartMock(ctx, countries) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...currentChartConfig.scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'BNP-vækst (%)',
@@ -4480,19 +4751,42 @@ function createOkunsLawChartMock(ctx, countries) {
                             size: 12,
                             weight: 'bold',
                             family: 'Inter, sans-serif'
-                        }
+                        },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
                     },
                     ticks: {
+                        ...currentChartConfig.scales.x.ticks,
+                        color: colors.text,
                         callback: function (value) {
                             return value.toFixed(1) + '%';
                         }
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     title: {
                         display: true,
                         text: 'Ændring i ledighed (procentpoint)',
+                        color: colors.text,
+                        font: {
+                            size: 12,
+                            weight: 'bold',
+                            family: 'Inter, sans-serif'
+                        }
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.y.ticks,
+                        color: colors.text,
                         font: {
                             size: 12,
                             weight: 'bold',
@@ -4514,6 +4808,13 @@ function createOkunsLawChartMock(ctx, countries) {
 function createBalanceOfPaymentsChart(canvasId, years = 20) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const loadingDiv = showChartLoading(ctx, 'Henter betalingsbalancedata...');
 
@@ -4543,9 +4844,9 @@ function createBalanceOfPaymentsChart(canvasId, years = 20) {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Betalingsbalancens udvikling i Danmark',
@@ -4557,13 +4858,14 @@ function createBalanceOfPaymentsChart(canvasId, years = 20) {
                         padding: {
                             top: 10,
                             bottom: 20
-                        }
+                        },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'Saldo (mia. kr.)',
@@ -4571,11 +4873,21 @@ function createBalanceOfPaymentsChart(canvasId, years = 20) {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.y.ticks,
+                            color: colors.text
                         }
                     },
                     x: {
-                        ...chartConfig.scales.x,
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'År',
@@ -4583,7 +4895,17 @@ function createBalanceOfPaymentsChart(canvasId, years = 20) {
                                 size: 12,
                                 weight: 'bold',
                                 family: 'Inter, sans-serif'
-                            }
+                            },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
                         }
                     }
                 }
@@ -4599,6 +4921,13 @@ function createBalanceOfPaymentsChart(canvasId, years = 20) {
 function createNationalAccountsChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     fetchNationalAccounts(20).then(data => {
         const chartCtx = ctx.getContext('2d');
@@ -4675,17 +5004,18 @@ function createNationalAccountsChart(canvasId) {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 interaction: {
                     mode: 'index',
                     intersect: false,
                 },
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Nationalregnskabets Udvikling (Realvækst)',
-                        font: { size: 18, weight: 'bold', family: 'Inter, sans-serif' }
+                        font: { size: 18, weight: 'bold', family: 'Inter, sans-serif' },
+                        color: colors.text
                     },
                     annotation: {
                         annotations: {
@@ -4723,11 +5053,36 @@ function createNationalAccountsChart(canvasId) {
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         beginAtZero: true,
-                        title: { display: true, text: 'Milliarder kr.' }
+                        title: { 
+                            display: true, 
+                            text: 'Milliarder kr.',
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.y.ticks,
+                            color: colors.text
+                        }
+                    },
+                    x: {
+                        ...currentChartConfig.scales.x,
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
+                        }
                     }
                 }
             }
@@ -4885,13 +5240,15 @@ function createGDPBubbleChart(canvasId, countries) {
     // Helper function to create bubble chart
     function createBubbleChart(ctx, bubbleData) {
         console.log('Creating bubble chart with', bubbleData.datasets.length, 'datasets');
+        const currentChartConfig = getChartConfig();
+        const colors = getThemeColors();
         new Chart(ctx, {
             type: 'bubble',
             data: bubbleData,
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Velstand vs. Økonomisk Størrelse (Boblediagram)',
@@ -4974,6 +5331,8 @@ function createSupplyAndUsePieChart(canvasId, type = 'use') {
         title: 'Tilgang af varer og tjenester'
     };
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
     new Chart(ctx, {
         type: 'pie',
         data: {
@@ -4985,10 +5344,10 @@ function createSupplyAndUsePieChart(canvasId, type = 'use') {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             scales: {},
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: dataSet.title,
@@ -4996,7 +5355,8 @@ function createSupplyAndUsePieChart(canvasId, type = 'use') {
                         size: 16,
                         weight: 'bold',
                         family: 'Inter, sans-serif'
-                    }
+                    },
+                    color: colors.text
                 },
                 tooltip: {
                     callbacks: {
@@ -5018,6 +5378,9 @@ function createBFIPieChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
+
     new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -5029,10 +5392,10 @@ function createBFIPieChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             scales: {},
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Fordeling af Bruttofaktorindkomst (BFI)',
@@ -5040,7 +5403,8 @@ function createBFIPieChart(canvasId) {
                         size: 16,
                         weight: 'bold',
                         family: 'Inter, sans-serif'
-                    }
+                    },
+                    color: colors.text
                 },
                 tooltip: {
                     callbacks: {
@@ -5066,6 +5430,8 @@ function createWagePriceSpiralChart(canvasId) {
     // Use colors that flow into each other to show the spiral
     const colors = ['#ff6384', '#ff9f40', '#4bc0c0'];
 
+    const currentChartConfig = getChartConfig();
+    const themeColors = getThemeColors();
     const chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -5079,13 +5445,13 @@ function createWagePriceSpiralChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             cutout: '50%', // Make it a donut with larger segments
             rotation: -90, // Start from top
             circumference: 360,
             scales: {},
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 legend: {
                     display: false // Hide legend since text will be in segments
                 },
@@ -5195,6 +5561,8 @@ function createEmploymentSectorPieChart(canvasId, country = 'DK') {
     };
 
     const data = countryData[country] || countryData['DK'];
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     new Chart(ctx, {
         type: 'pie',
@@ -5207,10 +5575,10 @@ function createEmploymentSectorPieChart(canvasId, country = 'DK') {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             scales: {},
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: data.title,
@@ -5218,7 +5586,8 @@ function createEmploymentSectorPieChart(canvasId, country = 'DK') {
                         size: 16,
                         weight: 'bold',
                         family: 'Inter, sans-serif'
-                    }
+                    },
+                    color: colors.text
                 },
                 tooltip: {
                     callbacks: {
@@ -5267,25 +5636,49 @@ function createBOPDetailedChart(canvasId) {
         ]
     };
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
     new Chart(ctx, {
         type: 'bar',
         data: data,
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             indexAxis: 'y', // Changed to 'y' for horizontal stacked bars
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     stacked: true,
-                    title: { display: true, text: 'Mia. kr.' }
+                    title: { 
+                        display: true, 
+                        text: 'Mia. kr.',
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.x.ticks,
+                        color: colors.text
+                    }
                 },
-                y: { stacked: true }
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    stacked: true,
+                    ticks: {
+                        ...currentChartConfig.scales.y.ticks,
+                        color: colors.text
+                    }
+                }
             },
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Sammensætning af overskuddet (Samlet: +342 mia. kr.)',
-                    font: { size: 16, weight: 'bold' }
+                    font: { size: 16, weight: 'bold' },
+                    color: colors.text
                 },
                 tooltip: {
                     callbacks: {
@@ -5408,15 +5801,17 @@ function createHDIChart(canvasId) {
         }]
     };
 
+    const currentChartConfig = getChartConfig();
+    const themeColors = getThemeColors();
     new Chart(ctx, {
         type: 'bar',
         data: data,
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             indexAxis: 'y', // Horizontal bars
             scales: {
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     min: 0,
                     max: 1,
                     title: {
@@ -5425,17 +5820,24 @@ function createHDIChart(canvasId) {
                         font: {
                             size: 14,
                             weight: 'bold'
-                        }
+                        },
+                        color: themeColors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: themeColors.grid,
+                        lineWidth: 1
                     },
                     ticks: {
-                        ...chartConfig.scales.x.ticks,
+                        ...currentChartConfig.scales.x.ticks,
+                        color: themeColors.text,
                         callback: function (value) {
                             return value.toFixed(3);
                         }
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     beginAtZero: false,
                     ticks: {
                         font: {
@@ -5443,7 +5845,7 @@ function createHDIChart(canvasId) {
                             family: 'Inter, sans-serif'
                         },
                         padding: 2,  // Reduce padding to fit more countries
-                        color: '#333',
+                        color: themeColors.text,
                         // Use labels directly from data.labels array
                         callback: function (value, index, ticks) {
                             // Chart.js with indexAxis: 'y' automatically maps labels
@@ -5460,12 +5862,12 @@ function createHDIChart(canvasId) {
                 }
             },
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 legend: {
                     display: false
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             const value = context.raw;
@@ -5603,15 +6005,17 @@ function createGDPPerCapitaBarChart(canvasId) {
         }]
     };
 
+    const currentChartConfig = getChartConfig();
+    const themeColors = getThemeColors();
     new Chart(ctx, {
         type: 'bar',
         data: data,
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             indexAxis: 'y', // Horizontal bars
             scales: {
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     min: 0,
                     title: {
                         display: true,
@@ -5619,10 +6023,17 @@ function createGDPPerCapitaBarChart(canvasId) {
                         font: {
                             size: 14,
                             weight: 'bold'
-                        }
+                        },
+                        color: themeColors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: themeColors.grid,
+                        lineWidth: 1
                     },
                     ticks: {
-                        ...chartConfig.scales.x.ticks,
+                        ...currentChartConfig.scales.x.ticks,
+                        color: themeColors.text,
                         callback: function (value) {
                             if (value >= 1000) {
                                 return '$' + (value / 1000).toFixed(1) + 'k';
@@ -5632,7 +6043,7 @@ function createGDPPerCapitaBarChart(canvasId) {
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     beginAtZero: false,
                     ticks: {
                         font: {
@@ -5640,7 +6051,7 @@ function createGDPPerCapitaBarChart(canvasId) {
                             family: 'Inter, sans-serif'
                         },
                         padding: 2,  // Reduce padding to fit more countries
-                        color: '#333',
+                        color: themeColors.text,
                         callback: function (value, index, ticks) {
                             if (data && data.labels && data.labels[index] !== undefined) {
                                 return data.labels[index];
@@ -5654,12 +6065,12 @@ function createGDPPerCapitaBarChart(canvasId) {
                 }
             },
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 legend: {
                     display: false
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             const value = context.raw;
@@ -5866,6 +6277,13 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
+
     // Color scheme for countries
     const countryColors = {
         'DNK': 'rgb(255, 99, 132)',
@@ -5961,7 +6379,7 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
             datasets: datasets
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             responsive: true,
             maintainAspectRatio: false,
             interaction: {
@@ -5969,7 +6387,7 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
                 intersect: false
             },
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Outputgap over tid (% af potentielt BNP)',
@@ -5981,10 +6399,11 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
                     padding: {
                         top: 10,
                         bottom: 20
-                    }
+                    },
+                    color: colors.text
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             const value = context.parsed.y;
@@ -6006,8 +6425,9 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
                 }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'År',
@@ -6015,11 +6435,21 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
                             size: 12,
                             weight: 'bold',
                             family: 'Inter, sans-serif'
-                        }
+                        },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.x.ticks,
+                        color: colors.text
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     title: {
                         display: true,
                         text: 'Outputgap (% af potentielt BNP)',
@@ -6027,10 +6457,17 @@ function createOutputGapChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NOR']
                             size: 12,
                             weight: 'bold',
                             family: 'Inter, sans-serif'
-                        }
+                        },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
                     },
                     ticks: {
-                        ...chartConfig.scales.y.ticks,
+                        ...currentChartConfig.scales.y.ticks,
+                        color: colors.text,
                         callback: function (value) {
                             return value.toFixed(1) + '%';
                         }
@@ -6446,6 +6883,13 @@ function createADASChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
+
     // Simulated data for AD-AS model
     const priceLevels = [80, 90, 100, 110, 120, 130, 140];
     const adData = [2800, 2600, 2400, 2200, 2000, 1800, 1600]; // Aggregate Demand (negatively sloped)
@@ -6483,16 +6927,17 @@ function createADASChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'AD-AS Modellen (SESU-modellen)',
-                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
+                    color: colors.text
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             return `${context.dataset.label}: ${context.parsed.y} mia. kr. (Prisniveau: ${context.label})`;
@@ -6501,21 +6946,41 @@ function createADASChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...currentChartConfig.scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'Prisniveau (Index, 100 = basis)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.x.ticks,
+                        color: colors.text
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     title: {
                         display: true,
                         text: 'BNP (mia. kr.)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.y.ticks,
+                        color: colors.text
                     }
                 }
             }
@@ -6527,6 +6992,13 @@ function createADASChart(canvasId) {
 function createSESUNegativeOutputGapChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
@@ -6607,17 +7079,18 @@ function createSESUNegativeOutputGapChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model – Negativt output gab',
-                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
+                    color: colors.text
                 },
-                legend: { ...chartConfig.plugins.legend, display: false },
+                legend: { ...currentChartConfig.plugins.legend, display: false },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) return context.dataset.label;
@@ -6631,19 +7104,48 @@ function createSESUNegativeOutputGapChart(canvasId) {
                 }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
                     max: 3000,
-                    title: { display: true, text: 'Nationalindkomst (Y)', font: { size: 12, weight: 'bold' } },
-                    ticks: { display: false }
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)', 
+                        font: { size: 12, weight: 'bold' },
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
-                    title: { display: true, text: 'Inflation (π)', font: { size: 12, weight: 'bold' } },
-                    ticks: { display: false }
+                    title: { 
+                        display: true, 
+                        text: 'Inflation (π)', 
+                        font: { size: 12, weight: 'bold' },
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 }
             }
         },
@@ -6669,8 +7171,9 @@ function createSESUNegativeOutputGapChart(canvasId) {
                     });
                 });
 
+                const colors = getThemeColors();
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -6717,6 +7220,7 @@ function createSESUPositiveOutputGapChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
     // SULANG (Y*) til venstre – potentielt output. π = 2 + 0.002Y uændret for SUKORT.
@@ -6796,9 +7300,9 @@ function createSESUPositiveOutputGapChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model – Positivt output gab',
@@ -6806,7 +7310,7 @@ function createSESUPositiveOutputGapChart(canvasId) {
                 },
                 legend: { ...chartConfig.plugins.legend, display: false },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) return context.dataset.label;
@@ -6821,17 +7325,19 @@ function createSESUPositiveOutputGapChart(canvasId) {
             },
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
                     max: 3000,
-                    title: { display: true, text: 'Nationalindkomst (Y)', font: { size: 12, weight: 'bold' } },
+                    title: { display: true, text: 'Nationalindkomst (Y)', font: { size: 12, weight: 'bold' }, color: getThemeColors().text },
                     ticks: { display: false }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
-                    title: { display: true, text: 'Inflation (π)', font: { size: 12, weight: 'bold' } },
+                    title: { display: true, text: 'Inflation (π)', font: { size: 12, weight: 'bold' }, color: getThemeColors().text },
                     ticks: { display: false }
                 }
             }
@@ -6858,8 +7364,9 @@ function createSESUPositiveOutputGapChart(canvasId) {
                     });
                 });
 
+                const colors = getThemeColors();
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -6906,6 +7413,7 @@ function createSESUNoOutputGapChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
     // SE (Aggregate Demand) - downward sloping red line
@@ -6963,16 +7471,16 @@ function createSESUNoOutputGapChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model kort og lang sigt (intet outputgab)',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -6985,6 +7493,7 @@ function createSESUNoOutputGapChart(canvasId) {
             },
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
@@ -6992,19 +7501,22 @@ function createSESUNoOutputGapChart(canvasId) {
                     title: {
                         display: true,
                         text: 'Nationalindkomst (Y)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: getThemeColors().text
                     },
                     ticks: {
                         display: false
                     }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
                     title: {
                         display: true,
                         text: 'Inflation (π)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: getThemeColors().text
                     },
                     ticks: {
                         display: false
@@ -7121,6 +7633,7 @@ function createSESUSEIncreaseChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
     // Initial SE (Aggregate Demand) - downward sloping red line
@@ -7192,9 +7705,9 @@ function createSESUSEIncreaseChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model kort sigt når SE stiger',
@@ -7205,7 +7718,7 @@ function createSESUSEIncreaseChart(canvasId) {
                     display: false // Disable default legend - we'll use custom HTML legend
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -7221,6 +7734,7 @@ function createSESUSEIncreaseChart(canvasId) {
             },
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
@@ -7228,19 +7742,22 @@ function createSESUSEIncreaseChart(canvasId) {
                     title: {
                         display: true,
                         text: 'Nationalindkomst (Y)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: getThemeColors().text
                     },
                     ticks: {
                         display: false
                     }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
                     title: {
                         display: true,
                         text: 'Inflation (π)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: getThemeColors().text
                     },
                     ticks: {
                         display: false
@@ -7277,9 +7794,10 @@ function createSESUSEIncreaseChart(canvasId) {
                 // Add Y₀, Y₁, π₀ and π₁ labels
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -7335,6 +7853,7 @@ function createSESUExpansiveFPChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
     // Initial SE
@@ -7401,9 +7920,9 @@ function createSESUExpansiveFPChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model – Ekspansiv finanspolitik',
@@ -7414,7 +7933,7 @@ function createSESUExpansiveFPChart(canvasId) {
                     display: false // Disable default legend - we'll use custom HTML legend
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -7430,6 +7949,7 @@ function createSESUExpansiveFPChart(canvasId) {
             },
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
@@ -7437,19 +7957,22 @@ function createSESUExpansiveFPChart(canvasId) {
                     title: {
                         display: true,
                         text: 'Nationalindkomst (Y)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: getThemeColors().text
                     },
                     ticks: {
                         display: false
                     }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
                     title: {
                         display: true,
                         text: 'Inflation (π)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: getThemeColors().text
                     },
                     ticks: {
                         display: false
@@ -7545,9 +8068,10 @@ function createSESUExpansiveFPChart(canvasId) {
                 // Add Y₀, Y₁, π₀ and π₁ labels
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -7602,6 +8126,8 @@ function createSESUExpansiveFPChart(canvasId) {
 function createSESUStrukturpolitikNoGapChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    const currentChartConfig = getChartConfig();
 
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
@@ -7658,16 +8184,16 @@ function createSESUStrukturpolitikNoGapChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model kort og lang sigt (intet outputgab)',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -7680,6 +8206,7 @@ function createSESUStrukturpolitikNoGapChart(canvasId) {
             },
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
@@ -7687,30 +8214,45 @@ function createSESUStrukturpolitikNoGapChart(canvasId) {
                     title: {
                         display: true,
                         text: 'Nationalindkomst (Y)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: currentChartConfig.scales.x.title.color
+                    },
+                    grid: {
+                        display: true,
+                        color: currentChartConfig.scales.x.grid.color,
+                        lineWidth: currentChartConfig.scales.x.grid.lineWidth
                     },
                     ticks: {
                         callback: function (value) {
                             if (value === eqY) return 'Y₀';
                             return '';
                         },
-                        font: { size: 11 }
+                        font: { size: 11 },
+                        color: currentChartConfig.scales.x.ticks.color
                     }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
                     title: {
                         display: true,
                         text: 'Inflation (π)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: currentChartConfig.scales.y.title.color
+                    },
+                    grid: {
+                        display: true,
+                        color: currentChartConfig.scales.y.grid.color,
+                        lineWidth: currentChartConfig.scales.y.grid.lineWidth
                     },
                     ticks: {
                         callback: function (value) {
                             if (value === eqPi) return 'π₀';
                             return '';
                         },
-                        font: { size: 11 }
+                        font: { size: 11 },
+                        color: currentChartConfig.scales.y.ticks.color
                     }
                 }
             }
@@ -7822,6 +8364,8 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500];
 
     // SE (Aggregate Demand) - downward sloping red line (unchanged)
@@ -7918,16 +8462,16 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'SE/SU model – når SU\u2097\u2090\u2099\u1d4d stiger',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -7940,6 +8484,7 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
             },
             scales: {
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
@@ -7947,7 +8492,13 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                     title: {
                         display: true,
                         text: 'Nationalindkomst (Y)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: currentChartConfig.scales.x.title.color
+                    },
+                    grid: {
+                        display: true,
+                        color: currentChartConfig.scales.x.grid.color,
+                        lineWidth: currentChartConfig.scales.x.grid.lineWidth
                     },
                     ticks: {
                         callback: function (value) {
@@ -7956,16 +8507,23 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                             return '';
                         },
                         font: { size: 12, weight: 'bold' },
-                        color: '#000000'
+                        color: currentChartConfig.scales.x.ticks.color
                     }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
                     title: {
                         display: true,
                         text: 'Inflation (π)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: currentChartConfig.scales.y.title.color
+                    },
+                    grid: {
+                        display: true,
+                        color: currentChartConfig.scales.y.grid.color,
+                        lineWidth: currentChartConfig.scales.y.grid.lineWidth
                     },
                     ticks: {
                         callback: function (value) {
@@ -7974,7 +8532,7 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                             return '';
                         },
                         font: { size: 12, weight: 'bold' },
-                        color: '#000000'
+                        color: currentChartConfig.scales.y.ticks.color
                     }
                 }
             }
@@ -8251,9 +8809,9 @@ function createKeynesianADChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Keynes-modellen: Samlet Efterspørgsel',
@@ -8261,9 +8819,9 @@ function createKeynesianADChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...getChartConfig().scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'Nationalindkomst (Y) - mia. kr.',
@@ -8271,7 +8829,7 @@ function createKeynesianADChart(canvasId) {
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...getChartConfig().scales.y,
                     title: {
                         display: true,
                         text: 'Efterspørgsel (SE) - mia. kr.',
@@ -8287,6 +8845,13 @@ function createKeynesianADChart(canvasId) {
 function createKeynesBasicChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const income = [0, 500, 1000, 1500, 2000, 2500];
     const se = income.map(y => 600 + 0.6 * y); // SE = 600 + 0.6Y -> Y = 1500
@@ -8322,16 +8887,17 @@ function createKeynesBasicChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Keynes-modellen: Ligevægt på varemarkedet',
-                    font: { size: 16, weight: 'bold' }
+                    font: { size: 16, weight: 'bold' },
+                    color: colors.text
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -8343,19 +8909,48 @@ function createKeynesBasicChart(canvasId) {
                 }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Nationalindkomst (Y)' },
-                    ticks: { display: false }
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Samlet efterspørgsel (SE)' },
-                    ticks: { display: false }
+                    title: { 
+                        display: true, 
+                        text: 'Samlet efterspørgsel (SE)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 }
             }
         },
@@ -8387,6 +8982,13 @@ function createKeynesBasicChart(canvasId) {
 function createKeynesFPChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const income = [0, 500, 1000, 1500, 2000, 2500, 3000];
     const se_orig = income.map(y => 800 + 0.5 * y); // SE = 800 + 0.5Y -> Y = 1600
@@ -8440,15 +9042,17 @@ function createKeynesFPChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Keynes model – Kontraktiv Finanspolitik',
-                    font: { size: 16, weight: 'bold' }
+                    font: { size: 16, weight: 'bold' },
+                    color: colors.text
                 },
                 tooltip: {
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -8460,19 +9064,48 @@ function createKeynesFPChart(canvasId) {
                 }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Nationalindkomst (Y)' },
-                    ticks: { display: false }
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 2500,
-                    title: { display: true, text: 'Samlet efterspørgsel (SE)' },
-                    ticks: { display: false }
+                    title: { 
+                        display: true, 
+                        text: 'Samlet efterspørgsel (SE)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 }
             }
         },
@@ -8503,9 +9136,10 @@ function createKeynesFPChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -8529,6 +9163,7 @@ function createKeynesMultiplierChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
     const income = [0, 500, 1000, 1500, 2000, 2500, 3000];
     const se_orig = income.map(y => 600 + 0.6 * y); // SE = 600 + 0.6Y -> Y = 1500
     const se_new = income.map(y => 600 + 0.4 * y);  // SE = 600 + 0.4Y -> Y = 1000
@@ -8581,9 +9216,9 @@ function createKeynesMultiplierChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Keynes model – Kontraktiv Finanspolitik (Lavere multiplikator)',
@@ -8645,6 +9280,13 @@ function createPublicBalanceChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
+
     const income = [0, 500, 1000, 1500, 2000, 2500];
     // Public Balance = T - G - R where T = t*Y, G and R are exogenous
     const saldo_orig = income.map(y => 0.4 * y - 800); // T=0.4Y, G+R=800
@@ -8684,12 +9326,17 @@ function createPublicBalanceChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Offentlig saldo (T-G-R)', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Offentlig saldo (T-G-R)', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -8701,8 +9348,46 @@ function createPublicBalanceChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
+                ...currentChartConfig.scales,
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    title: { 
+                        display: true, 
+                        text: 'Saldo (Underskud/Overskud)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -8718,7 +9403,8 @@ function createPublicBalanceChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -8731,9 +9417,10 @@ function createPublicBalanceChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -8756,6 +9443,13 @@ function createPublicBalanceChart(canvasId) {
 function createEmploymentChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const income = [0, 500, 1000, 1500, 2000, 2500];
     const employment = income.map(y => 0.8 * y); // L(Y) line
@@ -8787,12 +9481,17 @@ function createEmploymentChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Beskæftigelse (L) og nationalindkomst (Y)', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Beskæftigelse (L) og nationalindkomst (Y)', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -8804,8 +9503,46 @@ function createEmploymentChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { title: { display: true, text: 'Beskæftigelse (L)' }, ticks: { display: false } }
+                ...currentChartConfig.scales,
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    title: { 
+                        display: true, 
+                        text: 'Beskæftigelse (L)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -8821,7 +9558,8 @@ function createEmploymentChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -8834,9 +9572,10 @@ function createEmploymentChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -8860,6 +9599,8 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
     const income = [0, 500, 1000, 1500, 2000, 2500];
     // BB = X - IM, where IM = m*Y
     const bb = income.map(y => 400 - 0.3 * y); // X=400, IM=0.3Y
@@ -8891,12 +9632,17 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Betalingsbalance (BB)', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Betalingsbalance (BB)', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -8908,8 +9654,43 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    title: { 
+                        display: true, 
+                        text: 'Saldo (Underskud/Overskud)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -8925,7 +9706,8 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -8938,9 +9720,10 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -8963,6 +9746,13 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
 function createKeynesExpansiveChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const income = [0, 500, 1000, 1500, 2000, 2500];
     const se_orig = income.map(y => 600 + 0.4 * y); // Y = 1000
@@ -9009,12 +9799,17 @@ function createKeynesExpansiveChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Keynes model - Ekspansiv Finanspolitik', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Keynes model - Ekspansiv Finanspolitik', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -9026,8 +9821,48 @@ function createKeynesExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { min: 0, max: 2500, title: { display: true, text: 'Samlet efterspørgsel (SE)' }, ticks: { display: false } }
+                ...currentChartConfig.scales,
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Samlet efterspørgsel (SE)',
+                        color: colors.text,
+                        font: { size: 12, weight: 'bold' }
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -9043,7 +9878,8 @@ function createKeynesExpansiveChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -9056,9 +9892,10 @@ function createKeynesExpansiveChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -9082,6 +9919,8 @@ function createPublicBalanceExpansiveChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
     const income = [0, 500, 1000, 1500, 2000, 2500];
     const saldo_orig = income.map(y => 0.4 * y - 600); // G+R = 600
     const saldo_new = income.map(y => 0.4 * y - 800);  // Expansionary (Higher G)
@@ -9120,12 +9959,17 @@ function createPublicBalanceExpansiveChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Offentlig saldo (T-G-R) ved ekspansiv politik', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Offentlig saldo (T-G-R) ved ekspansiv politik', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -9137,8 +9981,43 @@ function createPublicBalanceExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    title: { 
+                        display: true, 
+                        text: 'Saldo (Underskud/Overskud)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -9154,7 +10033,8 @@ function createPublicBalanceExpansiveChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -9167,9 +10047,10 @@ function createPublicBalanceExpansiveChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -9193,6 +10074,8 @@ function createEmploymentExpansiveChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
     const income = [0, 500, 1000, 1500, 2000, 2500];
     const employment = income.map(y => 0.8 * y);
 
@@ -9223,12 +10106,17 @@ function createEmploymentExpansiveChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Beskæftigelse (L) stiger ved ekspansiv politik', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Beskæftigelse (L) stiger ved ekspansiv politik', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -9240,8 +10128,43 @@ function createEmploymentExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { title: { display: true, text: 'Beskæftigelse (L)' }, ticks: { display: false } }
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    title: { 
+                        display: true, 
+                        text: 'Beskæftigelse (L)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -9257,7 +10180,8 @@ function createEmploymentExpansiveChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -9270,9 +10194,10 @@ function createEmploymentExpansiveChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -9296,6 +10221,8 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
     const income = [0, 500, 1000, 1500, 2000, 2500];
     const bb = income.map(y => 400 - 0.3 * y);
 
@@ -9326,12 +10253,17 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'Betalingsbalance forværres ved ekspansiv politik', font: { size: 16 } },
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'Betalingsbalance forværres ved ekspansiv politik', 
+                    font: { size: 16 },
+                    color: colors.text
+                },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label.includes('Ligevægt')) {
@@ -9343,8 +10275,43 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { type: 'linear', min: 0, max: 2500, title: { display: true, text: 'Nationalindkomst (Y)' }, ticks: { display: false } },
-                y: { title: { display: true, text: 'Saldo (Underskud/Overskud)' }, ticks: { display: false } }
+                x: { 
+                    ...currentChartConfig.scales.x,
+                    type: 'linear', 
+                    min: 0, 
+                    max: 2500, 
+                    title: { 
+                        display: true, 
+                        text: 'Nationalindkomst (Y)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                },
+                y: { 
+                    ...currentChartConfig.scales.y,
+                    title: { 
+                        display: true, 
+                        text: 'Saldo (Underskud/Overskud)',
+                        color: colors.text
+                    }, 
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
+                }
             }
         },
         plugins: [{
@@ -9360,7 +10327,8 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
                         meta.data.forEach((element) => {
                             const { x, y } = element.getProps(['x', 'y'], true);
                             ctx.save();
-                            ctx.fillStyle = 'white';
+                            const colors = getThemeColors();
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -9373,9 +10341,10 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
                 // Add Y₀ and Y₁ labels on x-axis
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 ctx.save();
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = colors.text;
                 ctx.font = 'bold 11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -9398,6 +10367,13 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
 function createMultiplierChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     // Showing multiplier effect rounds with stacked bars
     // This makes it clearer how each round adds to the total effect
@@ -9480,16 +10456,17 @@ function createMultiplierChart(canvasId) {
             ]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Multiplikatoreffekten',
-                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
+                    color: getThemeColors().text
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             let label = context.dataset.label || '';
@@ -9510,11 +10487,12 @@ function createMultiplierChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...currentChartConfig.scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     stacked: true,
                     ticks: {
+                        ...currentChartConfig.scales.x.ticks,
                         display: true,
                         maxRotation: 45,
                         minRotation: 0,
@@ -9522,15 +10500,19 @@ function createMultiplierChart(canvasId) {
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     stacked: true,
                     title: {
                         display: true,
                         text: 'Kumuleret effekt (mia. kr.)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: currentChartConfig.scales.y.ticks.color
                     },
                     beginAtZero: true,
-                    ticks: { display: false }
+                    ticks: { 
+                        ...currentChartConfig.scales.y.ticks,
+                        display: false 
+                    }
                 }
             }
         }
@@ -9541,6 +10523,13 @@ function createMultiplierChart(canvasId) {
 function createPhillipsCurveChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     // Phillips curve data: inverse relationship between unemployment and inflation
     // Data points matching the image: unemployment decreases from left to right, inflation increases
@@ -9564,32 +10553,53 @@ function createPhillipsCurveChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Phillips-kurven: Sammenhængen mellem ledighed og inflation',
-                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
+                    color: colors.text
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...currentChartConfig.scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'Ledighed (%)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.x.ticks,
+                        color: colors.text
                     },
                     reverse: true // Reverse x-axis to show unemployment decreasing from left to right
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...currentChartConfig.scales.y,
                     title: {
                         display: true,
                         text: 'Inflation (%)',
-                        font: { size: 12, weight: 'bold' }
+                        font: { size: 12, weight: 'bold' },
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        ...currentChartConfig.scales.y.ticks,
+                        color: colors.text
                     }
                 }
             }
@@ -9601,6 +10611,13 @@ function createPhillipsCurveChart(canvasId) {
 function createMoneySupplyChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     fetchMoneySupplyData().then(data => {
         new Chart(ctx, {
@@ -9628,23 +10645,46 @@ function createMoneySupplyChart(canvasId) {
                 }]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Udvikling i pengemængde (M1, M2, M3)',
-                        font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                        font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' },
+                        color: colors.text
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'Pengemængde (mia. kr.)',
-                            font: { size: 12, weight: 'bold' }
+                            font: { size: 12, weight: 'bold' },
+                            color: colors.text
+                        },
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.y.ticks,
+                            color: colors.text
+                        }
+                    },
+                    x: {
+                        ...currentChartConfig.scales.x,
+                        grid: {
+                            display: true,
+                            color: colors.grid,
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            ...currentChartConfig.scales.x.ticks,
+                            color: colors.text
                         }
                     }
                 }
@@ -9681,9 +10721,9 @@ function createRiskPremiumChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Risikopræmie for forskellige låntyper',
@@ -9691,13 +10731,13 @@ function createRiskPremiumChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...getChartConfig().scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     stacked: true
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...getChartConfig().scales.y,
                     stacked: true,
                     title: {
                         display: true,
@@ -9715,6 +10755,12 @@ function createRiskPremiumChart(canvasId) {
 function createMarshallModelChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
 
     // Quantity of money (loan credit) on x-axis
     const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
@@ -9766,9 +10812,9 @@ function createMarshallModelChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 legend: {
                     display: true,
                     position: 'top',
@@ -9782,7 +10828,7 @@ function createMarshallModelChart(canvasId) {
                     }
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label === 'Ligevægt') {
@@ -9846,6 +10892,7 @@ function createMarshallModelChart(canvasId) {
                 const { ctx } = chart;
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 chart.data.datasets.forEach((dataset, i) => {
                     if (dataset.label === 'Ligevægt') {
@@ -9885,7 +10932,7 @@ function createMarshallModelChart(canvasId) {
 
                             // Draw r₀ label on y-axis
                             ctx.save();
-                            ctx.fillStyle = '#000';
+                            ctx.fillStyle = colors.text;
                             ctx.font = '12px Inter';
                             ctx.textAlign = 'right';
                             ctx.textBaseline = 'middle';
@@ -9895,7 +10942,7 @@ function createMarshallModelChart(canvasId) {
 
                             // Draw L₀ label on x-axis
                             ctx.save();
-                            ctx.fillStyle = '#000';
+                            ctx.fillStyle = colors.text;
                             ctx.font = '12px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'top';
@@ -9914,6 +10961,13 @@ function createMarshallModelChart(canvasId) {
 function createValutaMarketChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     // Quantity of foreign currency (e.g. euro) on x-axis
     const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
@@ -9962,18 +11016,19 @@ function createValutaMarketChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             layout: {
                 padding: { left: 78, right: 24, top: 24, bottom: 52 }
             },
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Kurs (DKK per EUR)',
                     position: 'top',
                     font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' },
-                    padding: { top: 0, bottom: 12 }
+                    padding: { top: 0, bottom: 12 },
+                    color: colors.text
                 },
                 legend: {
                     display: true,
@@ -9981,11 +11036,12 @@ function createValutaMarketChart(canvasId) {
                     labels: {
                         font: { size: 12, family: 'Inter, sans-serif' },
                         padding: 15,
-                        usePointStyle: true
+                        usePointStyle: true,
+                        color: colors.text
                     }
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
                             if (context.dataset.label === 'Ligevægt') return 'Ligevægtspunkt';
@@ -9995,7 +11051,9 @@ function createValutaMarketChart(canvasId) {
                 }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
@@ -10004,17 +11062,36 @@ function createValutaMarketChart(canvasId) {
                         display: true,
                         text: 'Mængde valuta (fx euro)',
                         font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' },
-                        padding: { top: 8, bottom: 24 }
+                        padding: { top: 8, bottom: 24 },
+                        color: colors.text
                     },
-                    ticks: { display: false },
-                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 14,
-                    title: { display: false },
-                    ticks: { display: false },
-                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                    title: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 }
             }
         },
@@ -10024,6 +11101,7 @@ function createValutaMarketChart(canvasId) {
                 const { ctx } = chart;
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+                const colors = getThemeColors();
 
                 chart.data.datasets.forEach((dataset, i) => {
                     if (dataset.label === 'Ligevægt') {
@@ -10061,7 +11139,7 @@ function createValutaMarketChart(canvasId) {
 
                             // 3. Number 0 inside (as it is the original equilibrium)
                             ctx.save();
-                            ctx.fillStyle = '#000';
+                            ctx.fillStyle = colors.text;
                             ctx.font = 'bold 10px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -10070,7 +11148,7 @@ function createValutaMarketChart(canvasId) {
 
                             // 4. Labels
                             ctx.save();
-                            ctx.fillStyle = '#000';
+                            ctx.fillStyle = colors.text;
                             ctx.font = '11px Inter';
                             ctx.textAlign = 'right';
                             ctx.textBaseline = 'middle';
@@ -10078,7 +11156,7 @@ function createValutaMarketChart(canvasId) {
                             ctx.restore();
 
                             ctx.save();
-                            ctx.fillStyle = '#000';
+                            ctx.fillStyle = colors.text;
                             ctx.font = '11px Inter';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'top';
@@ -10099,6 +11177,13 @@ var valutaScaleTitlePadding = { x: { top: 8, bottom: 28 }, y: { top: 8, bottom: 
 function createValutaMarketChartAppreciering(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
     const supply = quantity.map(q => 4 + 0.004 * q);
@@ -10155,29 +11240,71 @@ function createValutaMarketChartAppreciering(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             layout: valutaChartLayout,
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'KURS (DKK per GBP) APPRECIERING 4', position: 'top', font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
-                legend: { display: true, position: 'top', labels: { font: { size: 11, family: 'Inter, sans-serif' }, padding: 12, usePointStyle: true } }
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'KURS (DKK per GBP) APPRECIERING 4', 
+                    position: 'top', 
+                    font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, 
+                    padding: { top: 0, bottom: 12 },
+                    color: colors.text
+                },
+                legend: { 
+                    display: true, 
+                    position: 'top', 
+                    labels: { 
+                        font: { size: 11, family: 'Inter, sans-serif' }, 
+                        padding: 12, 
+                        usePointStyle: true,
+                        color: colors.text
+                    } 
+                }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
                     max: 1600,
-                    title: { display: true, text: 'Mængde valuta (fx GBP)', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: valutaScaleTitlePadding.x },
-                    ticks: { display: false },
-                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                    title: { 
+                        display: true, 
+                        text: 'Mængde valuta (fx GBP)', 
+                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, 
+                        padding: valutaScaleTitlePadding.x,
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 14,
-                    title: { display: false },
-                    ticks: { display: false },
-                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                    title: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 }
             }
         },
@@ -10189,6 +11316,13 @@ function createValutaMarketChartAppreciering(canvasId) {
 function createValutaMarketChartDepreciering(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+    const colors = getThemeColors();
 
     const quantity = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600];
     const supply = quantity.map(q => 4 + 0.004 * q);
@@ -10245,29 +11379,71 @@ function createValutaMarketChartDepreciering(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...currentChartConfig,
             layout: valutaChartLayout,
             plugins: {
-                ...chartConfig.plugins,
-                title: { display: true, text: 'KURS (DKK per GBP) DEPRECIERING 4', position: 'top', font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, padding: { top: 0, bottom: 12 } },
-                legend: { display: true, position: 'top', labels: { font: { size: 11, family: 'Inter, sans-serif' }, padding: 12, usePointStyle: true } }
+                ...currentChartConfig.plugins,
+                title: { 
+                    display: true, 
+                    text: 'KURS (DKK per GBP) DEPRECIERING 4', 
+                    position: 'top', 
+                    font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, 
+                    padding: { top: 0, bottom: 12 },
+                    color: colors.text
+                },
+                legend: { 
+                    display: true, 
+                    position: 'top', 
+                    labels: { 
+                        font: { size: 11, family: 'Inter, sans-serif' }, 
+                        padding: 12, 
+                        usePointStyle: true,
+                        color: colors.text
+                    } 
+                }
             },
             scales: {
+                ...currentChartConfig.scales,
                 x: {
+                    ...currentChartConfig.scales.x,
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
                     max: 1600,
-                    title: { display: true, text: 'Mængde valuta (fx GBP)', font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, padding: valutaScaleTitlePadding.x },
-                    ticks: { display: false },
-                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                    title: { 
+                        display: true, 
+                        text: 'Mængde valuta (fx GBP)', 
+                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, 
+                        padding: valutaScaleTitlePadding.x,
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 },
                 y: {
+                    ...currentChartConfig.scales.y,
                     min: 0,
                     max: 16,
-                    title: { display: false },
-                    ticks: { display: false },
-                    grid: { display: true, color: 'rgba(0,0,0,0.05)' }
+                    title: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    ticks: { 
+                        display: false,
+                        color: colors.text
+                    },
+                    grid: {
+                        display: true,
+                        color: colors.grid,
+                        lineWidth: 1
+                    }
                 }
             }
         },
@@ -10283,6 +11459,7 @@ function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBe
             const xScale = chart.scales.x;
             const yScale = chart.scales.y;
             const datasets = chart.data.datasets;
+            const colors = getThemeColors();
             let before = null, after = null;
             datasets.forEach((dataset, i) => {
                 if (dataset.label === labelBefore) {
@@ -10329,7 +11506,7 @@ function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBe
 
                 // 3. Add 0 or 1 inside dot
                 ctx.save();
-                ctx.fillStyle = idx === 0 ? '#fff' : '#000';
+                ctx.fillStyle = idx === 0 ? '#fff' : colors.text;
                 ctx.font = 'bold 10px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
@@ -10341,7 +11518,7 @@ function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBe
 
                 // Y-axis labels (kurs₀, kurs₁) - keep them aligned with dashed lines
                 ctx.save();
-                ctx.fillStyle = '#000';
+                ctx.fillStyle = colors.text;
                 ctx.font = '11px Inter';
                 ctx.textAlign = 'right';
                 ctx.textBaseline = 'middle';
@@ -10355,7 +11532,7 @@ function valutaEquilibriumPlugin(labelBefore, labelAfter, yLabelBefore, xLabelBe
                 // X-axis labels (Q₀, Q₁)
                 const xLabelY = xAxisY + (idx === 1 && before && Math.abs(x - before.x) < 80 ? 22 : 8);
                 ctx.save();
-                ctx.fillStyle = '#000';
+                ctx.fillStyle = colors.text;
                 ctx.font = '11px Inter';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
@@ -10458,6 +11635,12 @@ function createRealNominalRateChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    if (!isChartJSReady()) {
+        throw new Error('Chart.js not available');
+    }
+
+    const currentChartConfig = getChartConfig();
+
     // Fetch real data from Danmarks Statistik
     fetchRealNominalRateData(15).then(data => {
         const { years, nominalRates, inflationRates, realRates } = data;
@@ -10491,9 +11674,9 @@ function createRealNominalRateChart(canvasId) {
                 }]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Nominel rente vs. Realrente',
@@ -10501,9 +11684,9 @@ function createRealNominalRateChart(canvasId) {
                     }
                 },
                 scales: {
-                    ...chartConfig.scales,
+                    ...currentChartConfig.scales,
                     y: {
-                        ...chartConfig.scales.y,
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'Rente/Inflation (%)',
@@ -10520,6 +11703,8 @@ function createRealNominalRateChart(canvasId) {
 function createPolicyEffectivenessChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    const currentChartConfig = getChartConfig();
 
     const policies = ['Ekspansiv\nFinanspolitik', 'Kontraktiv\nFinanspolitik', 'Ekspansiv\nPengepolitik', 'Kontraktiv\nPengepolitik'];
     const bnpEffect = [3, -2, 2, -1.5];
@@ -10575,9 +11760,9 @@ function createPolicyEffectivenessChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Effekt af økonomisk politik',
@@ -10585,13 +11770,13 @@ function createPolicyEffectivenessChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...getChartConfig().scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     stacked: false
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...getChartConfig().scales.y,
                     stacked: false,
                     title: {
                         display: true,
@@ -10609,6 +11794,8 @@ function createPolicyEffectivenessChart(canvasId) {
 function createFiscalPolicyMultiplierChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    const currentChartConfig = getChartConfig();
 
     const rounds = ['Initial', 'Runde 1', 'Runde 2', 'Runde 3', 'Runde 4', 'Total'];
     // Stacked bars showing cumulative effect
@@ -10635,16 +11822,16 @@ function createFiscalPolicyMultiplierChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Finanspolitisk multiplikatoreffekt',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
                 tooltip: {
-                    ...chartConfig.plugins.tooltip,
+                    ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         footer: function (tooltipItems) {
                             let total = 0;
@@ -10657,13 +11844,13 @@ function createFiscalPolicyMultiplierChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...getChartConfig().scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     stacked: true
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...getChartConfig().scales.y,
                     stacked: true,
                     title: {
                         display: true,
@@ -10688,6 +11875,8 @@ function createFiscalPolicyMultiplierChart(canvasId) {
 function createMonetaryPolicyTransmissionChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    const currentChartConfig = getChartConfig();
 
     const quarters = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
     const interestRate = [3.5, 2.5, 2.0, 1.5, 1.5, 1.5, 1.5, 1.5];
@@ -10751,9 +11940,9 @@ function createMonetaryPolicyTransmissionChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Pengepolitisk transmission - Ekspansiv pengepolitik',
@@ -10762,7 +11951,7 @@ function createMonetaryPolicyTransmissionChart(canvasId) {
             },
             scales: {
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'Kvartal',
@@ -10805,6 +11994,8 @@ function createFiscalMonetaryComparisonChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    const currentChartConfig = getChartConfig();
+
     const timePeriods = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
     const fiscalPolicyBNP = [100, 103, 105, 106, 106.5, 106.8, 107, 107, 107];
     const monetaryPolicyBNP = [100, 100.5, 101.5, 102.5, 103.5, 104, 104.5, 104.8, 105];
@@ -10842,9 +12033,9 @@ function createFiscalMonetaryComparisonChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Sammenligning: Finanspolitik vs. Pengepolitik',
@@ -10857,9 +12048,9 @@ function createFiscalMonetaryComparisonChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...getChartConfig().scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'Kvartal efter politikændring',
@@ -10867,7 +12058,7 @@ function createFiscalMonetaryComparisonChart(canvasId) {
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...getChartConfig().scales.y,
                     title: {
                         display: true,
                         text: 'BNP (index, 100 = start)',
@@ -10885,6 +12076,8 @@ function createFiscalMonetaryComparisonChart(canvasId) {
 function createPolicyLagChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    const currentChartConfig = getChartConfig();
 
     const months = ['0', '3', '6', '9', '12', '15', '18', '21', '24'];
     const recognitionLag = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -10954,9 +12147,9 @@ function createPolicyLagChart(canvasId) {
             }]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'Politiklags - Tidsforsinkelser i økonomisk politik',
@@ -10964,9 +12157,9 @@ function createPolicyLagChart(canvasId) {
                 }
             },
             scales: {
-                ...chartConfig.scales,
+                ...getChartConfig().scales,
                 x: {
-                    ...chartConfig.scales.x,
+                    ...currentChartConfig.scales.x,
                     title: {
                         display: true,
                         text: 'Måneder',
@@ -10974,7 +12167,7 @@ function createPolicyLagChart(canvasId) {
                     }
                 },
                 y: {
-                    ...chartConfig.scales.y,
+                    ...getChartConfig().scales.y,
                     title: {
                         display: true,
                         text: 'Intensitet',
@@ -11025,9 +12218,9 @@ function createWSPSChart(canvasId) {
             ]
         },
         options: {
-            ...chartConfig,
+            ...getChartConfig(),
             plugins: {
-                ...chartConfig.plugins,
+                ...currentChartConfig.plugins,
                 title: {
                     display: true,
                     text: 'WS-PS Modellen: Bestemmelse af strukturel ledighed',
@@ -11351,6 +12544,9 @@ function createBeveridgeCurveChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
+    // Get chart configuration
+    const currentChartConfig = getChartConfig();
+
     // Fetch real data
     fetchBeveridgeCurveData(25).then(result => {
         const dataPoints = result.dataPoints || [];
@@ -11405,16 +12601,16 @@ function createBeveridgeCurveChart(canvasId) {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Beveridge-kurven: Ledige stillinger vs. Ledighed i Danmark',
                         font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                     },
                     tooltip: {
-                        ...chartConfig.plugins.tooltip,
+                        ...currentChartConfig.plugins.tooltip,
                         filter: function (tooltipItem) {
                             // Only show tooltip for real data points, not theoretical curve
                             return tooltipItem.datasetIndex === 1;
@@ -11436,28 +12632,34 @@ function createBeveridgeCurveChart(canvasId) {
                 },
                 scales: {
                     x: {
+                        ...currentChartConfig.scales.x,
                         title: {
                             display: true,
                             text: 'Ledighedsprocent (%)',
-                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 }
+                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 },
+                            color: currentChartConfig.scales.x.title.color
                         },
                         min: xMin,
                         max: xMax,
                         ticks: {
+                            ...currentChartConfig.scales.x.ticks,
                             callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
                     },
                     y: {
+                        ...currentChartConfig.scales.y,
                         title: {
                             display: true,
                             text: 'Ledige stillinger (%)',
-                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 }
+                            font: { weight: 'bold', family: 'Inter, sans-serif', size: 12 },
+                            color: currentChartConfig.scales.y.title.color
                         },
                         min: yMin,
                         max: yMax,
                         ticks: {
+                            ...currentChartConfig.scales.y.ticks,
                             callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
@@ -11468,6 +12670,9 @@ function createBeveridgeCurveChart(canvasId) {
         });
     }).catch(error => {
         console.error('Error creating Beveridge curve chart:', error);
+        // Get chart configuration for fallback
+        const currentChartConfig = getChartConfig();
+        
         // Fallback to simple theoretical curve
         const fallbackData = [
             { x: 10.0, y: 0.3, year: '2008' },
@@ -11515,16 +12720,16 @@ function createBeveridgeCurveChart(canvasId) {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Beveridge-kurven: Ledige stillinger vs. Ledighed',
                         font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                     },
                     tooltip: {
-                        ...chartConfig.plugins.tooltip,
+                        ...currentChartConfig.plugins.tooltip,
                         filter: function (tooltipItem) {
                             return tooltipItem.datasetIndex === 1;
                         },
@@ -11545,20 +12750,34 @@ function createBeveridgeCurveChart(canvasId) {
                 },
                 scales: {
                     x: {
-                        title: { display: true, text: 'Ledighedsprocent (%)', font: { weight: 'bold', family: 'Inter, sans-serif' } },
+                        ...currentChartConfig.scales.x,
+                        title: { 
+                            display: true, 
+                            text: 'Ledighedsprocent (%)', 
+                            font: { weight: 'bold', family: 'Inter, sans-serif' },
+                            color: currentChartConfig.scales.x.title.color
+                        },
                         min: 0,
                         max: 12,
                         ticks: {
+                            ...currentChartConfig.scales.x.ticks,
                             callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
                         }
                     },
                     y: {
-                        title: { display: true, text: 'Ledige stillinger (%)', font: { weight: 'bold', family: 'Inter, sans-serif' } },
+                        ...currentChartConfig.scales.y,
+                        title: { 
+                            display: true, 
+                            text: 'Ledige stillinger (%)', 
+                            font: { weight: 'bold', family: 'Inter, sans-serif' },
+                            color: currentChartConfig.scales.y.title.color
+                        },
                         min: 0,
                         max: 10,
                         ticks: {
+                            ...currentChartConfig.scales.y.ticks,
                             callback: function (value) {
                                 return value.toFixed(1) + '%';
                             }
@@ -11574,6 +12793,9 @@ function createBeveridgeCurveChart(canvasId) {
 function createDanishInflationTimeChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+
+    // Get chart configuration
+    const currentChartConfig = getChartConfig();
 
     fetchUnemploymentInflationData('DNK', 35).then(data => {
         new Chart(ctx, {
@@ -11604,9 +12826,9 @@ function createDanishInflationTimeChart(canvasId) {
                 ]
             },
             options: {
-                ...chartConfig,
+                ...currentChartConfig,
                 plugins: {
-                    ...chartConfig.plugins,
+                    ...currentChartConfig.plugins,
                     title: {
                         display: true,
                         text: 'Inflation og ledighed i Danmark (1989-2024)',
@@ -11614,8 +12836,17 @@ function createDanishInflationTimeChart(canvasId) {
                     }
                 },
                 scales: {
+                    x: {
+                        ...currentChartConfig.scales.x
+                    },
                     y: {
-                        title: { display: true, text: 'Procent (%)', font: { weight: 'bold' } }
+                        ...currentChartConfig.scales.y,
+                        title: { 
+                            display: true, 
+                            text: 'Procent (%)', 
+                            font: { weight: 'bold' },
+                            color: currentChartConfig.scales.y.title.color
+                        }
                     }
                 }
             }

@@ -19,6 +19,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="theme-dark.css">
     <link rel="icon" type="image/x-icon" href="favicon.svg">
     <style>
         .table-hover tbody tr:hover {
@@ -82,6 +83,28 @@
                 <i class="bi bi-house-door"></i>
             </a>
             <ul class="navbar-nav ml-auto align-items-center">
+                <!-- Theme Toggle Button -->
+                <li class="nav-item">
+                    <a class="nav-link" id="theme-toggle" href="#" role="button" aria-label="Skift tema">
+                        <div class="theme-icon-wrapper">
+                            <svg class="theme-icon-sun active" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                            <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link search-icon-nav" id="search-icon-nav" role="button" aria-label="Søg">
                         <i class="bi bi-search"></i>
@@ -1133,6 +1156,11 @@
                     </div>
                     <p><small><b>Figur 4.4: Eksempel på depreciering.</b> Kronen svækkes mod pundet pga. stigende
                             efterspørgsel (fx stigende UK renter).</small></p>
+                    <p><strong>Analyse af kurverne:</strong>
+                        <br>• En opadgående kurve betyder, at kronen er blevet svagere (depreciering).
+                        <br>• En nedadgående kurve betyder, at kronen er blevet stærkere (appreciering).
+                        <br>• <strong>Euro (gul):</strong> Bemærk den flade kurve pga. Danmarks fastkurspolitik.
+                    </p>
                 </div>
 
                 <h3>7.6. Udvikling i valutakurser</h3>
@@ -1141,17 +1169,18 @@
                         krone:</p>
                     <p><strong>Hvad viser grafen?</strong> Udviklingen i den danske krones værdi over for verdens
                         største valutaer (EUR, USD, GBP, JPY, CNY, RUB) gennem de seneste 2 år.</p>
-                    <p><strong>Analyse af kurverne:</strong>
-                        <br>• En opadgående kurve betyder, at kronen er blevet svagere (depreciering).
-                        <br>• En nedadgående kurve betyder, at kronen er blevet stærkere (appreciering).
-                        <br>• <strong>Euro (gul):</strong> Bemærk den flade kurve pga. Danmarks fastkurspolitik.
-                    </p>
 
                     <div class="chart-container mb-3" style="position: relative; height: 400px; width: 100%;">
                         <canvas id="exchangeRateChart" data-chart-type="exchange-rate"></canvas>
                     </div>
                     <p><small><b>Figur 4.5: Udvikling i valutakurser.</b> Historisk data over 2 år. Kilde:
-                            ExchangeRate-API.com.</small></p>
+                            ExchangeRate-API.com. <strong>Kommentar:</strong> Bemærk, at EUR-kursen (typisk vist som en
+                            næsten vandret linje) er markant mere stabil end de øvrige valutaer i figuren. Dette
+                            skyldes Danmarks fastkurspolitik, hvor Nationalbanken aktivt holder kronen tæt på euroen
+                            inden for et smalt interventionsbånd. I modsætning hertil viser valutaer som USD, GBP,
+                            JPY, CNY og RUB større svingninger, da de ikke er bundet til kronen på samme måde. Denne
+                            stabilitet gør EUR til en forudsigelig referencevaluta for danske investorer og
+                            virksomheder.</small></p>
                 </div>
 
                 <h3>7.7. Fastkurspolitik og interventionsbåndet</h3>
@@ -1616,6 +1645,7 @@
     <script src="menu.js"></script>
     <script src="script.js"></script>
     <script src="info.js"></script>
+    <script src="theme-toggle.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
@@ -1626,8 +1656,41 @@
     <script>
         // Initialize charts when page loads
         document.addEventListener('DOMContentLoaded', function () {
-            createInterestRateChart('interestRateChart', 'DK');
-            createExchangeRateChart('exchangeRateChart');
+            // Wait for Chart.js to be ready before initializing
+            if (typeof waitForChartJS !== 'undefined') {
+                waitForChartJS().then(() => {
+                    if (typeof createInterestRateChart !== 'undefined') {
+                        const interestRateEl = document.getElementById('interestRateChart');
+                        if (interestRateEl && !interestRateEl.dataset.initialized) {
+                            createInterestRateChart('interestRateChart', 'DK');
+                        }
+                    }
+                    if (typeof createExchangeRateChart !== 'undefined') {
+                        const exchangeRateEl = document.getElementById('exchangeRateChart');
+                        if (exchangeRateEl && !exchangeRateEl.dataset.initialized) {
+                            createExchangeRateChart('exchangeRateChart');
+                        }
+                    }
+                }).catch(error => {
+                    console.error('Error initializing charts:', error);
+                });
+            } else {
+                // Fallback if waitForChartJS is not available
+                setTimeout(() => {
+                    if (typeof createInterestRateChart !== 'undefined') {
+                        const interestRateEl = document.getElementById('interestRateChart');
+                        if (interestRateEl && !interestRateEl.dataset.initialized) {
+                            createInterestRateChart('interestRateChart', 'DK');
+                        }
+                    }
+                    if (typeof createExchangeRateChart !== 'undefined') {
+                        const exchangeRateEl = document.getElementById('exchangeRateChart');
+                        if (exchangeRateEl && !exchangeRateEl.dataset.initialized) {
+                            createExchangeRateChart('exchangeRateChart');
+                        }
+                    }
+                }, 500);
+            }
         });
     </script>
 

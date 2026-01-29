@@ -95,6 +95,41 @@
     align-items: center;
 }
 
+/* Dark mode styling for glossary tooltip */
+[data-theme="dark"] .glossary-tooltip {
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .glossary-tooltip h4 {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .glossary-tooltip h4::before {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+[data-theme="dark"] .glossary-tooltip .definition {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .glossary-tooltip .example {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-left-color: rgba(255, 255, 255, 0.3) !important;
+    color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .glossary-tooltip .footer {
+    color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .glossary-tooltip .footer i {
+    color: #b0b0b0 !important;
+}
+
 /* Arrow removed as per user request */
 
 /* Offset for table rows in glossary when linked to (navbar + alphabet header on kapitel9) */

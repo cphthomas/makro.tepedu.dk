@@ -639,7 +639,6 @@ kbd {
 
 .info-box {
     background-color: #ffffff;
-    border-left: 4px solid #d3d3d3;
     padding: 15px;
     margin: 20px 0;
     border-radius: 0 !important;
@@ -994,4 +993,82 @@ article table td a[href],
 .container,
 .container-fluid {
     border-radius: 0 !important;
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON - ANIMATED ICON
+   ============================================ */
+#theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+#theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon-wrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-icon-sun.active,
+.theme-icon-moon.active {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* Sun icon styling */
+.theme-icon-sun {
+    color: #f59e0b;
+}
+
+/* Moon icon styling */
+.theme-icon-moon {
+    color: #e0e0e0;
+}
+
+/* Animation for theme switch */
+@keyframes themeRotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+#theme-toggle:active .theme-icon-wrapper {
+    animation: themeRotate 0.6s ease;
 }

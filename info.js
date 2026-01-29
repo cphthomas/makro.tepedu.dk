@@ -61,10 +61,35 @@ document.addEventListener('DOMContentLoaded', function () {
             background-color: transparent;
             border-radius: 50%;
             padding: 2px;
+            transition: color 0.3s ease;
         }
         
         .info-icon:hover {
             color: #333;
+        }
+        
+        /* Dark theme support */
+        [data-theme="dark"] .info-icon {
+            color: #ffffff !important;
+        }
+        
+        [data-theme="dark"] .info-icon:hover {
+            color: #e0e0e0 !important;
+        }
+        
+        [data-theme="dark"] .info-popup {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        [data-theme="dark"] .info-popup h6 {
+            color: #ffffff !important;
+        }
+        
+        [data-theme="dark"] .info-popup small {
+            color: #e0e0e0 !important;
         }
     `;
     document.head.appendChild(style);

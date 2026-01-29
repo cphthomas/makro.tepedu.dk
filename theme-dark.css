@@ -1,0 +1,613 @@
+/* Dark Theme Styles */
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border-color: #404040;
+    --link-color: #4a9eff;
+    --link-hover: #6bb3ff;
+    --info-box-bg: #000000;
+    --info-box-border: #4a9eff;
+    --example-box-bg: #000000;
+    --example-box-border: #b3b3b3;
+    --table-header-bg: #000000;
+    --table-stripe: #000000;
+    --table-hover: #000000;
+    --chart-bg: #000000;
+    --chart-grid: rgba(255, 255, 255, 0.1);
+    --chart-text: #ffffff;
+}
+
+/* Base dark theme styles */
+[data-theme="dark"] body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Base dark theme styles - content container with single white shadow */
+[data-theme="dark"] .content {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    /* No shadow to avoid vertical line effect */
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+/* Remove shadows from nested elements to prevent double shadow */
+/* All nested containers have pure black background matching main background */
+[data-theme="dark"] article,
+[data-theme="dark"] .container,
+[data-theme="dark"] .content > div,
+[data-theme="dark"] .content-container {
+    background-color: #000000 !important;
+    color: var(--text-primary);
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+/* Info boxes and example boxes already have shadows defined above */
+[data-theme="dark"] .info-box:hover {
+    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .example-box:hover {
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="dark"] .table-responsive {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    outline: none !important;
+}
+
+[data-theme="dark"] .table {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
+/* Typography */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: var(--text-primary);
+    background-color: #000000 !important;
+}
+
+/* Content headings - pure black background */
+[data-theme="dark"] .content h1,
+[data-theme="dark"] .content h2,
+[data-theme="dark"] .content h3,
+[data-theme="dark"] .content h4,
+[data-theme="dark"] .content h5,
+[data-theme="dark"] .content h6,
+[data-theme="dark"] article h1,
+[data-theme="dark"] article h2,
+[data-theme="dark"] article h3,
+[data-theme="dark"] article h4,
+[data-theme="dark"] article h5,
+[data-theme="dark"] article h6 {
+    background-color: #000000 !important;
+}
+
+[data-theme="dark"] p {
+    color: var(--text-secondary);
+}
+
+/* Links */
+[data-theme="dark"] a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a) {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):hover {
+    color: var(--link-hover);
+}
+
+/* Navbar */
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .transparent-navbar {
+    background-color: #000000 !important;
+    border-bottom: none !important;
+    /* Light shadow under navbar */
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .navbar-light .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .navbar-light .navbar-nav .nav-link:hover {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] .navbar-brand {
+    color: #ffffff !important;
+}
+
+/* Bootstrap icons in navbar - make them white in dark mode */
+[data-theme="dark"] .navbar .nav-link .bi,
+[data-theme="dark"] .navbar .nav-link i.bi {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .navbar .nav-link:hover .bi,
+[data-theme="dark"] .navbar .nav-link:hover i.bi {
+    color: var(--link-color) !important;
+}
+
+/* Dropdown toggle icon */
+[data-theme="dark"] .navbar .dropdown-toggle .bi,
+[data-theme="dark"] .navbar .dropdown-toggle i.bi {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .navbar .dropdown-toggle:hover .bi,
+[data-theme="dark"] .navbar .dropdown-toggle:hover i.bi {
+    color: var(--link-color) !important;
+}
+
+/* Arrow icons */
+[data-theme="dark"] .navbar .bi-arrow-left,
+[data-theme="dark"] .navbar .bi-arrow-right {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .navbar .nav-link:hover .bi-arrow-left,
+[data-theme="dark"] .navbar .nav-link:hover .bi-arrow-right {
+    color: var(--link-color) !important;
+}
+
+/* Dropdown menu */
+[data-theme="dark"] .dropdown-menu {
+    background-color: #000000 !important;
+    border-color: var(--border-color);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+    background-color: var(--bg-tertiary);
+    color: #ffffff !important;
+}
+
+/* Info boxes - pure black background, separated only by white shadow */
+[data-theme="dark"] .info-box {
+    background-color: #000000 !important;
+    border-left-color: var(--info-box-border);
+    color: var(--text-primary);
+    /* White shadow separates from background */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    outline: none !important;
+}
+
+[data-theme="dark"] .info-box h2,
+[data-theme="dark"] .info-box h3,
+[data-theme="dark"] .info-box h4 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .info-box p,
+[data-theme="dark"] .info-box li {
+    color: var(--text-secondary);
+}
+
+/* Example boxes - pure black background, separated only by white shadow */
+[data-theme="dark"] .example-box {
+    background-color: #000000 !important;
+    border-left-color: var(--example-box-border);
+    color: var(--text-primary);
+    /* White shadow separates from background */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    outline: none !important;
+}
+
+[data-theme="dark"] .example-box p,
+[data-theme="dark"] .example-box li {
+    color: var(--text-secondary);
+}
+
+/* Tables - All black with white text */
+[data-theme="dark"] .table {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .table thead {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .table th {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #404040 !important;
+}
+
+[data-theme="dark"] .table td {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #404040 !important;
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #000000 !important;
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(even) {
+    background-color: #000000 !important;
+}
+
+/* Table row hover effect - smooth transition */
+[data-theme="dark"] .table tbody tr {
+    transition: background-color 0.2s ease !important;
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover,
+[data-theme="dark"] .table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+}
+
+/* Ensure hover effect works on table cells as well */
+[data-theme="dark"] .table tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+
+/* Override any inline styles that might interfere */
+[data-theme="dark"] .table-hover tbody tr:hover[style],
+[data-theme="dark"] .table tbody tr:hover[style] {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .table-bordered {
+    border-color: #404040 !important;
+    border-top: 1px solid #404040 !important;
+}
+
+[data-theme="dark"] .table-bordered th,
+[data-theme="dark"] .table-bordered td {
+    border-color: #404040 !important;
+}
+
+[data-theme="dark"] .table {
+    border-top: 1px solid #404040 !important;
+}
+
+[data-theme="dark"] .table thead th {
+    border-top: 1px solid #404040 !important;
+}
+
+[data-theme="dark"] .table-dark {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Policy popup styling for figur 3.3 and similar interactive elements */
+[data-theme="dark"] .policy-popup {
+    background: #000000 !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .policy-step {
+    color: #ffffff !important;
+}
+
+/* Override inline styles for policy popups in dark mode */
+[data-theme="dark"] .policy-popup[style*="background"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+[data-theme="dark"] .policy-popup[style*="border"] {
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .policy-popup[style*="color"] {
+    color: #ffffff !important;
+}
+
+/* More specific override for policy popup inline styles */
+[data-theme="dark"] .policy-popup[style*="#ffffff"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Bad examples in tables */
+[data-theme="dark"] .bad-example td {
+    background-color: rgba(139, 69, 19, 0.3) !important;
+    color: #ffffff !important;
+}
+
+/* Chart containers */
+[data-theme="dark"] .chart-container {
+    background-color: var(--chart-bg) !important;
+    color: var(--chart-text) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .chart-loading {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Ensure chart canvas has proper background */
+[data-theme="dark"] canvas {
+    background-color: var(--chart-bg) !important;
+}
+
+/* Chart title colors */
+[data-theme="dark"] .chart-container .chart-title,
+[data-theme="dark"] .chart-container h3,
+[data-theme="dark"] .chart-container h4 {
+    color: var(--text-primary) !important;
+}
+
+/* Code blocks */
+[data-theme="dark"] code {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] kbd {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Sidebar */
+[data-theme="dark"] #left-aligned-sidebar {
+    background-color: var(--bg-secondary);
+    border-right: none !important;
+    box-shadow: none !important;
+    /* Ensure sidebar doesn't create double shadow with content */
+    z-index: 1029;
+}
+
+/* Ensure sidebar border doesn't create visual double shadow effect */
+[data-theme="dark"] .content.sidebar-open {
+    /* No shadow to avoid vertical line effect */
+    box-shadow: none !important;
+}
+
+[data-theme="dark"] #left-aligned-sidebar h4,
+[data-theme="dark"] #left-aligned-sidebar h5 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] #left-aligned-sidebar ul li a {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] #left-aligned-sidebar ul li a:hover,
+[data-theme="dark"] #left-aligned-sidebar ul li a:focus {
+    color: var(--text-primary);
+}
+
+/* Sidebar toggle button */
+[data-theme="dark"] #sidebar-toggle-button {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] #sidebar-toggle-button:hover,
+[data-theme="dark"] #sidebar-toggle-button:focus {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+/* Book cover wrapper - pure black background */
+[data-theme="dark"] .book-cover-wrapper {
+    background-color: #000000 !important;
+}
+
+/* Cover text overlay */
+[data-theme="dark"] .cover-text-overlay {
+    color: var(--text-secondary);
+    background-color: transparent !important;
+}
+
+/* Scroll indicator */
+[data-theme="dark"] .scroll-indicator {
+    color: var(--text-secondary);
+}
+
+/* Legal term links */
+[data-theme="dark"] .legal-term-link {
+    color: var(--link-color);
+}
+
+/* Effect links */
+[data-theme="dark"] .effectLinks {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .effectLinks:hover {
+    background: var(--bg-secondary);
+}
+
+/* Effect links table */
+[data-theme="dark"] .effectLinksTable {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .effectLinksTable:hover {
+    color: var(--text-primary);
+}
+
+/* Quiz container */
+[data-theme="dark"] .quiz-container {
+    background-color: transparent;
+}
+
+/* Chart.js specific dark theme overrides */
+[data-theme="dark"] canvas {
+    background-color: var(--chart-bg);
+}
+
+/* Info Icon Dark Theme */
+[data-theme="dark"] .info-icon {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .info-icon:hover {
+    color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .info-popup {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .info-popup h6 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .info-popup small {
+    color: var(--text-secondary) !important;
+}
+
+/* ============================================
+   COLORED BOXES - Alert boxes and inline colored boxes
+   ============================================ */
+
+/* Bootstrap alert boxes - dark mode styling */
+[data-theme="dark"] .alert,
+[data-theme="dark"] .alert-info {
+    background-color: #000000 !important;
+    border-left: 4px solid #4a9eff !important;
+    color: var(--text-primary) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .alert p,
+[data-theme="dark"] .alert-info p,
+[data-theme="dark"] .alert ul,
+[data-theme="dark"] .alert-info ul {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .alert b,
+[data-theme="dark"] .alert-info b,
+[data-theme="dark"] .alert strong,
+[data-theme="dark"] .alert-info strong {
+    color: var(--text-primary) !important;
+}
+
+/* Inline styled colored boxes - light blue (#f0f9ff) */
+[data-theme="dark"] div[style*="background-color: #f0f9ff"],
+[data-theme="dark"] div[style*="background-color:#f0f9ff"] {
+    background-color: #000000 !important;
+    border-left-color: #4a9eff !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] div[style*="background-color: #f0f9ff"] p,
+[data-theme="dark"] div[style*="background-color:#f0f9ff"] p,
+[data-theme="dark"] div[style*="background-color: #f0f9ff"] li,
+[data-theme="dark"] div[style*="background-color:#f0f9ff"] li {
+    color: var(--text-secondary) !important;
+}
+
+/* Inline styled colored boxes - yellow (#fef3c7) */
+[data-theme="dark"] div[style*="background-color: #fef3c7"],
+[data-theme="dark"] div[style*="background-color:#fef3c7"] {
+    background-color: #000000 !important;
+    border-left-color: #f59e0b !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] div[style*="background-color: #fef3c7"] p,
+[data-theme="dark"] div[style*="background-color:#fef3c7"] p,
+[data-theme="dark"] div[style*="background-color: #fef3c7"] li,
+[data-theme="dark"] div[style*="background-color:#fef3c7"] li {
+    color: var(--text-secondary) !important;
+}
+
+/* ============================================
+   FIGURES - White background boxes (bg-white)
+   ============================================ */
+
+/* Bootstrap bg-white utility class - used in policy figures */
+[data-theme="dark"] .bg-white {
+    background-color: #000000 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Policy figure containers - override inline bg-white */
+[data-theme="dark"] .bg-white.shadow-sm,
+[data-theme="dark"] .bg-white.border {
+    background-color: #000000 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Policy step text colors in dark mode */
+[data-theme="dark"] .policy-step {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .policy-step[style*="color: #1f2937"],
+[data-theme="dark"] .policy-step[style*="color:#1f2937"] {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .policy-step[style*="color: #15803d"],
+[data-theme="dark"] .policy-step[style*="color:#15803d"] {
+    color: #4ade80 !important; /* Lighter green for dark mode */
+}
+
+/* Ensure arrows in policy figures are visible */
+[data-theme="dark"] .bg-white .bi-arrow-right {
+    color: var(--text-primary) !important;
+}
+
+/* Catch-all for any white backgrounds in figure containers */
+[data-theme="dark"] .text-center .bg-white,
+[data-theme="dark"] .text-center div[style*="background"] {
+    background-color: #000000 !important;
+}
+
+/* Override any inline white backgrounds in dark mode */
+[data-theme="dark"] [style*="background: #ffffff"],
+[data-theme="dark"] [style*="background:#ffffff"],
+[data-theme="dark"] [style*="background-color: #ffffff"],
+[data-theme="dark"] [style*="background-color:#ffffff"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
