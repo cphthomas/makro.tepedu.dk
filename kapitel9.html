@@ -21,6 +21,14 @@
             cursor: pointer;
         }
 
+        [data-theme="dark"] .table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        [data-theme="dark"] .table-hover tbody tr:hover td {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
         .book-cover-wrapper {
             position: relative;
             width: 100%;
@@ -112,6 +120,83 @@
             border-bottom: 2px solid #d3d3d3;
             padding-bottom: 5px;
             margin-bottom: 15px;
+        }
+
+        /* Dark mode styles for alphabetical word list */
+        [data-theme="dark"] .alphabet-nav {
+            background: #1a1a1a !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .alphabet-nav a {
+            color: #b0b0b0 !important;
+        }
+
+        [data-theme="dark"] .alphabet-nav a:hover,
+        [data-theme="dark"] .alphabet-nav a.active {
+            background-color: transparent !important;
+            color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .alphabet-nav a.disabled {
+            color: #666666 !important;
+            opacity: 0.5;
+        }
+
+        [data-theme="dark"] .letter-section h3 {
+            color: #ffffff !important;
+            border-bottom: 2px solid #ffffff !important;
+        }
+
+        [data-theme="dark"] .info-box {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .info-box p,
+        [data-theme="dark"] .info-box b {
+            color: #ffffff !important;
+        }
+
+        /* Force all table rows and cells to be black in dark mode */
+        [data-theme="dark"] .table tbody tr {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .table tbody tr td {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) td {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .table-striped tbody tr:nth-of-type(even) td {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .table-bordered tbody tr td {
+            background-color: #000000 !important;
+            border-color: #404040 !important;
+        }
+
+        /* Override any Bootstrap default backgrounds */
+        [data-theme="dark"] .table tbody tr[style*="background"] {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .table tbody tr td[style*="background"] {
+            background-color: #000000 !important;
+        }
+
+        /* Ensure table itself is black */
+        [data-theme="dark"] .table-responsive {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .table-responsive .table {
+            background-color: #000000 !important;
         }
     </style>
     <link rel="stylesheet" href="glossary.css">

@@ -30,8 +30,8 @@
 body {
     font-family: var(--font-primary);
     line-height: 1.7;
-    background-color: var(--bg-color);
-    color: var(--text-color-base);
+    background-color: #000000;
+    color: #ffffff;
     overflow-x: hidden; /* Crucial */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -42,14 +42,14 @@ h1, h2, .main-nav .logo {
     font-family: var(--font-secondary);
     font-weight: 500;
     letter-spacing: -0.02em;
-    color: var(--text-color-base);
+    color: #ffffff;
 }
 h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 0.7em; }
 h2 { font-size: 2.2rem; line-height: 1.3; margin-top: 1em; }
 .main-nav .logo { font-size: 1.7rem; font-weight: 700; min-height: 1.2em; }
 .book-card .book-info h3 {
     font-family: var(--font-book-title); font-weight: 400; font-size: 1.5rem;
-    color: var(--text-color-base); margin-bottom: 0.4em; letter-spacing: 0.01em;
+    color: #ffffff; margin-bottom: 0.4em; letter-spacing: 0.01em;
 }
 /* Fallback for any other h3 if used */
 h3 { 
@@ -61,7 +61,7 @@ h3 {
     font-family: var(--font-thin-body); 
     font-weight: 100; 
     font-size: 1.1rem; 
-    color: var(--text-color-medium); 
+    color: #e0e0e0; 
 }
 
 /* == GENERAL ELEMENT STYLES == */
@@ -215,11 +215,11 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 /* == LAYOUT & COMPONENTS == */
 /* Navigation */
 .site-header { 
-    background-color: var(--header-bg); padding: 0.8rem 1.5rem; /* Adjusted horizontal padding for desktop */
+    background-color: rgba(0, 0, 0, 0.9); padding: 0.8rem 1.5rem; /* Adjusted horizontal padding for desktop */
     position: sticky; top: 0; left: 0; width: 100%; 
     z-index: 1000; backdrop-filter: blur(10px); 
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02); 
-    border-bottom: 1px solid var(--border-color); 
+    box-shadow: 0 1px 2px rgba(255, 255, 255, 0.05); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
 }
 .main-nav { 
     display: flex; justify-content: space-between; align-items: center; 
@@ -234,10 +234,10 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 .nav-links li { margin-left: 28px; }
 .nav-links li a { 
     font-family: var(--font-book-title);
-    color: var(--text-color-medium); font-weight: 300; font-size: 0.9rem; 
+    color: #e0e0e0; font-weight: 300; font-size: 0.9rem; 
     padding: 0.5rem 0; letter-spacing: 0.01em; transition: color 0.2s ease; 
 }
-.nav-links li a:hover { color: var(--text-color-base); }
+.nav-links li a:hover { color: #ffffff; }
 
 /* Hamburger Menu */
 .hamburger-menu { 
@@ -246,7 +246,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 }
 .hamburger-menu__line { 
     display: block; width: 100%; height: 2px; 
-    background-color: var(--text-color-base); 
+    background-color: #ffffff; 
     border-radius: 2px; position: absolute; 
     transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; 
 }
@@ -264,10 +264,10 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     position: relative; padding-bottom: 120px; 
 }
 .hero-content h1 { 
-    color: var(--text-color-base); margin-bottom: 0.5em; font-size: 3.2rem; 
+    color: #ffffff; margin-bottom: 0.5em; font-size: 3.2rem; 
 }
 .hero-content .hero-sub-text { 
-    font-size: 1.3rem; color: var(--text-color-medium); 
+    font-size: 1.3rem; color: #e0e0e0; 
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2em; 
@@ -294,11 +294,11 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); 
     display: flex; flex-direction: column; align-items: center; 
     cursor: pointer; 
-    color: var(--text-color-medium) !important; 
+    color: #e0e0e0 !important; 
     text-decoration: none !important;
 }
 .scroll-indicator:hover { 
-    color: var(--text-color-base) !important; 
+    color: #ffffff !important; 
     background-color: transparent !important;
     transform: translateX(-50%) !important;
     box-shadow: none !important;
@@ -345,6 +345,9 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     max-width: 900px; margin: 0 auto 2em auto; 
     padding: 0 1rem; text-align: center; 
 }
+.section-title-container h2 {
+    color: #ffffff;
+}
 
 /* Book Grid */
 .book-grid {
@@ -355,7 +358,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 }
 
 .book-card {
-    background-color: var(--card-bg);
+    background-color: #000000;
     overflow: hidden;
     border: none;
     position: relative;
@@ -363,7 +366,10 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     flex-direction: column;
     width: 100%;
 }
-.book-card:hover { z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.book-card:hover { 
+    z-index: 10; 
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+}
 .book-card a {
     display: flex; flex-direction: column; flex-grow: 1;
     color: inherit; text-decoration: none;
@@ -385,7 +391,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 }
 
 .book-card:hover {
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: #000000;
 }
 
 .book-cover-wrapper {
@@ -393,7 +399,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     height: var(--card-cover-height);
     position: relative;
     overflow: hidden;
-    background-color: #333;
+    background-color: #000000;
 }
 
 .book-card .book-cover-image {
@@ -411,7 +417,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     position: absolute;
     top: 50%;
     left: 50%;
-    color: var(--text-color-overlay);
+    color: #ffffff;
     font-family: var(--font-cover-overlay);
     font-size: 2.8rem;
     font-weight: 400;
@@ -436,10 +442,10 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     padding: 1.5rem;
     position: relative;
     z-index: 2;
-    background-color: var(--card-bg);
+    background-color: #000000;
     flex-grow: 1;
     font-family: var(--font-book-title);
-    color: var(--text-color-base);
+    color: #ffffff;
 }
 .book-card .author {
     font-size: 0.85rem;
@@ -451,7 +457,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 .book-card .book-info p {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400; 
-    color: #000000; 
+    color: #ffffff; 
     line-height: 1.6;
 }
 
@@ -465,7 +471,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
     align-items: center; /* Vertically aligns icon and text */
     gap: 0.4em; /* Consistent spacing using em, replaces .link-icon margin-right */
     position: relative; 
-    color: var(--text-color-base);
+    color: #ffffff;
     text-decoration: none;
     font-family: 'IBM Plex Mono', monospace; 
     font-size: 0.9rem;
@@ -496,7 +502,7 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 }
 
 .styled-cta-link:hover {
-    color: var(--text-color-light); 
+    color: #b0b0b0; 
     text-decoration: underline;
     text-underline-offset: 0.2em; 
 }
@@ -513,10 +519,10 @@ a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.e
 
 /* Footer */
 .site-footer { 
-    background-color: var(--footer-bg); text-align: center; 
+    background-color: #000000; text-align: center; 
     padding: 2.5rem 1rem; margin-top: 5rem; 
-    font-size: 0.9rem; color: var(--text-color-medium); 
-    border-top: 1px solid var(--border-color); 
+    font-size: 0.9rem; color: #e0e0e0; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
 }
 
 /* == ANIMATIONS == */
