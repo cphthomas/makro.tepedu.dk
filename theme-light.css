@@ -1,0 +1,356 @@
+/* Light Theme Styles - White with faint shadows */
+
+/* Light theme variables */
+:root:not([data-theme="dark"]),
+[data-theme="light"] {
+    --bg-primary: #F8F8F8;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f5f5f5;
+    --text-primary: #222222;
+    --text-secondary: #333333;
+    --text-muted: #555555;
+    --border-color: #e0e0e0;
+    --link-color: #2563eb;
+    --link-hover: #1d4ed8;
+    --info-box-bg: #ffffff;
+    --info-box-border: #2563eb;
+    --example-box-bg: #ffffff;
+    --example-box-border: #b3b3b3;
+    --table-header-bg: #ffffff;
+    --table-stripe: #f8f8f8;
+    --table-hover: #f0f0f0;
+    --chart-bg: #ffffff;
+    --chart-grid: rgba(0, 0, 0, 0.1);
+    --chart-text: #222222;
+    --shadow-faint: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Base light theme styles */
+:root:not([data-theme="dark"]) body,
+[data-theme="light"] body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Hero section - white background with dark text */
+:root:not([data-theme="dark"]) .hero-section,
+[data-theme="light"] .hero-section {
+    background-color: #ffffff !important;
+    color: var(--text-primary);
+}
+
+:root:not([data-theme="dark"]) .hero-content h1,
+[data-theme="light"] .hero-content h1 {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .hero-content .hero-sub-text,
+[data-theme="light"] .hero-content .hero-sub-text {
+    color: var(--text-secondary) !important;
+}
+
+/* Navbar - light background with faint shadow */
+:root:not([data-theme="dark"]) .navbar,
+:root:not([data-theme="dark"]) .transparent-navbar,
+[data-theme="light"] .navbar,
+[data-theme="light"] .transparent-navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: none !important;
+    /* Faint shadow under navbar - subtle and elegant */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    backdrop-filter: blur(10px);
+}
+
+/* Navbar links - dark text */
+:root:not([data-theme="dark"]) .navbar-light .navbar-nav .nav-link,
+[data-theme="light"] .navbar-light .navbar-nav .nav-link {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .navbar-light .navbar-nav .nav-link:hover,
+[data-theme="light"] .navbar-light .navbar-nav .nav-link:hover {
+    color: var(--link-color) !important;
+}
+
+:root:not([data-theme="dark"]) .navbar-brand,
+[data-theme="light"] .navbar-brand {
+    color: var(--text-primary) !important;
+}
+
+/* Bootstrap icons in navbar - make them dark in light mode */
+:root:not([data-theme="dark"]) .navbar .nav-link .bi,
+:root:not([data-theme="dark"]) .navbar .nav-link i.bi,
+[data-theme="light"] .navbar .nav-link .bi,
+[data-theme="light"] .navbar .nav-link i.bi {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .navbar .nav-link:hover .bi,
+:root:not([data-theme="dark"]) .navbar .nav-link:hover i.bi,
+[data-theme="light"] .navbar .nav-link:hover .bi,
+[data-theme="light"] .navbar .nav-link:hover i.bi {
+    color: var(--link-color) !important;
+}
+
+/* Dropdown toggle icon */
+:root:not([data-theme="dark"]) .navbar .dropdown-toggle .bi,
+:root:not([data-theme="dark"]) .navbar .dropdown-toggle i.bi,
+[data-theme="light"] .navbar .dropdown-toggle .bi,
+[data-theme="light"] .navbar .dropdown-toggle i.bi {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .navbar .dropdown-toggle:hover .bi,
+:root:not([data-theme="dark"]) .navbar .dropdown-toggle:hover i.bi,
+[data-theme="light"] .navbar .dropdown-toggle:hover .bi,
+[data-theme="light"] .navbar .dropdown-toggle:hover i.bi {
+    color: var(--link-color) !important;
+}
+
+/* Arrow icons */
+:root:not([data-theme="dark"]) .navbar .bi-arrow-left,
+:root:not([data-theme="dark"]) .navbar .bi-arrow-right,
+[data-theme="light"] .navbar .bi-arrow-left,
+[data-theme="light"] .navbar .bi-arrow-right {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .navbar .nav-link:hover .bi-arrow-left,
+:root:not([data-theme="dark"]) .navbar .nav-link:hover .bi-arrow-right,
+[data-theme="light"] .navbar .nav-link:hover .bi-arrow-left,
+[data-theme="light"] .navbar .nav-link:hover .bi-arrow-right {
+    color: var(--link-color) !important;
+}
+
+/* Dropdown menu */
+:root:not([data-theme="dark"]) .dropdown-menu,
+[data-theme="light"] .dropdown-menu {
+    background-color: #ffffff !important;
+    border-color: var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+:root:not([data-theme="dark"]) .dropdown-item,
+[data-theme="light"] .dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .dropdown-item:hover,
+:root:not([data-theme="dark"]) .dropdown-item:focus,
+[data-theme="light"] .dropdown-item:hover,
+[data-theme="light"] .dropdown-item:focus {
+    background-color: var(--table-hover);
+    color: var(--text-primary) !important;
+}
+
+/* Typography */
+:root:not([data-theme="dark"]) h1,
+:root:not([data-theme="dark"]) h2,
+:root:not([data-theme="dark"]) h3,
+:root:not([data-theme="dark"]) h4,
+:root:not([data-theme="dark"]) h5,
+:root:not([data-theme="dark"]) h6,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+    color: var(--text-primary);
+}
+
+:root:not([data-theme="dark"]) p,
+[data-theme="light"] p {
+    color: var(--text-secondary);
+}
+
+/* Links */
+:root:not([data-theme="dark"]) a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a),
+[data-theme="light"] a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a) {
+    color: var(--link-color);
+}
+
+:root:not([data-theme="dark"]) a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):hover,
+[data-theme="light"] a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):not(.effectLinks):not(.effectLinksTable):not(.styled-cta-link):not(.scroll-indicator):not(.book-card a):hover {
+    color: var(--link-hover);
+}
+
+/* Book cards section */
+:root:not([data-theme="dark"]) .book-section,
+[data-theme="light"] .book-section {
+    background-color: #ffffff !important;
+}
+
+:root:not([data-theme="dark"]) .book-card,
+[data-theme="light"] .book-card {
+    background-color: #ffffff;
+}
+
+:root:not([data-theme="dark"]) .book-card .book-info,
+[data-theme="light"] .book-card .book-info {
+    background-color: #ffffff;
+    color: var(--text-primary);
+}
+
+:root:not([data-theme="dark"]) .book-card .book-info p,
+[data-theme="light"] .book-card .book-info p {
+    color: var(--text-secondary);
+}
+
+/* Scroll indicator - dark text in light mode */
+:root:not([data-theme="dark"]) .scroll-indicator,
+[data-theme="light"] .scroll-indicator {
+    color: var(--text-secondary) !important;
+}
+
+:root:not([data-theme="dark"]) .scroll-indicator .scroll-text,
+[data-theme="light"] .scroll-indicator .scroll-text {
+    color: var(--text-secondary) !important;
+}
+
+:root:not([data-theme="dark"]) .scroll-indicator .arrow-down,
+[data-theme="light"] .scroll-indicator .arrow-down {
+    color: var(--text-secondary) !important;
+}
+
+/* Highlight text */
+:root:not([data-theme="dark"]) .highlight-text,
+[data-theme="light"] .highlight-text {
+    color: var(--text-muted);
+}
+
+/* Section titles */
+:root:not([data-theme="dark"]) .section-title-container h2,
+[data-theme="light"] .section-title-container h2 {
+    color: var(--text-primary);
+}
+
+/* Override FRONT/style.css dark defaults for light mode */
+:root:not([data-theme="dark"]) body,
+[data-theme="light"] body {
+    background-color: #ffffff !important;
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) h1,
+:root:not([data-theme="dark"]) h2,
+[data-theme="light"] h1,
+[data-theme="light"] h2 {
+    color: var(--text-primary) !important;
+}
+
+:root:not([data-theme="dark"]) .thin-text,
+[data-theme="light"] .thin-text {
+    color: var(--text-muted) !important;
+}
+
+/* Ensure main content sections have proper light backgrounds */
+:root:not([data-theme="dark"]) main,
+[data-theme="light"] main {
+    background-color: #ffffff !important;
+}
+
+:root:not([data-theme="dark"]) .content-section,
+[data-theme="light"] .content-section {
+    background-color: #ffffff !important;
+}
+
+/* Index page specific - completely white */
+:root:not([data-theme="dark"]) body.index-page,
+:root:not([data-theme="dark"]) html:has(body > main > section#hero),
+[data-theme="light"] body.index-page,
+[data-theme="light"] html:has(body > main > section#hero) {
+    background-color: #ffffff !important;
+}
+
+/* Hero section on index page - white */
+:root:not([data-theme="dark"]) #hero.hero-section,
+[data-theme="light"] #hero.hero-section {
+    background-color: #ffffff !important;
+}
+
+/* Book section on index page - white */
+:root:not([data-theme="dark"]) #featured-books.book-section,
+[data-theme="light"] #featured-books.book-section {
+    background-color: #ffffff !important;
+}
+
+/* Book cover wrapper - white background in light mode */
+:root:not([data-theme="dark"]) .book-cover-wrapper,
+[data-theme="light"] .book-cover-wrapper {
+    background-color: #ffffff !important;
+}
+
+/* Cover text overlay - dark text in light mode */
+:root:not([data-theme="dark"]) .cover-text-overlay,
+[data-theme="light"] .cover-text-overlay {
+    color: var(--text-muted) !important;
+}
+
+/* Container shadows - faint shadows for light mode */
+:root:not([data-theme="dark"]) .info-box,
+[data-theme="light"] .info-box {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+}
+
+:root:not([data-theme="dark"]) .info-box:hover,
+[data-theme="light"] .info-box:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root:not([data-theme="dark"]) .example-box,
+[data-theme="light"] .example-box {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+}
+
+:root:not([data-theme="dark"]) .example-box:hover,
+[data-theme="light"] .example-box:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Book cards - faint shadows */
+:root:not([data-theme="dark"]) .book-card,
+[data-theme="light"] .book-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root:not([data-theme="dark"]) .book-card:hover,
+[data-theme="light"] .book-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Chart containers */
+:root:not([data-theme="dark"]) .chart-container,
+[data-theme="light"] .chart-container {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+}
+
+/* Cards */
+:root:not([data-theme="dark"]) .card,
+[data-theme="light"] .card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+}
+
+/* Tables */
+:root:not([data-theme="dark"]) .table-responsive,
+[data-theme="light"] .table-responsive {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+:root:not([data-theme="dark"]) .table,
+[data-theme="light"] .table {
+    background-color: #ffffff !important;
+}
+
+/* Alert boxes */
+:root:not([data-theme="dark"]) .alert,
+:root:not([data-theme="dark"]) .alert-info,
+[data-theme="light"] .alert,
+[data-theme="light"] .alert-info {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+}
