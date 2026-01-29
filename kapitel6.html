@@ -624,22 +624,59 @@
                         <div class="chart-legend" style="text-align: center; margin-top: 10px;"></div>
                     </div>
                     <p><small><b>Figur 6.11: SE/SU model – Negativt output gab.</b>
-                            <br><b>SE-kurven (rød):</b> Viser den samlede efterspørgsel. Den er nedadgående, fordi
+                            <br><b>SE-kurven (rød, tyk):</b> Samlet efterspørgsel. Den er nedadgående, fordi
                             højere inflation reducerer købekraften.
-                            <br><b>SU<sub>KORT</sub>-kurven (blå):</b> Viser det kortsigtede udbud. Den er opadgående,
-                            fordi virksomhederne producerer mere ved højere priser.
-                            <br><b>SU<sub>LANG</sub>-linjen (grå lodret):</b> Viser økonomiens potentiale. Den er
-                            lodret, fordi potentialet ikke afhænger af prisniveauet på lang sigt.
-                            <br><b>Punkt 0 (gult punkt):</b> Den kortsigtede ligevægt, hvor SE-kurven (rød) og
-                            SU<sub>KORT</sub>-kurven (blå) krydser hinanden. Ved dette gule punkt er Y₀ &lt; Y*
-                            (markeret på x-aksen), hvilket betyder et negativt outputgab - økonomien producerer mindre
-                            end sit potentiale. Inflationen er π₀ (markeret på y-aksen). Dette gule punkt viser, at
-                            økonomien opererer under sit potentiale, hvilket typisk fører til højere arbejdsløshed.
-                            <br><b>Ekspansiv pengepolitik kan hjælpe med at lukke et negativt outputgab ved at skubbe
-                                SE-kurven til højre.</b>
+                            <br><b>SE<sub>Ny</sub> (rød stiplede):</b> SE efter ekspansiv politik – kurven er skubbet
+                            til højre. Den krydser SU<sub>KORT</sub> ved punkt 1, hvor outputgabet er lukket.
+                            <br><b>SU<sub>KORT</sub>-kurven (blå):</b> Kortsigtet udbud. Den er opadgående, fordi
+                            virksomhederne producerer mere ved højere priser.
+                            <br><b>SU<sub>LANG</sub>-linjen (grå lodret):</b> Økonomiens potentiale (Y*).
+                            <br><b>Punkt 0 (gult):</b> Kortsigtet ligevægt før politik. Y₀ &lt; Y* →
+                            negativt outputgab. Inflationen er π₀.
+                            <br><b>Punkt 1 (blåt):</b> Ny ligevægt efter ekspansiv politik. SE<sub>Ny</sub> skubbet til
+                            højre; Y₁ = Y* (gabet lukket). Inflationen er π₁.
                         </small></p>
 
-                    <h4>2.2 Intet outputgab</h4>
+                    <h4>2.2 Positivt outputgab</h4>
+                    <p>Et <b>positivt outputgab</b> opstår, når den faktiske nationalindkomst (<span class="legal-term"
+                            data-definition="Faktisk nationalindkomst: Den faktiske produktion i økonomien på et givet tidspunkt."
+                            data-example="Hvis Y₀ = 2.800 mia. kr., betyder det at økonomien faktisk producerer varer og tjenester til en værdi af 2.800 mia. kr."
+                            data-slug="symbol-y">Y₀</span>) er højere end den potentielle nationalindkomst (<span
+                            class="legal-term"
+                            data-definition="Potentiel nationalindkomst: Den maksimale produktion, som en økonomi kan opretholde på lang sigt uden at skabe inflation."
+                            data-example="Hvis Y* = 2.850 mia. kr., betyder det at økonomien potentielt kunne producere varer og tjenester til en værdi af 2.850 mia. kr."
+                            data-slug="symbol-y">Y*</span>). Dette betyder, at økonomien kører over kapacitet – den
+                        producerer mere end den kan opretholde på lang sigt – hvilket typisk fører til højere inflation
+                        og overophedning.</p>
+
+                    <p><b>Inflationens (π) rolle ved positivt outputgab:</b> Når der er et positivt outputgab (Y₀ &gt;
+                        Y*), er inflationen typisk <b>højere</b> end ved fuld kapacitetsudnyttelse. I SE-SU modellen ses
+                        dette ved, at ligevægtspunktet (hvor SE-kurven og SU<sub>KORT</sub>-kurven mødes) ligger til
+                        højre for SU<sub>LANG</sub>-linjen. Årsager inkluderer stærk efterspørgsel, knap arbejdskraft
+                        og pres på priser og lønninger. Politikerne har derfor typisk behov for at føre
+                        <b>kontraktiv politik</b> (både finans- og pengepolitik) for at lukke outputgabet og dæmpe
+                        inflationen. Ved at skubbe SE-kurven til venstre kan økonomien bevæge sig tilbage mod sit
+                        potentiale.</p>
+
+                    <div class="chart-container mb-1" style="position: relative; height: 400px; width: 100%;">
+                        <canvas id="sesuPositiveOutputGapChart" data-chart-type="sesu-positive-output-gap"></canvas>
+                        <div class="chart-legend" style="text-align: center; margin-top: 10px;"></div>
+                    </div>
+                    <p><small><b>Figur 6.12: SE/SU model – Positivt output gab.</b>
+                            <br><b>SE-kurven (rød, tyk):</b> Samlet efterspørgsel. Den er nedadgående, fordi
+                            højere inflation reducerer købekraften.
+                            <br><b>SE<sub>Ny</sub> (rød stiplede):</b> SE efter kontraktiv politik – kurven er skubbet
+                            til venstre. Den krydser SU<sub>KORT</sub> ved punkt 1, hvor outputgabet er lukket.
+                            <br><b>SU<sub>KORT</sub>-kurven (blå):</b> Kortsigtet udbud. Den er opadgående, fordi
+                            virksomhederne producerer mere ved højere priser.
+                            <br><b>SU<sub>LANG</sub>-linjen (grå lodret):</b> Økonomiens potentiale (Y*).
+                            <br><b>Punkt 0 (gult):</b> Kortsigtet ligevægt før politik. Y₀ &gt; Y* →
+                            positivt outputgab. Inflationen er π₀.
+                            <br><b>Punkt 1 (blåt):</b> Ny ligevægt efter kontraktiv politik. SE<sub>Ny</sub> skubbet til
+                            venstre; Y₁ = Y* (gabet lukket). Inflationen er π₁.
+                        </small></p>
+
+                    <h4>2.3 Intet outputgab</h4>
                     <p>Når den faktiske nationalindkomst (Y₀) er lig med den potentielle nationalindkomst (Y*), siger
                         vi, at der er <b>intet outputgab</b>. Dette er den ideelle situation, hvor økonomien udnytter
                         alle sine ressourcer optimalt uden at skabe unødvendig inflation.</p>
@@ -649,7 +686,7 @@
                         <div class="chart-legend" style="text-align: center; margin-top: 10px;"></div>
                     </div>
                     <br>
-                    <p><small><b>Figur 6.12: SE/SU model kort og lang sigt (intet outputgab).</b>
+                    <p><small><b>Figur 6.13: SE/SU model kort og lang sigt (intet outputgab).</b>
                             <br>Herover ses et eksempel på en økonomi uden outputgab - dette er den ideelle situation,
                             som vi forsøger at ramme vha. af konjunkturpolitik.
                             <br><b>Punkt 0 (gult punkt):</b> I denne model er ligevægtspunktet (det gule punkt) placeret

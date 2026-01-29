@@ -6528,62 +6528,79 @@ function createSESUNegativeOutputGapChart(canvasId) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
-    // Data points for the curves
     const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
 
-    // SE (Aggregate Demand) - downward sloping red line
-    // π = 8 - 0.002Y (example function)
-    const seData = nationalIncome.map(y => 8 - 0.002 * y);
+    // SE (Aggregate Demand) – nedadgående, tydelig rød linje. π = 8 - 0.002Y
+    const seData = nationalIncome.map(y => ({ x: y, y: 8 - 0.002 * y }));
 
-    // SUKORT (Short-run Aggregate Supply) - upward sloping blue line
-    // π = 2 + 0.002Y (example function)
-    const sukortData = nationalIncome.map(y => 2 + 0.002 * y);
+    // SE_Ny (ekspansiv politik): skubber SE til højre, lukker gabet ved Y* = 2000. π = 10 - 0.002Y
+    const seNyData = nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y }));
 
-    // SULANG (Long-run Aggregate Supply) - vertical grey line at Y = 2000
+    // SUKORT: π = 2 + 0.002Y
+    const sukortData = nationalIncome.map(y => ({ x: y, y: 2 + 0.002 * y }));
+
     const sulangY = 2000;
-    const sulangData = Array(nationalIncome.length).fill(null);
-    sulangData[4] = 0; // Start point
-    sulangData[5] = 10; // End point
 
-    // Equilibrium point (intersection of SE and SUKORT)
-    // Solve: 8 - 0.002Y = 2 + 0.002Y => 6 = 0.004Y => Y = 1500
-    const eqY = 1500;
-    const eqPi = 8 - 0.002 * eqY; // π = 5
+    // Punkt 0: SE ∩ SUKORT → Y₀ = 1500, π₀ = 5 (negativt outputgab)
+    const eq0Y = 1500;
+    const eq0Pi = 5;
+
+    // Punkt 1: SE_Ny ∩ SUKORT → Y₁ = Y* = 2000, π₁ = 6 (gab lukket)
+    const eq1Y = 2000;
+    const eq1Pi = 6;
 
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: nationalIncome,
             datasets: [{
-                label: 'SE',
-                data: seData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
-                borderColor: '#ef4444', // Red
+                label: 'SULANG',
+                data: [{ x: sulangY, y: 0 }, { x: sulangY, y: 10 }],
+                borderColor: '#6b7280',
                 backgroundColor: 'transparent',
-                borderWidth: 3,
+                borderWidth: 2,
                 pointRadius: 0,
                 tension: 0
             }, {
                 label: 'SUKORT',
-                data: sukortData.map((pi, i) => ({ x: nationalIncome[i], y: pi })),
-                borderColor: '#3b82f6', // Blue
+                data: sukortData,
+                borderColor: '#3b82f6',
                 backgroundColor: 'transparent',
-                borderWidth: 3,
+                borderWidth: 2.5,
                 pointRadius: 0,
                 tension: 0
             }, {
-                label: 'SULANG',
-                data: [{ x: sulangY, y: 0 }, { x: sulangY, y: 10 }],
-                borderColor: '#6b7280', // Grey
+                label: 'SE',
+                data: seData,
+                borderColor: '#dc2626',
+                backgroundColor: 'transparent',
+                borderWidth: 4,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SE_Ny',
+                data: seNyData,
+                borderColor: '#dc2626',
                 backgroundColor: 'transparent',
                 borderWidth: 3,
+                borderDash: [6, 4],
                 pointRadius: 0,
                 tension: 0
             }, {
                 label: 'Ligevægt 0',
-                data: [{ x: eqY, y: eqPi }],
+                data: [{ x: eq0Y, y: eq0Pi }],
                 type: 'scatter',
-                backgroundColor: '#fbbf24', // Yellow/Gold
+                backgroundColor: '#fbbf24',
                 borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }, {
+                label: 'Ligevægt 1',
+                data: [{ x: eq1Y, y: eq1Pi }],
+                type: 'scatter',
+                backgroundColor: '#2563eb',
+                borderColor: '#2563eb',
                 pointRadius: 10,
                 pointHoverRadius: 12,
                 showLine: false
@@ -6598,18 +6615,14 @@ function createSESUNegativeOutputGapChart(canvasId) {
                     text: 'SE/SU model – Negativt output gab',
                     font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
                 },
-                legend: {
-                    ...chartConfig.plugins.legend,
-                    display: false // Disable default legend - we'll use custom HTML legend
-                },
+                legend: { ...chartConfig.plugins.legend, display: false },
                 tooltip: {
                     ...chartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
-                            if (context.dataset.label.includes('Ligevægt')) {
-                                return context.dataset.label;
-                            }
+                            if (context.dataset.label.includes('Ligevægt')) return context.dataset.label;
                             let label = context.dataset.label;
+                            if (label === 'SE_Ny') label = 'SE\u2099\u1d67 (ekspansiv)';
                             if (label === 'SUKORT') label = 'SU\u2096\u2092\u1d63\u209c';
                             if (label === 'SULANG') label = 'SU\u2097\u2090\u2099\u1d4d';
                             return label;
@@ -6623,26 +6636,14 @@ function createSESUNegativeOutputGapChart(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 3000,
-                    title: {
-                        display: true,
-                        text: 'Nationalindkomst (Y)',
-                        font: { size: 12, weight: 'bold' }
-                    },
-                    ticks: {
-                        display: false
-                    }
+                    title: { display: true, text: 'Nationalindkomst (Y)', font: { size: 12, weight: 'bold' } },
+                    ticks: { display: false }
                 },
                 y: {
                     min: 0,
                     max: 10,
-                    title: {
-                        display: true,
-                        text: 'Inflation (π)',
-                        font: { size: 12, weight: 'bold' }
-                    },
-                    ticks: {
-                        display: false
-                    }
+                    title: { display: true, text: 'Inflation (π)', font: { size: 12, weight: 'bold' } },
+                    ticks: { display: false }
                 }
             }
         },
@@ -6650,29 +6651,23 @@ function createSESUNegativeOutputGapChart(canvasId) {
             id: 'pointLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
-                const y0 = eqY;
-                const yStar = sulangY;
-                const pi0 = eqPi;
-
-                chart.data.datasets.forEach((dataset, i) => {
-                    if (dataset.label.includes('Ligevægt')) {
-                        const meta = chart.getDatasetMeta(i);
-                        meta.data.forEach((element) => {
-                            const { x, y } = element.getProps(['x', 'y'], true);
-                            ctx.save();
-                            ctx.fillStyle = 'white';
-                            ctx.font = 'bold 12px Inter';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText('0', x, y);
-                            ctx.restore();
-                        });
-                    }
-                });
-
-                // Add Y₀, Y* and π₀ labels
                 const xScale = chart.scales.x;
                 const yScale = chart.scales.y;
+
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (!dataset.label.includes('Ligevægt')) return;
+                    const meta = chart.getDatasetMeta(i);
+                    meta.data.forEach((el) => {
+                        const { x, y } = el.getProps(['x', 'y'], true);
+                        ctx.save();
+                        ctx.fillStyle = 'white';
+                        ctx.font = 'bold 12px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(dataset.label.includes('0') ? '0' : '1', x, y);
+                        ctx.restore();
+                    });
+                });
 
                 ctx.save();
                 ctx.fillStyle = '#1f2937';
@@ -6680,44 +6675,226 @@ function createSESUNegativeOutputGapChart(canvasId) {
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'top';
 
-                // Y₀ label on x-axis
-                const y0X = xScale.getPixelForValue(y0);
-                ctx.fillText('Y₀', y0X, yScale.bottom + 5);
+                ctx.fillText('Y₀', xScale.getPixelForValue(eq0Y), yScale.bottom + 5);
+                ctx.fillText('Y* = Y₁', xScale.getPixelForValue(eq1Y), yScale.bottom + 5);
 
-                // Y* label on x-axis
-                const yStarX = xScale.getPixelForValue(yStar);
-                ctx.fillText('Y*', yStarX, yScale.bottom + 5);
-
-                // π₀ label on y-axis
                 ctx.textAlign = 'right';
                 ctx.textBaseline = 'middle';
-                const pi0Y = yScale.getPixelForValue(pi0);
-                ctx.fillText('π₀', xScale.left - 5, pi0Y);
-
+                ctx.fillText('π₀', xScale.left - 5, yScale.getPixelForValue(eq0Pi));
+                ctx.fillText('π₁', xScale.left - 5, yScale.getPixelForValue(eq1Pi));
                 ctx.restore();
             }
         }, {
             id: 'curveLabels',
             afterDatasetsDraw(chart) {
                 const { ctx } = chart;
-                ctx.save();
-                ctx.fillStyle = '#ef4444';
-                ctx.font = 'bold 14px Inter';
-                ctx.fillText('SE', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(2.4));
-
-                ctx.fillStyle = '#3b82f6';
-                // Helper function to draw text with subscript
-                const drawTextWithSubscript = (text, subscript, x, y, color, fontSize = 14) => {
+                const drawSub = (text, sub, x, y, color, fs = 14) => {
                     ctx.fillStyle = color;
-                    ctx.font = `bold ${fontSize}px Inter`;
+                    ctx.font = `bold ${fs}px Inter`;
                     ctx.fillText(text, x, y);
-                    const textWidth = ctx.measureText(text).width;
-                    ctx.font = `bold ${fontSize * 0.7}px Inter`;
-                    ctx.fillText(subscript, x + textWidth, y + fontSize * 0.3);
+                    const w = ctx.measureText(text).width;
+                    ctx.font = `bold ${fs * 0.7}px Inter`;
+                    ctx.fillText(sub, x + w, y + fs * 0.3);
                 };
+                ctx.save();
+                const xs = chart.scales.x;
+                const ys = chart.scales.y;
+                ctx.fillStyle = '#dc2626';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', xs.getPixelForValue(2800), ys.getPixelForValue(2.2));
+                drawSub('SE', 'Ny', xs.getPixelForValue(2800), ys.getPixelForValue(4.2), '#dc2626');
+                ctx.fillStyle = '#3b82f6';
+                drawSub('SU', 'KORT', xs.getPixelForValue(2800), ys.getPixelForValue(7.6), '#3b82f6');
+                drawSub('SU', 'LANG', xs.getPixelForValue(sulangY + 50), ys.getPixelForValue(9), '#6b7280');
+                ctx.restore();
+            }
+        }]
+    });
+}
 
-                drawTextWithSubscript('SU', 'KORT', chart.scales.x.getPixelForValue(2800), chart.scales.y.getPixelForValue(7.6), '#3b82f6');
-                drawTextWithSubscript('SU', 'LANG', chart.scales.x.getPixelForValue(sulangY + 50), chart.scales.y.getPixelForValue(9), '#6b7280');
+// Create SE-SU Model Chart with Positive Output Gap
+function createSESUPositiveOutputGapChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    const nationalIncome = [0, 500, 1000, 1500, 2000, 2500, 3000];
+
+    // SULANG (Y*) til venstre – potentielt output. π = 2 + 0.002Y uændret for SUKORT.
+    const sulangY = 1500;
+
+    const sukortData = nationalIncome.map(y => ({ x: y, y: 2 + 0.002 * y }));
+
+    // SE (Aggregate Demand): π = 10 - 0.002Y. Skærer SUKORT ved Y₀ = 2000, π₀ = 6 (Y₀ > Y*).
+    const seData = nationalIncome.map(y => ({ x: y, y: 10 - 0.002 * y }));
+
+    // SE_Ny (kontraktiv politik): skubber SE til venstre. π = 8 - 0.002Y. Skærer SUKORT ved Y* = 1500, π₁ = 5.
+    const seNyData = nationalIncome.map(y => ({ x: y, y: 8 - 0.002 * y }));
+
+    // Punkt 0: SE ∩ SUKORT → Y₀ = 2000, π₀ = 6 (positivt outputgab)
+    const eq0Y = 2000;
+    const eq0Pi = 6;
+
+    // Punkt 1: SE_Ny ∩ SUKORT → Y₁ = Y* = 1500, π₁ = 5 (gab lukket)
+    const eq1Y = 1500;
+    const eq1Pi = 5;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nationalIncome,
+            datasets: [{
+                label: 'SULANG',
+                data: [{ x: sulangY, y: 0 }, { x: sulangY, y: 10 }],
+                borderColor: '#6b7280',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SUKORT',
+                data: sukortData,
+                borderColor: '#3b82f6',
+                backgroundColor: 'transparent',
+                borderWidth: 2.5,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SE',
+                data: seData,
+                borderColor: '#dc2626',
+                backgroundColor: 'transparent',
+                borderWidth: 4,
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'SE_Ny',
+                data: seNyData,
+                borderColor: '#dc2626',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                tension: 0
+            }, {
+                label: 'Ligevægt 0',
+                data: [{ x: eq0Y, y: eq0Pi }],
+                type: 'scatter',
+                backgroundColor: '#fbbf24',
+                borderColor: '#fbbf24',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }, {
+                label: 'Ligevægt 1',
+                data: [{ x: eq1Y, y: eq1Pi }],
+                type: 'scatter',
+                backgroundColor: '#2563eb',
+                borderColor: '#2563eb',
+                pointRadius: 10,
+                pointHoverRadius: 12,
+                showLine: false
+            }]
+        },
+        options: {
+            ...chartConfig,
+            plugins: {
+                ...chartConfig.plugins,
+                title: {
+                    display: true,
+                    text: 'SE/SU model – Positivt output gab',
+                    font: { size: 16, weight: 'bold', family: 'Inter, sans-serif' }
+                },
+                legend: { ...chartConfig.plugins.legend, display: false },
+                tooltip: {
+                    ...chartConfig.plugins.tooltip,
+                    callbacks: {
+                        label: function (context) {
+                            if (context.dataset.label.includes('Ligevægt')) return context.dataset.label;
+                            let label = context.dataset.label;
+                            if (label === 'SE_Ny') label = 'SE\u2099\u1d67 (kontraktiv)';
+                            if (label === 'SUKORT') label = 'SU\u2096\u2092\u1d63\u209c';
+                            if (label === 'SULANG') label = 'SU\u2097\u2090\u2099\u1d4d';
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: 3000,
+                    title: { display: true, text: 'Nationalindkomst (Y)', font: { size: 12, weight: 'bold' } },
+                    ticks: { display: false }
+                },
+                y: {
+                    min: 0,
+                    max: 10,
+                    title: { display: true, text: 'Inflation (π)', font: { size: 12, weight: 'bold' } },
+                    ticks: { display: false }
+                }
+            }
+        },
+        plugins: [{
+            id: 'pointLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const xScale = chart.scales.x;
+                const yScale = chart.scales.y;
+
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (!dataset.label.includes('Ligevægt')) return;
+                    const meta = chart.getDatasetMeta(i);
+                    meta.data.forEach((el) => {
+                        const { x, y } = el.getProps(['x', 'y'], true);
+                        ctx.save();
+                        ctx.fillStyle = 'white';
+                        ctx.font = 'bold 12px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(dataset.label.includes('0') ? '0' : '1', x, y);
+                        ctx.restore();
+                    });
+                });
+
+                ctx.save();
+                ctx.fillStyle = '#1f2937';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+
+                ctx.fillText('Y* = Y₁', xScale.getPixelForValue(eq1Y), yScale.bottom + 5);
+                ctx.fillText('Y₀', xScale.getPixelForValue(eq0Y), yScale.bottom + 5);
+
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('π₁', xScale.left - 5, yScale.getPixelForValue(eq1Pi));
+                ctx.fillText('π₀', xScale.left - 5, yScale.getPixelForValue(eq0Pi));
+                ctx.restore();
+            }
+        }, {
+            id: 'curveLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx } = chart;
+                const drawSub = (text, sub, x, y, color, fs = 14) => {
+                    ctx.fillStyle = color;
+                    ctx.font = `bold ${fs}px Inter`;
+                    ctx.fillText(text, x, y);
+                    const w = ctx.measureText(text).width;
+                    ctx.font = `bold ${fs * 0.7}px Inter`;
+                    ctx.fillText(sub, x + w, y + fs * 0.3);
+                };
+                ctx.save();
+                const xs = chart.scales.x;
+                const ys = chart.scales.y;
+                ctx.fillStyle = '#dc2626';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('SE', xs.getPixelForValue(2800), ys.getPixelForValue(4.4));
+                drawSub('SE', 'Ny', xs.getPixelForValue(2800), ys.getPixelForValue(2.4), '#dc2626');
+                ctx.fillStyle = '#3b82f6';
+                drawSub('SU', 'KORT', xs.getPixelForValue(2800), ys.getPixelForValue(7.6), '#3b82f6');
+                drawSub('SU', 'LANG', xs.getPixelForValue(sulangY + 50), ys.getPixelForValue(9), '#6b7280');
                 ctx.restore();
             }
         }]
@@ -9224,7 +9401,7 @@ function createMultiplierChart(canvasId) {
 
     // Showing multiplier effect rounds with stacked bars
     // This makes it clearer how each round adds to the total effect
-    const rounds = ['Initial', 'Runde 1', 'Runde 2', 'Runde 3', 'Runde 4', 'Runde 5', 'Total'];
+    const rounds = ['1 runde', '2 runde', '3 runde', '4 runde', '5 runde', '6 runde', 'mange runder'];
 
     // Initial government spending (e.g., infrastructure investment)
     const initialG = 100;
@@ -9337,7 +9514,12 @@ function createMultiplierChart(canvasId) {
                 x: {
                     ...chartConfig.scales.x,
                     stacked: true,
-                    ticks: { display: false }
+                    ticks: {
+                        display: true,
+                        maxRotation: 45,
+                        minRotation: 0,
+                        font: { size: 11 }
+                    }
                 },
                 y: {
                     ...chartConfig.scales.y,
@@ -11489,7 +11671,7 @@ const chartObserver = new IntersectionObserver((entries) => {
                     'phillips-curve', 'keynes-basic', 'multiplier', 'keynes-fp', 'keynes-expansive',
                     'public-balance', 'public-balance-expansive', 'employment-y', 'employment-expansive',
                     'balance-of-payments', 'balance-of-payments-expansive', 'sesu-negative-output-gap',
-                    'sesu-no-output-gap', 'sesu-expansive-fp', 'sesu-se-increase', 'fiscal-multiplier',
+                    'sesu-positive-output-gap', 'sesu-no-output-gap', 'sesu-expansive-fp', 'sesu-se-increase', 'fiscal-multiplier',
                     'monetary-transmission', 'fiscal-monetary-comparison', 'policy-lag', 'policy-effectiveness',
                     'sesu-strukturpolitik-no-gap', 'sesu-strukturpolitik-sulang-shift', 'marshall-model'
                 ];
@@ -11594,6 +11776,9 @@ function initializeChartByType(element, chartType, chartData) {
                         break;
                     case 'sesu-negative-output-gap':
                         createSESUNegativeOutputGapChart(element.id);
+                        break;
+                    case 'sesu-positive-output-gap':
+                        createSESUPositiveOutputGapChart(element.id);
                         break;
                     case 'sesu-no-output-gap':
                         createSESUNoOutputGapChart(element.id);
