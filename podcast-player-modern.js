@@ -25,10 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
             barWidth: 3,
             barRadius: 5, // More rounded bars
             responsive: true,
-            height: 80, // A bit taller to look more impressive
+            height: 44,
             normalize: true,
             media: audioEl,
             barGap: 2 // Add a small gap between bars
+        });
+
+        wavesurfer.on('error', function () {
+            waveformEl.innerHTML = '';
         });
 
         // Explicitly load the audio to ensure duration is available

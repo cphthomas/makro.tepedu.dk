@@ -72,6 +72,7 @@
         }
     </style>
     <link rel="stylesheet" href="glossary.css">
+    <link rel="stylesheet" href="podcast-player-modern.css">
 </head>
 
 <body>
@@ -171,6 +172,29 @@
                     <div class="cover-text-overlay animate-cover-text" data-type-text="1. Introduktion til makroøkonomi"
                         data-type-speed="150">Introduktion til makroøkonomi</div>
                 </div>
+
+                <section class="podcast-section" aria-label="Lydoverblik">
+                    <div class="podcast-player-modern">
+                        <div class="podcast-header">
+                            <h3 class="podcast-title-modern">Lyt til lydoverblik – Introduktion til makroøkonomi</h3>
+                            <i class="bi bi-broadcast-pin podcast-icon"></i>
+                        </div>
+                        <audio src="podcast/kapitel1.m4a" preload="metadata"></audio>
+                        <div class="waveform-container"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="podcast-footer">
+                            <div class="time-display">
+                                <span class="current-time">0:00</span>
+                            </div>
+                            <div class="podcast-controls-modern">
+                                <button class="control-button play-pause-button" type="button" aria-label="Afspil"><i class="bi bi-play-fill"></i></button>
+                                <button class="control-button speed-control-modern" type="button" aria-label="Hastighed"><span class="speed-text">1.0x</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <div class="info-box">
                     <p>Dette kapitel introducerer <span class="legal-term"
@@ -1052,6 +1076,8 @@
     <script src="info.js"></script>
     <script src="theme-toggle.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="podcast-player-modern.js"></script>
     <!-- MDB JS -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
