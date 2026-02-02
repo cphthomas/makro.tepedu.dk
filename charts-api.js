@@ -11246,7 +11246,7 @@ function createValutaMarketChartAppreciering(canvasId) {
                 ...currentChartConfig.plugins,
                 title: { 
                     display: true, 
-                    text: 'KURS (DKK per GBP) APPRECIERING 4', 
+                    text: 'KURS (DKK per GBP) APPRECIERING', 
                     position: 'top', 
                     font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, 
                     padding: { top: 0, bottom: 12 },
@@ -11385,7 +11385,7 @@ function createValutaMarketChartDepreciering(canvasId) {
                 ...currentChartConfig.plugins,
                 title: { 
                     display: true, 
-                    text: 'KURS (DKK per GBP) DEPRECIERING 4', 
+                    text: 'KURS (DKK per GBP) DEPRECIERING', 
                     position: 'top', 
                     font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, 
                     padding: { top: 0, bottom: 12 },
