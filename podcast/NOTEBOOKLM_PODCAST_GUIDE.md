@@ -38,8 +38,17 @@ Efter download skal de 8 lydfiler ligge i mappen `podcast/` med navnene:
 
 Så vises de i podcast-afspilleren lige efter overskriften i hvert kapitel (kapitel1.html–kapitel8.html).
 
-## Status: Lydoverblik klar (2. feb 2026)
-Alle 8 Audio overviews er genereret i NotebookLM.
+## Status: Grundige lydoverblik (min. 13 min, samme korte indledning)
+Ønsket stil:
+- **Indledning:** Værterne siger KUN: "Dette er en kort opsamling af kapitel X i onlinebogen, der handler om [emne]." Derefter direkte til emnet – ingen snak om målgruppe eller om teksten.
+- **Indhold:** Grundig gennemgang, minimum 13 minutter. Det må gerne inkludere historiske begivenheder og eksempler.
+- **Format i NotebookLM:** deep_dive, length: long.
+
+Kapitel 1–4 er startet med disse indstillinger. Kapitel 5–8 gav "Failed to create audio overview" (sandsynligvis fordi der allerede kører/ligger et lydoverblik i de notebooks). Når de tidligere er færdige eller slettet, kan du i hver notebook (5–8) manuelt oprette nyt Audio overview med samme focus prompt, eller bede Cursor om at prøve igen.
+
+**Focus prompt til brug i NotebookLM (erstat X og emne):**  
+"Værterne skal KUN starte med: \"Dette er en kort opsamling af kapitel X i onlinebogen, der handler om [emne].\" Derefter direkte til emnet. Ingen snak om målgruppe eller om teksten. Gør det en GRUNDIG gennemgang – minimum 13 minutter. Det må gerne inkludere historiske begivenheder og eksempler."  
+(Format: deep_dive, length: long, sprog: da.)
 
 ### VIGTIGT: Download skal ske i browseren
 NotebookLMs lyd-URLs kræver login. Du **skal** hente MP3’erne mens du er logget ind i Google:
