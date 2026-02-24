@@ -94,10 +94,10 @@ const API_CONFIG = {
 function showChartLoading(elementOrId, message = 'Henter data...') {
     const element = typeof elementOrId === 'string' ? document.getElementById(elementOrId) : elementOrId;
     if (!element) return null;
-    
+
     const container = element.parentElement;
     if (!container) return null;
-    
+
     const loadingDiv = document.createElement('div');
     loadingDiv.className = 'chart-loading';
     loadingDiv.innerHTML = `
@@ -106,7 +106,7 @@ function showChartLoading(elementOrId, message = 'Henter data...') {
     `;
     container.style.position = 'relative';
     container.appendChild(loadingDiv);
-    
+
     return loadingDiv;
 }
 
@@ -1555,69 +1555,78 @@ function createEconomicCircuitVis(containerId) {
     const rightBottomX = containerWidth * 0.7;
 
     const nodes = new vis.DataSet([
-        { id: 'offentlig', label: 'Offentlig sektor', x: centerX, y: topY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }, title: nodeInfo['offentlig'] },
-        { id: 'husholdninger', label: 'Husholdninger', x: leftX, y: midY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }, title: nodeInfo['husholdninger'] },
-        { id: 'virksomheder', label: 'Virksomheder', x: rightX, y: midY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }, title: nodeInfo['virksomheder'] },
-        { id: 'banker', label: 'Banker', x: leftBottomX, y: bottomY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }, title: nodeInfo['banker'] },
-        { id: 'udlandet', label: 'Udlandet', x: rightBottomX, y: bottomY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }, title: nodeInfo['udlandet'] }
+        { id: 'offentlig', label: '🏛️ Offentlig sektor', x: centerX, y: topY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, sans-serif', color: '#0369a1' }, color: { background: '#f0f9ff', border: '#bae6fd' }, title: nodeInfo['offentlig'] },
+        { id: 'husholdninger', label: '🏠 Husholdninger', x: leftX, y: midY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, sans-serif', color: '#86198f' }, color: { background: '#fdf4ff', border: '#f5d0fe' }, title: nodeInfo['husholdninger'] },
+        { id: 'virksomheder', label: '🏭 Virksomheder', x: rightX, y: midY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, sans-serif', color: '#166534' }, color: { background: '#f0fdf4', border: '#bbf7d0' }, title: nodeInfo['virksomheder'] },
+        { id: 'banker', label: '🏦 Banker', x: leftBottomX, y: bottomY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, sans-serif', color: '#b45309' }, color: { background: '#fffbeb', border: '#fde68a' }, title: nodeInfo['banker'] },
+        { id: 'udlandet', label: '🌍 Udlandet', x: rightBottomX, y: bottomY, fixed: true, shape: 'box', font: { size: 16, face: 'Inter, sans-serif', color: '#334155' }, color: { background: '#f8fafc', border: '#e2e8f0' }, title: nodeInfo['udlandet'] }
     ]);
 
     const edges = new vis.DataSet([
-        { from: 'husholdninger', to: 'offentlig', label: 'Skat (T)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'offentlig', to: 'husholdninger', label: 'Løn & Overførsler (Y, Tr)', color: { color: '#3b82f6' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'virksomheder', to: 'offentlig', label: 'Skat (T)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'offentlig', to: 'virksomheder', label: 'Off. Forbrug (Cg)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'husholdninger', to: 'virksomheder', label: 'Privat Forbrug (Cp)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'husholdninger', to: 'banker', label: 'Opsparing (S)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'banker', to: 'virksomheder', label: 'Investering (I)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'virksomheder', to: 'udlandet', label: 'Eksport (X)', color: { color: '#3b82f6' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } },
-        { from: 'udlandet', to: 'virksomheder', label: 'Import (IM)', color: { color: '#ef4444' }, dashes: true, arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' } }
+        { from: 'husholdninger', to: 'offentlig', label: 'Skat (T)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCCW', roundness: 0.2 } },
+        { from: 'offentlig', to: 'husholdninger', label: 'Løn & Overførsler (Y, Tr)', color: { color: '#3b82f6' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCCW', roundness: 0.2 } },
+        { from: 'virksomheder', to: 'offentlig', label: 'Skat (T)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.2 } },
+        { from: 'offentlig', to: 'virksomheder', label: 'Off. Forbrug (Cg)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.2 } },
+        { from: 'husholdninger', to: 'virksomheder', label: 'Privat Forbrug (Cp)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.1 } },
+        { from: 'virksomheder', to: 'husholdninger', label: 'Indkomst/Profit (Y)', color: { color: '#3b82f6' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.1 } },
+        { from: 'husholdninger', to: 'banker', label: 'Opsparing (S)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.2 } },
+        { from: 'banker', to: 'virksomheder', label: 'Investering (I)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.2 } },
+        { from: 'virksomheder', to: 'udlandet', label: 'Eksport (X)', color: { color: '#3b82f6' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.2 } },
+        { from: 'udlandet', to: 'virksomheder', label: 'Import (IM)', color: { color: '#ef4444' }, dashes: [5, 5], arrows: 'to', font: { size: 13, align: 'middle', face: 'Inter, sans-serif', background: 'transparent' }, smooth: { type: 'curvedCW', roundness: 0.2 } }
     ]);
 
     const data = { nodes: nodes, edges: edges };
     const options = {
         nodes: {
             shape: 'box',
-            margin: 16, // Increased margin for better text spacing
-            borderRadius: 0, // Hårde hjørner - ingen runde hjørner
+            margin: 18, // Increased margin for better text spacing
+            borderRadius: 12, // Softer corners
             font: {
                 size: 16,
-                face: "'Open Sans', sans-serif",
-                color: '#0f172a',
+                face: "'Inter', sans-serif",
+                bold: {
+                    color: '#0f172a',
+                    size: 16,
+                    vadjust: 0
+                },
                 multi: false
             },
             color: {
                 background: '#ffffff',
                 border: '#e2e8f0',
-                borderWidth: 1,
+                borderWidth: 2,
                 highlight: {
-                    background: '#f0f9ff',
-                    border: '#d3d3d3',
-                    borderWidth: 2
+                    borderWidth: 3
                 },
                 hover: {
-                    background: '#f8fafc',
-                    border: '#d3d3d3'
+                    borderWidth: 3
                 }
             },
-            shadow: { enabled: true, size: 8, x: 0, y: 2 },
-            widthConstraint: { maximum: 160 },
-            heightConstraint: { maximum: 85 },
+            shadow: { enabled: true, color: 'rgba(0,0,0,0.06)', size: 15, x: 0, y: 6 },
+            widthConstraint: { maximum: 180 },
+            heightConstraint: { maximum: 90 },
             shapeProperties: {
-                borderRadius: 0  // Force hårde hjørner
+                borderRadius: 12  // Force rounded corners
             }
         },
         edges: {
             arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+            width: 2,
             font: {
                 size: 13,
                 align: 'middle',
-                face: "'Open Sans', sans-serif",
-                color: '#1e293b',
-                multi: false
+                face: "'Inter', sans-serif",
+                color: '#475569',
+                multi: false,
+                background: 'rgba(255,255,255,0.85)',
+                strokeWidth: 0
             },
-            smooth: { type: 'straight' },
-            color: { highlight: '#d3d3d3' }
+            smooth: {
+                type: 'cubicBezier',
+                roundness: 0.2
+            },
+            color: { highlight: '#94a3b8' },
+            shadow: { enabled: false }
         },
         physics: false,
         interaction: {
@@ -1650,53 +1659,28 @@ function createEconomicCircuitVis(containerId) {
     network.on("stabilizationEnd", function () {
         const canvas = container.querySelector('canvas');
         if (canvas) {
-            canvas.style.fontFamily = "'Open Sans', sans-serif";
+            canvas.style.fontFamily = "'Inter', sans-serif";
         }
 
-        // Force remove border-radius from all nodes
-        const nodeElements = container.querySelectorAll('.vis-network .vis-node');
-        nodeElements.forEach(node => {
-            if (node.style) {
-                node.style.borderRadius = '0';
-            }
-        });
-
-        // Add CSS to prevent black selection
+        // Add CSS to fix fonts and styles
         if (!document.getElementById('vis-network-font-fix')) {
             const style = document.createElement('style');
             style.id = 'vis-network-font-fix';
             style.textContent = `
                 #${containerId} canvas {
-                    font-family: 'Open Sans', sans-serif !important;
+                    font-family: 'Inter', sans-serif !important;
                 }
                 .vis-network .vis-node.vis-selected {
-                    background-color: #f0f9ff !important;
-                    border-color: #d3d3d3 !important;
-                    color: #0f172a !important;
-                }
-                .vis-network .vis-node {
-                    border-radius: 0 !important;
-                }
-                #${containerId} .vis-network .vis-node {
-                    border-radius: 0 !important;
+                    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
                 }
                 .vis-network .vis-node .vis-label {
-                    font-family: 'Open Sans', sans-serif !important;
+                    font-family: 'Inter', sans-serif !important;
                 }
                 .vis-tooltip {
                     display: none !important;
                     visibility: hidden !important;
                     opacity: 0 !important;
                 }
-                /* Force hårde hjørner på alle vis.js noder */
-                .vis-network .vis-node,
-                .vis-network .vis-node div,
-                .vis-network .vis-node rect {
-                    border-radius: 0 !important;
-                    -webkit-border-radius: 0 !important;
-                    -moz-border-radius: 0 !important;
-                }
-                /* Force hvid baggrund på tooltip */
                 #economic-circuit-tooltip {
                     background: #ffffff !important;
                     background-color: #ffffff !important;
@@ -1719,9 +1703,10 @@ function createEconomicCircuitVis(containerId) {
         border: 2px solid #d3d3d3 !important;
         border-radius: 0 !important;
         padding: 14px 16px;
-        box-shadow: 0 10px 25px rgba(211, 211, 211, 0.15), 0 4px 10px rgba(0,0,0,0.1);
-        font-family: 'Open Sans', sans-serif !important;
-        font-size: 13px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0,0,0,0.05);
+        font-family: 'Inter', sans-serif !important;
+        font-size: 14px;
+        border-radius: 8px !important;
         color: #0f172a;
         max-width: 280px;
         z-index: 99999 !important;
@@ -2295,611 +2280,611 @@ let cachedChartData = null;
 // This ensures all data is available even when chart-data-cache.json cannot be loaded due to CORS
 // All data here is REAL data from World Bank API, not mock data
 const embeddedCacheData = {
-  "gdpPerCapita": {
-    "lastUpdated": "2024-01-01",
-    "data": {
-      "DNK": [
-        {"date": "1994", "value": 32000},
-        {"date": "1995", "value": 34000},
-        {"date": "1996", "value": 36000},
-        {"date": "1997", "value": 38000},
-        {"date": "1998", "value": 39000},
-        {"date": "1999", "value": 40000},
-        {"date": "2000", "value": 42000},
-        {"date": "2001", "value": 43000},
-        {"date": "2002", "value": 44000},
-        {"date": "2003", "value": 45000},
-        {"date": "2004", "value": 48000},
-        {"date": "2005", "value": 50000},
-        {"date": "2006", "value": 53000},
-        {"date": "2007", "value": 56000},
-        {"date": "2008", "value": 57000},
-        {"date": "2009", "value": 55000},
-        {"date": "2010", "value": 56000},
-        {"date": "2011", "value": 60000},
-        {"date": "2012", "value": 58000},
-        {"date": "2013", "value": 59000},
-        {"date": "2014", "value": 61000},
-        {"date": "2015", "value": 53000},
-        {"date": "2016", "value": 55000},
-        {"date": "2017", "value": 57000},
-        {"date": "2018", "value": 61000},
-        {"date": "2019", "value": 59000},
-        {"date": "2020", "value": 61000},
-        {"date": "2021", "value": 68000},
-        {"date": "2022", "value": 68000},
-        {"date": "2023", "value": 69000}
-      ],
-      "DEU": [
-        {"date": "1994", "value": 28000},
-        {"date": "1995", "value": 30000},
-        {"date": "1996", "value": 31000},
-        {"date": "1997", "value": 32000},
-        {"date": "1998", "value": 33000},
-        {"date": "1999", "value": 34000},
-        {"date": "2000", "value": 35000},
-        {"date": "2001", "value": 36000},
-        {"date": "2002", "value": 37000},
-        {"date": "2003", "value": 38000},
-        {"date": "2004", "value": 40000},
-        {"date": "2005", "value": 41000},
-        {"date": "2006", "value": 43000},
-        {"date": "2007", "value": 45000},
-        {"date": "2008", "value": 46000},
-        {"date": "2009", "value": 44000},
-        {"date": "2010", "value": 45000},
-        {"date": "2011", "value": 48000},
-        {"date": "2012", "value": 47000},
-        {"date": "2013", "value": 48000},
-        {"date": "2014", "value": 49000},
-        {"date": "2015", "value": 42000},
-        {"date": "2016", "value": 43000},
-        {"date": "2017", "value": 46000},
-        {"date": "2018", "value": 48000},
-        {"date": "2019", "value": 47000},
-        {"date": "2020", "value": 48000},
-        {"date": "2021", "value": 51000},
-        {"date": "2022", "value": 51000},
-        {"date": "2023", "value": 52000}
-      ],
-      "SWE": [
-        {"date": "1994", "value": 30000},
-        {"date": "1995", "value": 32000},
-        {"date": "1996", "value": 33000},
-        {"date": "1997", "value": 35000},
-        {"date": "1998", "value": 36000},
-        {"date": "1999", "value": 37000},
-        {"date": "2000", "value": 39000},
-        {"date": "2001", "value": 40000},
-        {"date": "2002", "value": 41000},
-        {"date": "2003", "value": 43000},
-        {"date": "2004", "value": 45000},
-        {"date": "2005", "value": 47000},
-        {"date": "2006", "value": 50000},
-        {"date": "2007", "value": 53000},
-        {"date": "2008", "value": 54000},
-        {"date": "2009", "value": 52000},
-        {"date": "2010", "value": 54000},
-        {"date": "2011", "value": 58000},
-        {"date": "2012", "value": 56000},
-        {"date": "2013", "value": 58000},
-        {"date": "2014", "value": 60000},
-        {"date": "2015", "value": 52000},
-        {"date": "2016", "value": 54000},
-        {"date": "2017", "value": 56000},
-        {"date": "2018", "value": 58000},
-        {"date": "2019", "value": 56000},
-        {"date": "2020", "value": 58000},
-        {"date": "2021", "value": 62000},
-        {"date": "2022", "value": 62000},
-        {"date": "2023", "value": 63000}
-      ],
-      "NOR": [
-        {"date": "1994", "value": 35000},
-        {"date": "1995", "value": 38000},
-        {"date": "1996", "value": 40000},
-        {"date": "1997", "value": 42000},
-        {"date": "1998", "value": 43000},
-        {"date": "1999", "value": 45000},
-        {"date": "2000", "value": 48000},
-        {"date": "2001", "value": 50000},
-        {"date": "2002", "value": 52000},
-        {"date": "2003", "value": 54000},
-        {"date": "2004", "value": 58000},
-        {"date": "2005", "value": 65000},
-        {"date": "2006", "value": 72000},
-        {"date": "2007", "value": 80000},
-        {"date": "2008", "value": 85000},
-        {"date": "2009", "value": 78000},
-        {"date": "2010", "value": 85000},
-        {"date": "2011", "value": 98000},
-        {"date": "2012", "value": 100000},
-        {"date": "2013", "value": 102000},
-        {"date": "2014", "value": 97000},
-        {"date": "2015", "value": 75000},
-        {"date": "2016", "value": 70000},
-        {"date": "2017", "value": 75000},
-        {"date": "2018", "value": 82000},
-        {"date": "2019", "value": 76000},
-        {"date": "2020", "value": 68000},
-        {"date": "2021", "value": 89000},
-        {"date": "2022", "value": 106000},
-        {"date": "2023", "value": 95000}
-      ],
-      "USA": [
-        {"date": "1994", "value": 28000},
-        {"date": "1995", "value": 29000},
-        {"date": "1996", "value": 30000},
-        {"date": "1997", "value": 31000},
-        {"date": "1998", "value": 32000},
-        {"date": "1999", "value": 34000},
-        {"date": "2000", "value": 36000},
-        {"date": "2001", "value": 37000},
-        {"date": "2002", "value": 38000},
-        {"date": "2003", "value": 40000},
-        {"date": "2004", "value": 42000},
-        {"date": "2005", "value": 44000},
-        {"date": "2006", "value": 46000},
-        {"date": "2007", "value": 48000},
-        {"date": "2008", "value": 49000},
-        {"date": "2009", "value": 47000},
-        {"date": "2010", "value": 48000},
-        {"date": "2011", "value": 50000},
-        {"date": "2012", "value": 52000},
-        {"date": "2013", "value": 53000},
-        {"date": "2014", "value": 55000},
-        {"date": "2015", "value": 56000},
-        {"date": "2016", "value": 57000},
-        {"date": "2017", "value": 60000},
-        {"date": "2018", "value": 63000},
-        {"date": "2019", "value": 65000},
-        {"date": "2020", "value": 63000},
-        {"date": "2021", "value": 70000},
-        {"date": "2022", "value": 76000},
-        {"date": "2023", "value": 80000}
-      ],
-      "JPN": [
-        {"date": "1994", "value": 38000},
-        {"date": "1995", "value": 42000},
-        {"date": "1996", "value": 38000},
-        {"date": "1997", "value": 35000},
-        {"date": "1998", "value": 33000},
-        {"date": "1999", "value": 35000},
-        {"date": "2000", "value": 37000},
-        {"date": "2001", "value": 35000},
-        {"date": "2002", "value": 33000},
-        {"date": "2003", "value": 35000},
-        {"date": "2004", "value": 37000},
-        {"date": "2005", "value": 36000},
-        {"date": "2006", "value": 35000},
-        {"date": "2007", "value": 35000},
-        {"date": "2008", "value": 39000},
-        {"date": "2009", "value": 40000},
-        {"date": "2010", "value": 43000},
-        {"date": "2011", "value": 48000},
-        {"date": "2012", "value": 48000},
-        {"date": "2013", "value": 40000},
-        {"date": "2014", "value": 38000},
-        {"date": "2015", "value": 35000},
-        {"date": "2016", "value": 39000},
-        {"date": "2017", "value": 39000},
-        {"date": "2018", "value": 40000},
-        {"date": "2019", "value": 40000},
-        {"date": "2020", "value": 40000},
-        {"date": "2021", "value": 39000},
-        {"date": "2022", "value": 34000},
-        {"date": "2023", "value": 34000}
-      ],
-      "CHN": [
-        {"date": "1994", "value": 470},
-        {"date": "1995", "value": 600},
-        {"date": "1996", "value": 700},
-        {"date": "1997", "value": 780},
-        {"date": "1998", "value": 820},
-        {"date": "1999", "value": 860},
-        {"date": "2000", "value": 950},
-        {"date": "2001", "value": 1050},
-        {"date": "2002", "value": 1150},
-        {"date": "2003", "value": 1300},
-        {"date": "2004", "value": 1500},
-        {"date": "2005", "value": 1750},
-        {"date": "2006", "value": 2100},
-        {"date": "2007", "value": 2700},
-        {"date": "2008", "value": 3400},
-        {"date": "2009", "value": 3800},
-        {"date": "2010", "value": 4500},
-        {"date": "2011", "value": 5600},
-        {"date": "2012", "value": 6300},
-        {"date": "2013", "value": 7000},
-        {"date": "2014", "value": 7700},
-        {"date": "2015", "value": 8000},
-        {"date": "2016", "value": 8100},
-        {"date": "2017", "value": 8800},
-        {"date": "2018", "value": 9800},
-        {"date": "2019", "value": 10000},
-        {"date": "2020", "value": 10500},
-        {"date": "2021", "value": 12500},
-        {"date": "2022", "value": 12800},
-        {"date": "2023", "value": 13000}
-      ],
-      "IND": [
-        {"date": "1994", "value": 350},
-        {"date": "1995", "value": 380},
-        {"date": "1996", "value": 400},
-        {"date": "1997", "value": 420},
-        {"date": "1998", "value": 430},
-        {"date": "1999", "value": 450},
-        {"date": "2000", "value": 450},
-        {"date": "2001", "value": 460},
-        {"date": "2002", "value": 480},
-        {"date": "2003", "value": 550},
-        {"date": "2004", "value": 650},
-        {"date": "2005", "value": 750},
-        {"date": "2006", "value": 850},
-        {"date": "2007", "value": 1100},
-        {"date": "2008", "value": 1100},
-        {"date": "2009", "value": 1200},
-        {"date": "2010", "value": 1400},
-        {"date": "2011", "value": 1500},
-        {"date": "2012", "value": 1500},
-        {"date": "2013", "value": 1500},
-        {"date": "2014", "value": 1600},
-        {"date": "2015", "value": 1600},
-        {"date": "2016", "value": 1700},
-        {"date": "2017", "value": 2000},
-        {"date": "2018", "value": 2000},
-        {"date": "2019", "value": 2100},
-        {"date": "2020", "value": 1900},
-        {"date": "2021", "value": 2300},
-        {"date": "2022", "value": 2400},
-        {"date": "2023", "value": 2500}
-      ],
-      "RUS": [
-        {"date": "1994", "value": 2600},
-        {"date": "1995", "value": 2700},
-        {"date": "1996", "value": 2700},
-        {"date": "1997", "value": 2800},
-        {"date": "1998", "value": 1800},
-        {"date": "1999", "value": 1300},
-        {"date": "2000", "value": 1800},
-        {"date": "2001", "value": 2100},
-        {"date": "2002", "value": 2400},
-        {"date": "2003", "value": 3000},
-        {"date": "2004", "value": 4100},
-        {"date": "2005", "value": 5300},
-        {"date": "2006", "value": 6900},
-        {"date": "2007", "value": 9100},
-        {"date": "2008", "value": 11600},
-        {"date": "2009", "value": 8600},
-        {"date": "2010", "value": 10700},
-        {"date": "2011", "value": 14000},
-        {"date": "2012", "value": 15000},
-        {"date": "2013", "value": 16000},
-        {"date": "2014", "value": 14000},
-        {"date": "2015", "value": 9000},
-        {"date": "2016", "value": 8700},
-        {"date": "2017", "value": 11000},
-        {"date": "2018", "value": 12000},
-        {"date": "2019", "value": 12000},
-        {"date": "2020", "value": 10000},
-        {"date": "2021", "value": 12000},
-        {"date": "2022", "value": 12000},
-        {"date": "2023", "value": 12000}
-      ],
-      "GBR": [
-        {"date": "1994", "value": 19000},
-        {"date": "1995", "value": 20000},
-        {"date": "1996", "value": 22000},
-        {"date": "1997", "value": 24000},
-        {"date": "1998", "value": 26000},
-        {"date": "1999", "value": 27000},
-        {"date": "2000", "value": 26000},
-        {"date": "2001", "value": 26000},
-        {"date": "2002", "value": 28000},
-        {"date": "2003", "value": 31000},
-        {"date": "2004", "value": 36000},
-        {"date": "2005", "value": 38000},
-        {"date": "2006", "value": 41000},
-        {"date": "2007", "value": 48000},
-        {"date": "2008", "value": 46000},
-        {"date": "2009", "value": 36000},
-        {"date": "2010", "value": 38000},
-        {"date": "2011", "value": 41000},
-        {"date": "2012", "value": 41000},
-        {"date": "2013", "value": 42000},
-        {"date": "2014", "value": 46000},
-        {"date": "2015", "value": 44000},
-        {"date": "2016", "value": 40000},
-        {"date": "2017", "value": 40000},
-        {"date": "2018", "value": 43000},
-        {"date": "2019", "value": 42000},
-        {"date": "2020", "value": 41000},
-        {"date": "2021", "value": 47000},
-        {"date": "2022", "value": 45000},
-        {"date": "2023", "value": 46000}
-      ],
-      "TUR": [
-        {"date": "1994", "value": 3000},
-        {"date": "1995", "value": 3000},
-        {"date": "1996", "value": 3100},
-        {"date": "1997", "value": 3200},
-        {"date": "1998", "value": 3300},
-        {"date": "1999", "value": 3000},
-        {"date": "2000", "value": 3000},
-        {"date": "2001", "value": 2500},
-        {"date": "2002", "value": 3000},
-        {"date": "2003", "value": 3600},
-        {"date": "2004", "value": 4200},
-        {"date": "2005", "value": 5000},
-        {"date": "2006", "value": 5500},
-        {"date": "2007", "value": 7000},
-        {"date": "2008", "value": 10000},
-        {"date": "2009", "value": 8500},
-        {"date": "2010", "value": 10000},
-        {"date": "2011", "value": 11000},
-        {"date": "2012", "value": 11000},
-        {"date": "2013", "value": 12000},
-        {"date": "2014", "value": 11000},
-        {"date": "2015", "value": 9000},
-        {"date": "2016", "value": 11000},
-        {"date": "2017", "value": 11000},
-        {"date": "2018", "value": 9500},
-        {"date": "2019", "value": 9100},
-        {"date": "2020", "value": 8500},
-        {"date": "2021", "value": 9600},
-        {"date": "2022", "value": 10600},
-        {"date": "2023", "value": 11000}
-      ],
-      "BRA": [
-        {"date": "1994", "value": 3500},
-        {"date": "1995", "value": 5000},
-        {"date": "1996", "value": 5000},
-        {"date": "1997", "value": 5200},
-        {"date": "1998", "value": 5000},
-        {"date": "1999", "value": 3500},
-        {"date": "2000", "value": 3700},
-        {"date": "2001", "value": 3100},
-        {"date": "2002", "value": 2800},
-        {"date": "2003", "value": 3000},
-        {"date": "2004", "value": 3600},
-        {"date": "2005", "value": 4700},
-        {"date": "2006", "value": 5800},
-        {"date": "2007", "value": 7200},
-        {"date": "2008", "value": 8700},
-        {"date": "2009", "value": 8600},
-        {"date": "2010", "value": 11000},
-        {"date": "2011", "value": 13000},
-        {"date": "2022", "value": 12000},
-        {"date": "2013", "value": 12000},
-        {"date": "2014", "value": 12000},
-        {"date": "2015", "value": 8700},
-        {"date": "2016", "value": 8700},
-        {"date": "2017", "value": 9900},
-        {"date": "2018", "value": 9000},
-        {"date": "2019", "value": 8700},
-        {"date": "2020", "value": 6800},
-        {"date": "2021", "value": 7500},
-        {"date": "2022", "value": 8800},
-        {"date": "2023", "value": 9000}
-      ],
-      "ITA": [
-        {"date": "1994", "value": 20000},
-        {"date": "1995", "value": 21000},
-        {"date": "1996", "value": 22000},
-        {"date": "1997", "value": 21000},
-        {"date": "1998", "value": 23000},
-        {"date": "1999", "value": 22000},
-        {"date": "2000", "value": 20000},
-        {"date": "2001", "value": 20000},
-        {"date": "2002", "value": 22000},
-        {"date": "2003", "value": 26000},
-        {"date": "2004", "value": 30000},
-        {"date": "2005", "value": 31000},
-        {"date": "2006", "value": 33000},
-        {"date": "2007", "value": 36000},
-        {"date": "2008", "value": 38000},
-        {"date": "2009", "value": 35000},
-        {"date": "2010", "value": 34000},
-        {"date": "2011", "value": 37000},
-        {"date": "2012", "value": 34000},
-        {"date": "2013", "value": 35000},
-        {"date": "2014", "value": 35000},
-        {"date": "2015", "value": 30000},
-        {"date": "2016", "value": 31000},
-        {"date": "2017", "value": 32000},
-        {"date": "2018", "value": 34000},
-        {"date": "2019", "value": 33000},
-        {"date": "2020", "value": 32000},
-        {"date": "2021", "value": 36000},
-        {"date": "2022", "value": 35000},
-        {"date": "2023", "value": 36000}
-      ],
-      "ESP": [
-        {"date": "1994", "value": 14000},
-        {"date": "1995", "value": 15000},
-        {"date": "1996", "value": 16000},
-        {"date": "1997", "value": 17000},
-        {"date": "1998", "value": 18000},
-        {"date": "1999", "value": 19000},
-        {"date": "2000", "value": 15000},
-        {"date": "2001", "value": 16000},
-        {"date": "2002", "value": 18000},
-        {"date": "2003", "value": 22000},
-        {"date": "2004", "value": 26000},
-        {"date": "2005", "value": 28000},
-        {"date": "2006", "value": 30000},
-        {"date": "2007", "value": 32000},
-        {"date": "2008", "value": 32000},
-        {"date": "2009", "value": 31000},
-        {"date": "2010", "value": 30000},
-        {"date": "2011", "value": 31000},
-        {"date": "2012", "value": 28000},
-        {"date": "2013", "value": 29000},
-        {"date": "2014", "value": 29000},
-        {"date": "2015", "value": 26000},
-        {"date": "2016", "value": 27000},
-        {"date": "2017", "value": 28000},
-        {"date": "2018", "value": 30000},
-        {"date": "2019", "value": 30000},
-        {"date": "2020", "value": 27000},
-        {"date": "2021", "value": 30000},
-        {"date": "2022", "value": 30000},
-        {"date": "2023", "value": 31000}
-      ],
-      "GRC": [
-        {"date": "1994", "value": 11000},
-        {"date": "1995", "value": 12000},
-        {"date": "1996", "value": 13000},
-        {"date": "1997", "value": 13000},
-        {"date": "1998", "value": 14000},
-        {"date": "1999", "value": 14000},
-        {"date": "2000", "value": 12000},
-        {"date": "2001", "value": 13000},
-        {"date": "2002", "value": 15000},
-        {"date": "2003", "value": 18000},
-        {"date": "2004", "value": 22000},
-        {"date": "2005", "value": 24000},
-        {"date": "2006", "value": 26000},
-        {"date": "2007", "value": 28000},
-        {"date": "2008", "value": 32000},
-        {"date": "2009", "value": 30000},
-        {"date": "2010", "value": 26000},
-        {"date": "2011", "value": 23000},
-        {"date": "2012", "value": 22000},
-        {"date": "2013", "value": 22000},
-        {"date": "2014", "value": 22000},
-        {"date": "2015", "value": 18000},
-        {"date": "2016", "value": 18000},
-        {"date": "2017", "value": 19000},
-        {"date": "2018", "value": 20000},
-        {"date": "2019", "value": 20000},
-        {"date": "2020", "value": 18000},
-        {"date": "2021", "value": 20000},
-        {"date": "2022", "value": 21000},
-        {"date": "2023", "value": 22000}
-      ],
-      "ARG": [
-        {"date": "1994", "value": 7000},
-        {"date": "1995", "value": 8000},
-        {"date": "1996", "value": 8500},
-        {"date": "1997", "value": 9000},
-        {"date": "1998", "value": 9000},
-        {"date": "1999", "value": 8000},
-        {"date": "2000", "value": 7700},
-        {"date": "2001", "value": 7000},
-        {"date": "2002", "value": 2800},
-        {"date": "2003", "value": 3500},
-        {"date": "2004", "value": 4000},
-        {"date": "2005", "value": 5000},
-        {"date": "2006", "value": 6000},
-        {"date": "2007", "value": 7000},
-        {"date": "2008", "value": 8200},
-        {"date": "2009", "value": 7700},
-        {"date": "2010", "value": 10000},
-        {"date": "2011", "value": 11000},
-        {"date": "2012", "value": 12000},
-        {"date": "2013", "value": 13000},
-        {"date": "2014", "value": 12000},
-        {"date": "2015", "value": 13000},
-        {"date": "2016", "value": 12000},
-        {"date": "2017", "value": 14000},
-        {"date": "2018", "value": 12000},
-        {"date": "2019", "value": 10000},
-        {"date": "2020", "value": 8500},
-        {"date": "2021", "value": 10600},
-        {"date": "2022", "value": 13600},
-        {"date": "2023", "value": 14000}
-      ],
-      "KOR": [
-        {"date": "1994", "value": 9000},
-        {"date": "1995", "value": 12000},
-        {"date": "1996", "value": 13000},
-        {"date": "1997", "value": 12000},
-        {"date": "1998", "value": 8000},
-        {"date": "1999", "value": 11000},
-        {"date": "2000", "value": 12000},
-        {"date": "2001", "value": 11000},
-        {"date": "2002", "value": 13000},
-        {"date": "2003", "value": 15000},
-        {"date": "2004", "value": 16000},
-        {"date": "2005", "value": 18000},
-        {"date": "2006", "value": 20000},
-        {"date": "2007", "value": 22000},
-        {"date": "2008", "value": 20000},
-        {"date": "2009", "value": 18000},
-        {"date": "2010", "value": 22000},
-        {"date": "2011", "value": 24000},
-        {"date": "2012", "value": 25000},
-        {"date": "2013", "value": 26000},
-        {"date": "2014", "value": 28000},
-        {"date": "2015", "value": 27000},
-        {"date": "2016", "value": 28000},
-        {"date": "2017", "value": 30000},
-        {"date": "2018", "value": 32000},
-        {"date": "2019", "value": 32000},
-        {"date": "2020", "value": 32000},
-        {"date": "2021", "value": 35000},
-        {"date": "2022", "value": 33000},
-        {"date": "2023", "value": 34000}
-      ]
+    "gdpPerCapita": {
+        "lastUpdated": "2024-01-01",
+        "data": {
+            "DNK": [
+                { "date": "1994", "value": 32000 },
+                { "date": "1995", "value": 34000 },
+                { "date": "1996", "value": 36000 },
+                { "date": "1997", "value": 38000 },
+                { "date": "1998", "value": 39000 },
+                { "date": "1999", "value": 40000 },
+                { "date": "2000", "value": 42000 },
+                { "date": "2001", "value": 43000 },
+                { "date": "2002", "value": 44000 },
+                { "date": "2003", "value": 45000 },
+                { "date": "2004", "value": 48000 },
+                { "date": "2005", "value": 50000 },
+                { "date": "2006", "value": 53000 },
+                { "date": "2007", "value": 56000 },
+                { "date": "2008", "value": 57000 },
+                { "date": "2009", "value": 55000 },
+                { "date": "2010", "value": 56000 },
+                { "date": "2011", "value": 60000 },
+                { "date": "2012", "value": 58000 },
+                { "date": "2013", "value": 59000 },
+                { "date": "2014", "value": 61000 },
+                { "date": "2015", "value": 53000 },
+                { "date": "2016", "value": 55000 },
+                { "date": "2017", "value": 57000 },
+                { "date": "2018", "value": 61000 },
+                { "date": "2019", "value": 59000 },
+                { "date": "2020", "value": 61000 },
+                { "date": "2021", "value": 68000 },
+                { "date": "2022", "value": 68000 },
+                { "date": "2023", "value": 69000 }
+            ],
+            "DEU": [
+                { "date": "1994", "value": 28000 },
+                { "date": "1995", "value": 30000 },
+                { "date": "1996", "value": 31000 },
+                { "date": "1997", "value": 32000 },
+                { "date": "1998", "value": 33000 },
+                { "date": "1999", "value": 34000 },
+                { "date": "2000", "value": 35000 },
+                { "date": "2001", "value": 36000 },
+                { "date": "2002", "value": 37000 },
+                { "date": "2003", "value": 38000 },
+                { "date": "2004", "value": 40000 },
+                { "date": "2005", "value": 41000 },
+                { "date": "2006", "value": 43000 },
+                { "date": "2007", "value": 45000 },
+                { "date": "2008", "value": 46000 },
+                { "date": "2009", "value": 44000 },
+                { "date": "2010", "value": 45000 },
+                { "date": "2011", "value": 48000 },
+                { "date": "2012", "value": 47000 },
+                { "date": "2013", "value": 48000 },
+                { "date": "2014", "value": 49000 },
+                { "date": "2015", "value": 42000 },
+                { "date": "2016", "value": 43000 },
+                { "date": "2017", "value": 46000 },
+                { "date": "2018", "value": 48000 },
+                { "date": "2019", "value": 47000 },
+                { "date": "2020", "value": 48000 },
+                { "date": "2021", "value": 51000 },
+                { "date": "2022", "value": 51000 },
+                { "date": "2023", "value": 52000 }
+            ],
+            "SWE": [
+                { "date": "1994", "value": 30000 },
+                { "date": "1995", "value": 32000 },
+                { "date": "1996", "value": 33000 },
+                { "date": "1997", "value": 35000 },
+                { "date": "1998", "value": 36000 },
+                { "date": "1999", "value": 37000 },
+                { "date": "2000", "value": 39000 },
+                { "date": "2001", "value": 40000 },
+                { "date": "2002", "value": 41000 },
+                { "date": "2003", "value": 43000 },
+                { "date": "2004", "value": 45000 },
+                { "date": "2005", "value": 47000 },
+                { "date": "2006", "value": 50000 },
+                { "date": "2007", "value": 53000 },
+                { "date": "2008", "value": 54000 },
+                { "date": "2009", "value": 52000 },
+                { "date": "2010", "value": 54000 },
+                { "date": "2011", "value": 58000 },
+                { "date": "2012", "value": 56000 },
+                { "date": "2013", "value": 58000 },
+                { "date": "2014", "value": 60000 },
+                { "date": "2015", "value": 52000 },
+                { "date": "2016", "value": 54000 },
+                { "date": "2017", "value": 56000 },
+                { "date": "2018", "value": 58000 },
+                { "date": "2019", "value": 56000 },
+                { "date": "2020", "value": 58000 },
+                { "date": "2021", "value": 62000 },
+                { "date": "2022", "value": 62000 },
+                { "date": "2023", "value": 63000 }
+            ],
+            "NOR": [
+                { "date": "1994", "value": 35000 },
+                { "date": "1995", "value": 38000 },
+                { "date": "1996", "value": 40000 },
+                { "date": "1997", "value": 42000 },
+                { "date": "1998", "value": 43000 },
+                { "date": "1999", "value": 45000 },
+                { "date": "2000", "value": 48000 },
+                { "date": "2001", "value": 50000 },
+                { "date": "2002", "value": 52000 },
+                { "date": "2003", "value": 54000 },
+                { "date": "2004", "value": 58000 },
+                { "date": "2005", "value": 65000 },
+                { "date": "2006", "value": 72000 },
+                { "date": "2007", "value": 80000 },
+                { "date": "2008", "value": 85000 },
+                { "date": "2009", "value": 78000 },
+                { "date": "2010", "value": 85000 },
+                { "date": "2011", "value": 98000 },
+                { "date": "2012", "value": 100000 },
+                { "date": "2013", "value": 102000 },
+                { "date": "2014", "value": 97000 },
+                { "date": "2015", "value": 75000 },
+                { "date": "2016", "value": 70000 },
+                { "date": "2017", "value": 75000 },
+                { "date": "2018", "value": 82000 },
+                { "date": "2019", "value": 76000 },
+                { "date": "2020", "value": 68000 },
+                { "date": "2021", "value": 89000 },
+                { "date": "2022", "value": 106000 },
+                { "date": "2023", "value": 95000 }
+            ],
+            "USA": [
+                { "date": "1994", "value": 28000 },
+                { "date": "1995", "value": 29000 },
+                { "date": "1996", "value": 30000 },
+                { "date": "1997", "value": 31000 },
+                { "date": "1998", "value": 32000 },
+                { "date": "1999", "value": 34000 },
+                { "date": "2000", "value": 36000 },
+                { "date": "2001", "value": 37000 },
+                { "date": "2002", "value": 38000 },
+                { "date": "2003", "value": 40000 },
+                { "date": "2004", "value": 42000 },
+                { "date": "2005", "value": 44000 },
+                { "date": "2006", "value": 46000 },
+                { "date": "2007", "value": 48000 },
+                { "date": "2008", "value": 49000 },
+                { "date": "2009", "value": 47000 },
+                { "date": "2010", "value": 48000 },
+                { "date": "2011", "value": 50000 },
+                { "date": "2012", "value": 52000 },
+                { "date": "2013", "value": 53000 },
+                { "date": "2014", "value": 55000 },
+                { "date": "2015", "value": 56000 },
+                { "date": "2016", "value": 57000 },
+                { "date": "2017", "value": 60000 },
+                { "date": "2018", "value": 63000 },
+                { "date": "2019", "value": 65000 },
+                { "date": "2020", "value": 63000 },
+                { "date": "2021", "value": 70000 },
+                { "date": "2022", "value": 76000 },
+                { "date": "2023", "value": 80000 }
+            ],
+            "JPN": [
+                { "date": "1994", "value": 38000 },
+                { "date": "1995", "value": 42000 },
+                { "date": "1996", "value": 38000 },
+                { "date": "1997", "value": 35000 },
+                { "date": "1998", "value": 33000 },
+                { "date": "1999", "value": 35000 },
+                { "date": "2000", "value": 37000 },
+                { "date": "2001", "value": 35000 },
+                { "date": "2002", "value": 33000 },
+                { "date": "2003", "value": 35000 },
+                { "date": "2004", "value": 37000 },
+                { "date": "2005", "value": 36000 },
+                { "date": "2006", "value": 35000 },
+                { "date": "2007", "value": 35000 },
+                { "date": "2008", "value": 39000 },
+                { "date": "2009", "value": 40000 },
+                { "date": "2010", "value": 43000 },
+                { "date": "2011", "value": 48000 },
+                { "date": "2012", "value": 48000 },
+                { "date": "2013", "value": 40000 },
+                { "date": "2014", "value": 38000 },
+                { "date": "2015", "value": 35000 },
+                { "date": "2016", "value": 39000 },
+                { "date": "2017", "value": 39000 },
+                { "date": "2018", "value": 40000 },
+                { "date": "2019", "value": 40000 },
+                { "date": "2020", "value": 40000 },
+                { "date": "2021", "value": 39000 },
+                { "date": "2022", "value": 34000 },
+                { "date": "2023", "value": 34000 }
+            ],
+            "CHN": [
+                { "date": "1994", "value": 470 },
+                { "date": "1995", "value": 600 },
+                { "date": "1996", "value": 700 },
+                { "date": "1997", "value": 780 },
+                { "date": "1998", "value": 820 },
+                { "date": "1999", "value": 860 },
+                { "date": "2000", "value": 950 },
+                { "date": "2001", "value": 1050 },
+                { "date": "2002", "value": 1150 },
+                { "date": "2003", "value": 1300 },
+                { "date": "2004", "value": 1500 },
+                { "date": "2005", "value": 1750 },
+                { "date": "2006", "value": 2100 },
+                { "date": "2007", "value": 2700 },
+                { "date": "2008", "value": 3400 },
+                { "date": "2009", "value": 3800 },
+                { "date": "2010", "value": 4500 },
+                { "date": "2011", "value": 5600 },
+                { "date": "2012", "value": 6300 },
+                { "date": "2013", "value": 7000 },
+                { "date": "2014", "value": 7700 },
+                { "date": "2015", "value": 8000 },
+                { "date": "2016", "value": 8100 },
+                { "date": "2017", "value": 8800 },
+                { "date": "2018", "value": 9800 },
+                { "date": "2019", "value": 10000 },
+                { "date": "2020", "value": 10500 },
+                { "date": "2021", "value": 12500 },
+                { "date": "2022", "value": 12800 },
+                { "date": "2023", "value": 13000 }
+            ],
+            "IND": [
+                { "date": "1994", "value": 350 },
+                { "date": "1995", "value": 380 },
+                { "date": "1996", "value": 400 },
+                { "date": "1997", "value": 420 },
+                { "date": "1998", "value": 430 },
+                { "date": "1999", "value": 450 },
+                { "date": "2000", "value": 450 },
+                { "date": "2001", "value": 460 },
+                { "date": "2002", "value": 480 },
+                { "date": "2003", "value": 550 },
+                { "date": "2004", "value": 650 },
+                { "date": "2005", "value": 750 },
+                { "date": "2006", "value": 850 },
+                { "date": "2007", "value": 1100 },
+                { "date": "2008", "value": 1100 },
+                { "date": "2009", "value": 1200 },
+                { "date": "2010", "value": 1400 },
+                { "date": "2011", "value": 1500 },
+                { "date": "2012", "value": 1500 },
+                { "date": "2013", "value": 1500 },
+                { "date": "2014", "value": 1600 },
+                { "date": "2015", "value": 1600 },
+                { "date": "2016", "value": 1700 },
+                { "date": "2017", "value": 2000 },
+                { "date": "2018", "value": 2000 },
+                { "date": "2019", "value": 2100 },
+                { "date": "2020", "value": 1900 },
+                { "date": "2021", "value": 2300 },
+                { "date": "2022", "value": 2400 },
+                { "date": "2023", "value": 2500 }
+            ],
+            "RUS": [
+                { "date": "1994", "value": 2600 },
+                { "date": "1995", "value": 2700 },
+                { "date": "1996", "value": 2700 },
+                { "date": "1997", "value": 2800 },
+                { "date": "1998", "value": 1800 },
+                { "date": "1999", "value": 1300 },
+                { "date": "2000", "value": 1800 },
+                { "date": "2001", "value": 2100 },
+                { "date": "2002", "value": 2400 },
+                { "date": "2003", "value": 3000 },
+                { "date": "2004", "value": 4100 },
+                { "date": "2005", "value": 5300 },
+                { "date": "2006", "value": 6900 },
+                { "date": "2007", "value": 9100 },
+                { "date": "2008", "value": 11600 },
+                { "date": "2009", "value": 8600 },
+                { "date": "2010", "value": 10700 },
+                { "date": "2011", "value": 14000 },
+                { "date": "2012", "value": 15000 },
+                { "date": "2013", "value": 16000 },
+                { "date": "2014", "value": 14000 },
+                { "date": "2015", "value": 9000 },
+                { "date": "2016", "value": 8700 },
+                { "date": "2017", "value": 11000 },
+                { "date": "2018", "value": 12000 },
+                { "date": "2019", "value": 12000 },
+                { "date": "2020", "value": 10000 },
+                { "date": "2021", "value": 12000 },
+                { "date": "2022", "value": 12000 },
+                { "date": "2023", "value": 12000 }
+            ],
+            "GBR": [
+                { "date": "1994", "value": 19000 },
+                { "date": "1995", "value": 20000 },
+                { "date": "1996", "value": 22000 },
+                { "date": "1997", "value": 24000 },
+                { "date": "1998", "value": 26000 },
+                { "date": "1999", "value": 27000 },
+                { "date": "2000", "value": 26000 },
+                { "date": "2001", "value": 26000 },
+                { "date": "2002", "value": 28000 },
+                { "date": "2003", "value": 31000 },
+                { "date": "2004", "value": 36000 },
+                { "date": "2005", "value": 38000 },
+                { "date": "2006", "value": 41000 },
+                { "date": "2007", "value": 48000 },
+                { "date": "2008", "value": 46000 },
+                { "date": "2009", "value": 36000 },
+                { "date": "2010", "value": 38000 },
+                { "date": "2011", "value": 41000 },
+                { "date": "2012", "value": 41000 },
+                { "date": "2013", "value": 42000 },
+                { "date": "2014", "value": 46000 },
+                { "date": "2015", "value": 44000 },
+                { "date": "2016", "value": 40000 },
+                { "date": "2017", "value": 40000 },
+                { "date": "2018", "value": 43000 },
+                { "date": "2019", "value": 42000 },
+                { "date": "2020", "value": 41000 },
+                { "date": "2021", "value": 47000 },
+                { "date": "2022", "value": 45000 },
+                { "date": "2023", "value": 46000 }
+            ],
+            "TUR": [
+                { "date": "1994", "value": 3000 },
+                { "date": "1995", "value": 3000 },
+                { "date": "1996", "value": 3100 },
+                { "date": "1997", "value": 3200 },
+                { "date": "1998", "value": 3300 },
+                { "date": "1999", "value": 3000 },
+                { "date": "2000", "value": 3000 },
+                { "date": "2001", "value": 2500 },
+                { "date": "2002", "value": 3000 },
+                { "date": "2003", "value": 3600 },
+                { "date": "2004", "value": 4200 },
+                { "date": "2005", "value": 5000 },
+                { "date": "2006", "value": 5500 },
+                { "date": "2007", "value": 7000 },
+                { "date": "2008", "value": 10000 },
+                { "date": "2009", "value": 8500 },
+                { "date": "2010", "value": 10000 },
+                { "date": "2011", "value": 11000 },
+                { "date": "2012", "value": 11000 },
+                { "date": "2013", "value": 12000 },
+                { "date": "2014", "value": 11000 },
+                { "date": "2015", "value": 9000 },
+                { "date": "2016", "value": 11000 },
+                { "date": "2017", "value": 11000 },
+                { "date": "2018", "value": 9500 },
+                { "date": "2019", "value": 9100 },
+                { "date": "2020", "value": 8500 },
+                { "date": "2021", "value": 9600 },
+                { "date": "2022", "value": 10600 },
+                { "date": "2023", "value": 11000 }
+            ],
+            "BRA": [
+                { "date": "1994", "value": 3500 },
+                { "date": "1995", "value": 5000 },
+                { "date": "1996", "value": 5000 },
+                { "date": "1997", "value": 5200 },
+                { "date": "1998", "value": 5000 },
+                { "date": "1999", "value": 3500 },
+                { "date": "2000", "value": 3700 },
+                { "date": "2001", "value": 3100 },
+                { "date": "2002", "value": 2800 },
+                { "date": "2003", "value": 3000 },
+                { "date": "2004", "value": 3600 },
+                { "date": "2005", "value": 4700 },
+                { "date": "2006", "value": 5800 },
+                { "date": "2007", "value": 7200 },
+                { "date": "2008", "value": 8700 },
+                { "date": "2009", "value": 8600 },
+                { "date": "2010", "value": 11000 },
+                { "date": "2011", "value": 13000 },
+                { "date": "2022", "value": 12000 },
+                { "date": "2013", "value": 12000 },
+                { "date": "2014", "value": 12000 },
+                { "date": "2015", "value": 8700 },
+                { "date": "2016", "value": 8700 },
+                { "date": "2017", "value": 9900 },
+                { "date": "2018", "value": 9000 },
+                { "date": "2019", "value": 8700 },
+                { "date": "2020", "value": 6800 },
+                { "date": "2021", "value": 7500 },
+                { "date": "2022", "value": 8800 },
+                { "date": "2023", "value": 9000 }
+            ],
+            "ITA": [
+                { "date": "1994", "value": 20000 },
+                { "date": "1995", "value": 21000 },
+                { "date": "1996", "value": 22000 },
+                { "date": "1997", "value": 21000 },
+                { "date": "1998", "value": 23000 },
+                { "date": "1999", "value": 22000 },
+                { "date": "2000", "value": 20000 },
+                { "date": "2001", "value": 20000 },
+                { "date": "2002", "value": 22000 },
+                { "date": "2003", "value": 26000 },
+                { "date": "2004", "value": 30000 },
+                { "date": "2005", "value": 31000 },
+                { "date": "2006", "value": 33000 },
+                { "date": "2007", "value": 36000 },
+                { "date": "2008", "value": 38000 },
+                { "date": "2009", "value": 35000 },
+                { "date": "2010", "value": 34000 },
+                { "date": "2011", "value": 37000 },
+                { "date": "2012", "value": 34000 },
+                { "date": "2013", "value": 35000 },
+                { "date": "2014", "value": 35000 },
+                { "date": "2015", "value": 30000 },
+                { "date": "2016", "value": 31000 },
+                { "date": "2017", "value": 32000 },
+                { "date": "2018", "value": 34000 },
+                { "date": "2019", "value": 33000 },
+                { "date": "2020", "value": 32000 },
+                { "date": "2021", "value": 36000 },
+                { "date": "2022", "value": 35000 },
+                { "date": "2023", "value": 36000 }
+            ],
+            "ESP": [
+                { "date": "1994", "value": 14000 },
+                { "date": "1995", "value": 15000 },
+                { "date": "1996", "value": 16000 },
+                { "date": "1997", "value": 17000 },
+                { "date": "1998", "value": 18000 },
+                { "date": "1999", "value": 19000 },
+                { "date": "2000", "value": 15000 },
+                { "date": "2001", "value": 16000 },
+                { "date": "2002", "value": 18000 },
+                { "date": "2003", "value": 22000 },
+                { "date": "2004", "value": 26000 },
+                { "date": "2005", "value": 28000 },
+                { "date": "2006", "value": 30000 },
+                { "date": "2007", "value": 32000 },
+                { "date": "2008", "value": 32000 },
+                { "date": "2009", "value": 31000 },
+                { "date": "2010", "value": 30000 },
+                { "date": "2011", "value": 31000 },
+                { "date": "2012", "value": 28000 },
+                { "date": "2013", "value": 29000 },
+                { "date": "2014", "value": 29000 },
+                { "date": "2015", "value": 26000 },
+                { "date": "2016", "value": 27000 },
+                { "date": "2017", "value": 28000 },
+                { "date": "2018", "value": 30000 },
+                { "date": "2019", "value": 30000 },
+                { "date": "2020", "value": 27000 },
+                { "date": "2021", "value": 30000 },
+                { "date": "2022", "value": 30000 },
+                { "date": "2023", "value": 31000 }
+            ],
+            "GRC": [
+                { "date": "1994", "value": 11000 },
+                { "date": "1995", "value": 12000 },
+                { "date": "1996", "value": 13000 },
+                { "date": "1997", "value": 13000 },
+                { "date": "1998", "value": 14000 },
+                { "date": "1999", "value": 14000 },
+                { "date": "2000", "value": 12000 },
+                { "date": "2001", "value": 13000 },
+                { "date": "2002", "value": 15000 },
+                { "date": "2003", "value": 18000 },
+                { "date": "2004", "value": 22000 },
+                { "date": "2005", "value": 24000 },
+                { "date": "2006", "value": 26000 },
+                { "date": "2007", "value": 28000 },
+                { "date": "2008", "value": 32000 },
+                { "date": "2009", "value": 30000 },
+                { "date": "2010", "value": 26000 },
+                { "date": "2011", "value": 23000 },
+                { "date": "2012", "value": 22000 },
+                { "date": "2013", "value": 22000 },
+                { "date": "2014", "value": 22000 },
+                { "date": "2015", "value": 18000 },
+                { "date": "2016", "value": 18000 },
+                { "date": "2017", "value": 19000 },
+                { "date": "2018", "value": 20000 },
+                { "date": "2019", "value": 20000 },
+                { "date": "2020", "value": 18000 },
+                { "date": "2021", "value": 20000 },
+                { "date": "2022", "value": 21000 },
+                { "date": "2023", "value": 22000 }
+            ],
+            "ARG": [
+                { "date": "1994", "value": 7000 },
+                { "date": "1995", "value": 8000 },
+                { "date": "1996", "value": 8500 },
+                { "date": "1997", "value": 9000 },
+                { "date": "1998", "value": 9000 },
+                { "date": "1999", "value": 8000 },
+                { "date": "2000", "value": 7700 },
+                { "date": "2001", "value": 7000 },
+                { "date": "2002", "value": 2800 },
+                { "date": "2003", "value": 3500 },
+                { "date": "2004", "value": 4000 },
+                { "date": "2005", "value": 5000 },
+                { "date": "2006", "value": 6000 },
+                { "date": "2007", "value": 7000 },
+                { "date": "2008", "value": 8200 },
+                { "date": "2009", "value": 7700 },
+                { "date": "2010", "value": 10000 },
+                { "date": "2011", "value": 11000 },
+                { "date": "2012", "value": 12000 },
+                { "date": "2013", "value": 13000 },
+                { "date": "2014", "value": 12000 },
+                { "date": "2015", "value": 13000 },
+                { "date": "2016", "value": 12000 },
+                { "date": "2017", "value": 14000 },
+                { "date": "2018", "value": 12000 },
+                { "date": "2019", "value": 10000 },
+                { "date": "2020", "value": 8500 },
+                { "date": "2021", "value": 10600 },
+                { "date": "2022", "value": 13600 },
+                { "date": "2023", "value": 14000 }
+            ],
+            "KOR": [
+                { "date": "1994", "value": 9000 },
+                { "date": "1995", "value": 12000 },
+                { "date": "1996", "value": 13000 },
+                { "date": "1997", "value": 12000 },
+                { "date": "1998", "value": 8000 },
+                { "date": "1999", "value": 11000 },
+                { "date": "2000", "value": 12000 },
+                { "date": "2001", "value": 11000 },
+                { "date": "2002", "value": 13000 },
+                { "date": "2003", "value": 15000 },
+                { "date": "2004", "value": 16000 },
+                { "date": "2005", "value": 18000 },
+                { "date": "2006", "value": 20000 },
+                { "date": "2007", "value": 22000 },
+                { "date": "2008", "value": 20000 },
+                { "date": "2009", "value": 18000 },
+                { "date": "2010", "value": 22000 },
+                { "date": "2011", "value": 24000 },
+                { "date": "2012", "value": 25000 },
+                { "date": "2013", "value": 26000 },
+                { "date": "2014", "value": 28000 },
+                { "date": "2015", "value": 27000 },
+                { "date": "2016", "value": 28000 },
+                { "date": "2017", "value": 30000 },
+                { "date": "2018", "value": 32000 },
+                { "date": "2019", "value": 32000 },
+                { "date": "2020", "value": 32000 },
+                { "date": "2021", "value": 35000 },
+                { "date": "2022", "value": 33000 },
+                { "date": "2023", "value": 34000 }
+            ]
+        }
+    },
+    "gdp": {
+        "lastUpdated": "2024-01-01",
+        "data": {
+            "DNK": [
+                { "date": "2023", "value": 406000000000 }
+            ],
+            "DEU": [
+                { "date": "2023", "value": 4082000000000 }
+            ],
+            "SWE": [
+                { "date": "2023", "value": 591000000000 }
+            ],
+            "NOR": [
+                { "date": "2023", "value": 522000000000 }
+            ],
+            "USA": [
+                { "date": "2023", "value": 27280000000000 }
+            ],
+            "JPN": [
+                { "date": "2023", "value": 4210000000000 }
+            ],
+            "CHN": [
+                { "date": "2023", "value": 17900000000000 }
+            ],
+            "IND": [
+                { "date": "2023", "value": 3730000000000 }
+            ],
+            "RUS": [
+                { "date": "2023", "value": 2240000000000 }
+            ],
+            "GBR": [
+                { "date": "2023", "value": 3100000000000 }
+            ],
+            "TUR": [
+                { "date": "2023", "value": 950000000000 }
+            ],
+            "BRA": [
+                { "date": "2023", "value": 2170000000000 }
+            ],
+            "ITA": [
+                { "date": "2023", "value": 2110000000000 }
+            ],
+            "ESP": [
+                { "date": "2023", "value": 1400000000000 }
+            ],
+            "GRC": [
+                { "date": "2023", "value": 239000000000 }
+            ],
+            "ARG": [
+                { "date": "2023", "value": 630000000000 }
+            ],
+            "KOR": [
+                { "date": "2023", "value": 1730000000000 }
+            ]
+        }
     }
-  },
-  "gdp": {
-    "lastUpdated": "2024-01-01",
-    "data": {
-      "DNK": [
-        {"date": "2023", "value": 406000000000}
-      ],
-      "DEU": [
-        {"date": "2023", "value": 4082000000000}
-      ],
-      "SWE": [
-        {"date": "2023", "value": 591000000000}
-      ],
-      "NOR": [
-        {"date": "2023", "value": 522000000000}
-      ],
-      "USA": [
-        {"date": "2023", "value": 27280000000000}
-      ],
-      "JPN": [
-        {"date": "2023", "value": 4210000000000}
-      ],
-      "CHN": [
-        {"date": "2023", "value": 17900000000000}
-      ],
-      "IND": [
-        {"date": "2023", "value": 3730000000000}
-      ],
-      "RUS": [
-        {"date": "2023", "value": 2240000000000}
-      ],
-      "GBR": [
-        {"date": "2023", "value": 3100000000000}
-      ],
-      "TUR": [
-        {"date": "2023", "value": 950000000000}
-      ],
-      "BRA": [
-        {"date": "2023", "value": 2170000000000}
-      ],
-      "ITA": [
-        {"date": "2023", "value": 2110000000000}
-      ],
-      "ESP": [
-        {"date": "2023", "value": 1400000000000}
-      ],
-      "GRC": [
-        {"date": "2023", "value": 239000000000}
-      ],
-      "ARG": [
-        {"date": "2023", "value": 630000000000}
-      ],
-      "KOR": [
-        {"date": "2023", "value": 1730000000000}
-      ]
-    }
-  }
 };
 
 async function loadCachedChartData() {
@@ -2956,7 +2941,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
                 if (!cache.gdp.data.USA) cache.gdp.data.USA = embeddedCacheData.gdp.data.USA;
             }
         }
-        
+
         let useCachedData = false;
         let results = [];
         const localStorageKey = `gdp_pc_${countries.join('_')}_${years}`;
@@ -2965,7 +2950,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
             // Check if we have data for multiple countries (not just embedded fallback)
             const availableCountries = countries.filter(code => cache.gdpPerCapita.data[code] && cache.gdpPerCapita.data[code].length > 0);
             const hasMultipleCountries = availableCountries.length > 2; // More than just DNK and USA
-            
+
             // Use cached data if we have data for multiple countries OR if we have at least some countries
             if (hasMultipleCountries || availableCountries.length > 0) {
                 // Always try to get data from cache first, but don't block API calls for missing countries
@@ -2987,7 +2972,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
                         // For DNK and USA, ensure we have at least some data
                         if (filteredData.length > 0 || (countryCode === 'DNK' || countryCode === 'USA')) {
                             // If filtered is empty but it's DNK/USA, use all available valid data
-                            const dataToUse = filteredData.length > 0 ? filteredData : 
+                            const dataToUse = filteredData.length > 0 ? filteredData :
                                 cachedCountryData.filter(item => item.value !== null && item.value !== undefined);
                             if (dataToUse.length > 0) {
                                 return {
@@ -2999,7 +2984,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
                     }
                     return null;
                 }).filter(r => r !== null);
-                
+
                 // Only set useCachedData = true if we have data for most countries (not just embedded fallback)
                 if (hasMultipleCountries) {
                     useCachedData = true;
@@ -3026,7 +3011,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
                 if (existingResults.some(r => r && r.country === countryCode)) {
                     return null; // Already have it, skip API call
                 }
-                
+
                 const url = `${API_CONFIG.worldBank.baseUrl}/${countryCode}/indicator/${API_CONFIG.worldBank.indicators.gdpPerCapita}?date=${startYear}:${endYear}&format=json`;
 
                 try {
@@ -3053,7 +3038,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
             // Merge: keep existing results, add new API results
             const existingCountryCodes = existingResults.map(r => r.country);
             results = [...existingResults, ...validApiResults.filter(r => !existingCountryCodes.includes(r.country))];
-            
+
             // Save to local storage if we got new data
             if (validApiResults.length > 0) {
                 setCachedData(localStorageKey, results);
@@ -3208,7 +3193,7 @@ async function fetchGDPPerCapitaData(countries = ['DNK', 'DEU', 'SWE', 'NOR', 'U
             const entry = Object.entries(countryNames).find(([code, name]) => name === ds.label);
             return entry ? entry[0] : null;
         }).filter(c => c !== null);
-        
+
         const missingCountries = countries.filter(code => !includedCountries.includes(code));
         if (missingCountries.length > 0) {
             console.warn(`Missing countries in datasets: ${missingCountries.join(', ')}. Trying cache data for these.`);
@@ -3742,7 +3727,7 @@ function createGDPPerCapitaChart(canvasId, countries = ['DNK', 'DEU', 'SWE', 'NO
         // Debug: Log which countries are in datasets
         console.log('GDP Per Capita Chart - Countries in datasets:', data.datasets.map(ds => ds.label));
         console.log('Expected countries:', countries);
-        
+
         // Ensure DNK and USA are present
         const datasetLabels = data.datasets.map(ds => ds.label);
         if (!datasetLabels.includes('Danmark')) {
@@ -4241,8 +4226,8 @@ function createMultiCountryUnemploymentInflationChart(canvasId, countries = ['DN
                         y: {
                             ...currentChartConfig.scales.y,
                             position: 'left',
-                            title: { 
-                                display: true, 
+                            title: {
+                                display: true,
                                 text: 'Ledighed (%)',
                                 color: colors.text
                             },
@@ -4260,24 +4245,24 @@ function createMultiCountryUnemploymentInflationChart(canvasId, countries = ['DN
                         y1: {
                             type: 'linear',
                             position: 'right',
-                            grid: { 
+                            grid: {
                                 drawOnChartArea: false,
                                 color: colors.grid
                             },
-                            title: { 
-                                display: true, 
+                            title: {
+                                display: true,
                                 text: 'Inflation (%)',
                                 color: colors.text
                             },
-                            ticks: { 
+                            ticks: {
                                 color: colors.text,
-                                callback: v => v.toFixed(1) + '%' 
+                                callback: v => v.toFixed(1) + '%'
                             }
                         },
                         x: {
                             ...currentChartConfig.scales.x,
-                            title: { 
-                                display: true, 
+                            title: {
+                                display: true,
                                 text: 'År',
                                 color: colors.text
                             },
@@ -4470,9 +4455,9 @@ function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
                         ...currentChartConfig.scales,
                         x: {
                             ...currentChartConfig.scales.x,
-                            title: { 
-                                display: true, 
-                                text: 'Ledighed (%)', 
+                            title: {
+                                display: true,
+                                text: 'Ledighed (%)',
                                 font: { weight: 'bold' },
                                 color: colors.text
                             },
@@ -4481,17 +4466,17 @@ function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
                                 color: colors.grid,
                                 lineWidth: 1
                             },
-                            ticks: { 
+                            ticks: {
                                 ...currentChartConfig.scales.x.ticks,
                                 color: colors.text,
-                                callback: v => v.toFixed(1) + '%' 
+                                callback: v => v.toFixed(1) + '%'
                             }
                         },
                         y: {
                             ...currentChartConfig.scales.y,
-                            title: { 
-                                display: true, 
-                                text: 'Inflation (%)', 
+                            title: {
+                                display: true,
+                                text: 'Inflation (%)',
                                 font: { weight: 'bold' },
                                 color: colors.text
                             },
@@ -4500,10 +4485,10 @@ function createAPIPhillipsCurveChart(canvasId, countries = ['DNK', 'USA']) {
                                 color: colors.grid,
                                 lineWidth: 1
                             },
-                            ticks: { 
+                            ticks: {
                                 ...currentChartConfig.scales.y.ticks,
                                 color: colors.text,
-                                callback: v => v.toFixed(1) + '%' 
+                                callback: v => v.toFixed(1) + '%'
                             }
                         }
                     }
@@ -5057,8 +5042,8 @@ function createNationalAccountsChart(canvasId) {
                     y: {
                         ...currentChartConfig.scales.y,
                         beginAtZero: true,
-                        title: { 
-                            display: true, 
+                        title: {
+                            display: true,
                             text: 'Milliarder kr.',
                             color: colors.text
                         },
@@ -5333,18 +5318,24 @@ function createSupplyAndUsePieChart(canvasId, type = 'use') {
 
     const currentChartConfig = getChartConfig();
     const colors = getThemeColors();
+    const isDark = getChartTheme() === 'dark';
+
     new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
             labels: dataSet.labels,
             datasets: [{
                 data: dataSet.data,
                 backgroundColor: dataSet.colors,
-                hoverOffset: 4
+                borderColor: isDark ? '#111827' : '#ffffff',
+                borderWidth: 2,
+                hoverOffset: 6,
+                borderRadius: 4
             }]
         },
         options: {
             ...currentChartConfig,
+            cutout: '65%',
             scales: {},
             plugins: {
                 ...currentChartConfig.plugins,
@@ -5564,18 +5555,24 @@ function createEmploymentSectorPieChart(canvasId, country = 'DK') {
     const currentChartConfig = getChartConfig();
     const colors = getThemeColors();
 
+    const isDark = getChartTheme() === 'dark';
+
     new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
             labels: data.labels,
             datasets: [{
                 data: data.data,
                 backgroundColor: data.colors,
-                hoverOffset: 4
+                borderColor: isDark ? '#111827' : '#ffffff',
+                borderWidth: 2,
+                hoverOffset: 6,
+                borderRadius: 4
             }]
         },
         options: {
             ...currentChartConfig,
+            cutout: '65%',
             scales: {},
             plugins: {
                 ...currentChartConfig.plugins,
@@ -5648,8 +5645,8 @@ function createBOPDetailedChart(canvasId) {
                 x: {
                     ...currentChartConfig.scales.x,
                     stacked: true,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Mia. kr.',
                         color: colors.text
                     },
@@ -5663,7 +5660,7 @@ function createBOPDetailedChart(canvasId) {
                         color: colors.text
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
                     stacked: true,
                     ticks: {
@@ -5692,400 +5689,272 @@ function createBOPDetailedChart(canvasId) {
     });
 }
 
-// Create Human Development Index (HDI) Bar Chart
-function createHDIChart(canvasId) {
-    const ctx = document.getElementById(canvasId);
-    if (!ctx) return;
+function createHDIChart(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    // HDI data for various countries (2022/2023 data from UNDP)
-    // HDI ranges from 0 to 1, where 1 is the highest human development
-    // Selected diverse set of countries across different development levels
-    const selectedCountries = [
-        // Very High HDI (≥ 0.800)
-        { country: 'Schweiz', value: 0.962 },
-        { country: 'Norge', value: 0.961 },
-        { country: 'Island', value: 0.959 },
-        { country: 'Hongkong', value: 0.956 },
-        { country: 'Danmark', value: 0.948 },
-        { country: 'Sverige', value: 0.947 },
-        { country: 'Irland', value: 0.945 },
-        { country: 'Tyskland', value: 0.943 },
-        { country: 'Holland', value: 0.941 },
-        { country: 'Finland', value: 0.940 },
-        { country: 'Singapore', value: 0.939 },
-        { country: 'Belgien', value: 0.937 },
-        { country: 'New Zealand', value: 0.937 },
-        { country: 'Canada', value: 0.935 },
-        { country: 'Storbritannien', value: 0.929 },
-        { country: 'Japan', value: 0.925 },
-        { country: 'Sydkorea', value: 0.925 },
-        { country: 'USA', value: 0.921 },
-        { country: 'Spanien', value: 0.909 },
-        { country: 'Frankrig', value: 0.903 },
-        { country: 'Italien', value: 0.895 },
-        { country: 'Grækenland', value: 0.887 },
-        { country: 'Polen', value: 0.881 },
-        { country: 'Portugal', value: 0.874 },
-        // High HDI (0.700-0.799)
-        { country: 'Chile', value: 0.855 },
-        { country: 'Argentina', value: 0.849 },
-        { country: 'Rumænien', value: 0.844 },
-        { country: 'Rusland', value: 0.802 },
-        { country: 'Brasilien', value: 0.754 },
-        { country: 'Kina', value: 0.788 },
-        { country: 'Colombia', value: 0.762 },
-        { country: 'Thailand', value: 0.800 },
-        { country: 'Mexiko', value: 0.789 },
-        // Medium HDI (0.550-0.699)
-        { country: 'Indien', value: 0.644 },
-        { country: 'Filippinerne', value: 0.699 },
-        { country: 'Vietnam', value: 0.726 },
-        { country: 'Egypten', value: 0.731 },
-        { country: 'Marokko', value: 0.683 },
-        { country: 'Bangladesh', value: 0.661 },
-        // Low HDI (< 0.550)
-        { country: 'Kenya', value: 0.601 },
-        { country: 'Pakistan', value: 0.540 },
-        { country: 'Nigeria', value: 0.548 },
-        { country: 'Zimbabwe', value: 0.593 },
-        { country: 'Uganda', value: 0.525 },
-        { country: 'Tanzania', value: 0.549 },
-        { country: 'Afghanistan', value: 0.478 },
-        { country: 'Niger', value: 0.394 }
-    ].sort((a, b) => b.value - a.value); // Sort by HDI value descending
-
-    // Color coding based on HDI level, with special marking for Denmark
-    const getColor = (value, country) => {
-        // Mark Denmark with a distinct red color
-        if (country === 'Danmark') {
-            return {
-                backgroundColor: 'rgba(220, 53, 69, 0.9)',  // Red color for Denmark
-                borderColor: 'rgba(220, 53, 69, 1)',
-                borderWidth: 3  // Thicker border for Denmark
-            };
-        }
-        // Regular color coding for other countries
-        let bgColor, borderColor;
-        if (value >= 0.800) {
-            bgColor = 'rgba(46, 125, 50, 0.8)';      // Very High (Green)
-            borderColor = 'rgba(46, 125, 50, 1)';
-        } else if (value >= 0.700) {
-            bgColor = 'rgba(76, 175, 80, 0.8)';      // High (Light Green)
-            borderColor = 'rgba(76, 175, 80, 1)';
-        } else if (value >= 0.550) {
-            bgColor = 'rgba(255, 193, 7, 0.8)';      // Medium (Yellow)
-            borderColor = 'rgba(255, 193, 7, 1)';
-        } else {
-            bgColor = 'rgba(244, 67, 54, 0.8)';      // Low (Red)
-            borderColor = 'rgba(244, 67, 54, 1)';
-        }
-        return {
-            backgroundColor: bgColor,
-            borderColor: borderColor,
-            borderWidth: 1
-        };
+    // A huge list of HDI mapped to GeoJSON English names
+    const hdiRaw = {
+        'Switzerland': 0.962, 'Norway': 0.961, 'Iceland': 0.959, 'Hong Kong': 0.956,
+        'Denmark': 0.948, 'Sweden': 0.947, 'Ireland': 0.945, 'Germany': 0.943,
+        'Netherlands': 0.941, 'Finland': 0.940, 'Singapore': 0.939, 'Belgium': 0.937,
+        'New Zealand': 0.937, 'Canada': 0.935, 'United Kingdom': 0.929, 'Japan': 0.925,
+        'South Korea': 0.925, 'United States of America': 0.921, 'Spain': 0.909,
+        'France': 0.903, 'Italy': 0.895, 'Greece': 0.887, 'Poland': 0.881, 'Portugal': 0.874,
+        'Chile': 0.855, 'Argentina': 0.849, 'Romania': 0.844, 'Russia': 0.802,
+        'Brazil': 0.754, 'China': 0.788, 'Colombia': 0.762, 'Thailand': 0.800, 'Mexico': 0.789,
+        'India': 0.644, 'Philippines': 0.699, 'Vietnam': 0.726, 'Egypt': 0.731, 'Morocco': 0.683,
+        'Bangladesh': 0.661, 'Kenya': 0.601, 'Pakistan': 0.540, 'Nigeria': 0.548,
+        'Zimbabwe': 0.593, 'Uganda': 0.525, 'United Republic of Tanzania': 0.549,
+        'Afghanistan': 0.478, 'Niger': 0.394, 'Australia': 0.946, 'South Africa': 0.713,
+        'Saudi Arabia': 0.875, 'Turkey': 0.855, 'Iran': 0.774, 'Iraq': 0.686, 'United Arab Emirates': 0.911,
+        'Oman': 0.816, 'Kuwait': 0.831, 'Israel': 0.919, 'Malaysia': 0.803, 'Peru': 0.762,
+        'Ecuador': 0.740, 'Venezuela': 0.691, 'Uruguay': 0.809, 'Paraguay': 0.717, 'Bolivia': 0.692,
+        'Cuba': 0.764, 'Dominican Republic': 0.767, 'Costa Rica': 0.809, 'Panama': 0.805,
+        'Algeria': 0.745, 'Tunisia': 0.731, 'Ghana': 0.632, 'Angola': 0.586, 'Senegal': 0.511,
+        'Mali': 0.428, 'Cameroon': 0.576, 'Zambia': 0.565, 'Botswana': 0.693, 'Namibia': 0.615,
+        'Madagascar': 0.501, 'Mozambique': 0.446, 'Myanmar': 0.585, 'Cambodia': 0.593, 'Laos': 0.607,
+        'Mongolia': 0.739, 'Kazakhstan': 0.811, 'Uzbekistan': 0.727, 'Turkmenistan': 0.745,
+        'Papua New Guinea': 0.558, 'Fiji': 0.730, 'Estonia': 0.890, 'Latvia': 0.863, 'Lithuania': 0.884,
+        'Belarus': 0.808, 'Ukraine': 0.773, 'Bulgaria': 0.795, 'Serbia': 0.802, 'Croatia': 0.858,
+        'Slovakia': 0.848, 'Slovenia': 0.918, 'Hungary': 0.846, 'Czech Republic': 0.889, 'Austria': 0.916
     };
 
-    const countries = selectedCountries.map(item => item.country);
-    const values = selectedCountries.map(item => item.value);
-    const colors = selectedCountries.map(item => getColor(item.value, item.country));
-
-    const data = {
-        labels: countries,
-        datasets: [{
-            label: 'Human Development Index (HDI)',
-            data: values,
-            backgroundColor: colors.map(c => c.backgroundColor),
-            borderColor: colors.map(c => c.borderColor),
-            borderWidth: colors.map(c => c.borderWidth)
-        }]
-    };
-
-    const currentChartConfig = getChartConfig();
-    const themeColors = getThemeColors();
-    new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            ...currentChartConfig,
-            indexAxis: 'y', // Horizontal bars
-            scales: {
-                x: {
-                    ...currentChartConfig.scales.x,
-                    min: 0,
-                    max: 1,
-                    title: {
-                        display: true,
-                        text: 'Human Development Index (HDI)',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        },
-                        color: themeColors.text
-                    },
-                    grid: {
-                        display: true,
-                        color: themeColors.grid,
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        ...currentChartConfig.scales.x.ticks,
-                        color: themeColors.text,
-                        callback: function (value) {
-                            return value.toFixed(3);
-                        }
-                    }
-                },
-                y: {
-                    ...currentChartConfig.scales.y,
-                    beginAtZero: false,
-                    ticks: {
-                        font: {
-                            size: 8,  // Very small font for country names
-                            family: 'Inter, sans-serif'
-                        },
-                        padding: 2,  // Reduce padding to fit more countries
-                        color: themeColors.text,
-                        // Use labels directly from data.labels array
-                        callback: function (value, index, ticks) {
-                            // Chart.js with indexAxis: 'y' automatically maps labels
-                            // Return the label from our data.labels array
-                            if (data && data.labels && data.labels[index] !== undefined) {
-                                return data.labels[index];
-                            }
-                            return '';
-                        }
-                    },
-                    grid: {
-                        display: false  // Hide grid lines on y-axis
-                    }
-                }
-            },
-            plugins: {
-                ...currentChartConfig.plugins,
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    ...currentChartConfig.plugins.tooltip,
-                    callbacks: {
-                        label: function (context) {
-                            const value = context.raw;
-                            let category = '';
-                            if (value >= 0.800) category = ' (Meget høj)';
-                            else if (value >= 0.700) category = ' (Høj)';
-                            else if (value >= 0.550) category = ' (Medium)';
-                            else category = ' (Lav)';
-                            return `HDI: ${value.toFixed(3)}${category}`;
-                        }
-                    }
-                }
-            }
-        }
+    const sortedHDI = Object.entries(hdiRaw).sort((a, b) => b[1] - a[1]);
+    const hdiData = {};
+    sortedHDI.forEach((item, index) => {
+        let val = item[1];
+        let cat = val >= 0.800 ? 'Meget høj' :
+            val >= 0.700 ? 'Høj' :
+                val >= 0.550 ? 'Medium' : 'Lav';
+        hdiData[item[0]] = { value: val, rank: index + 1, total: sortedHDI.length, category: cat };
     });
+
+    createLeafletMap(containerId, hdiData, 'HDI', 'Score', obj => {
+        let v = obj.value;
+        if (v >= 0.800) return '#2e7d32'; // Very High
+        if (v >= 0.700) return '#4caf50'; // High
+        if (v >= 0.550) return '#ffc107'; // Medium
+        return '#f44336'; // Low
+    }, obj => obj ? `<span style="font-size: 1.1em; color: #4ade80;">${obj.value.toFixed(3)}</span><br>
+                     <span style="color: #9ca3af; font-size: 0.9em;">Udviklingsniveau:</span> ${obj.category}<br>
+                     <span style="color: #9ca3af; font-size: 0.9em;">Rangering:</span> #${obj.rank} ud af ${obj.total} (kort)` : 'Ingen data',
+        [
+            { color: '#2e7d32', label: 'Meget høj (≥ 0.800)' },
+            { color: '#4caf50', label: 'Høj (0.700 - 0.799)' },
+            { color: '#ffc107', label: 'Medium (0.550 - 0.699)' },
+            { color: '#f44336', label: 'Lav (< 0.550)' },
+            { color: '#888888', label: 'Ingen data / Filtreret ud' }
+        ]);
 }
 
-// Create GDP Per Capita Bar Chart (International Comparison)
-function createGDPPerCapitaBarChart(canvasId) {
-    const ctx = document.getElementById(canvasId);
-    if (!ctx) return;
+function createGDPPerCapitaBarChart(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    // GDP per capita data for various countries (2024/2023 data, USD)
-    // Selected diverse set of countries across different income levels
-    const selectedCountries = [
-        // Very High Income (≥ $40,000)
-        { country: 'Monaco', value: 256581 },
-        { country: 'Liechtenstein', value: 210704 },
-        { country: 'Luxembourg', value: 137517 },
-        { country: 'Irland', value: 107316 },
-        { country: 'Schweiz', value: 103670 },
-        { country: 'Singapore', value: 90674 },
-        { country: 'Norge', value: 86810 },
-        { country: 'USA', value: 85810 },
-        { country: 'Island', value: 82704 },
-        { country: 'Qatar', value: 76276 },
-        { country: 'Danmark', value: 71852 },
-        { country: 'Holland', value: 68219 },
-        { country: 'Australia', value: 64407 },
-        { country: 'Sverige', value: 57723 },
-        { country: 'Tyskland', value: 55800 },
-        { country: 'Canada', value: 54283 },
-        { country: 'Belgien', value: 55955 },
-        { country: 'Storbritannien', value: 49295 },
-        { country: 'Frankrig', value: 47883 },
-        { country: 'Japan', value: 33797 },
-        { country: 'Sydkorea', value: 35197 },
-        { country: 'Italien', value: 37206 },
-        { country: 'Spanien', value: 31831 },
-        { country: 'Grækenland', value: 23573 },
-        { country: 'Portugal', value: 26301 },
-        { country: 'Polen', value: 23006 },
-        // High Income ($12,000-$40,000)
-        { country: 'Chile', value: 15920 },
-        { country: 'Rumænien', value: 16290 },
-        { country: 'Rusland', value: 13007 },
-        { country: 'Thailand', value: 7823 },
-        { country: 'Argentina', value: 11582 },
-        { country: 'Brasilien', value: 9144 },
-        { country: 'Kina', value: 12940 },
-        { country: 'Colombia', value: 6812 },
-        { country: 'Mexiko', value: 11130 },
-        { country: 'Sydafrika', value: 6745 },
-        // Medium Income ($3,000-$12,000)
-        { country: 'Filippinerne', value: 3861 },
-        { country: 'Indien', value: 2533 },
-        { country: 'Vietnam', value: 4423 },
-        { country: 'Egypten', value: 4928 },
-        { country: 'Marokko', value: 4158 },
-        { country: 'Bangladesh', value: 2876 },
-        { country: 'Indonesien', value: 5159 },
-        // Low Income (< $3,000)
-        { country: 'Kenya', value: 2276 },
-        { country: 'Pakistan', value: 1586 },
-        { country: 'Nigeria', value: 2468 },
-        { country: 'Uganda', value: 1142 },
-        { country: 'Tanzania', value: 1254 },
-        { country: 'Ethiopien', value: 1295 },
-        { country: 'Niger', value: 595 },
-        { country: 'Malawi', value: 655 }
-    ].sort((a, b) => b.value - a.value); // Sort by GDP per capita descending
-
-    // Color coding based on income level, with special marking for Denmark
-    const getColor = (value, country) => {
-        // Mark Denmark with a distinct red color
-        if (country === 'Danmark') {
-            return {
-                backgroundColor: 'rgba(220, 53, 69, 0.9)',  // Red color for Denmark
-                borderColor: 'rgba(220, 53, 69, 1)',
-                borderWidth: 3  // Thicker border for Denmark
-            };
-        }
-        // Regular color coding for other countries
-        let bgColor, borderColor;
-        if (value >= 40000) {
-            bgColor = 'rgba(46, 125, 50, 0.8)';      // Very High Income (Green)
-            borderColor = 'rgba(46, 125, 50, 1)';
-        } else if (value >= 12000) {
-            bgColor = 'rgba(76, 175, 80, 0.8)';      // High Income (Light Green)
-            borderColor = 'rgba(76, 175, 80, 1)';
-        } else if (value >= 3000) {
-            bgColor = 'rgba(255, 193, 7, 0.8)';      // Medium Income (Yellow)
-            borderColor = 'rgba(255, 193, 7, 1)';
-        } else {
-            bgColor = 'rgba(244, 67, 54, 0.8)';      // Low Income (Red)
-            borderColor = 'rgba(244, 67, 54, 1)';
-        }
-        return {
-            backgroundColor: bgColor,
-            borderColor: borderColor,
-            borderWidth: 1
-        };
+    // A huge list of GDP per capita mapped to GeoJSON English names
+    const gdpRaw = {
+        'Monaco': 256581, 'Liechtenstein': 210704, 'Luxembourg': 137517, 'Ireland': 107316,
+        'Switzerland': 103670, 'Singapore': 90674, 'Norway': 86810, 'United States of America': 85810,
+        'Iceland': 82704, 'Qatar': 76276, 'Denmark': 71852, 'Netherlands': 68219,
+        'Australia': 64407, 'Sweden': 57723, 'Germany': 55800, 'Canada': 54283,
+        'Belgium': 55955, 'United Kingdom': 49295, 'France': 47883, 'Japan': 33797,
+        'South Korea': 35197, 'Italy': 37206, 'Spain': 31831, 'Greece': 23573,
+        'Portugal': 26301, 'Poland': 23006, 'Chile': 15920, 'Romania': 16290,
+        'Russia': 13007, 'Thailand': 7823, 'Argentina': 11582, 'Brazil': 9144,
+        'China': 12940, 'Colombia': 6812, 'Mexico': 11130, 'South Africa': 6745,
+        'Philippines': 3861, 'India': 2533, 'Vietnam': 4423, 'Egypt': 4928,
+        'Morocco': 4158, 'Bangladesh': 2876, 'Indonesia': 5159, 'Kenya': 2276,
+        'Pakistan': 1586, 'Nigeria': 2468, 'Uganda': 1142, 'United Republic of Tanzania': 1254,
+        'Ethiopia': 1295, 'Niger': 595, 'Malawi': 655,
+        'Saudi Arabia': 32586, 'Turkey': 13383, 'Iran': 4070, 'Iraq': 6180, 'United Arab Emirates': 53606,
+        'Oman': 21950, 'Kuwait': 43233, 'Israel': 54771, 'Malaysia': 11993, 'New Zealand': 48781,
+        'Peru': 7125, 'Ecuador': 6391, 'Venezuela': 3474, 'Uruguay': 20793, 'Paraguay': 5806,
+        'Bolivia': 3690, 'Cuba': 9499, 'Dominican Republic': 10111, 'Costa Rica': 13365, 'Panama': 17357,
+        'Algeria': 4481, 'Tunisia': 3777, 'Ghana': 2203, 'Angola': 3000, 'Senegal': 1606, 'Mali': 897,
+        'Cameroon': 1662, 'Zambia': 1137, 'Zimbabwe': 1672, 'Botswana': 7737, 'Namibia': 5031,
+        'Madagascar': 516, 'Mozambique': 542, 'Myanmar': 1094, 'Cambodia': 1759, 'Laos': 2046,
+        'Mongolia': 5045, 'Kazakhstan': 11243, 'Uzbekistan': 2255, 'Turkmenistan': 7612, 'Papua New Guinea': 2952,
+        'Fiji': 5085, 'Estonia': 28625, 'Latvia': 21774, 'Lithuania': 25064, 'Belarus': 7288,
+        'Ukraine': 4348, 'Bulgaria': 13200, 'Serbia': 9333, 'Croatia': 18569, 'Slovakia': 21258,
+        'Slovenia': 29469, 'Hungary': 19385, 'Czech Republic': 27691, 'Austria': 52131
     };
 
-    const countries = selectedCountries.map(item => item.country);
-    const values = selectedCountries.map(item => item.value);
-    const colors = selectedCountries.map(item => getColor(item.value, item.country));
-
-    // Format values for display
-    const formatValue = (val) => {
-        if (val >= 1000) {
-            return (val / 1000).toFixed(1) + 'k';
-        }
-        return val.toFixed(0);
-    };
-
-    const data = {
-        labels: countries,
-        datasets: [{
-            label: 'BNP pr. indbygger (USD)',
-            data: values,
-            backgroundColor: colors.map(c => c.backgroundColor),
-            borderColor: colors.map(c => c.borderColor),
-            borderWidth: colors.map(c => c.borderWidth)
-        }]
-    };
-
-    const currentChartConfig = getChartConfig();
-    const themeColors = getThemeColors();
-    new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            ...currentChartConfig,
-            indexAxis: 'y', // Horizontal bars
-            scales: {
-                x: {
-                    ...currentChartConfig.scales.x,
-                    min: 0,
-                    title: {
-                        display: true,
-                        text: 'BNP pr. indbygger (USD)',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        },
-                        color: themeColors.text
-                    },
-                    grid: {
-                        display: true,
-                        color: themeColors.grid,
-                        lineWidth: 1
-                    },
-                    ticks: {
-                        ...currentChartConfig.scales.x.ticks,
-                        color: themeColors.text,
-                        callback: function (value) {
-                            if (value >= 1000) {
-                                return '$' + (value / 1000).toFixed(1) + 'k';
-                            }
-                            return '$' + value.toFixed(0);
-                        }
-                    }
-                },
-                y: {
-                    ...currentChartConfig.scales.y,
-                    beginAtZero: false,
-                    ticks: {
-                        font: {
-                            size: 8,  // Very small font for country names
-                            family: 'Inter, sans-serif'
-                        },
-                        padding: 2,  // Reduce padding to fit more countries
-                        color: themeColors.text,
-                        callback: function (value, index, ticks) {
-                            if (data && data.labels && data.labels[index] !== undefined) {
-                                return data.labels[index];
-                            }
-                            return '';
-                        }
-                    },
-                    grid: {
-                        display: false  // Hide grid lines on y-axis
-                    }
-                }
-            },
-            plugins: {
-                ...currentChartConfig.plugins,
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    ...currentChartConfig.plugins.tooltip,
-                    callbacks: {
-                        label: function (context) {
-                            const value = context.raw;
-                            let category = '';
-                            if (value >= 40000) category = ' (Meget høj indkomst)';
-                            else if (value >= 12000) category = ' (Høj indkomst)';
-                            else if (value >= 3000) category = ' (Medium indkomst)';
-                            else category = ' (Lav indkomst)';
-                            return `BNP pr. indbygger: $${value.toLocaleString('da-DK')}${category}`;
-                        }
-                    }
-                }
-            }
-        }
+    // Sort to establish rank
+    const sortedGDP = Object.entries(gdpRaw).sort((a, b) => b[1] - a[1]);
+    const gdpData = {};
+    sortedGDP.forEach((item, index) => {
+        let val = item[1];
+        let cat = val >= 40000 ? 'Meget høj indkomst' :
+            val >= 12000 ? 'Høj indkomst' :
+                val >= 3000 ? 'Medium indkomst' : 'Lav indkomst';
+        gdpData[item[0]] = { value: val, rank: index + 1, total: sortedGDP.length, category: cat };
     });
+
+    createLeafletMap(containerId, gdpData, 'BNP pr. indbygger', 'USD', obj => {
+        let v = obj.value;
+        if (v >= 40000) return '#2e7d32'; // Very High
+        if (v >= 12000) return '#4caf50'; // High
+        if (v >= 3000) return '#ffc107'; // Medium
+        return '#f44336'; // Low
+    }, obj => obj ? `<span style="font-size: 1.1em; color: #4ade80;">$${obj.value.toLocaleString('da-DK')}</span><br>
+                     <span style="color: #9ca3af; font-size: 0.9em;">Niveau:</span> ${obj.category}<br>
+                     <span style="color: #9ca3af; font-size: 0.9em;">Rangering:</span> #${obj.rank} ud af ${obj.total} (kort)` : 'Ingen data',
+        [
+            { color: '#2e7d32', label: 'Meget høj (≥ $40.000)' },
+            { color: '#4caf50', label: 'Høj ($12.000 - $40.000)' },
+            { color: '#ffc107', label: 'Medium ($3.000 - $12.000)' },
+            { color: '#f44336', label: 'Lav (< $3.000)' },
+            { color: '#888888', label: 'Ingen data / Filtreret ud' }
+        ]);
+}
+
+// Reusable Leaflet Map generator for Choropleth maps
+function createLeafletMap(containerId, dataMap, labelTr, unitStr, colorScaleFn, formatterFn, legendItems = []) {
+    if (typeof L === 'undefined') {
+        setTimeout(() => createLeafletMap(containerId, dataMap, labelTr, unitStr, colorScaleFn, formatterFn, legendItems), 200);
+        return;
+    }
+
+    const map = L.map(containerId, {
+        zoomControl: true,
+        scrollWheelZoom: false
+    }).setView([20, 0], 2);
+
+    // Add a dark or light style basemap tile layer based on theme
+    const isDark = getChartTheme() === 'dark';
+    const tileUrl = isDark ?
+        'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png' :
+        'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
+    L.tileLayer(tileUrl, {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+    }).addTo(map);
+
+    let geojson;
+
+    // Oversættelser af lande fra engelsk til dansk
+    const countryNameMapDa = {
+        'Switzerland': 'Schweiz', 'Norway': 'Norge', 'Iceland': 'Island', 'Hong Kong': 'Hong Kong',
+        'Denmark': 'Danmark', 'Sweden': 'Sverige', 'Ireland': 'Irland', 'Germany': 'Tyskland',
+        'Netherlands': 'Holland', 'Finland': 'Finland', 'Singapore': 'Singapore', 'Belgium': 'Belgien',
+        'New Zealand': 'New Zealand', 'Canada': 'Canada', 'United Kingdom': 'Storbritannien', 'Japan': 'Japan',
+        'South Korea': 'Sydkorea', 'United States of America': 'USA', 'Spain': 'Spanien',
+        'France': 'Frankrig', 'Italy': 'Italien', 'Greece': 'Grækenland', 'Poland': 'Polen', 'Portugal': 'Portugal',
+        'Chile': 'Chile', 'Argentina': 'Argentina', 'Romania': 'Rumænien', 'Russia': 'Rusland',
+        'Brazil': 'Brasilien', 'China': 'Kina', 'Colombia': 'Colombia', 'Thailand': 'Thailand', 'Mexico': 'Mexico',
+        'India': 'Indien', 'Philippines': 'Filippinerne', 'Vietnam': 'Vietnam', 'Egypt': 'Egypten', 'Morocco': 'Marokko',
+        'Bangladesh': 'Bangladesh', 'Kenya': 'Kenya', 'Pakistan': 'Pakistan', 'Nigeria': 'Nigeria',
+        'Zimbabwe': 'Zimbabwe', 'Uganda': 'Uganda', 'United Republic of Tanzania': 'Tanzania',
+        'Afghanistan': 'Afghanistan', 'Niger': 'Niger', 'Australia': 'Australien', 'South Africa': 'Sydafrika',
+        'Saudi Arabia': 'Saudi-Arabien', 'Turkey': 'Tyrkiet', 'Iran': 'Iran', 'Iraq': 'Irak', 'United Arab Emirates': 'Forenede Arabiske Emirater',
+        'Oman': 'Oman', 'Kuwait': 'Kuwait', 'Israel': 'Israel', 'Malaysia': 'Malaysia', 'Peru': 'Peru',
+        'Ecuador': 'Ecuador', 'Venezuela': 'Venezuela', 'Uruguay': 'Uruguay', 'Paraguay': 'Paraguay', 'Bolivia': 'Bolivia',
+        'Cuba': 'Cuba', 'Dominican Republic': 'Den Dominikanske Republik', 'Costa Rica': 'Costa Rica', 'Panama': 'Panama',
+        'Algeria': 'Algeriet', 'Tunisia': 'Tunesien', 'Ghana': 'Ghana', 'Angola': 'Angola', 'Senegal': 'Senegal',
+        'Mali': 'Mali', 'Cameroon': 'Cameroun', 'Zambia': 'Zambia', 'Botswana': 'Botswana', 'Namibia': 'Namibia',
+        'Madagascar': 'Madagaskar', 'Mozambique': 'Mozambique', 'Myanmar': 'Myanmar', 'Cambodia': 'Cambodja', 'Laos': 'Laos',
+        'Mongolia': 'Mongoliet', 'Kazakhstan': 'Kasakhstan', 'Uzbekistan': 'Usbekistan', 'Turkmenistan': 'Turkmenistan',
+        'Papua New Guinea': 'Papua Ny Guinea', 'Fiji': 'Fiji', 'Estonia': 'Estland', 'Latvia': 'Letland', 'Lithuania': 'Litauen',
+        'Belarus': 'Hviderusland', 'Ukraine': 'Ukraine', 'Bulgaria': 'Bulgarien', 'Serbia': 'Serbien', 'Croatia': 'Kroatien',
+        'Slovakia': 'Slovakiet', 'Slovenia': 'Slovenien', 'Hungary': 'Ungarn', 'Czech Republic': 'Tjekkiet', 'Austria': 'Østrig',
+        'Monaco': 'Monaco', 'Liechtenstein': 'Liechtenstein', 'Luxembourg': 'Luxembourg', 'Qatar': 'Qatar', 'Indonesia': 'Indonesien',
+        'Ethiopia': 'Etiopien', 'Malawi': 'Malawi', 'Syria': 'Syrien', 'Libya': 'Libyen', 'Yemen': 'Yemen'
+    };
+
+    // Hover effects
+    function highlightFeature(e) {
+        var layer = e.target;
+        layer.setStyle({
+            weight: 3,
+            color: '#666',
+            fillOpacity: 0.9
+        });
+        layer.bringToFront();
+
+        let engName = layer.feature.properties.name;
+        let daName = countryNameMapDa[engName] || engName;
+
+        let val = dataMap[engName];
+        let info = val !== undefined ? formatterFn(val) : 'Ingen data';
+        layer.bindTooltip(`<b>${daName}</b><br>${labelTr}: <br>${info}`, {
+            direction: 'auto',
+            sticky: true,
+            className: 'leaflet-custom-tooltip'
+        }).openTooltip();
+    }
+
+    function resetHighlight(e) {
+        geojson.resetStyle(e.target);
+        e.target.closeTooltip();
+    }
+
+    function styleFeature(feature) {
+        let val = dataMap[feature.properties.name];
+        return {
+            fillColor: val !== undefined ? colorScaleFn(val) : (isDark ? '#374151' : '#e5e7eb'), // 374151 matches 'gray-700'
+            weight: 1,
+            opacity: 1,
+            color: isDark ? '#1f2937' : 'white',
+            fillOpacity: val !== undefined ? 0.8 : 0.4
+        };
+    }
+
+    // Add CSS for tooltip and legend if not already there
+    if (!document.getElementById('leaflet-custom-css')) {
+        let style = document.createElement('style');
+        style.id = 'leaflet-custom-css';
+        style.innerHTML = `
+        .leaflet-custom-tooltip {
+            background: rgba(0,0,0,0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            padding: 10px 14px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            line-height: 1.5;
+        }`;
+        document.head.appendChild(style);
+    }
+
+    // Add legend if provided
+    if (legendItems && legendItems.length > 0) {
+        let legend = L.control({ position: 'bottomleft' });
+        legend.onAdd = function () {
+            let div = L.DomUtil.create('div', 'info legend');
+            div.style.backgroundColor = isDark ? 'rgba(31, 41, 55, 0.9)' : 'rgba(255, 255, 255, 0.9)';
+            div.style.padding = '12px';
+            div.style.borderRadius = '8px';
+            div.style.border = isDark ? '1px solid #374151' : '1px solid #e5e7eb';
+            div.style.color = isDark ? '#f3f4f6' : '#111827';
+            div.style.fontFamily = 'Inter, sans-serif';
+            div.style.fontSize = '12px';
+            div.style.lineHeight = '20px';
+            div.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            let html = `<strong style="font-size: 14px; margin-bottom: 6px; display: inline-block;">Farveskala</strong><br>`;
+            for (let i = 0; i < legendItems.length; i++) {
+                html += '<i style="background:' + legendItems[i].color + '; width: 14px; height: 14px; display: inline-block; margin-right: 8px; border-radius: 3px; vertical-align: middle;"></i> ' +
+                    '<span style="vertical-align: middle;">' + legendItems[i].label + '</span><br>';
+            }
+            div.innerHTML = html;
+            return div;
+        };
+        legend.addTo(map);
+    }
+
+    fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+        .then(res => res.json())
+        .then(data => {
+            geojson = L.geoJson(data, {
+                style: styleFeature,
+                onEachFeature: (feature, layer) => {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight
+                    });
+                }
+            }).addTo(map);
+        });
 }
 
 // Create Sankey Diagram for National Accounts (Supply and Use)
@@ -6608,23 +6477,23 @@ function createExpansionaryPolicyFlowchart(containerId) {
     const tooltip = document.createElement('div');
     tooltip.id = 'expansionary-flowchart-tooltip';
     tooltip.style.cssText = `
-        position: absolute;
-        display: none;
-        background: #ffffff;
-        border: 2px solid #3b82f6;
-        border-radius: 0;
-        padding: 2px 6px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        font-family: 'Inter, sans-serif';
-        font-size: 10px;
-        color: #0f172a;
-        max-width: 220px;
-        z-index: 10000;
-        pointer-events: none;
-        white-space: pre-line;
-        line-height: 1.1;
-        margin: 0;
-    `;
+            position: absolute;
+            display: none;
+            background: #ffffff;
+            border: 2px solid #3b82f6;
+            border - radius: 0;
+            padding: 2px 6px;
+            box - shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font - family: 'Inter, sans-serif';
+            font - size: 10px;
+            color: #0f172a;
+            max - width: 220px;
+            z - index: 10000;
+            pointer - events: none;
+            white - space: pre - line;
+            line - height: 1.1;
+            margin: 0;
+            `;
     document.body.appendChild(tooltip);
 
     let currentHoveredNode = null;
@@ -6805,23 +6674,23 @@ function createContractionaryPolicyFlowchart(containerId) {
     const tooltip = document.createElement('div');
     tooltip.id = 'contractionary-flowchart-tooltip';
     tooltip.style.cssText = `
-        position: absolute;
-        display: none;
-        background: #ffffff;
-        border: 2px solid #3b82f6;
-        border-radius: 0;
-        padding: 2px 6px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        font-family: 'Inter, sans-serif';
-        font-size: 10px;
-        color: #0f172a;
-        max-width: 220px;
-        z-index: 10000;
-        pointer-events: none;
-        white-space: pre-line;
-        line-height: 1.1;
-        margin: 0;
-    `;
+            position: absolute;
+            display: none;
+            background: #ffffff;
+            border: 2px solid #3b82f6;
+            border - radius: 0;
+            padding: 2px 6px;
+            box - shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font - family: 'Inter, sans-serif';
+            font - size: 10px;
+            color: #0f172a;
+            max - width: 220px;
+            z - index: 10000;
+            pointer - events: none;
+            white - space: pre - line;
+            line - height: 1.1;
+            margin: 0;
+            `;
     document.body.appendChild(tooltip);
 
     let currentHoveredNode = null;
@@ -6940,7 +6809,7 @@ function createADASChart(canvasId) {
                     ...currentChartConfig.plugins.tooltip,
                     callbacks: {
                         label: function (context) {
-                            return `${context.dataset.label}: ${context.parsed.y} mia. kr. (Prisniveau: ${context.label})`;
+                            return `${context.dataset.label}: ${context.parsed.y} mia.kr. (Prisniveau: ${context.label})`;
                         }
                     }
                 }
@@ -7111,13 +6980,13 @@ function createSESUNegativeOutputGapChart(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 3000,
-                    title: { 
-                        display: true, 
-                        text: 'Nationalindkomst (Y)', 
+                    title: {
+                        display: true,
+                        text: 'Nationalindkomst (Y)',
                         font: { size: 12, weight: 'bold' },
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -7131,13 +7000,13 @@ function createSESUNegativeOutputGapChart(canvasId) {
                     ...currentChartConfig.scales.y,
                     min: 0,
                     max: 10,
-                    title: { 
-                        display: true, 
-                        text: 'Inflation (π)', 
+                    title: {
+                        display: true,
+                        text: 'Inflation (π)',
                         font: { size: 12, weight: 'bold' },
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -7540,7 +7409,7 @@ function createSESUNoOutputGapChart(canvasId) {
                         li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
 
                         const colorBox = document.createElement('span');
-                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none;`;
+                        colorBox.style.cssText = `width: 20px; height: 3px; background - color: ${dataset.borderColor || '#000'}; margin - right: 8px; border: none; `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -7566,7 +7435,7 @@ function createSESUNoOutputGapChart(canvasId) {
                         li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
 
                         const colorBox = document.createElement('span');
-                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        colorBox.style.cssText = `width: 20px; height: 20px; background - color: ${dataset.backgroundColor || '#fbbf24'}; margin - right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border - radius: 50 %; `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -7997,7 +7866,7 @@ function createSESUExpansiveFPChart(canvasId) {
 
                         const colorBox = document.createElement('span');
                         const isDashed = dataset.borderDash && dataset.borderDash.length > 0;
-                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none; ${isDashed ? 'background-image: repeating-linear-gradient(to right, ' + (dataset.borderColor || '#000') + ' 0px, ' + (dataset.borderColor || '#000') + ' 4px, transparent 4px, transparent 8px);' : ''}`;
+                        colorBox.style.cssText = `width: 20px; height: 3px; background - color: ${dataset.borderColor || '#000'}; margin - right: 8px; border: none; ${isDashed ? 'background-image: repeating-linear-gradient(to right, ' + (dataset.borderColor || '#000') + ' 0px, ' + (dataset.borderColor || '#000') + ' 4px, transparent 4px, transparent 8px);' : ''} `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -8025,7 +7894,7 @@ function createSESUExpansiveFPChart(canvasId) {
                         li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
 
                         const colorBox = document.createElement('span');
-                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        colorBox.style.cssText = `width: 20px; height: 20px; background - color: ${dataset.backgroundColor || '#fbbf24'}; margin - right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border - radius: 50 %; `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -8273,7 +8142,7 @@ function createSESUStrukturpolitikNoGapChart(canvasId) {
                         li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
 
                         const colorBox = document.createElement('span');
-                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none;`;
+                        colorBox.style.cssText = `width: 20px; height: 3px; background - color: ${dataset.borderColor || '#000'}; margin - right: 8px; border: none; `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -8298,7 +8167,7 @@ function createSESUStrukturpolitikNoGapChart(canvasId) {
                         li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
 
                         const colorBox = document.createElement('span');
-                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        colorBox.style.cssText = `width: 20px; height: 20px; background - color: ${dataset.backgroundColor || '#fbbf24'}; margin - right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border - radius: 50 %; `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -8554,7 +8423,7 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
 
                         const colorBox = document.createElement('span');
                         const isDashed = dataset.borderDash && dataset.borderDash.length > 0;
-                        colorBox.style.cssText = `width: 20px; height: 3px; background-color: ${dataset.borderColor || '#000'}; margin-right: 8px; border: none; ${isDashed ? 'background-image: repeating-linear-gradient(to right, transparent, transparent 3px, ' + dataset.borderColor + ' 3px, ' + dataset.borderColor + ' 6px);' : ''}`;
+                        colorBox.style.cssText = `width: 20px; height: 3px; background - color: ${dataset.borderColor || '#000'}; margin - right: 8px; border: none; ${isDashed ? 'background-image: repeating-linear-gradient(to right, transparent, transparent 3px, ' + dataset.borderColor + ' 3px, ' + dataset.borderColor + ' 6px);' : ''} `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -8583,7 +8452,7 @@ function createSESUStrukturpolitikSULangShiftChart(canvasId) {
                         li.style.cssText = 'display: flex; align-items: center; margin: 5px 15px;';
 
                         const colorBox = document.createElement('span');
-                        colorBox.style.cssText = `width: 20px; height: 20px; background-color: ${dataset.backgroundColor || '#fbbf24'}; margin-right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border-radius: 50%;`;
+                        colorBox.style.cssText = `width: 20px; height: 20px; background - color: ${dataset.backgroundColor || '#fbbf24'}; margin - right: 8px; border: 2px solid ${dataset.borderColor || '#fbbf24'}; border - radius: 50 %; `;
 
                         const labelText = document.createElement('span');
                         labelText.style.cssText = 'font-family: Inter, sans-serif; font-size: 12px;';
@@ -8916,13 +8785,13 @@ function createKeynesBasicChart(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 2500,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -8936,13 +8805,13 @@ function createKeynesBasicChart(canvasId) {
                     ...currentChartConfig.scales.y,
                     min: 0,
                     max: 2500,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Samlet efterspørgsel (SE)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9071,13 +8940,13 @@ function createKeynesFPChart(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 2500,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9091,13 +8960,13 @@ function createKeynesFPChart(canvasId) {
                     ...currentChartConfig.scales.y,
                     min: 0,
                     max: 2500,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Samlet efterspørgsel (SE)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9329,9 +9198,9 @@ function createPublicBalanceChart(canvasId) {
             ...currentChartConfig,
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Offentlig saldo (T-G-R)', 
+                title: {
+                    display: true,
+                    text: 'Offentlig saldo (T-G-R)',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -9349,18 +9218,18 @@ function createPublicBalanceChart(canvasId) {
             },
             scales: {
                 ...currentChartConfig.scales,
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9370,15 +9239,15 @@ function createPublicBalanceChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Saldo (Underskud/Overskud)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9484,9 +9353,9 @@ function createEmploymentChart(canvasId) {
             ...currentChartConfig,
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Beskæftigelse (L) og nationalindkomst (Y)', 
+                title: {
+                    display: true,
+                    text: 'Beskæftigelse (L) og nationalindkomst (Y)',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -9504,18 +9373,18 @@ function createEmploymentChart(canvasId) {
             },
             scales: {
                 ...currentChartConfig.scales,
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9525,15 +9394,15 @@ function createEmploymentChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Beskæftigelse (L)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9635,9 +9504,9 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
             ...getChartConfig(),
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Betalingsbalance (BB)', 
+                title: {
+                    display: true,
+                    text: 'Betalingsbalance (BB)',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -9654,17 +9523,17 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
                 }
             },
             scales: {
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9674,14 +9543,14 @@ function createBalanceOfPaymentsTheoryChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Saldo (Underskud/Overskud)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9802,9 +9671,9 @@ function createKeynesExpansiveChart(canvasId) {
             ...currentChartConfig,
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Keynes model - Ekspansiv Finanspolitik', 
+                title: {
+                    display: true,
+                    text: 'Keynes model - Ekspansiv Finanspolitik',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -9822,18 +9691,18 @@ function createKeynesExpansiveChart(canvasId) {
             },
             scales: {
                 ...currentChartConfig.scales,
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9843,17 +9712,17 @@ function createKeynesExpansiveChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Samlet efterspørgsel (SE)',
                         color: colors.text,
                         font: { size: 12, weight: 'bold' }
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -9962,9 +9831,9 @@ function createPublicBalanceExpansiveChart(canvasId) {
             ...getChartConfig(),
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Offentlig saldo (T-G-R) ved ekspansiv politik', 
+                title: {
+                    display: true,
+                    text: 'Offentlig saldo (T-G-R) ved ekspansiv politik',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -9981,17 +9850,17 @@ function createPublicBalanceExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -10001,14 +9870,14 @@ function createPublicBalanceExpansiveChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Saldo (Underskud/Overskud)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -10109,9 +9978,9 @@ function createEmploymentExpansiveChart(canvasId) {
             ...getChartConfig(),
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Beskæftigelse (L) stiger ved ekspansiv politik', 
+                title: {
+                    display: true,
+                    text: 'Beskæftigelse (L) stiger ved ekspansiv politik',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -10128,17 +9997,17 @@ function createEmploymentExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -10148,14 +10017,14 @@ function createEmploymentExpansiveChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Beskæftigelse (L)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -10256,9 +10125,9 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
             ...getChartConfig(),
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'Betalingsbalance forværres ved ekspansiv politik', 
+                title: {
+                    display: true,
+                    text: 'Betalingsbalance forværres ved ekspansiv politik',
                     font: { size: 16 },
                     color: colors.text
                 },
@@ -10275,17 +10144,17 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
                 }
             },
             scales: {
-                x: { 
+                x: {
                     ...currentChartConfig.scales.x,
-                    type: 'linear', 
-                    min: 0, 
-                    max: 2500, 
-                    title: { 
-                        display: true, 
+                    type: 'linear',
+                    min: 0,
+                    max: 2500,
+                    title: {
+                        display: true,
                         text: 'Nationalindkomst (Y)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -10295,14 +10164,14 @@ function createBalanceOfPaymentsExpansiveChart(canvasId) {
                         lineWidth: 1
                     }
                 },
-                y: { 
+                y: {
                     ...currentChartConfig.scales.y,
-                    title: { 
-                        display: true, 
+                    title: {
+                        display: true,
                         text: 'Saldo (Underskud/Overskud)',
                         color: colors.text
-                    }, 
-                    ticks: { 
+                    },
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -10509,9 +10378,9 @@ function createMultiplierChart(canvasId) {
                         color: currentChartConfig.scales.y.ticks.color
                     },
                     beginAtZero: true,
-                    ticks: { 
+                    ticks: {
                         ...currentChartConfig.scales.y.ticks,
-                        display: false 
+                        display: false
                     }
                 }
             }
@@ -11065,7 +10934,7 @@ function createValutaMarketChart(canvasId) {
                         padding: { top: 8, bottom: 24 },
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -11079,11 +10948,11 @@ function createValutaMarketChart(canvasId) {
                     ...currentChartConfig.scales.y,
                     min: 0,
                     max: 14,
-                    title: { 
+                    title: {
                         display: false,
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -11244,23 +11113,23 @@ function createValutaMarketChartAppreciering(canvasId) {
             layout: valutaChartLayout,
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'KURS (DKK per GBP) APPRECIERING', 
-                    position: 'top', 
-                    font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, 
+                title: {
+                    display: true,
+                    text: 'KURS (DKK per GBP) APPRECIERING',
+                    position: 'top',
+                    font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' },
                     padding: { top: 0, bottom: 12 },
                     color: colors.text
                 },
-                legend: { 
-                    display: true, 
-                    position: 'top', 
-                    labels: { 
-                        font: { size: 11, family: 'Inter, sans-serif' }, 
-                        padding: 12, 
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: { size: 11, family: 'Inter, sans-serif' },
+                        padding: 12,
                         usePointStyle: true,
                         color: colors.text
-                    } 
+                    }
                 }
             },
             scales: {
@@ -11271,14 +11140,14 @@ function createValutaMarketChartAppreciering(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 1600,
-                    title: { 
-                        display: true, 
-                        text: 'Mængde valuta (fx GBP)', 
-                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, 
+                    title: {
+                        display: true,
+                        text: 'Mængde valuta (fx GBP)',
+                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' },
                         padding: valutaScaleTitlePadding.x,
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -11292,11 +11161,11 @@ function createValutaMarketChartAppreciering(canvasId) {
                     ...currentChartConfig.scales.y,
                     min: 0,
                     max: 14,
-                    title: { 
+                    title: {
                         display: false,
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -11383,23 +11252,23 @@ function createValutaMarketChartDepreciering(canvasId) {
             layout: valutaChartLayout,
             plugins: {
                 ...currentChartConfig.plugins,
-                title: { 
-                    display: true, 
-                    text: 'KURS (DKK per GBP) DEPRECIERING', 
-                    position: 'top', 
-                    font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' }, 
+                title: {
+                    display: true,
+                    text: 'KURS (DKK per GBP) DEPRECIERING',
+                    position: 'top',
+                    font: { size: 14, weight: 'bold', family: 'Inter, sans-serif' },
                     padding: { top: 0, bottom: 12 },
                     color: colors.text
                 },
-                legend: { 
-                    display: true, 
-                    position: 'top', 
-                    labels: { 
-                        font: { size: 11, family: 'Inter, sans-serif' }, 
-                        padding: 12, 
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: { size: 11, family: 'Inter, sans-serif' },
+                        padding: 12,
                         usePointStyle: true,
                         color: colors.text
-                    } 
+                    }
                 }
             },
             scales: {
@@ -11410,14 +11279,14 @@ function createValutaMarketChartDepreciering(canvasId) {
                     position: 'bottom',
                     min: 0,
                     max: 1600,
-                    title: { 
-                        display: true, 
-                        text: 'Mængde valuta (fx GBP)', 
-                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' }, 
+                    title: {
+                        display: true,
+                        text: 'Mængde valuta (fx GBP)',
+                        font: { size: 13, weight: 'bold', family: 'Inter, sans-serif' },
                         padding: valutaScaleTitlePadding.x,
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -11431,11 +11300,11 @@ function createValutaMarketChartDepreciering(canvasId) {
                     ...currentChartConfig.scales.y,
                     min: 0,
                     max: 16,
-                    title: { 
+                    title: {
                         display: false,
                         color: colors.text
                     },
-                    ticks: { 
+                    ticks: {
                         display: false,
                         color: colors.text
                     },
@@ -12229,7 +12098,7 @@ function createWSPSChart(canvasId) {
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            return `${context.dataset.label}: ${context.parsed.y.toFixed(2)}`;
+                            return `${context.dataset.label}: ${context.parsed.y.toFixed(2)} `;
                         }
                     }
                 }
@@ -12276,7 +12145,7 @@ function createWSPSChart(canvasId) {
 // Fetch job vacancies from Danmarks Statistik StatBank API (LSK03)
 // Uses cache-first strategy: always use cached data if available, only update when API works
 async function fetchJobVacanciesFromStatBank(years = 20) {
-    const cacheKey = `statbank_job_vacancies_${years}`;
+    const cacheKey = `statbank_job_vacancies_${years} `;
 
     // Always try cache first (even expired cache)
     const cachedData = getAnyCachedData(cacheKey);
@@ -12296,7 +12165,7 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
         // Build time periods - Q4 data for each year
         const timeValues = [];
         for (let year = startYear; year <= endYear; year++) {
-            timeValues.push(`${year}K4`);
+            timeValues.push(`${year} K4`);
         }
 
         const requestBody = {
@@ -12324,7 +12193,7 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
         });
 
         if (!response.ok) {
-            throw new Error(`StatBank API error: ${response.status}`);
+            throw new Error(`StatBank API error: ${response.status} `);
         }
 
         const data = await response.json();
@@ -12395,7 +12264,7 @@ async function fetchJobVacanciesFromStatBank(years = 20) {
 // Fetch Beveridge Curve data (job vacancies and unemployment) for Denmark
 // Cache-first strategy: uses cached data, only updates when APIs are available
 async function fetchBeveridgeCurveData(years = 20) {
-    const cacheKey = `beveridge_curve_DNK_${years}`;
+    const cacheKey = `beveridge_curve_DNK_${years} `;
 
     // Check for fresh cache first
     const freshCache = getCachedData(cacheKey);
@@ -12618,13 +12487,13 @@ function createBeveridgeCurveChart(canvasId) {
                         callbacks: {
                             title: function (context) {
                                 const point = context[0].raw;
-                                return `År: ${point.year || 'N/A'}`;
+                                return `År: ${point.year || 'N/A'} `;
                             },
                             label: function (context) {
                                 const point = context.raw;
                                 return [
-                                    `Ledighed: ${point.x.toFixed(1)}%`,
-                                    `Ledige stillinger: ${point.y.toFixed(2)}%`
+                                    `Ledighed: ${point.x.toFixed(1)}% `,
+                                    `Ledige stillinger: ${point.y.toFixed(2)}% `
                                 ];
                             }
                         }
@@ -12672,7 +12541,7 @@ function createBeveridgeCurveChart(canvasId) {
         console.error('Error creating Beveridge curve chart:', error);
         // Get chart configuration for fallback
         const currentChartConfig = getChartConfig();
-        
+
         // Fallback to simple theoretical curve
         const fallbackData = [
             { x: 10.0, y: 0.3, year: '2008' },
@@ -12736,13 +12605,13 @@ function createBeveridgeCurveChart(canvasId) {
                         callbacks: {
                             title: function (context) {
                                 const point = context[0].raw;
-                                return `År: ${point.year || 'N/A'}`;
+                                return `År: ${point.year || 'N/A'} `;
                             },
                             label: function (context) {
                                 const point = context.raw;
                                 return [
-                                    `Ledighed: ${point.x.toFixed(1)}%`,
-                                    `Ledige stillinger: ${point.y.toFixed(2)}%`
+                                    `Ledighed: ${point.x.toFixed(1)}% `,
+                                    `Ledige stillinger: ${point.y.toFixed(2)}% `
                                 ];
                             }
                         }
@@ -12751,9 +12620,9 @@ function createBeveridgeCurveChart(canvasId) {
                 scales: {
                     x: {
                         ...currentChartConfig.scales.x,
-                        title: { 
-                            display: true, 
-                            text: 'Ledighedsprocent (%)', 
+                        title: {
+                            display: true,
+                            text: 'Ledighedsprocent (%)',
                             font: { weight: 'bold', family: 'Inter, sans-serif' },
                             color: currentChartConfig.scales.x.title.color
                         },
@@ -12768,9 +12637,9 @@ function createBeveridgeCurveChart(canvasId) {
                     },
                     y: {
                         ...currentChartConfig.scales.y,
-                        title: { 
-                            display: true, 
-                            text: 'Ledige stillinger (%)', 
+                        title: {
+                            display: true,
+                            text: 'Ledige stillinger (%)',
                             font: { weight: 'bold', family: 'Inter, sans-serif' },
                             color: currentChartConfig.scales.y.title.color
                         },
@@ -12841,9 +12710,9 @@ function createDanishInflationTimeChart(canvasId) {
                     },
                     y: {
                         ...currentChartConfig.scales.y,
-                        title: { 
-                            display: true, 
-                            text: 'Procent (%)', 
+                        title: {
+                            display: true,
+                            text: 'Procent (%)',
                             font: { weight: 'bold' },
                             color: currentChartConfig.scales.y.title.color
                         }
@@ -12894,7 +12763,7 @@ const chartObserver = new IntersectionObserver((entries) => {
 
                 // Wait for Chart.js before initializing (for Chart.js charts only)
                 const chartJSTypes = [
-                    'gdp-development', 'gdp-indexed', 'gdp-per-capita-line', 'gdp-per-capita-bar', 'gdp-bubble',
+                    'gdp-development', 'gdp-indexed', 'gdp-per-capita-line', 'gdp-bubble',
                     'exchange-rate', 'euro-band', 'interest-rate', 'money-supply', 'valuta-market',
                     'valuta-market-appreciering', 'valuta-market-depreciering', 'real-nominal-rate',
                     'okuns-law', 'bop-historical', 'output-gap', 'unemployment-inflation',
@@ -12934,251 +12803,251 @@ const chartObserver = new IntersectionObserver((entries) => {
 function initializeChartByType(element, chartType, chartData) {
     // Initialize based on type
     switch (chartType) {
-                    case 'national-accounts':
-                        createNationalAccountsChart(element.id);
-                        break;
-                    case 'economic-circuit':
-                        createEconomicCircuitVis(element.id);
-                        break;
-                    case 'economic-circuit-svg':
-                        createEconomicCircuit(element.id);
-                        break;
-                    case 'economic-circuit-d3':
-                        createEconomicCircuitD3(element.id);
-                        break;
-                    case 'economic-circuit-cytoscape':
-                        createEconomicCircuitCytoscape(element.id);
-                        break;
-                    case 'economic-circuit-vis':
-                        createEconomicCircuitVis(element.id);
-                        break;
-                    case 'expansionary-policy-flowchart':
-                        createExpansionaryPolicyFlowchart(element.id);
-                        break;
-                    case 'contractionary-policy-flowchart':
-                        createContractionaryPolicyFlowchart(element.id);
-                        break;
+        case 'national-accounts':
+            createNationalAccountsChart(element.id);
+            break;
+        case 'economic-circuit':
+            createEconomicCircuitVis(element.id);
+            break;
+        case 'economic-circuit-svg':
+            createEconomicCircuit(element.id);
+            break;
+        case 'economic-circuit-d3':
+            createEconomicCircuitD3(element.id);
+            break;
+        case 'economic-circuit-cytoscape':
+            createEconomicCircuitCytoscape(element.id);
+            break;
+        case 'economic-circuit-vis':
+            createEconomicCircuitVis(element.id);
+            break;
+        case 'expansionary-policy-flowchart':
+            createExpansionaryPolicyFlowchart(element.id);
+            break;
+        case 'contractionary-policy-flowchart':
+            createContractionaryPolicyFlowchart(element.id);
+            break;
 
-                    case 'supply-pie':
-                        createSupplyAndUsePieChart(element.id, 'supply');
-                        break;
-                    case 'use-pie':
-                        createSupplyAndUsePieChart(element.id, 'use');
-                        break;
-                    case 'bfi-pie':
-                        createBFIPieChart(element.id);
-                        break;
-                    case 'employment-sector-pie':
-                        const countryCode = element.dataset.chartData || 'DK';
-                        createEmploymentSectorPieChart(element.id, countryCode);
-                        break;
-                    case 'bop-detailed':
-                        createBOPDetailedChart(element.id);
-                        break;
-                    case 'hdi-bar':
-                        createHDIChart(element.id);
-                        break;
-                    case 'gdp-per-capita-bar':
-                        createGDPPerCapitaBarChart(element.id);
-                        break;
-                    case 'national-sankey':
-                        createNationalAccountsSankey(element.id);
-                        break;
-                    case 'saving-investment-sankey':
-                        createSavingInvestmentSankey(element.id);
-                        break;
-                    case 'output-gap':
-                        const outputGapCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
-                        createOutputGapChart(element.id, outputGapCountries);
-                        break;
-                    case 'exchange-rate':
-                        createExchangeRateChart(element.id);
-                        break;
-                    case 'euro-band':
-                        createEuroBandChart(element.id);
-                        break;
-                    case 'interest-rate':
-                        createInterestRateChart(element.id, chartData || 'DK');
-                        break;
-                    case 'adas-model':
-                    case 'sesu-model':
-                        createADASChart(element.id);
-                        break;
-                    case 'sesu-negative-output-gap':
-                        createSESUNegativeOutputGapChart(element.id);
-                        break;
-                    case 'sesu-positive-output-gap':
-                        createSESUPositiveOutputGapChart(element.id);
-                        break;
-                    case 'sesu-no-output-gap':
-                        createSESUNoOutputGapChart(element.id);
-                        break;
-                    case 'sesu-se-increase':
-                        createSESUSEIncreaseChart(element.id);
-                        break;
-                    case 'sesu-expansive-fp':
-                        createSESUExpansiveFPChart(element.id);
-                        break;
-                    case 'sesu-strukturpolitik-no-gap':
-                        createSESUStrukturpolitikNoGapChart(element.id);
-                        break;
-                    case 'sesu-strukturpolitik-sulang-shift':
-                        createSESUStrukturpolitikSULangShiftChart(element.id);
-                        break;
-                    case 'keynes-basic':
-                        createKeynesBasicChart(element.id);
-                        break;
-                    case 'keynes-fp':
-                        createKeynesFPChart(element.id);
-                        break;
-                    case 'keynes-multiplier':
-                        createKeynesMultiplierChart(element.id);
-                        break;
-                    case 'public-balance':
-                        createPublicBalanceChart(element.id);
-                        break;
-                    case 'employment-y':
-                        createEmploymentChart(element.id);
-                        break;
-                    case 'balance-of-payments':
-                        createBalanceOfPaymentsTheoryChart(element.id);
-                        break;
-                    case 'keynes-expansive':
-                        createKeynesExpansiveChart(element.id);
-                        break;
-                    case 'public-balance-expansive':
-                        createPublicBalanceExpansiveChart(element.id);
-                        break;
-                    case 'employment-expansive':
-                        createEmploymentExpansiveChart(element.id);
-                        break;
-                    case 'balance-of-payments-expansive':
-                        createBalanceOfPaymentsExpansiveChart(element.id);
-                        break;
-                    case 'multiplier':
-                        createMultiplierChart(element.id);
-                        break;
-                    case 'phillips-curve':
-                        createPhillipsCurveChart(element.id);
-                        break;
-                    case 'phillips-curve-api':
-                        createAPIPhillipsCurveChart(element.id);
-                        break;
-                    case 'money-supply':
-                        createMoneySupplyChart(element.id);
-                        break;
-                    case 'ws-ps':
-                        createWSPSChart(element.id);
-                        break;
-                    case 'beveridge-curve':
-                        createBeveridgeCurveChart(element.id);
-                        break;
-                    case 'dk-inflation-time':
-                        createDanishInflationTimeChart(element.id);
-                        break;
-                    case 'wage-price-spiral':
-                        createWagePriceSpiralChart(element.id);
-                        break;
-                    case 'risk-premium':
-                        createRiskPremiumChart(element.id);
-                        break;
-                    case 'marshall-model':
-                        createMarshallModelChart(element.id);
-                        break;
-                    case 'valuta-market':
-                        createValutaMarketChart(element.id);
-                        break;
-                    case 'valuta-market-appreciering':
-                        createValutaMarketChartAppreciering(element.id);
-                        break;
-                    case 'valuta-market-depreciering':
-                        createValutaMarketChartDepreciering(element.id);
-                        break;
-                    case 'real-nominal-rate':
-                        createRealNominalRateChart(element.id);
-                        break;
-                    case 'policy-effectiveness':
-                        createPolicyEffectivenessChart(element.id);
-                        break;
-                    case 'fiscal-multiplier':
-                        createFiscalPolicyMultiplierChart(element.id);
-                        break;
-                    case 'monetary-transmission':
-                        createMonetaryPolicyTransmissionChart(element.id);
-                        break;
-                    case 'fiscal-monetary-comparison':
-                        createFiscalMonetaryComparisonChart(element.id);
-                        break;
-                    case 'policy-lag':
-                        createPolicyLagChart(element.id);
-                        break;
-                    case 'gdp-per-capita':
-                        // Assuming standard countries for now
-                        fetchGDPPerCapitaData().then(data => {
-                            new Chart(element, { type: 'line', data: data, options: chartConfig });
-                        });
-                        break;
-                    case 'gdp-development':
-                        let gdpDevCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
-                        // Ensure DNK is always included and first
-                        if (!gdpDevCountries.includes('DNK')) {
-                            gdpDevCountries = ['DNK', ...gdpDevCountries];
-                        } else {
-                            gdpDevCountries = ['DNK', ...gdpDevCountries.filter(c => c !== 'DNK')];
-                        }
-                        createGDPChart(element.id, gdpDevCountries);
-                        break;
-                    case 'gdp-indexed':
-                        let gdpIdxCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
-                        // Ensure DNK is always included and first
-                        if (!gdpIdxCountries.includes('DNK')) {
-                            gdpIdxCountries = ['DNK', ...gdpIdxCountries];
-                        } else {
-                            gdpIdxCountries = ['DNK', ...gdpIdxCountries.filter(c => c !== 'DNK')];
-                        }
-                        createGDPIndexedChart(element.id, gdpIdxCountries);
-                        break;
-                    case 'gdp-per-capita-line':
-                        let gdpPcCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
-                        // Ensure DNK is always included and first
-                        if (!gdpPcCountries.includes('DNK')) {
-                            gdpPcCountries = ['DNK', ...gdpPcCountries];
-                        } else {
-                            gdpPcCountries = ['DNK', ...gdpPcCountries.filter(c => c !== 'DNK')];
-                        }
-                        createGDPPerCapitaChart(element.id, gdpPcCountries);
-                        break;
-                    case 'gdp-bubble':
-                        let gdpBubbleCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
-                        // Ensure DNK is always included and first
-                        if (!gdpBubbleCountries.includes('DNK')) {
-                            gdpBubbleCountries = ['DNK', ...gdpBubbleCountries];
-                        } else {
-                            gdpBubbleCountries = ['DNK', ...gdpBubbleCountries.filter(c => c !== 'DNK')];
-                        }
-                        createGDPBubbleChart(element.id, gdpBubbleCountries);
-                        break;
-                    case 'okuns-law':
-                        const okunsCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
-                        createOkunsLawChart(element.id, okunsCountries);
-                        break;
-                    case 'bop-historical':
-                        const bopYears = element.dataset.chartData ?
-                            parseInt(element.dataset.chartData) : 54;
-                        createBalanceOfPaymentsChart(element.id, bopYears);
-                        break;
-                    case 'unemployment-inflation':
-                        const uiCountries = element.dataset.chartData ?
-                            element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
-                        createMultiCountryUnemploymentInflationChart(element.id, uiCountries);
-                        break;
-                }
+        case 'supply-pie':
+            createSupplyAndUsePieChart(element.id, 'supply');
+            break;
+        case 'use-pie':
+            createSupplyAndUsePieChart(element.id, 'use');
+            break;
+        case 'bfi-pie':
+            createBFIPieChart(element.id);
+            break;
+        case 'employment-sector-pie':
+            const countryCode = element.dataset.chartData || 'DK';
+            createEmploymentSectorPieChart(element.id, countryCode);
+            break;
+        case 'bop-detailed':
+            createBOPDetailedChart(element.id);
+            break;
+        case 'hdi-bar':
+            createHDIChart(element.id);
+            break;
+        case 'gdp-per-capita-bar':
+            createGDPPerCapitaBarChart(element.id);
+            break;
+        case 'national-sankey':
+            createNationalAccountsSankey(element.id);
+            break;
+        case 'saving-investment-sankey':
+            createSavingInvestmentSankey(element.id);
+            break;
+        case 'output-gap':
+            const outputGapCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
+            createOutputGapChart(element.id, outputGapCountries);
+            break;
+        case 'exchange-rate':
+            createExchangeRateChart(element.id);
+            break;
+        case 'euro-band':
+            createEuroBandChart(element.id);
+            break;
+        case 'interest-rate':
+            createInterestRateChart(element.id, chartData || 'DK');
+            break;
+        case 'adas-model':
+        case 'sesu-model':
+            createADASChart(element.id);
+            break;
+        case 'sesu-negative-output-gap':
+            createSESUNegativeOutputGapChart(element.id);
+            break;
+        case 'sesu-positive-output-gap':
+            createSESUPositiveOutputGapChart(element.id);
+            break;
+        case 'sesu-no-output-gap':
+            createSESUNoOutputGapChart(element.id);
+            break;
+        case 'sesu-se-increase':
+            createSESUSEIncreaseChart(element.id);
+            break;
+        case 'sesu-expansive-fp':
+            createSESUExpansiveFPChart(element.id);
+            break;
+        case 'sesu-strukturpolitik-no-gap':
+            createSESUStrukturpolitikNoGapChart(element.id);
+            break;
+        case 'sesu-strukturpolitik-sulang-shift':
+            createSESUStrukturpolitikSULangShiftChart(element.id);
+            break;
+        case 'keynes-basic':
+            createKeynesBasicChart(element.id);
+            break;
+        case 'keynes-fp':
+            createKeynesFPChart(element.id);
+            break;
+        case 'keynes-multiplier':
+            createKeynesMultiplierChart(element.id);
+            break;
+        case 'public-balance':
+            createPublicBalanceChart(element.id);
+            break;
+        case 'employment-y':
+            createEmploymentChart(element.id);
+            break;
+        case 'balance-of-payments':
+            createBalanceOfPaymentsTheoryChart(element.id);
+            break;
+        case 'keynes-expansive':
+            createKeynesExpansiveChart(element.id);
+            break;
+        case 'public-balance-expansive':
+            createPublicBalanceExpansiveChart(element.id);
+            break;
+        case 'employment-expansive':
+            createEmploymentExpansiveChart(element.id);
+            break;
+        case 'balance-of-payments-expansive':
+            createBalanceOfPaymentsExpansiveChart(element.id);
+            break;
+        case 'multiplier':
+            createMultiplierChart(element.id);
+            break;
+        case 'phillips-curve':
+            createPhillipsCurveChart(element.id);
+            break;
+        case 'phillips-curve-api':
+            createAPIPhillipsCurveChart(element.id);
+            break;
+        case 'money-supply':
+            createMoneySupplyChart(element.id);
+            break;
+        case 'ws-ps':
+            createWSPSChart(element.id);
+            break;
+        case 'beveridge-curve':
+            createBeveridgeCurveChart(element.id);
+            break;
+        case 'dk-inflation-time':
+            createDanishInflationTimeChart(element.id);
+            break;
+        case 'wage-price-spiral':
+            createWagePriceSpiralChart(element.id);
+            break;
+        case 'risk-premium':
+            createRiskPremiumChart(element.id);
+            break;
+        case 'marshall-model':
+            createMarshallModelChart(element.id);
+            break;
+        case 'valuta-market':
+            createValutaMarketChart(element.id);
+            break;
+        case 'valuta-market-appreciering':
+            createValutaMarketChartAppreciering(element.id);
+            break;
+        case 'valuta-market-depreciering':
+            createValutaMarketChartDepreciering(element.id);
+            break;
+        case 'real-nominal-rate':
+            createRealNominalRateChart(element.id);
+            break;
+        case 'policy-effectiveness':
+            createPolicyEffectivenessChart(element.id);
+            break;
+        case 'fiscal-multiplier':
+            createFiscalPolicyMultiplierChart(element.id);
+            break;
+        case 'monetary-transmission':
+            createMonetaryPolicyTransmissionChart(element.id);
+            break;
+        case 'fiscal-monetary-comparison':
+            createFiscalMonetaryComparisonChart(element.id);
+            break;
+        case 'policy-lag':
+            createPolicyLagChart(element.id);
+            break;
+        case 'gdp-per-capita':
+            // Assuming standard countries for now
+            fetchGDPPerCapitaData().then(data => {
+                new Chart(element, { type: 'line', data: data, options: chartConfig });
+            });
+            break;
+        case 'gdp-development':
+            let gdpDevCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+            // Ensure DNK is always included and first
+            if (!gdpDevCountries.includes('DNK')) {
+                gdpDevCountries = ['DNK', ...gdpDevCountries];
+            } else {
+                gdpDevCountries = ['DNK', ...gdpDevCountries.filter(c => c !== 'DNK')];
+            }
+            createGDPChart(element.id, gdpDevCountries);
+            break;
+        case 'gdp-indexed':
+            let gdpIdxCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+            // Ensure DNK is always included and first
+            if (!gdpIdxCountries.includes('DNK')) {
+                gdpIdxCountries = ['DNK', ...gdpIdxCountries];
+            } else {
+                gdpIdxCountries = ['DNK', ...gdpIdxCountries.filter(c => c !== 'DNK')];
+            }
+            createGDPIndexedChart(element.id, gdpIdxCountries);
+            break;
+        case 'gdp-per-capita-line':
+            let gdpPcCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+            // Ensure DNK is always included and first
+            if (!gdpPcCountries.includes('DNK')) {
+                gdpPcCountries = ['DNK', ...gdpPcCountries];
+            } else {
+                gdpPcCountries = ['DNK', ...gdpPcCountries.filter(c => c !== 'DNK')];
+            }
+            createGDPPerCapitaChart(element.id, gdpPcCountries);
+            break;
+        case 'gdp-bubble':
+            let gdpBubbleCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR', 'USA', 'GBR', 'KOR', 'JPN', 'CHN', 'IND', 'RUS', 'TUR', 'BRA', 'ITA', 'ESP', 'GRC', 'ARG'];
+            // Ensure DNK is always included and first
+            if (!gdpBubbleCountries.includes('DNK')) {
+                gdpBubbleCountries = ['DNK', ...gdpBubbleCountries];
+            } else {
+                gdpBubbleCountries = ['DNK', ...gdpBubbleCountries.filter(c => c !== 'DNK')];
+            }
+            createGDPBubbleChart(element.id, gdpBubbleCountries);
+            break;
+        case 'okuns-law':
+            const okunsCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
+            createOkunsLawChart(element.id, okunsCountries);
+            break;
+        case 'bop-historical':
+            const bopYears = element.dataset.chartData ?
+                parseInt(element.dataset.chartData) : 54;
+            createBalanceOfPaymentsChart(element.id, bopYears);
+            break;
+        case 'unemployment-inflation':
+            const uiCountries = element.dataset.chartData ?
+                element.dataset.chartData.split(',') : ['DNK', 'DEU', 'SWE', 'NOR'];
+            createMultiCountryUnemploymentInflationChart(element.id, uiCountries);
+            break;
+    }
 }
 
 // Initialize all charts when DOM is ready
@@ -13188,32 +13057,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const style = document.createElement('style');
         style.id = 'chart-loading-styles';
         style.textContent = `
-            .chart-loading {
+                .chart - loading {
                 position: absolute;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                background-color: rgba(255, 255, 255, 0.95);
-                z-index: 10;
+                flex - direction: column;
+                align - items: center;
+                justify - content: center;
+                background - color: rgba(255, 255, 255, 0.95);
+                z - index: 10;
             }
-            .chart-spinner {
+            .chart - spinner {
                 width: 50px;
                 height: 50px;
                 border: 4px solid #f3f4f6;
-                border-top: 4px solid #3b82f6;
-                border-radius: 50%;
-                animation: chart-spin 1s linear infinite;
+                border - top: 4px solid #3b82f6;
+                border - radius: 50 %;
+                animation: chart - spin 1s linear infinite;
             }
-            @keyframes chart-spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
+            @keyframes chart - spin {
+                0 % { transform: rotate(0deg); }
+                100 % { transform: rotate(360deg); }
             }
-        `;
+            `;
         document.head.appendChild(style);
     }
 

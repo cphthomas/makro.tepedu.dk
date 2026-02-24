@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="search.css">
     <link rel="stylesheet" href="theme-dark.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="icon" type="image/x-icon" href="favicon.svg">
     <style>
         .table-hover tbody tr:hover {
@@ -122,7 +124,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="theme-toggle" href="#" role="button" aria-label="Skift tema">
                         <div class="theme-icon-wrapper">
-                            <svg class="theme-icon-sun active" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="theme-icon-sun active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="5"></circle>
                                 <line x1="12" y1="1" x2="12" y2="3"></line>
                                 <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -133,7 +137,9 @@
                                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                             </svg>
-                            <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                             </svg>
                         </div>
@@ -207,8 +213,10 @@
                                 <span class="current-time">0:00</span>
                             </div>
                             <div class="podcast-controls-modern">
-                                <button class="control-button play-pause-button" type="button" aria-label="Afspil"><i class="bi bi-play-fill"></i></button>
-                                <button class="control-button speed-control-modern" type="button" aria-label="Hastighed"><span class="speed-text">1.0x</span></button>
+                                <button class="control-button play-pause-button" type="button" aria-label="Afspil"><i
+                                        class="bi bi-play-fill"></i></button>
+                                <button class="control-button speed-control-modern" type="button"
+                                    aria-label="Hastighed"><span class="speed-text">1.0x</span></button>
                             </div>
                         </div>
                     </div>
@@ -286,10 +294,36 @@
                                 style="position: relative; min-height: 600px; width: 100%; max-width: 100%; padding: 0 20px; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.05));">
                                 <div id="economicCircuit" data-chart-type="economic-circuit" style="width: 100%;"></div>
                             </div>
-                            <small class="d-block mt-3"><b>Figur 2.1:</b> Det samfundsøkonomiske betalingskredsløb.
+                            <small class="d-block mt-3 mb-4"><b>Figur 2.1:</b> Det samfundsøkonomiske betalingskredsløb.
                                 Modellen
                                 viser strømmene af penge mellem de centrale sektorer i økonomien. <i>Hold musen over en
                                     sektor for at se forklaring.</i></small>
+
+                            <!-- Ny tekstforklaring under figuren -->
+                            <div class="text-left mt-4 border-top pt-4">
+                                <h5 class="h6 font-weight-bold mb-3">Forstå figuren: Kredsløbet i praksis</h5>
+                                <p>Figuren ovenfor illustrerer, hvordan penge strømmer rundt i samfundet mellem de fem
+                                    primære aktører:</p>
+                                <ul style="list-style-type: none; padding-left: 0;">
+                                    <li class="mb-2">🏠 <b>Husholdningerne</b> modtager løn fra deres arbejde i
+                                        virksomheder og overførsler (som fx SU eller pension) fra det offentlige. Disse
+                                        penge deles mellem privat forbrug (Cp), skat (T) og opsparing (S).</li>
+                                    <li class="mb-2">🏭 <b>Virksomhederne</b> skaber værdi ved at producere varer og
+                                        tjenester. De betaler lønninger og eventuelt udbytte (Y) og skat (T). Salget går
+                                        både til privat/offentligt forbrug, investeringer (I) og udlandets eksport (X).
+                                    </li>
+                                    <li class="mb-2">🏛️ <b>Offentlig sektor</b> driver skoler, sygehuse mv. Dette
+                                        betales primært via skatteindtægter (T). Når det offentlige køber varer eller
+                                        tjenester hos virksomheder, kalder vi det offentligt forbrug (Cg).</li>
+                                    <li class="mb-2">🏦 <b>Bankerne</b> (den finansielle sektor) er bindeleddet for de
+                                        penge, der ikke bliver forbrugt lige nu. De forvalter opsparinger (S) og
+                                        formidler pengene videre, så virksomheder (eller andre) kan låne til
+                                        investeringer (I).</li>
+                                    <li class="mb-0">🌍 <b>Udlandet</b> viser vores relation med resten af verden. Penge
+                                        flyder fra udlandet til os, når vi eksporterer varer (X), og penge flyder fra
+                                        os, når vi importerer varer (IM).</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1252,8 +1286,9 @@
                         mindre udviklede lande. HDI måles på en skala fra 0 til 1, hvor 1 er det højeste niveau
                         af menneskelig udvikling.</p>
 
-                    <div class="chart-container mb-2" style="position: relative; height: 900px; width: 100%;">
-                        <canvas id="hdiChart" data-chart-type="hdi-bar"></canvas>
+                    <div class="chart-container mb-2" style="position: relative; height: 600px; width: 100%;">
+                        <div id="hdiChart" data-chart-type="hdi-bar" style="height: 100%; width: 100%; z-index: 1;">
+                        </div>
                     </div>
                     <small class="d-block mb-4"><b>Figur 2.7:</b> Human Development Index (HDI) for forskellige lande.
                         HDI måler menneskelig udvikling baseret på middellevetid, uddannelse og levestandard (BNP pr.
@@ -1484,7 +1519,8 @@
                 <h2>Quiz</h2>
                 <div class="quiz-container">
                     <a href="https://quiz.tepedu.dk/makro2.1" class="effectLinks"
-                        data-replace="Start Quiz 2.1 om Nationalregnskab, forsyningsbalance og velstandsmål" target="_blank">
+                        data-replace="Start Quiz 2.1 om Nationalregnskab, forsyningsbalance og velstandsmål"
+                        target="_blank">
                         <span>Quiz 2.1 om Nationalregnskab, forsyningsbalance og velstandsmål</span> </a>
                 </div>
                 <br><br>
@@ -1510,6 +1546,9 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.0/dist/chartjs-chart-sankey.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- Charts API Integration -->
     <script src="charts-api.js"></script>
     <script>
